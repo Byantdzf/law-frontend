@@ -1,0 +1,84 @@
+.page-home {
+  background: #f3f3f3;
+}
+.page-home--hd {
+  padding: 20rpx 30rpx;
+  background: #fff;
+}
+.page-home--hd .location {
+  min-width: 160rpx;
+}
+.page-home--hd .search-box {
+  padding: 8rpx 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 20rpx;
+}
+
+.service-types {
+  padding: 10rpx 0;
+  background: #fff;
+}
+.service-item {
+  position: relative;
+  width: 25%;
+  padding: 10rpx 0;
+  align-items: center;
+  justify-content: center;
+}
+.service-item .icon-box{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.service-item .icon-box .iconfont{
+  font-size: 46rpx;
+  color: #fff;
+}
+.page-title {
+  margin-top: 20rpx;
+}
+.page-title .title{
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.page-title .icon-arrow-right {
+  font-size: 24rpx;
+}
+
+.list-item {
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  align-items: flex-start;
+}
+.list-item + .list-item {
+  margin-top: 20rpx;
+}
+.list-item .img-box {
+  width: 120rpx;
+  height: 120rpx;
+}
+.list-item .img-box image {
+  border-radius: 50%;
+}
+.list-item .name {
+  font-size: 32rpx;
+}
+.list-item .desc {
+  margin: 10rpx 0;
+}
+.list-item .btn-box {
+  margin-top: 16rpx;
+  justify-content: space-between;
+}
+.list-item .btn-box button {
+  margin: 0;
+  padding: 0 20rpx;
+  border-color: #e0e0e0;
+  color: #666;
+}
+.list-item .btn-box button::after {
+  border-color: #e0e0e0;
+}

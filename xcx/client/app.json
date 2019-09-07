@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/tabBar/home/index",
+    "pages/tabBar/lawyer/index",
+    "pages/tabBar/message/index",
+    "pages/tabBar/user/index",
+    "pages/login/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/product",
+      "pages": [
+        "details/index",
+        "list/index"
+      ]
+    },
+    {
+      "root": "pages/order",
+      "pages": [
+        "details/index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTitleText": "antengtech",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#c6c6c6",
+    "selectedColor": "#00b0ab",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/home/index",
+        "iconPath": "static/images/tabbar/icon-home.png",
+        "selectedIconPath": "static/images/tabbar/icon-home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabBar/lawyer/index",
+        "iconPath": "static/images/tabbar/icon-lawyer.png",
+        "selectedIconPath": "static/images/tabbar/icon-lawyer-active.png",
+        "text": "律师"
+      },
+      {
+        "pagePath": "pages/tabBar/message/index",
+        "iconPath": "static/images/tabbar/icon-msg.png",
+        "selectedIconPath": "static/images/tabbar/icon-msg-active.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/tabBar/user/index",
+        "iconPath": "static/images/tabbar/icon-user.png",
+        "selectedIconPath": "static/images/tabbar/icon-user-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "app-page": "/components/app-page/index",
+    "app-loading": "/components/app-loading/index"
+  },
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
+}

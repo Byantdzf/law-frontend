@@ -1,0 +1,55 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "0.0.01",
+	"appid": "wx9d2efaaf2722879d",
+	"projectname": "xcx",
+	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 2,
+					"name": "home",
+					"pathName": "pages/tabBar/home/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/tabBar/user/index",
+					"query": ""
+				}
+			]
+		}
+	}
+}

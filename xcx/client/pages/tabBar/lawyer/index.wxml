@@ -1,0 +1,8 @@
+<view class='panel-cart'>
+    <view class="weui-cells order-list" wx:if="{{ orders.length > 0 }}">
+        
+    </view>
+    <view class="noRecords" wx:else>
+        <image src="/static/images/default/noData.jpg" mode="widthFix"></image>
+    </view>
+</view>

@@ -1,0 +1,71 @@
+<!-- pages/home/index.wxml -->
+<app-page id="app-page" class="app-page">
+  <view class="flex-column container page-home">
+    <view class="flex page-home--hd">
+      <view class="flex location pr-20">
+        <view class="iconfont icon-location"></view>
+        <view class="pl-10">深圳</view>
+      </view>
+      <view class="flex-bd">
+        <view class="flex search-box">
+          <input
+            class="flex-bd pl-20"
+            type="text"
+            placeholder="关键字搜索相关信息"
+            placeholder-class="placeholder"
+          />
+          <view class="iconfont icon-search pl-20 pr-20"></view>
+        </view>
+      </view>
+    </view>
+    <view class="flex-bd app-scroller">
+      <scroll-view scroll-y>
+        <app-swiper items="{{ banners }}" />
+        <view class="flex service-types">
+          <view class="flex-column service-item" wx:for="{{ serviceTypes }}" wx:key="{{ index }}">
+            <view class="flex icon-box" style="background: {{ item.iconBg }};">
+              <text class="iconfont {{ item.icon }}"></text>
+            </view>
+            <view class="name">{{ item.name }}</view>
+          </view>
+        </view>
+        <view class="flex page-title">
+          <view class="flex-bd pl-20 title">本地律师推荐</view>
+          <view class="flex-ft">
+            <text class="cl-999">更多</text>
+            <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+          </view>
+        </view>
+        <view class="pa-20">
+          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}">
+            <view class="img-box">
+              <image src="{{ item.imgUrl }}" mode="widthFix"></image>
+            </view>
+            <view class="flex-bd pl-20">
+              <view class="flex">
+                <view class="flex-bd name">{{ item.name }}</view>
+                <view class="flex-ft score cl-red">{{ item.score }}分</view>
+              </view>
+              <view class="desc cl-666">{{ item.desc }}</view>
+              <view class="flex">
+                <view class="flex-bd">
+                  <text class="cl-999">帮助人数：</text>
+                  <text class="cl-666">{{ item.helpers }}人</text>
+                </view>
+                <view class="flex-ft">
+                  <text class="cl-999">关注人数：</text>
+                  <text class="cl-666">{{ item.followers }}人</text>
+                </view>
+              </view>
+              <view class="flex btn-box">
+                <button size="mini" plain>语音咨询</button>
+                <button size="mini" plain>一对一咨询</button>
+                <button size="mini" plain>立即关注</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</app-page>

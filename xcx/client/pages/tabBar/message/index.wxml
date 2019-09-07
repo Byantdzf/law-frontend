@@ -1,0 +1,10 @@
+
+<view class="container flex-column">
+  <!-- <app-tab tabs="{{ tabs }}" currentKey="{{ curTab }}" bind:itemTap="tabChange" equal align="flex-start" /> -->
+  <view class="flex-bd" wx:if="{{ list && list.length > 0 }}">
+    <scroll-view class="scroll-box" scroll-y="true" bindscrolltolower="_loadMore"></scroll-view>
+  </view>
+  <view class="noRecords" wx:else>
+    <image src="/static/images/default/noData.jpg" mode="widthFix"></image>
+  </view>
+</view>
