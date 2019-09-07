@@ -1,0 +1,52 @@
+<div class="layui-row layui-col-space15 app-table-page">
+{{# if (d.searchParams && d.searchParams.length) { }}
+	<div class="layui-col-md12">
+		<div class="layui-card">
+			<div class="layui-card-body app-search-box">
+			</div>
+		</div>
+	</div>
+{{# } }}
+	<div class="layui-col-md12">
+		<div class="layui-card">
+			{{# if (d.actions.length || d.filters.length) { }}
+			<div class="layui-form layui-card-header layuiadmin-card-header-auto app-table-controller">
+				<div class="layui-clear">
+					{{# if (d.filters.length) { }}
+					<div class="left">
+						<div class="layui-tab layui-tab-brief app-table-tab" data-id="{{ d.field }}" lay-filter="app-table-filter">
+							<ul class="layui-tab-title">
+								{{# 
+									layui.each(d.filters, function (i, t) { 
+										t.clz = !d.selected && i == 0 ? ' class="layui-this"' : '';
+										if (d.selected && d.selected == t.id) {
+											t.clz = ' class="layui-this"';
+										}
+								}}
+								<li{{ t.clz }} data-id="{{ t.id || '' }}">{{ t.name || '' }}</li>
+								{{# }); }}
+							</ul>
+						</div>      
+					</div>
+					{{# } }}
+					
+					{{# if (d.actions.length) { }}
+					<div class="right">
+						{{# 
+							layui.each(d.actions, function (i, t) {
+						}}
+						<button class="layui-btn layui-btn-sm {{ t.class || '' }}" data-type="{{ t.id || '' }}">{{ t.name || '' }}</button>
+						{{# }); }}
+					</div>
+					{{# } }}
+				</div>
+			</div>
+			{{# } }}
+			<div class="layui-card-body layui-form">
+				<div class="app-table-box {{ d.tableClass || ''}}"></div>
+				<div class="app-page-box"></div>
+			</div>
+		</div>
+	</div>
+
+</div>

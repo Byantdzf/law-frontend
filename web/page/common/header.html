@@ -1,0 +1,23 @@
+<!-- 头部区域 -->
+<div class="layui-layout-left">
+	<div class="layui-logo">
+		<span>{{ appName || 'ADMIN' }}</span>
+	</div>
+	<ul class="layui-nav layui-inline">
+		<li class="layui-nav-item layadmin-flexible" lay-unselect="">
+			<a href="javascript:;" title="侧边伸缩">
+				<i class="layui-icon  layui-icon-shrink-right" id="APP_flexible"></i>
+			</a>
+		</li>
+	</ul>
+	<div class="breadcrumb layui-inline" id="APP_breadcrumb"></div>
+</div>
+<ul class="layui-nav layui-layout-right">
+	<li class="layui-nav-item">
+		<a href="javascript:;">{{ d.userInfo.accountName || '' }}</a>
+		<dl class="layui-nav-child"> <!-- 二级菜单 -->
+			<dd><a href="javascript:;" class="updatePassword">修改密码</a></dd>
+			<dd><a href="javascript:;" class="logout">退出</a></dd>
+		</dl>
+	</li>
+</ul>

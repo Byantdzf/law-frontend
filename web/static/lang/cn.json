@@ -1,0 +1,75 @@
+﻿{
+	"btn": {
+		"login": "登录",
+		"addBtn": "新增",
+		"exportBtn": "导出",
+		"searchBtn": "查询",
+		"resetBtn": "清除",
+		"delBtn": "删除"
+	},
+	"msg": {
+		"inputUserName": "请输入用户名",
+		"inputPassword": "请输入密码",
+		"select": "请选择",
+		"input": "请输入"
+	},
+	"placeholder": {
+		"userName": "用户名",
+		"password": "密码",
+		"filterInput": "直接选择或搜索选择"
+	},
+	"text": {
+	},
+	"rs": {
+		"sex": [{"id": "1", "name": "男"}, {"id": "2", "name": "女"}],
+		"yesOrNo": [{"id": "1", "name": "是", "type": "success"}, {"id": "2", "name": "否", "type": "warning"}],
+		"status": [{"id": "1", "name": "启用", "type": "success"}, {"id": "2", "name": "禁用", "type": "warning"}],
+		"monthShot": [
+			{"id": "1", "name": "一月"},
+			{"id": "2", "name": "二月"},
+			{"id": "3", "name": "三月"},
+			{"id": "4", "name": "四月"},
+			{"id": "5", "name": "五月"},
+			{"id": "6", "name": "六月"},
+			{"id": "7", "name": "七月"},
+			{"id": "8", "name": "八月"},
+			{"id": "9", "name": "九月"},
+			{"id": "10", "name": "十月"},
+			{"id": "11", "name": "十一月"},
+			{"id": "12", "name": "十二月"}
+		],
+		"weeks": [
+			{"id": "1", "name": "周一"},
+			{"id": "2", "name": "周二"},
+			{"id": "3", "name": "周三"},
+			{"id": "4", "name": "周四"},
+			{"id": "5", "name": "周五"},
+			{"id": "6", "name": "周六"},
+			{"id": "0", "name": "周日"}
+		],
+		"weekShot": [
+			{"id": "1", "name": "一"},
+			{"id": "2", "name": "二"},
+			{"id": "3", "name": "三"},
+			{"id": "4", "name": "四"},
+			{"id": "5", "name": "五"},
+			{"id": "6", "name": "六"},
+			{"id": "0", "name": "日"}
+		],
+		"dateUnit": [
+			{"id": "1", "name": "年"},
+			{"id": "2", "name": "月"},
+			{"id": "3", "name": "日"},
+			{"id": "4", "name": "时"},
+			{"id": "5", "name": "分"},
+			{"id": "6", "name": "秒"}
+		],
+		"accountType": [
+			{"id": "1", "name": "系统管理员", "type": "default"},
+			{"id": "2", "name": "运营人员1", "type": "info"},
+			{"id": "3", "name": "运营人员2", "type": "warning"},
+			{"id": "4", "name": "运营人员3", "type": "success"},
+			{"id": "6", "name": "运营人员4", "type": "warm"}
+		]
+	}
+}

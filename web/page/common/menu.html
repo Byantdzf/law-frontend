@@ -1,0 +1,21 @@
+{{# 
+	layui.each(d.list, function(i, t){ 
+		var children = t.children || [];
+		var className = '';
+		if (t.isOpen) {
+			className = children.length ? ' layui-nav-itemed' : ' layui-this';
+		} else if (!d.isOpenItem && i == 0) {
+			className = children.length ? ' layui-nav-itemed' : ' layui-this';
+		}
+}}
+<li class="layui-nav-item{{ className }}">
+	<a href="javascript:;" data-url="{{ t.menuUrl || '' }}">{{# if (t.icon) { }}<i class="menuIcon {{ t.icon }}"></i>{{# } }}<cite>{{ t.menuName || '' }}</cite></a>
+	{{# if (children.length) { }}
+	<dl class="layui-nav-child">
+		{{# layui.each(children, function(i2, t2){ }}
+		<dd{{# if (t2.isOpen) { }} class="layui-this"{{# } }}><a href="javascript:;" data-url="{{ t2.menuUrl || '' }}">{{ t2.menuName || '' }}</a></dd>
+		{{# }); }}
+	</dl>
+	{{# } }}
+</li>
+{{# }); }}

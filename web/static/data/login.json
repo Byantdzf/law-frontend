@@ -1,0 +1,18 @@
+{
+	"code": 2,
+	"msg": "接口调用成功",
+	"data": {
+		"id": 1,
+		"accountName": "testadmin",
+		"roleId": 1,
+		"userName": "testadmin",
+		"fullName": "系统管理员",
+		"status": 0,
+		"repassword": 1,
+		"accountType": 10,
+		"updateTime": "2017-08-08 23:55:06",
+		"updatetime": "2017-09-12 23:18:58",
+		"updateBy": "testadmin",
+		"accessToken": "56479b7130044e2da4894a144a242075-testadmin"
+	}
+}

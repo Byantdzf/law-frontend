@@ -1,0 +1,153 @@
+{
+	"code": 2,
+	"msg": "接口调用成功",
+	"page": {
+		"allPageSize": 6,
+		"allRecordSize": 59,
+		"pageRecodeSize": 10,
+		"restCount": 0
+	},
+	"data": {
+		"totalCount": 59,
+		"pageIndex": 1,
+		"pageSize": 10,
+		"dataList": [
+			{
+				"id": 1,
+				"distributorId": 1,
+				"accountName": "MBPTRAVEL ",
+				"accountType": "1",
+				"businessName": "李俊",
+				"contactPhone": "13971650525",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-01-03 11:10:17",
+				"updateTime": "2018-07-31 18:09:01",
+				"createBy": "sysadmin[1]",
+				"updateBy": "sysadmin[1]"
+			}, {
+				"id": 2,
+				"distributorId": 1,
+				"accountName": "94403322",
+				"accountType": "2",
+				"businessName": "曾伟彬",
+				"contactPhone": "13710198671",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-01-16 09:49:08",
+				"updateTime": "2019-05-27 20:23:40",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]",
+				"isReceiveSms": "2"
+			}, {
+				"id": 3,
+				"distributorId": 1,
+				"accountName": "FZ-HT",
+				"accountType": "3",
+				"businessName": "刘忠亮",
+				"contactPhone": "13554094672",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 11:51:40",
+				"updateTime": "2018-04-26 17:29:10",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 4,
+				"distributorId": 1,
+				"accountName": "FZ-HG",
+				"accountType": "4",
+				"businessName": "杨淑琼",
+				"contactPhone": "18062507073",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 11:52:36",
+				"updateTime": "2019-03-28 11:49:37",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 5,
+				"distributorId": 1,
+				"accountName": "FZ-HZ",
+				"accountType": "5",
+				"businessName": "胡小茜",
+				"contactPhone": "15926402180",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 11:53:28",
+				"updateTime": "2018-04-26 17:57:35",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 6,
+				"distributorId": 1,
+				"accountName": "FZ-HTU",
+				"accountType": "6",
+				"businessName": "杨畅",
+				"contactPhone": "13419642532",
+				"repassword": "1",
+				"status": "2",
+				"createTime": "2018-02-07 11:55:48",
+				"updateTime": "2019-01-14 15:52:32",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 7,
+				"distributorId": 1,
+				"accountName": "FZ-HB",
+				"accountType": "7",
+				"businessName": "朱思齐",
+				"contactPhone": "15527410503",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 11:57:15",
+				"updateTime": "2018-04-26 17:29:28",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 8,
+				"distributorId": 1,
+				"accountName": "FZ-HAN",
+				"accountType": "8",
+				"businessName": "李媛",
+				"contactPhone": "15979972741",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 11:58:06",
+				"updateTime": "2019-05-27 18:27:03",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 9,
+				"distributorId": 1,
+				"accountName": "FZ-HTUN",
+				"accountType": "9",
+				"businessName": "黄聪丽",
+				"contactPhone": "13871173262",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 11:59:18",
+				"updateTime": "2019-05-27 18:26:42",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "MBPTRAVEL [1]"
+			}, {
+				"id": 10,
+				"distributorId": 1,
+				"accountName": "FZ-SH",
+				"accountType": "10",
+				"businessName": "彭成梅",
+				"contactPhone": "15687117211",
+				"repassword": "1",
+				"status": "1",
+				"createTime": "2018-02-07 12:00:13",
+				"updateTime": "2019-05-27 18:08:56",
+				"createBy": "MBPTRAVEL [1]",
+				"updateBy": "18823797714[11]",
+				"isReceiveSms": "2"
+			}
+		],
+		"fromIndex": 0,
+		"toIndex": 10,
+		"pageCount": 6
+	}
+}

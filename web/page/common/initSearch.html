@@ -1,0 +1,46 @@
+<div class="layui-form layui-form-pane">
+	<div class="layui-form-items">
+	{{# 
+		layui.each(d, function (i, t) {
+			if (t.type == "text") {
+	}}
+		<div class="layui-inline">
+			<label class="layui-form-label">{{ t.title || '' }}</label>
+			<div class="layui-input-inline">
+				<input class="layui-input search-{{ t.field }}" autocomplete="off" name="{{ t.field }}">
+			</div>
+		</div>
+		{{# } else if (t.type == "dateRange") { }}
+		<div class="layui-inline">
+			<label class="layui-form-label">{{ t.title || '' }}</label>
+			<div class="layui-input-inline w-210">
+				<input class="layui-input dateIcon search-{{ t.field }}" autocomplete="off" name="{{ t.field }}">
+			</div>
+		</div>
+		{{# } else if (t.type == "date") { }}
+		<div class="layui-inline">
+			<label class="layui-form-label">{{ t.title || '' }}</label>
+			<div class="layui-input-inline">
+				<input class="layui-input dateIcon search-{{ t.field }}" autocomplete="off" name="{{ t.field }}">
+			</div>
+		</div>
+		{{# } else if (t.type == "select") { }}
+		<div class="layui-inline">
+			<label class="layui-form-label">{{ t.title || '' }}</label>
+			<div class="layui-input-inline">
+				<select name="{{ t.field }}" class="search-{{ t.field }}" lay-filter="search-{{ t.field }}">
+					<option></option>
+				</select>
+			</div>
+		</div>
+	{{#
+			}
+		});
+	}}
+	
+		<div class="layui-inline">
+			<button class="layui-btn search" lay-submit="" lay-filter="app-search-submit">{{ global.btn.searchBtn }}</button>
+			<button class="layui-btn layui-btn-primary reset" lay-submit="" lay-filter="app-search-reset">{{ global.btn.resetBtn }}</button>
+		</div>
+	</div>
+</div>

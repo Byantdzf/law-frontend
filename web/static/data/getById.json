@@ -1,0 +1,22 @@
+{
+	"code": 2,
+	"msg": "接口调用成功",
+	"data": {
+		"id": 9,
+		"status": 1,
+		"touristSpotsTypeId": 1,
+		"spotsTypeName": "",
+		"name": "这是测试操作试试这是测试操作试试",
+		"content": "这是测试操作试试这是测试操作试试这是测试操作试试这是测试操作试试这是测试操作试试这是测试操作试试这是测试操作试试这是测试操作试试",
+		"spotsImg": "http://anteng-picture-oss.oss-cn-shenzhen.aliyuncs.com/osslvbang/20180927/aa1e57a16ccd41d4be38cc5856469dcc.jpg",
+		"spotsName": "123",
+		"sportsCode": "123",
+		"sportsStar": 3,
+		"docName": "123",
+		"downloadTimes": "123",
+		"lineName": "哪里到哪里游",
+		"createUserId": 1,
+		"updateUserName": "admin",
+		"updateTime": "2018-09-27 18:24:02"
+	}
+}
