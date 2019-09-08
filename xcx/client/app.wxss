@@ -62,7 +62,7 @@ button:after {
 
 .fs-30 { font-size: 30rpx; }
 
-.cl-primary{ color: #00b0ab; }
+.cl-primary{ color: #CF443D; }
 .cl-red{ color: #e00000; }
 .cl-gray{ color: #c0c0c0; }
 .cl-white{ color: #fff; }
@@ -75,7 +75,7 @@ button:after {
 .cl-warm { color: #ffba00; }
 
 .bg-pink { background: #f9879a; }
-.bg-primary{ background: #00b0ab; }
+.bg-primary{ background: #CF443D; }
 .bg-white{ background: #fff; }
 .bg-warm{ background: #ffba00; }
 .bg-f3{ background: #f3f3f3; }

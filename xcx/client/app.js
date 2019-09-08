@@ -2,7 +2,7 @@
 const test = require('utils/test.js')
 const pages = require('plugins/pages.js')
 
-let primaryColor = '#00b0ab'
+let primaryColor = '#CF443D'
 let reverseColor = '#ffffff'
 
 App({

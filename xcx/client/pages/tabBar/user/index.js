@@ -16,16 +16,20 @@ Page({
     menus: [
       {
         url: '',
-        label: '我的关注'
+        label: '我的关注',
+        icon: 'iconfont icon-attention-fill'
       }, {
         url: '',
-        label: '我的优惠券'
+        label: '我的优惠券',
+        icon: 'iconfont icon-coupon'
       }, {
         url: '',
-        label: '我的订单'
+        label: '我的订单',
+        icon: 'iconfont icon-order-fill'
       }, {
         url: '',
-        label: '设置'
+        label: '设置',
+        icon: 'iconfont icon-setting-fill'
       }
     ]
   },

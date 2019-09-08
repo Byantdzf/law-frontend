@@ -29,12 +29,12 @@ button[size=mini] {
 }
 
 button[type=primary] {
-  background-color: #00b0ab;
+  background-color: #CF443D;
   border: 1px solid #fff;
 }
 
 button[loading][type=primary] {
-  background-color: #00b0ab;
+  background-color: #CF443D;
 }
 
 button[type=warm] {
@@ -62,7 +62,7 @@ button[loading]::before {
 
 button[type=primary].button-hover {
   color: #fff;
-  background-color: #00b0ab;
+  background-color: #CF443D;
 }
 
 button[type=warm].button-hover {
@@ -72,8 +72,8 @@ button[type=warm].button-hover {
 
 button[plain][type=primary],
 button[plain][type=primary].button-hover {
-  color: #00b0ab;
-  border: 1px solid #00b0ab;
+  color: #CF443D;
+  border: 1px solid #CF443D;
   background-color: transparent;
 }
 
@@ -121,7 +121,7 @@ checkbox {
 radio[checked] + .icon-check::after,
 checkbox[checked] + .icon-check::after {
   content: "\e63a";
-  color: #00b0ab;
+  color: #F64335;
 }
 
 /* reset -- end */

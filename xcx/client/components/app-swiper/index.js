@@ -25,7 +25,7 @@ Component({
     //是否采用衔接滑动  
     circular: true,
     //选中点的颜色  
-    indicatorActiveColor: "#00b0ab",
+    indicatorActiveColor: "#CF443D",
     //是否竖直  
     vertical: false,
     //是否自动切换  

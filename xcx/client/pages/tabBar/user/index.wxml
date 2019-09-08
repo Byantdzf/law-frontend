@@ -20,7 +20,10 @@
     <view class="panel-user--bd mt-20">
       <view class="app-cells">
         <view class="app-cell" wx:for="{{ menus }}" wx:key="{{ index }}">
-          <view class="flex-bd pl-30">{{ item.label }}</view>
+          <view class="flex-hd pl-20">
+            <text class="{{ item.icon }}"></text>
+          </view>
+          <view class="flex-bd pl-10">{{ item.label }}</view>
           <view class="flex-ft pr-30">
             <text class="iconfont icon-arrow-right"></text>
           </view>
