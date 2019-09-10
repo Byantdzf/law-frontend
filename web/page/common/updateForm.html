@@ -1,33 +1,37 @@
 <div class="layui-row">
-{{# 
-	layui.each(d, function (i, t) {
-		var cols = t.cols || 6;
-		var val = t.value || t.value == 0 ? t.value : '';
-}}
-	<div class="items layui-col-md{{ cols }}"{{# if (t.required) { }} data-required="1"{{#  } }} data-type="{{ t.type }}">
-		<label class="layui-form-label">{{# if (t.required) { }}<i class="layui-icon redpoint f-red">*</i><span>{{#  } }} {{ t.title || '' }}</span></label>
-		<div class="layui-input-{{ t.label ? 'inline left' : 'block' }}">
-{{# if (t.type == 'text') { }}
-			<input class="layui-input edit_{{ t.field }}" type="text" autocomplete="off" data-type="{{ t.type }}" name="{{ t.field }}" value="{{ val }}">
-{{# } else if (t.type == 'select') { }}
-			<select name="{{ t.field }}" class="edit_{{ t.field }}" lay-filter="filter_{{ t.field }}">
-				<option></option>
-			</select>
-{{# } else if (t.type == 'radio' || t.type == 'checkbox') { }}
-			<div class="edit_{{ t.field }}" data-type="{{ t.type }}" data-name="{{ t.field }}" data-val="{{ val }}"></div>
-{{# } else if (t.type == 'textarea') { }}
-			<textarea class="layui-textarea edit_{{ t.field }}" name="{{ t.field }}">{{ val }}</textarea>
-{{# } else if (t.type == 'password') { }}
-			<input class="layui-input edit_{{ t.field }}" type="password" autocomplete="off" data-type="{{ t.type }}" name="{{ t.field }}" value="{{ val }}">
-{{# } else if (t.type == 'year' || t.type == 'month' || t.type == 'date' || t.type == 'time' || t.type == 'datetime') { }}
-			<input class="layui-input edit_{{ t.field }} dateIcon" type="text" autocomplete="off" data-type="{{ t.type }}"{{# if (t.range) { }} data-range="1"{{# } }} name="{{ t.field }}" value="{{ val }}">
-{{# } }}
+		{{# 
+		layui.each(d, function (i, t) {
+			var cols = t.cols || 6;
+			var val = t.value || t.value == 0 ? t.value : '';
+	}}
+		<div class="items layui-col-md{{ cols }}" {{# if (t.required) { }} data-required="1" {{#  } }}
+			data-type="{{ t.type }}">
+			<label class="layui-form-label">{{# if (t.required) { }}<i class="layui-icon redpoint f-red">*</i><span>{{#  } }} {{ t.title || '' }}</span></label>
+			<div class="layui-input-{{ t.label ? 'inline left' : 'block' }}">
+				{{# if (t.type == 'text') { }}
+				<input class="layui-input edit_{{ t.field }}" type="text" autocomplete="off" data-type="{{ t.type }}" name="{{ t.field }}" value="{{ val }}">
+				{{# } else if (t.type == 'html') { }}
+				<div class="edit_html">{{ t.html }}</div>
+				{{# } else if (t.type == 'select') { }}
+				<select name="{{ t.field }}" class="edit_{{ t.field }}" lay-filter="filter_{{ t.field }}">
+					<option></option>
+				</select>
+				{{# } else if (t.type == 'radio' || t.type == 'checkbox') { }}
+				<div class="edit_{{ t.field }}" data-type="{{ t.type }}" data-name="{{ t.field }}" data-val="{{ val }}">
+				</div>
+				{{# } else if (t.type == 'textarea') { }}
+				<textarea class="layui-textarea edit_{{ t.field }}" name="{{ t.field }}">{{ val }}</textarea>
+				{{# } else if (t.type == 'password') { }}
+				<input class="layui-input edit_{{ t.field }}" type="password" autocomplete="off" data-type="{{ t.type }}" name="{{ t.field }}" value="{{ val }}">
+				{{# } else if (t.type == 'year' || t.type == 'month' || t.type == 'date' || t.type == 'time' || t.type == 'datetime') { }}
+				<input class="layui-input edit_{{ t.field }} dateIcon" type="text" autocomplete="off" data-type="{{ t.type }}" {{# if (t.range) { }} data-range="1" {{# } }} name="{{ t.field }}" value="{{ val }}">
+				{{# } }}
+			</div>
+			{{# if (t.label) { }}
+			<div class="layui-form-mid">{{ t.label }}</div>
+			{{# } }}
 		</div>
-		{{# if (t.label) { }}
-		<div class="layui-form-mid">{{ t.label }}</div>
-		{{# } }}
+		{{#
+		});
+	}}
 	</div>
-{{#
-	});
-}}
-</div>

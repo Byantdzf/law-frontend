@@ -7,10 +7,12 @@ if (!window.console.log) {
 }
 
 var _t = null;  // 保存页面模块对象
-var appName = '润丰生鲜'; // 项目名称
-var appToken = 'RFSX';
+var appName = '虎甲律师问答'; // 项目名称
+var appToken = 'HJLAWYER';
 
 var global = {
+    tel: '0755-123456',
+    testUserInfo: {id: 1, username: "wakaka", pic: "/static/images/avatar.jpg"},
     page: 'pageIndex',                      // 分页页码字段
     rows: 'pageSize',                       // 分页每页条数字段
     defaultRows: 10,
@@ -19,6 +21,9 @@ var global = {
     account: appToken + '_ACCOUNT',         // 登录后本地保存用户名字段
     backToken:  'LOGIN_ACCESS_TOKEN',       // 后端授权需要携带的cookie名称
     userInfoToken: appToken + '_USERINFO',  // 登录的用户信息
+    areaCookie: 'thisArea',                 // 当前城市cookie名称
+    requestAreaCookie: 'AREA_ACCESS_TOKEN',
+    defaultArea: {"id": "440300", "name": "深圳"},
     userInfo: {},                           // 登录的用户信息
     autoSearch: false,                      // 基础页搜索，控制是否 改变值后立即搜索 的开关
     expires: 30,                            // 本地cookie保存时长
@@ -29,5 +34,5 @@ var global = {
     text: {},                               // 语言库中文本内容的对象
     rs: {},                                 // 语言库中数组的对象
     LOADING_URL: [],                        // 请求中的URL数组
-    menus: []                               // 目录
+    menus: []                              // 目录
 }

@@ -5,7 +5,7 @@
  * remove      hash.remove('id')
  * clear       hash.clear()
  */
-$(function () { (function (a, b) { "use strict"; var c = function () { var b = function () { var b = a.location.hash ? a.location.hash.substr(1).split("&") : [], c = {}; for (var d = 0; d < b.length; d++) { var e = b[d].split("="); c[e[0]] = decodeURIComponent(e[1]) } return c }; var c = function (b) { var c = []; for (var d in b) { c.push(d + "=" + encodeURIComponent(b[d])) } a.location.hash = c.join("&") }; return { get: function (a) { var c = b(); if (a) { return c[a] } else { return c } }, add: function (a) { var d = b(); for (var e in a) { d[e] = a[e] } c(d) }, remove: function (a) { a = typeof a == "string" ? [a] : a; var d = b(); for (var e = 0; e < a.length; e++) { delete d[a[e]] } c(d) }, clear: function () { c({}) } } }(); a.hash = c })(window) });
+(function (a, b) { "use strict"; var c = function () { var b = function () { var b = a.location.hash ? a.location.hash.substr(1).split("&") : [], c = {}; for (var d = 0; d < b.length; d++) { var e = b[d].split("="); c[e[0]] = decodeURIComponent(e[1]) } return c }; var c = function (b) { var c = []; for (var d in b) { c.push(d + "=" + encodeURIComponent(b[d])) } a.location.hash = c.join("&") }; return { get: function (a) { var c = b(); if (a) { return c[a] } else { return c } }, add: function (a) { var d = b(); for (var e in a) { d[e] = a[e] } c(d) }, remove: function (a) { a = typeof a == "string" ? [a] : a; var d = b(); for (var e = 0; e < a.length; e++) { delete d[a[e]] } c(d) }, clear: function () { c({}) } } }(); a.hash = c })(window);
 
 /**
  * md5 插件
@@ -84,6 +84,16 @@ layui.define(function (exports) {
 				};
 			}
 
+			// 读取当前默认城市
+			var areas = utils.cookie(global.areaCookie);
+			if (areas) {
+				areas = JSON.parse(areas) || {};
+			} else {
+				areas = global.defaultArea;
+			}
+
+			_t.setCookie(global.requestAreaCookie, areas.id);
+
 			return $.ajax({
 				headers: headers || '',
 				type: options.type || 'POST',
@@ -114,7 +124,7 @@ layui.define(function (exports) {
 
 						window.parent.location.pathname != '/index.html' && (window.location = '/index.html');
 					} else {
-						layer.msg(res.msg || res.code);
+						gather.msg(res.msg || res.code);
 					}
 				},
 				complete: function () {
@@ -129,7 +139,7 @@ layui.define(function (exports) {
 					$('.submit').removeAttr("disabled");
 				},
 				error: function (e) {
-					layer.msg(options.error || '请求异常，请重试', {
+					gather.msg(options.error || '请求异常，请重试', {
 						shift: 6
 					});
 				}
@@ -236,7 +246,7 @@ layui.define(function (exports) {
 								params[t] = valArr[i];
 							})
 						} else {
-							params[e.name] = $(e).attr('data-id') && val ? $(e).attr('data-id') : val;
+							params[e.name] = $(e).data('id') && val ? $(e).data('id') : val;
 						}
 					}
 				}
@@ -389,6 +399,12 @@ layui.define(function (exports) {
 			}, callback)
 		},
 
+		alert: function (content, icon, callback) {
+			layer.alert(content, {
+				icon: icon
+			}, callback)
+		},
+
 		confirm: function (content, params, yes, no) {
 			if (typeof params === 'function') {
 				no = yes;
@@ -428,12 +444,13 @@ layui.define(function (exports) {
 		openForm: function (params) {
 			var cb = params.success;
 			var yes = params.yes;
+			var classes = params["class"] || '';
 			delete(params.success);
 			delete(params.yes);
 			var opts = {
 				area: "800px",
 				btn: ['保存', '关闭'],
-				content: '<div class="updateBox layui-form ' + params.class + '"></div>',
+				content: '<div class="updateBox layui-form ' + classes + '"></div>',
 				success: function (layero) {
 					cb && cb(layero);
 				},
@@ -487,9 +504,9 @@ layui.define(function (exports) {
 			// 如果表单中有时间控件，初始化时间控件
 			parents.find('.dateIcon').each(function () {
 				var elem = $(this);
-				var type = $(this).attr('data-type');
+				var type = $(this).data('type');
 				if (type == 'year' || type == 'month' || type == 'date' || type == 'time' || type == 'datetime') {
-					if (elem.attr('data-range')) {
+					if (elem.data('range')) {
 						gather.initDateRange(elem[0], {type: type});
 					} else {
 						gather.initDate(elem[0], {type: type});
@@ -499,11 +516,33 @@ layui.define(function (exports) {
 
 			$.each(forms, function (i, t) {
 				 if (t.type == 'select' && t.rs) {
-					var defaultStr = t.default || '';
+					var defaultStr = t['default'] || '';
 					var defaultVal = item[t.field] || '';
 					gahter.getSelect(t.rs, '.edit_' + t.field, defaultStr, defaultVal);
 				}
 			})
+		},
+		
+		// 获取今天
+		now: function () {
+			var dd 	= new Date();
+			var y	= dd.getFullYear();
+			var m 	= dd.getMonth() + 1;
+			var d 	= dd.getDate();
+			return y + '-' + lay.digit(m) + '-' + lay.digit(d);
+		},
+		
+		// 获取某天的前几天，后几天
+		// nd   2017-08-08
+		// AddDayCount   +7    -7
+		// base.days("-7", "2017-12-01")
+		days: function (AddDayCount, nd) {
+			var dd = new Date(nd);
+			dd.setDate(dd.getDate()+Number(AddDayCount));
+			var y = dd.getFullYear();
+			var m = dd.getMonth()+1;
+			var d = dd.getDate();
+			return  y + '-' + lay.digit(m) + '-' + lay.digit(d);
 		},
 
 		getSelect: function (data, box, defaults, showId) {
@@ -549,9 +588,9 @@ layui.define(function (exports) {
 		getRadio: function (data, box, value, notNeedDefault) {
 			var fields = '';
 			if (gather.isType(box) == 'string') {
-				fields = $(box).attr('data-name');
+				fields = $(box).data('name');
 			} else {
-				fields = box.attr('data-name');
+				fields = box.data('name');
 			}
 
 			var html = '';
@@ -591,9 +630,9 @@ layui.define(function (exports) {
 		getCheckbox: function (data, box, value) {
 			var fields = '';
 			if (gather.isType(box) == 'string') {
-				fields = $(box).attr('data-name');
+				fields = $(box).data('name');
 			} else {
-				fields = box.attr('data-name');
+				fields = box.data('name');
 			}
 			var html = '';
 			layui.each(data, function (i, t) {
@@ -909,7 +948,52 @@ layui.define(function (exports) {
                 str = times.toString().split(' ')[0];
             }
             return str;
-        }
+        },
+
+		/*
+		 * params:
+		 * box
+		 * accept 限制文件，选填，格式如：{extensions: 'xls,xlsx',mimeTypes: 'application/vnd.ms-excel'}
+		 * size 限制大小，默认100M
+		 */
+		uploadFiles: function(params, callback){
+			var uploading;
+			var btn = params.btn ? params.btn : '#picker';
+			var size = params.size ? params.size : 100 * 1024 * 1024;
+
+			var opts = {
+				swf:'/static/js/plugin/webuploader/Uploader.swf',		// swf文件路径
+				server: URL.common.upload,								// 文件接收服务端。
+				auto:true,
+				duplicate: true,
+				fileSingleSizeLimit:size,    							// 单个文件最大10M
+				pick:{id:btn, multiple: false},							// 选择文件的按钮
+				resize:false 											//不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			};
+
+			params && (opts = $.extend(true, opts, params));
+
+			var fileUploader = WebUploader.create(opts);
+
+			// 当有文件被添加进队列的时候
+			fileUploader.on('fileQueued',function(file) {
+				uploading = layer.load(2, {shade: [0.5,"#fff"]});
+			});
+
+			//上传成功
+			fileUploader.on('uploadSuccess', function(file,res) {
+				layer.close(uploading);
+				if(res.code==2){
+					gather.msg(lang.text.uploadSuccess);
+					if (callback) {
+						callback(res);
+					}
+				}else{
+					gather.msg(lang.text.uploadFaild);
+					fileUploader.removeFile(fileUploader.getFile(file.id));
+				}
+			});
+		}
 	}
 
 	gather = $.extend(true, gahter, layui.util);

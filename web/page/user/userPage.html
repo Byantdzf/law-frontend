@@ -1,0 +1,27 @@
+<div class="clearfix">
+	<div class="userLeft">
+		<div class="userHead">
+			<div class="imgBox">
+				<img src="{{d.userInfo.pic || d.defaultPic }}" />
+			</div>
+			<h3>{{ d.userInfo.username || '' }}</h3>
+		</div>
+		<div class="userMenu">
+			<ul>
+				{{# 
+					layui.each(d.menu, function(i, t){
+						var clz = d.code == t.code ? ' class="curr"' : ''; 
+				}}
+				<li data-id="{{ t.id }}"><a href="{{ t.code == 'about' ? t.url : 'javascript:;' }}"{{# if (t.code == 'about') { }} target="_blank"{{# } }} data-code="{{ t.code }}"{{ clz }}>{{ t.name }}</a></li>
+				{{# }); }}
+			</ul>
+		</div>
+	</div>
+
+	<div class="userRight">
+		<div class="userPageTit">
+			<h3></h3>
+		</div>
+		<div class="userPageCon"></div>
+	</div>
+</div>

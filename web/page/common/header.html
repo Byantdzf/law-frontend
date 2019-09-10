@@ -1,23 +1,31 @@
 <!-- 头部区域 -->
-<div class="layui-layout-left">
-	<div class="layui-logo">
-		<span>{{ appName || 'ADMIN' }}</span>
-	</div>
-	<ul class="layui-nav layui-inline">
-		<li class="layui-nav-item layadmin-flexible" lay-unselect="">
-			<a href="javascript:;" title="侧边伸缩">
-				<i class="layui-icon  layui-icon-shrink-right" id="APP_flexible"></i>
-			</a>
+
+<div class="welcome">
+	<ul class="layui-nav" lay-filter="">
+		<li class="layui-nav-item topUserBox">
+			您好，{{# if (d.username) { }}<a href="/user.html" class="topUser">{{ d.username || '' }}</a> {{# } }}欢迎来到虎甲问答
+			<dl class="layui-nav-child">
+				<!-- 二级菜单 -->
+				<dd><a href="javascript:;" class="logout">退出登录</a></dd>
+			</dl>
 		</li>
+		{{# if (!d.username) { }}
+		<li class="layui-nav-item"><a href="javascript:;" class="eqReg">免费注册</a></li>
+		<li class="layui-nav-item">
+			<a href="javascript:;">登陆</a>
+			<dl class="layui-nav-child">
+				<!-- 二级菜单 -->
+				<dd><a href="javascript:;" class="eqlogin">我是咨询者</a></dd>
+				<dd><a href="login.html">我是律师</a></dd>
+			</dl>
+		</li>
+		{{# } }}
 	</ul>
-	<div class="breadcrumb layui-inline" id="APP_breadcrumb"></div>
 </div>
-<ul class="layui-nav layui-layout-right">
-	<li class="layui-nav-item">
-		<a href="javascript:;">{{ d.userInfo.accountName || '' }}</a>
-		<dl class="layui-nav-child"> <!-- 二级菜单 -->
-			<dd><a href="javascript:;" class="updatePassword">修改密码</a></dd>
-			<dd><a href="javascript:;" class="logout">退出</a></dd>
-		</dl>
-	</li>
-</ul>
+
+<p><a href="index.html">首页</a>
+	<a href="ask.html">语音咨询</a>
+	<a href="selfAsk.html">1对1咨询</a>
+	<a href="javascript:;" class="eqcodew">公众号</a>
+	<a href="javascript:;" class="eqService">联系客服</a>
+</p>
