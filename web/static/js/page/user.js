@@ -15,7 +15,6 @@
 				{"id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/user/feedback.js"},
 				{"id": 9, "name": "退出登录", "code": "logout"}
 			];
-			console.log(hash)
 			_t.code = hash.get('c') || _t.userMenu[0].code;
 
 			if ($.isEmptyObject(global.userInfo)) {

@@ -29,6 +29,7 @@ img{outline: none; border: none;}
 .clearfix:after { display: table; content: " "}
 .clearfix:after {clear: both}
 
+.couponList .itemTop,
 a {
 	-moz-transition: all .2s ease-out;
 	-webkit-transition: all .2s ease-out;
@@ -1147,3 +1148,42 @@ i, em { font-style: normal;}
 .userPageCon .index_ccbox2_1 li { width:48%; margin-right:2%; float: left; box-sizing: border-box; padding:0;}
 .userPageCon .index_ccbox2_1 li p { padding-right:20px; height:42px;}
 .userPageCon .index_ccbox2_1 li .consult_btn02 a { padding: 5px 10px; margin-right:10px;}
+
+.couponList { padding: 30px 0 0 30px;}
+.couponList .items { width: 440px; float:left; margin: 0 60px 50px 0;}
+.couponList .items:nth-child(even) { margin-right: 0;}
+.couponList .items .itemTop { position: relative; background: rgba(255,85,85, .6); font-size: 40px; font-weight: bolder; text-align: center; color: #fff; padding: 25px 0; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden;}
+.couponList .items .itemTop span { font-size: 28px; font-weight: lighter;}
+.couponList .items .itemTop:before,
+.couponList .items .itemTop:after { position: absolute; top:60px; width:20px; height:20px; background: #fff; border-radius: 50%; content: ""; }
+.couponList .items .itemTop:before { left: -10px;}
+.couponList .items .itemTop:after { right: -10px;}
+.couponList .items .itemBottom { padding: 15px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border: 1px solid rgba(255,85,85, .6); text-align: left; color:#999;}
+.couponList .items .itemBottom div { line-height: 24px; height:48px; overflow: hidden; margin-bottom: 5px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.couponList .items .itemBottom em { background:#f55; font-size:12px; padding: 3px 5px; color:#fff; border-radius: 4px; margin-right: 5px;}
+.couponList .items .itemBottom p { color:#666; text-align: right;}
+
+.couponList .items:hover .itemTop { background: rgba(255,85,85, .8);}
+.couponList .items:hover .itemBottom { border-color: rgba(255,85,85, .8);}
+
+.couponList .items .itemTop em { position: absolute; font-size: 14px; right:-78px; top:-10px; width: 200px; height: 50px; line-height: 60px; transform: rotate(30deg); font-weight: lighter; background: #666;}
+
+.couponList .items.used .itemTop,
+.couponList .items.over .itemTop { background: rgba(70,70,70,0.5);}
+.couponList .items.used .itemBottom,
+.couponList .items.over .itemBottom { border-color: rgba(70,70,70,0.5);}
+.couponList .items.used:hover .itemTop,
+.couponList .items.over:hover .itemTop { background: rgba(70,70,70,0.6);}
+.couponList .items.used:hover .itemBottom,
+.couponList .items.over:hover .itemBottom { border-color: rgba(70,70,70,0.6);}
+
+.couponTab .layui-tab-title { height:60px;}
+.couponTab .layui-tab-title li { font-size: 18px; line-height: 60px; padding: 0 30px;}
+.couponTab .layui-tab-title .layui-this { color:#f55;}
+.couponTab .layui-tab-title .layui-this:after { border:none; border-bottom:1px solid #f55; height:61px;}
