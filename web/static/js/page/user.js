@@ -5,15 +5,15 @@
 			var _t = this;
 			_t.defaultPic = '/static/images/default.jpg';
 			_t.userMenu = [
-				{"id": 1, "name": "我的关注", "code": "attention", "url": "/page/user/attention.js"},
-				{"id": 2, "name": "我的优惠券", "code": "coupon", "url": "/page/user/coupon.js"},
-				{"id": 3, "name": "我的订单", "code": "order", "url": "/page/user/order.js"},
-				{"id": 4, "name": "消息中心", "code": "notice", "url": "/page/user/notice.js"},
-				{"id": 5, "name": "关于我们", "code": "about", "url": "/about.html"},
-				{"id": 6, "name": "帮助中心", "code": "help", "url": "/page/user/help.js"},
-				{"id": 7, "name": "用户协议", "code": "agreement", "url": "/page/user/agreement.js"},
-				{"id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/user/feedback.js"},
-				{"id": 9, "name": "退出登录", "code": "logout"}
+				{ "id": 1, "name": "我的关注", "code": "attention", "url": "/page/user/attention.js" },
+				{ "id": 2, "name": "我的优惠券", "code": "coupon", "url": "/page/user/coupon.js" },
+				{ "id": 3, "name": "我的订单", "code": "order", "url": "/page/user/order.js" },
+				{ "id": 4, "name": "消息中心", "code": "notice", "url": "/page/user/notice.js" },
+				{ "id": 5, "name": "关于我们", "code": "about", "url": "/about.html" },
+				{ "id": 6, "name": "帮助中心", "code": "help", "url": "/page/user/help.js" },
+				{ "id": 7, "name": "用户协议", "code": "agreement", "url": "/page/user/agreement.js" },
+				{ "id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/user/feedback.js" },
+				{ "id": 9, "name": "退出登录", "code": "logout" }
 			];
 			_t.code = hash.get('c') || _t.userMenu[0].code;
 
@@ -54,11 +54,13 @@
 			// 默认跳转到哪个页面
 			_t.getPageByCode();
 			$('.userMenu').on('click', 'a', function () {
-				$(this).addClass('curr').closest('li').siblings().find('a').removeClass('curr');
 				_t.code = $(this).data('code');
-				var hashObj = {};
-				hashObj.c = _t.code;
-				hash.add(hashObj);
+				if (_t.code != 'about') {
+					$(this).addClass('curr').closest('li').siblings().find('a').removeClass('curr');
+					var hashObj = {};
+					hashObj.c = _t.code;
+					hash.add(hashObj);
+				}
 				_t.getPageByCode();
 			})
 		},

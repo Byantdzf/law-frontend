@@ -705,7 +705,7 @@ layui.define(function (exports) {
 			container.html(html);
 
 			// autoFixHeight
-			gather.setMainTableHeight();
+			// gather.setMainTableHeight();
 
 			// 如果有查询条件
 			if (opts.searchParams.length) {

@@ -12,6 +12,7 @@
 			var data = {};
 			var html = utils.getTemp('/page/user/feedback.html', data);
 			$('.userPageCon').html(html);
+			form.render();
 		}
 	}
 

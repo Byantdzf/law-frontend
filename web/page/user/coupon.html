@@ -9,7 +9,7 @@
 	<div class="clearfix">
 		{{# 
 	layui.each(d.list, function(i, t) {
-		var clz = '可使用';
+		var clz = '';
 		var str = '';
 		if (t.status == 2) {
 			clz = 'used';
@@ -21,7 +21,7 @@
 }}
 		<div class="items {{ clz }}">
 			<div class="itemTop">
-				<span>￥</span><label>{{ t.price }}</label>
+				<span><label>￥</label>{{ t.price }}</span>
 				{{# if (str) { }}<em>{{str}}</em>{{# } }}
 			</div>
 			<div class="itemBottom">

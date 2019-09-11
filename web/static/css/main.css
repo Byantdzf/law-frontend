@@ -36,6 +36,7 @@ a {
 	-o-transition: all .2s ease-out;
 	transition: all .2s ease-out;
 }
+a:hover { opacity: .8;}
 
 /*  顶部  */
 .top{height: 28px;line-height:28px;font-family:"宋体";color:#646464;border-bottom:1px solid #e6e6e6;font-size:12px;}
@@ -1152,8 +1153,9 @@ i, em { font-style: normal;}
 .couponList { padding: 30px 0 0 30px;}
 .couponList .items { width: 440px; float:left; margin: 0 60px 50px 0;}
 .couponList .items:nth-child(even) { margin-right: 0;}
-.couponList .items .itemTop { position: relative; background: rgba(255,85,85, .6); font-size: 40px; font-weight: bolder; text-align: center; color: #fff; padding: 25px 0; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden;}
-.couponList .items .itemTop span { font-size: 28px; font-weight: lighter;}
+.couponList .items .itemTop { position: relative; background: rgba(255,85,85, .6); font-size: 40px; font-weight: bolder; text-align: center; color: #fff; padding: 25px 0; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; height:50px; line-height: 50px;}
+.couponList .items .itemTop span { position: absolute; left:50%; transform:translateX(-50%);}
+.couponList .items .itemTop span label { font-size: 28px; font-weight: lighter; position: absolute; left:-30px; top:4px;}
 .couponList .items .itemTop:before,
 .couponList .items .itemTop:after { position: absolute; top:60px; width:20px; height:20px; background: #fff; border-radius: 50%; content: ""; }
 .couponList .items .itemTop:before { left: -10px;}
@@ -1172,7 +1174,7 @@ i, em { font-style: normal;}
 .couponList .items:hover .itemTop { background: rgba(255,85,85, .8);}
 .couponList .items:hover .itemBottom { border-color: rgba(255,85,85, .8);}
 
-.couponList .items .itemTop em { position: absolute; font-size: 14px; right:-78px; top:-10px; width: 200px; height: 50px; line-height: 60px; transform: rotate(30deg); font-weight: lighter; background: #666;}
+.couponList .items .itemTop em { position: absolute; font-size: 14px; right:-78px; top:-10px; width: 200px; height: 50px; line-height: 65px; transform: rotate(30deg); font-weight: lighter; background: #666; color: rgba(255,255,255,.6);}
 
 .couponList .items.used .itemTop,
 .couponList .items.over .itemTop { background: rgba(70,70,70,0.5);}
@@ -1183,7 +1185,35 @@ i, em { font-style: normal;}
 .couponList .items.used:hover .itemBottom,
 .couponList .items.over:hover .itemBottom { border-color: rgba(70,70,70,0.6);}
 
-.couponTab .layui-tab-title { height:60px;}
-.couponTab .layui-tab-title li { font-size: 18px; line-height: 60px; padding: 0 30px;}
+.couponTab .layui-tab-title { height:50px;}
+.couponTab .layui-tab-title li { font-size: 16px; line-height: 50px; padding: 0 30px;}
 .couponTab .layui-tab-title .layui-this { color:#f55;}
-.couponTab .layui-tab-title .layui-this:after { border:none; border-bottom:1px solid #f55; height:61px;}
+.couponTab .layui-tab-title .layui-this:after { border:none; border-bottom:1px solid #f55; height:51px;}
+
+.orderSearchBox { padding-top:20px;}
+.orderSearchBox input { text-align: center;}
+
+.userPage .layui-card-header { border-bottom: none;}
+.userPage .layui-card { box-shadow: none;}
+
+.noticeList .layui-table-header { display: none;}
+.noticeList .layui-table-view,
+.noticeList .layui-table td { border:none;}
+.noticeList .layui-table tr:hover { background:#fff;}
+
+.noticeTit { padding: 40px 50px 20px; font-size: 18px; text-align: center;}
+.noticeTit p { font-size: 14px; color: #999; margin-top:10px;}
+.helpCon,
+.noticeCon { padding: 0 50px 20px 50px; color:#333;}
+.noticeCon p,
+.helpCon p,
+.noticeCon div { line-height: 1.8; margin: 15px 0;}
+
+.aboutPage { width: 1000px; box-shadow: 0 0 2px rgba(0,0,0,0.3); margin-top:20px; padding: 30px; box-sizing: border-box; border-radius: 20px;}
+.aboutTit { text-align: center; font-size: 22px; margin-bottom: 30px; padding-bottom:30px; border-bottom: 1px solid #e6e6e6;}
+.aboutCon { line-height: 1.8;}
+
+.helpCon { text-align: left; margin-top:50px;}
+
+.feedbackBox { width:600px; margin: 50px auto;}
+.feedbackBox textarea { min-height: 150px;}

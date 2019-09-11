@@ -2,6 +2,7 @@
 	"btn": {
 		"login": "登录",
 		"addBtn": "新增",
+		"viewBtn": "查看详情",
 		"exportBtn": "导出",
 		"searchBtn": "查询",
 		"resetBtn": "清除",
@@ -19,6 +20,7 @@
 		"filterInput": "直接选择或搜索选择"
 	},
 	"text": {
+		"all": "全部"
 	},
 	"rs": {
 		"sex": [{"id": "1", "name": "男"}, {"id": "2", "name": "女"}],
