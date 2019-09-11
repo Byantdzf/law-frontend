@@ -400,6 +400,10 @@ layui.define(function (exports) {
 		},
 
 		alert: function (content, icon, callback) {
+			if (typeof icon === 'function') {
+				callback = icon;
+				icon = {};
+			}
 			layer.alert(content, {
 				icon: icon
 			}, callback)

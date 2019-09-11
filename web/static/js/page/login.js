@@ -14,7 +14,9 @@
 			})
 
 			$('.wechatLogin').click(function () {
-				
+				utils.alert('扫码登录成功，点击确定，跳转到绑定手机页面', {}, function () {
+					window.location = '/lawyer/bind.html';
+				});
 			});
 		}
 	}

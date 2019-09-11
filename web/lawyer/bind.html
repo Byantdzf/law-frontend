@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div class="header widthCC">
-		<a href="index.html" class="flt logo"><img src="/static/images/logo.png"></a>
+		<a href="/index.html" class="flt logo"><img src="/static/images/logo.png"></a>
 		<div class="flt area">
 			<a href="javascript:;">地区切换：<label class="showAreaName"></label><span></span></a>
 			<div class="region_box">
@@ -46,7 +46,7 @@
 
 	<div class="nav">
 		<div class="widthCC">
-			<a href="/index.html">首页</a>
+			<a class="current" href="/index.html">首页</a>
 			<a href="/ask.html">语音咨询</a>
 			<a href="/selfAsk.html">1对1咨询</a>
 			<a href="/nonlitigationLegalServices.html">非诉讼法律服务</a>
@@ -57,45 +57,43 @@
 		</div>
 	</div>
 
-	<div class="widthCC orderPage hidden">
-		<div class="layui-form">
+	<p class="bread_tips widthCC">
+		<a href="/index.html">首页</a> &gt;
+		<a href="javascript:;">律师登录</a>
+	</p>
 
-		</div>
-	</div>
+	<div class="widthCC regPage">
+		<div class="clearfix">
+			<div class="regTit">绑定手机</div>
+			<div class="bindLeft">
+				<div class="imgBox"><img src="/static/images/avatar.jpg" /></div>
+				<h3>wakaka</h3>
+			</div>
+			<div class="bindRight">
+				<div class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><i>*</i>手机号码：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+						</div>
+						<a href="javascript:;" class="layui-btn layui-btn-primary">获取验证码</a>
+					</div>
 
-	<div class="widthCC setPay hidden">
-		<div class="payTit"><i class="iconfont icon-money"></i>在线支付</div>
-		<p>支付金额为<em class="amount">50</em>元，请选择以下支付方式支付，建议您使用微信支付，打开微信，扫描二维码即可支付，方便快速。</p>
-		
-		<div class="layui-form">
-			<div class="layui-form-item">
-				<label class="layui-form-label">支付方式：</label>
-				<div class="layui-input-block">
-						<input type="radio" name="payment" value="1" title="<img src='/static/images/wxpay.png' />" checked="">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><i>*</i>验证码：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item tac">
+						<a href="javascript:;" class="layui-btn layui-btn-red bindSubmit" lay-submit=""
+							lay-filter="bindSubmit">确定</a>
+					</div>
+
 				</div>
-				<div class="layui-input-block">
-						<input type="radio" name="payment" value="2" title="<img src='/static/images/alipay.png' />">
-				</div>
 			</div>
+		</div>
 
-			<div class="layui-form-item tac">
-				<a href="javascript:;" class="layui-btn layui-btn-red marginTop40 paySubmit" lay-submit="" lay-filter="paySubmit">确定提交</a>
-			</div>
-		</div>
-	</div>
-
-	<div class="widthCC paySuccess hidden">
-		<div class="payTit"><i class="iconfont icon-money"></i><label></label></div>
-		<p class="successInfo hidden">恭喜您！您已提交成功，<span class="lawyerHtml"></span>，请及时留意信息通知。</p>
-		<p>扫码公众号二维码，第一时间掌握信息回复。</p>
-		<div class="paySuccessQr">
-			<img src="static/images/eqcode_240.png" />
-		</div>
-		<div class="layui-form">
-			<div class="layui-form-item tac">
-				<a href="javascript:;" class="layui-btn layui-btn-red marginTop40 returnFirst" lay-submit="" lay-filter="returnFirst">完成</a>
-			</div>
-		</div>
 	</div>
 
 	<div class="btm">
@@ -121,7 +119,6 @@
 					<p>Copyright 2015-2019 hujiawenda.com All Rights Reserved. 粤ICP备xxxxxxxx号</p>
 					<p>深圳市xxx水泉西路98号山东财经大学大学生创业园</p>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -131,7 +128,7 @@
 	<script src="/static/js/common/url.js"></script>
 	<script src="/static/js/common/util.js"></script>
 	<script src="/static/js/common/common.js"></script>
-	<script src="/static/js/page/order.js"></script>
+	<script src="/static/js/page/lawyer/bind.js"></script>
 </body>
 
 </html>

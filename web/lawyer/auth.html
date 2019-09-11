@@ -15,6 +15,7 @@
 		content="虎甲问答-3-5分钟100%解答您的法律问题,律师在线提供免费法律咨询,律师在线咨询免费解答,在线律师咨询,24小时律师在线免费咨询,全国法律援助热线：400-618-8116。" />
 	<link rel="stylesheet" href="/static/js/plugin/layui/css/layui.css" />
 	<link href="//at.alicdn.com/t/font_1391008_wg5ke8317t.css" rel="stylesheet">
+	<link href="/static/js/plugin/webuploader/css/webuploader.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 </head>
 
@@ -46,49 +47,53 @@
 
 	<div class="nav">
 		<div class="widthCC">
-			<a class="current" href="index.html">首页</a>
-			<a href="ask.html">语音咨询</a>
-			<a href="selfAsk.html">1对1咨询</a>
-			<a href="nonlitigationLegalServices.html">非诉讼法律服务</a>
-			<a href="litigationLegalServices.html">诉讼法律服务</a>
-			<a href="getLawyer.html">委托律师</a>
-			<a href="modelAgreement.html">协议模版</a>
-			<a href="user.html">我的</a>
+			<a class="current" href="/index.html">首页</a>
+			<a href="/ask.html">语音咨询</a>
+			<a href="/selfAsk.html">1对1咨询</a>
+			<a href="/nonlitigationLegalServices.html">非诉讼法律服务</a>
+			<a href="/litigationLegalServices.html">诉讼法律服务</a>
+			<a href="/getLawyer.html">委托律师</a>
+			<a href="/modelAgreement.html">协议模版</a>
+			<a href="/user.html">我的</a>
 		</div>
 	</div>
 
 	<p class="bread_tips widthCC">
-		<a href="index.html">首页</a> &gt;
+		<a href="/index.html">首页</a> &gt;
 		<a href="javascript:;">律师登录</a>
 	</p>
 
 	<div class="widthCC regPage">
-		<div class="regTit">律师平台登录</div>
-		<div class="layui-form loginForm">
+		<div class="regTit">律师认证审核</div>
+		<div class="layui-form">
+			<fieldset class="layui-elem-field layui-field-title">
+				<legend>上传身份证</legend>
+			</fieldset>
 			<div class="layui-form-item">
-				<input type="text" name="nums" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+				<div class="layui-col-xs6">
+					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard1.jpg" /></a>
+				</div>
+				<div class="layui-col-xs6">
+					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard2.jpg" /></a>
+				</div>
 			</div>
-
-			<div class="layui-form-item">
-				<input type="text" name="text" placeholder="请输入密码" autocomplete="off" class="layui-input">
-			</div>
-
-			<div class="layui-form-item">
-					<a href="javascript:;" class="flt fontGreen">微信扫码登录</a>
-					<a href="javascript:;" class="flr fontGrey">忘记密码</a>
-			</div>
-
 			<div class="layui-form-item">
 				<br />
 			</div>
-			<div class="layui-form-item tac">
-					<a href="javascript:;" class="layui-btn layui-btn-red regSubmit" lay-submit=""
-						lay-filter="regSubmit">登 录</a>
+			<fieldset class="layui-elem-field layui-field-title">
+				<legend>上传证书</legend>
+			</fieldset>
+			<div class="layui-form-item">
+				<div class="layui-col-xs6">
+					<a href="javascript:;" class="uploadBusinessCard"><img src="/static/images/businessCard.jpg" /></a>
+				</div>
 			</div>
 
+			<div class="layui-form-item tac">
+				<a href="javascript:;" class="layui-btn layui-btn-red authSubmit" lay-submit=""
+					lay-filter="authSubmit">提交审核</a>
+			</div>
 		</div>
-
-
 	</div>
 
 	<div class="btm">
@@ -101,12 +106,12 @@
 			<div class="btm_rt">
 				<div class="btm_rt_nav">
 					<a href="/">首页</a>
-					<a href="ask.html">咨询</a>
-					<a href="nonlitigationLegalServices.html">法律服务</a>
-					<a href="getLawyer.html">代理律师</a>
-					<a href="modelAgreement.html">法律文件</a>
-					<a href="about.html">关于我们</a>
-					<a href="declare.html">免责声明</a>
+					<a href="/ask.html">咨询</a>
+					<a href="/nonlitigationLegalServices.html">法律服务</a>
+					<a href="/getLawyer.html">代理律师</a>
+					<a href="/modelAgreement.html">法律文件</a>
+					<a href="/about.html">关于我们</a>
+					<a href="/declare.html">免责声明</a>
 				</div>
 				<div>
 					<h4><i class="iconfont icon-tel"></i>客服热线：400-618-8116</h4>
@@ -120,6 +125,7 @@
 	</div>
 
 	<script src="/static/js/plugin/layui/layui.all.js"></script>
+	<script src="/static/js/plugin/webuploader/webuploader.js"></script>
 	<script src="/static/js/common/global.js"></script>
 	<script src="/static/js/common/url.js"></script>
 	<script src="/static/js/common/util.js"></script>

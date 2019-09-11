@@ -3,7 +3,6 @@
 	var gather = {
 		init: function () {
 			var _t = this;
-
 		}
 	}
 
