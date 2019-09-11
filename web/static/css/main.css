@@ -1103,21 +1103,15 @@ i, em { font-style: normal;}
 .modelAgreement_list li .btnBox { text-align: right; margin: 10px 20px;}
 .modelAgreement_list li .btnBox a { width:100%;}
 
-.regPage .layui-field-title { border-width: 0; }
-.regPage .layui-field-title legend {font-size: 16px; margin-left:0; color:#454545;}
+.regPage { padding-left:100px!important; padding-right:100px!important;}
+.regPage .regTit { font-size: 22px; text-align: center; margin-bottom: 30px; border-bottom: 1px solid #e6e6e6; padding-bottom: 20px;}
 .regPage .selectAreas .layui-input-inline { width:170px;}
-
-.regTit { font-size: 22px; text-align: center; margin-bottom: 20px;}
-.regRight,
-.regLeft { float:left;}
-.regLeft { width:650px; margin-right:50px;}
-.regRight { width:500px;}
-
-.regRight a { display: block; width:90%; margin-top:10px;}
-.regRight a img { display: block; width:100%; height:100%;}
-.regRight a:hover { opacity: .8;}
-
 .regPage .layui-form-checkbox span { width:75px;}
+.regPage .layui-input-inline { width:350px;}
+.loginForm { width:350px; margin:0 auto;}
+.forgetStep .steps .layui-form { width:400px; margin:0 auto;}
+.forgetStep .layui-input-inline { width:160px;}
+.forgetStep .step2 .layui-input-inline { width:260px;}
 
 .chooseUserTypeBox { padding: 80px 0 30px 240px;}
 .chooseUserTypeBox .items { width:310px; height:310px; border:1px solid #e6e6e6; border-radius: 20px; box-sizing: border-box; text-align: center; float:left; padding-top:20px;
@@ -1209,6 +1203,7 @@ i, em { font-style: normal;}
 .helpCon p,
 .noticeCon div { line-height: 1.8; margin: 15px 0;}
 
+.regPage,
 .aboutPage { width: 1000px; box-shadow: 0 0 2px rgba(0,0,0,0.3); margin-top:20px; padding: 30px; box-sizing: border-box; border-radius: 20px;}
 .aboutTit { text-align: center; font-size: 22px; margin-bottom: 30px; padding-bottom:30px; border-bottom: 1px solid #e6e6e6;}
 .aboutCon { line-height: 1.8;}
@@ -1217,3 +1212,5 @@ i, em { font-style: normal;}
 
 .feedbackBox { width:600px; margin: 50px auto;}
 .feedbackBox textarea { min-height: 150px;}
+
+.noMinHeight { min-height: auto;}

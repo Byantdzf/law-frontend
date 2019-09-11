@@ -20,9 +20,11 @@
 			if ($.isEmptyObject(global.userInfo)) {
 				// 如果没有本地用户
 				_t.loadChooseUserType();
+				$('.userPage').addClass('noMinHeight');
 			} else {
 				// 如果有本地用户
 				_t.loadUserPage();
+				$('.userPage').removeClass('noMinHeight');
 			}
 		},
 

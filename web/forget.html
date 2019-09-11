@@ -63,31 +63,82 @@
 	</p>
 
 	<div class="widthCC regPage">
-		<div class="regTit">律师平台登录</div>
-		<div class="layui-form loginForm">
-			<div class="layui-form-item">
-				<input type="text" name="nums" autocomplete="off" placeholder="请输入手机号" class="layui-input">
-			</div>
+		<div class="forgetStep">
+			<div class="steps step1">
+				<div class="regTit">找回密码</div>
+				<div class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><i>*</i>手机号码：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+						</div>
+						<a href="javascript:;" class="layui-btn layui-btn-primary">获取验证码</a>
+					</div>
 
-			<div class="layui-form-item">
-				<input type="text" name="text" placeholder="请输入密码" autocomplete="off" class="layui-input">
-			</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label"><i>*</i>验证码：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+						</div>
+					</div>
 
-			<div class="layui-form-item">
-					<a href="javascript:;" class="flt fontGreen">微信扫码登录</a>
-					<a href="forget.html" class="flr fontGrey">忘记密码</a>
+					<div class="layui-form-item">
+						<br />
+					</div>
+					<div class="layui-form-item tac">
+						<a href="javascript:;" class="layui-btn layui-btn-red forgetNext" lay-submit=""
+							lay-filter="forgetNext">下一步</a>
+					</div>
+				</div>
 			</div>
+			<div class="steps step2 hidden">
+				<div class="regTit">重置密码</div>
+				<div class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><i>*</i>新密码：</label>
+						<div class="layui-input-inline">
+							<input type="password" name="nums" autocomplete="off" class="layui-input">
+						</div>
+					</div>
 
-			<div class="layui-form-item">
-				<br />
-			</div>
-			<div class="layui-form-item tac">
-					<a href="javascript:;" class="layui-btn layui-btn-red regSubmit" lay-submit="" lay-filter="regSubmit">登 录</a>
-			</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label"><i>*</i>确认密码：</label>
+						<div class="layui-input-inline">
+							<input type="password" name="nums" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<br />
+					</div>
+					<div class="layui-form-item tac">
+						<a href="javascript:;" class="layui-btn layui-btn-red forgetSubmit" lay-submit=""
+							lay-filter="forgetSubmit">确定</a>
+					</div>
+				</div>
 
+			</div>
+			<div class="steps step3 hidden">
+				<div class="regTit">重置成功</div>
+				<div class="layui-form">
+					<div class="layui-form-item">
+						<br />
+					</div>
+					<div class="layui-form-item tac">
+						请妥善保管好您的新密码，<a href="login.html" class="fontRed">点击登录</a>
+					</div>
+					<div class="layui-form-item">
+						<br />
+					</div>
+					<div class="layui-form-item">
+						<br />
+					</div>
+					<div class="layui-form-item">
+						<br />
+					</div>
+				</div>
+
+			</div>
 		</div>
-
-
 	</div>
 
 	<div class="btm">
@@ -123,7 +174,7 @@
 	<script src="/static/js/common/url.js"></script>
 	<script src="/static/js/common/util.js"></script>
 	<script src="/static/js/common/common.js"></script>
-	<script src="/static/js/page/login.js"></script>
+	<script src="/static/js/page/forget.js"></script>
 </body>
 
 </html>

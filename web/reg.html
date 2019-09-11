@@ -15,7 +15,6 @@
 		content="虎甲问答-3-5分钟100%解答您的法律问题,律师在线提供免费法律咨询,律师在线咨询免费解答,在线律师咨询,24小时律师在线免费咨询,全国法律援助热线：400-618-8116。" />
 	<link rel="stylesheet" href="/static/js/plugin/layui/css/layui.css" />
 	<link href="//at.alicdn.com/t/font_1391008_wg5ke8317t.css" rel="stylesheet">
-	<link href="/static/js/plugin/webuploader/css/webuploader.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 </head>
 
@@ -65,152 +64,125 @@
 
 	<div class="widthCC regPage">
 		<div class="regTit">律师平台注册</div>
-
 		<div class="layui-form">
-			<div class="clearfix">
-				<div class="regLeft">
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>基本信息填写</legend>
-					</fieldset>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>姓名：</label>
-						<div class="layui-input-inline">
-							<input type="text" name="nums" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>手机号码：</label>
-						<div class="layui-input-inline">
-							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
-						</div>
-						<a href="javascript:;" class="layui-btn layui-btn-primary">获取验证码</a>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>验证码：</label>
-						<div class="layui-input-inline">
-							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>登录密码：</label>
-						<div class="layui-input-inline">
-							<input type="password" name="nums" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>确认密码：</label>
-						<div class="layui-input-inline">
-							<input type="password" name="nums" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>身份证号：</label>
-						<div class="layui-input-inline">
-							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>执业证号：</label>
-						<div class="layui-input-inline">
-							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>执业律所：</label>
-						<div class="layui-input-inline">
-							<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
-						</div>
-					</div>
-
-					<div class="layui-form-item selectAreas">
-						<label class="layui-form-label"><i>*</i>选择地区：</label>
-						<div class="layui-input-inline">
-							<select name="quiz1">
-								<option value="">请选择省</option>
-								<option value="浙江" selected="">浙江省</option>
-								<option value="你的工号">江西省</option>
-								<option value="你最喜欢的老师">福建省</option>
-							</select>
-						</div>
-						<div class="layui-input-inline">
-							<select name="quiz2">
-								<option value="">请选择市</option>
-								<option value="杭州">杭州</option>
-								<option value="宁波" disabled="">宁波</option>
-								<option value="温州">温州</option>
-								<option value="温州">台州</option>
-								<option value="温州">绍兴</option>
-							</select>
-						</div>
-						<div class="layui-input-inline">
-							<select name="quiz3">
-								<option value="">请选择县/区</option>
-								<option value="西湖区">西湖区</option>
-								<option value="余杭区">余杭区</option>
-								<option value="拱墅区">临安市</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label"><i>*</i>擅长领域：<br /><label
-								class="fontGrey">最多可选6项</label></label>
-						<div class="layui-input-block">
-							<div class="checkboxList">
-
-							</div>
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<label class="layui-form-label">简介：</label>
-						<div class="layui-input-block">
-							<textarea class="layui-textarea" maxlength="100" name="content"
-								placeholder="（律师简介文字不能超过100字！）"></textarea>
-							<div class="textarea_counter"><span>0</span>/<em>0</em></div>
-						</div>
-					</div>
-
-					<div class="layui-form-item">
-						<div class="layui-input-block agreementBox">
-							<input type="radio" name="payment" value="1" title="确认以上信息为本人提交，且信息真实有效">
-						</div>
-					</div>
-
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>姓名：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="nums" autocomplete="off" class="layui-input">
 				</div>
+			</div>
 
-				<div class="regRight">
-					<fieldset class="layui-elem-field layui-field-title">
-						<legend>上传文件</legend>
-					</fieldset>
-					<div class="layui-form-item">
-						<div class="layui-col-xs6">
-							<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard1.jpg" /></a>
-						</div>
-						<div class="layui-col-xs6">
-							<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard2.jpg" /></a>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<div class="layui-col-xs6">
-							<a href="javascript:;" class="uploadBusinessCard"><img src="/static/images/businessCard.jpg" /></a>
-						</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>手机号码：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+				<a href="javascript:;" class="layui-btn layui-btn-primary">获取验证码</a>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>验证码：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>登录密码：</label>
+				<div class="layui-input-inline">
+					<input type="password" name="nums" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>确认密码：</label>
+				<div class="layui-input-inline">
+					<input type="password" name="nums" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>身份证号：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>执业证号：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>执业律所：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item selectAreas">
+				<label class="layui-form-label"><i>*</i>选择地区：</label>
+				<div class="layui-input-inline">
+					<select name="quiz1">
+						<option value="">请选择省</option>
+						<option value="浙江" selected="">浙江省</option>
+						<option value="你的工号">江西省</option>
+						<option value="你最喜欢的老师">福建省</option>
+					</select>
+				</div>
+				<div class="layui-input-inline">
+					<select name="quiz2">
+						<option value="">请选择市</option>
+						<option value="杭州">杭州</option>
+						<option value="宁波" disabled="">宁波</option>
+						<option value="温州">温州</option>
+						<option value="温州">台州</option>
+						<option value="温州">绍兴</option>
+					</select>
+				</div>
+				<div class="layui-input-inline">
+					<select name="quiz3">
+						<option value="">请选择县/区</option>
+						<option value="西湖区">西湖区</option>
+						<option value="余杭区">余杭区</option>
+						<option value="拱墅区">临安市</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i>*</i>擅长领域：<br /><label class="fontGrey">最多可选6项</label></label>
+				<div class="layui-input-block">
+					<div class="checkboxList">
+
 					</div>
 				</div>
 			</div>
-					
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">简介：</label>
+				<div class="layui-input-block">
+					<textarea class="layui-textarea" maxlength="100" name="content"
+						placeholder="（律师简介文字不能超过100字！）"></textarea>
+					<div class="textarea_counter"><span>0</span>/<em>0</em></div>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<div class="layui-input-block agreementBox">
+					<input type="radio" name="payment" value="1" title="确认以上信息为本人提交，且信息真实有效">
+				</div>
+			</div>
 			<div class="layui-form-item tac">
-				<a href="javascript:;" class="layui-btn layui-btn-red regSubmit" lay-submit="" lay-filter="regSubmit">提交审核</a>
+				<a href="javascript:;" class="layui-btn layui-btn-red regSubmit" lay-submit=""
+					lay-filter="regSubmit">提交审核</a>
 			</div>
+
 		</div>
+
+
 	</div>
 
 	<div class="btm">
@@ -242,7 +214,6 @@
 	</div>
 
 	<script src="/static/js/plugin/layui/layui.all.js"></script>
-	<script src="/static/js/plugin/webuploader/webuploader.js"></script>
 	<script src="/static/js/common/global.js"></script>
 	<script src="/static/js/common/url.js"></script>
 	<script src="/static/js/common/util.js"></script>
