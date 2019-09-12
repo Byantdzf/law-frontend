@@ -1,31 +1,56 @@
 <!-- 头部区域 -->
 
-<div class="welcome">
-	<ul class="layui-nav" lay-filter="">
-		<li class="layui-nav-item topUserBox">
-			您好，{{# if (d.username) { }}<a href="/user.html" class="topUser">{{ d.username || '' }}</a> {{# } }}欢迎来到虎甲问答
-			<dl class="layui-nav-child">
-				<!-- 二级菜单 -->
-				<dd><a href="javascript:;" class="logout">退出登录</a></dd>
-			</dl>
-		</li>
-		{{# if (!d.username) { }}
-		<li class="layui-nav-item"><a href="javascript:;" class="eqReg">免费注册</a></li>
-		<li class="layui-nav-item">
-			<a href="javascript:;">登陆</a>
-			<dl class="layui-nav-child">
-				<!-- 二级菜单 -->
-				<dd><a href="javascript:;" class="eqlogin">我是咨询者</a></dd>
-				<dd><a href="login.html">我是律师</a></dd>
-			</dl>
-		</li>
-		{{# } }}
-	</ul>
-</div>
+<div class="top">
+	<div class="widthCC">
+		<div class="welcome">
+			<ul class="layui-nav" lay-filter="">
+				<li class="layui-nav-item topUserBox">
+					您好，{{# if (d.username) { }}<a href="/user.html" class="topUser">{{ d.username || '' }}</a>
+					{{# } }}欢迎来到虎甲问答
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="javascript:;" class="logout">退出登录</a></dd>
+					</dl>
+				</li>
+				{{# if (!d.username) { }}
+				<li class="layui-nav-item"><a href="javascript:;" class="eqReg">免费注册</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">登陆</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="javascript:;" class="eqlogin">我是咨询者</a></dd>
+						<dd><a href="/login.html">我是律师</a></dd>
+					</dl>
+				</li>
+				{{# } }}
+			</ul>
+		</div>
 
-<p><a href="/index.html">首页</a>
-	<a href="/ask.html">语音咨询</a>
-	<a href="/selfAsk.html">1对1咨询</a>
-	<a href="javascript:;" class="eqcodew">公众号</a>
-	<a href="javascript:;" class="eqService">联系客服</a>
-</p>
+		<p><a href="/index.html">首页</a>
+			<a href="/ask.html">语音咨询</a>
+			<a href="/selfAsk.html">1对1咨询</a>
+			<a href="javascript:;" class="eqcodew">公众号</a>
+			<a href="javascript:;" class="eqService">联系客服</a>
+		</p>
+	</div>
+</div>
+<div class="header widthCC">
+	<a href="index.html" class="flt logo"><img src="/static/images/logo.png"></a>
+	<div class="flt area">
+		<a href="javascript:;">地区切换：<label class="showAreaName"></label><span></span></a>
+		<div class="region_box">
+			<p class="region_list">
+				<span
+					class="region_on">热门城市</span><span>ABCDE</span><span>FGHJ</span><span>KLMNP</span><span>QRSTW</span><span>XYZ</span>
+			</p>
+			<div class="region_conList">
+				<ul class="region_con">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="flr search">
+		<input type="text" placeholder="请输入关键词搜索律师" value="" id="search">
+		<button class="searchBtn">搜 索</button>
+	</div>
+</div>

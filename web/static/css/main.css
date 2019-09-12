@@ -39,6 +39,7 @@ a {
 a:hover { opacity: .8;}
 
 /*  顶部  */
+.appTop { height: 136px;}
 .top{height: 28px;line-height:28px;font-family:"宋体";color:#646464;border-bottom:1px solid #e6e6e6;font-size:12px;}
 .top>div{height: 28px;}
 .top .welcome{float: left;}
@@ -93,6 +94,7 @@ a:hover { opacity: .8;}
 .nav>div{margin:auto;}
 .nav h2{float: left; height: 52px;line-height:52px;color:#fff;font-size:20px;font-weight:bold;margin-right:80px;}
 .nav a{float: left; height: 52px;line-height:52px;color:#fff;font-weight:bold;width:12.5%;text-align:center;background:url("../images/nav_bg.png") no-repeat right center;background-size:2px auto;}
+.lawyer_nav a { width:20%;}
 .nav a:hover { color: #f55;}
 .nav a:last-child { background-image: none;}
 .nav .current{background-color:#eb4546;background-image: none;}
@@ -201,7 +203,7 @@ a:hover { opacity: .8;}
 .index_ccbox2_1 li h6 label { float: right; color: #f55;}
 .index_ccbox2_1 li p,
 .index_ccbox2_1 li p a { color:#666; line-height: 1.5;}
-.index_ccbox2_1 li p { padding-right:100px; margin-bottom: 10px;
+.index_ccbox2_1 li p { margin-bottom: 10px;
     max-height:42px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1225,3 +1227,14 @@ i, em { font-style: normal;}
 .bindRight { float:left;}
 .bindRight { float: left; width:500px;}
 .bindRight .layui-input-inline { width:160px;}
+
+.authPage img { display: block; margin: 0 auto;}
+.bindPage { margin-top:70px; margin-bottom: 70px;}
+
+.searchPage .searchBox li { position: relative; padding: 10px 10px 10px 60px; min-height: 40px;}
+.searchPage .searchBox li label { position: absolute; left:10px; top:15px; font-weight: bold;}
+.searchPage .searchBox li { position: relative;}
+.searchPage .searchBox li a { float:left; padding: 5px 10px; margin: 0 10px 10px 0; color:#666;}
+.searchPage .searchBox li a.curr { color: #fff!important; background:#f55;}
+.searchPage .searchBox li a:hover { color: #f55;}
+.searchPage .searchBox li:last-child a { border: 1px solid #e6e6e6;}

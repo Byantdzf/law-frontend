@@ -1,0 +1,317 @@
+@import "color.less";
+
+.mixinTheme() {
+  .colorClass(@className, @bgColor, @bgFontColor) {
+    .cl-@{className} {
+      color: @bgColor;
+    }
+    .bg-@{className} {
+      background: @bgColor;
+      color: @bgFontColor;
+    }
+    .el-button--@{className} {
+      background-color: @bgColor;
+      border-color: @bgColor;
+      color: @bgFontColor;
+      &.el-button:active,
+      &.el-button:hover,
+      &.el-button:focus {
+        background-color: @bgColor;
+        border-color: @bgColor;
+        color: @bgFontColor;
+        opacity: 0.85;
+      }
+      &.is-plain {
+        background-color: transparent;
+        border-color: @bgColor;
+        color: @bgColor;
+        &:active,
+        &:hover,
+        &:focus {
+          background-color: @bgColor;
+          border-color: @bgColor;
+          color: @bgFontColor;
+        }
+      }
+    }
+  }
+
+  .loopColors(@i) when (@i < length(@bg-names)+1) {
+    .colorClass(extract(@bg-names, @i), extract(@bg-colors, @i), extract(@bg-font-colors, @i));
+    .loopColors(@i+1);
+  }
+
+  .loopColors(1);
+
+  .bg-primary--linear {
+    background: linear-gradient(to right, @primary-linear-start, @primary-linear-end);
+  }
+  
+  .cl-inverse {
+    color: @inverse;
+  }
+
+  .cl-sub {
+    color: @text-color-sub;
+  }
+
+  .cl-999 {
+    color: @text-color-999;
+  }
+  
+  /* 登录页面 start */
+
+  .page-login {
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .login-form {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    .input-item {
+      border-bottom-color: @border-color;
+    }
+    .el-input__inner {
+      background-color: transparent;
+    }
+  }
+
+  /* 登录页面 end */
+
+  /* 页面内容 start */ 
+  
+  .app-header {
+    background-color: @header-bg;
+    color: @header-color;
+    .icon-box {
+      background: @header-icon-bg;
+    }
+  }
+  .app-nav-item {
+    a {
+      color: @inverse;
+    }
+    &:hover,
+    &.active {
+      a {
+        background: @nav-bg-active;
+      }
+    }
+  }
+  .app-header__tools {
+    li {
+      position: relative;
+      & + li {
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 1px;
+          height: 100%;
+          background: @header-border-color;
+        }
+      }
+      border-left: 1px solid transparent;
+    }
+  }
+  .header-popover-hd {
+    border-bottom: 1px solid @border-color;
+  }
+
+  .app-side {
+    background-color: @side-bg;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+
+    .el-submenu__title,
+    .el-menu-item a,
+    .el-menu-item i {
+      color: @side-color;
+    }
+
+    .el-submenu__title:focus,
+    .el-submenu__title:hover,
+    .el-menu-item.is-active,
+    .el-menu-item:focus,
+    .el-menu-item:hover {
+      background-color: @side-bg-active;
+      a,
+      i {
+        color: @side-color;
+      }
+    }
+
+    .el-menu-item.is-active {
+      font-weight: bold;
+      a,
+      i {
+        color: @side-color-active;
+      }
+    }
+  }
+
+  .app-form {
+    .el-upload__tip,
+    .el-form-item__label {
+      color: @text-color-999;
+    }
+    .el-form-item {
+      &.required {
+        .el-input__inner,
+        .el-textarea__inner {
+          background-color: @bg-input-required;
+        }
+      }
+    }
+  }
+
+  .page-area-hd {
+    background: @table-header-bg;
+    color: @text-color-sub;
+  }
+
+  .page-area-col {
+    & + .page-area-col {
+      border-left: 1px solid @border-color;
+    }
+  }
+
+  .infinite-list-wrapper {
+    .item.active {
+      background: @side-bg-active;
+      color: @side-color-active;
+      font-weight: bold;
+    }
+    .item.is-edit {
+      border: 1px solid extract(@bg-colors, 1);
+    }
+  }
+
+  .tenant-detail {
+    .label {
+      background: @side-bg-active;
+    }
+  }
+
+  .el-image-viewer__close {
+    color: @text-color-base;
+  }
+
+  /* 页面内容 end */
+
+  /* element-ui start */
+
+  .el-dialog__header {
+    background: @dialog-header-bg;
+    border-bottom: 1px solid @border-color;
+  }
+  .page-dialog {
+    &.is-full {
+      .el-dialog__header {
+        background: @dialog-header-bg--full;
+      }
+      .el-dialog__body {
+        background: @bg-content;
+      }
+    }
+  }
+
+  .el-card.is-always-shadow,
+  .el-card.is-hover-shadow:focus,
+  .el-card.is-hover-shadow:hover {
+    box-shadow: 0px 0px 10px 0px rgba(4,0,0,0.05);
+    border-radius: 4px;
+  }
+
+  .el-table__header {
+    th {
+      background: @table-header-bg;
+      color: @text-color-sub;
+    }
+  }
+
+  .el-table--border::after, .el-table--group::after, .el-table::before {
+    background-color: @table-border-color;
+  }
+  .el-table td, .el-table th.is-leaf {
+    border-bottom: 1px solid @table-border-color;
+  }
+
+  .el-table__body tr.current-row>td {
+    background: @table-current-row-bg;
+  }
+
+  .el-pagination.is-background {
+    .btn-next,
+    .btn-prev,
+    button,
+    span:not([class*=suffix]),
+    .el-pager li {
+      color: @text-color-base;
+      background-color: transparent;
+    }
+    .el-pager li {
+      &:not(.disabled).active{
+        background-color: extract(@bg-colors, 1);
+      }
+    }
+  }
+
+  .el-radio-button__inner:hover,
+  .el-tabs__item.is-active,
+  .el-tabs__item:hover,
+  .el-checkbox__input.is-checked+.el-checkbox__label,
+  .el-select-dropdown__item.selected,
+  .el-date-table td.today span,
+  .el-date-table td.available:hover,
+  .el-radio__input.is-checked+.el-radio__label,
+  .el-dropdown-menu__item:focus, 
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    color: extract(@bg-colors, 1);
+  }
+
+  .el-date-table td.current:not(.disabled) span,
+  .el-radio-button.is-active .el-radio-button__inner:hover,
+  .el-date-table td.today.end-date span, .el-date-table td.today.start-date span {
+    color: #fff;
+  }
+  
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner,
+  .el-range-editor.is-active, .el-range-editor.is-active:hover,
+  .el-radio.is-bordered.is-checked,
+  .el-checkbox__input.is-checked .el-checkbox__inner, 
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner,
+  .el-pagination__sizes .el-input .el-input__inner:hover,
+  .el-radio__input.is-checked .el-radio__inner,
+  .el-select .el-input.is-focus .el-input__inner,
+  .el-input.is-active .el-input__inner, 
+  .el-textarea__inner:focus,
+  .el-input__inner:focus {
+    border-color: extract(@bg-colors, 1);
+  }
+
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner,
+  .el-date-table td.end-date span, .el-date-table td.start-date span,
+  .el-tabs__active-bar,
+  .el-checkbox__input.is-checked .el-checkbox__inner, 
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner,
+  .el-radio__input.is-checked .el-radio__inner,
+  .el-date-table td.current:not(.disabled) span {
+    background-color: extract(@bg-colors, 1);
+  }
+
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    box-shadow: -1px 0 0 0 extract(@bg-colors, 1);
+  }
+
+  /* element-ui end */
+}
+
+/*
+ * 默认主题
+ */
+.theme-default {
+  background: @bg-content;
+  .var-default();
+  .mixinTheme();
+}

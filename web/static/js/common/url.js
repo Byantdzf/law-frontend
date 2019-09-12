@@ -15,6 +15,7 @@ var URL = {
 	select: {
 		getCate: '/static/data/cate.json',
 		getArea: '/static/data/area.json',
+		getProvCity: '/static/data/city_code.json',
 	},
 	order: {
 		list: '/static/data/order.json',
