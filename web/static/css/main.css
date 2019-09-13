@@ -1,9 +1,9 @@
-html,body{width: 100%; overflow-x: hidden;}
+html,body{width: 100%; overflow-x: hidden; color:#333;}
 html,body,ul,li,p,h1,h2,h3,h4,h5,h6{margin: 0; padding: 0; font-weight: normal;}
 *{font-family: 微软雅黑;}
 li{list-style: none;}
 input,textarea,select,option,button{margin: 0; padding: 0; outline: none; border: none;background: none;}
-a{ text-decoration: none; color:#000;}
+a{ text-decoration: none; color:#333;}
 img{outline: none; border: none;}
 .dblock{display: block}
 .d_inblock{display:inline-block!important;}
@@ -39,6 +39,7 @@ a {
 a:hover { opacity: .8;}
 
 /*  顶部  */
+.appTop { height: 136px;}
 .top{height: 28px;line-height:28px;font-family:"宋体";color:#646464;border-bottom:1px solid #e6e6e6;font-size:12px;}
 .top>div{height: 28px;}
 .top .welcome{float: left;}
@@ -93,6 +94,7 @@ a:hover { opacity: .8;}
 .nav>div{margin:auto;}
 .nav h2{float: left; height: 52px;line-height:52px;color:#fff;font-size:20px;font-weight:bold;margin-right:80px;}
 .nav a{float: left; height: 52px;line-height:52px;color:#fff;font-weight:bold;width:12.5%;text-align:center;background:url("../images/nav_bg.png") no-repeat right center;background-size:2px auto;}
+.lawyer_nav a { width:20%;}
 .nav a:hover { color: #f55;}
 .nav a:last-child { background-image: none;}
 .nav .current{background-color:#eb4546;background-image: none;}
@@ -201,7 +203,7 @@ a:hover { opacity: .8;}
 .index_ccbox2_1 li h6 label { float: right; color: #f55;}
 .index_ccbox2_1 li p,
 .index_ccbox2_1 li p a { color:#666; line-height: 1.5;}
-.index_ccbox2_1 li p { padding-right:100px; margin-bottom: 10px;
+.index_ccbox2_1 li p { margin-bottom: 10px;
     max-height:42px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1225,3 +1227,48 @@ i, em { font-style: normal;}
 .bindRight { float:left;}
 .bindRight { float: left; width:500px;}
 .bindRight .layui-input-inline { width:160px;}
+
+.authPage img { display: block; margin: 0 auto;}
+.bindPage { margin-top:70px; margin-bottom: 70px;}
+
+.searchPage .searchBox li { position: relative; padding: 10px 10px 10px 60px; min-height: 40px;}
+.searchPage .searchBox li label { position: absolute; left:10px; top:15px; font-weight: bold;}
+.searchPage .searchBox li { position: relative;}
+.searchPage .searchBox li a { float:left; padding: 5px 10px; margin: 0 10px 10px 0; color:#666;}
+.searchPage .searchBox li a.curr { color: #fff!important; background:#f55;}
+.searchPage .searchBox li a:hover { color: #f55;}
+.searchPage .searchBox li:last-child a { border: 1px solid #e6e6e6;}
+
+.systemPush li { position: relative;}
+.systemPush li .items { padding: 20px 30px;}
+.systemPush dd { width:40%; float:left; position: relative; padding-left:80px; box-sizing: border-box; line-height: 2; color:#333;}
+.systemPush dd label { position: absolute; left:0; top:0; width:80px; color:#999;}
+.systemPush dd:nth-child(even) { width:60%;}
+.systemPush li .rightTop { position: absolute;right:20px; top:20px;}
+.systemPush li .rightTop i { font-size: 30px; color:#f55; margin-right: 20px;}
+.systemPush li .rightTop .countTimes { float:right; background:rgba(70,70,70,0.5); padding: 5px 10px; color: #fff; border-radius: 5px;}
+.systemPush li .rightTop .countTimes.notice { background:rgba(255,85,85,0.5);}
+.systemPush li .btnList { position: absolute; right: 20px; bottom: 20px;}
+.systemPush li .btnList a { margin-left: 10px;}
+.systemPush li .btnList .share { padding-bottom: 0;}
+.systemPush li .btnList .share i { color: #333; font-size:22px; position: relative; top:5px; margin-right:0;}
+.systemPush .cateList { border:1px solid #d8d8d8; margin-bottom: 10px; padding:10px;}
+.systemPush .cateList li { float:left; text-align: center; padding: 0 20px;}
+.systemPush .cateList li a { display: block;}
+.systemPush .cateList li a:hover,
+.systemPush .cateList li.curr a { color: #f55;}
+
+.lawyerIndex .index_ccbox2_1,
+.lawyerIndex .clm_3_1 { margin-top:0;}
+
+.layui-fixbar li .fixAsk { display: none;}
+.layui-fixbar li:hover .fixAsk { display: block;}
+.layui-fixbar .iconfont { font-size: 30px;}
+.layui-fixbar li:first-child:hover { opacity: .95;}
+.layui-fixbar li:first-child a:hover { background:#f55;}
+.layui-fixbar .fixAsk { position: absolute; left:-150px; top:-100px; width:200px; height:200px;}
+.layui-fixbar .fixAsk a { position: absolute; font-size: 12px; text-align: center; line-height: 1.2; width:50px; height:50px; background:#01AAED; border-radius: 50%; color:#fff; box-sizing: border-box; padding-top:10px;}
+.layui-fixbar .fixAsk a.fixAsk1 { top: 20px; left:150px;}
+.layui-fixbar .fixAsk a.fixAsk2 { top: 45px; left:95px;}
+.layui-fixbar .fixAsk a.fixAsk3 { top: 100px; left:75px;}
+.layui-fixbar .fixAsk a.fixAsk4 { top: 155px; left:90px;}

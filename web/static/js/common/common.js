@@ -103,7 +103,7 @@
 				var thisCity = {};
 				thisCity.id = $(this).data('code');
 				thisCity.name = $(this).text();
-				utils.setCookie(global.areaCookie, thisCity, {expires: 30});
+				utils.setCookie(global.areaCookie, thisCity, { expires: 30 });
 				window.location = '/index.html';
 			});
 
@@ -138,7 +138,51 @@
 				})
 			})
 
+			_t.setFixBar();
+
 			_t.hotCity();
+		},
+
+		setFixBar: function () {
+			var _t = this;
+			//固定块
+			util.fixbar({
+				bar1: " "
+				, bar2: " "
+				, css: { right: 50, bottom: 100 }
+				, bgcolor: '#9F9F9F'
+			});
+			var box = $('.layui-fixbar');
+			var topBtn = box.find('.layui-fixbar-top');
+			topBtn.before('<li class="layui-icon" lay-type="bar3" style="background-color:#9F9F9F"> </li><li class="layui-icon" lay-type="bar4" style="background-color:#9F9F9F"> </li>');	// 添加第三，四个图标
+			var list = [
+				{"title": "", "name": "icon-radio" },
+				{"title": "用户登录", "name": "icon-user1" },
+				{"title": "联系客服", "name": "icon-kefu" },
+				{"title": "关于我们", "name": "icon-guanyuwomen"}
+			]
+			box.find('li').each(function () {
+				var li = $(this);
+				if (li.attr('lay-type').indexOf('bar') > -1) {
+					var t = list[li.index()];
+					li.html('<i class="iconfont ' + t.name + '" title="' + t.title + '"></i>');
+					if (li.find('i').hasClass('icon-radio')) {
+						var html = utils.getTemp('/page/common/fixAsk.html');
+						li.append(html);
+					}
+				}
+			});
+
+			box.on('click', 'li', function () {
+				var i = $(this).find('i');
+				if (i.hasClass('icon-user1')) {
+					_t.login();
+				} else if (i.hasClass('icon-kefu')) {
+					_t.eqService();
+				} else if (i.hasClass('icon-guanyuwomen')) {
+					window.location = '/about.html';
+				}
+			})
 		},
 
 		topSearch: function () {
@@ -164,7 +208,7 @@
 					timer = window.setInterval(function () {
 						t--;
 						$('.showTestCount').html('登录倒计时：' + t);
-						if ( t == 0) {
+						if (t == 0) {
 							window.clearInterval(timer);
 							if (eb) {
 								eb();

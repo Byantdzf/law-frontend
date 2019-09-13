@@ -19,7 +19,7 @@
 			var _t = this;
 			utils.get(URL.select.getCate, function (res) {
 				var list = res.data;
-				var html = '';
+				var html = '<a href="javascript:;" class="on">全部</a>';
 				$.each(list, function (i, t) {
 					var on = t.on ? ' class="on"' : '';
 					html += '<a href="javascript:;" data-id="' + t.id + '"' + on + '>' + t.name + '</a>';

@@ -5,6 +5,12 @@
 			var _t = this;
 
 			_t.loadCateList();
+
+			form.on('submit(regSubmit)', function (elem) {
+				utils.alert('注册成功，点击登录', {}, function () {
+					window.location = '/login.html';
+				})
+			});
 		},
 
 		loadCateList: function () {
@@ -26,7 +32,7 @@
 					form.render('checkbox');
 					utils.alert('最多只可选择6项');
 				}
-			})
+			});
 		},
 	}
 

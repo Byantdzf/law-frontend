@@ -7,6 +7,7 @@
 			form.on('submit(loginSubmit)', function () {
 				utils.alert('还未绑定微信，立即绑定', {}, function () {
 					utils.msg('绑定成功');
+					utils.setCookie(global.userInfoToken, global.testUserInfo);
 					setTimeout(function () {
 						window.location = '/lawyer/auth.html';
 					}, 1000);
@@ -15,6 +16,7 @@
 
 			$('.wechatLogin').click(function () {
 				utils.alert('扫码登录成功，点击确定，跳转到绑定手机页面', {}, function () {
+					utils.setCookie(global.userInfoToken, global.testUserInfo);
 					window.location = '/lawyer/bind.html';
 				});
 			});

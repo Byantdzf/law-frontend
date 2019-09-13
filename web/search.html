@@ -5,59 +5,363 @@
 	<meta charset="utf-8">
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link rel="icon" href="/static/images/favicon.ico" />
 	<link rel="shortcut icon" href="/static/images/favicon.ico" />
 	<title>虎甲问答官网-3-5分钟快速解答您的法律问题</title>
 	<meta name="keywords" content="免费法律咨询,律师在线咨询免费,免费律师咨询,在线律师咨询,语音咨询,虎甲问答" />
-	<meta name="description" content="虎甲问答-3-5分钟100%解答您的法律问题,律师在线提供免费法律咨询,律师在线咨询免费解答,在线律师咨询,24小时律师在线免费咨询,全国法律援助热线：400-618-8116。" />
+	<meta name="description"
+		content="虎甲问答-3-5分钟100%解答您的法律问题,律师在线提供免费法律咨询,律师在线咨询免费解答,在线律师咨询,24小时律师在线免费咨询,全国法律援助热线：400-618-8116。" />
 	<link rel="stylesheet" href="/static/js/plugin/layui/css/layui.css" />
-	<link href="//at.alicdn.com/t/font_1391008_wg5ke8317t.css" rel="stylesheet">
+	<link href="//at.alicdn.com/t/font_1391008_krrlmtaogwl.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 </head>
 
 <body>
-	<div class="top">
-		<div class="widthCC appTop">
-		</div>
-	</div>
-	<div class="header widthCC">
-		<a href="index.html" class="flt logo"><img
-				src="/static/images/logo.png"></a>
-		<div class="flt area">
-			<a href="javascript:;">地区切换：<label class="showAreaName"></label><span></span></a>
-			<div class="region_box">
-				<p class="region_list">
-					<span
-						class="region_on">热门城市</span><span>ABCDE</span><span>FGHJ</span><span>KLMNP</span><span>QRSTW</span><span>XYZ</span>
-				</p>
-				<div class="region_conList">
-					<ul class="region_con">
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="flr search">
-			<input type="text" placeholder="请输入关键词搜索律师和咨询" value="" id="search">
-			<button class="searchBtn">搜 索</button>
-		</div>
-	</div>
+	<div class="appTop"></div>
 
 	<div class="nav">
 		<div class="widthCC">
-			<a href="/index.html">首页</a>
+			<a class="current" href="/index.html">首页</a>
 			<a href="/ask.html">语音咨询</a>
 			<a href="/selfAsk.html">1对1咨询</a>
 			<a href="/nonlitigationLegalServices.html">非诉讼法律服务</a>
 			<a href="/litigationLegalServices.html">诉讼法律服务</a>
 			<a href="/getLawyer.html">委托律师</a>
 			<a href="/modelAgreement.html">协议模版</a>
-			<a class="current" href="/user.html">我的</a>
+			<a href="/user.html">我的</a>
 		</div>
 	</div>
 
-	<div class="widthCC aboutPage">
+	<p class="bread_tips widthCC">
+		<a href="/index.html">首页</a> &gt; <a href="javascript:;">搜索结果</a>
+	</p>
 
+	<div class="widthCC searchPage">
+		<div class="clearfix">
+			<div class="lft flt">
+				<h4 class="clm_tt_l"><a href="javascript:;">律师查找</a></h4>
+				<p class="tt_underline"><span></span></p>
+
+				<div class="searchBox">
+					<ul>
+						<li>
+							<div class="clearfix">
+								<label>省份：</label>
+								<div class="list provList">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="clearfix">
+								<label>城市：</label>
+								<div class="list cityList">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="clearfix">
+								<label>专长：</label>
+								<div class="list specialityList">
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div id="zhixun">
+					<ul class="index_ccbox2_1">
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/5a9ca50f47c1.png" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">杨波律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a href="javascript:;">杨波律师，北京大成深圳分所合伙人，具有建设工程高级合同管理师、高级法务咨询师资格，具有独立董事资格，</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">30人</label>　　　关注人数：<label
+											class="fontGreen">1816人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/71cb1cf3d9ec-1902271341.jpg" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">金振朝律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a
+											href="javascript:;">高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务，独著《融资担高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务，独著《融资担高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">37人</label>　　　关注人数：<label
+											class="fontGreen">1953人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/220fe76a89a3.jpg" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">张雨平律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a href="javascript:;">张雨平律师，广东蛇口律师事务所（中国首家律师事务所）执业律师。擅长劳资争议、婚姻家事、公司法务、经济</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">40人</label>　　　关注人数：<label
+											class="fontGreen">4213人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/e8a1a5236d8d.png" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">廖翔律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a href="javascript:;">9年执业经验，大量实践经历; 高效专注，尽心竭力承您所托。</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">65人</label>　　　关注人数：<label
+											class="fontGreen">1790人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/5a9ca50f47c1.png" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">杨波律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a href="javascript:;">杨波律师，北京大成深圳分所合伙人，具有建设工程高级合同管理师、高级法务咨询师资格，具有独立董事资格，</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">30人</label>　　　关注人数：<label
+											class="fontGreen">1816人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/71cb1cf3d9ec-1902271341.jpg" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">金振朝律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a
+											href="javascript:;">高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务，独著《融资担高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务，独著《融资担高级合伙人，北京大学法律硕士（民商法方向），12年法律实务经验，办理大量诉讼及非诉业务</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">37人</label>　　　关注人数：<label
+											class="fontGreen">1953人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/220fe76a89a3.jpg" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">张雨平律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a href="javascript:;">张雨平律师，广东蛇口律师事务所（中国首家律师事务所）执业律师。擅长劳资争议、婚姻家事、公司法务、经济</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">40人</label>　　　关注人数：<label
+											class="fontGreen">4213人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="items">
+									<div class="imgBox"><a href="javascript:;"><img
+												src="/static/images/e8a1a5236d8d.png" /></a><span></span></div>
+									<h6>
+										<a href="javascript:;">廖翔律师 <i class="addvip vvip"></i></a><label>4.9分</label>
+									</h6>
+									<p>
+										<a href="javascript:;">9年执业经验，大量实践经历; 高效专注，尽心竭力承您所托。</a>
+									</p>
+									<div class="others">
+										帮助人数：<label class="fontRed">65人</label>　　　关注人数：<label
+											class="fontGreen">1790人</label>
+									</div>
+									<div class="consult_btn02">
+										<a href="ask.html?id=1" class="conbtn03"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+										<a href="selfAsk.html?id=1" class="conbtn04"><i
+												class="iconfont icon-feature"></i>一对一咨询</a>
+										<a href="javascript:;" class="conbtn05"><i
+												class="iconfont icon-favorites"></i>立即关注</a>
+									</div>
+								</div>
+							</li>
+					</ul>
+					<div class="Pages">
+						<div class="PBtn"> <a class="PBtnCrt" href="#">1</a>
+							<a onclick="ajaxPage(2)">2</a>
+							<a onclick="ajaxPage(3)">3</a>
+							<a onclick="ajaxPage(4)">4</a>
+							<a onclick="ajaxPage(5)">5</a>
+							<a onclick="ajaxPage(6)">6</a>
+							<a onclick="ajaxPage(7)">7</a>
+							<a onclick="ajaxPage(8)">8</a>
+							<a onclick="ajaxPage(9)">9</a>
+							<a onclick="ajaxPage(10)">10</a>
+							<a onclick="ajaxPage(11)">11</a>
+							<a onclick="ajaxPage(12)">12</a>
+							<a onclick="ajaxPage(13)">13</a>
+							<a onclick="ajaxPage(14)">14</a>
+							<a onclick="ajaxPage(15)">15</a>
+							<a class="widthLong" onclick="ajaxPage(2)">下一页</a>
+						</div>
+						<div class="Clip">
+							<label>跳转：<input type="text" id="gop2">页</label>
+							<button onclick="gpage2()">GO</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="rt flr">
+				<div class="clm_side part3_3_cc newsRight">
+					<h2 class="clm_tt_m"><a href="/Lawyer/Index/index/areaid/440300.html">本地律师推荐<span>更多+</span></a>
+					</h2>
+					<ul>
+						<li class="consult_list">
+							<div class="audio_header flt">
+								<a href="javascript:;"><img src="/static/images/5a9ca50f47c1.png" /></a>
+								<span></span>
+							</div>
+							<h6><a href="javascript:;">何阳律师</a>　
+								<label>4.9分</label>
+							</h6>
+							<p><a href="javascript:;">何阳律师，广东深信律师事务所专职律师，具有丰富的办案经验，律</a>
+							</p>
+							<p>帮助人数:<label class="fontRed">169人</label> 关注人数:<label class="fontGreen">4812人</label>
+							</p>
+							<div class="consult_btn">
+								<a href="javascript:;" class="conbtn01"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+								<a href="javascript:;" class="conbtn02"><i class="iconfont icon-feature"></i>一对一咨询</a>
+							</div>
+						</li>
+						<li class="consult_list">
+							<div class="audio_header flt">
+								<a href="javascript:;"><img src="/static/images/220fe76a89a3.jpg" /></a>
+								<span></span>
+							</div>
+							<h6><a href="javascript:;">康芬芬律师</a>　
+								<label>4.9分</label>
+							</h6>
+							<p><a href="javascript:;">康芬芬律师办事认真负责，深入研究法律，办案多年经验，整合资源</a>
+							</p>
+							<p>帮助人数:<label class="fontRed">18人</label> 关注人数:<label class="fontGreen">821人</label>
+							</p>
+							<div class="consult_btn">
+								<a href="javascript:;" class="conbtn01"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+								<a href="javascript:;" class="conbtn02"><i class="iconfont icon-feature"></i>一对一咨询</a>
+							</div>
+						</li>
+						<li class="consult_list">
+							<div class="audio_header flt">
+								<a href="javascript:;"><img src="/static/images/e8a1a5236d8d.png" /></a>
+								<span></span>
+							</div>
+							<h6><a href="javascript:;">杨波律师</a>　
+								<label>4.9分</label>
+							</h6>
+							<p><a href="javascript:;">杨波律师，北京大成深圳分所合伙人，具有建设工程高级合同管理师</a>
+							</p>
+							<p>帮助人数:<label class="fontRed">30人</label> 关注人数:<label class="fontGreen">1820人</label>
+							</p>
+							<div class="consult_btn">
+								<a href="javascript:;" class="conbtn01"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+								<a href="javascript:;" class="conbtn02"><i class="iconfont icon-feature"></i>一对一咨询</a>
+							</div>
+						</li>
+						<li class="consult_list">
+							<div class="audio_header flt">
+								<a href="javascript:;"><img src="/static/images/5a9ca50f47c1.png" /></a>
+								<span></span>
+							</div>
+							<h6><a href="javascript:;">周定元律师</a>　
+								<label>4.9分</label>
+							</h6>
+							<p><a href="javascript:;">专注企业法律服务18年，擅长企业纠纷、经济纠纷处理。深圳贵州</a>
+							</p>
+							<p>帮助人数:<label class="fontRed">452人</label> 关注人数:<label class="fontGreen">2579人</label>
+							</p>
+							<div class="consult_btn">
+								<a href="javascript:;" class="conbtn01"><i class="iconfont icon-yuyin"></i>语音咨询</a>
+								<a href="javascript:;" class="conbtn02"><i class="iconfont icon-feature"></i>一对一咨询</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="btm">
@@ -93,7 +397,7 @@
 	<script src="/static/js/common/url.js"></script>
 	<script src="/static/js/common/util.js"></script>
 	<script src="/static/js/common/common.js"></script>
-	<script src="/static/js/page/user.js"></script>
+	<script src="/static/js/page/search.js"></script>
 </body>
 
 </html>
