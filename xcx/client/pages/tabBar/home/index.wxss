@@ -1,14 +1,14 @@
 .page-home {
   background: #f3f3f3;
 }
-.page-home--hd {
+.page-search {
   padding: 20rpx 30rpx;
   background: #fff;
 }
-.page-home--hd .location {
+.page-search .location {
   min-width: 160rpx;
 }
-.page-home--hd .search-box {
+.page-search .search-box {
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
   border-radius: 20rpx;

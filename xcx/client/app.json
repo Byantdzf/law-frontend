@@ -1,10 +1,9 @@
-{
+ {
   "pages": [
     "pages/tabBar/home/index",
     "pages/tabBar/lawyer/index",
     "pages/tabBar/message/index",
-    "pages/tabBar/user/index",
-    "pages/login/index"
+    "pages/tabBar/user/index"
   ],
   "subPackages": [
     {
@@ -23,7 +22,7 @@
   ],
   "window": {
     "navigationBarBackgroundColor": "white",
-    "navigationBarTitleText": "antengtech",
+    "navigationBarTitleText": "虎甲律师咨询平台",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "light"
   },

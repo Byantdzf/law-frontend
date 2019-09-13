@@ -1,8 +1,60 @@
-<view class='panel-cart'>
-    <view class="weui-cells order-list" wx:if="{{ orders.length > 0 }}">
-        
+<!-- pages/home/index.wxml -->
+<app-page id="app-page">
+  <view class="flex-column container page-lawyer">
+    <view class="flex page-search">
+      <view class="flex location pr-20">
+        <view class="iconfont icon-location"></view>
+        <view class="pl-10">深圳</view>
+      </view>
+      <view class="flex-bd flex search-box">
+        <input
+          class="flex-bd pl-20"
+          type="text"
+          placeholder="关键字搜索相关信息"
+          placeholder-class="placeholder"
+        />
+        <view class="iconfont icon-search pl-20 pr-20"></view>
+      </view>
     </view>
-    <view class="noRecords" wx:else>
-        <image src="/static/images/default/noData.jpg" mode="widthFix"></image>
+    <app-tab items="{{ types }}"/>
+    <view class="flex app-sort ta-c">
+      <view class="flex-bd">默认排序</view>
+      <view class="flex-bd">评分高低</view>
+      <view class="flex-bd">帮助人数</view>
+      <view class="flex-bd">关注人数</view>
     </view>
-</view>
+    <view class="flex-bd app-scroller">
+      <scroll-view scroll-y>
+        <view class="pa-20">
+          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}">
+            <view class="img-box">
+              <image src="{{ item.imgUrl }}" mode="widthFix"></image>
+            </view>
+            <view class="flex-bd pl-20">
+              <view class="flex">
+                <view class="flex-bd name">{{ item.name }}</view>
+                <view class="flex-ft score cl-red">{{ item.score }}分</view>
+              </view>
+              <view class="desc cl-666">{{ item.desc }}</view>
+              <view class="flex">
+                <view class="flex-bd">
+                  <text class="cl-999">帮助人数：</text>
+                  <text class="cl-666">{{ item.helpers }}人</text>
+                </view>
+                <view class="flex-ft">
+                  <text class="cl-999">关注人数：</text>
+                  <text class="cl-666">{{ item.followers }}人</text>
+                </view>
+              </view>
+              <view class="flex btn-box">
+                <button size="mini" plain>语音咨询</button>
+                <button size="mini" plain>一对一咨询</button>
+                <button size="mini" plain>立即关注</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</app-page>

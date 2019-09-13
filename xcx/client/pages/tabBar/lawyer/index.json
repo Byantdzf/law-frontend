@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "律师",
   "usingComponents": {
-    "app-input-number":"../../../../components/app-input-number/index",
+    "app-tab":"../../../../components/app-tab/index",
     "app-empty":"../../../../components/app-empty/index"
   }
 }

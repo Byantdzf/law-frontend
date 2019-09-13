@@ -1,45 +1,32 @@
 Component({
   options: {
-    multipleSlots: true 
+    multipleSlots: true,
+    addGlobalClass: true
   },
   properties: { 
-    styles:{
-      type:String,
-      value:''
-    },
-    itemStyles:{
-      type:String,
-      value:''
-    },
     equal: Boolean,
     align: {
       type: String,
       value: 'center'
     },
-    tabs:{
+    items: {
       type:Array,
       value:[]
     },
-    currentKey: {
-      type: String,
-      value: ''
-    },
-    fixed:{
-      type:Boolean,
-      value:false
-    }
+    current: String,
+    classNames: String
   },
   data: {
-    overflow:false,
-    parentWidth:0,
-    childWidth:0,
-    scrollLeft:0
+    overflow: false,
+    parentWidth: 0,
+    childWidth: 0,
+    scrollLeft: 0
   },
   ready(){
-    !this.properties.currentKey && 
-    this.properties.tabs.length > 0 && 
+    !this.properties.current && 
+    this.properties.items.length > 0 && 
     this.setData({
-      currentKey:this.properties.tabs[0].key
+      current: this.properties.items[0].id
     });
     let parentWidth = 0;
     let childWidth = 0;
@@ -64,11 +51,11 @@ Component({
   },
   methods:{
     itemTap(ev){
-      let { key } = ev.currentTarget.dataset;
+      let { id } = ev.currentTarget.dataset;
       this.setData({
-        currentKey:key
+        current: id
       });
-      this.triggerEvent('itemTap',{ key });
+      this.triggerEvent('change', id);
     },
     scroll(ev){
       this.setData({
