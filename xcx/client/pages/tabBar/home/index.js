@@ -63,6 +63,29 @@ Page({
         helpers: 249,
         followers: 249
       }
+    ],
+    hotNews: [
+      {
+        id: 1,
+        imgUrl: '/static/images/demo/banner1.png',
+        title: '劳务合同纠纷风起云涌',
+        content: '劳务合同纠纷风起云涌'
+      }, {
+        id: 2,
+        imgUrl: '/static/images/demo/banner2.png',
+        title: '劳务合同纠纷风起云涌',
+        content: '劳务合同纠纷风起云涌'
+      }, {
+        id: 3,
+        imgUrl: '/static/images/demo/banner3.png',
+        title: '劳务合同纠纷风起云涌',
+        content: '劳务合同纠纷风起云涌'
+      }, {
+        id: 4,
+        imgUrl: '/static/images/demo/banner1.png',
+        title: '劳务合同纠纷风起云涌',
+        content: '劳务合同纠纷风起云涌'
+      }
     ]
   },
   onLoad() {

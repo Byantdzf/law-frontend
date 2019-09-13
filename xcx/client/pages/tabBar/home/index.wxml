@@ -21,13 +21,33 @@
     <view class="flex-bd app-scroller">
       <scroll-view scroll-y>
         <app-swiper items="{{ banners }}" />
-        <view class="flex service-types">
+        <!-- <view class="flex service-types">
           <view class="flex-column service-item" wx:for="{{ serviceTypes }}" wx:key="{{ index }}">
             <view class="flex icon-box" style="background: {{ item.iconBg }};">
               <text class="iconfont {{ item.icon }}"></text>
             </view>
             <view class="name">{{ item.name }}</view>
           </view>
+        </view> -->
+        <view class="flex page-title">
+          <view class="flex-bd pl-20 title">热点资讯</view>
+          <view class="flex-ft">
+            <text class="cl-999">更多</text>
+            <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+          </view>
+        </view>
+        <view class="hot-news-wrapper">
+          <scroll-view class="pa-20" scroll-x>
+            <view class="hot-news flex">
+              <view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="index">
+                <view class="img-box">
+                  <image src="{{ item.imgUrl }}"></image>
+                </view>
+                <view class="ellipsis">{{ item.title }}</view>
+                <view class="ellipsis cl-999">{{ item.content }}</view>
+              </view>
+            </view>
+          </scroll-view>
         </view>
         <view class="flex page-title">
           <view class="flex-bd pl-20 title">本地律师推荐</view>

@@ -129,10 +129,10 @@ button[type=primary][plain].btn-code{
   vertical-align: middle;
 }
 
-.ellipse {
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .app-input {

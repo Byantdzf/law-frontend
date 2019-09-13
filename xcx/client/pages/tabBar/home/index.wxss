@@ -82,3 +82,23 @@
 .list-item .btn-box button::after {
   border-color: #e0e0e0;
 }
+.hot-news-wrapper {
+  height: 240rpx;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.hot-news {
+  flex-wrap: nowrap;
+}
+.hot-news-item {
+  width: 224rpx;
+}
+
+.hot-news-item image {
+  width: 100%;
+  height: 130rpx;
+  border-radius: 6rpx;
+}
+.hot-news-item + .hot-news-item {
+  margin-left: 22rpx;
+}
