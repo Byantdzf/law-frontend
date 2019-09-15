@@ -7,4 +7,4 @@
   <view class="noRecords" wx:else>
     <image src="/static/images/default/noData.jpg" mode="widthFix"></image>
   </view>
-</view>
+</view> 
