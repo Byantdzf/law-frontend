@@ -7,12 +7,7 @@
         <view class="pl-10">深圳</view>
       </view>
       <view class="flex-bd flex search-box">
-        <input
-          class="flex-bd pl-20"
-          type="text"
-          placeholder="关键字搜索相关信息"
-          placeholder-class="placeholder"
-        />
+        <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
         <view class="iconfont icon-search pl-20 pr-20"></view>
       </view>
     </view>
@@ -46,7 +41,7 @@
             <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
           </view>
         </view>
-        <view class="pa-20">
+        <view class="pa-20 home-list">
           <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}">
             <view class="img-box">
               <image src="{{ item.imgUrl }}" mode="widthFix"></image>
@@ -76,6 +71,16 @@
           </view>
         </view>
       </scroll-view>
+    </view>
+  </view>
+  <view class="float-tools {{ showTools ? 'show' : '' }}">
+    <view class="mask" wx:if="{{ showTools }}" bindtap="handleToolBtnTap"></view>
+    <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
+      <text class="iconfont icon-plus"></text>
+    </view>
+    <view class="float-tools-item float-tools-item{{ index + 1 }}" wx:for="{{ tools }}" wx:key="{{ index }}" style="background: {{ item.iconBg }};">
+      <view class="cl-white">{{ item.name1 }}</view>
+      <view class="cl-white">{{ item.name2 }}</view>
     </view>
   </view>
 </app-page>

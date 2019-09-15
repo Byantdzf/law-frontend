@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": 2,
@@ -53,6 +53,13 @@
 					"id": -1,
 					"name": "lawyer",
 					"pathName": "pages/tabBar/lawyer/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "message",
+					"pathName": "pages/tabBar/message/index",
 					"scene": null
 				}
 			]

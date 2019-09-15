@@ -1,4 +1,4 @@
-<!-- pages/home/index.wxml -->
+<!-- pages/lawyer/index.wxml -->
 <app-page id="app-page">
   <view class="flex-column container page-lawyer">
     <view class="flex page-search">
@@ -17,11 +17,11 @@
       </view>
     </view>
     <app-tab items="{{ types }}"/>
-    <view class="flex app-sort ta-c">
-      <view class="flex-bd">默认排序</view>
-      <view class="flex-bd">评分高低</view>
-      <view class="flex-bd">帮助人数</view>
-      <view class="flex-bd">关注人数</view>
+    <view class="flex app-sort">
+      <view class="flex-bd flex" wx:for="{{ sorts }}" wx:key="{{ index }}">
+        <text>{{ item.name }}</text>
+        <text class="iconfont icon-arrow-down-fill"></text>
+      </view>
     </view>
     <view class="flex-bd app-scroller">
       <scroll-view scroll-y>

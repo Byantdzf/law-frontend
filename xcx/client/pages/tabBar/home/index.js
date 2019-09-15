@@ -9,37 +9,6 @@ Page({
       '/static/images/demo/banner2.png',
       '/static/images/demo/banner3.png'
     ],
-    serviceTypes: [
-      {
-        name: '语音咨询',
-        icon: 'icon-yuyin',
-        iconBg: '#00b0ab'
-      }, {
-        name: '1对1咨询',
-        icon: 'icon-feature',
-        iconBg: '#00A2FF'
-      }, {
-        name: '非诉讼服务',
-        icon: 'icon-feisusongzhuanxiang',
-        iconBg: '#00b0ab'
-      }, {
-        name: '诉讼服务',
-        icon: 'icon-susong',
-        iconBg: '#F64335'
-      }, {
-        name: '收费委托',
-        icon: 'icon-shoufei',
-        iconBg: '#FFD200'
-      }, {
-        name: '风险委托',
-        icon: 'icon-fengxian',
-        iconBg: '#F9879A'
-      }, {
-        name: '协议模版',
-        icon: 'icon-xieyi',
-        iconBg: '#15B774'
-      }
-    ],
     list: [
       {
         name: '何金宝律师',
@@ -86,7 +55,46 @@ Page({
         title: '劳务合同纠纷风起云涌',
         content: '劳务合同纠纷风起云涌'
       }
-    ]
+    ],
+    tools: [
+      {
+        name1: '语音',
+        name2: '咨询',
+        icon: 'icon-yuyin',
+        iconBg: '#00b0ab'
+      }, {
+        name1: '1对1',
+        name2: '咨询',
+        icon: 'icon-feature',
+        iconBg: '#00A2FF'
+      }, {
+        name1: '非诉讼',
+        name2: '服务',
+        icon: 'icon-feisusongzhuanxiang',
+        iconBg: '#00b0ab'
+      }, {
+        name1: '诉讼',
+        name2: '服务',
+        icon: 'icon-susong',
+        iconBg: '#F64335'
+      }, {
+        name1: '收费',
+        name2: '委托',
+        icon: 'icon-shoufei',
+        iconBg: '#FFD200'
+      }, {
+        name1: '风险',
+        name2: '委托',
+        icon: 'icon-fengxian',
+        iconBg: '#F9879A'
+      }, {
+        name1: '协议',
+        name2: '模版',
+        icon: 'icon-xieyi',
+        iconBg: '#15B774'
+      }
+    ],
+    showTools: false
   },
   onLoad() {
     app.pages.add(this)
@@ -107,5 +115,11 @@ Page({
     //   console.log('index auth reject')
     //   console.log(e)
     // });
+  },
+  handleToolBtnTap() {
+    this.setData({
+      showTools: !this.data.showTools
+    })
+    console.log(this.data.showTools)
   }
 })

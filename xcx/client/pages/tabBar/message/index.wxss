@@ -1,24 +1,21 @@
-page {
-    background-color: #f3f3f3;
+.page-message {
+  width: 100%;
+  overflow-x: hidden;
 }
-.app-rows.orderList { padding:0; border:none;}
-.orderList .app-row { background-color:#fff; padding: 30rpx;}
-.orderList .app-row__hd { line-height: 44rpx; margin-bottom: 22rpx;}
-.orderList .app-row__hd .flex-bd { font-size: 26rpx; color:#999;}
-.orderList .app-row__hd .flex-ft { font-size: 24rpx;}
-.orderList .app-row .title{
-    max-height:80rpx; 
-    padding-bottom: 0;
-    width:345rpx;
-    overflow:hidden;
-    font-size: 28rpx;
-    color: #333;
-  }
-.orderList .img-box { border-radius: 20rpx; overflow:hidden;}
-.orderList .app-row .con { padding-left:30rpx;}
-button + button { margin-left:30rpx;}
-.order-project { margin-top:20rpx;}
-
-.order-price { font-size: 30rpx;}
-.order-price text {font-size:20rpx;}
-.orderItems + .orderItems { margin-top:30rpx;}
+.page-message .img-box image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.page-message .desc {
+  max-width: 580rpx;
+  margin-top: 12rpx;
+}
+.page-message .title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.page-message .app-cell::before,
+.page-message .app-cells::after {
+  left: 140rpx;
+}
