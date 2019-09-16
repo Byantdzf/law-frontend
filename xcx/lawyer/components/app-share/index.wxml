@@ -1,0 +1,7 @@
+<!-- 分享 -->
+<view class='Parse' hidden='{{canvasHidden}}'>
+    <canvas style="width:{{canvas.w}}rpx;height:{{canvas.h}}rpx;margin: 0 auto" canvas-id="myCanvas"></canvas>
+    <view class='gotosave' bindtap='saveImage'>
+        保存
+    </view>
+</view>

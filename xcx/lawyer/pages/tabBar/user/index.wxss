@@ -1,0 +1,113 @@
+/* pages/tabBar/user/index.wxss */
+.panel-user{
+  min-height: 100%;
+  overflow-x: hidden;
+}
+.panel-user--hd .app-cells::before,
+.panel-user--hd .app-cells::after,
+.panel-user--hd .app-cell::before,
+.panel-user--hd .app-cell::after {
+  height: 0;
+  border: 0;
+}
+.panel-user--hd{
+  position: relative; 
+  width: 100%;
+  margin-top: 0;
+  padding: 20rpx 0;
+}
+.panel-user--hd::before,
+.panel-user--hd::after,
+.panel-user--hd .cr::before,
+.panel-user--hd .cr::after{
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.05;
+  z-index: 0;
+}
+.panel-user--hd .cr-l{
+  position: absolute;
+  width: 86rpx;
+  height: 86rpx;
+  bottom: 180rpx;
+  left: 70rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  filter: blur(2rpx);
+}
+.panel-user--hd .cr-l::before{
+  top: 120rpx;
+  left: -160rpx;
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.1;
+  filter: blur(8rpx);
+}
+.panel-user--hd .cr-l::after{
+  top: 216rpx;
+  left: 186rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.panel-user--hd .cr-r{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: auto;
+}
+.panel-user--hd .cr-r::before{
+  bottom: 70rpx;
+  right: -40rpx;
+  width: 106rpx;
+  height: 106rpx;
+  opacity: 0.1;
+}
+.panel-user--hd .cr-r::after{
+  bottom: -60rpx;
+  right: -60rpx;
+  width: 140rpx;
+  height: 140rpx;
+  opacity: 0.07;
+  filter: blur(2rpx);
+}
+.panel-user .panel-user--hd::before{
+  top: 110rpx;
+  right: 210rpx;
+  left: auto;
+  width: 56rpx;
+  height: 56rpx;
+  filter: blur(2rpx);
+}
+.panel-user .panel-user--hd::after{
+  top: 18rpx;
+  right: 80rpx;
+  left: auto;
+  width: 94rpx;
+  height: 94rpx;
+  filter: blur(2rpx);
+}
+.panel-user--hd .userimg{
+  display: inline-block;
+  width: 158rpx;
+  height: 158rpx;
+  border-radius: 158rpx;
+  overflow: hidden;
+}
+.panel-user--hd .app-cell__hd + .app-cell__hd{
+  padding-left: 30rpx;
+}
+.panel-user--hd .username{
+  font-size: 36rpx;
+  color: #fff;
+}
+.panel-user--bd {
+  background: #fff;
+}
+.panel-user--bd .icon-arrow-right{
+  font-size: 26rpx;
+}
+.panel-user--bd .app-cell::before {
+  left: 30rpx;
+}

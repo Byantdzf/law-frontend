@@ -1,0 +1,21 @@
+<!--components/app-swiper/index.wxml-->
+  <view class='swiper'>
+    <swiper
+      indicator-dots="{{indicatorDots}}"
+      indicator-active-color="{{ indicatorActiveColor }}"
+      vertical="{{vertical}}"
+      autoplay="{{autoplay}}"
+      duration="{{duration}}"
+      interval='{{interval}}'
+      bindchange="bindchange"
+      circular="{{circular}}"
+      style="height:{{imgheights[current]}}rpx;"
+    >
+      <block wx:for='{{items}}' wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <text class="swiper-text" wx:if='{{showNumber}}'>{{current+1}}/{{imgList.length}}</text>
+  </view>

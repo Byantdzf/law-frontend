@@ -1,0 +1,115 @@
+<!-- pages/home/index.wxml -->
+<app-page id="app-page">
+  <view class="flex-column container page-home">
+    <view class="flex page-search">
+      <view class="flex location pr-20">
+        <view class="iconfont icon-location"></view>
+        <view class="pl-10">深圳</view>
+      </view>
+      <view class="flex-bd flex search-box">
+        <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
+        <view class="iconfont icon-search pl-20 pr-20"></view>
+      </view>
+      <view class="msg-box pl-40">
+        <view class="iconfont icon-send-msg"></view>
+      </view>
+    </view>
+    <view class="flex-bd app-scroller">
+      <scroll-view scroll-y>
+        <app-swiper items="{{ banners }}" />
+        <view class="flex page-title">
+          <view class="flex-bd pl-20 title">订单推荐</view>
+          <view class="flex-ft">
+            <text class="cl-999">更多</text>
+            <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+          </view>
+        </view>
+        <view class="pa-20 order-list">
+          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}">
+            <view class="flex order-item-hd">
+              <view class="flex-bd cl-primary fw-b">{{ item.orderType }}</view>
+              <view class="countdown"></view>
+              <view class="iconfont icon-guanzhu"></view>
+            </view>
+            <view class="order-item-bd">
+              <view class="cl-999 subtitle">发布人信息</view>
+              <view class="flex">
+                <view class="flex-bd flex">
+                  <view class="label cl-999">姓名：</view>
+                  <view class="flex-bd cl-666">{{ item.name }}</view>
+                </view>
+                <view class="flex-bd flex">
+                  <view class="label cl-999">联系方式：</view>
+                  <view class="flex-bd cl-666">{{ item.phone }}</view>
+                </view>
+              </view>
+              <view class="flex">
+                <view class="flex-bd flex">
+                  <view class="label cl-999">ID号：</view>
+                  <view class="flex-bd cl-666">123456789</view>
+                </view>
+                <view class="flex-bd flex">
+                  <view class="label cl-999">所在城市：</view>
+                  <view class="flex-bd cl-666">广东-深圳</view>
+                </view>
+              </view>
+            </view>
+            <view class="order-item-bd">
+              <view class="cl-999 subtitle">订单信息</view>
+              <view class="flex">
+                <view class="flex-bd flex">
+                  <view class="label cl-999">订单类型：</view>
+                  <view class="flex-bd cl-666">咨询订单</view>
+                </view>
+                <view class="flex-bd flex">
+                  <view class="label cl-999">所属问题：</view>
+                  <view class="flex-bd cl-666">劳务纠纷</view>
+                </view>
+              </view>
+              <view class="flex">
+                <view class="flex-bd flex">
+                  <view class="label cl-999">订单金额：</view>
+                  <view class="flex-bd cl-666">50元</view>
+                </view>
+                <view class="flex-bd flex">
+                  <view class="label cl-999">是否紧急：</view>
+                  <view class="flex-bd cl-666">是</view>
+                </view>
+              </view>
+              <view class="flex">
+                <view class="label cl-999">发布时间：</view>
+                <view class="flex-bd cl-666">2019年8月18日20:00</view>
+              </view>
+            </view>
+            <view class="flex btn-box">
+              <button size="mini" plain>转发</button>
+              <button size="mini" plain>拒绝接单</button>
+              <button size="mini" plain>立即接单</button>
+            </view>
+          </view>
+        </view>
+
+        <view class="flex page-title">
+          <view class="flex-bd pl-20 title">热点资讯</view>
+          <view class="flex-ft">
+            <text class="cl-999">更多</text>
+            <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+          </view>
+        </view>
+        <view class="hot-news-wrapper">
+          <scroll-view class="pa-20" scroll-x>
+            <view class="hot-news flex">
+              <view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="index">
+                <view class="img-box">
+                  <image src="{{ item.imgUrl }}"></image>
+                </view>
+                <view class="ellipsis">{{ item.title }}</view>
+                <view class="ellipsis cl-999">{{ item.content }}</view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</app-page>

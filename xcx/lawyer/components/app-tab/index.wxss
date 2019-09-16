@@ -1,0 +1,86 @@
+.app-tab {
+  position: relative;
+  width: 100%;
+}
+.app-tab::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2rpx;
+  background: #f2f2f2;
+  z-index: 10;
+}
+.app-tab .scroll-view {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  white-space: nowrap;
+  font-size: 0;
+  text-align: center;
+}
+.scroll-view.overflow::before,
+.scroll-view.overflow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70rpx;
+  height: 100%;
+  z-index: 100;
+}
+.app-tab .scroll-view.overflow::before {
+  left: 0;
+  background: linear-gradient(to right,rgba(255,255,255,1),rgba(255,255,255,0));
+}
+.app-tab .scroll-view.overflow::after {
+  right: 0;
+  background: linear-gradient(to left,rgba(255,255,255,1),rgba(255,255,255,0));
+}
+.app-tab .scroll-view.scroll-start::before {
+  display: none;
+}
+.app-tab .scroll-view.scroll-end::after {
+  display: none;
+}
+.scroll-view-box {
+  display: flex;
+}
+.scroll-view-box.flex-start {
+  justify-content: flex-start;
+}
+.scroll-view-box.flex-end {
+  justify-content: flex-end;
+}
+.scroll-view-box.center {
+  justify-content: center;
+}
+.scroll-view-box.space-between {
+  justify-content: space-between;
+}
+.scroll-view-box.space-around {
+  justify-content: space-around;
+}
+.scroll-view-item {
+  padding: 0 20rpx;
+  color: #999;
+  text-align: center;
+}
+.scroll-view-item text {
+  display: block; 
+  margin: 0 20rpx;
+  height:84rpx;
+}
+.scroll-view-item.equal {
+  flex: 1;
+}
+.scroll-view-item.active {
+  color: #CF443D;
+}
+.scroll-view-item.active text {
+  border-bottom: 4rpx solid #CF443D;
+}

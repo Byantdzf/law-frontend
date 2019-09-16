@@ -1,0 +1,12 @@
+<!-- components/app-previewImage/index.wxml -->
+<view class="prevImgList">
+    <block wx:for="{{imgList}}" wx:key="{{ index }}">
+        <view class="items">
+            <image 
+            mode="aspectFill"
+            src="{{item}}"
+            data-src="{{item}}" 
+            bindtap="prevImg"></image>
+        </view>
+    </block>
+</view>

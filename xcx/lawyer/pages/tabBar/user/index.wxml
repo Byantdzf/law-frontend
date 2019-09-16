@@ -1,0 +1,34 @@
+<!-- pages/tabBar/user/index.wxml -->
+<app-page id="app-page">
+  <view class="panel-user bg-f3">
+    <view class="app-cells panel-user--hd bg-primary">
+      <view class="app-cell ta-c">
+        <view class="app-cell__bd">
+          <view class="img-box">
+            <image class="userimg" src="{{ userInfos.photo }}" wx:if="{{ userInfos.photo }}"></image>
+            <open-data class="userimg" type="userAvatarUrl" wx:else></open-data>
+          </view>
+          <view class="username">
+            <text wx:if="{{ userInfos.userName }}">{{ userInfos.userName }}</text>
+            <open-data class="username" type="userNickName" wx:else></open-data>
+          </view>
+        </view>
+      </view>
+      <view class="cr cr-l"></view>
+      <view class="cr cr-r"></view>
+    </view>
+    <view class="panel-user--bd mt-20">
+      <view class="app-cells">
+        <view class="app-cell" wx:for="{{ menus }}" wx:key="{{ index }}">
+          <view class="flex-hd pl-20">
+            <text class="{{ item.icon }}"></text>
+          </view>
+          <view class="flex-bd pl-10">{{ item.label }}</view>
+          <view class="flex-ft pr-30">
+            <text class="iconfont icon-arrow-right"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</app-page>

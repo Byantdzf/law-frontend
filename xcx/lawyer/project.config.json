@@ -1,0 +1,68 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "0.0.01",
+	"appid": "wxa8febe9e68fcbd41",
+	"projectname": "hujia-lawyer",
+	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": 2,
+					"name": "home",
+					"pathName": "pages/tabBar/home/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/tabBar/user/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "lawyer",
+					"pathName": "pages/tabBar/lawyer/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "message",
+					"pathName": "pages/tabBar/message/index",
+					"scene": null
+				}
+			]
+		}
+	}
+}

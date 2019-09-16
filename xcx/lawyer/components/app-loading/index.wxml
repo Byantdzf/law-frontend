@@ -1,0 +1,23 @@
+<!-- loading -->
+<view class="app-loading {{ className }}" wx:if="{{ show }}">
+  <view class="app-loading-icon" style="{{ baseStyles + bgShadow }}">
+    <block wx:if="{{ type == 'ring' }}">
+      <view class="app-loading--ring__box" style="{{ ringStyles }}">
+        <text class="app-loading--ring__main" style="{{ ringStyles + ringShadow }}"></text>
+      </view>
+    </block>
+    <block wx:if="{{ type == 'circle' }}">
+      <view
+        class="app-loading--circle__item"
+        wx:for="{{ 12 }}"
+        wx:key="item"
+        style="transform: rotateZ({{ item*30 }}deg);"
+      >
+        <text class="app-loading--circle__main" style="{{ circleMainStyles }}"></text>
+      </view>
+    </block>
+  </view>
+  <view class="app-loading-text">
+    <text style="color:{{ textColor }};">{{ text || "" }}</text>
+  </view>
+</view>

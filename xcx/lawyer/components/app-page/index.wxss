@@ -1,0 +1,31 @@
+.app-page{
+  position: relative;
+  height: 100%;
+}
+
+.pop-auth {
+  padding: 30rpx;
+}
+
+.pop-auth { padding: 60rpx 40rpx;}
+.pop-auth .pop-auth__hd .img-box { float:left; width:60rpx; height:60rpx; background:#fff; border-radius: 50%; overflow: hidden;}
+.pop-auth .pop-auth__hd .img-box image { display:block; width:60rpx; height:60rpx;}
+.pop-auth .pop-auth__hd .txt { font-size:40rpx; margin-left:30rpx;}
+.pop-auth .pop-auth__bd { margin-top:40rpx; font-size:28rpx;}
+.pop-auth .pop-auth__bd .subtxt { margin-bottom: 60rpx; margin-top:10rpx; font-size:24rpx; color:#999;}
+
+.app-loading--wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, .5);
+  color: #ffffff;
+  z-index: 9999;
+}
+.app-loading {
+  padding: 300rpx;
+  text-align: center;
+  font-size: 40rpx;
+}
