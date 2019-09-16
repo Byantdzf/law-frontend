@@ -562,7 +562,7 @@ a:hover { opacity: .8;}
 .concall_tt_box{height:54px;overflow: hidden;}
 .concall_tt{color:#3e3e3e;font-size:14px;line-height:54px;padding-left:130px;}
 
-.fixed { position:fixed; top:0;}
+.fixed { position:fixed; top:0; z-index: 99;}
 
 
 
@@ -981,6 +981,7 @@ div.clm_tt_m.font_16 a{font-size:16px}
 .index_company_news .swiper-pagination { top:-57px; right:70px;}
 .index_company_news .swiper-pagination span { margin: 0 4px;}
 
+.orderRight,
 .newsRight { width:290px; background: #fff; box-sizing: border-box;}
 
 .layui-btn-red {
@@ -1237,7 +1238,16 @@ i, em { font-style: normal;}
 .searchPage .searchBox li a { float:left; padding: 5px 10px; margin: 0 10px 10px 0; color:#666;}
 .searchPage .searchBox li a.curr { color: #fff!important; background:#f55;}
 .searchPage .searchBox li a:hover { color: #f55;}
-.searchPage .searchBox li:last-child a { border: 1px solid #e6e6e6;}
+.searchPage .searchBox li.aBox a { border: 1px solid #e6e6e6;}
+.searchPage .searchBox li.filterBox a { margin-right:30px; position: relative;}
+.searchPage .searchBox li.filterBox a em { position: relative; float:right; margin-left:10px;}
+.searchPage .searchBox li.filterBox a em i.up { transform: rotate(180deg);}
+.searchPage .searchBox li.filterBox a em i { display: block; height:14px;}
+.searchPage .searchBox li.filterBox a em i:last-child { position: relative; top:-5px;}
+.searchPage .searchBox li a.curr,
+.searchPage .searchBox li.filterBox a:hover { color: #333;}
+.searchPage .searchBox li.filterBox a i.curr { color: #f55;}
+
 
 .systemPush li { position: relative;}
 .systemPush li .items { padding: 20px 30px;}
@@ -1272,3 +1282,8 @@ i, em { font-style: normal;}
 .layui-fixbar .fixAsk a.fixAsk2 { top: 45px; left:95px;}
 .layui-fixbar .fixAsk a.fixAsk3 { top: 100px; left:75px;}
 .layui-fixbar .fixAsk a.fixAsk4 { top: 155px; left:90px;}
+
+.orderRight { padding:0;}
+.orderRight .clm_3_1 { margin:0; padding: 0;}
+.orderRight .clm_3_1 { padding: 20px 0;}
+.orderRight ul li { margin-top:0; padding-top: 0; border-top:none;}

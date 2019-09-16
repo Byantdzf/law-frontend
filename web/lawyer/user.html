@@ -5,64 +5,32 @@
 	<meta charset="utf-8">
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link rel="icon" href="/static/images/favicon.ico" />
 	<link rel="shortcut icon" href="/static/images/favicon.ico" />
 	<title>虎甲问答官网-3-5分钟快速解答您的法律问题</title>
 	<meta name="keywords" content="免费法律咨询,律师在线咨询免费,免费律师咨询,在线律师咨询,语音咨询,虎甲问答" />
-	<meta name="description"
-		content="虎甲问答-3-5分钟100%解答您的法律问题,律师在线提供免费法律咨询,律师在线咨询免费解答,在线律师咨询,24小时律师在线免费咨询,全国法律援助热线：400-618-8116。" />
+	<meta name="description" content="虎甲问答-3-5分钟100%解答您的法律问题,律师在线提供免费法律咨询,律师在线咨询免费解答,在线律师咨询,24小时律师在线免费咨询,全国法律援助热线：400-618-8116。" />
 	<link rel="stylesheet" href="/static/js/plugin/layui/css/layui.css" />
 	<link href="//at.alicdn.com/t/font_1391008_krrlmtaogwl.css" rel="stylesheet">
-	<link href="/static/js/plugin/webuploader/css/webuploader.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 </head>
 
 <body>
 	<div class="appTop"></div>
 
-	<div class="nav lawyer_nav">
+	<div class="nav">
 		<div class="widthCC">
-			<a class="current" href="/index.html">首页</a>
-			<a href="/lawyer/systemPush.html">系统推送</a>
-			<a href="/lawyer/orderList.html">订单池</a>
-			<a href="/lawyer/customerAssign.html">客户指定</a>
-			<a href="/lawyer/user.html">我的</a>
+				<a href="/lawyer/index.html">首页</a>
+				<a href="/lawyer/systemPush.html">系统推送</a>
+				<a href="/lawyer/orderList.html">订单池</a>
+				<a href="/lawyer/customerAssign.html">客户指定</a>
+				<a class="current" href="/lawyer/user.html">我的</a>
 		</div>
 	</div>
 
-	<div class="widthCC regPage">
-		<div class="regTit">律师认证审核</div>
-		<div class="layui-form">
-			<fieldset class="layui-elem-field layui-field-title">
-				<legend>上传身份证</legend>
-			</fieldset>
-			<div class="layui-form-item">
-				<div class="layui-col-xs6">
-					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard1.jpg" /></a>
-				</div>
-				<div class="layui-col-xs6">
-					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard2.jpg" /></a>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<br />
-			</div>
-			<fieldset class="layui-elem-field layui-field-title">
-				<legend>上传证书</legend>
-			</fieldset>
-			<div class="layui-form-item">
-				<div class="layui-col-xs6">
-					<a href="javascript:;" class="uploadBusinessCard"><img src="/static/images/businessCard.jpg" /></a>
-				</div>
-			</div>
+	<div class="widthCC userPage">
 
-			<div class="layui-form-item tac">
-				<a href="javascript:;" class="layui-btn layui-btn-red authSubmit" lay-submit=""
-					lay-filter="authSubmit">提交审核</a>
-			</div>
-		</div>
 	</div>
 
 	<div class="btm">
@@ -94,12 +62,11 @@
 	</div>
 
 	<script src="/static/js/plugin/layui/layui.all.js"></script>
-	<script src="/static/js/plugin/webuploader/webuploader.js"></script>
 	<script src="/static/js/common/global.js"></script>
 	<script src="/static/js/common/url.js"></script>
 	<script src="/static/js/common/util.js"></script>
 	<script src="/static/js/common/common.js"></script>
-	<script src="/static/js/page/lawyer/auth.js"></script>
+	<script src="/static/js/page/lawyer/user.js"></script>
 </body>
 
 </html>

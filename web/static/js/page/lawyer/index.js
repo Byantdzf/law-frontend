@@ -29,31 +29,9 @@
 			});
 
 			$('.countTimes').each(function () {
-				_t.countTimes($(this));
+				utils.countTimes($(this));
 			});
 		},
-
-		countTimes: function (obj) {
-			var timer = window.setInterval(function () {
-				var times = obj.html();
-				var timeArr = times.split(':');
-				var s = parseInt(timeArr[0]) * 60 * 60 + parseInt(timeArr[1]) * 60 + parseInt(timeArr[2]);
-				s--;
-				if (s == 0) {
-					window.clearInterval(timer);
-					obj.closest('li').remove();
-				} else {
-					var h = Math.floor(s / (60*60));//整数部分代表小时；
-					s %= 3600; //余数代表 剩下的秒数；
-					var m = Math.floor(s / 60);
-					s %= 60;
-					obj.html(lay.digit(h) + ':' + lay.digit(m) + ':' + lay.digit(s))
-					if (h < 1 && !obj.hasClass('notice')) {
-						obj.addClass('notice');
-					}
-				}
-			}, 1000);
-		}
 
 	}
 

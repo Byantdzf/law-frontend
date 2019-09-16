@@ -187,7 +187,15 @@
 
 		topSearch: function () {
 			var search = $.trim($("#search").val());
-			!search ? utils.msg('请输入搜索关键词') : window.location.href = "/search.html?keyword=" + search;
+			if (!search) {
+				utils.msg('请输入搜索关键词');
+			} else {
+				var url = "/search.html?keyword=" + search;
+				if (window.location.href.indexOf('/lawyer/') > -1) {
+					url = '/lawyer/search.html?keyword=' + search
+				}
+				window.location = url;
+			}
 		},
 		login: function (eb) {
 			var html = '<div class="eqcodebox"><p>请用微信扫码登录，测试版，实际上会跳到微信的二维码页面<b class="layui-layer-close">X</b></p><img src="/static/images/eqcode_240.png" width="244"></div><p style="text-align:center; margin-top:10px;" class="showTestCount">登录倒计时：3</p>';
