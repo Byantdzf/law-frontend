@@ -1,4 +1,4 @@
-const authModel = require('../../model/auth/index')
+const api = require('../../service/auth')
 const { tokenName } = require('../../config/global')
 const pages = require('../../plugins/pages')
 Component({
@@ -10,7 +10,7 @@ Component({
     hideTabBar: {
       type: Boolean,
       value: true
-    },
+    }
   },
   data: {
     authVisible: false,
@@ -20,8 +20,6 @@ Component({
     authReject: null,
     isLoading: false
   },
-  observers: {
-  },
   methods: {
     userLogin() {
       wx.login({
@@ -29,7 +27,7 @@ Component({
           if(!code) return
 
           // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
-          authModel.login({ code }).then(res => {
+          api.login({ code }).then(res => {
             // 保存token
             wx.setStorageSync(tokenName, res.data.token)
             
@@ -144,6 +142,6 @@ Component({
     },
     // 离开页面触发
     hide() {
-    },
-  },
+    }
+  }
 })

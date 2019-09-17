@@ -74,7 +74,7 @@
     </view>
   </view>
   <view class="float-tools {{ showTools ? 'show' : '' }}">
-    <view class="mask" wx:if="{{ showTools }}" bindtap="handleToolBtnTap"></view>
+    <view class="mask" wx:if="{{ showTools }}" bindtap="handleToolBtnTap" catch:touchmove></view>
     <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
       <text class="iconfont icon-plus"></text>
     </view>

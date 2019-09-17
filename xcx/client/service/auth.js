@@ -1,5 +1,5 @@
 
-const { post } = require('../../utils/ajax.js')
+const { post } = require('../utils/ajax.js')
 
 module.exports = {
   /**

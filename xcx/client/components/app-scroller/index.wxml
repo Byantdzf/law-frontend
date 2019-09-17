@@ -1,16 +1,16 @@
 <!-- 滚动加载 -->
 <scroll-view
   class="app-scroller"
-  style="height:{{height}}px;background:{{bjcolor}}"
   scroll-y
   bindscrolltolower="loadMore"
-  lower-threshold="{{threshold}}"
+  lower-threshold="{{ threshold }}"
 >
 	<slot></slot>
-  <view class='loading_view'style="color:{{hintcolor}}" >
-    <text class='iconfont_view'>
-      <text class="iconfont {{isshow==0?'icon-jiazai':''}}"></text>
-    </text>
-    <text>{{isshow==0?'正在加载中...':(isshow==1?'暂无数据，敬请期待':'已加载全部')}}</text>
-  </view>      
+  <app-loading
+    show="{{ isLoading }}"
+    type="circle"
+    size="{{ 40 }}"
+    inline
+    text="努力加载中"
+  />
 </scroll-view>

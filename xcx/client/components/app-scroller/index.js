@@ -1,77 +1,45 @@
-Component({
-  properties: {
-    dataPage: {
-      type: Number,
-      observer: function (pages) {
-        this.getdata(pages)
-      }
-    },
-    url: {
-      type: String,
-      value: ''
-    },
+const { get } = require('../../utils/ajax.js')
+const PAGE_KEY = 'pageNo'
+const SIZE_KEY = 'pageSize'
 
+Component({
+  options: {
+    addGlobalClass: true,
+    multipleSlots: true
+  },
+  properties: {
+    url: String,
+    params: Object,
     threshold: {
       type: Number,
       value: 50
-    },
-    height: {
-      type: Number,
-      value: 300
-    },
-    hintcolor: {
-      type: String,
-      value: '#777'
-    },
-    bjcolor: {
-      type: String,
-      value: '#fff'
-    },
-    datalist: {
-      type: Object,
-      observer: function (obj) {
-        this.triggerEvent('devicePageChange', obj)
-      }
     }
   },
   data: {
-    datalist: '',
-    isshow: '',//0加载中，1暂无数据，2已加载全部
+    list: [],
+    defaultParams: {
+      [PAGE_KEY]: 1,
+      [SIZE_KEY]: 15,
+    }
   },
   observers: {
-
+    list(e) {
+      this.triggerEvent('change', e)
+    }
   },
 
   methods: {
-    loadMore: function (e) {
-      var pages = this.data.dataPage;
-      pages++
-      this.setData({
-        dataPage: pages
+    getList() {
+      let { defaultParams, params, list } = this.data
+      params = Object.assign(defaultParams, params)
+      get(url, params).then(res => {
+        
+      }).catch(err => {
+
       })
     },
-    getdata: function (page) {
-      var that = this
-      wx.request({
-        url: this.properties.url,
-        data: { page, pagesize: 90 },
-        method: 'GET',
-        dataType: 'json',
-        responseType: 'text',
-        success: function (res) {
-          var newdata = res.data.data.info
-          that.setData({ datalist: newdata })
-          if (newdata.length > 0) {
-            that.setData({ isshow: 0 })
-          } else {
-            if (page == 1) {
-              that.setData({ isshow: 1 })
-            } else (
-              that.setData({ isshow: 2 })
-            )
-          }
-        }
-      })
+    loadMore(e) {
+      
     }
   }
 })

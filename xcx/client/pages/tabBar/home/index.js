@@ -120,6 +120,5 @@ Page({
     this.setData({
       showTools: !this.data.showTools
     })
-    console.log(this.data.showTools)
   }
 })

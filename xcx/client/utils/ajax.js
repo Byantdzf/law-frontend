@@ -14,7 +14,6 @@
 const { baseUrl } = require('../config/url')
 const { tokenName } = require('../config/global')
 const pages = require('../plugins/pages')
-// const { absolutePath } = require('./path')
 
 let requests = []
 
@@ -67,7 +66,7 @@ const ajax = (_options = {}) => {
               resolve(data);
               break;
             default:
-            toast &&
+              toast &&
               wx.showToast({
                 title: data.msg || data.dataList.errorMsg || '加载失败',
                 icon: 'none',
@@ -81,26 +80,17 @@ const ajax = (_options = {}) => {
         }
       },
       fail: error => {
-        //   console.log(error);
-        //   toast && wx.showToast({
-        //     title: error,
-        //     icon: 'none',
-        //     duration: 2000
-        //   });
         reject(error)
       },
       complete: () => {
         if(loading && appPage) {
           // 关闭自定义loading
-
-          requests = requests.filter(req => req !== path)
-
+          requests = requests.filter(v => v !== path)
           if(requests.length == 0) {
             appPage.setData({ isLoading: false })
           }
         }
         wx.hideNavigationBarLoading()
-        // wx.stopPullDownRefresh();
       }
     }
     

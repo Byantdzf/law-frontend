@@ -85,7 +85,7 @@
   border-color: #e0e0e0;
 }
 .hot-news-wrapper {
-  height: 240rpx;
+  height: 250rpx;
   margin-top: 20rpx;
   background: #fff;
 }
