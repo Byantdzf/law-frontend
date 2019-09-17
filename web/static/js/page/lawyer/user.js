@@ -5,45 +5,21 @@
 			var _t = this;
 			_t.defaultPic = '/static/images/default.jpg';
 			_t.userMenu = [
-				{ "id": 10, "name": "我的主页", "code": "attention", "url": "/page/user/index.js" },
-				{ "id": 1, "name": "我的关注", "code": "attention", "url": "/page/user/attention.js" },
-				{ "id": 2, "name": "我的优惠券", "code": "coupon", "url": "/page/user/coupon.js" },
-				{ "id": 3, "name": "我的订单", "code": "order", "url": "/page/user/order.js" },
-				{ "id": 4, "name": "消息中心", "code": "notice", "url": "/page/user/notice.js" },
+				{ "id": 10, "name": "我的主页", "code": "home", "url": "/page/lawyer/user/index.js" },
+				{ "id": 1, "name": "我的关注", "code": "attention", "url": "/page/lawyer/user/attention.js" },
+				{ "id": 2, "name": "我的优惠券", "code": "coupon", "url": "/page/lawyer/user/coupon.js" },
+				{ "id": 3, "name": "我的订单", "code": "order", "url": "/page/lawyer/user/order.js" },
+				{ "id": 4, "name": "消息中心", "code": "notice", "url": "/page/lawyer/user/notice.js" },
 				{ "id": 5, "name": "关于我们", "code": "about", "url": "/about.html" },
-				{ "id": 6, "name": "帮助中心", "code": "help", "url": "/page/user/help.js" },
-				{ "id": 7, "name": "用户协议", "code": "agreement", "url": "/page/user/agreement.js" },
-				{ "id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/user/feedback.js" },
+				{ "id": 6, "name": "帮助中心", "code": "help", "url": "/page/lawyer/user/help.js" },
+				{ "id": 7, "name": "用户协议", "code": "agreement", "url": "/page/lawyer/user/agreement.js" },
+				{ "id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/lawyer/user/feedback.js" },
 				{ "id": 9, "name": "退出登录", "code": "logout" }
 			];
 			_t.code = hash.get('c') || _t.userMenu[0].code;
 
-			if ($.isEmptyObject(global.userInfo)) {
-				// 如果没有本地用户
-				_t.loadChooseUserType();
-				$('.userPage').addClass('noMinHeight');
-			} else {
-				// 如果有本地用户
-				_t.loadUserPage();
-				$('.userPage').removeClass('noMinHeight');
-			}
-		},
-
-		loadChooseUserType: function () {
-			var _t = this;
-			var html = utils.getTemp('/page/user/chooseUserType.html');
-			$('.userPage').html(html);
-
-			$('body').on('click', '.user', function () {
-				base.login(function () {
-					utils.setCookie(global.userInfoToken, global.testUserInfo);
-					_t.loadUserPage();
-				});
-			});
-
-			$('body').on('click', '.lawyer', function () {
-				window.location = '/login.html';
-			});
+			_t.loadUserPage();
+			$('.userPage').removeClass('noMinHeight');
 		},
 
 		loadUserPage: function () {
@@ -53,6 +29,8 @@
 			data.menu = _t.userMenu || [];
 			var html = utils.getTemp('/page/user/userPage.html', data);
 			$('.userPage').html(html);
+
+			$('.userHead').append('<em class="userScore">4.9分</em>');
 
 			// 默认跳转到哪个页面
 			_t.getPageByCode();

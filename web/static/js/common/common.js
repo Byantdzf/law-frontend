@@ -138,7 +138,9 @@
 				})
 			})
 
-			_t.setFixBar();
+			if (window.location.href.indexOf('/lawyer/') == -1) {
+				_t.setFixBar();
+			}
 
 			_t.hotCity();
 		},
