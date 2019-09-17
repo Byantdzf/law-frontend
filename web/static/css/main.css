@@ -1139,6 +1139,7 @@ i, em { font-style: normal;}
 .userLeft .userHead .imgBox img { display: block; width:100%; height:100%;}
 .bindLeft .imgBox h3,
 .userLeft .userHead h3 { margin-bottom: 10px; text-overflow: ellipsis;white-space:nowrap;overflow: hidden;}
+.userLeft .userHead em { display: block; text-align: center; font-size: 18px; color: #f55; font-weight: bold; margin-bottom: 10px;}
 
 .userMenu li a { display: block; border: 1px solid #e6e6e6; border-radius: 5px; margin-top:10px; padding: 7px 0;}
 .userMenu li a:hover { background: #efefef;}
@@ -1287,3 +1288,22 @@ i, em { font-style: normal;}
 .orderRight .clm_3_1 { margin:0; padding: 0;}
 .orderRight .clm_3_1 { padding: 20px 0;}
 .orderRight ul li { margin-top:0; padding-top: 0; border-top:none;}
+
+.systemPush .newsRight .items { padding-left:10px; padding-right:10px;}
+.systemPush .newsRight dd { float:none; width:100%!important;}
+.systemPush .newsRight li .rightTop { right:0; top:0;}
+.systemPush .newsRight li .rightTop em { border-radius: 0;}
+.systemPush .newsRight li .rightTop i { position: absolute; right:0; top:35px; margin-right:0;}
+.systemPush .newsRight li .btnList { position: relative; right:0; bottom:0; margin-top:10px;}
+.systemPush .newsRight li .btnList a { margin-left:8px;}
+
+.userHome1 { border-bottom:1px solid #ccc;}
+.userHome1 .items { width:300px; height:100px; padding-top:30px; box-sizing: border-box; margin: 20px auto;}
+
+.userHome2 .data-num,
+.userHome1 .items .data-num { color:#f55; font-size: 30px; margin-bottom: 10px;}
+.userHome1 .items .data-lavel { color:#999;}
+.userPageCon .layui-tab-brief { font-size: 16px; font-weight:bold;}
+
+.userHome2 { margin-top:50px;}
+.userHome2 .data-lavel { font-size: 14px;}
