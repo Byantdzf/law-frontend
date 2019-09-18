@@ -62,11 +62,10 @@ const ajax = (_options = {}) => {
         let data = response.data || {};
         if (response.statusCode == 200) {
           switch (data.code) {
-            case 2:
+            case '000000':
               resolve(data);
               break;
             default:
-            console.log(data)
               toast &&
               wx.showToast({
                 title: data.errmsg || '加载失败',
