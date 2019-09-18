@@ -1,5 +1,5 @@
 const app = getApp()
-const productModel = require('../../../model/product/index.js')
+// const productModel = require('../../../model/product/index.js')
 let page = null
 Page({
   data: {

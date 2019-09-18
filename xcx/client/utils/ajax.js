@@ -66,9 +66,10 @@ const ajax = (_options = {}) => {
               resolve(data);
               break;
             default:
+            console.log(data)
               toast &&
               wx.showToast({
-                title: data.msg || data.dataList.errorMsg || '加载失败',
+                title: data.errmsg || '加载失败',
                 icon: 'none',
                 duration: 2000
               })

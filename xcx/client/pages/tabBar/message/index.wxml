@@ -1,21 +1,23 @@
 <!-- pages/lawyer/index.wxml -->
 <app-page id="app-page">
-  <view class="flex-column page-message">
-    <view class="app-cells">
-      <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
-        <view class="flex-hd img-box pl-20">
-          <image src="{{ item.imgUrl }}" mode="widthFix"></image>
-        </view>
-        <view class="flex-bd con-box pl-20 pr-20">
-          <view class="flex">
-            <view class="title flex-bd">{{ item.name }}</view>
-            <view class="cl-999">{{ item.updateTime }}</view>
+  <view class="flex-column container page-message">
+    <app-list url="/applets/user/coupon/list">
+      <view class="app-cells">
+        <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
+          <view class="flex-hd img-box pl-20">
+            <image src="{{ item.imgUrl }}" mode="widthFix"></image>
           </view>
-          <view class="ellipsis desc">
-            <text class="cl-666">{{ item.desc }}</text>
+          <view class="flex-bd con-box pl-20 pr-20">
+            <view class="flex">
+              <view class="title flex-bd">{{ item.name }}</view>
+              <view class="cl-999">{{ item.updateTime }}</view>
+            </view>
+            <view class="ellipsis desc">
+              <text class="cl-666">{{ item.desc }}</text>
+            </view>
           </view>
         </view>
       </view>
-    </view>
+    </app-list>
   </view>
 </app-page>

@@ -1,0 +1,31 @@
+<!-- pages/lawyer/index.wxml -->
+<app-page id="app-page">
+  <view class="flex-column page-news">
+    <view class="flex page-search">
+      <view class="flex-bd flex search-box">
+        <input
+          class="flex-bd pl-20"
+          type="text"
+          placeholder="关键字搜索相关信息"
+          placeholder-class="placeholder"
+        />
+        <view class="iconfont icon-search pl-20 pr-20"></view>
+      </view>
+    </view>
+    <view class="app-cells">
+      <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
+        <view class="flex-hd img-box pl-20">
+          <image src="{{ item.imgUrl }}" mode="widthFix"></image>
+        </view>
+        <view class="flex-bd con-box pl-20 pr-20">
+          <view class="flex">
+            <view class="title flex-bd">{{ item.name }}</view>
+          </view>
+          <view class="desc">
+            <text class="cl-666">{{ item.desc }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</app-page>

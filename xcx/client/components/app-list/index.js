@@ -30,7 +30,7 @@ Component({
 
   methods: {
     getList() {
-      let { defaultParams, params, list } = this.data
+      let { url, defaultParams, params, list } = this.data
       params = Object.assign(defaultParams, params)
       get(url, params).then(res => {
         
@@ -40,6 +40,11 @@ Component({
     },
     loadMore(e) {
       
+    }
+  },
+  pageLifetimes: {
+    show() {
+      this.getList()
     }
   }
 })

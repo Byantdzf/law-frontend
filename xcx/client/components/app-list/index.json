@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "app-pop": "../app-pop/index"
+    "app-loading": "../app-loading/index"
   }
 }

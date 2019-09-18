@@ -1,6 +1,6 @@
 // pages/tabBar/user/index.js
 
-const authModel = require('../../../model/auth/index.js');
+// const authModel = require('../../../model/auth/index.js');
 let app = getApp();
 Page({
   ...app.loadMoreMethods,
