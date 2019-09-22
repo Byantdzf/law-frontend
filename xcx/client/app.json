@@ -1,5 +1,6 @@
  {
   "pages": [
+    "pages/lawyer/detail/index",
     "pages/news/list/index",
     "pages/tabBar/home/index",
     "pages/tabBar/lawyer/index",
@@ -10,14 +11,14 @@
     {
       "root": "pages/product",
       "pages": [
-        "details/index",
+        "detail/index",
         "list/index"
       ]
     },
     {
       "root": "pages/order",
       "pages": [
-        "details/index"
+        "detail/index"
       ]
     }
   ],

@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "app-swiper": "/components/app-swiper/index",
-    "app-scroller": "/components/app-scroller/index",
     "app-text": "/components/app-text/index",
     "app-share": "/components/app-share/index"
   },
