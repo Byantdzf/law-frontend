@@ -130,9 +130,7 @@ Page({
                     showCancel: false,
                     confirmColor: '#00b0ab',
                     success() {
-                        wx.navigateTo({
-                            url: '../../user/address/index?from=proDetail&id=' + _that.data.id
-                        })
+                        app.gotoPage('/pages/user/address/index?from=proDetail&id=' + _that.data.id)
                     }
                 })
             } else {
@@ -158,9 +156,7 @@ Page({
                     app.removeItemFormCart();
 
                     // 提交订单
-                    wx.navigateTo({
-                        url: '../../../pages/order/buyNow/index?id=' + order.order_code
-                    })
+                    app.gotoPage('/pages/order/buyNow/index?id=' + order.order_code)
                 });
             }
         }

@@ -17,19 +17,23 @@
         <view class="flex page-title">
           <view class="flex-bd pl-20 title">热点资讯</view>
           <view class="flex-ft">
-            <text class="cl-999">更多</text>
-            <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+            <navigator url="../../news/list/index">
+              <text class="cl-999">更多</text>
+              <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+            </navigator>
           </view>
         </view>
         <view class="hot-news-wrapper">
           <scroll-view class="pa-20" scroll-x>
             <view class="hot-news flex">
-              <view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="index">
-                <view class="img-box">
-                  <image src="{{ item.imgUrl }}"></image>
-                </view>
-                <view class="ellipsis">{{ item.title }}</view>
-                <view class="ellipsis cl-999">{{ item.content }}</view>
+              <view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
+                <navigator url="../../news/detail/index?id={{ item.id }}">
+                  <view class="img-box">
+                    <image src="{{ item.imgUrl }}"></image>
+                  </view>
+                  <view class="ellipsis">{{ item.title }}</view>
+                  <view class="ellipsis cl-999">{{ item.content }}</view>
+                </navigator>
               </view>
             </view>
           </scroll-view>
@@ -37,12 +41,14 @@
         <view class="flex page-title">
           <view class="flex-bd pl-20 title">本地律师推荐</view>
           <view class="flex-ft">
-            <text class="cl-999">更多</text>
-            <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+            <navigator url="../lawyer/index" open-type="switchTab">
+              <text class="cl-999">更多</text>
+              <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+            </navigator>
           </view>
         </view>
         <view class="pa-20 home-list">
-          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}">
+          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
             <view class="img-box">
               <image src="{{ item.imgUrl }}" mode="widthFix"></image>
             </view>

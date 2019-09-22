@@ -1,0 +1,10 @@
+<!-- pages/news/list/index.wxml -->
+<app-page id="app-page">
+  <view class="page-news">
+    <view class="title">{{ item.name }}</view>
+    <view class="dates">{{ item.updateTime }}</view>
+    <view class="desc">
+    <app-text datatext="{{ item.content }}"></app-text>
+    </view>
+  </view>
+</app-page>

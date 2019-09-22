@@ -25,13 +25,13 @@ App({
   // 设置导航栏文字颜色，背景色
   setNavColor(o) {
     let options = {
-          frontColor: reverseColor,
-          backgroundColor: primaryColor,
-          animation: {
-            duration: 10,
-            timingFunc: 'easeIn'
-          }
-        }
+      frontColor: reverseColor,
+      backgroundColor: primaryColor,
+      animation: {
+        duration: 10,
+        timingFunc: 'easeIn'
+      }
+    }
     let obj = Object.assign(options, o)
     // console.log(obj)
     wx.setNavigationBarColor(obj)
@@ -39,13 +39,13 @@ App({
   // 确认操作提示
   confirm(o) {
     let options = {
-          title: '温馨提示',
-          content: '',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确认',
-          confirmColor: primaryColor
-        }
+      title: '温馨提示',
+      content: '',
+      showCancel: true,
+      cancelText: '取消',
+      confirmText: '确认',
+      confirmColor: primaryColor
+    }
     let obj = Object.assign(options, o)
 
     return new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ App({
   },
   // 警告提示
   alert(o) {
-      typeof o == 'string' && (o = { content: o })
+    typeof o == 'string' && (o = { content: o })
     return this.confirm(Object.assign(o, {
       showCancel: false
     }))
@@ -96,6 +96,17 @@ App({
         console.log(res)
       }
     })
+  },
+  // js跳转页面，分tab和普通链接
+  gotoPage(url, type) {
+    let op = {
+      url: url
+    }
+    if (type == 'tab') {
+      wx.switchTab(op)
+    } else {
+      wx.navigateTo(op)
+    }
   },
   //分页
   loadMoreMethods: {
