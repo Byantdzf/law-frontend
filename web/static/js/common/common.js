@@ -118,8 +118,7 @@
 
 			$(function () {
 				$('body').find('textarea').each(function () {
-					var max = $(this).attr('maxlength');
-					$(this).next().find('em').html(max);
+					_t.setTextarea($(this));
 				});
 
 				$('body').on('keyup', 'textarea', function () {
@@ -143,6 +142,11 @@
 			}
 
 			_t.hotCity();
+		},
+
+		setTextarea: function (obj) {
+			var max = obj.attr('maxlength');
+			obj.next().find('em').html(max);
 		},
 
 		setFixBar: function () {

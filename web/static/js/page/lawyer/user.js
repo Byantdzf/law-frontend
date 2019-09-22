@@ -6,15 +6,15 @@
 			_t.defaultPic = '/static/images/default.jpg';
 			_t.userMenu = [
 				{ "id": 10, "name": "我的主页", "code": "home", "url": "/page/lawyer/user/index.js" },
-				{ "id": 1, "name": "我的关注", "code": "attention", "url": "/page/lawyer/user/attention.js" },
-				{ "id": 2, "name": "我的优惠券", "code": "coupon", "url": "/page/lawyer/user/coupon.js" },
+				{ "id": 1, "name": "个人资料", "code": "info", "url": "/page/lawyer/user/info.js" },
+				{ "id": 2, "name": "我的关注", "code": "attention", "url": "/page/lawyer/user/attention.js" },
 				{ "id": 3, "name": "我的订单", "code": "order", "url": "/page/lawyer/user/order.js" },
-				{ "id": 4, "name": "消息中心", "code": "notice", "url": "/page/lawyer/user/notice.js" },
-				{ "id": 5, "name": "关于我们", "code": "about", "url": "/about.html" },
-				{ "id": 6, "name": "帮助中心", "code": "help", "url": "/page/lawyer/user/help.js" },
-				{ "id": 7, "name": "用户协议", "code": "agreement", "url": "/page/lawyer/user/agreement.js" },
-				{ "id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/lawyer/user/feedback.js" },
-				{ "id": 9, "name": "退出登录", "code": "logout" }
+				{ "id": 5, "name": "消息中心", "code": "notice", "url": "/page/lawyer/user/notice.js" },
+				{ "id": 6, "name": "关于我们", "code": "about", "url": "/about.html" },
+				{ "id": 7, "name": "帮助中心", "code": "help", "url": "/page/lawyer/user/help.js" },
+				{ "id": 8, "name": "用户协议", "code": "agreement", "url": "/page/lawyer/user/agreement.js" },
+				{ "id": 9, "name": "意见反馈", "code": "feedback", "url": "/page/lawyer/user/feedback.js" },
+				{ "id": 10, "name": "退出登录", "code": "logout" }
 			];
 			_t.code = hash.get('c') || _t.userMenu[0].code;
 
@@ -65,6 +65,8 @@
 			$('.userPageTit h3').html(item.name);
 
 			$.getScript('/static/js' + url);
+
+			$('body,html').animate({ scrollTop:0  }, 0);
 		}
 	}
 

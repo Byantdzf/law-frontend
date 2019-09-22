@@ -1,0 +1,225 @@
+<div class="tal updateLawyerInfo">
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>
+			基本资料
+		</legend>
+	</fieldset>
+	{{# if (!d.isEdit) { }}
+	<a href="javascript:;" class="layui-btn flr editLawyerInfo">编辑资料</a>
+	{{# } }}
+	<div class="layui-form">
+		<div class="layui-row">
+
+			<div class="layui-form-item avatarBox">
+				<label class="layui-form-label">头像</label>
+				<div class="layui-input-block">
+					<div class="flt">
+						<div class="avatar">
+							<img src="/static/images/avatar.jpg">
+						</div>
+					</div>
+					{{# if (d.isEdit) { }}
+					<div class="flt">
+						<a href="javascript:;" class="layui-btn layui-btn-normal layui-btn-xs uploadAvatar">选择图片</a>
+					</div>
+					<div class="flt">
+						<div class="layui-form-mid">支持jpg、png、jpeg、bmp，图片大小5M以内</div>
+					</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">姓名</label>
+				<div class="layui-input-inline">
+					{{# if (d.isEdit) { }}
+					<input type="text" name="title" value="Wakaka" autocomplete="off" class="layui-input">
+					{{# } else { }}
+					<div class="layui-form-mid">Wakaka</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">联系电话</label>
+				<div class="layui-input-inline">
+					{{# if (d.isEdit) { }}
+					<input type="text" name="title" value="12345678901" autocomplete="off" class="layui-input">
+					{{# } else { }}
+					<div class="layui-form-mid">12345678901</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">邮箱</label>
+				<div class="layui-input-inline">
+					{{# if (d.isEdit) { }}
+					<input type="text" name="title" value="123456789@qq.com" autocomplete="off" class="layui-input">
+					{{# } else { }}
+					<div class="layui-form-mid">123456789@qq.com</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item selectAreas">
+				<label class="layui-form-label">所在地区</label>
+				<div class="layui-input-block">
+					{{# if (d.isEdit) { }}
+					<div class="layui-input-inline">
+						<select name="quiz1">
+							<option value="">请选择省</option>
+							<option value="浙江" selected="">浙江省</option>
+							<option value="你的工号">江西省</option>
+							<option value="你最喜欢的老师">福建省</option>
+						</select>
+					</div>
+					<div class="layui-input-inline">
+						<select name="quiz2">
+							<option value="">请选择市</option>
+							<option value="杭州">杭州</option>
+							<option value="宁波" disabled="">宁波</option>
+							<option value="温州">温州</option>
+							<option value="温州">台州</option>
+							<option value="温州">绍兴</option>
+						</select>
+					</div>
+					<div class="layui-input-inline">
+						<select name="quiz3">
+							<option value="">请选择县/区</option>
+							<option value="西湖区">西湖区</option>
+							<option value="余杭区">余杭区</option>
+							<option value="拱墅区">临安市</option>
+						</select>
+					</div>
+					{{# } else { }}
+					<div class="layui-form-mid">广东省-深圳市</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">执业证书</label>
+				<div class="layui-input-inline">
+					{{# if (d.isEdit) { }}
+					<input type="text" name="title" value="1234567890" autocomplete="off" class="layui-input">
+					{{# } else { }}
+					<div class="layui-form-mid">1234567890</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">执业律所</label>
+				<div class="layui-input-inline">
+					{{# if (d.isEdit) { }}
+					<input type="text" name="title" value="xxxxxxxxx" autocomplete="off" class="layui-input">
+					{{# } else { }}
+					<div class="layui-form-mid">xxxxxxxxx</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">身份证号</label>
+				<div class="layui-input-inline">
+					{{# if (d.isEdit) { }}
+					<input type="text" name="title" value="xxxxxxxxx" autocomplete="off" class="layui-input">
+					{{# } else { }}
+					<div class="layui-form-mid">xxxxxxxxx</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">擅长领域</label>
+				<div class="layui-input-block">
+					{{# if (d.isEdit) { }}
+					<div class="checkboxList">
+
+					</div>
+					{{# } else { }}
+					<div class="layui-form-mid">婚姻家庭、劳动工伤、交通事故、刑事辩护</div>
+					{{# } }}
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">个人简介</label>
+				<div class="layui-input-block">
+					{{# if (d.isEdit) { }}
+					<textarea class="layui-textarea" maxlength="100" name="content"
+						placeholder="（律师简介文字不能超过100字！）">这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，</textarea>
+					<div class="textarea_counter"><span>0</span>/<em>0</em></div>
+					{{# } else { }}
+					<div class="layui-form-mid">
+						这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，这是个人简介的内容，</div>
+					{{# } }}
+				</div>
+			</div>
+
+			{{# if (d.isEdit) { }}
+			<div class="layui-form-item tac">
+				<a href="javascript:;" class="layui-btn layui-btn-red updateBaseSubmit" lay-submit=""
+					lay-filter="updateBaseSubmit">保存</a>
+			</div>
+			{{# } }}
+
+
+		</div>
+	</div>
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>实名认证信息</legend>
+	</fieldset>
+	{{# if (!d.reUpload) { }}
+	<a href="javascript:;" class="layui-btn flr reUpload">重新上传</a>
+	{{# } }}
+
+	<div class="layui-form infoAuthForm">
+		<div class="layui-row">
+			<fieldset class="layui-elem-field layui-field-title">
+				<legend>上传身份证</legend>
+			</fieldset>
+			<div class="layui-form-item">
+				<div class="layui-col-xs4">
+					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard1.jpg" /></a>
+				</div>
+				<div class="layui-col-xs4">
+					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard2.jpg" /></a>
+				</div>
+				<div class="layui-col-xs4">
+					<a href="javascript:;" class="uploadIdCard"><img src="/static/images/idcard3.jpg" /></a>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<br />
+			</div>
+			<fieldset class="layui-elem-field layui-field-title">
+				<legend>上传证书</legend>
+			</fieldset>
+			<div class="layui-form-item">
+				<div class="layui-col-xs6">
+					<a href="javascript:;" class="uploadBusinessCard"><img src="/static/images/businessCard.jpg" /></a>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<br />
+			</div>
+			<fieldset class="layui-elem-field layui-field-title">
+				<legend>其他资料照片</legend>
+			</fieldset>
+			<div class="layui-form-item">
+				<div class="layui-col-xs6">
+					<a href="javascript:;" class="uploadOtherCard"><img src="/static/images/otherCard.jpg" /></a>
+				</div>
+			</div>
+
+			{{# if (d.reUpload) { }}
+			<div class="layui-form-item tac">
+				<a href="javascript:;" class="layui-btn layui-btn-red authSubmit" lay-submit=""
+					lay-filter="authSubmit">提交审核</a>
+			</div>
+			{{# } }}
+		</div>
+	</div>
+</div>
