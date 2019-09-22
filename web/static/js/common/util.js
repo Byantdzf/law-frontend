@@ -434,13 +434,14 @@ layui.define(function (exports) {
 				type: 1,
 				shade: 0.5,
 				closeBtn: 1,
-				offset: '100px',
+				// offset: '100px',
 				moveType: 1,
 				shadeClose: 1,
 				resize: 0,
 				moveOut: 1
 			}
 			params && (opts = $.extend(true, opts, params));
+			// params.offset == 'no' && delete(params.offset);
 			opts.btn && (opts.btnAlign = 'c');
 			layer.open(opts);
 		},

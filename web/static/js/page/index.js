@@ -26,6 +26,8 @@
 				  clickable: true,
 				},
 			});
+
+			base.openRedPacket();
 		}
 	}
 
