@@ -1,9 +1,9 @@
  {
   "pages": [
+    "pages/tabBar/user/index",
     "pages/tabBar/home/index",
     "pages/tabBar/orders/index",
-    "pages/tabBar/orderManage/index",
-    "pages/tabBar/user/index"
+    "pages/tabBar/orderManage/index"
   ],
   "subPackages": [
     {
