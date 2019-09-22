@@ -6,6 +6,9 @@
 
 			$('.nav').find('a').attr('href', 'javascrtip:;');
 
+			_t.initUpload('.uploadIdCard');
+			_t.initUpload('.uploadBusinessCard');
+
 			form.on('submit(authSubmit)', function () {
 				window.location = '/lawyer/waitAuth.html';
 			});
@@ -23,7 +26,22 @@
 					}
 				}, 1000);
 			}
-		}
+		},
+    
+		// 初始化图片上传功能
+		initUpload: function (btn, callback) {
+			// 上传图片
+			var p = {};
+			p.btn = btn;
+			p.accept = {
+				extensions: 'jpg,jpeg,png,gif',
+				mimeTypes: '.jpg,.jpeg,.png,.gif'
+			};
+			utils.uploadFiles(p, function(res) {
+				var url = res.data;
+				$(btn).html('<img src="' + url + '" />');
+			});
+		},
 	}
 
 	// 点击事件

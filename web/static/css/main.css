@@ -9,6 +9,7 @@ img{outline: none; border: none;}
 .d_inblock{display:inline-block!important;}
 .hidden { display: none!important;}
 .tac{text-align:center}
+.tal{text-align:left}
 .oh{overflow: hidden;}
 .flt{float: left; }
 .flr{float:right; }
@@ -260,7 +261,7 @@ a:hover { opacity: .8;}
 .btm_rt{margin-left:50%;}
 .btm_rt div{overflow: hidden;}
 .btm_rt_nav{padding-bottom:20px;}
-.btm_rt div a{width:14%;float: left;font-size:14px;line-height:34px;color:#000; position:relative; text-align: center;}
+.btm_rt div a{ padding: 0 15px; float: left;font-size:14px;line-height:34px;color:#000; position:relative; text-align: center;}
 .btm_rt div a:after { position:absolute; right:0; top:5px; bottom:5px; content: ""; border-right:1px solid #666;}
 .btm_rt div a:last-child:after { display:none;}
 .btm_rt h4 { padding-left:30px; font-size:20px; font-weight:bolder;color:#f55; margin-bottom: 20px;}
@@ -992,6 +993,7 @@ div.clm_tt_m.font_16 a{font-size:16px}
 .questions { margin-top:50px; width:800px;}
 i, em { font-style: normal;}
 .textarea_counter { font-size:12px; text-align: right; color:#999;}
+.layui-form-label { color:#999;}
 .layui-form-label i { color:#f00; margin-right:3px;}
 
 .setPay { width:500px;}
@@ -1108,8 +1110,11 @@ i, em { font-style: normal;}
 
 .regPage { padding-left:100px!important; padding-right:100px!important;}
 .regPage .regTit { font-size: 22px; text-align: center; margin-bottom: 30px; border-bottom: 1px solid #e6e6e6; padding-bottom: 20px;}
+.updateLawyerInfo .selectAreas .layui-input-inline,
 .regPage .selectAreas .layui-input-inline { width:170px;}
+.updateLawyerInfo .layui-form-checkbox span,
 .regPage .layui-form-checkbox span { width:75px;}
+.updateLawyerInfo .layui-input-inline,
 .regPage .layui-input-inline { width:350px;}
 .loginForm { width:350px; margin:0 auto;}
 .forgetStep .steps .layui-form { width:400px; margin:0 auto;}
@@ -1134,7 +1139,7 @@ i, em { font-style: normal;}
 .userLeft .userHead { border-bottom: 1px solid #e6e6e6; padding-top:50px;}
 
 .bindLeft .imgBox,
-.userLeft .userHead .imgBox { width:110px; height:110px; border-radius: 50%; overflow: hidden; margin:0 auto 10px;}
+.userLeft .userHead .imgBox { width:80px; height:80px; border-radius: 50%; overflow: hidden; margin:0 auto 10px;}
 .bindLeft .imgBox img,
 .userLeft .userHead .imgBox img { display: block; width:100%; height:100%;}
 .bindLeft .imgBox h3,
@@ -1193,7 +1198,7 @@ i, em { font-style: normal;}
 .couponTab .layui-tab-title .layui-this { color:#f55;}
 .couponTab .layui-tab-title .layui-this:after { border:none; border-bottom:1px solid #f55; height:51px;}
 
-.orderSearchBox { padding-top:20px;}
+.orderSearchBox { padding-top:20px; text-align: left;}
 .orderSearchBox input { text-align: center;}
 
 .userPage .layui-card-header { border-bottom: none;}
@@ -1307,3 +1312,26 @@ i, em { font-style: normal;}
 
 .userHome2 { margin-top:50px;}
 .userHome2 .data-lavel { font-size: 14px;}
+
+.updateLawyerInfo { width:800px; margin: 0 auto;}
+.avatarBox .layui-input-block { position: relative; top:-8px;}
+.avatarBox .avatar { width:50px; height:50px; border-radius: 50%; overflow: hidden; margin-right:20px;}
+.avatarBox .avatar img { display: block; width:100%; height:100%;}
+.avatarBox .uploadAvatar { margin-top:15px;}
+.avatarBox .layui-form-mid { font-size: 12px; color:#999; margin:6px 0 0 20px;}
+
+.checkboxList { margin-bottom: 10px;}
+.infoAuthForm .layui-elem-field { border:none;}
+.infoAuthForm .layui-elem-field legend { font-size: 16px;}
+.infoAuthForm img { width:240px;}
+
+.userPageCon .systemPush .index_ccbox2_1 li { margin-right: 0; width: 100%; float:none;}
+
+.userInfoModel { background: #f5f5f5; color:#333; text-align: left; padding:20px; box-sizing: border-box;}
+.userInfoModel .myAvatar { float:left; width:100px; height:100px; margin-right:30px; border-radius: 50%; overflow: hidden;}
+.userInfoModel .myAvatar img { display: block; width:100%; height:100%;}
+.userInfoModel h3 { font-size: 28px; line-height: 2;}
+.userInfoModel .myFonts p em { font-size: 20px; color:#f55;}
+.userInfoModel .myFonts p span a { color:#f55;}
+.userInfoModel .myFonts p span { margin-left:20px;}
+.userInfoModel .withdraw { margin-top:30px;}

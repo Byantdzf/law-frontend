@@ -86,6 +86,8 @@
 			$('.userPageTit h3').html(item.name);
 
 			$.getScript('/static/js' + url);
+
+			$('body,html').animate({ scrollTop:0  }, 0);
 		}
 	}
 

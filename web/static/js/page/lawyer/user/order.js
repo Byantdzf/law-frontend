@@ -6,10 +6,11 @@
 			{title: "序号", type: "numbers"},
 			{title: "订单编号", field: "orderNo"},
 			{title: "订单时间", field: "createTime"}, 
+			{title: "订单来源", field: "source", width:"100"}, 
 			{title: "订单类型", field: "rootCategory", width:"100"}, 
-			{title: "订单种类", field: "childCategory"}, 
-			{title: "订单状态", field: "status", width:"100"}, 
-			{title: "订单金额", field: "amount", width:"100"}, 
+			{title: "订单种类", field: "childCategory", width:"130"}, 
+			{title: "状态", field: "status", width:"80"}, 
+			{title: "金额", field: "amount", width:"80"}, 
 			{
 				title: "操作",
 				width: "80",
@@ -26,8 +27,12 @@
 			_t.rootCategory = [
 				{"id": 1, "name": "咨询订单", "child": [{"id": 1, "name": "语音咨询"},{"id": 2, "name": "1对1咨询"}]},
 				{"id": 2, "name": "分块法律服务订单", "child": [{"id": 3, "name": "非诉讼法律服务"},{"id": 4, "name": "诉讼法律服务"}]},
-				{"id": 3, "name": "委托律师订单", "child": [{"id": 5, "name": "收费委托"},{"id": 6, "name": "风险委托"}]},
-				{"id": 4, "name": "法律文件订单", "child": []}
+				{"id": 3, "name": "委托律师订单", "child": [{"id": 5, "name": "收费委托"},{"id": 6, "name": "风险委托"}]}
+			]
+			_t.source = [
+				{"id": 1, "name": "系统推送订单"},
+				{"id": 2, "name": "订单池订单"},
+				{"id": 3, "name": "委托我的订单"}
 			]
 
 			_t.loadPage();
@@ -36,10 +41,11 @@
 		loadPage: function () {
 			var _t = this;
 			var data = {};
-			var html = utils.getTemp('/page/user/order.html', data);
+			var html = utils.getTemp('/page/lawyer/user/order.html', data);
 			$('.userPageCon').html(html);
 
 			utils.getSelect(_t.rootCategory, '.rootCategory', global.text.all);
+			utils.getSelect(_t.source, '.source', global.text.all);
 			
 			var ips = {
 				filters: [
