@@ -3,7 +3,7 @@
   <view class="flex-column container page-message">
     <app-list url="/applets/user/coupon/list">
       <view class="app-cells">
-        <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
+        <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoDetail">
           <view class="flex-hd img-box pl-20">
             <image src="{{ item.imgUrl }}" mode="widthFix"></image>
           </view>

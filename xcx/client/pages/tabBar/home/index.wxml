@@ -69,9 +69,9 @@
                 </view>
               </view>
               <view class="flex btn-box">
-                <button size="mini" plain>语音咨询</button>
-                <button size="mini" plain>一对一咨询</button>
-                <button size="mini" plain>立即关注</button>
+                <button size="mini" plain catch:tap="ask">语音咨询</button>
+                <button size="mini" plain catch:tap="ask">一对一咨询</button>
+                <button size="mini" plain catch:tap="ask">立即关注</button>
               </view>
             </view>
           </view>

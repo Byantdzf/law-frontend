@@ -20,6 +20,12 @@
       "pages": [
         "detail/index"
       ]
+    },
+    {
+      "root": "pages/message",
+      "pages": [
+        "detail/index"
+      ]
     }
   ],
   "window": {

@@ -127,5 +127,8 @@ Page({
   gotoLawyerDetail(e) {
     let { id } = e.currentTarget.dataset
     app.gotoPage('/pages/lawyer/detail/index?id=' + id)
+  },
+  ask(){
+    
   }
 })
