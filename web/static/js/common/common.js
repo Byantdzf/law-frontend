@@ -291,7 +291,27 @@
 			});
 			html += '<li><a href="/area.html">更多&gt;&gt;</a></li>';
 			$('.region_conList .region_con').html(html)
-		}
+		},
+		openRedPacket: function () {
+			var html = '<div class="redPackageBox"><p>平台赠送了您一张新人优惠券<br />快去扫码登录领取吧</p></div>';
+
+			var ops = {
+				type: 1,
+				title: false,
+				shadeClose: true,
+				area: ["300px", "420px"],
+				skin: 'showRedPacket',
+				content: html,
+				success: function (layero, index) {
+					$('.redPackageBox').off().on('click', function () {
+						// layer.close(index);
+						// base.login();
+						window.location = 'user.html';
+					});
+				}
+			};
+			utils.dialog(ops);
+		},
 	}
 
 	gahter.init();

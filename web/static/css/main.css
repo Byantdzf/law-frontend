@@ -1335,3 +1335,7 @@ i, em { font-style: normal;}
 .userInfoModel .myFonts p span a { color:#f55;}
 .userInfoModel .myFonts p span { margin-left:20px;}
 .userInfoModel .withdraw { margin-top:30px;}
+
+.showRedPacket { background: transparent!important; box-shadow: none!important;}
+.redPackageBox { position: relative; width:300px; height:420px; background: url(../images/redPacket.png?_=1) center no-repeat;}
+.redPackageBox p { position: absolute; left:0; right:0; bottom: 50px; font-size: 20px; line-height: 2; text-align: center; color:#fff;}

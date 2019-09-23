@@ -1,28 +1,135 @@
 <view class="pa-20 home-list">
-          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}">
-            <view class="img-box">
-              <image src="{{ item.imgUrl }}" mode="widthFix"></image>
+  <view class="img-box">
+    <image src="{{ details.imgUrl }}" mode="widthFix"></image>
   </view>
+  <view class="lawyerName">
+    <view class="score cl-red">{{ details.score }}分</view>
+    <view class="name">
+      {{ details.name }}
+      <text>{{ details.area}}</text>
+    </view>
   </view>
-       <view class="flex">
-       <view class="flex-bd name">{{ item.name }}</view>
-       <view class="flex-ft score cl-red">{{ item.score }}分</view>
-       </view>
-       <view class="desc cl-666">{{ item.desc }}</view>
-       <view class="flex">
-       <view class="flex-bd">
-       <text class="cl-999">帮助人数：</text>
-       <text class="cl-666">{{ item.helpers }}人</text>
-       </view>
-       <view class="flex-ft">
-       <text class="cl-999">关注人数：</text>
-       <text class="cl-666">{{ item.followers }}人</text>
-       </view>
-       </view>
-    <view class="flex btn-box">
+  <view class="helper">
+    <view class="flex">
+      <view class="flex-bd">
+        <text class="cl-999">帮助人数：</text>
+        <text class="cl-666">{{ details.helpers }}人</text>
+      </view>
+      <view class="flex-ft">
+        <text class="cl-999">关注人数：</text>
+        <text class="cl-666">{{ details.followers }}人</text>
+      </view>
+    </view>
+  </view>
+  <view class="flex btn-box">
     <button size="mini" plain>语音咨询</button>
     <button size="mini" plain>一对一咨询</button>
     <button size="mini" plain>立即关注</button>
     <button size="mini" plain>邀请接单</button>
-  </view>  
+  </view>
+  <view class="flex tab-box">
+    <view class="flex-bd {{ showType == 1 && 'curr' }}" bind:tap="changeTab">基本信息</view>
+    <view class="flex-bd {{ showType == 2 && 'curr' }}" bind:tap="changeTab">用户评论</view>
+  </view>
+  <view class="tab-content">
+    <!-- 基本信息 -->
+    <view class="baseInfo" wx:if="{{showType == 1}}">
+      <view class="items flex">
+        <view class="flex-ft">
+          <text class="cl-999">性别：</text>
+        </view>
+        <view class="flex-bd">
+          <text class="cl-666">男</text>
+        </view>
+      </view>
+      <view class="items flex">
+        <view class="flex-ft">
+          <text class="cl-999">所在地区：</text>
+        </view>
+        <view class="flex-bd">
+          <text class="cl-666">广东-深圳</text>
+        </view>
+      </view>
+      <view class="items flex">
+        <view class="flex-ft">
+          <text class="cl-999">所属事务所：</text>
+        </view>
+        <view class="flex-bd">
+          <text class="cl-666">广东创辉律师事务所</text>
+        </view>
+      </view>
+      <view class="items flex">
+        <view class="flex-ft">
+          <text class="cl-999">执业证号：</text>
+        </view>
+        <view class="flex-bd">
+          <text class="cl-666">1234567890</text>
+        </view>
+      </view>
+      <view class="items flex">
+        <view class="flex-ft">
+          <text class="cl-999">入驻时间：</text>
+        </view>
+        <view class="flex-bd">
+          <text class="cl-666">2018年8月8日</text>
+        </view>
+      </view>
+      <view class="items flex rangeList">
+        <view class="flex-ft">
+          <text class="cl-999">擅长领域：</text>
+        </view>
+        <view class="flex-bd">
+          <button size="mini" plain wx:for="{{ details.range }}" wx:key="{{item.index}}">
+            {{item.name}}
+          </button>
+        </view>
+      </view>
+      <view class="orderList">
+        <view class="tit">接单数据</view>
+        <view class="table">
+          <view class="thead">
+            <view class="tr bg-w">
+              <view class="th">订单类型</view>
+              <view class="th">接单量</view>
+              <view class="th ">评分</view>
+            </view>
+          </view>
+          <view class="tbody">
+            <block wx:for="{{details.listData}}" wx:key="{{index}}">
+              <view class="tr">
+                <view class="td">{{item.name}}</view>
+                <view class="td">{{item.orderNums}}</view>
+                <view class="td">{{item.score}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="orderList">
+        <view class="tit">个人简介</view>
+        <app-text datatext="{{ details.content }}"></app-text>
+      </view>
+    </view>
+    <!-- 用户评论 -->
+    <view class="scoreBox" wx:if="{{showType == 2}}">
+      <view class="totalScore">
+        <image src="/static/images/score.png" mode="widthFix"></image>
+      </view>
+      <view class="scoreList">
+        <view class="flex items" wx:for="{{comments}}" wx:key="{{index}}">
+          <view class="flex-ft img-box">
+            <image src="{{item.imgUrl}}" mode="widthFix"></image>
+          </view>
+          <view class="flex-bd">
+            <view class="name">{{item.name}}</view>
+            <view class="flex"><view class="flex-ft cl-999">服务类型：</view><view class="flex_bd">{{ item.type }}</view></view>
+            <view class="flex"><view class="flex-ft cl-999">服务时间：</view><view class="flex_bd">{{ item.servicesTime }}</view></view>
+            <view class="flex"><view class="flex-ft cl-999">服务态度 </view><view class="flex_bd">{{ item.servicesScore }}</view></view>
+            <view class="flex"><view class="flex-ft cl-999">专业程度 </view><view class="flex_bd">{{ item.Professional }}</view></view>
+          </view>
+            <view class="desc">{{ item.remark }}</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

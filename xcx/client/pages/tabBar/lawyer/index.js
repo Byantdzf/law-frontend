@@ -48,6 +48,7 @@ Page({
     ],
     list: [
       {
+        id: 1,
         name: '何金宝律师',
         imgUrl: '../../../static/images/demo/wakaka.png',
         score: 4.9,
@@ -55,6 +56,7 @@ Page({
         helpers: 249,
         followers: 249
       }, {
+        id: 2,
         name: '何金宝律师',
         imgUrl: '../../../static/images/demo/wakaka.png',
         score: 4.9,
@@ -62,6 +64,7 @@ Page({
         helpers: 249,
         followers: 249
       }, {
+        id: 3,
         name: '何金宝律师',
         imgUrl: '../../../static/images/demo/wakaka.png',
         score: 4.9,
@@ -74,5 +77,12 @@ Page({
   onLoad() {
     app.pages.add(this)
     app.setNavColor()
+  },
+  gotoLawyerDetail(e) {
+    let { id } = e.currentTarget.dataset
+    app.gotoPage('/pages/lawyer/detail/index?id=' + id)
+  },
+  ask(){
+    
   }
 })

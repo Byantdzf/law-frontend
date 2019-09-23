@@ -1,4 +1,6 @@
 @import "/wxParse/wxParse.wxss";
-.Parse{
-  padding: 30rpx
+
+.wxParse-p {
+  margin-bottom:20rpx;
+  line-height: 2em;
 }

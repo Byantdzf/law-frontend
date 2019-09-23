@@ -24,5 +24,9 @@ Page({
   onLoad() {
     app.pages.add(this)
     app.setNavColor()
-  }
+  },
+  gotoDetail(e) {
+    let { id } = e.currentTarget.dataset
+    app.gotoPage('/pages/message/detail/index?id=' + id)
+  },
 })

@@ -26,7 +26,7 @@
     <view class="flex-bd app-scroller">
       <scroll-view scroll-y>
         <view class="pa-20">
-          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}">
+          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
             <view class="img-box">
               <image src="{{ item.imgUrl }}" mode="widthFix"></image>
             </view>
@@ -47,9 +47,9 @@
                 </view>
               </view>
               <view class="flex btn-box">
-                <button size="mini" plain>语音咨询</button>
-                <button size="mini" plain>一对一咨询</button>
-                <button size="mini" plain>立即关注</button>
+                <button size="mini" plain catch:tap="ask">语音咨询</button>
+                <button size="mini" plain catch:tap="ask">一对一咨询</button>
+                <button size="mini" plain catch:tap="ask">立即关注</button>
               </view>
             </view>
           </view>
