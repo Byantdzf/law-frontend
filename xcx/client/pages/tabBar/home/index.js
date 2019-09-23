@@ -15,7 +15,7 @@ Page({
         name: '何金宝律师',
         imgUrl: '../../../static/images/demo/wakaka.png',
         score: 4.9,
-        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
+        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
         helpers: 249,
         followers: 249
       }, {
@@ -129,6 +129,6 @@ Page({
     app.gotoPage('/pages/lawyer/detail/index?id=' + id)
   },
   ask(){
-    
+
   }
 })

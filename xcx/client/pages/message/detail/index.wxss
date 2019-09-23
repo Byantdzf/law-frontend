@@ -4,6 +4,7 @@
 }
 .page-news .desc {
   font-size: 28rpx;
+  padding: 30rpx;
 }
 .page-news .title {
   font-size: 40rpx;
