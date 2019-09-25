@@ -3,6 +3,7 @@ const app = getApp()
 let page = null
 Page({
   data: {
+    curCity: '',
     //图片地址
     banners: [
       '/static/images/demo/banner1.png',
@@ -103,21 +104,26 @@ Page({
     app.pages.add(this)
     app.setNavColor()
     app.setNavTitle('虎甲律师咨询平台')
+    app.getUserLocation(data => {
+      const adInfo = data.adInfo || {}
+      this.setData({
+        curCity: adInfo.city || ''
+      })
+    })
+    page = this.selectComponent('#app-page')
+    page.checkAuth().then((data) => {
+      // 授权成功
+      console.log('index auth')
+      console.log(data)
+    }).catch((e) => {
+      // 授权失败
+      console.log('index auth reject')
+      console.log(e)
+    });
   },
 
   onShow() {
     console.log('home show')
-    page = this.selectComponent('#app-page')
-    // productModel.query().then(data => {})
-    // page.checkAuth().then((data) =>{
-    //   // 授权成功
-    //   console.log('index auth')
-    //   console.log(data)
-    // }).catch((e) =>{
-    //   // 授权失败
-    //   console.log('index auth reject')
-    //   console.log(e)
-    // });
   },
   handleToolBtnTap() {
     this.setData({

@@ -1,5 +1,5 @@
 const api = require('../../service/auth')
-const { tokenName } = require('../../config/global')
+const { tokenName, appName } = require('../../config/global')
 const pages = require('../../plugins/pages')
 Component({
   options: {
@@ -13,6 +13,7 @@ Component({
     }
   },
   data: {
+    appName,
     authVisible: false,
     authStyles: 'bottom:0rpx;left:0;width:100%;margin:0;',
     hasNetwork: true,
@@ -25,7 +26,7 @@ Component({
       wx.login({
         success:({ code }) => {
           if(!code) return
-
+          console.log(code)
           // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
           api.login({ code }).then(res => {
             // 保存token

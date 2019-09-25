@@ -4,7 +4,7 @@
     <view class="flex page-search">
       <view class="flex location pr-20">
         <view class="iconfont icon-location"></view>
-        <view class="pl-10">深圳</view>
+        <view class="pl-10 ellipsis city">{{ curCity }}</view>
       </view>
       <view class="flex-bd flex search-box">
         <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
