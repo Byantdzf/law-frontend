@@ -109,8 +109,26 @@ App({
         }, cb)
       },
       fail: () => {
-        this.reverseGeocoder(this.globalData.defaultLocation, cb)
+          this.confirm({ 
+              "content": '需要获取您的地理位置，请确认授权，否则将无法找到您附近的律师',
+          }).then(res => {
+              if (res.confirm) {
+                  wx.openSetting({
+                      success () {
+                          _t.getUserLocation(cb)
+                      }, 
+                      fail () {
+                          _t.reverseGeocoder(this.globalData.defaultLocation, cb)
+                      }
+                  });
+              }
+          }, reject => {
+              _t.reverseGeocoder(this.globalData.defaultLocation, cb)
+          })
       }
+      // fail: () => {
+      //   this.reverseGeocoder(this.globalData.defaultLocation, cb)
+      // }
     })
   },
   // 通过经纬度获取具体的位置信息
