@@ -130,5 +130,9 @@ Page({
   },
   ask(){
 
+  },
+  voiceTap(e) {
+    let { id } = e.currentTarget.dataset
+    app.gotoPage('/pages/lawyer/voice/index?id=' + id)
   }
 })

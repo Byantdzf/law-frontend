@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": 2,
@@ -75,6 +75,12 @@
 					"name": "lawyerDetail",
 					"pathName": "pages/lawyer/detail/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "voickAsk",
+					"pathName": "pages/lawyer/voice/index",
 					"scene": null
 				}
 			]

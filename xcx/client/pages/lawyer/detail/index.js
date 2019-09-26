@@ -1,11 +1,12 @@
 // pages/lawyer/detail/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showType: 2,
+    showType: 1,
     details: {
       id: 1,
       name: '何金宝律师',
@@ -71,6 +72,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let { id } = options
+    this.setData({
+      id 
+    })
   },
 
   /**
@@ -90,5 +95,8 @@ Page({
     this.setData({
       showType: this.data.showType == 1 ? 2 : 1
     })
+  },
+  voiceTap() {
+    app.gotoPage('/pages/lawyer/voice/index?id=' + this.data.id)
   }
 })

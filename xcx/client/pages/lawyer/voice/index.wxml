@@ -1,0 +1,98 @@
+<view class="pa-20 home-list">
+    <view class="img-box">
+        <image src="{{ details.imgUrl }}" mode="widthFix"></image>
+    </view>
+    <view class="lawyerName">
+        <view class="score cl-red">{{ details.score }}分</view>
+        <view class="name">
+            {{ details.name }}
+            <text>{{ details.area}}</text>
+        </view>
+    </view>
+    <view class="helper">
+        <view class="flex">
+            <view class="flex-bd">
+                <text class="cl-999">帮助人数：</text>
+                <text class="cl-666">{{ details.helpers }}人</text>
+            </view>
+            <view class="flex-ft">
+                <text class="cl-999">关注人数：</text>
+                <text class="cl-666">{{ details.followers }}人</text>
+            </view>
+        </view>
+    </view>
+    <view class="issueBox">
+        <view class="issue-title">语音咨询发布</view>
+        <view class="issue-form">
+            <view class="issue-form-item">
+                <view class="issue-form-input flex-bd">
+                    <textarea bindblur="bindTextAreaBlur" auto-height placeholder="请在此输入您想咨询的问题（不少于10个字）" />
+                </view>
+            </view>
+            <view class="issue-form-item">
+                <view class="issue-form-input flex">
+                    <view class="question flex-bd">
+                        <picker class="picker" bindchange="questionChange" value="{{index}}" range="{{details.range}}" range-key="name">
+                            <view wx:if="{{selectRange}}">所属问题：{{selectRange.name}}</view>
+                            <view wx:else>请选择所属问题</view>
+                        </picker>
+                    </view>
+                    <view>
+                        <text class="cl-999 iconfont icon-arrow-right"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="issue-form-item">
+                <view class="issue-form-input flex">
+                    <view class="area flex-bd">
+                        <picker mode="region" bindchange="regionChange" value="{{region}}">
+                            <view class="picker" wx:if="{{region.length}}">
+                                地区：{{region[0]}} - {{region[1]}} - {{region[2]}}
+                            </view>
+                            <view class="picker" wx:else>请选择地区</view>
+                        </picker>
+                    </view>
+                    <view>
+                        <text class="cl-999 iconfont icon-arrow-right"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="issue-form-item">
+                <view class="issue-form-input">
+                    <input class="app-input" type="number" name="mobile" placeholder="请输入您的手机号码" value='{{ mobile }}'></input>
+                </view>
+            </view>
+            <view class="issue-form-item">
+                <view class="issue-form-input flex">
+                    <view class="amount flex-bd">
+                        <picker class="picker" bindchange="amountChange" value="{{index}}" range="{{details.amountList}}" range-key="name">
+                            <view wx:if="{{selectAmount}}">金额：{{selectAmount.name}}</view>
+                            <view wx:else>请选择金额</view>
+                        </picker>
+                    </view>
+                    <view>
+                        <text class="cl-999 iconfont icon-arrow-right"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="issue-form-item flex">
+                <view class="issue-form-label">是否紧急</view>
+                <view class="issue-form-input">
+                    <radio-group class="radio-group" bindchange="radioChange">
+                        <radio class="radio" wx:for="{{ isEmergency }}" wx:key="{{index}}" value="{{item.id}}" checked="{{item.checked}}">
+                            <text>{{item.name}}</text>
+                        </radio>
+                    </radio-group>
+                </view>
+            </view>
+            <view class="issue-form-item">
+                <view class="issue-form-input">
+                    <textarea bindblur="bindTextAreaBlur" auto-height placeholder="请填写备注说明" />
+                </view>
+            </view>
+            <view class="issue-form-item form-btn-box">
+                <button class="app-input-btn" size="mini" plain bindtap="submitForm">确定提交</button>
+            </view>
+        </view>
+    </view>
+</view>

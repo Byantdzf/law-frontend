@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "语音咨询",
+  "usingComponents": {
+    "app-text": "/components/app-text/index",
+    "app-pop": "../../../../components/app-pop/index"
+  }
+}
