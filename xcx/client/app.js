@@ -1,19 +1,29 @@
 
 const test = require('utils/test.js')
 const pages = require('plugins/pages.js')
+const QQMapWX = require('plugins/qqmap-wx-jssdk.min.js')
+const qqmapsdk = new QQMapWX({
+  key: 'LW5BZ-ZTFA4-QXNUJ-XWKTM-5VAB5-J6BTM'
+})
 
 let primaryColor = '#CF443D'
 let reverseColor = '#ffffff'
 
 App({
   globalData: {
+    defaultLocation: {
+      latitude: 22.55,
+      longitude: 114.05
+    },
     userInfo: null, // 用户信息
+    adInfo: null, // 用户位置信息
     scene: ''
   },
   onLaunch(e) {
     this.test = test
     this.pages = pages
     this.globalData.scene = e.scene
+    this.qqmapsdk = qqmapsdk
   },
   onShow(o) {
     // console.log(o)
@@ -88,12 +98,35 @@ App({
   makePhoneCall(phoneNumber) {
     wx.makePhoneCall({ phoneNumber })
   },
-  // 获取地理位置
-  getUserLocation() {
+  // 获取用户经纬度
+  getUserLocation(cb) {
     wx.getLocation({
       type: 'wgs84',
-      success(res) {
-        console.log(res)
+      success: res => {
+        this.reverseGeocoder({
+          latitude: res.latitude,
+          longitude: res.longitude
+        }, cb)
+      },
+      fail: () => {
+        this.reverseGeocoder(this.globalData.defaultLocation, cb)
+      }
+    })
+  },
+  // 通过经纬度获取具体的位置信息
+  reverseGeocoder(location, cb) {
+    this.qqmapsdk &&
+    this.qqmapsdk.reverseGeocoder({
+      location,
+      success: res => {
+        const { status, result } = res
+        if (status == 0) {
+          this.globalData.adInfo = result.ad_info
+        }
+        typeof cb === 'function' && cb(this.globalData)
+      },
+      fail: () => {
+        typeof cb === 'function' && cb(this.globalData)
       }
     })
   },
@@ -106,67 +139,6 @@ App({
       wx.switchTab(op)
     } else {
       wx.navigateTo(op)
-    }
-  },
-  //分页
-  loadMoreMethods: {
-    _data: {
-      page: 1,
-      rows: 10,
-      list: [],
-      hasNextPage: false,
-      request: null,
-      callback: null,
-      params: null
-    },
-    _initLoadMore(params = {}) {
-      let {
-        page = 1,
-        page_size = 10,
-        list = [],
-        hasNextPage = false
-      } = params;
-      this._data.page = page;
-      this._data.page_size = page_size;
-      this._data.list = list;
-      this._data.hasNextPage = hasNextPage;
-    },
-    _getList({
-      request,
-      params
-    }, callback = function () { }) {
-      let { page, page_size } = this._data;
-      let _params = {
-        page: page,
-        page_size: page_size
-      };
-      params && (_params = Object.assign({}, _params, params));
-      this._data.request = request;
-      this._data.params = params;
-      this._data.callback = callback;
-      request(_params).then(response => {
-        //let { page, totalPages, list = [] } = response.dataList || {};
-        let totalRows = response.dataList.total;
-        let page = _params.page;
-        let totalPages = Math.ceil(totalRows / params.page_size);
-        let baseData = response.dataList;
-        let list = baseData.productList || baseData.orderList || baseData.waitServiceScheduleList || baseData.technicianList || baseData.technicianScheduleList || [];
-        this._data.hasNextPage = totalPages > page ? true : false;
-        this._data.list = page == 1 ? list : [...this._data.list, ...list];
-        typeof callback == 'function' && callback({
-          list: this._data.list,
-          hasNextPage: this._data.hasNextPage
-        });
-      }).catch(e => { });
-    },
-    _loadMore() {
-      if (this._data.hasNextPage) {
-        this._data.page += 1;
-        this._getList({
-          request: this._data.request,
-          params: this._data.params
-        }, this._data.callback);
-      }
     }
   }
 })

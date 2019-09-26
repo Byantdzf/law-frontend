@@ -47,7 +47,11 @@ const ajax = (_options = {}) => {
       "content-type": contentType
     }, header)
 
-    auth && (params.token = wx.getStorageSync(tokenName))
+    const token = wx.getStorageSync(tokenName)
+
+    if (auth) {
+      header["Authorization"] = "Bear " + token
+    }
 
     if (path.indexOf('http:') > -1 || path.indexOf('https:') > -1) {
       url = path;
