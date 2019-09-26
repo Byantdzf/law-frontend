@@ -18,7 +18,7 @@ Component({
     },
     borderColor: {
       type: String,
-      value: "rgb(79, 124, 237)"
+      value: "#999"
     },
     borderWidth: {
       type: Number,
