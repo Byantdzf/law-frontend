@@ -8,7 +8,7 @@ module.exports = {
    * @param[String]  password   密码
    * @param[String]  code       小程序登录code
   */
-  login: params => postJson('/applets/user/addAndLoginUser', params, { auth: false, loading: false }),
+  login: params => postJson('/applets/lawyer/login', params, { auth: false, loading: false }),
 
   getUserInfo: params => post('/api/getUserInfo', params),
 

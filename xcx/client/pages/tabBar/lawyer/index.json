@@ -2,6 +2,7 @@
   "navigationBarTitleText": "律师",
   "usingComponents": {
     "app-tab":"../../../../components/app-tab/index",
+    "app-list":"../../../../components/app-list/index",
     "app-empty":"../../../../components/app-empty/index"
   }
 }

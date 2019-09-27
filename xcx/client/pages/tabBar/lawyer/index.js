@@ -46,37 +46,29 @@ Page({
         name: '关注人数'
       }
     ],
-    list: [
-      {
-        id: 1,
-        name: '何金宝律师',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        score: 4.9,
-        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-        helpers: 249,
-        followers: 249
-      }, {
-        id: 2,
-        name: '何金宝律师',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        score: 4.9,
-        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-        helpers: 249,
-        followers: 249
-      }, {
-        id: 3,
-        name: '何金宝律师',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        score: 4.9,
-        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-        helpers: 249,
-        followers: 249
-      }
-    ],
+    list: [],
+    queryParams: {}
   },
   onLoad() {
     app.pages.add(this)
     app.setNavColor()
+  },
+  updateList(e) {
+    this.setData({ list: e.detail })
+  },
+  keyWordChange({ detail }) {
+    this.keyWord = detail.value
+  },
+  handleSearch() {
+    let queryParams = this.data.queryParams
+    if (this.keyWord || this.keyWord === 0) {
+      this.setData({
+        queryParams: Object.assign(queryParams, { keyWord: this.keyWord })
+      })
+    } else {
+      delete queryParams.keyWord
+      this.setData({ queryParams })
+    }
   },
   gotoLawyerDetail(e) {
     let { id } = e.currentTarget.dataset
