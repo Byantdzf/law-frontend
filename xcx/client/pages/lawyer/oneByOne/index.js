@@ -1,4 +1,4 @@
-// pages/lawyer/voice/index.js
+// pages/lawyer/oneByOne/index.js
 const app = getApp()
 Page({
 
@@ -70,16 +70,6 @@ Page({
   regionChange(e) {
     this.setData({
       region: e.detail.value
-    })
-  },
-  questionChange(e) {
-    this.setData({
-      selectRange: this.data.details.range[e.detail.value]
-    })
-  },
-  amountChange(e) {
-    this.setData({
-      selectAmount: this.data.details.amountList[e.detail.value]
     })
   },
   submitForm(e) {

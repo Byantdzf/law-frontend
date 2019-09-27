@@ -4,7 +4,10 @@
     "pages/tabBar/home/index",
     "pages/tabBar/lawyer/index",
     "pages/tabBar/message/index",
-    "pages/tabBar/user/index"
+    "pages/tabBar/user/index",
+    "pages/legalServices/list/index",
+    "pages/mandatoryLawyer/list/index",
+    "pages/template/list/index"
   ],
   "subPackages": [
     {
@@ -30,7 +33,19 @@
       "root": "pages/lawyer",
       "pages": [
         "detail/index",
-        "voice/index"
+        "voice/index",
+        "success/index",
+        "oneByOne/index"
+      ]
+    },
+    {
+      "root": "pages/issue",
+      "pages": [
+        "voice/index",
+        "success/index",
+        "oneByOne/index",
+        "legalServices/index",
+        "mandatoryLawyer/index"
       ]
     }
   ],

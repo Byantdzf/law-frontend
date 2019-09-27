@@ -1,0 +1,13 @@
+<view class="successPage">
+    <view class="img-box">
+        <icon type="success" size="100" />
+    </view>
+    <view class="noticeFonts">
+        <view>恭喜您！您已提交成功</view>
+        <view>何金宝律师会在第一时间进行解答</view>
+        <view>请及时留意信息通知。</view>
+    </view>
+    <view class="btnBox">
+        <button class="app-input-btn" bindtap="goHome">返回首页</button>
+    </view>
+</view>

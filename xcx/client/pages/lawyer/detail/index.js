@@ -98,5 +98,8 @@ Page({
   },
   voiceTap() {
     app.gotoPage('/pages/lawyer/voice/index?id=' + this.data.id)
-  }
+  },
+  onByOneTap() {
+    app.gotoPage('/pages/lawyer/oneByOne/index?id=' + this.data.id)
+  },
 })

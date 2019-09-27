@@ -70,8 +70,8 @@
               </view>
               <view class="flex btn-box">
                 <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">语音咨询</button>
-                <button size="mini" plain catch:tap="ask">一对一咨询</button>
-                <button size="mini" plain catch:tap="ask">立即关注</button>
+                <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">一对一咨询</button>
+                <button size="mini" plain data-id="{{item.id}}" catch:tap="ask">立即关注</button>
               </view>
             </view>
           </view>
@@ -84,7 +84,7 @@
     <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
       <text class="iconfont icon-plus"></text>
     </view>
-    <view class="float-tools-item float-tools-item{{ index + 1 }}" wx:for="{{ tools }}" wx:key="{{ index }}" style="background: {{ item.iconBg }};">
+    <view class="float-tools-item float-tools-item{{ index + 1 }}" wx:for="{{ tools }}" wx:key="{{ index }}" style="background: {{ item.iconBg }};" data-type="{{ item.type }}" bind:tap="tapTools">
       <view class="cl-white">{{ item.name1 }}</view>
       <view class="cl-white">{{ item.name2 }}</view>
     </view>

@@ -1,0 +1,6 @@
+.successPage { height:100%; padding-top:140rpx; box-sizing:border-box;}
+.img-box { width:200rpx; height:200rpx; margin: 0 auto 60rpx; border-radius: 20rpx; overflow: hidden;}
+.noticeFonts { text-align: center; margin-bottom: 200rpx;}
+.noticeFonts view { line-height: 2; font-size: 36rpx;}
+.btnBox { position: fixed; left:30rpx; right:30rpx; bottom:30rpx;}
+.btnBox button { width:100%; border-radius: 50rpx; border:none; background:#09BB07; color: #fff;}

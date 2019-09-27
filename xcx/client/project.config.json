@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 6,
 			"list": [
 				{
 					"id": 2,
@@ -68,6 +68,19 @@
 					"name": "newList",
 					"pathName": "pages/news/list/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "success",
+					"pathName": "pages/lawyer/success/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "oneByOne",
+					"pathName": "pages/lawyer/oneByOne/index",
 					"scene": null
 				}
 			]

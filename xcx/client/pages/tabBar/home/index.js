@@ -64,36 +64,43 @@ Page({
       {
         name1: '语音',
         name2: '咨询',
+        url: '/pages/issue/voice/index',
         icon: 'icon-yuyin',
         iconBg: '#00b0ab'
       }, {
         name1: '1对1',
         name2: '咨询',
+        url: '/pages/issue/oneByOne/index',
         icon: 'icon-feature',
         iconBg: '#00A2FF'
       }, {
         name1: '非诉讼',
         name2: '服务',
+        url: '/pages/legalServices/list/index',
         icon: 'icon-feisusongzhuanxiang',
         iconBg: '#00b0ab'
       }, {
         name1: '诉讼',
         name2: '服务',
+        url: '/pages/legalServices/list/index',
         icon: 'icon-susong',
         iconBg: '#F64335'
       }, {
         name1: '收费',
         name2: '委托',
+        url: '/pages/mandatoryLawyer/list/index',
         icon: 'icon-shoufei',
         iconBg: '#FFD200'
       }, {
         name1: '风险',
         name2: '委托',
+        url: '/pages/mandatoryLawyer/list/index',
         icon: 'icon-fengxian',
         iconBg: '#F9879A'
       }, {
         name1: '协议',
         name2: '模版',
+        url: '/pages/template/list/index',
         icon: 'icon-xieyi',
         iconBg: '#15B774'
       }
@@ -125,7 +132,7 @@ Page({
   onShow() {
     console.log('home show')
   },
-  handleToolBtnTap() {
+  handleToolBtnTap(e) {
     this.setData({
       showTools: !this.data.showTools
     })
@@ -134,11 +141,18 @@ Page({
     let { id } = e.currentTarget.dataset
     app.gotoPage('/pages/lawyer/detail/index?id=' + id)
   },
-  ask(){
+  ask() {
 
   },
   voiceTap(e) {
     let { id } = e.currentTarget.dataset
     app.gotoPage('/pages/lawyer/voice/index?id=' + id)
+  },
+  onByOneTap(e) {
+    let { id } = e.currentTarget.dataset
+    app.gotoPage('/pages/lawyer/oneByOne/index?id=' + id)
+  },
+  tapTools(e) {
+    let { url } = e.currentTarget.dataset
   }
 })
