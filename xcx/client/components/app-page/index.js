@@ -1,3 +1,4 @@
+const app = getApp()
 const api = require('../../service/auth')
 const { tokenName, appName } = require('../../config/global')
 const pages = require('../../plugins/pages')
@@ -26,19 +27,19 @@ Component({
       wx.login({
         success:({ code }) => {
           if(!code) return
-          console.log(code)
           // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
+          let params = {}
+          params.code = code
+          if (app.globalData.adInfo) {
+            params.locationX = app.globalData.adInfo.location.lng
+            params.locationY = app.globalData.adInfo.location.lat
+          }
           api.login({ code }).then(res => {
             // 保存token
-            wx.setStorageSync(tokenName, res.data.token)
-            
-            // 如果有返回用户信息
-            if (res.data.userInfo) {
-              this.data.authResolve(res.data.userInfo)
-            } else {
-              // 如果没有返回用户信息，从微信获取
-              this.getAuthSetting()
-            }
+            wx.setStorageSync(tokenName, res.data.sessionId)
+
+            // 如果没有返回用户信息，从微信获取
+            this.getAuthSetting()
           }).catch(() =>{
             // 后端接口异常情况下，本地继续走流程，从微信获取
             this.getAuthSetting()
@@ -116,8 +117,16 @@ Component({
       // 保存用户信息到服务器，相当于注册用户，需要提交 iv, encryptedData, rawData, signature, userInfo
       // ……
       if (detail.errMsg == "getUserInfo:ok") {
-        this.data.authResolve(detail.userInfo)
-        wx.setStorageSync('userInfo', detail.userInfo)
+        let params = detail.userInfo
+        if (app.globalData.adInfo) {
+          params.locationX = app.globalData.adInfo.location.lng
+          params.locationY = app.globalData.adInfo.location.lat
+        }
+        api.getUserInfo(params).then(res => {
+          this.data.authResolve(detail.userInfo)
+          app.globalData.userInfo = params
+          wx.setStorageSync('userInfo', params)
+        })
       } else {
         this.data.authReject()
       }

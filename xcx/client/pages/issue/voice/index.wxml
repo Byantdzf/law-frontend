@@ -35,10 +35,11 @@
                     </view>
                 </view>
             </view>
-            <view class="issue-form-item">
-                <view class="issue-form-input">
+            <view class="issue-form-item flex">
+                <view class="issue-form-input flex-bd">
                     <input class="app-input" type="number" name="mobile" placeholder="请输入您的手机号码" value='{{ mobile }}'></input>
                 </view>
+                <view><text class="sendSMS cl-primary">获取验证码</text></view>
             </view>
             <view class="issue-form-item">
                 <view class="issue-form-input flex">

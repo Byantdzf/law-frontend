@@ -12,11 +12,17 @@ let reverseColor = '#ffffff'
 App({
   globalData: {
     defaultLocation: {
-      latitude: 22.55,
-      longitude: 114.05
+      // latitude: 22.55,
+      // longitude: 114.05
     },
     userInfo: null, // 用户信息
-    adInfo: null, // 用户位置信息
+    adInfo: null, // 用户位置信息,
+    questionCatetory: [
+      {id: 1, name: "劳动纠纷"},
+      {id: 2, name: "地产纠纷"},
+      {id: 3, name: "经济纠纷"},
+      {id: 4, name: "合同纠纷"}
+    ],
     scene: ''
   },
   onLaunch(e) {
@@ -100,6 +106,7 @@ App({
   },
   // 获取用户经纬度
   getUserLocation(cb) {
+    let _t = this
     wx.getLocation({
       type: 'wgs84',
       success: res => {

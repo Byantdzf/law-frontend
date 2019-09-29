@@ -113,20 +113,24 @@ Page({
     app.setNavTitle('虎甲律师咨询平台')
     app.getUserLocation(data => {
       const adInfo = data.adInfo || {}
+      console.log(adInfo)
       this.setData({
         curCity: adInfo.city || ''
       })
+
+      // 获取地址完成以后再判断授权
+      page = this.selectComponent('#app-page')
+      page.checkAuth().then((data) => {
+        // 授权成功
+        console.log('index auth')
+        console.log(data)
+      }).catch((e) => {
+        // 授权失败
+        console.log('index auth reject')
+        console.log(e)
+      });
+
     })
-    page = this.selectComponent('#app-page')
-    page.checkAuth().then((data) => {
-      // 授权成功
-      console.log('index auth')
-      console.log(data)
-    }).catch((e) => {
-      // 授权失败
-      console.log('index auth reject')
-      console.log(e)
-    });
   },
 
   onShow() {
@@ -154,5 +158,6 @@ Page({
   },
   tapTools(e) {
     let { url } = e.currentTarget.dataset
+    app.gotoPage(url)
   }
 })

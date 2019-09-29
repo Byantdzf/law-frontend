@@ -1,5 +1,5 @@
 
-const { post, postJson } = require('../utils/ajax.js')
+const { post, postJson, get } = require('../utils/ajax.js')
 
 module.exports = {
   /**
@@ -8,9 +8,17 @@ module.exports = {
    * @param[String]  password   密码
    * @param[String]  code       小程序登录code
   */
-  login: params => postJson('/applets/lawyer/login', params, { auth: false, loading: false }),
+  login: params => get('/applets/lawyer/login', params, { auth: false, loading: false }),
 
-  getUserInfo: params => post('/api/getUserInfo', params),
+  /**
+   * 保存用户信息
+   */
+  getUserInfo: params => postJson('/applets/lawyer/updateLoginInfo/1', params),
 
-  save: params => post('/api/saveUserInfo', params)
+  save: params => post('/api/saveUserInfo', params),
+
+  /**
+   * 查询用户注册状态
+   */
+  getRegisterStatus: params => get('/applets/user/consult/publish/page', params)
 }

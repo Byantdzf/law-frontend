@@ -50,7 +50,7 @@ const ajax = (_options = {}) => {
     const token = wx.getStorageSync(tokenName)
 
     if (auth) {
-      header["Authorization"] = "Bear " + token
+      header["Authorization"] = "Bearer " + token
     }
 
     if (path.indexOf('http:') > -1 || path.indexOf('https:') > -1) {
