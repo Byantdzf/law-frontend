@@ -17,12 +17,7 @@ App({
     },
     userInfo: null, // 用户信息
     adInfo: null, // 用户位置信息,
-    questionCatetory: [
-      {id: 1, name: "劳动纠纷"},
-      {id: 2, name: "地产纠纷"},
-      {id: 3, name: "经济纠纷"},
-      {id: 4, name: "合同纠纷"}
-    ],
+    smsCount: 10, // 再次发短信间隔时间
     scene: ''
   },
   onLaunch(e) {

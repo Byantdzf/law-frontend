@@ -14,8 +14,11 @@
 .issueBox { margin: 0 30rpx;}
 .issue-title { font-size: 30rpx; font-weight: bold; margin-bottom: 20rpx;}
 .issue-form-label { width:160rpx; color:#999;}
-.issue-form-item { border-bottom: 1rpx solid #e8e8e8; padding: 40rpx 0;}
+.issue-form-item { border-bottom: 1rpx solid #e8e8e8; padding: 20rpx 0;}
+.issue-form-item .issue-form-input { height:70rpx; line-height: 70rpx;}
 .issue-form-item textarea { min-height: 200rpx; width: 100%;}
-.issueBox .radio { margin-right: 50rpx;}
+.issue-form-item input { height:100%; border:none;}
+.issueBox .radio { margin-left: 50rpx;}
 .issueBox .form-btn-box button { width:100%;}
 
+.issueBox .isRegLabel { width: 320rpx;}

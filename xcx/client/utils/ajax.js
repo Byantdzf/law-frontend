@@ -72,7 +72,7 @@ const ajax = (_options = {}) => {
             default:
               toast &&
               wx.showToast({
-                title: data.errmsg || '加载失败',
+                title: data.data || data.msg || '加载失败',
                 icon: 'none',
                 duration: 2000
               })
@@ -147,9 +147,26 @@ const postJson = (path, params, options) => ajax({
   contentType: 'application/json'
 })
 
+const put = (path, params, options) => ajax({
+  path,
+  params,
+  ...options,
+  method: 'put'
+})
+
+const putJson = (path, params, options) => ajax({
+  path,
+  params,
+  ...options,
+  method: 'put',
+  contentType: 'application/json'
+})
+
 module.exports = {
   ajax,
   get,
   post,
-  postJson
+  postJson,
+  put,
+  putJson
 }
