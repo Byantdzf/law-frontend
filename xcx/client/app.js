@@ -12,12 +12,12 @@ let reverseColor = '#ffffff'
 App({
   globalData: {
     defaultLocation: {
-      // latitude: 22.55,
-      // longitude: 114.05
+      latitude: 22.55,
+      longitude: 114.05
     },
     userInfo: null, // 用户信息
     adInfo: null, // 用户位置信息,
-    smsCount: 10, // 再次发短信间隔时间
+    smsCount: 60, // 再次发短信间隔时间
     scene: ''
   },
   onLaunch(e) {

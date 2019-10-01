@@ -4,8 +4,31 @@
     </view>
     <view class="noticeFonts">
         <view>恭喜您！您已提交成功</view>
-        <view>何金宝律师会在第一时间进行解答</view>
-        <view>请及时留意信息通知。</view>
+        <view wx:if="{{type == 4}}">
+            <view class="downloadFaild cl-999" wx:if="{{dowloadFailed}}">下载失败</view>
+            <view class="downloadBox" wx:if="{{!downloadDisabled}}">
+                <button class="app-input-btn bg-primary cl-white" disabled="{{downloadDisabled}}" bindtap="downloadFiles">
+                    点击下载
+                </button>
+            </view>
+            <view class="downloadProgress" wx:else>
+                <view wx:if="{{progress < 100}}">
+                    <progress percent="{{progress}}" />
+                    <text class="progress" wx:if="{{ progress > 0}}">{{written}} / {{expected}}</text>
+                    <button class="app-input-btn bg-f8" bindtap="cancelDownload">取消下载</button>
+                </view>
+                <view bindtap="viewFiles" wx:else>
+                下载完成，<text class="cl-red">点击查看</text>
+                </view>
+            </view>
+            <view bindtap="gotoFileList">
+                查看已购买的文件，<text class="cl-red">立即前往》</text>
+            </view>
+        </view>
+        <view wx:else>
+            <view>系统会在第一时间安排律师进行解答</view>
+            <view>请及时留意信息通知。</view>
+        </view>
     </view>
     <view class="btnBox">
         <button class="app-input-btn" bindtap="goHome">返回首页</button>

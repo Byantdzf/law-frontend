@@ -3,6 +3,7 @@ const app = getApp()
 const api = require('../../../service/auth')
 const selectApi = require('../../../service/select')
 const userApi = require('../../../service/users')
+let page = null
 
 Page({
 
@@ -11,6 +12,7 @@ Page({
      */
     data: {
         regStatus: 1,
+        btnDisable: true,
         emergencyRadio: [
             { id: 1, name: "是", checked: true },
             { id: 0, name: "否" }
@@ -44,6 +46,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      page = this.selectComponent('#app-page')
+      page.checkAuth().then((data) => {
+        // 授权成功
+        this.setData({btnDisable: false})
+
         // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
         api.getRegisterStatus().then(res => {
             let useCurrentPhone = null
@@ -61,6 +68,10 @@ Page({
                 questionType: res.data
             })
         })
+      }).catch((e) => {
+        // 授权失败
+        this.setData({btnDisable: true})
+      });
     },
     proviceChange(e) {
         // this.setData({
@@ -136,6 +147,9 @@ Page({
         })
     },
     formSubmit(e) {
+        // 测试流程
+        app.gotoPage('/pages/issue/success/index?type=1')
+        return 
         let params = e.detail.value
         if (!params.customerRequirement || params.customerRequirement.length < 10) {
             app.toastError('问题不能少于10个字')
@@ -184,7 +198,7 @@ Page({
         console.log(params)
         userApi.postVoice(params).then(res => {
             console.log(res)
-            // app.gotoPage('/pages/lawyer/success/index')
+            app.gotoPage('/pages/issue/success/index?type=1')
         })
     },
     getCityResult(e) {

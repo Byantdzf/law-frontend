@@ -4,3 +4,12 @@
 .noticeFonts view { line-height: 2; font-size: 36rpx;}
 .btnBox { position: fixed; left:30rpx; right:30rpx; bottom:30rpx;}
 .btnBox button { width:100%; border-radius: 50rpx; border:none; background:#09BB07; color: #fff;}
+.downloadProgress,
+.downloadBox { margin: 40rpx 0;}
+.downloadProgress button,
+.downloadBox button { width: 400rpx;}
+
+.downloadProgress { margin: 40rpx; position: relative;}
+.downloadProgress .progress { font-size: 24rpx; position: absolute; left:0; right:0; text-align: center; top:-20rpx;}
+.downloadProgress button { margin-top:40rpx;}
+.downloadFaild { margin-top: 30rpx;}
