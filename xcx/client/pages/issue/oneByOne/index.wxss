@@ -1,1 +1,2 @@
 /* pages/issue/oneByOne/index.wxss */
+@import "/static/css/issue.wxss";

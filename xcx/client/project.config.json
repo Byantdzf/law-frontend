@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": 2,
@@ -96,6 +96,13 @@
 					"name": "success",
 					"pathName": "pages/issue/success/index",
 					"query": "type=4",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "issueOneByOne",
+					"pathName": "pages/issue/oneByOne/index",
+					"query": "type=1",
 					"scene": null
 				}
 			]

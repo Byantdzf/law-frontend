@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "一对一咨询",
+  "usingComponents": {
+    "app-cityPicker": "/components/app-cityPicker/index"
+  }
 }
