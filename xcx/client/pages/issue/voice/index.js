@@ -2,7 +2,7 @@
 const app = getApp()
 const api = require('../../../service/auth')
 const selectApi = require('../../../service/select')
-const userApi = require('../../../service/users')
+const userApi = require('../../../service/user')
 let page = null
 
 Page({
@@ -62,7 +62,7 @@ Page({
                 regStatus: res.data
             })
         })
-        // 获取用户注册状态
+        // 获取问题类型
         selectApi.getQuestionType().then(res => {
             this.setData({
                 questionType: res.data
@@ -72,11 +72,6 @@ Page({
         // 授权失败
         this.setData({btnDisable: true})
       });
-    },
-    proviceChange(e) {
-        // this.setData({
-        //     city: e.detail.value
-        // })
     },
     questionChange(e) {
         this.setData({
@@ -131,7 +126,7 @@ Page({
             app.toastError('请输入正确的手机号码');
             return;
         }
-        // 获取用户注册状态
+        // 发送短信验证码
         selectApi.getSmsCode({phone: this.data.validateMobile}).then(res => {
             this.countTimes('countVal', 'waitValidateCode')
         })
@@ -141,7 +136,7 @@ Page({
             app.toastError('请输入正确的手机号码');
             return;
         }
-        // 获取用户注册状态
+        // 发送短信验证码
         selectApi.getSmsCode({phone: this.data.registerMobile}).then(res => {
             this.countTimes('countReg', 'waitRegisterCode')
         })

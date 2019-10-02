@@ -5,8 +5,6 @@
     "pages/tabBar/lawyer/index",
     "pages/tabBar/message/index",
     "pages/tabBar/user/index",
-    "pages/legalServices/list/index",
-    "pages/mandatoryLawyer/list/index",
     "pages/template/list/index"
   ],
   "subPackages": [
@@ -20,6 +18,20 @@
     {
       "root": "pages/order",
       "pages": [
+        "detail/index"
+      ]
+    },
+    {
+      "root": "pages/legalServices",
+      "pages": [
+        "list/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "pages/mandatoryLawyer",
+      "pages": [
+        "list/index",
         "detail/index"
       ]
     },

@@ -1,66 +1,140 @@
 // pages/issue/legalServices/index.js
+const app = getApp()
+const api = require('../../../service/auth')
+const selectApi = require('../../../service/select')
+const userApi = require('../../../service/user')
+const legalServices = require('../../../static/data/legalServices')
+let page = null
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        regStatus: 1,
+        btnDisable: true,
+        selectAmount: '100',
+        selectCode: [],
+        validateCode: null,
+        validateMobile: null,
+        waitValidateCode: null,
+        countVal: app.globalData.smsCount,
+        countReg: app.globalData.smsCount,
+        details: {},
+        selectDate: ''
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        let { id } = options
+        page = this.selectComponent('#app-page')
+        page.checkAuth().then((data) => {
+            // 授权成功
+            this.setData({ btnDisable: false })
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+            this.setData({
+                details: legalServices.default.details,
+                id
+            })
 
-  },
+            // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
+            api.getRegisterStatus().then(res => {
+                this.setData({
+                    regStatus: res.data
+                })
+            })
+        }).catch((e) => {
+            // 授权失败
+            this.setData({ btnDisable: true })
+        });
+    },
+    setValidateMobie(e) {
+        let { value } = e.detail
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+        this.setData({
+            validateMobile: value
+        })
+    },
+    getValidateCode() {
+        if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(this.data.validateMobile)) {
+            app.toastError('请输入正确的手机号码');
+            return;
+        }
+        // 获取用户注册状态
+        selectApi.getSmsCode({ phone: this.data.validateMobile }).then(res => {
+            this.countTimes('countVal', 'waitValidateCode')
+        })
+    },
+    bindDateChange(e) {
+        let { value } = e.detail
+        this.setData({
+            selectDate: value
+        })
+    },
+    formSubmit(e) {
+        // 测试流程
+        // app.gotoPage('/pages/issue/success/index?type=1')
+        // return 
+        let params = e.detail.value
+        if (!params.userName) {
+            app.toastError('请输入您的姓名')
+            return
+        }
+        if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.contactMobile)) {
+            app.toastError('请输入正确的手机号码');
+            return;
+        }
+        if (!params.validateCode) {
+            app.toastError('请输入验证码');
+            return;
+        }
+        if (!this.data.selectCode.length) {
+            app.toastError('请选择地区');
+            return;
+        }
+        params.amount = this.data.selectAmount
+        params.provice = this.data.selectCode[0]
+        params.city = this.data.selectCode[0]
+        if (app.globalData.adInfo) {
+            params.locationX = app.globalData.adInfo.location.lng
+            params.locationY = app.globalData.adInfo.location.lat
+        }
+        console.log(params)
+        userApi.postOneByOne(params).then(res => {
+            console.log(res)
+            app.gotoPage('/pages/issue/success/index?type=1')
+        })
+    },
+    getCityResult(e) {
+        let arr = e.detail
+        this.setData({
+            selectCode: [arr[0].code, arr[1].code]
+        })
+    },
+    countTimes(field, statusField) {
+        let _t = this
+        // 显示倒计时
+        let data = _t.data
+        data[statusField] = 1
+        _t.setData(data)
+        let timer = null;
+        let t = _t.data[field]
+        timer = setInterval(function () {
+            t--;
+            if (t == 0) {
+                clearInterval(timer);
+                let data = _t.data
+                data[statusField] = ''
+                data[field] = app.globalData.smsCount
+                _t.setData(data)
+            } else {
+                let data = _t.data
+                data[field] = t
+                _t.setData(data)
+            }
+        }, 1000);
+    }
 })

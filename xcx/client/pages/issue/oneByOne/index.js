@@ -2,7 +2,7 @@
 const app = getApp()
 const api = require('../../../service/auth')
 const selectApi = require('../../../service/select')
-const userApi = require('../../../service/users')
+const userApi = require('../../../service/user')
 let page = null
 
 Page({
@@ -22,9 +22,7 @@ Page({
             { id: 0, name: "否" }
         ],
         emergency: 1,
-        questionType: [],
-        selectQuestionType: '',
-        selectAmount: '',
+        selectAmount: '100',
         useCurrentPhone: null,  // 是否使用当前手机号进行注册 1-是，0 -否，不填表示当前用户已经注册
         selectCode: [],
         validateCode: null,
@@ -34,12 +32,7 @@ Page({
         waitValidateCode: null,
         waitRegisterCode: null,
         countVal: app.globalData.smsCount,
-        countReg: app.globalData.smsCount,
-        amountList: [
-            { id: 1, name: "30元", value: "30" },
-            { id: 2, name: "50元", value: "50" },
-            { id: 3, name: "100元", value: "100" }
-        ],
+        countReg: app.globalData.smsCount
     },
 
     /**
@@ -62,31 +55,10 @@ Page({
                 regStatus: res.data
             })
         })
-        // 获取用户注册状态
-        selectApi.getQuestionType().then(res => {
-            this.setData({
-                questionType: res.data
-            })
-        })
       }).catch((e) => {
         // 授权失败
         this.setData({btnDisable: true})
       });
-    },
-    proviceChange(e) {
-        // this.setData({
-        //     city: e.detail.value
-        // })
-    },
-    questionChange(e) {
-        this.setData({
-            selectQuestionType: this.data.questionType[e.detail.value]
-        })
-    },
-    amountChange(e) {
-        this.setData({
-            selectAmount: this.data.amountList[e.detail.value]
-        })
     },
     radioChange(e) {
         let { value } = e.detail
@@ -151,17 +123,9 @@ Page({
         // app.gotoPage('/pages/issue/success/index?type=1')
         // return 
         let params = e.detail.value
-        if (!params.customerRequirement || params.customerRequirement.length < 10) {
-            app.toastError('问题不能少于10个字')
+        if (!params.userName) {
+            app.toastError('请输入您的姓名')
             return
-        }
-        if(!this.data.selectQuestionType){
-            app.toastError('请选择所属问题');
-            return;
-        }
-        if(!this.data.selectCode.length){
-            app.toastError('请选择地区');
-            return;
         }
         if(!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.contactMobile)){
             app.toastError('请输入正确的手机号码');
@@ -171,8 +135,8 @@ Page({
             app.toastError('请输入验证码');
             return;
         }
-        if(!this.data.selectAmount){
-            app.toastError('请选择支付金额');
+        if(!this.data.selectCode.length){
+            app.toastError('请选择地区');
             return;
         }
         if(this.data.useCurrentPhone === '0'){
@@ -185,8 +149,7 @@ Page({
                 return;
             }
         }
-        params.questionType = this.data.selectQuestionType.key
-        params.amount = this.data.selectAmount.value
+        params.amount = this.data.selectAmount
         params.emergency = this.data.emergency
         params.useCurrentPhone = this.data.useCurrentPhone
         params.provice = this.data.selectCode[0]
@@ -196,7 +159,7 @@ Page({
           params.locationY = app.globalData.adInfo.location.lat
         }
         console.log(params)
-        userApi.postVoice(params).then(res => {
+        userApi.postOneByOne(params).then(res => {
             console.log(res)
             app.gotoPage('/pages/issue/success/index?type=1')
         })

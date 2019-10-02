@@ -1,2 +1,94 @@
-<!--pages/issue/legalServices/index.wxml-->
-<text>pages/issue/legalServices/index.wxml</text>
+<!-- pages/issue/legalServices/index.wxml -->
+<app-page id="app-page">
+    <view class="pa-20 home-list">
+        <view class="issueBox">
+            <form bindsubmit="formSubmit">
+                <view class="issue-title">{{details.title}}</view>
+                <view class="issue-form">
+                    <view class="issue-form-item">
+                        <textarea name="requirement" auto-height placeholder="请填写我的要求" />
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="area flex-bd">
+                                <picker mode="date" value="{{selectDate}}" start="2019-09-10" end="2019-11-01" bindchange="bindDateChange">
+                                    <view class="picker" wx:if="{{selectDate}}">
+                                        交付期限：{{selectDate}}
+                                    </view>
+                                    <view class="picker" wx:else>请选择交付期限</view>
+                                </picker>
+                            </view>
+                            <view>
+                                <text class="cl-999 iconfont icon-arrow-right"></text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="area flex-bd">
+                                <app-cityPicker selectCode="{{selectCode}}" bind:change="getCityResult"></app-cityPicker>
+                            </view>
+                            <view>
+                                <text class="cl-999 iconfont icon-arrow-right"></text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex">
+                        <view class="issue-form-input flex-bd">
+                            <input class="app-input" type="number" name="contactMobile" bindblur="setValidateMobie" placeholder="请输入您的手机号码"></input>
+                        </view>
+                        <view>
+                            <text class="sendSMS cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">
+                                获取验证码
+                            </text>
+                            <text class="cl-999" wx:else>重新发送({{countVal}})</text>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex">
+                        <view class="issue-form-input">
+                            <input class="app-input" type="text" name="validateCode" placeholder="请输入验证码"></input>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="amount flex-bd">
+                                <view>
+                                    金额：
+                                    <text class="cl-red">{{selectAmount}}元/次</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <textarea name="remark" auto-height placeholder="请填写备注说明" />
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="amount flex-bd">
+                                <view>
+                                    使用优惠券：
+                                    <text class="cl-red">{{selectAmount}}元/次</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="amount flex-bd">
+                                <view>
+                                    合计费用：
+                                    <text class="cl-red">{{selectAmount}}元</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item form-btn-box">
+                        <button class="app-input-btn" size="mini" disabled="{{btnDisable}}" plain form-type="submit">
+                            确定提交
+                        </button>
+                    </view>
+                </view>
+            </form>
+        </view>
+    </view>
+</app-page>

@@ -3,34 +3,11 @@
     <view class="pa-20 home-list">
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-            <view class="issue-title">语音咨询发布</view>
+            <view class="issue-title">一对一咨询发布</view>
             <view class="issue-form">
-                <view class="issue-form-item">
-                    <textarea name="customerRequirement" auto-height placeholder="请在此输入您想咨询的问题（不少于10个字）" />
-                </view>
-                <view class="issue-form-item">
-                    <view class="issue-form-input flex">
-                        <view class="question flex-bd">
-                            <picker class="picker" bindchange="questionChange" value="{{index}}" range="{{questionType}}" range-key="value">
-                                <view wx:if="{{selectQuestionType}}">
-                                    所属问题：{{selectQuestionType.value}}
-                                </view>
-                                <view wx:else>请选择所属问题</view>
-                            </picker>
-                        </view>
-                        <view>
-                            <text class="cl-999 iconfont icon-arrow-right"></text>
-                        </view>
-                    </view>
-                </view>
-                <view class="issue-form-item">
-                    <view class="issue-form-input flex">
-                        <view class="area flex-bd">
-                            <app-cityPicker selectCode="{{selectCode}}" bind:change="getCityResult"></app-cityPicker>
-                        </view>
-                        <view>
-                            <text class="cl-999 iconfont icon-arrow-right"></text>
-                        </view>
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="text" name="userName" placeholder="请输入您的姓名"></input>
                     </view>
                 </view>
                 <view class="issue-form-item flex">
@@ -49,14 +26,18 @@
                 </view>
                 <view class="issue-form-item">
                     <view class="issue-form-input flex">
-                        <view class="amount flex-bd">
-                            <picker class="picker" bindchange="amountChange" value="{{index}}" range="{{amountList}}" range-key="name">
-                                <view wx:if="{{selectAmount}}">金额：{{selectAmount.name}}</view>
-                                <view wx:else>请选择支付金额</view>
-                            </picker>
+                        <view class="area flex-bd">
+                            <app-cityPicker selectCode="{{selectCode}}" bind:change="getCityResult"></app-cityPicker>
                         </view>
                         <view>
                             <text class="cl-999 iconfont icon-arrow-right"></text>
+                        </view>
+                    </view>
+                </view>
+                <view class="issue-form-item">
+                    <view class="issue-form-input flex">
+                        <view class="amount flex-bd">
+                                <view>金额：<text class="cl-red">{{selectAmount}}元/次</text></view>
                         </view>
                     </view>
                 </view>

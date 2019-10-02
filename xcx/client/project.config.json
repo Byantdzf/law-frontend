@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 12,
 			"list": [
 				{
 					"id": 2,
@@ -103,6 +103,27 @@
 					"name": "issueOneByOne",
 					"pathName": "pages/issue/oneByOne/index",
 					"query": "type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "legalServices",
+					"pathName": "pages/legalServices/list/index",
+					"query": "type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "legalServicesDetail",
+					"pathName": "pages/legalServices/detail/index",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "issueLegalServices",
+					"pathName": "pages/issue/legalServices/index",
+					"query": "id=1",
 					"scene": null
 				}
 			]

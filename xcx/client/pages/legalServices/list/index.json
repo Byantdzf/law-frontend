@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "虎甲律师问答",
+  "backgroundColor": "#f3f3f3",
+  "usingComponents": {
+    "app-tab":"../../../../components/app-tab/index"
+  }
 }
