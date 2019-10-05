@@ -4,7 +4,7 @@
     </view>
     <view class="noticeFonts">
         <view>恭喜您！您已提交成功</view>
-        <view wx:if="{{type == 4}}">
+        <view wx:if="{{type == 5}}">
             <view class="downloadFaild cl-999" wx:if="{{dowloadFailed}}">下载失败</view>
             <view class="downloadBox" wx:if="{{!downloadDisabled}}">
                 <button class="app-input-btn bg-primary cl-white" disabled="{{downloadDisabled}}" bindtap="downloadFiles">
@@ -24,6 +24,10 @@
             <view bindtap="gotoFileList">
                 查看已购买的文件，<text class="cl-red">立即前往》</text>
             </view>
+        </view>
+        <view wx:elif="{{type == 3 || type == 4}}">
+            <view>系统会在第一时间安排律师为您提供服务</view>
+            <view>请及时留意信息通知。</view>
         </view>
         <view wx:else>
             <view>系统会在第一时间安排律师进行解答</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "虎甲平台委托服务协议",
+  "usingComponents": {
+    "app-text": "/components/app-text/index"
+  }
+}

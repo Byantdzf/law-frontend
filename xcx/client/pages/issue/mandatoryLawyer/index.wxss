@@ -1,1 +1,2 @@
 /* pages/issue/mandatoryLawyer/index.wxss */
+@import "/static/css/issue.wxss";

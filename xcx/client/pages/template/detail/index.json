@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "协议模板",
+  "usingComponents": {
+    "app-text": "/components/app-text/index"
+  }
+}

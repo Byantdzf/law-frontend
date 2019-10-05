@@ -5,7 +5,7 @@
     "pages/tabBar/lawyer/index",
     "pages/tabBar/message/index",
     "pages/tabBar/user/index",
-    "pages/template/list/index"
+    "pages/news/agreement/index"
   ],
   "subPackages": [
     {
@@ -23,6 +23,13 @@
     },
     {
       "root": "pages/legalServices",
+      "pages": [
+        "list/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "pages/template",
       "pages": [
         "list/index",
         "detail/index"

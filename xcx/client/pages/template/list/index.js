@@ -1,66 +1,43 @@
 // pages/template/list/index.js
+const app = getApp();
+const template = require('../../../static/data/template')
+const selectApi = require('../../../service/select')
 Page({
+    data: {
+        type: 1,
+        list: [],
+        types: [{
+            key: 0,
+            value: '全部'
+        }],
+    },
+    onLoad(e) {
+        let { type } = e
+        app.pages.add(this)
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+        // 获取问题类型
+        selectApi.getQuestionType().then(res => {
+            let types = [...this.data.types, ...res.data]
+            types.forEach(item => {
+                item.id = item.key
+                item.name = item.value
+            })
+            this.setData({
+                types
+            })
+        })
 
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+        this.setData({
+            list: template.default.list,
+            type
+        })
+    },
+    showDetails(e) {
+        let { id } = e.currentTarget.dataset
+        app.gotoPage('/pages/template/detail/index?id=' + id)
+    },
+    buyNow(e) {
+        let { id } = e.currentTarget.dataset
+        app.gotoPage('/pages/issue/success/index?type=5')
+    }
 })

@@ -28,7 +28,7 @@ Page({
         let _t = this
         _t.setData({ downloadDisabled: true })
         const downloadTask = wx.downloadFile({
-            // 示例 url，并非真实存在
+            // 示例 url
             url: 'http://www.idec.com/language/chinese_s/AO/B-1944(2)_C.pdf',
             success (res) {
                 _t.setData({

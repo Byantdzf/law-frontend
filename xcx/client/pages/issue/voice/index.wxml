@@ -48,7 +48,7 @@
                 </view>
                 <view class="issue-form-item">
                     <view class="issue-form-input flex">
-                        <view class="amount flex-bd">
+                        <view class="flex-bd">
                             <picker class="picker" bindchange="amountChange" value="{{index}}" range="{{amountList}}" range-key="name">
                                 <view wx:if="{{selectAmount}}">金额：{{selectAmount.name}}</view>
                                 <view wx:else>请选择支付金额</view>

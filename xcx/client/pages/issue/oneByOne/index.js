@@ -120,7 +120,7 @@ Page({
     },
     formSubmit(e) {
         // 测试流程
-        // app.gotoPage('/pages/issue/success/index?type=1')
+        // app.gotoPage('/pages/issue/success/index?type=2')
         // return 
         let params = e.detail.value
         if (!params.userName) {
@@ -161,7 +161,7 @@ Page({
         console.log(params)
         userApi.postOneByOne(params).then(res => {
             console.log(res)
-            app.gotoPage('/pages/issue/success/index?type=1')
+            app.gotoPage('/pages/issue/success/index?type=2')
         })
     },
     getCityResult(e) {

@@ -1,2 +1,103 @@
-<!--pages/issue/mandatoryLawyer/index.wxml-->
-<text>pages/issue/mandatoryLawyer/index.wxml</text>
+<!-- pages/issue/mandatoryLawyer/index.wxml -->
+<app-page id="app-page">
+    <view class="pa-20 home-list">
+        <view class="issueBox">
+            <form bindsubmit="formSubmit">
+                <view class="issue-title">{{details.title}}</view>
+                <view class="issue-form">
+                    <view class="issue-form-item">
+                        <textarea name="requirement" auto-height placeholder="请填写我的要求" />
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="area flex-bd">
+                                <app-cityPicker selectCode="{{selectCode}}" bind:change="getCityResult"></app-cityPicker>
+                            </view>
+                            <view>
+                                <text class="cl-999 iconfont icon-arrow-right"></text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex">
+                        <view class="issue-form-input flex-bd">
+                            <input class="app-input" type="number" name="contactMobile" bindblur="setValidateMobie" placeholder="请输入您的手机号码"></input>
+                        </view>
+                        <view>
+                            <text class="sendSMS cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">
+                                获取验证码
+                            </text>
+                            <text class="cl-999" wx:else>重新发送({{countVal}})</text>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex">
+                        <view class="issue-form-input">
+                            <input class="app-input" type="text" name="validateCode" placeholder="请输入验证码"></input>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex" wx:if="{{regStatus == 1}}">
+                        <view class="issue-form-label flex-bd">是否用当前手机注册</view>
+                        <view class="issue-form-input">
+                            <radio-group class="radio-group" bindchange="regMobileChange">
+                                <radio class="radio" wx:for="{{ regRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
+                                    <text>{{item.name}}</text>
+                                </radio>
+                            </radio-group>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex" wx:if="{{regStatus == 1 && useCurrentPhone == 0}}">
+                        <view class="issue-form-input flex-bd">
+                            <input class="app-input" type="number" name="registerPhone" bindblur="setRegisterMobile" placeholder="请输入注册手机号码"></input>
+                        </view>
+                        <view>
+                            <text class="sendSMS cl-primary" bindtap="getRegisterValidateCode" wx:if="{{!waitRegisterCode}}">获取验证码</text>
+                            <text class="cl-999" wx:else>重新发送({{countReg}})</text>
+                        </view>
+                    </view>
+                    <view class="issue-form-item flex" wx:if="{{regStatus == 1 && useCurrentPhone == 0}}">
+                        <view class="issue-form-input">
+                            <input class="app-input" type="text" name="registerValidateCode" placeholder="请输入验证码"></input>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="amount flex-bd">
+                                <view>
+                                    金额：
+                                    <text class="cl-red">{{selectAmount}}元/次</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <textarea name="remark" auto-height placeholder="请填写备注说明" />
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="amount flex-bd">
+                                <checkbox-group bindchange="checkboxChange">
+                                    <label class="checkbox cl-primary">
+                                        <checkbox value="1" />
+                                        <icon class="iconfont icon-check"></icon>
+                                        确认同意<text catchtap="showAgreement">《虎甲平台委托服务协议》</text>
+                                    </label>
+                                </checkbox-group>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item">
+                        <view class="issue-form-input flex">
+                            <view class="cl-primary flex-bd">
+                                <text>说明：下单后平台工作人员会跟您确认。</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="issue-form-item form-btn-box">
+                        <button class="app-input-btn" size="mini" disabled="{{btnDisable}}" plain form-type="submit">
+                            立即下单
+                        </button>
+                    </view>
+                </view>
+            </form>
+        </view>
+    </view>
+</app-page>

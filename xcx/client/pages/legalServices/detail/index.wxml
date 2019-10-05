@@ -1,0 +1,34 @@
+<app-page id="app-page">
+    <view class="container">
+        <view class="title">{{ details.title }}</view>
+        <view class="baseInfo">
+            <view class="items flex">
+                <view class="flex-ft">
+                    <text class="cl-999">价格：</text>
+                </view>
+                <view class="flex-bd">
+                    <text>{{details.price}}元/次</text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="flex-ft">
+                    <text class="cl-999">销售量：</text>
+                </view>
+                <view class="flex-bd">
+                    <text>{{details.sold}}</text>
+                </view>
+            </view>
+            <view class="orderList">
+                <view class="tit">服务说明</view>
+                <app-text datatext="{{ details.desc }}"></app-text>
+            </view>
+            <view class="orderList">
+                <view class="tit">适用范围</view>
+                <app-text datatext="{{ details.range }}"></app-text>
+            </view>
+        </view>
+        <view class="btn-box">
+            <button size="mini" plain catch:tap="buyNow">立即购买</button>
+        </view>
+    </view>
+</app-page>

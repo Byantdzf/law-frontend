@@ -2,7 +2,7 @@
 <app-page id="app-page">
     <view class="flex-column container page-lawyer">
         <view class="tab-bar">
-            <app-tab items="{{ types }}" />
+            <app-tab items="{{ types }}" current="{{ type }}" />
         </view>
         <view class="flex-bd app-scroller">
             <view class="intro">

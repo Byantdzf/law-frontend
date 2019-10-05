@@ -76,25 +76,25 @@ Page({
       }, {
         name1: '非诉讼',
         name2: '服务',
-        url: '/pages/legalServices/list/index',
+        url: '/pages/legalServices/list/index?type=1',
         icon: 'icon-feisusongzhuanxiang',
         iconBg: '#00b0ab'
       }, {
         name1: '诉讼',
         name2: '服务',
-        url: '/pages/legalServices/list/index',
+        url: '/pages/legalServices/list/index?type=2',
         icon: 'icon-susong',
         iconBg: '#F64335'
       }, {
         name1: '收费',
         name2: '委托',
-        url: '/pages/mandatoryLawyer/list/index',
+        url: '/pages/mandatoryLawyer/list/index?type=1',
         icon: 'icon-shoufei',
         iconBg: '#FFD200'
       }, {
         name1: '风险',
         name2: '委托',
-        url: '/pages/mandatoryLawyer/list/index',
+        url: '/pages/mandatoryLawyer/list/index?type=2',
         icon: 'icon-fengxian',
         iconBg: '#F9879A'
       }, {
