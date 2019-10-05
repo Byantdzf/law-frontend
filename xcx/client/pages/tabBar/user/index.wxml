@@ -1,34 +1,60 @@
-<!-- pages/tabBar/user/index.wxml -->
+<!-- pages/tabBar/search/index.wxml -->
 <app-page id="app-page">
-  <view class="panel-user bg-f3">
-    <view class="app-cells panel-user--hd bg-primary">
-      <view class="app-cell ta-c">
-        <view class="app-cell__bd">
-          <view class="img-box">
-            <image class="userimg" src="{{ userInfos.photo }}" wx:if="{{ userInfos.photo }}"></image>
-            <open-data class="userimg" type="userAvatarUrl" wx:else></open-data>
-          </view>
-          <view class="username">
-            <text wx:if="{{ userInfos.userName }}">{{ userInfos.userName }}</text>
-            <open-data class="username" type="userNickName" wx:else></open-data>
-          </view>
+    <view class="container">
+        <view class="user-head">
+            <image class="user-bg" src="/static/images/userBg.jpg" mode="widthFix" />
+            <view class="flex">
+                <view class="user-avatar">
+                    <image src="{{userInfos.portrait}}" mode="widthFix" />
+                </view>
+                <view class="user-fonts flex-bd">
+                    <view class="user-name">{{userInfos.name}}</view>
+                    <view class="user-mobile">{{userInfos.mobile}}</view>
+                </view>
+            </view>
+            <!-- <view class="user-setting" data-code="setting" bindtap="tapTools">
+                <text class="iconfont icon-setting-fill"></text>
+            </view> -->
         </view>
-      </view>
-      <view class="cr cr-l"></view>
-      <view class="cr cr-r"></view>
-    </view>
-    <view class="panel-user--bd mt-20">
-      <view class="app-cells">
-        <view class="app-cell" wx:for="{{ menus }}" wx:key="{{ index }}">
-          <view class="flex-hd pl-20">
-            <text class="{{ item.icon }}"></text>
-          </view>
-          <view class="flex-bd pl-10">{{ item.label }}</view>
-          <view class="flex-ft pr-30">
-            <text class="iconfont icon-arrow-right"></text>
-          </view>
+        <view class="user-order">
+            <view class="user-order-title flex" bindtap="gotoOrder">
+                <view class="flex-bd">我的订单</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="user-order-type flex">
+                <view class="flex-bd" data-state="1" bindtap="gotoOrder">
+                    <image src="/static/images/icon1.png" mode="widthFix" />
+                    待接单
+                </view>
+                <view class="flex-bd" data-state="2" bindtap="gotoOrder">
+                    <image src="/static/images/icon2.png" mode="widthFix" />
+                    待支付
+                </view>
+                <view class="flex-bd" data-state="3" bindtap="gotoOrder">
+                    <image src="/static/images/icon3.png" mode="widthFix" />
+                    待评价
+                </view>
+                <view class="flex-bd" data-state="4" bindtap="gotoOrder">
+                    <image src="/static/images/icon4.png" mode="widthFix" />
+                    已完成
+                </view>
+            </view>
         </view>
-      </view>
+        <view class="list">
+            <view class="items flex" wx:for="{{ tools }}" wx:key="{{index}}" data-code="{{ item.code }}" bind:tap="tapTools">
+                <view class="item-icon">
+                    <text class="iconfont {{ item.icon }}"></text>
+                </view>
+                <view class="flex-bd">{{ item.title }}</view>
+                <view class="item-right">
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+        </view>
+        <view class="logout-btn">
+            <button class="app-input-btn" size="mini" plain bindtap="logout">退出登录</button>
+        </view>
     </view>
-  </view>
 </app-page>

@@ -1,0 +1,34 @@
+<!--pages/user/collect/index.wxml-->
+<app-page id="app-page">
+  <view class="flex-column">
+        <view class="pa-20 home-list">
+          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
+            <view class="img-box">
+              <image src="{{ item.imgUrl }}" mode="widthFix"></image>
+            </view>
+            <view class="flex-bd pl-20">
+              <view class="flex">
+                <view class="flex-bd name">{{ item.name }}</view>
+                <view class="flex-ft score cl-red">{{ item.score }}分</view>
+              </view>
+              <view class="desc cl-666">{{ item.desc }}</view>
+              <view class="flex">
+                <view class="flex-bd">
+                  <text class="cl-999">帮助人数：</text>
+                  <text class="cl-666">{{ item.helpers }}人</text>
+                </view>
+                <view class="flex-ft">
+                  <text class="cl-999">关注人数：</text>
+                  <text class="cl-666">{{ item.followers }}人</text>
+                </view>
+              </view>
+              <view class="flex btn-box">
+                <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">语音咨询</button>
+                <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">一对一咨询</button>
+                <button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect">已关注</button>
+              </view>
+            </view>
+          </view>
+        </view>
+  </view>
+</app-page>

@@ -9,16 +9,16 @@
   ],
   "subPackages": [
     {
-      "root": "pages/product",
+      "root": "pages/user",
       "pages": [
-        "detail/index",
-        "list/index"
-      ]
-    },
-    {
-      "root": "pages/order",
-      "pages": [
-        "detail/index"
+        "collect/index",
+        "coupon/index",
+        "setting/home/index",
+        "order/list/index",
+        "setting/about/index",
+        "setting/help/index",
+        "setting/agreement/index",
+        "setting/feedback/index"
       ]
     },
     {

@@ -1,113 +1,28 @@
 /* pages/tabBar/user/index.wxss */
-.panel-user{
-  min-height: 100%;
-  overflow-x: hidden;
-}
-.panel-user--hd .app-cells::before,
-.panel-user--hd .app-cells::after,
-.panel-user--hd .app-cell::before,
-.panel-user--hd .app-cell::after {
-  height: 0;
-  border: 0;
-}
-.panel-user--hd{
-  position: relative; 
-  width: 100%;
-  margin-top: 0;
-  padding: 20rpx 0;
-}
-.panel-user--hd::before,
-.panel-user--hd::after,
-.panel-user--hd .cr::before,
-.panel-user--hd .cr::after{
-  content: '';
-  position: absolute;
-  background: #fff;
-  border-radius: 50%;
-  opacity: 0.05;
-  z-index: 0;
-}
-.panel-user--hd .cr-l{
-  position: absolute;
-  width: 86rpx;
-  height: 86rpx;
-  bottom: 180rpx;
-  left: 70rpx;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
-  filter: blur(2rpx);
-}
-.panel-user--hd .cr-l::before{
-  top: 120rpx;
-  left: -160rpx;
-  width: 300rpx;
-  height: 300rpx;
-  opacity: 0.1;
-  filter: blur(8rpx);
-}
-.panel-user--hd .cr-l::after{
-  top: 216rpx;
-  left: 186rpx;
-  width: 100rpx;
-  height: 100rpx;
-}
-.panel-user--hd .cr-r{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: auto;
-}
-.panel-user--hd .cr-r::before{
-  bottom: 70rpx;
-  right: -40rpx;
-  width: 106rpx;
-  height: 106rpx;
-  opacity: 0.1;
-}
-.panel-user--hd .cr-r::after{
-  bottom: -60rpx;
-  right: -60rpx;
-  width: 140rpx;
-  height: 140rpx;
-  opacity: 0.07;
-  filter: blur(2rpx);
-}
-.panel-user .panel-user--hd::before{
-  top: 110rpx;
-  right: 210rpx;
-  left: auto;
-  width: 56rpx;
-  height: 56rpx;
-  filter: blur(2rpx);
-}
-.panel-user .panel-user--hd::after{
-  top: 18rpx;
-  right: 80rpx;
-  left: auto;
-  width: 94rpx;
-  height: 94rpx;
-  filter: blur(2rpx);
-}
-.panel-user--hd .userimg{
-  display: inline-block;
-  width: 158rpx;
-  height: 158rpx;
-  border-radius: 158rpx;
-  overflow: hidden;
-}
-.panel-user--hd .app-cell__hd + .app-cell__hd{
-  padding-left: 30rpx;
-}
-.panel-user--hd .username{
-  font-size: 36rpx;
-  color: #fff;
-}
-.panel-user--bd {
-  background: #fff;
-}
-.panel-user--bd .icon-arrow-right{
-  font-size: 26rpx;
-}
-.panel-user--bd .app-cell::before {
-  left: 30rpx;
-}
+page { background: #f3f3f3; }
+
+.user-head { position: relative; height: 400rpx; padding:120rpx 30rpx 0; box-sizing: border-box;}
+.user-head .user-bg { position: absolute; z-index: 0; left:0; top:0; width:100%; height:100%;}
+.user-head .user-avatar { width: 132rpx; height: 132rpx; border-radius: 50%; border:10rpx solid rgba(255,255,255,.3); overflow: hidden; margin-right:30rpx;}
+.user-head .user-fonts .user-name { font-size: 44rpx; color:#fff; padding-bottom: 10rpx;}
+.user-head .user-fonts .user-mobile { font-size: 30rpx; color:rgba(255,255,255,.5);}
+.user-head .user-setting { position: absolute; right:30rpx; top: 160rpx;}
+.user-head .user-setting .iconfont { color:#ffffff; font-size: 40rpx; padding: 16rpx; border-radius: 50%; background: rgba(0,0,0,.15)}
+.user-order { margin: -90rpx 30rpx 0; border-radius: 20rpx; background: #fff;}
+.user-order .user-order-title { height: 90rpx; line-height: 90rpx; border-bottom: 1rpx solid #f3f3f3; padding: 0 30rpx;}
+.user-order .user-order-title .flex-bd { font-size: 30rpx; }
+.user-order .user-order-title .icon-right { font-size: 28rpx; color: #e6e6e6; font-weight:bolder; }
+.user-order .user-order-type { text-align: center; padding: 40rpx 10rpx; color: #666;}
+.user-order .user-order-type .flex-bd { font-size: 24rpx;}
+.user-order .user-order-type .flex-bd image { display: block; width:50rpx; height:50rpx; margin: 0 auto; margin-bottom: 10rpx;}
+
+.ad { margin: 30rpx; border-radius: 20rpx; overflow: hidden;}
+
+.list { margin: 30rpx; background: #fff; border-radius: 20rpx;}
+.list .items { height: 100rpx; line-height: 100rpx; padding: 0 30rpx; border-bottom: 1rpx solid #f3f3f3;}
+.list .items .item-icon text { font-size: 34rpx; margin-right:20rpx;}
+.list .items .flex-bd { font-size: 30rpx;}
+.list .items .item-right text { color: #e6e6e6; font-size: 28rpx; font-weight:bolder}
+
+.logout-btn { margin: 30rpx;}
+.logout-btn button { width:100%; background: #fff; border:none; height:100rpx; line-height: 100rpx; color: #E1251B; font-size: 32rpx; border-radius: 20rpx;}

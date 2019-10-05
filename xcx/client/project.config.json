@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 15,
+			"current": 17,
 			"list": [
 				{
 					"id": 2,
@@ -145,6 +145,19 @@
 					"name": "templateList",
 					"pathName": "pages/template/list/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "collect",
+					"pathName": "pages/user/collect/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "setting",
+					"pathName": "pages/user/setting/home/index",
 					"scene": null
 				}
 			]

@@ -1,0 +1,8 @@
+<!-- pages/user/setting/agreement/index.wxml -->
+<app-page id="app-page">
+  <view class="page-news">
+    <view class="desc">
+    <app-text datatext="{{ item.content }}"></app-text>
+    </view>
+  </view>
+</app-page>

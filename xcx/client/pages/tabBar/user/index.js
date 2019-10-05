@@ -1,76 +1,66 @@
 // pages/tabBar/user/index.js
 
-// const authModel = require('../../../model/auth/index.js');
+let startY = 0, moveY = 0, pageAtTop = true;
 let app = getApp();
 Page({
-  ...app.loadMoreMethods,
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    userInfos: {
-      userName: '',     //用户名
-      photo: '',        //头像
-      id: 0
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        coverTransform: 'translateY(0px)',
+        coverTransition: '0s',
+        moving: false,
+        userInfos: {
+            id: 1,
+            mobile: 18888888888,
+            name: 'Leo yo',
+            portrait: '/static/images/demo/1.jpg'
+        },
+        tools: [
+            {
+                code: 'collect',
+                title: '我的关注',
+                icon: 'iconfont icon-attention-fill'
+            }, {
+                code: 'coupon',
+                title: '我的优惠券',
+                icon: 'iconfont icon-coupon'
+            }, {
+                code: 'setting',
+                title: '设置',
+                icon: 'iconfont icon-setting-fill'
+            }
+        ],
     },
-    menus: [
-      {
-        url: '',
-        label: '我的关注',
-        icon: 'iconfont icon-attention-fill'
-      }, {
-        url: '',
-        label: '我的优惠券',
-        icon: 'iconfont icon-coupon'
-      }, {
-        url: '',
-        label: '我的订单',
-        icon: 'iconfont icon-order-fill'
-      }, {
-        url: '',
-        label: '设置',
-        icon: 'iconfont icon-setting-fill'
-      }
-    ]
-  },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let userInfos = wx.getStorageSync('userInfo');
-    this.setData({
-      userInfos
-    });
-    app.setNavTitle(' ')
-    app.setNavColor()
-      
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-   
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        // let userInfos = wx.getStorageSync('userInfo');
+        // this.setData({
+        //     userInfos
+        // });
+    },
+    tapTools(e) {
+        let { code } = e.currentTarget.dataset
+        console.log(code)
+        switch (code) {
+            case 'collect':
+                app.gotoPage('/pages/user/collect/index')
+                break;
+            case 'coupon':
+                app.gotoPage('/pages/user/coupon/index')
+                break;
+            case 'setting':
+                app.gotoPage('/pages/user/setting/home/index')
+                break;
+        }
+    },
+    gotoOrder(e) {
+        let { state } = e.currentTarget.dataset
+        let params = '';
+        state && (params = '?state=' + state)
+        app.gotoPage('/pages/order/list/index' + params)
+    }
 })
