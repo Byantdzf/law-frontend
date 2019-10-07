@@ -113,7 +113,6 @@ Page({
     app.setNavTitle('虎甲律师咨询平台')
     app.getUserLocation(data => {
       const adInfo = data.adInfo || {}
-      console.log(adInfo)
       this.setData({
         curCity: adInfo.city || ''
       })

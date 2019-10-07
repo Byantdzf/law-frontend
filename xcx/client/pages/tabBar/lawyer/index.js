@@ -2,6 +2,7 @@
 const app = getApp();
 Page({
   data: {
+    curCity: '',
     types: [
       {
         id: -1,
@@ -46,12 +47,20 @@ Page({
         name: '关注人数'
       }
     ],
-    list: [],
-    queryParams: {}
+    list: []
   },
   onLoad() {
+    const curCity = app.globalData.adInfo ? app.globalData.adInfo.city : ''
     app.pages.add(this)
     app.setNavColor()
+    this.setData({ curCity })
+  },
+  onShow() {
+    const appList = this.selectComponent('#app-list')
+    appList.setParams(params => {
+      params.score = 1
+      return params
+    })
   },
   updateList(e) {
     this.setData({ list: e.detail })

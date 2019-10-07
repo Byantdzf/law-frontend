@@ -1,4 +1,5 @@
 const { get } = require('../../utils/ajax.js')
+const { isPlainObject } = require('../../utils/tools.js')
 const PAGE_KEY = 'pageNo'
 const SIZE_KEY = 'pageSize'
 
@@ -8,8 +9,11 @@ Component({
     multipleSlots: true
   },
   properties: {
+    // 请求地址
     url: String,
-    params: Object,
+    // 是否进入页面就请求数据
+    immediate: Boolean,
+    // 距离底部多少触发加载更多
     threshold: {
       type: Number,
       value: 20
@@ -23,29 +27,39 @@ Component({
     defaultParams: {
       [PAGE_KEY]: 1,
       [SIZE_KEY]: 10,
-    }
+    },
+    params: {}
   },
   observers: {
     list(e) {
       this.triggerEvent('change', e)
-    },
-    params(e) {
-      // 计数，用于避免页面第一次初始化时，在onShow重复调用getList方法
-      this.xhrCount = 1
-      const { defaultParams } = this.data
-      // 传入参数发生改变时
-      // 重置为第一页
-      defaultParams[[PAGE_KEY]] = 1
-      // 清空list
-      this.data.list = []
-      this.data.isPageLoading = true
-      this.getList()
     }
   },
 
   methods: {
-    getList() {
-      let { url, defaultParams, params, list, isPageLoading } = this.data
+    // 设置请求的额外参数
+    setParams(fn, readyToRequest = true) {
+      // 第一个参数是一个返回Object的方法
+      if (typeof fn !== 'function') return
+      let { params, defaultParams } = this.data
+      const res = fn(params)
+
+      if (isPlainObject(res)) {
+        params = res
+      }
+      
+      if (readyToRequest) {
+        // 重置为第一页
+        defaultParams[[PAGE_KEY]] = 1
+        // 清空list
+        this.data.list = []
+        this.data.isPageLoading = true
+        this.getList(params)
+      }
+    },
+    // 获取列表数据
+    getList(params) {
+      let { url, defaultParams, list, isPageLoading } = this.data
       const queryParams = Object.assign({}, defaultParams, params)
       
       get(url, queryParams, { loading: isPageLoading }).then(res => {
@@ -66,20 +80,21 @@ Component({
         this.xhrCount = 0
       })
     },
+    // 加载更多
     loadMore(e) {
       const { hasNextPage, defaultParams, isLoadMoreLoading } = this.data
       if (hasNextPage && !isLoadMoreLoading) {
         defaultParams[[PAGE_KEY]] ++
         this.setData({ isLoadMoreLoading: true })
-        this.getList()
+        this.getList(this.data.params)
       }
     }
   },
   pageLifetimes: {
     show() {
-      if (!this.xhrCount) {
+      if (this.data.immediate) {
         this.data.isPageLoading = true
-        this.getList()
+        this.getList(this.data.params)
       }
     }
   }
