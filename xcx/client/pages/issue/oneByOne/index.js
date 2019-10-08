@@ -123,7 +123,7 @@ Page({
         // app.gotoPage('/pages/issue/success/index?type=2')
         // return 
         let params = e.detail.value
-        if (!params.userName) {
+        if (!params.name) {
             app.toastError('请输入您的姓名')
             return
         }

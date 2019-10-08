@@ -6,7 +6,7 @@
                 <view class="issue-title">{{details.title}}</view>
                 <view class="issue-form">
                     <view class="issue-form-item">
-                        <textarea name="requirement" auto-height placeholder="请填写我的要求" />
+                        <textarea name="customerRequirement" auto-height placeholder="请填写我的要求" />
                     </view>
                     <view class="issue-form-item">
                         <view class="issue-form-input flex">

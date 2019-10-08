@@ -43,6 +43,7 @@ Page({
      */
     onLoad: function (options) {
         let { id } = options
+        
         page = this.selectComponent('#app-page')
         page.checkAuth().then((data) => {
             // 授权成功
@@ -129,8 +130,8 @@ Page({
     },
     formSubmit(e) {
         // 测试流程
-        app.gotoPage('/pages/issue/success/index?type=3')
-        return 
+        // app.gotoPage('/pages/issue/success/index?type=3')
+        // return 
         let params = e.detail.value
         if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.contactMobile)) {
             app.toastError('请输入正确的手机号码');
@@ -154,6 +155,8 @@ Page({
                 return;
             }
         }
+        params.chooseService = this.data.id
+        params.selectDate = this.data.selectDate
         params.amount = this.data.selectAmount
         params.provice = this.data.selectCode[0]
         params.city = this.data.selectCode[0]
