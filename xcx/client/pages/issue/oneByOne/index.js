@@ -158,9 +158,7 @@ Page({
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat
         }
-        console.log(params)
         userApi.postOneByOne(params).then(res => {
-            console.log(res)
             app.gotoPage('/pages/issue/success/index?type=2')
         })
     },

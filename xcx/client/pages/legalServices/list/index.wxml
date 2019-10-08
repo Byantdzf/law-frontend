@@ -2,39 +2,47 @@
 <app-page id="app-page">
     <view class="flex-column container page-lawyer">
         <view class="tab-bar">
-            <app-tab items="{{ types }}" current="{{ type }}" />
+            <app-tab items="{{ types }}" current="{{ type }}" bind:change="changeType" />
         </view>
-        <view class="flex-bd app-scroller">
-            <view class="intro">
-                <view class="img-box">
-                    <image src="{{ intro.imgPath }}"></image>
-                </view>
-                <view class="title">{{ intro.title }}</view>
-                <view class="desc">{{ intro.desc }}</view>
-            </view>
-            <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
-                <view class="img-box">
-                    <image src="{{ item.imgPath }}"></image>
-                </view>
-                <view class="flex-bd pl-20">
-                    <view class="title">{{ item.title }}</view>
-                    <view class="desc cl-666">{{ item.desc }}</view>
-                    <view class="price-box flex">
-                        <view class="flex-bd">
-                            <text class="cl-999">价格：</text>
-                            <text class="cl-red">{{ item.price }}元/次</text>
+        <view class="flex-bd flex-column app-scroller">
+            <view class="flex-bd list-box">
+                <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
+                    <view class="intro">
+                        <view class="img-box">
+                            <image src="{{ list[0].imgPath }}"></image>
                         </view>
-                        <view class="flex-ft">
-                            <text class="cl-999">销售量：</text>
-                            <text class="cl-999">{{ item.sold }}</text>
+                        <view class="title">{{ list[0].title }}</view>
+                        <view class="desc">{{ list[0].instruction }}</view>
+                    </view>
+                    <!-- <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails" wx:if="{{ list.length > 1 }}">
+                        <view class="flex" wx:if="{{ index > 0 }}"> -->
+                    <view class="list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
+                        <view class="flex">
+                            <view class="img-box">
+                                <image src="{{ item.imgPath }}"></image>
+                            </view>
+                            <view class="flex-bd pl-20">
+                                <view class="title">{{ item.title }}</view>
+                                <view class="desc cl-666">{{ item.instruction }}</view>
+                                <view class="price-box flex">
+                                    <view class="flex-bd">
+                                        <text class="cl-999">价格：</text>
+                                        <text class="cl-red">{{ item.price }}元/次</text>
+                                    </view>
+                                    <view class="flex-ft">
+                                        <text class="cl-999">销售量：</text>
+                                        <text class="cl-999">{{ item.salesCount }}</text>
+                                    </view>
+                                </view>
+                                <view class="btn-box">
+                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
+                                        立即购买
+                                    </button>
+                                </view>
+                            </view>
                         </view>
                     </view>
-                    <view class="btn-box">
-                        <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
-                            立即购买
-                        </button>
-                    </view>
-                </view>
+                </app-list>
             </view>
         </view>
     </view>

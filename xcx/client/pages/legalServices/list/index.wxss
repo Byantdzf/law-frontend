@@ -12,6 +12,8 @@ page { background: #f3f3f3;}
 .intro .title { font-size: 40rpx; line-height: 2.4;}
 .intro .desc { color:#666;}
 
+.list-box { position: relative;}
+
 .list-item { align-items: flex-start;}
 .list-item .img-box { width: 240rpx; height:240rpx;}
 .list-item .img-box image { margin-right:30rpx;}
