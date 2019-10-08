@@ -1,7 +1,6 @@
 const { get } = require('../../utils/ajax.js')
 const { isPlainObject } = require('../../utils/tools.js')
-const PAGE_KEY = 'pageNo'
-const SIZE_KEY = 'pageSize'
+const { PAGE_KEY, SIZE_KEY } = require('../../config/global')
 
 Component({
   options: {

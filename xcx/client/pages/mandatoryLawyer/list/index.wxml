@@ -1,27 +1,29 @@
 <!-- pages/mandatoryLawyer/list/index.wxml -->
 <app-page id="app-page">
     <view class="flex-column container page-lawyer">
-        <view class="flex-bd app-scroller">
-            <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
-                <view class="img-box">
-                    <image src="{{ item.imgPath }}"></image>
-                </view>
-                <view class="flex-bd pl-20">
-                    <view class="title">{{ item.title }}</view>
-                    <view class="desc cl-666">{{ item.desc }}</view>
-                    <view class="price-box flex">
-                        <view class="flex-bd">
-                            <text class="cl-999">价格：</text>
-                            <text class="cl-red">{{ item.price }}元/次</text>
+        <view class="flex-bd">
+            <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
+                <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
+                    <view class="img-box">
+                        <image src="{{ item.instructionPic }}" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
+                    </view>
+                    <view class="flex-bd pl-20">
+                        <view class="title">{{ item.title }}</view>
+                        <view class="desc cl-666">{{ item.instruction }}</view>
+                        <view class="price-box flex">
+                            <view class="flex-bd">
+                                <text class="cl-999">价格：</text>
+                                <text class="cl-red">{{ item.priceRange }}元/次</text>
+                            </view>
+                        </view>
+                        <view class="btn-box">
+                            <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
+                                立即下单
+                            </button>
                         </view>
                     </view>
-                    <view class="btn-box">
-                        <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
-                            立即下单
-                        </button>
-                    </view>
                 </view>
-            </view>
+            </app-list>
         </view>
     </view>
 </app-page>

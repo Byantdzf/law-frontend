@@ -1,5 +1,5 @@
 
-const { get } = require('../utils/ajax.js')
+const { get, put } = require('../utils/ajax.js')
 
 module.exports = {
   /**
@@ -10,6 +10,15 @@ module.exports = {
   /**
    * 获取验证码
   */
- getSmsCode: params => get('/applets/lawyer/getPhoneVerificationCode', params),
+  getSmsCode: params => get('/applets/lawyer/getPhoneVerificationCode', params),
 
+  /**
+   * 新闻列表
+  */
+  newsList: params => get('/applets/user/article/list', params),
+
+  /**
+   * 新闻详细
+  */
+  newsDetails: params => get('/applets/user/article/details/' + params.id),
 }

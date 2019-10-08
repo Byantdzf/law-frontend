@@ -1,9 +1,11 @@
 // pages/issue/mandatoryLawyer/index.js
 const app = getApp()
 const api = require('../../../service/auth')
+const { formatTime } = require('../../../utils/tools')
 const selectApi = require('../../../service/select')
 const userApi = require('../../../service/user')
-const mandatoryLawyer = require('../../../static/data/mandatoryLawyer')
+const legalServices = require('../../../service/legalServices')
+const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 let page = null
 
 Page({
@@ -14,7 +16,7 @@ Page({
     data: {
         regStatus: 1,
         btnDisable: true,
-        selectAmount: '100',
+        selectAmount: '',
         useCurrentPhone: null,  // 是否使用当前手机号进行注册 1-是，0 -否，不填表示当前用户已经注册
         selectCode: [],
         validateCode: null,
@@ -25,10 +27,13 @@ Page({
         waitRegisterCode: null,
         countVal: app.globalData.smsCount,
         details: {},
+        selectDate: '',
         regRadio: [
             { id: 1, name: "是", checked: true },
             { id: 0, name: "否" }
         ],
+        startDate: '',
+        aggreement: false,
     },
 
     /**
@@ -36,20 +41,22 @@ Page({
      */
     onLoad: function (options) {
         let { id } = options
+        
         page = this.selectComponent('#app-page')
         page.checkAuth().then((data) => {
             // 授权成功
-            this.setData({ btnDisable: false })
+            // this.setData({ btnDisable: false })
 
-            
-            let list = mandatoryLawyer.default.list
-            let index = list.findIndex(item => {
-                return item.id == id
-            })
-            
-            this.setData({
-                details: list[index],
-                id
+            let startDate = formatTime(new Date())
+            startDate = startDate.split(' ')[0]
+
+            legalServices.getById({id: id}).then(res => {
+                this.setData({
+                    startDate,
+                    selectAmount: res.data.priceRange,
+                    details: res.data,
+                    id
+                })
             })
 
             // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
@@ -115,21 +122,41 @@ Page({
             this.countTimes('countReg', 'waitRegisterCode')
         })
     },
+    bindDateChange(e) {
+        let { value } = e.detail
+        this.setData({
+            selectDate: value
+        })
+    },
+    checkboxChange(e) {
+        this.setData({
+            aggreement: !this.data.aggreement
+        })
+        this.setData({ btnDisable: !this.data.aggreement })
+    },
     formSubmit(e) {
         // 测试流程
-        app.gotoPage('/pages/issue/success/index?type=4')
-        return 
+        // app.gotoPage('/pages/issue/success/index?type=3')
+        // return 
         let params = e.detail.value
+        if (!params.customerRequirement || params.customerRequirement.length < 10) {
+            app.toastError('我的要求不能少于10个字')
+            return
+        }
+        if (!params.name) {
+            app.toastError('请输入您的姓名');
+            return;
+        }
+        if (!this.data.selectCode.length) {
+            app.toastError('请选择地区');
+            return;
+        }
         if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.contactMobile)) {
             app.toastError('请输入正确的手机号码');
             return;
         }
         if (!params.validateCode) {
             app.toastError('请输入验证码');
-            return;
-        }
-        if (!this.data.selectCode.length) {
-            app.toastError('请选择地区');
             return;
         }
         if(this.data.useCurrentPhone === '0'){
@@ -142,6 +169,8 @@ Page({
                 return;
             }
         }
+        params.chooseService = this.data.id
+        params.deliveryDeadDate = this.data.selectDate
         params.amount = this.data.selectAmount
         params.provice = this.data.selectCode[0]
         params.city = this.data.selectCode[0]
@@ -151,8 +180,7 @@ Page({
             params.locationY = app.globalData.adInfo.location.lat
         }
         console.log(params)
-        userApi.postOneByOne(params).then(res => {
-            console.log(res)
+        userApi.postLegalServices(params).then(res => {
             app.gotoPage('/pages/issue/success/index?type=4')
         })
     },

@@ -16,7 +16,7 @@ Page({
     data: {
         regStatus: 1,
         btnDisable: true,
-        selectAmount: '100',
+        selectAmount: '',
         useCurrentPhone: null,  // 是否使用当前手机号进行注册 1-是，0 -否，不填表示当前用户已经注册
         selectCode: [],
         validateCode: null,
@@ -55,6 +55,7 @@ Page({
             legalServices.getById({id: id}).then(res => {
                 this.setData({
                     startDate,
+                    selectAmount: res.data.price,
                     details: res.data,
                     id
                 })

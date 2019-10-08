@@ -47,20 +47,26 @@ Page({
     loadList() {
         const appList = this.selectComponent('#app-list')
         appList.setParams(params => {
-           return params
-         })
+            return params
+        })
+    },
+    imageError(e) {
+        var _errImg = e.target.dataset.img
+        var _errObj = {}
+        _errObj[_errImg] = "/static/images/errorImage.jpg"
+        this.setData(_errObj)
     },
     changeType(e) {
         let type = e.detail
         let listUrl = this.data.baseUrl + type
-        this.setData({ 
+        this.setData({
             type,
             listUrl
-         })
-         this.loadList()
+        })
+        this.loadList()
     },
     updateList(e) {
-      this.setData({ list: e.detail })
+        this.setData({ list: e.detail })
     },
     showDetails(e) {
         let { id } = e.currentTarget.dataset
