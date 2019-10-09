@@ -1,0 +1,6 @@
+<!-- pages/order/index.wxml -->
+<app-page id="app-page">
+  <view class="flex-column container page-order-detail">
+    order detail
+  </view>
+</app-page>

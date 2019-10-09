@@ -66,6 +66,14 @@
         "legalServices/index",
         "mandatoryLawyer/index"
       ]
+    },
+    {
+      "root": "pages/order",
+      "pages": [
+        "types/index",
+        "list/index",
+        "detail/index"
+      ]
     }
   ],
   "window": {
