@@ -161,7 +161,7 @@ Page({
         _errObj[_errImg] = "/static/images/errorImage.jpg"
         this.setData(_errObj)
     },
-    ask() {
+    collect() {
 
     },
     voiceTap(e) {
@@ -175,5 +175,8 @@ Page({
     tapTools(e) {
         let { url } = e.currentTarget.dataset
         app.gotoPage(url)
+    },
+    gotoSearch() {
+        app.gotoPage('/pages/search/index/index')
     }
 })

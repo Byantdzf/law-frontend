@@ -6,7 +6,7 @@
         <view class="iconfont icon-location"></view>
         <view class="pl-10 ellipsis city">{{ curCity }}</view>
       </view>
-      <view class="flex-bd flex search-box">
+      <view class="flex-bd flex search-box" bind:tap="gotoSearch">
         <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
         <view class="iconfont icon-search pl-20 pr-20"></view>
       </view>
@@ -71,7 +71,7 @@
               <view class="flex btn-box">
                 <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">语音咨询</button>
                 <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">一对一咨询</button>
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="ask">立即关注</button>
+                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">立即关注</button>
               </view>
             </view>
           </view>

@@ -23,6 +23,7 @@ Component({
     hasNextPage: false,
     isLoadMoreLoading: false,
     isPageLoading: true,
+    isSearch: false,
     defaultParams: {
       [PAGE_KEY]: 1,
       [SIZE_KEY]: 10,
@@ -63,6 +64,28 @@ Component({
       
       get(url, queryParams, { loading: isPageLoading }).then(res => {
         let { curPage, totalPage, list } = res.data || {}
+
+        // 如果是搜索，返回格式不一样，需做特殊处理
+        if (params.isSearch) {
+          let newsList = res.data.articlePageInfo.list
+          let lawyerList = res.data.lawyerPageInfo.list
+          newsList.forEach(item => {
+            item.isNews = 1
+          })
+          lawyerList.forEach(item => {
+            item.isLawyer = 1
+          })
+          list = [...lawyerList, ...newsList]
+
+          if (res.data.articlePageInfo.totalRow > res.data.lawyerPageInfo.totalRow) {
+            curPage = res.data.articlePageInfo.curPage
+            totalPage = res.data.articlePageInfo.totalPage
+          } else {
+            curPage = res.data.lawyerPageInfo.curPage
+            totalPage = res.data.lawyerPageInfo.totalPage
+          }
+        }
+
         list = this.data.list.concat(list)
         // 更新视图不需要的数据，不要用setDate，减少性能消耗
         this.data.hasNextPage = totalPage > curPage

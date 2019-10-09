@@ -32,6 +32,7 @@ Page({
     loadList() {
         const appList = this.selectComponent('#app-list')
         appList.setParams(params => {
+            params.businessTypes = 1
             return params
         })
     },

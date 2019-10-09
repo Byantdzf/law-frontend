@@ -2,7 +2,7 @@
 <app-page id="app-page">
   <view class="flex-column page-news">
     <view class="flex page-search">
-      <view class="flex-bd flex search-box">
+      <view class="flex-bd flex search-box" bind:tap="gotoSearch">
         <input class="flex-bd pl-20" type="text" placeholder="关键字搜索相关信息" placeholder-class="placeholder" />
         <view class="iconfont icon-search pl-20 pr-20"></view>
       </view>
