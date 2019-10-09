@@ -31,5 +31,8 @@ Page({
   gotoDetail(e) {
     let { id } = e.currentTarget.dataset
     app.gotoPage('/pages/news/detail/index?id=' + id)
+  },
+  gotoSearch() {
+    app.gotoPage('/pages/search/index/index')
   }
 })

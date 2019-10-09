@@ -29,6 +29,13 @@
       ]
     },
     {
+      "root": "pages/search",
+      "pages": [
+        "list/index",
+        "index/index"
+      ]
+    },
+    {
       "root": "pages/template",
       "pages": [
         "list/index",

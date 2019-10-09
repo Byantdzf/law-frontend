@@ -1,0 +1,10 @@
+page { background: #fff; }
+
+.mp-top-box { padding:30rpx;}
+.mp-top-box input { background: #ECECEC; box-sizing: border-box; border-radius: 64rpx; height:80rpx; line-height: 80rpx; text-align: center; padding:0 20rpx 0 60rpx; text-align: left;}
+.mp-top-box .icon-search { position: absolute; left:50rpx; top:30rpx; font-size: 30rpx; line-height: 80rpx;}
+
+.search-action { padding:40rpx 35rpx;}
+.search-action .tit { font-size: 30rpx; font-weight: bold;}
+.search-action .search-list { margin:30rpx 0 100rpx;}
+.search-action .search-list view { background: #F6F6F6; padding: 0 36rpx; line-height: 60rpx; border-radius: 64rpx; margin:0 20rpx 20rpx 0;}

@@ -1,0 +1,63 @@
+<!-- pages/mandatoryLawyer/list/index.wxml -->
+<app-page id="app-page">
+    <view class="flex-column container page-lawyer">
+        <view class="mp-top-box">
+            <input type="text" confirm-type="search" placeholder="请输入关键词" bindconfirm="gotoSearch" />
+            <text class="iconfont icon-search"></text>
+        </view>
+        <view class="flex-bd">
+            <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
+                <view class="search-items">
+                    <view class="home-list">
+                        <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetails" wx:if="{{item.isLawyer}}">
+                            <view class="img-box">
+                                <image src="{{ item.pic || lawyerImg }}" mode="widthFix" binderror="imageError" data-img="list[{{index}}].pic"></image>
+                            </view>
+                            <view class="flex-bd    ">
+                                <view class="flex">
+                                    <view class="flex-bd name">{{ item.name }}</view>
+                                    <view class="flex-ft score cl-red">{{ item.score }}分</view>
+                                </view>
+                                <view class="desc cl-666 twolines">{{ item.desc }}</view>
+                                <view class="flex">
+                                    <view class="flex-bd">
+                                        <text class="cl-999">帮助人数：</text>
+                                        <text class="cl-666">{{ item.helps }}人</text>
+                                    </view>
+                                    <view class="flex-ft">
+                                        <text class="cl-999">关注人数：</text>
+                                        <text class="cl-666">{{ item.concerns }}人</text>
+                                    </view>
+                                </view>
+                                <view class="flex btn-box">
+                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">
+                                        语音咨询
+                                    </button>
+                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">
+                                        一对一咨询
+                                    </button>
+                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">
+                                        立即关注
+                                    </button>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="search-items">
+                    <view class="app-cell news-items" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoNewsDetails" wx:if="{{item.isNews}}">
+                        <view class="img-box">
+                            <image src="{{ item.pic || newsImg }}" mode="widthFix" binderror="newsImageError" data-img="list[{{index}}].pic"></image>
+                        </view>
+                        <view class="flex-bd con-box">
+                            <view class="title">{{ item.title || '' }}</view>
+                            <view class="desc">
+                                <text class="cl-666 twolines">{{ item.brief || '' }}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </app-list>
+        </view>
+    </view>
+</app-page>

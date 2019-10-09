@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "虎甲律师问答",
+  "usingComponents": {
+    "app-list":"../../../../components/app-list/index"
+  }
+}

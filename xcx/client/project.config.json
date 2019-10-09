@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 18,
+			"current": 20,
 			"list": [
 				{
 					"id": 2,
@@ -166,6 +166,20 @@
 					"name": "messageDetail",
 					"pathName": "pages/message/detail/index",
 					"query": "id=5",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/index/index",
+					"query": "id=5",
+					"scene": null
+				},
+				{
+					"id": 20,
+					"name": "searchResult",
+					"pathName": "pages/search/list/index",
+					"query": "t=m",
 					"scene": null
 				}
 			]

@@ -1,0 +1,17 @@
+<!-- pages/tabBar/search/index.wxml -->
+<app-page id="app-page">
+    <view class="container">
+        <view class="mp-top-box">
+            <input type="text" confirm-type="search" focus="{{focus}}" placeholder="请输入关键词" bindconfirm="gotoSearch" />
+            <text class="iconfont icon-search"></text>
+        </view>
+        <view class="search-action" wx:if="{{history.length}}">
+            <view class="tit">历史搜索</view>
+            <view class="search-list flex">
+                <view wx:for="{{ history }}" wx:key="{{ index }}" data-name="{{ item }}" bind:tap="gotoSearch">
+                    {{ item }}
+                </view>
+            </view>
+        </view>
+    </view>
+</app-page>

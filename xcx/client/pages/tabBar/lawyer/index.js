@@ -83,7 +83,7 @@ Page({
     let { id } = e.currentTarget.dataset
     app.gotoPage('/pages/lawyer/detail/index?id=' + id)
   },
-  ask(){
+  collect(){
     
   },
   voiceTap(e) {
