@@ -27,7 +27,7 @@
       </view>
     </view>
     <view class="flex-bd app-scroller">
-      <app-list url="/applets/user/lawyer/list" id="app-list" bind:change="updateList">
+      <app-list url="/applets/user/lawyer/list" id="app-list" immediate bind:change="updateList">
         <view class="pa-20">
           <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
             <view class="img-box">
