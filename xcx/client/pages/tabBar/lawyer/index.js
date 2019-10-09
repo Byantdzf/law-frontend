@@ -56,11 +56,7 @@ Page({
     this.setData({ curCity })
   },
   onShow() {
-    const appList = this.selectComponent('#app-list')
-    appList.setParams(params => {
-      params.score = 1
-      return params
-    })
+    this.appList = this.selectComponent('#app-list')
   },
   updateList(e) {
     this.setData({ list: e.detail })
@@ -69,14 +65,16 @@ Page({
     this.keyWord = detail.value
   },
   handleSearch() {
-    let queryParams = this.data.queryParams
     if (this.keyWord || this.keyWord === 0) {
-      this.setData({
-        queryParams: Object.assign(queryParams, { keyWord: this.keyWord })
+      this.appList.setParams(params => {
+        params.keyWord = this.keyWord
+        return params
       })
     } else {
-      delete queryParams.keyWord
-      this.setData({ queryParams })
+      this.appList.setParams(params => {
+        delete params.keyWord
+        return params
+      })
     }
   },
   gotoLawyerDetail(e) {
