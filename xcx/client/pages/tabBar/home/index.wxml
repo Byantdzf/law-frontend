@@ -29,10 +29,10 @@
               <view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
                 <navigator url="../../news/detail/index?id={{ item.id }}">
                   <view class="img-box">
-                    <image src="{{ item.imgUrl }}"></image>
+                    <image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic"></image>
                   </view>
                   <view class="ellipsis">{{ item.title }}</view>
-                  <view class="ellipsis cl-999">{{ item.content }}</view>
+                  <view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
                 </navigator>
               </view>
             </view>

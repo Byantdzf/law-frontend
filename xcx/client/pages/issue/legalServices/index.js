@@ -1,9 +1,11 @@
 // pages/issue/legalServices/index.js
 const app = getApp()
 const api = require('../../../service/auth')
+const { formatTime } = require('../../../utils/tools')
 const selectApi = require('../../../service/select')
 const userApi = require('../../../service/user')
-const legalServices = require('../../../static/data/legalServices')
+const legalServices = require('../../../service/legalServices')
+const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 let page = null
 
 Page({
@@ -14,7 +16,7 @@ Page({
     data: {
         regStatus: 1,
         btnDisable: true,
-        selectAmount: '100',
+        selectAmount: '',
         useCurrentPhone: null,  // 是否使用当前手机号进行注册 1-是，0 -否，不填表示当前用户已经注册
         selectCode: [],
         validateCode: null,
@@ -31,11 +33,9 @@ Page({
             { id: 1, name: "是", checked: true },
             { id: 0, name: "否" }
         ],
-        couponList: [
-            { id: 1, name: "不使用优惠券", value: "0" },
-            { id: 2, name: "新人优惠券", value: "50" },
-            { id: 3, name: "100减15优惠券", value: "15" }
-        ],
+        couponList: [],
+        startDate: '',
+        aggreement: false,
     },
 
     /**
@@ -43,14 +43,22 @@ Page({
      */
     onLoad: function (options) {
         let { id } = options
+        
         page = this.selectComponent('#app-page')
         page.checkAuth().then((data) => {
             // 授权成功
-            this.setData({ btnDisable: false })
+            // this.setData({ btnDisable: false })
 
-            this.setData({
-                details: legalServices.default.details,
-                id
+            let startDate = formatTime(new Date())
+            startDate = startDate.split(' ')[0]
+
+            legalServices.getById({id: id}).then(res => {
+                this.setData({
+                    startDate,
+                    selectAmount: res.data.price,
+                    details: res.data,
+                    id
+                })
             })
 
             // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
@@ -63,6 +71,14 @@ Page({
                     useCurrentPhone,
                     regStatus: res.data
                 })
+            })
+
+            let params = {}
+            params[PAGE_KEY] = 1
+            params[SIZE_KEY] = 100
+            userApi.couponList(params).then(res => {
+                let couponList = res.data.list || []
+                this.setData({ couponList })
             })
         }).catch((e) => {
             // 授权失败
@@ -123,25 +139,41 @@ Page({
         })
     },
     couponChange(e) {
+        if (this.data.couponList.length) {
+            this.setData({
+                selectCoupon: this.data.couponList[e.detail.value]
+            })
+        }
+    },
+    checkboxChange(e) {
         this.setData({
-            selectCoupon: this.data.couponList[e.detail.value]
+            aggreement: !this.data.aggreement
         })
+        this.setData({ btnDisable: !this.data.aggreement })
     },
     formSubmit(e) {
         // 测试流程
-        app.gotoPage('/pages/issue/success/index?type=3')
-        return 
+        // app.gotoPage('/pages/issue/success/index?type=3')
+        // return 
         let params = e.detail.value
+        if (!params.customerRequirement || params.customerRequirement.length < 10) {
+            app.toastError('我的要求不能少于10个字')
+            return
+        }
+        if (!this.data.selectDate) {
+            app.toastError('请选择交付期限');
+            return;
+        }
+        if (!this.data.selectCode.length) {
+            app.toastError('请选择地区');
+            return;
+        }
         if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.contactMobile)) {
             app.toastError('请输入正确的手机号码');
             return;
         }
         if (!params.validateCode) {
             app.toastError('请输入验证码');
-            return;
-        }
-        if (!this.data.selectCode.length) {
-            app.toastError('请选择地区');
             return;
         }
         if(this.data.useCurrentPhone === '0'){
@@ -154,6 +186,8 @@ Page({
                 return;
             }
         }
+        params.chooseService = this.data.id
+        params.deliveryDeadDate = this.data.selectDate
         params.amount = this.data.selectAmount
         params.provice = this.data.selectCode[0]
         params.city = this.data.selectCode[0]
@@ -162,9 +196,11 @@ Page({
             params.locationX = app.globalData.adInfo.location.lng
             params.locationY = app.globalData.adInfo.location.lat
         }
+        if (this.data.selectCoupon) {
+            params.couponId = this.data.selectCoupon.id
+        }
         console.log(params)
-        userApi.postOneByOne(params).then(res => {
-            console.log(res)
+        userApi.postLegalServices(params).then(res => {
             app.gotoPage('/pages/issue/success/index?type=3')
         })
     },

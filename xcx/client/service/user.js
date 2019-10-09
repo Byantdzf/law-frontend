@@ -1,5 +1,5 @@
 
-const { get, post, postJson } = require('../utils/ajax.js')
+const { get, post, postJson, putJson } = require('../utils/ajax.js')
 
 module.exports = {
     /**
@@ -14,4 +14,9 @@ module.exports = {
     postOneByOne: params => putJson('/applets/user/consult/publish/2', params),
     postLegalServices: params => putJson('/applets/user/consult/publish/3', params),
     postMandatoryLawyer: params => putJson('/applets/user/consult/publish/4', params),
+
+    /**
+     * 我的优惠券列表
+    */
+    couponList: params =>get('/applets/user/coupon/list/', params),
 }

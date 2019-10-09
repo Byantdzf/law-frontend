@@ -15,16 +15,16 @@
                     <text class="cl-999">销售量：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.sold}}</text>
+                    <text>{{details.salesCount}}</text>
                 </view>
             </view>
             <view class="orderList">
                 <view class="tit">服务说明</view>
-                <app-text datatext="{{ details.desc }}"></app-text>
+                <app-text datatext="{{ details.instruction }}"></app-text>
             </view>
             <view class="orderList">
                 <view class="tit">适用范围</view>
-                <app-text datatext="{{ details.range }}"></app-text>
+                <app-text datatext="{{ details.serviceRange }}"></app-text>
             </view>
         </view>
         <view class="btn-box">

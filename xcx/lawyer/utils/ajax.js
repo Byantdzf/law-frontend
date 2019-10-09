@@ -14,7 +14,6 @@
 const { baseUrl } = require('../config/url')
 const { tokenName } = require('../config/global')
 const pages = require('../plugins/pages')
-// const { absolutePath } = require('./path')
 
 let requests = []
 
@@ -48,7 +47,11 @@ const ajax = (_options = {}) => {
       "content-type": contentType
     }, header)
 
-    auth && (params.token = wx.getStorageSync(tokenName))
+    const token = wx.getStorageSync(tokenName)
+
+    if (auth) {
+      header["Authorization"] = "Bearer " + token
+    }
 
     if (path.indexOf('http:') > -1 || path.indexOf('https:') > -1) {
       url = path;
@@ -63,13 +66,13 @@ const ajax = (_options = {}) => {
         let data = response.data || {};
         if (response.statusCode == 200) {
           switch (data.code) {
-            case 2:
+            case '000000':
               resolve(data);
               break;
             default:
-            toast &&
+              toast &&
               wx.showToast({
-                title: data.msg || data.dataList.errorMsg || '加载失败',
+                title: data.data || data.msg || '加载失败',
                 icon: 'none',
                 duration: 2000
               })
@@ -81,26 +84,17 @@ const ajax = (_options = {}) => {
         }
       },
       fail: error => {
-        //   console.log(error);
-        //   toast && wx.showToast({
-        //     title: error,
-        //     icon: 'none',
-        //     duration: 2000
-        //   });
         reject(error)
       },
       complete: () => {
         if(loading && appPage) {
           // 关闭自定义loading
-
-          requests = requests.filter(req => req !== path)
-
+          requests = requests.filter(v => v !== path)
           if(requests.length == 0) {
             appPage.setData({ isLoading: false })
           }
         }
         wx.hideNavigationBarLoading()
-        // wx.stopPullDownRefresh();
       }
     }
     
@@ -153,9 +147,26 @@ const postJson = (path, params, options) => ajax({
   contentType: 'application/json'
 })
 
+const put = (path, params, options) => ajax({
+  path,
+  params,
+  ...options,
+  method: 'put'
+})
+
+const putJson = (path, params, options) => ajax({
+  path,
+  params,
+  ...options,
+  method: 'put',
+  contentType: 'application/json'
+})
+
 module.exports = {
   ajax,
   get,
   post,
-  postJson
+  postJson,
+  put,
+  putJson
 }

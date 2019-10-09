@@ -1,4 +1,4 @@
-const payModel = require('../../model/pay/index.js');
+// const payModel = require('../../model/pay/index.js');
 const app = getApp();
 Component({
   options: {

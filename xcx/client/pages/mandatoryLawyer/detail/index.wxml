@@ -7,20 +7,20 @@
                     <text class="cl-999">价格：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.price}}元/次</text>
+                    <text>{{details.priceRange}}元/次</text>
                 </view>
             </view>
             <view class="orderList">
                 <view class="tit">服务说明</view>
-                <app-text datatext="{{ details.desc }}"></app-text>
+                <app-text datatext="{{ details.instruction }}"></app-text>
             </view>
             <view class="orderList">
                 <view class="tit">适用范围</view>
-                <app-text datatext="{{ details.range }}"></app-text>
+                <app-text datatext="{{ details.serviceRange }}"></app-text>
             </view>
             <view class="orderList">
                 <view class="tit">服务流程</view>
-                <app-text datatext="{{ details.services }}"></app-text>
+                <app-text datatext="{{ details.serviceSteps }}"></app-text>
             </view>
         </view>
         <view class="btn-box">

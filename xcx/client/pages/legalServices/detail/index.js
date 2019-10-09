@@ -1,6 +1,6 @@
 // pages/lawyer/detail/index.js
 const app = getApp();
-const legalServices = require('../../../static/data/legalServices')
+const legalServices = require('../../../service/legalServices')
 Page({
     data: {
         details: {}
@@ -9,9 +9,11 @@ Page({
         let { id } = e
         app.pages.add(this)
 
-        this.setData({
-            details: legalServices.default.details,
-            id
+        legalServices.getById({id: id}).then(res => {
+            this.setData({
+                details: res.data,
+                id
+            })
         })
     },
     buyNow() {

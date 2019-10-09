@@ -108,19 +108,17 @@ button[plain][type=pink].button-hover {
 }
 
 .icon-check::after {
-  content: "\e651";
+  content: "\e696";
   font-size: 46rpx;
   color: #9e9e9e;
 }
 
-radio,
 checkbox {
   display: none;
 }
 
-radio[checked] + .icon-check::after,
 checkbox[checked] + .icon-check::after {
-  content: "\e63a";
+  content: "\e695";
   color: #F64335;
 }
 

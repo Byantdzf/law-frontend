@@ -6,12 +6,12 @@
                 <view class="issue-title">{{details.title}}</view>
                 <view class="issue-form">
                     <view class="issue-form-item">
-                        <textarea name="requirement" auto-height placeholder="请填写我的要求" />
+                        <textarea name="customerRequirement" auto-height placeholder="在此编辑服务内容及大致要求（不得少于10个字）" />
                     </view>
                     <view class="issue-form-item">
                         <view class="issue-form-input flex">
                             <view class="area flex-bd">
-                                <picker mode="date" value="{{selectDate}}" start="2019-09-10" end="2019-11-01" bindchange="bindDateChange">
+                                <picker mode="date" value="{{selectDate}}" start="{{ startDate }}" bindchange="bindDateChange">
                                     <view class="picker" wx:if="{{selectDate}}">
                                         交付期限：{{selectDate}}
                                     </view>

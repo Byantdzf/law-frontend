@@ -1,23 +1,23 @@
-<!-- pages/lawyer/index.wxml -->
+<!-- pages/tabBar/message/index.wxml -->
 <app-page id="app-page">
-  <view class="flex-column container page-message">
-    <app-list url="/applets/user/coupon/list">
-      <view class="app-cells">
-        <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoDetail">
-          <view class="flex-hd img-box pl-20">
-            <image src="{{ item.imgUrl }}" mode="widthFix"></image>
-          </view>
-          <view class="flex-bd con-box pl-20 pr-20">
-            <view class="flex">
-              <view class="title flex-bd">{{ item.name }}</view>
-              <view class="cl-999">{{ item.updateTime }}</view>
+    <view class="flex-column container page-message">
+        <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
+            <view class="app-cells">
+                <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoDetail">
+                    <view class="flex-hd img-box pl-20">
+                        <image src="{{ item.imagePath }}" mode="widthFix" binderror="imageError" data-img="list[{{index}}].imagePath"></image>
+                    </view>
+                    <view class="flex-bd con-box pl-20 pr-20">
+                        <view class="flex">
+                            <view class="title flex-bd">{{ item.receiver }}</view>
+                            <view class="cl-999">{{ item.sentTime || '' }}</view>
+                        </view>
+                        <view class="ellipsis desc">
+                            <text class="cl-666">{{ item.content || '' }}</text>
+                        </view>
+                    </view>
+                </view>
             </view>
-            <view class="ellipsis desc">
-              <text class="cl-666">{{ item.desc }}</text>
-            </view>
-          </view>
-        </view>
-      </view>
-    </app-list>
-  </view>
+        </app-list>
+    </view>
 </app-page>

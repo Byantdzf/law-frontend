@@ -1,10 +1,17 @@
 <!-- pages/message/detail/index.wxml -->
 <app-page id="app-page">
-  <view class="page-news">
-    <view class="title">{{ item.name }}</view>
-    <view class="dates">{{ item.updateTime }}</view>
-    <view class="desc">
-    <app-text datatext="{{ item.content }}"></app-text>
+    <view class="flex-column container page-message">
+        <app-list url="{{listUrl}}" id="app-list" bind:change="updateList" wx:if="{{listUrl}}">
+            <view class="app-cells">
+                <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
+                    <view class="flex-hd img-box pl-20">
+                        <image src="{{ item.imagePath }}" mode="widthFix" binderror="imageError" data-img="list[{{index}}].imagePath"></image>
+                    </view>
+                    <view class="flex-bd con-box">
+                        <text class="cl-666">{{ item.content }}</text>
+                    </view>
+                </view>
+            </view>
+        </app-list>
     </view>
-  </view>
 </app-page>

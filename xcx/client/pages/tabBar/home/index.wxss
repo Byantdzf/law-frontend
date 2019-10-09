@@ -100,12 +100,16 @@
 }
 
 .hot-news-item image {
-  width: 100%;
+  width: 224rpx;
   height: 130rpx;
   border-radius: 6rpx;
 }
 .hot-news-item + .hot-news-item {
   margin-left: 22rpx;
+}
+.hot-news-item .brief {
+  height:1.5em;
+  line-height: 1.5em;
 }
 
 .float-tools {

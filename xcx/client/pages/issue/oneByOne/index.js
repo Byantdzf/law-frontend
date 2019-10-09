@@ -123,7 +123,7 @@ Page({
         // app.gotoPage('/pages/issue/success/index?type=2')
         // return 
         let params = e.detail.value
-        if (!params.userName) {
+        if (!params.name) {
             app.toastError('请输入您的姓名')
             return
         }
@@ -158,9 +158,7 @@ Page({
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat
         }
-        console.log(params)
         userApi.postOneByOne(params).then(res => {
-            console.log(res)
             app.gotoPage('/pages/issue/success/index?type=2')
         })
     },
