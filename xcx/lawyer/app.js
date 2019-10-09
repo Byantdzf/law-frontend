@@ -157,5 +157,16 @@ App({
         }, this._data.callback);
       }
     }
+  },
+  // js跳转页面，分tab和普通链接
+  gotoPage(url, type) {
+    let op = {
+      url: url
+    }
+    if (type == 'tab') {
+      wx.switchTab(op)
+    } else {
+      wx.navigateTo(op)
+    }
   }
 })

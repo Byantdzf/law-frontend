@@ -1,15 +1,16 @@
 // pages/template/list/index.js
 const app = getApp();
-const template = require('../../../static/data/template')
 const selectApi = require('../../../service/select')
 Page({
     data: {
-        type: 1,
+        type: 0,
+        listUrl: '/applets/user/template/list',
         list: [],
         types: [{
             key: 0,
             value: '全部'
         }],
+        queryParams: {},
     },
     onLoad(e) {
         let { type } = e
@@ -26,11 +27,20 @@ Page({
                 types
             })
         })
-
+        this.loadList()
+    },
+    loadList() {
+        const appList = this.selectComponent('#app-list')
+        appList.setParams(params => {
+            return params
+        })
+    },
+    changeType(e) {
+        let type = e.detail
         this.setData({
-            list: template.default.list,
             type
         })
+        this.loadList()
     },
     showDetails(e) {
         let { id } = e.currentTarget.dataset

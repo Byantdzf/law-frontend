@@ -1,5 +1,5 @@
-const productModel = require('../../../model/product/index.js');
-const orderModel = require('../../../model/order/index.js');
+// const productModel = require('../../../model/product/index.js');
+// const orderModel = require('../../../model/order/index.js');
 const wxParse = require('../../../wxParse/wxParse.js');
 const { img } = require('../../../config/url.js');
 const app = getApp();

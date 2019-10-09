@@ -1,0 +1,9 @@
+/* pages/login/wechat/index.wxss */
+page { text-align: center;}
+
+.login-title { padding-top: 150rpx; font-size: 24rpx;}
+
+.btn-box { margin:80rpx 160rpx 30rpx;}
+.btn-box button { border-radius: 50rpx; font-size: 28rpx;}
+
+.login-logo image { display: block; width:160rpx; height:160rpx; border-radius: 10rpx; margin:50rpx auto;}

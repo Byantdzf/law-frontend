@@ -1,5 +1,5 @@
 
-const { post } = require('../../utils/ajax.js')
+const { post } = require('../utils/ajax.js')
 
 module.exports = {
   /**
@@ -12,5 +12,7 @@ module.exports = {
 
   getUserInfo: params => post('/api/getUserInfo', params),
 
-  save: params => post('/api/saveUserInfo', params)
+  save: params => post('/api/saveUserInfo', params),
+  
+  accountLogin: params => post('/applets/lawyer/loginByAccount', params, { auth: false, loading: false }),
 }
