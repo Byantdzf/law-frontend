@@ -2,31 +2,31 @@
 const app = getApp();
 Page({
   data: {
-    list: [
-      {
-        id: 1,
-        name: '复仇者联盟',
-        imgUrl: '../../../static/images/demo/img_lawyer.png',
-        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-        updateTime: '2019-08-09 11:00:00'
-      }, {
-        id: 2,
-        name: '系统消息',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        desc: 'hello，您好，xxx请求加您为好友',
-        updateTime: '2019-08-09 11:00:00'
-      }, {
-        id: 3,
-        name: '18110868606',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-        updateTime: '2019-08-09 11:00:00'
-      }
-    ],
+    list: [],
+    queryParams: '',
+    listUrl: '/applets/user/article/list',
+    defaultPic: '/static/images/errorImage.jpg'
   },
   onLoad() {
     app.pages.add(this)
     app.setNavColor()
+    
+    this.loadData()
+  },
+  loadData() {
+      const appList = this.selectComponent('#app-list')
+      appList.setParams(params => {
+          return params
+      })
+  },
+  imageError(e) {
+      var _errImg = e.target.dataset.img
+      var _errObj = {}
+      _errObj[_errImg] = this.data.defaultPic
+      this.setData(_errObj)
+  },
+  updateList(e) {
+      this.setData({ list: e.detail })
   },
   gotoDetail(e) {
     let { id } = e.currentTarget.dataset

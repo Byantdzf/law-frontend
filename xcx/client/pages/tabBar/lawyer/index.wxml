@@ -1,63 +1,61 @@
 <!-- pages/lawyer/index.wxml -->
 <app-page id="app-page">
-  <view class="flex-column container page-lawyer">
-    <view class="flex page-search">
-      <view class="flex location pr-20">
-        <view class="iconfont icon-location"></view>
-        <view class="pl-10">{{ curCity }}</view>
-      </view>
-      <view class="flex-bd flex search-box">
-        <input
-          class="flex-bd pl-20"
-          type="text"
-          name="keyWord"
-          placeholder="关键字搜索相关信息"
-          placeholder-class="placeholder"
-          bindinput="keyWordChange"
-          bindconfirm="handleSearch"
-        />
-        <view class="iconfont icon-search pl-20 pr-20" bindtap="handleSearch"></view>
-      </view>
-    </view>
-    <app-tab items="{{ types }}" />
-    <view class="flex app-sort">
-      <view class="flex-bd flex" wx:for="{{ sorts }}" wx:key="{{ index }}">
-        <text>{{ item.name }}</text>
-        <text class="iconfont icon-arrow-down-fill"></text>
-      </view>
-    </view>
-    <view class="flex-bd app-scroller">
-      <app-list url="/applets/user/lawyer/list" id="app-list" immediate bind:change="updateList">
-        <view class="pa-20">
-          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
-            <view class="img-box">
-              <image src="{{ item.pic }}" mode="widthFix"></image>
+    <view class="flex-column container page-lawyer">
+        <view class="flex page-search">
+            <view class="flex location pr-20">
+                <view class="iconfont icon-location"></view>
+                <view class="pl-10">{{ curCity }}</view>
             </view>
-            <view class="flex-bd pl-20">
-              <view class="flex">
-                <view class="flex-bd name">{{ item.name || '' }}</view>
-                <view class="flex-ft score cl-red">{{ item.score }}分</view>
-              </view>
-              <view class="desc cl-666">{{ item.brief }}</view>
-              <view class="flex">
-                <view class="flex-bd">
-                  <text class="cl-999">帮助人数：</text>
-                  <text class="cl-666">{{ item.helps }}人</text>
-                </view>
-                <view class="flex-ft">
-                  <text class="cl-999">关注人数：</text>
-                  <text class="cl-666">{{ item.concerns }}人</text>
-                </view>
-              </view>
-              <view class="flex btn-box">
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">语音咨询</button>
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">一对一咨询</button>
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">立即关注</button>
-              </view>
+            <view class="flex-bd flex search-box" bind:tap="gotoSearch">
+                <input class="flex-bd pl-20" type="text" name="keyWord" placeholder="关键字搜索相关信息" placeholder-class="placeholder" />
+                <view class="iconfont icon-search pl-20 pr-20"></view>
             </view>
-          </view>
         </view>
-      </app-list>
+        <app-tab items="{{ types }}" bind:change="changeType" />
+        <view class="flex app-sort">
+            <view class="flex-bd flex {{ item.curr && 'curr'}}" wx:for="{{ sorts }}" wx:key="{{ index }}" data-index="{{index}}" bind:tap="changeOrder">
+                <text>{{ item.name }}</text>
+                <text class="iconfont icon-arrow-down-fill"></text>
+            </view>
+        </view>
+        <view class="flex-bd app-scroller">
+            <app-list url="/applets/user/lawyer/list" id="app-list" bind:change="updateList">
+                <view class="pa-20">
+                    <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
+                        <view class="img-box">
+                            <image src="{{ item.pic }}" mode="widthFix"></image>
+                        </view>
+                        <view class="flex-bd pl-20">
+                            <view class="flex">
+                                <view class="flex-bd name">{{ item.name || '' }}</view>
+                                <view class="flex-ft score cl-red">{{ item.score }}分</view>
+                            </view>
+                            <view class="desc cl-666">{{ item.brief || '' }}</view>
+                            <view class="flex">
+                                <view class="flex-bd">
+                                    <text class="cl-999">帮助人数：</text>
+                                    <text class="cl-666">{{ item.helps }}人</text>
+                                </view>
+                                <view class="flex-ft">
+                                    <text class="cl-999">关注人数：</text>
+                                    <text class="cl-666">{{ item.concerns }}人</text>
+                                </view>
+                            </view>
+                            <view class="flex btn-box">
+                                <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">
+                                    语音咨询
+                                </button>
+                                <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">
+                                    一对一咨询
+                                </button>
+                                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">
+                                    立即关注
+                                </button>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </app-list>
+        </view>
     </view>
-  </view>
 </app-page>

@@ -1,1 +1,1 @@
-/* pages/reg/index.wxss */
+@import "/static/css/issue.wxss";

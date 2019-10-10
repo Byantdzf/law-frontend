@@ -1,16 +1,18 @@
 // pages/template/list/index.js
 const app = getApp();
 const selectApi = require('../../../service/select')
+const userApi = require('../../../service/user')
 Page({
     data: {
-        type: 0,
+        type: '',
         listUrl: '/applets/user/template/list',
         list: [],
         types: [{
-            key: 0,
+            key: '',
             value: '全部'
         }],
         queryParams: {},
+        defaultImg: '/static/images/errorImage.jpg'
     },
     onLoad(e) {
         let { type } = e
@@ -32,9 +34,18 @@ Page({
     loadList() {
         const appList = this.selectComponent('#app-list')
         appList.setParams(params => {
-            params.businessTypes = 1
+            params.businessTypes = this.data.type
             return params
         })
+    },
+    updateList(e) {
+        this.setData({ list: e.detail })
+    },
+    imageError(e) {
+        var _errImg = e.target.dataset.img
+        var _errObj = {}
+        _errObj[_errImg] = this.data.defaultImg
+        this.setData(_errObj)
     },
     changeType(e) {
         let type = e.detail
@@ -49,6 +60,24 @@ Page({
     },
     buyNow(e) {
         let { id } = e.currentTarget.dataset
-        app.gotoPage('/pages/issue/success/index?type=5')
+
+        // 获取地址完成以后再判断授权
+        let page = this.selectComponent('#app-page')
+        page.checkAuth().then((data) => {
+            // 授权成功
+            let index = this.data.list.findIndex(items => {
+                return items.id == id
+            })
+            let params = {}
+            params.chooseService = id
+            params.fileType = this.data.list[index].businessTypeName
+            userApi.postTemplate(params).then(res => {
+                app.gotoPage('/pages/issue/success/index?type=5&id=' + id)
+            })
+        }).catch((e) => {
+            // 授权失败
+            console.log('auth reject')
+            console.log(e)
+        });
     }
 })

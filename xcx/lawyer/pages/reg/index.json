@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "律师注册",
+  "usingComponents": {
+    "app-cityPicker": "/components/app-cityPicker/index"
+  }
 }
