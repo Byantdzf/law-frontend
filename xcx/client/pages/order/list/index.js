@@ -36,14 +36,16 @@ Page({
         phone: '181******01',
         score: 4.9,
         helpers: 249,
-        followers: 249
+        followers: 249,
+        time: 100
       }, {
         orderType: '语音咨询订单',
         name: '陆先生',
         phone: '181******01',
         score: 4.9,
         helpers: 249,
-        followers: 249
+        followers: 249,
+        time: '2019-10-11 12:30:00'
       }, {
         orderType: '语音咨询订单',
         name: '陆先生',

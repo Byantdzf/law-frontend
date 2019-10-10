@@ -1,0 +1,6 @@
+<view class="app-countdown {{ className }}">
+  <block wx:for="{{ items }}" wx:key="{{ index }}">
+    <text class="app-countdown__con">{{ item.value }}</text>
+    <text class="app-countdown__splitor" wx:if="{{ splitors[index] }}">{{ splitors[index] }}</text>
+  </block>
+</view>
