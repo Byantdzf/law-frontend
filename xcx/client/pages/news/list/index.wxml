@@ -1,26 +1,30 @@
 <!-- pages/lawyer/index.wxml -->
 <app-page id="app-page">
-  <view class="flex-column page-news">
-    <view class="flex page-search">
-      <view class="flex-bd flex search-box" bind:tap="gotoSearch">
-        <input class="flex-bd pl-20" type="text" placeholder="关键字搜索相关信息" placeholder-class="placeholder" />
-        <view class="iconfont icon-search pl-20 pr-20"></view>
-      </view>
-    </view>
-    <view class="app-cells">
-      <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoDetail">
-          <view class="flex-hd img-box pl-20">
-            <image src="{{ item.imgUrl }}" mode="widthFix"></image>
-          </view>
-          <view class="flex-bd con-box pl-20 pr-20">
-            <view class="flex">
-              <view class="title flex-bd">{{ item.name }}</view>
+    <view class="flex-column container page-news">
+        <view class="flex page-search">
+            <view class="flex-bd flex search-box" bind:tap="gotoSearch">
+                <input class="flex-bd pl-20" type="text" placeholder="关键字搜索相关信息" placeholder-class="placeholder" />
+                <view class="iconfont icon-search pl-20 pr-20"></view>
             </view>
-            <view class="desc">
-              <text class="cl-666">{{ item.desc }}</text>
+        </view>
+        <view class="flex-bd flex-column">
+            <view class="flex-bd list-box">
+                <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
+                <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoDetail">
+                    <view class="flex-hd img-box pl-20">
+                        <image src="{{ item.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="list[{{index}}].pic"></image>
+                    </view>
+                    <view class="flex-bd con-box pl-20 pr-20">
+                        <view class="flex">
+                            <view class="title flex-bd">{{ item.title }}</view>
+                        </view>
+                        <view class="desc">
+                            <text class="cl-666">{{ item.brief }}</text>
+                        </view>
+                    </view>
+                </view>
+                </app-list>
             </view>
-          </view>
-      </view>
+        </view>
     </view>
-  </view>
 </app-page>

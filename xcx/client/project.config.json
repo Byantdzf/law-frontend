@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 21,
+			"current": 8,
 			"list": [
 				{
 					"id": 2,
@@ -92,10 +92,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 8,
 					"name": "success",
 					"pathName": "pages/issue/success/index",
-					"query": "type=4",
+					"query": "type=5&id=111000",
 					"scene": null
 				},
 				{
@@ -183,10 +183,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "orderList",
-					"pathName": "pages/order/list/index",
-					"query": "",
+					"id": 21,
+					"name": "templateDetail",
+					"pathName": "pages/template/detail/index",
+					"query": "id=111000",
 					"scene": null
 				}
 			]

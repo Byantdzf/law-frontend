@@ -1,5 +1,6 @@
 // pages/lawyer/success/index.js
 const app = getApp()
+const selectApi = require('../../../service/select')
 Page({
 
     /**
@@ -12,50 +13,65 @@ Page({
         written: 0,
         expected: '',
         filePath: null,
-        dowloadFailed: false
+        dowloadFailed: false,
+        fileData: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let { type } = options
+        let { type, id } = options
         this.setData({
+            id,
             type
         })
+
+        if (type == 5) {
+            selectApi.templateDetails({ id: id }).then(res => {
+                let fileData = res.data
+                this.setData({ fileData })
+            })
+        }
     },
     downloadFiles() {
         let _t = this
         _t.setData({ downloadDisabled: true })
-        const downloadTask = wx.downloadFile({
-            // 示例 url
-            url: 'http://www.idec.com/language/chinese_s/AO/B-1944(2)_C.pdf',
-            success (res) {
-                _t.setData({
-                    filePath: res.tempFilePath
+        let params = {}
+        selectApi.getFileUrl({ targetName: this.data.fileData.filePath }).then(res => {
+            if (res.data) {
+                const downloadTask = wx.downloadFile({
+                    // 示例 url
+                    url: res.data,
+                    // url: 'https://law-voice.obs.cn-south-1.myhuaweicloud.com/law/%E5%8D%8F%E8%AE%AE%E6%A8%A1%E6%9D%BF.docx?AccessKeyId=K0JNHUCDYRDDBG19RGNJ&Expires=1570698043&Signature=aYnFyB3vDx5eXwewuqs%2B6imP8M0%3D',
+                    success(res) {
+                        _t.setData({
+                            filePath: res.tempFilePath
+                        })
+                    },
+                    fail(e) {
+                        _t.setData({
+                            dowloadFailed: true,
+                            downloadDisabled: false,
+                            progress: 0,
+                            written: 0,
+                            expected: '',
+                            filePath: null,
+                        })
+                    }
                 })
-            },
-            fail (e) {
-                _t.setData({
-                    dowloadFailed: true,
-                    downloadDisabled: false,
-                    progress: 0,
-                    written: 0,
-                    expected: '',
-                    filePath: null,
+
+                downloadTask.onProgressUpdate((res) => {
+                    let progress = res.progress
+                    let written = this.biteChange(res.totalBytesWritten)
+                    let expected = this.biteChange(res.totalBytesExpectedToWrite)
+                    this.setData({
+                        progress,
+                        written,
+                        expected
+                    })
                 })
             }
-        })
-
-        downloadTask.onProgressUpdate((res) => {
-            let progress = res.progress
-            let written = this.biteChange(res.totalBytesWritten)
-            let expected = this.biteChange(res.totalBytesExpectedToWrite)
-            this.setData({
-                progress,
-                written,
-                expected
-            })
         })
     },
     viewFiles() {

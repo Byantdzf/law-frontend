@@ -2,6 +2,6 @@
   "navigationBarTitleText": "文章列表",
   "usingComponents": {
     "app-tab": "../../../components/app-tab/index",
-    "app-pop": "../../../../components/app-pop/index"
+    "app-list":"../../../../components/app-list/index"
   }
 }

@@ -7,7 +7,7 @@ Component({
     addGlobalClass: true,
     multipleSlots: true 
   },
-  properties: { 
+  properties: {
     hideTabBar: {
       type: Boolean,
       value: true

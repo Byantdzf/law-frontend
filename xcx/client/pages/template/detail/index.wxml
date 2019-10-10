@@ -7,7 +7,7 @@
                     <text class="cl-999">所属分类：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.catetory}}</text>
+                    <text>{{details.businessTypeName}}</text>
                 </view>
             </view>
             <view class="items flex">
@@ -15,7 +15,7 @@
                     <text class="cl-999">更新时间：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.updateTime}}</text>
+                    <text>{{details.updateTime || details.createTime}}</text>
                 </view>
             </view>
             <view class="items flex">
@@ -31,16 +31,16 @@
                     <text class="cl-999">销售量：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.sold}}</text>
+                    <text>{{details.sales}}</text>
                 </view>
             </view>
             <view class="orderList">
                 <view class="tit">服务说明</view>
-                <app-text datatext="{{ details.desc }}"></app-text>
+                <app-text datatext="{{ details.brief }}"></app-text>
             </view>
             <view class="orderList">
                 <view class="tit">适用范围</view>
-                <app-text datatext="{{ details.range }}"></app-text>
+                <app-text datatext="{{ details.serviceRange }}"></app-text>
             </view>
         </view>
         <view class="btn-box">

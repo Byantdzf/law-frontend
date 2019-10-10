@@ -129,7 +129,6 @@ Page({
                 console.log('index auth reject')
                 console.log(e)
             });
-
         })
 
         // 获取热门新闻

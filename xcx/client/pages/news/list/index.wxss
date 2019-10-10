@@ -1,7 +1,4 @@
-.page-news {
-  width: 100%;
-  overflow-x: hidden;
-}
+
 .page-news .img-box image{
   width: 100rpx;
   height: 100rpx;

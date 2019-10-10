@@ -13,6 +13,8 @@
 .pop-auth .pop-auth__hd .txt { font-size:40rpx; margin-left:30rpx;}
 .pop-auth .pop-auth__bd { margin-top:40rpx; font-size:28rpx;}
 .pop-auth .pop-auth__bd .subtxt { margin-bottom: 60rpx; margin-top:10rpx; font-size:24rpx; color:#999;}
+.pop-auth .pop-auth__ft .flex-bd:first-child { margin-right:10rpx;}
+.pop-auth .pop-auth__ft .flex-bd:last-child { margin-left:10rpx;}
 
 .app-loading--wrapper {
   position: fixed;

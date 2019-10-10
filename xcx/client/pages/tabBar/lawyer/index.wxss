@@ -17,15 +17,18 @@
   background: #fff;
 }
 .app-sort {
-  padding: 20rpx 0;
   background: #dcdcdc;
 }
 .app-sort .flex-bd {
+  padding: 20rpx 0;
   justify-content: center;
 }
 .app-sort .iconfont {
   margin-left: 6rpx;
   font-size: 22rpx;
+}
+.app-sort .curr {
+  background: #fff;
 }
 
 .list-item {

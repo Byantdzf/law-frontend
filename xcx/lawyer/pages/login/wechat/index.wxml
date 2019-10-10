@@ -1,7 +1,7 @@
 <!-- pages/login/wechat/index.wxml -->
 <app-page id="app-page">
     <view class="flex-column container page-login">
-        <view class="login-title">使用微信帐号快捷登录小米有品</view>
+        <view class="login-title">使用微信帐号快捷登录虎甲问答</view>
         <view class="login-logo">
             <image src="/static/images/logo.png"></image>
         </view>

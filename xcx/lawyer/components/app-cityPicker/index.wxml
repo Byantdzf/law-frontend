@@ -1,0 +1,7 @@
+<!-- components/app-cityPicker/index.wxml -->
+<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{cityIndex}}" range="{{cityObj}}" range-key="name">
+    <view class="picker" wx:if="{{selectCity.length}}">
+        所在地区：{{selectCity[0].name}} > {{selectCity[1].name}}
+    </view>
+    <view class="picker" wx:else>请选择您所在地区</view>
+</picker>
