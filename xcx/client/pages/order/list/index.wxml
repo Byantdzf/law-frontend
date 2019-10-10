@@ -1,0 +1,45 @@
+<!-- pages/order/index.wxml -->
+<app-page id="app-page">
+  <view class="flex-column container page-order">
+    <app-tab items="{{ statusItems }}"/>
+    <view class="flex-bd">
+      <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
+        <view class="pa-20">
+          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}">
+            <view class="flex order-item-hd">
+              <view class="flex-bd cl-primary fw-b">订单编号：{{ item.orderNo }}</view>
+              <view class="flex-ft">
+                <text>已完成</text>
+              </view>
+            </view>
+            <view class="order-item-bd pt-20">
+              <view class="flex">
+                <view class="flex-bd flex">
+                  <view class="label cl-999">订单类型：</view>
+                  <view class="flex-bd cl-666">咨询订单</view>
+                </view>
+                <view class="flex-bd flex">
+                  <view class="label cl-999">订单种类：</view>
+                  <view class="flex-bd cl-666">语音咨询</view>
+                </view>
+              </view>
+              <view class="flex">
+                <view class="label cl-999">订单金额：</view>
+                <view class="flex-bd cl-666">50元</view>
+              </view>
+              <view class="flex">
+                <view class="label cl-999">发布时间：</view>
+                <view class="flex-bd cl-666">2019年8月18日20:00</view>
+              </view>
+            </view>
+            <view class="flex btn-box">
+              <button size="mini" plain>关注</button>
+              <button size="mini" plain>转发</button>
+              <button size="mini" plain>立即接单</button>
+            </view>
+          </view>
+        </view>
+      </app-list>
+    </view>
+  </view>
+</app-page>
