@@ -29,9 +29,12 @@
 .order-item-bd {
   line-height: 46rpx;
 }
+.order-item-ft {
+  border-top: 2rpx solid #f3f3f3;
+}
 .order-item .btn-box {
   margin-top: 30rpx;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .order-item .btn-box button {
   width: 210rpx;

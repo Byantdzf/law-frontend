@@ -1,8 +1,12 @@
-// const orderModel = require('../../../model/order/index.js');
+
 const app = getApp();
+const { orderType, orderCategory, orderStatus } = require('../../../config/global')
 Page({
   data: {
-    listUrl: '/applets/user/order/list',
+    orderType,
+    orderCategory,
+    orderStatus,
+    listUrl: '/applets/user/order/orderList',
     statusItems: [
       {
         id: -1,
@@ -31,36 +35,42 @@ Page({
     ],
     list: [
       {
-        orderType: '语音咨询订单',
-        name: '陆先生',
-        phone: '181******01',
-        score: 4.9,
-        helpers: 249,
-        followers: 249,
-        time: 100
+        orderNo: '201910120004',
+        lawyer: '陆先生',
+        status: 0,
+        orderType: 1,
+        orderCategory: 11
       }, {
-        orderType: '语音咨询订单',
-        name: '陆先生',
-        phone: '181******01',
-        score: 4.9,
-        helpers: 249,
-        followers: 249,
-        time: '2019-10-11 12:30:00'
+        orderNo: '201910120004',
+        lawyer: '陆先生',
+        status: 1,
+        orderType: 2,
+        orderCategory: 21
       }, {
-        orderType: '语音咨询订单',
-        name: '陆先生',
-        phone: '181******01',
-        score: 4.9,
-        helpers: 249,
-        followers: 249
+        orderNo: '201910120004',
+        lawyer: '陆先生',
+        time: 20,
+        status: 2,
+        orderType: 2,
+        orderCategory: 22
       }
     ],
   },
   onLoad() {
-    app.pages.add(this)
-    app.setNavColor()
+    app.pages.add(this);
+    app.setNavColor();
+    if (!this.appList) {
+      this.appList = this.selectComponent('#app-list');
+    }
+    // this.appList.setParams();
   },
   updateList(e) {
     this.setData({ list: e.detail })
   },
+  handleItemTimeup(e) {
+    const { index } = e.currentTarget.dataset
+    this.setData({
+      [`list[${ index }].time`]: 0
+    })
+  }
 })
