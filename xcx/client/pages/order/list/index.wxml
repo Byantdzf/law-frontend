@@ -8,8 +8,9 @@
           <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}">
             <view class="flex order-item-hd">
               <view class="flex-bd cl-primary fw-b">订单编号：{{ item.orderNo }}</view>
-              <view class="flex-ft">
-                <text>已完成</text>
+              <view class="flex flex-ft">
+                <app-countdown value="{{ item.time }}" wx:if="{{ item.time }}"/>
+                <text class="pl-10">已完成</text>
               </view>
             </view>
             <view class="order-item-bd pt-20">

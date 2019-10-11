@@ -1,31 +1,9 @@
 .page-order {
   background: #f3f3f3;
 }
-.page-search {
-  padding: 20rpx 30rpx 0;
-  background: #fff;
-}
-.page-search .location {
-  min-width: 160rpx;
-}
-.page-search .search-box {
-  padding: 8rpx 0;
-  border: 1px solid #e0e0e0;
-  border-radius: 20rpx;
-}
+
 .page-order .app-tab {
   background: #fff;
-}
-.app-sort {
-  padding: 20rpx 0;
-  background: #dcdcdc;
-}
-.app-sort .flex-bd {
-  justify-content: center;
-}
-.app-sort .iconfont {
-  margin-left: 6rpx;
-  font-size: 22rpx;
 }
 
 .order-list {
@@ -45,11 +23,11 @@
   font-size: 32rpx;
 }
 .order-item-hd {
-  padding-bottom: 10rpx;
+  padding-bottom: 20rpx;
   border-bottom: 2rpx solid #f3f3f3;
 }
 .order-item-bd {
-  
+  line-height: 46rpx;
 }
 .order-item .btn-box {
   margin-top: 30rpx;
@@ -64,4 +42,21 @@
 }
 .order-item .btn-box button::after {
   border-color: #e0e0e0;
+}
+
+/* .app-countdown {
+  padding: 8rpx 16rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8rpx;
+}
+.app-countdown text {
+  color: #fff;
+} */
+
+.app-countdown {
+  padding: 0rpx 16rpx;
+}
+.app-countdown .app-countdown__con {
+  padding: 0 4rpx;
+  color: #CF443D;
 }

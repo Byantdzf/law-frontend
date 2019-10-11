@@ -82,5 +82,5 @@
   color: #CF443D;
 }
 .scroll-view-item.active text {
-  border-bottom: 4rpx solid #CF443D;
+  border-bottom: 6rpx solid #CF443D;
 }
