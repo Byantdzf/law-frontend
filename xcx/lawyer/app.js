@@ -8,6 +8,7 @@ let reverseColor = '#ffffff'
 App({
   globalData: {
     userInfo: null, // 用户信息
+    smsCount: 60, // 再次发短信间隔时间
     scene: ''
   },
   onLaunch(e) {

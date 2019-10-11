@@ -2,12 +2,71 @@
     <view class="pa-20 home-list">
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-            <view class="issue-title">语音咨询发布</view>
             <view class="issue-form">
                 <view class="issue-form-item">
-                    <textarea name="customerRequirement" auto-height placeholder="请在此输入您想咨询的问题（不少于10个字）" />
+                    <input class="app-input" type="number" name="name" placeholder="请输入您的姓名"></input>
                 </view>
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input flex-bd">
+                        <input class="app-input" type="number" name="phone" bindblur="setValidateMobie" placeholder="请输入您的手机号码"></input>
+                    </view>
+                    <view>
+                        <text class="sendSMS cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">获取验证码</text>
+                        <text class="cl-999" wx:else>重新发送({{countVal}})</text>
+                    </view>
+                </view>
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="text" name="phoneVerificationCode" placeholder="请输入验证码"></input>
+                    </view>
+                </view> 
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="password" name="pwd" placeholder="请输入密码"></input>
+                    </view>
+                </view> 
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="password" name="rePwd" placeholder="请重复输入密码"></input>
+                    </view>
+                </view> 
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="idcard" name="identityCard" placeholder="请输入身份证号码"></input>
+                    </view>
+                </view> 
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="text" name="lawerLicenseNo" placeholder="请输入执业证号码"></input>
+                    </view>
+                </view> 
+                <view class="issue-form-item flex">
+                    <view class="issue-form-input">
+                        <input class="app-input" type="text" name="belongs" placeholder="请输入执业律所"></input>
+                    </view>
+                </view> 
                 <view class="issue-form-item">
+                    <view class="issue-form-input flex">
+                        <view class="question flex-bd">
+                            <picker mode="region" bindchange="bindRegionChange">
+                                <view wx:if="{{region}}">
+                                    所在地区：{{region[0]}}，{{region[1]}}，{{region[2]}}
+                                </view>
+                                <view wx:else>请选择所在地区</view>
+                            </picker>
+                        </view>
+                        <view>
+                            <text class="cl-999 iconfont icon-arrow-right"></text>
+                        </view>
+                    </view>
+                </view>
+                <view class="issue-form-item goodAtBox">
+                    <view class="goodAtTit">请选择擅长领域<text>（可多选）</text></view>
+                    <view class="flex">
+                        <text class="at-item {{item.selected && 'curr'}}" wx:for="{{questionType}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="selectAt">{{item.value}}</text>
+                    </view>
+                </view>
+                <!-- <view class="issue-form-item">
                     <view class="issue-form-input flex">
                         <view class="question flex-bd">
                             <picker class="picker" bindchange="questionChange" value="{{index}}" range="{{questionType}}" range-key="value">
@@ -21,80 +80,27 @@
                             <text class="cl-999 iconfont icon-arrow-right"></text>
                         </view>
                     </view>
-                </view>
+                </view> -->
                 <view class="issue-form-item">
-                    <view class="issue-form-input flex">
-                        <view class="area flex-bd">
-                            <app-cityPicker selectCode="{{selectCode}}" bind:change="getCityResult"></app-cityPicker>
-                        </view>
-                        <view>
-                            <text class="cl-999 iconfont icon-arrow-right"></text>
-                        </view>
-                    </view>
+                    <textarea name="remark" auto-height maxlength="100" placeholder="请填写简介（不超过100个字）" />
                 </view>
-                <view class="issue-form-item flex">
-                    <view class="issue-form-input flex-bd">
-                        <input class="app-input" type="number" name="contactMobile" bindblur="setValidateMobie" placeholder="请输入您的手机号码"></input>
-                    </view>
-                    <view>
-                        <text class="sendSMS cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">获取验证码</text>
-                        <text class="cl-999" wx:else>重新发送({{countVal}})</text>
-                    </view>
+                <view class="upload-title">
+                    <text>证件信息上传</text>
                 </view>
-                <view class="issue-form-item flex">
-                    <view class="issue-form-input">
-                        <input class="app-input" type="text" name="validateCode" placeholder="请输入验证码"></input>
-                    </view>
+                <view class="upload-subTitle">
+                    <text>身份证</text>
                 </view>
-                <view class="issue-form-item">
-                    <view class="issue-form-input flex">
-                        <view class="flex-bd">
-                            <picker class="picker" bindchange="amountChange" value="{{index}}" range="{{amountList}}" range-key="name">
-                                <view wx:if="{{selectAmount}}">金额：{{selectAmount.name}}</view>
-                                <view wx:else>请选择支付金额</view>
-                            </picker>
-                        </view>
-                        <view>
-                            <text class="cl-999 iconfont icon-arrow-right"></text>
-                        </view>
-                    </view>
+                <view class="issue-form-item img-box">
+                    <image src="{{idCard1}}" data-img="idCard1" bind:tap="uploadImage" />
                 </view>
-                <view class="issue-form-item flex">
-                    <view class="issue-form-label flex-bd">是否紧急</view>
-                    <view class="issue-form-input">
-                        <radio-group class="radio-group" bindchange="radioChange">
-                            <radio class="radio" wx:for="{{ emergencyRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
-                                <text>{{item.name}}</text>
-                            </radio>
-                        </radio-group>
-                    </view>
+                <view class="issue-form-item img-box">
+                    <image src="{{idCard2}}" data-img="idCard2" bind:tap="uploadImage" />
                 </view>
-                <view class="issue-form-item flex" wx:if="{{regStatus == 1}}">
-                    <view class="issue-form-label flex-bd">是否用当前手机注册</view>
-                    <view class="issue-form-input">
-                        <radio-group class="radio-group" bindchange="regMobileChange">
-                            <radio class="radio" wx:for="{{ regRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
-                                <text>{{item.name}}</text>
-                            </radio>
-                        </radio-group>
-                    </view>
+                <view class="upload-subTitle">
+                    <text>执业证书（正面）</text>
                 </view>
-                <view class="issue-form-item flex" wx:if="{{regStatus == 1 && useCurrentPhone == 0}}">
-                    <view class="issue-form-input flex-bd">
-                        <input class="app-input" type="number" name="registerPhone" bindblur="setRegisterMobile" placeholder="请输入注册手机号码"></input>
-                    </view>
-                    <view>
-                        <text class="sendSMS cl-primary" bindtap="getRegisterValidateCode" wx:if="{{!waitRegisterCode}}">获取验证码</text>
-                        <text class="cl-999" wx:else>重新发送({{countReg}})</text>
-                    </view>
-                </view>
-                <view class="issue-form-item flex" wx:if="{{regStatus == 1 && useCurrentPhone == 0}}">
-                    <view class="issue-form-input">
-                        <input class="app-input" type="text" name="registerValidateCode" placeholder="请输入验证码"></input>
-                    </view>
-                </view>
-                <view class="issue-form-item">
-                    <textarea name="remark" auto-height placeholder="请填写备注说明" />
+                <view class="issue-form-item img-box">
+                    <image src="{{idCard3}}" data-img="idCard3" bind:tap="uploadImage" />
                 </view>
                 <view class="issue-form-item form-btn-box">
                     <button class="app-input-btn" size="mini" disabled="{{btnDisable}}" plain form-type="submit">确定提交</button>

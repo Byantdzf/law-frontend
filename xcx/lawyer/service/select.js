@@ -1,5 +1,5 @@
 
-const { get, put } = require('../utils/ajax.js')
+const { get, put, post } = require('../utils/ajax.js')
 
 module.exports = {
   /**
@@ -31,4 +31,6 @@ module.exports = {
    * 获取下载路径
   */
   getFileUrl: params => get('/applets/lawyer/downloadFile', params),
+
+  uploadFile: params => post('/applets/lawyer/uploadFile', params),
 }
