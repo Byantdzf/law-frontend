@@ -185,7 +185,7 @@ Page({
         params.emergency = this.data.emergency
         params.useCurrentPhone = this.data.useCurrentPhone
         params.provice = this.data.selectCode[0]
-        params.city = this.data.selectCode[0]
+        params.city = this.data.selectCode[1]
         if (app.globalData.adInfo) {
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat

@@ -32,5 +32,8 @@ module.exports = {
   */
   getFileUrl: params => get('/applets/lawyer/downloadFile', params),
 
+  /**
+   * 上传文件
+  */
   uploadFile: params => post('/applets/lawyer/uploadFile', params),
 }

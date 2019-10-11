@@ -190,7 +190,7 @@ Page({
         params.deliveryDeadDate = this.data.selectDate
         params.amount = this.data.selectAmount
         params.provice = this.data.selectCode[0]
-        params.city = this.data.selectCode[0]
+        params.city = this.data.selectCode[1]
         params.useCurrentPhone = this.data.useCurrentPhone
         if (app.globalData.adInfo) {
             params.locationX = app.globalData.adInfo.location.lng

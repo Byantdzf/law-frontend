@@ -87,40 +87,44 @@ Page({
         // app.gotoPage('/pages/issue/success/index?type=1')
         // return 
         let params = e.detail.value
-        if (!params.customerRequirement || params.customerRequirement.length < 10) {
-            app.toastError('问题不能少于10个字')
+        if (!params.name) {
+            app.toastError('请输入您的姓名')
             return
         }
-        if (!this.data.selectQuestionType) {
-            app.toastError('请选择所属问题');
-            return;
-        }
-        if (!this.data.selectCode.length) {
-            app.toastError('请选择地区');
-            return;
-        }
-        if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.contactMobile)) {
+        if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.phone)) {
             app.toastError('请输入正确的手机号码');
             return;
         }
-        if (!params.validateCode) {
+        if (!params.phoneVerificationCode) {
             app.toastError('请输入验证码');
             return;
         }
-        if (!this.data.selectAmount) {
-            app.toastError('请选择支付金额');
+        if (!params.pwd) {
+            app.toastError('请输入密码');
             return;
         }
-        if (this.data.useCurrentPhone === '0') {
-            if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(params.registerPhone)) {
-                app.toastError('请输入正确的手机号码');
-                return;
-            }
-            if (!params.registerValidateCode) {
-                app.toastError('请输入验证码');
-                return;
-            }
+        if (!params.rePwd) {
+            app.toastError('请重复输入密码');
+            return;
         }
+        if (params.pwd != params.rePwd) {
+            app.toastError('两次密码输入不一致，请重试');
+            return;
+        }
+        if (!params.identityCard) {
+            app.toastError('请输入身份证号码');
+            return;
+        }
+        if (!params.lawerLicenseNo) {
+            app.toastError('请输入执业证号码');
+            return;
+        }
+        if (!params.belongs) {
+            app.toastError('请输入执业律所');
+            return;
+        }
+
+
         params.questionType = this.data.selectQuestionType.key
         params.amount = this.data.selectAmount.value
         params.emergency = this.data.emergency
