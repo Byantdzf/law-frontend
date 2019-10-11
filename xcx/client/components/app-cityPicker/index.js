@@ -7,10 +7,11 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        selectCode: {
+        selectArea: {
             type: Array,
             value: []
         },
+        isHome: Boolean,
     },
 
     /**
@@ -22,32 +23,37 @@ Component({
         cityIndex: [0, 0],
     },
     ready() {
-        let selectCode = this.properties.selectCode || []
-        let cityIndex = []
-        let city = []
-        if (selectCode.length) {
-            let pIndex = cityList.findIndex(items => {
-                return items.code == selectCode[0]
-            })
-            let city = cityList[pIndex].city || []
-            let cIndex = city.findIndex(items => {
-                return items.code == selectCode[1]
-            })
-            cityIndex = [pIndex, cIndex]
-
-            let cityObj = this.data.cityObj
-            cityObj[1] = city
-
-            this.setData({
-                cityObj,
-                cityIndex
-            })
-        }
+        this.init(this.properties.selectArea)
     },
     /**
      * 组件的方法列表
      */
     methods: {
+        init() {
+            let selectArea = this.properties.selectArea || []
+                let cityIndex = []
+                if (selectArea.length) {
+                let pIndex = cityList.findIndex(items => {
+                    return items.name == selectArea[0]
+                })
+                let city = cityList[pIndex].city || []
+                let cIndex = city.findIndex(items => {
+                    return items.name == selectArea[1]
+                })
+                cityIndex = [pIndex, cIndex]
+
+                let cityObj = this.data.cityObj
+                cityObj[1] = city
+
+                let selectCity = [cityObj[0][cityIndex[0]], cityObj[0][cityIndex[0]]['city'][cityIndex[1]]]
+
+                this.setData({
+                    cityObj,
+                    cityIndex,
+                    selectCity
+                })
+            }
+        },
         bindMultiPickerChange(e) {
             let cityIndex = e.detail.value || []
             let cityObj = this.data.cityObj

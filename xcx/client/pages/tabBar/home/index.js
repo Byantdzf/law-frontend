@@ -4,7 +4,7 @@ const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 let page = null
 Page({
     data: {
-        curCity: '',
+        currArea: [],
         //图片地址
         banners: [
             '/static/images/demo/banner1.png',
@@ -115,8 +115,10 @@ Page({
         app.getUserLocation(data => {
             const adInfo = data.adInfo || {}
             this.setData({
-                curCity: adInfo.city || ''
+                currArea: [adInfo.province, adInfo.city]
             })
+            let cityPicker = this.selectComponent('#app-cityPicker')
+            cityPicker.init(this.data.currArea)
 
             // 获取地址完成以后再判断授权
             page = this.selectComponent('#app-page')
@@ -177,5 +179,10 @@ Page({
     },
     gotoSearch() {
         app.gotoPage('/pages/search/index/index')
+    },
+    getCityResult(e) {
+        let city = e.detail[1].name
+        app.getCityLocation(city)
+        this.onLoad()
     }
 })
