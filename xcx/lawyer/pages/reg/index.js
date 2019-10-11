@@ -123,22 +123,43 @@ Page({
             app.toastError('请输入执业律所');
             return;
         }
-
-
-        params.questionType = this.data.selectQuestionType.key
-        params.amount = this.data.selectAmount.value
-        params.emergency = this.data.emergency
-        params.useCurrentPhone = this.data.useCurrentPhone
-        params.provice = this.data.selectCode[0]
-        params.city = this.data.selectCode[0]
-        if (app.globalData.adInfo) {
-            params.locationX = app.globalData.adInfo.location.lng
-            params.locationY = app.globalData.adInfo.location.lat
+        if (!this.data.region) {
+            app.toastError('请选择所在地区');
+            return;
         }
-        console.log(params)
-        userApi.postVoice(params).then(res => {
+
+        params.provice = this.data.region[0]
+        params.city = this.data.region[1]
+        params.zone = this.data.region[2]
+
+        let arr = []
+        this.data.questionType.forEach(item => {
+            item.selected == true && arr.push(item.value)
+        })
+        params.goodAt = arr.join(',')
+        if (!params.goodAt) {
+            app.toastError('请选择擅长领域');
+            return;
+        }
+
+        var imgArr = [
+            {
+                businessType: 1,
+                fileName: this.data.idCard1
+            },
+            {
+                businessType: 1,
+                fileName: this.data.idCard2
+            },
+            {
+                businessType: 2,
+                fileName: this.data.idCard3
+            }
+        ]
+        params.uploadFiles = imgArr
+
+        api.register(params).then(res => {
             console.log(res)
-            app.gotoPage('/pages/issue/success/index?type=1')
         })
     },
     bindRegionChange(e) {

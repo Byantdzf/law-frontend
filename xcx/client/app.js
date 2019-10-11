@@ -111,22 +111,22 @@ App({
         }, cb)
       },
       fail: () => {
-          this.confirm({ 
-              "content": '需要获取您的地理位置，请确认授权，否则将无法找到您附近的律师',
-          }).then(res => {
-              if (res.confirm) {
-                  wx.openSetting({
-                      success () {
-                          _t.getUserLocation(cb)
-                      }, 
-                      fail () {
-                          _t.reverseGeocoder(this.globalData.defaultLocation, cb)
-                      }
-                  });
+        this.confirm({
+          "content": '需要获取您的地理位置，请确认授权，否则将无法找到您附近的律师',
+        }).then(res => {
+          if (res.confirm) {
+            wx.openSetting({
+              success() {
+                _t.getUserLocation(cb)
+              },
+              fail() {
+                _t.reverseGeocoder(this.globalData.defaultLocation, cb)
               }
-          }, reject => {
-              _t.reverseGeocoder(this.globalData.defaultLocation, cb)
-          })
+            });
+          }
+        }, reject => {
+          _t.reverseGeocoder(this.globalData.defaultLocation, cb)
+        })
       }
       // fail: () => {
       //   this.reverseGeocoder(this.globalData.defaultLocation, cb)
@@ -136,19 +136,36 @@ App({
   // 通过经纬度获取具体的位置信息
   reverseGeocoder(location, cb) {
     this.qqmapsdk &&
-    this.qqmapsdk.reverseGeocoder({
-      location,
-      success: res => {
-        const { status, result } = res
-        if (status == 0) {
-          this.globalData.adInfo = result.ad_info
+      this.qqmapsdk.reverseGeocoder({
+        location,
+        success: res => {
+          const { status, result } = res
+          if (status == 0) {
+            let adInfo = {}
+            adInfo.province = result.ad_info.province
+            adInfo.city = result.ad_info.city
+            adInfo.location = result.ad_info.location
+            this.globalData.adInfo = adInfo
+          }
+          typeof cb === 'function' && cb(this.globalData)
+        },
+        fail: () => {
+          typeof cb === 'function' && cb(this.globalData)
         }
-        typeof cb === 'function' && cb(this.globalData)
-      },
-      fail: () => {
-        typeof cb === 'function' && cb(this.globalData)
-      }
-    })
+      })
+  },
+  getCityLocation(city) {
+    this.qqmapsdk &&
+      this.qqmapsdk.geocoder({
+        address: city,
+        complete: res => {
+          let adInfo = {}
+          adInfo.province = res.result.address_components.province
+          adInfo.city = res.result.address_components.city
+          adInfo.location = res.result.location
+          this.globalData.adInfo = adInfo
+        }
+      })
   },
   // js跳转页面，分tab和普通链接
   gotoPage(url, type) {

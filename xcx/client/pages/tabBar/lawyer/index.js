@@ -3,7 +3,7 @@ const app = getApp();
 const selectApi = require('../../../service/select')
 Page({
     data: {
-        curCity: '',
+        currArea: [],
         types: [{
             key: '',
             value: '全部'
@@ -39,10 +39,13 @@ Page({
         type: '',
     },
     onLoad() {
-        const curCity = app.globalData.adInfo ? app.globalData.adInfo.city : ''
+        const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province, app.globalData.adInfo.city] : []
         app.pages.add(this)
         app.setNavColor()
-        this.setData({ curCity })
+        this.setData({ currArea })
+        
+        let cityPicker = this.selectComponent('#app-cityPicker')
+        cityPicker.init(currArea)
 
         // 获取问题类型
         selectApi.getQuestionType().then(res => {
@@ -61,7 +64,7 @@ Page({
     loadList() {
         const appList = this.selectComponent('#app-list')
         appList.setParams(params => {
-            params.city = this.data.curCity
+            params.city = this.data.currArea[1] || ''
             params.goodAt = this.data.type
             
             this.data.sorts.forEach((item, i) => {
@@ -118,4 +121,9 @@ Page({
         let { id } = e.currentTarget.dataset
         app.gotoPage('/pages/lawyer/oneByOne/index?id=' + id)
     },
+    getCityResult(e) {
+        let city = e.detail[1].name
+        app.getCityLocation(city)
+        this.onLoad()
+    }
 })

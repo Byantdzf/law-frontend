@@ -26,7 +26,7 @@
                     <view class="issue-form-item">
                         <view class="issue-form-input flex">
                             <view class="area flex-bd">
-                                <app-cityPicker selectCode="{{selectCode}}" bind:change="getCityResult"></app-cityPicker>
+                                <app-cityPicker selectArea="{{selectArea}}" bind:change="getCityResult"></app-cityPicker>
                             </view>
                             <view>
                                 <text class="cl-999 iconfont icon-arrow-right"></text>

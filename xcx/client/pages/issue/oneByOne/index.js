@@ -24,7 +24,7 @@ Page({
         emergency: 1,
         selectAmount: '100',
         useCurrentPhone: null,  // 是否使用当前手机号进行注册 1-是，0 -否，不填表示当前用户已经注册
-        selectCode: [],
+        selectArea: [],
         validateCode: null,
         validateMobile: null,
         registerValidateCode: null,
@@ -135,7 +135,7 @@ Page({
             app.toastError('请输入验证码');
             return;
         }
-        if(!this.data.selectCode.length){
+        if(!this.data.selectArea.length){
             app.toastError('请选择地区');
             return;
         }
@@ -152,8 +152,8 @@ Page({
         params.amount = this.data.selectAmount
         params.emergency = this.data.emergency
         params.useCurrentPhone = this.data.useCurrentPhone
-        params.provice = this.data.selectCode[0]
-        params.city = this.data.selectCode[1]
+        params.provice = this.data.selectArea[0]
+        params.city = this.data.selectArea[1]
         if (app.globalData.adInfo) {
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat
@@ -165,7 +165,7 @@ Page({
     getCityResult(e) {
         let arr = e.detail
         this.setData({
-            selectCode: [arr[0].code, arr[1].code]
+            selectArea: [arr[0].name, arr[1].name]
         })
     },
     countTimes(field, statusField) {

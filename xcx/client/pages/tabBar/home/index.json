@@ -2,7 +2,8 @@
   "usingComponents": {
     "app-swiper": "/components/app-swiper/index",
     "app-text": "/components/app-text/index",
-    "app-share": "/components/app-share/index"
+    "app-share": "/components/app-share/index",
+    "app-cityPicker": "/components/app-cityPicker/index"
   },
   "backgroundColorTop": "#00b0ab",
   "backgroundColorBottom": "#f3f3f3"

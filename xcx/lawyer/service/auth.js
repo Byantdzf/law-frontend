@@ -25,5 +25,10 @@ module.exports = {
   /**
    * 帐号登录
    */
-  accountLogin: params => get('/applets/lawyer/loginByAccount', params)
+  accountLogin: params => get('/applets/lawyer/loginByAccount', params),
+  
+  /**
+   * 注册
+   */
+  register: params => postJson('/applets/lawyer/register', params),
 }
