@@ -22,6 +22,11 @@ module.exports = {
   */
  lawyerList: params => get('/applets/user/lawyer/list', params),
 
+ /**
+  * 律师详情
+ */
+  lawyerDetail: params => get('/applets/user/lawyer/details/' + params.id),
+
   /**
    * 新闻详细
   */

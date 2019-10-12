@@ -1,5 +1,6 @@
 // pages/lawyer/detail/index.js
 const app = getApp()
+const selectApi = require('../../../service/select')
 Page({
 
   /**
@@ -76,7 +77,10 @@ Page({
     this.setData({
       id 
     })
-    console.log(this.data.id)
+    
+    selectApi.lawyerDetail({id: id}).then(res => {
+      console.log(res)
+    })
   },
 
   /**
