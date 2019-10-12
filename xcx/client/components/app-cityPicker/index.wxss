@@ -1,1 +1,2 @@
 /* components/app-cityPicker/index.wxss */
+.picker { min-width: 80rpx; min-height: 40rpx;}

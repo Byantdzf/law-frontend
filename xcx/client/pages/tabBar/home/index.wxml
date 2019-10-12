@@ -50,7 +50,7 @@
         <view class="pa-20 home-list">
           <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
             <view class="img-box">
-                  <image src="{{ item.pic || '/static/images/demp/img_lawyer.png' }}" binderror="imageError" data-img="hotNews[{{index}}].pic"></image>
+                  <image src="{{ item.pic || '/static/images/demo/img_lawyer.png' }}" binderror="imageError" data-img="list[{{index}}].pic"></image>
             </view>
             <view class="flex-bd pl-20">
               <view class="flex">

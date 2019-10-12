@@ -76,6 +76,7 @@ Page({
     this.setData({
       id 
     })
+    console.log(this.data.id)
   },
 
   /**

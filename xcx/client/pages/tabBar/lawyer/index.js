@@ -66,7 +66,6 @@ Page({
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
             params.goodAt = this.data.type
-            
             this.data.sorts.forEach((item, i) => {
                 if (item.code) {
                     params[item.code] = item.value
@@ -125,7 +124,13 @@ Page({
         this.setData({
             currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
         })
-        app.getCityLocation(city)
-        this.onLoad()
+        app.getCityLocation(e.detail[0].name, e.detail[1].name)
+        this.loadList()
+    },
+    imageError(e) {
+        var _errImg = e.target.dataset.img
+        var _errObj = {}
+        _errObj[_errImg] = "/static/images/demo/img_lawyer.png"
+        this.setData(_errObj)
     }
 })

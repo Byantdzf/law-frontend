@@ -154,16 +154,33 @@ App({
         }
       })
   },
-  getCityLocation(city) {
+  getCityLocation(provice, city) {
     this.qqmapsdk &&
       this.qqmapsdk.geocoder({
         address: city,
         complete: res => {
-          let adInfo = {}
-          adInfo.province = res.result.address_components.province
-          adInfo.city = res.result.address_components.city
-          adInfo.location = res.result.location
-          this.globalData.adInfo = adInfo
+          if (res.result && res.result.length) {
+            let adInfo = {}
+            adInfo.province = res.result.address_components.province
+            adInfo.city = res.result.address_components.city
+            adInfo.location = res.result.location
+            this.globalData.adInfo = adInfo
+          } else {
+            this.qqmapsdk.geocoder({
+              address: provice,
+              complete: res => {
+                if (res.result && res.result.length) {
+                  let adInfo = {}
+                  adInfo.province = res.result.address_components.province
+                  adInfo.city = res.result.address_components.city
+                  adInfo.location = res.result.location
+                  this.globalData.adInfo = adInfo
+                } else {
+                  
+                }
+              }
+            })
+          }
         }
       })
   },

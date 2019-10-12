@@ -139,11 +139,8 @@ Page({
         params[SIZE_KEY] = 5
         selectApi.newsList(params).then(res => {
             let hotNews = res.data.list
-            console.log(hotNews)
             this.setData({ hotNews })
         })
-        console.log('adInfo:')
-        console.log(app.globalData.adInfo)
     },
     onShow() {
         console.log('home show')
@@ -162,7 +159,6 @@ Page({
         // lawyerParams.city = 'shenzhen'
         selectApi.lawyerList(lawyerParams).then(res => {
             let list = res.data.list
-            console.log(list)
             this.setData({ list })
         })
     },
@@ -178,7 +174,7 @@ Page({
     imageError(e) {
         var _errImg = e.target.dataset.img
         var _errObj = {}
-        _errObj[_errImg] = "/static/images/errorImage.jpg"
+        _errObj[_errImg] = "/static/images/demo/img_lawyer.png"
         this.setData(_errObj)
     },
     collect() {
@@ -200,11 +196,10 @@ Page({
         app.gotoPage('/pages/search/index/index')
     },
     getCityResult(e) {
-        let city = e.detail[1].name
         this.setData({
             currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
         })
-        app.getCityLocation(city)
+        app.getCityLocation(e.detail[0].name, e.detail[1].name)
         this.initHome()
     }
 })
