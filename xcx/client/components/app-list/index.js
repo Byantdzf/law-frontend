@@ -38,14 +38,14 @@ Component({
 
   methods: {
     // 设置请求的额外参数
+    // 第一个参数是一个返回Object的方法
     setParams(fn, readyToRequest = true) {
-      // 第一个参数是一个返回Object的方法
-      if (typeof fn !== 'function') return
       let { params, defaultParams } = this.data
-      const res = fn(params)
 
-      if (isPlainObject(res)) {
-        params = res
+      if (typeof fn === 'function') {
+        if (isPlainObject(fn(params))) {
+          params = fn(params)
+        }
       }
       
       if (readyToRequest) {
