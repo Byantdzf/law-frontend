@@ -77,7 +77,6 @@
     {
       "root": "pages/order",
       "pages": [
-        "types/index",
         "list/index",
         "detail/index"
       ]

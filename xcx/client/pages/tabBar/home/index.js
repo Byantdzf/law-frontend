@@ -12,31 +12,31 @@ Page({
             '/static/images/demo/banner3.png'
         ],
         list: [
-            {
-                id: 1,
-                name: '何金宝律师',
-                imgUrl: '../../../static/images/demo/wakaka.png',
-                score: 4.9,
-                desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-                helpers: 249,
-                followers: 249
-            }, {
-                id: 2,
-                name: '何金宝律师',
-                imgUrl: '../../../static/images/demo/wakaka.png',
-                score: 4.9,
-                desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-                helpers: 249,
-                followers: 249
-            }, {
-                id: 3,
-                name: '何金宝律师',
-                imgUrl: '../../../static/images/demo/wakaka.png',
-                score: 4.9,
-                desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-                helpers: 249,
-                followers: 249
-            }
+            // {
+            //     id: 1,
+            //     name: '何金宝律师',
+            //     imgUrl: '../../../static/images/demo/wakaka.png',
+            //     score: 4.9,
+            //     desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
+            //     helpers: 249,
+            //     followers: 249
+            // }, {
+            //     id: 2,
+            //     name: '何金宝律师',
+            //     imgUrl: '../../../static/images/demo/wakaka.png',
+            //     score: 4.9,
+            //     desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
+            //     helpers: 249,
+            //     followers: 249
+            // }, {
+            //     id: 3,
+            //     name: '何金宝律师',
+            //     imgUrl: '../../../static/images/demo/wakaka.png',
+            //     score: 4.9,
+            //     desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
+            //     helpers: 249,
+            //     followers: 249
+            // }
         ],
         hotNews: [
             // {
@@ -112,13 +112,13 @@ Page({
         app.pages.add(this)
         app.setNavColor()
         app.setNavTitle('虎甲律师咨询平台')
+
         app.getUserLocation(data => {
             const adInfo = data.adInfo || {}
             this.setData({
-                currArea: [adInfo.province, adInfo.city]
+                currArea: [adInfo.province.replace('省', ''), adInfo.city.replace('市', '')]
             })
-            let cityPicker = this.selectComponent('#app-cityPicker')
-            cityPicker.init(this.data.currArea)
+            this.initHome()
 
             // 获取地址完成以后再判断授权
             page = this.selectComponent('#app-page')
@@ -142,10 +142,29 @@ Page({
             console.log(hotNews)
             this.setData({ hotNews })
         })
+        console.log('adInfo:')
+        console.log(app.globalData.adInfo)
     },
-
     onShow() {
         console.log('home show')
+    },
+    initHome() {
+        let cityPicker = this.selectComponent('#app-cityPicker')
+        cityPicker.init(this.data.currArea)
+        this.getLawyerList()
+    },
+    getLawyerList() {
+        // 获取本地律师
+        let lawyerParams = {}
+        lawyerParams[PAGE_KEY] = 1
+        lawyerParams[SIZE_KEY] = 5
+        lawyerParams.city = this.data.currArea[1] || ''
+        // lawyerParams.city = 'shenzhen'
+        selectApi.lawyerList(lawyerParams).then(res => {
+            let list = res.data.list
+            console.log(list)
+            this.setData({ list })
+        })
     },
     handleToolBtnTap(e) {
         this.setData({
@@ -182,7 +201,10 @@ Page({
     },
     getCityResult(e) {
         let city = e.detail[1].name
+        this.setData({
+            currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
+        })
         app.getCityLocation(city)
-        this.onLoad()
+        this.initHome()
     }
 })

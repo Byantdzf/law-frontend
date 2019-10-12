@@ -39,7 +39,7 @@ Page({
         type: '',
     },
     onLoad() {
-        const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province, app.globalData.adInfo.city] : []
+        const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
         app.pages.add(this)
         app.setNavColor()
         this.setData({ currArea })
@@ -72,7 +72,6 @@ Page({
                     params[item.code] = item.value
                 }
             })
-            console.log(params)
             return params
         })
     },
@@ -123,6 +122,9 @@ Page({
     },
     getCityResult(e) {
         let city = e.detail[1].name
+        this.setData({
+            currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
+        })
         app.getCityLocation(city)
         this.onLoad()
     }

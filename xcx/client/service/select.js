@@ -18,6 +18,11 @@ module.exports = {
   newsList: params => get('/applets/user/article/list', params),
 
   /**
+   * 律师列表
+  */
+ lawyerList: params => get('/applets/user/lawyer/list', params),
+
+  /**
    * 新闻详细
   */
   newsDetails: params => get('/applets/user/article/details/' + params.id),
