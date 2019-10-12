@@ -31,4 +31,9 @@ module.exports = {
    * 获取下载路径
   */
   getFileUrl: params => get('/applets/lawyer/downloadFile', params),
+
+  /**
+   * 上传文件
+  */
+  uploadFile: params => post('test.php', params, {requestType: 'uploadFile'}),
 }

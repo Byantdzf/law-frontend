@@ -35,5 +35,5 @@ module.exports = {
   /**
    * 上传文件
   */
-  uploadFile: params => post('/applets/lawyer/uploadFile', params),
+  uploadFile: params => post('/applets/lawyer/multiUpload', params, {requestType: 'uploadFile'}),
 }

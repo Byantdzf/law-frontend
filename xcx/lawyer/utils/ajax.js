@@ -104,11 +104,11 @@ const ajax = (_options = {}) => {
       requests.push(path)
     }
 
-    switch (options.requestType) {
+    switch (_options.requestType) {
       case 'uploadFile':
         if (params) {
           options.filePath = params.filePath;
-          options.name = params.name || 'fileName';
+          options.name = params.name || 'file';
           params.formData && (options.formData = params.formData);
         }
         return wx.uploadFile(options);

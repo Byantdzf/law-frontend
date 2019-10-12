@@ -74,10 +74,7 @@ Page({
         // 获取问题类型
         let params = {}
         params.filePath = path[0]
-        let formData = {
-            sourceFilePath: path[0]
-        }
-        params.formData = formData
+        params.requestType = 'uploadFile'
         selectApi.uploadFile(params).then(res => {
             console.log(res)
         })
