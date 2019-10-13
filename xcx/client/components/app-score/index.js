@@ -1,6 +1,4 @@
-// import ImgNormal from "./static/icon-star.png";
-// import ImgHighlight from "./static/icon-star-hl.png";
-// const ImgNormal = require('.')
+
 Component({
   options: {
     addGlobalClass: true
@@ -35,7 +33,6 @@ Component({
   methods: {
     handlerClick(e) {
       if (this.data.readonly) return;
-      console.log(e)
       const { item: value } = e.currentTarget.dataset;
       this.setData({ value });
       this.triggerEvent("change", value);

@@ -87,7 +87,7 @@
                 wx:if="{{ fn.showPay(item) }}"
                 plain
                 size="mini"
-                data-id="{{ item.id }}"
+                data-index="{{ index }}"
                 catchtap="handlePay"
               >
                 立即支付

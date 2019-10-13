@@ -19,7 +19,7 @@
     }
 </wxs>
 <app-page id="app-page">
-  <view class="container page-order-detail">
+  <view class="page-order-detail">
     <view class="detail-box">
       <view class="title fw-b">基本信息</view>
       <view class="flex detail-row">
@@ -83,7 +83,7 @@
         </view>
       </view>
     </view>
-    <view class="detail-box">
+    <view class="detail-box" wx:if="{{ fn.showLawyer(item) }}">
       <view class="flex detail-row flex-start">
         <text class="label cl-999">我的追问：</text>
         <view class="flex flex-bd cl-666">
@@ -91,13 +91,32 @@
         </view>
       </view>
     </view>
-    <view class="detail-box">
+    <view class="detail-box" wx:if="{{ item.orderStatus == 60 }}">
       <view class="flex detail-row flex-start">
         <text class="label cl-999">我的评价：</text>
         <view class="flex flex-bd cl-666">
-          
+          <text>{{ item.evaluateContent }}</text>
         </view>
       </view>
+    </view>
+    <view class="ask-wrapper" wx:if="{{ showAskWrapper }}">
+      <view>
+        <textarea class="textarea" placeholder="请输入您要追问的问题" bindinput="handleAskContentChange"></textarea>
+      </view>
+      <view class="flex btn-box mt-20">
+        <button plain bindtap="handleCancelAsk">取消</button>
+        <button type="primary" bindtap="handleConfirmAsk">确认</button>
+      </view>
+    </view>
+    <view class="btn-box" wx:if="{{ fn.showCancel(item) }}">
+      <button type="primary" bindtap="handleCancel">取消订单</button>
+    </view>
+    <view class="btn-box" wx:if="{{ fn.showComment(item) }}">
+      <button type="primary" bindtap="handleComment">立即评价</button>
+    </view>
+    <view class="flex btn-box" wx:if="{{ (item.orderStatus == 30 || item.orderStatus == 40) && !showAskWrapper }}">
+      <button plain bindtap="handleAsk">追问</button>
+      <button type="primary" bindtap="handleConfirm">确认订单完成</button>
     </view>
   </view>
 </app-page>

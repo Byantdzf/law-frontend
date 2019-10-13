@@ -49,10 +49,10 @@ Page({
   },
   handleCancel(e) {
     const { index } = e.currentTarget.dataset;
+    const id = this.data.list[index].id;
     app.confirm({
-      content: '系统正在积极为您指派律师您确定要取消订单？'
+      content: '系统正在积极为您指派律师，您确定要取消订单？'
     }).then(() => {
-      const id = this.data.list[index].id;
       orderApi.orderCancel(id).then(() => {
         wx.showToast({
           title: '订单已取消',
@@ -65,7 +65,8 @@ Page({
     }).catch(e => {});
   },
   handlePay(e) {
-
+    const { index } = e.currentTarget.dataset;
+    const id = this.data.list[index].id;
   },
   handleComment(e) {
     const { index } = e.currentTarget.dataset;
