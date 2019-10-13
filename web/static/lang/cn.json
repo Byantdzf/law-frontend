@@ -11,6 +11,8 @@
 	"msg": {
 		"inputUserName": "请输入用户名",
 		"inputPassword": "请输入密码",
+		"uploadSuccess": "上传成功",
+		"uploadFaild": "上传失败",
 		"select": "请选择",
 		"input": "请输入"
 	},

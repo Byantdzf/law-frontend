@@ -1,23 +1,26 @@
 <view class="pa-20 home-list">
   <view class="img-box">
-    <image src="{{ details.imgUrl }}" mode="widthFix"></image>
+    <image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
   </view>
   <view class="lawyerName">
-    <view class="score cl-red">{{ details.score }}分</view>
+    <view class="scoreBox">
+      <view class="starBox"><text style="width:40%"></text></view>
+      <view class="score">{{details.score}}分</view>
+    </view>
     <view class="name">
       {{ details.name }}
-      <text>{{ details.area}}</text>
+      <text>{{ details.province }}{{ details.city }}</text>
     </view>
   </view>
   <view class="helper">
     <view class="flex">
       <view class="flex-bd">
         <text class="cl-999">帮助人数：</text>
-        <text class="cl-666">{{ details.helpers }}人</text>
+        <text class="cl-666">{{ details.helps }}人</text>
       </view>
       <view class="flex-ft">
         <text class="cl-999">关注人数：</text>
-        <text class="cl-666">{{ details.followers }}人</text>
+        <text class="cl-666">{{ details.concerns }}人</text>
       </view>
     </view>
   </view>
@@ -39,7 +42,7 @@
           <text class="cl-999">性别：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">男</text>
+          <text class="cl-666">{{details.sex}}</text>
         </view>
       </view>
       <view class="items flex">
@@ -47,7 +50,7 @@
           <text class="cl-999">所在地区：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">广东-深圳</text>
+          <text class="cl-666">{{ details.province }}-{{ details.city }}</text>
         </view>
       </view>
       <view class="items flex">
@@ -55,7 +58,7 @@
           <text class="cl-999">所属事务所：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">广东创辉律师事务所</text>
+          <text class="cl-666">{{ details.belongs }}</text>
         </view>
       </view>
       <view class="items flex">
@@ -63,7 +66,7 @@
           <text class="cl-999">执业证号：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">1234567890</text>
+          <text class="cl-666">{{ details.lawyerLicenseNo }}</text>
         </view>
       </view>
       <view class="items flex">
@@ -71,7 +74,7 @@
           <text class="cl-999">入驻时间：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">2018年8月8日</text>
+          <text class="cl-666">{{ details.joinDate }}</text>
         </view>
       </view>
       <view class="items flex rangeList">
@@ -79,8 +82,8 @@
           <text class="cl-999">擅长领域：</text>
         </view>
         <view class="flex-bd">
-          <button size="mini" plain wx:for="{{ details.range }}" wx:key="{{item.index}}">
-            {{item.name}}
+          <button size="mini" plain wx:for="{{ details.goodAt }}" wx:key="{{index}}">
+            {{item}}
           </button>
         </view>
       </view>
@@ -95,10 +98,10 @@
             </view>
           </view>
           <view class="tbody">
-            <block wx:for="{{details.listData}}" wx:key="{{index}}">
+            <block wx:for="{{details.orderList}}" wx:key="{{index}}">
               <view class="tr">
-                <view class="td">{{item.name}}</view>
-                <view class="td">{{item.orderNums}}</view>
+                <view class="td">{{item.orderTypeName || ''}}</view>
+                <view class="td">{{item.count}}</view>
                 <view class="td">{{item.score}}</view>
               </view>
             </block>
@@ -107,14 +110,11 @@
       </view>
       <view class="orderList">
         <view class="tit">个人简介</view>
-        <app-text datatext="{{ details.content }}"></app-text>
+        <app-text datatext="{{ details.brief }}"></app-text>
       </view>
     </view>
     <!-- 用户评论 -->
     <view class="scoreBox" wx:if="{{showType == 2}}">
-      <view class="totalScore">
-        <image src="/static/images/score.png" mode="widthFix"></image>
-      </view>
       <view class="scoreList">
         <view class="flex items" wx:for="{{comments}}" wx:key="{{index}}">
           <view class="flex-ft img-box">
