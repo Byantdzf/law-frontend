@@ -18,6 +18,16 @@ module.exports = {
   newsList: params => get('/applets/user/article/list', params),
 
   /**
+   * 律师列表
+  */
+ lawyerList: params => get('/applets/user/lawyer/list', params),
+
+ /**
+  * 律师详情
+ */
+  lawyerDetail: params => get('/applets/user/lawyer/details/' + params.id),
+
+  /**
    * 新闻详细
   */
   newsDetails: params => get('/applets/user/article/details/' + params.id),
@@ -35,5 +45,10 @@ module.exports = {
   /**
    * 上传文件
   */
-  uploadFile: params => post('test.php', params, {requestType: 'uploadFile'}),
+  uploadFile: params => post('/applets/lawyer/uploadFile', params, {requestType: 'uploadFile'}),
+
+  /**
+   * 上传文件
+  */
+  data: params => get('/applets/lawyer/getDictData', params)
 }

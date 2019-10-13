@@ -989,12 +989,12 @@ layui.define(function (exports) {
 			fileUploader.on('uploadSuccess', function(file,res) {
 				layer.close(uploading);
 				if(res.code==2){
-					gather.msg(lang.text.uploadSuccess);
+					gather.msg(global.msg.uploadSuccess);
 					if (callback) {
 						callback(res);
 					}
 				}else{
-					gather.msg(lang.text.uploadFaild);
+					gather.msg(global.msg.uploadFaild);
 					fileUploader.removeFile(fileUploader.getFile(file.id));
 				}
 			});

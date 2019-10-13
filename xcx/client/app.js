@@ -15,6 +15,7 @@ App({
       latitude: 22.55,
       longitude: 114.05
     },
+    maxScore: 5,    // 律师评分为5分制
     userInfo: null, // 用户信息
     adInfo: null, // 用户位置信息,
     smsCount: 60, // 再次发短信间隔时间
@@ -154,16 +155,33 @@ App({
         }
       })
   },
-  getCityLocation(city) {
+  getCityLocation(provice, city) {
     this.qqmapsdk &&
       this.qqmapsdk.geocoder({
         address: city,
         complete: res => {
-          let adInfo = {}
-          adInfo.province = res.result.address_components.province
-          adInfo.city = res.result.address_components.city
-          adInfo.location = res.result.location
-          this.globalData.adInfo = adInfo
+          if (res.result && res.result.length) {
+            let adInfo = {}
+            adInfo.province = res.result.address_components.province
+            adInfo.city = res.result.address_components.city
+            adInfo.location = res.result.location
+            this.globalData.adInfo = adInfo
+          } else {
+            this.qqmapsdk.geocoder({
+              address: provice,
+              complete: res => {
+                if (res.result && res.result.length) {
+                  let adInfo = {}
+                  adInfo.province = res.result.address_components.province
+                  adInfo.city = res.result.address_components.city
+                  adInfo.location = res.result.location
+                  this.globalData.adInfo = adInfo
+                } else {
+                  
+                }
+              }
+            })
+          }
         }
       })
   },

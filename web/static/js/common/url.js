@@ -5,7 +5,7 @@ if (typeof (hosts) == 'undefined') {
 
 var URL = {
 	common: {
-		upload: '/base/tool/oss/upload',
+		upload: '/applets/lawyer/multiUpload',
 	},
 	auth: {
 		login: '/static/data/login.json',

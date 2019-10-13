@@ -39,7 +39,7 @@ Page({
         type: '',
     },
     onLoad() {
-        const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province, app.globalData.adInfo.city] : []
+        const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
         app.pages.add(this)
         app.setNavColor()
         this.setData({ currArea })
@@ -66,13 +66,11 @@ Page({
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
             params.goodAt = this.data.type
-            
             this.data.sorts.forEach((item, i) => {
                 if (item.code) {
                     params[item.code] = item.value
                 }
             })
-            console.log(params)
             return params
         })
     },
@@ -123,7 +121,16 @@ Page({
     },
     getCityResult(e) {
         let city = e.detail[1].name
-        app.getCityLocation(city)
-        this.onLoad()
+        this.setData({
+            currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
+        })
+        app.getCityLocation(e.detail[0].name, e.detail[1].name)
+        this.loadList()
+    },
+    imageError(e) {
+        var _errImg = e.target.dataset.img
+        var _errObj = {}
+        _errObj[_errImg] = "/static/images/demo/img_lawyer.png"
+        this.setData(_errObj)
     }
 })

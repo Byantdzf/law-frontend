@@ -43,11 +43,9 @@
 .list-item .img-box {
   width: 120rpx;
   height: 120rpx;
-  background: #f3f3f3;
-  border-radius: 6rpx;
 }
 .list-item .img-box image {
-  border-radius: 6rpx;
+  border-radius: 50%;
 }
 .list-item .name {
   font-size: 32rpx;

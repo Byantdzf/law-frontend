@@ -102,6 +102,7 @@ Component({
       wx.getUserInfo({
         lang: "zh_CN",
         success: (detail) => {
+          console.log(detail)
           if (detail.errMsg == "getUserInfo:ok") {
             this.data.authResolve(detail.userInfo)
             wx.setStorageSync('userInfo', detail.userInfo)

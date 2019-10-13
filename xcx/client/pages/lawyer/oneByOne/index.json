@@ -1,7 +1,6 @@
 {
   "navigationBarTitleText": "一对一咨询",
   "usingComponents": {
-    "app-text": "/components/app-text/index",
-    "app-pop": "../../../../components/app-pop/index"
+    "app-cityPicker": "/components/app-cityPicker/index"
   }
 }
