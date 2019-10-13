@@ -15,6 +15,7 @@ App({
       latitude: 22.55,
       longitude: 114.05
     },
+    maxScore: 5,    // 律师评分为5分制
     userInfo: null, // 用户信息
     adInfo: null, // 用户位置信息,
     smsCount: 60, // 再次发短信间隔时间

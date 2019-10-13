@@ -9,58 +9,43 @@ Page({
   data: {
     showType: 1,
     persent: 0,
+    gender: ['', '男', '女'],
     defaultPic: '/static/images/demo/img_lawyer.png',
-    details: {
-      id: 1,
-      name: '何金宝律师',
-      area: '广东-深圳',
-      imgUrl: '../../../static/images/demo/wakaka.png',
-      score: 4.9,
-      content: '<p>1995年吉林大学法学研究生院毕业后在深圳从事专职律师至今，创晖律师所主任，深圳仲裁委员会仲裁员，安师大法学院校外硕导。诉讼纠纷代理、刑事辩护、公司法律顾问及金融法律服务。出具尽调报告和法律意见书。</p>',
-      helpers: 249,
-      followers: 249,
-      listData:[
-        {"name": "语音咨询", "orderNums":"20","score":"2.9"},
-        {"name": "1对1咨询", "orderNums":"20","score":"2.9"},
-        {"name": "非诉讼法律服务", "orderNums":"20","score":"2.9"},
-        {"name": "诉讼法律服务", "orderNums":"20","score":"2.9"},
-        {"name": "收费代理", "orderNums":"20","score":"2.9"}
-      ]
-    },
+    details: {},
     comments: [
-      {
-        id: 1,
-        name: 'Silent Li',
-        area: '广东-深圳',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        type: '风险代理律师',
-        servicesScore: '5',
-        servicesTime: '2019年8月8日',
-        Professional: '5',
-        remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
-      },
-      {
-        id: 2,
-        name: '泼辣丸子',
-        area: '广东-深圳',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        type: '风险代理律师',
-        servicesScore: '5',
-        servicesTime: '2019年8月8日',
-        Professional: '5',
-        remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
-      },
-      {
-        id: 3,
-        name: '我在旧城等待花开',
-        area: '广东-深圳',
-        imgUrl: '../../../static/images/demo/wakaka.png',
-        type: '风险代理律师',
-        servicesScore: '5',
-        servicesTime: '2019年8月8日',
-        Professional: '5',
-        remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
-      }
+      // {
+      //   id: 1,
+      //   name: 'Silent Li',
+      //   area: '广东-深圳',
+      //   imgUrl: '../../../static/images/demo/wakaka.png',
+      //   type: '风险代理律师',
+      //   servicesScore: '5',
+      //   servicesTime: '2019年8月8日',
+      //   Professional: '5',
+      //   remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
+      // },
+      // {
+      //   id: 2,
+      //   name: '泼辣丸子',
+      //   area: '广东-深圳',
+      //   imgUrl: '../../../static/images/demo/wakaka.png',
+      //   type: '风险代理律师',
+      //   servicesScore: '5',
+      //   servicesTime: '2019年8月8日',
+      //   Professional: '5',
+      //   remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
+      // },
+      // {
+      //   id: 3,
+      //   name: '我在旧城等待花开',
+      //   area: '广东-深圳',
+      //   imgUrl: '../../../static/images/demo/wakaka.png',
+      //   type: '风险代理律师',
+      //   servicesScore: '5',
+      //   servicesTime: '2019年8月8日',
+      //   Professional: '5',
+      //   remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
+      // }
     ]
   },
 
@@ -77,7 +62,12 @@ Page({
       let details = res.data
       details.joinDate = details.joinDate && details.joinDate.split(' ')[0]
       details.goodAt = details.goodAt && details.goodAt.split('，')
+      
+      let score = details.score > 5 ? 5 : details.score < 0 ? 0 : details.score
+      let persent = Math.floor(score / app.globalData.maxScore * 100)
+
       this.setData({
+        persent,
         details
       })
     })

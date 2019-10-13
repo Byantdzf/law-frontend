@@ -1,23 +1,21 @@
 /* pages/lawyer/oneByOne/index.wxss */
+@import "/static/css/issue.wxss";
+
 .img-box { width:200rpx; height:200rpx; margin: 0 auto; border-radius: 20rpx; overflow: hidden;}
 .lawyerName { text-align: center; }
-.lawyerName .score { font-size:40rpx; margin-top:20rpx;}
 .lawyerName .name { font-size: 40rpx;}
-.lawyerName text { font-size: 28rpx; color:#999; margin-left:40rpx;}
+.lawyerName .name text { font-size: 28rpx; color:#999; margin-left:40rpx;}
 .helper { padding: 40rpx 50rpx;}
-.btn-box button[size=mini] { padding-left:.5em; padding-right:.5em;}
-.tab-box { text-align: center; margin-top:30rpx; background: #f5f5f5; line-height: 3em;}
-.tab-box .curr { background: #f55; color:#fff;}
-.tab-content { margin: 30rpx 0;}
-.tab-content .items { line-height: 2em;}
-.tab-content .items .flex-ft { width:170rpx;}
-.tab-content .items.rangeList { align-items: initial;}
-.tab-content .items.rangeList button { float:left; margin: 0 20rpx 20rpx 0; font-size:24rpx; padding: 0 .5rem;}
 
-.issueBox { margin: 0 30rpx;}
-.issue-title { font-size: 30rpx; font-weight: bold; margin-bottom: 20rpx;}
-.issue-form-label { width:160rpx; color:#999;}
-.issue-form-item { border-bottom: 1rpx solid #e8e8e8; padding: 40rpx 0;}
-.issue-form-item textarea { min-height: 200rpx; width: 100%;}
-.issueBox .radio { margin-right: 50rpx;}
-.issueBox .form-btn-box button { width:100%;}
+.scoreBox { text-align: center; height: 40rpx;}
+.scoreBox>view { display: inline-block; vertical-align: top;}
+.starBox { width:200rpx; height:40rpx; margin-right:20rpx; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NUM3RTFCQzdFRDY3MTFFOUEzMTY5NkJFMUNFOEFGRkMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NUM3RTFCQzZFRDY3MTFFOUEzMTY5NkJFMUNFOEFGRkMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUQyMkNBMEFFRDY3MTFFOUExMDZFODdFMTc2MTA2NEIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUQyMkNBMEJFRDY3MTFFOUExMDZFODdFMTc2MTA2NEIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4afEslAAACA0lEQVR42syYzUrDQBSFm+qiC0FFtIhpraVYN7oSBBfdiFQXLvUp+jjxKVyLCxGlUoQKIoJiS6luFLQLNwpCwXgGb8oYmmSS6WRy4XDTND8fJzP3JmPYtp1KYqRTCY1x2Qu0Wi2WZqF32jUH9UTPL5fLSh078NjW+iiLQ/atJAFsF7K432x7CxrTBobxlff4i8Ft6nRsz+UWH2vQROxgPm7xru3ocMzPLSeyVD7iAYNbJcFDGfh+nI5VBdzioxT2BoZfr4QzGaQZaB5agEzOiTBRo/wDvVKXeIM+oE9U/74nGCCmkFahHDQdESBqOOB3gLwcgAGKAVViBPGLCoNzxlhSoJz6Nxj8F5ydOqNGLH9gsO4e6UYzHLv3E7H8n5UYa+tIGxoeK4NqA+rUs1xomAgM6gFQ54F1DHDLSNsxwDGoW0A1hAsstZ2qQjgGdQ2oZqiWhBM6SGeKJgS75hXUjNQrAfeIVFcA1qAqINXE+wrAvkfxdlFUAFYYBdiiArClUYCp+FpPSx2AkqFyCcGQIZ9UVMesoC+oILCsQseyMosquRBvn0eQza1dWAKTqhMVLC8AdAw9c/sPafUnFQBYkHEs4wN0gs7QpWUod/QEADMyYHUCsdxAguPIATRdgLWgVmcELXVyX09dAL0M+T/MgDepuLI++UX9OBqYrkjsGuyvAAMAbMSY/3UKCZUAAAAASUVORK5CYII=); background-size:40rpx;}
+.starBox text { display: block; height:100%; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjFBRTM3NzBFRDY4MTFFOUI2NjlFQjkzNEU2MzY3M0EiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjFBRTM3NkZFRDY4MTFFOUI2NjlFQjkzNEU2MzY3M0EiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUQyMkNBMEFFRDY3MTFFOUExMDZFODdFMTc2MTA2NEIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUQyMkNBMEJFRDY3MTFFOUExMDZFODdFMTc2MTA2NEIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz52U4ISAAACA0lEQVR42syYzUrDQBSFm6rQhaAiWsS21lLFja4UwUU3ItWFS32KPk58CtfiQkSpFKEFEUERLdWNgnbhRkEIGM/gTRlDk0wynUwuHG6a5ufjZObeZAzbtlNJjHQqoTEsewGrtcDSFPROu6ahruj5I2uPSh3b99jW+ihLffYtJQFsBzK532x7ExrSBobxVfD4i8Ft6HRs1+UWHyvQaOxgPm7xrm3rcMzPLSeyVD7iAYNbZcFDGfhenI5VBdzioxz2BoZfr4QzGaRJaAaahXKcE2GiRvkHeqUu8QZ9QJ+o/pYnGCDGkZahPDQRESBqOOA3gLzogQGKAVViBPGLCoNzxlhSoJz61xv855ydOqNGLH9gsO4W6UozHLv3E7H8n5UYa6tI6xoeK4N6ANSJZ7nQMBEY1B2gzgLrGOAWkbZigGNQ14BqCBdYajtVhXAMqgWoZqiWhBPaSKeKJgS75iXUjNQrAXePVFcA1qAqINXELQVg34N4uygpACsOAmxOAdj8IMBUfK2npQ5AyVC5hGDIkI8pqmNm0BdUEFhWoWNZmUWVfIi3z0PI5tYuTIFJ1Y4KVhAAOoKeuf0HtPqTCgAsyjiW8QE6Rmfo0DKUO7oCgBkZsDqBmG4gwXHkAOZcgLWgVmcELXVyX08dAL30+T/MgM9RcWV98ov6cTQwXZHYNdhfAQYASKmZn9ReaGIAAAAASUVORK5CYII=); background-size:40rpx;}
+
+.scoreBox .score { color: #f00; font-size: 36rpx;}s
+.scoreList .items { border:1px solid #e6e6e6; border-radius: 30rpx; padding:20rpx; align-items: initial; margin-top: 30rpx;}
+.scoreList .items .img-box { width:200rpx; height:200rpx; margin-right:50rpx; margin-top:10rpx; border-radius: 20rpx; overflow: hidden;}
+.scoreList .items .flex-bd .name { font-size: 36rpx; text-align: left;}
+.scoreList .items .flex-bd .flex { line-height: 1.5em;}
+.scoreList .items .flex-bd .flex .flex-ft { width: 140rpx; font-size: 24rpx;}
+.scoreList .items .desc {margin-top:20rpx; font-size: 24rpx; color:#999; line-height: 1.5em; text-align: left;}

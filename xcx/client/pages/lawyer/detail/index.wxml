@@ -4,7 +4,7 @@
   </view>
   <view class="lawyerName">
     <view class="scoreBox">
-      <view class="starBox"><text style="width:40%"></text></view>
+      <view class="starBox"><text style="width:{{persent}}%"></text></view>
       <view class="score">{{details.score}}分</view>
     </view>
     <view class="name">
@@ -42,7 +42,7 @@
           <text class="cl-999">性别：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">{{details.sex}}</text>
+          <text class="cl-666">{{gender[details.gender]}}</text>
         </view>
       </view>
       <view class="items flex">
@@ -124,8 +124,8 @@
             <view class="name">{{item.name}}</view>
             <view class="flex"><view class="flex-ft cl-999">服务类型：</view><view class="flex_bd">{{ item.type }}</view></view>
             <view class="flex"><view class="flex-ft cl-999">服务时间：</view><view class="flex_bd">{{ item.servicesTime }}</view></view>
-            <view class="flex"><view class="flex-ft cl-999">服务态度 </view><view class="flex_bd">{{ item.servicesScore }}</view></view>
-            <view class="flex"><view class="flex-ft cl-999">专业程度 </view><view class="flex_bd">{{ item.Professional }}</view></view>
+            <view class="flex"><view class="flex-ft cl-999">服务态度：</view><view class="flex_bd">{{ item.servicesScore }}</view></view>
+            <view class="flex"><view class="flex-ft cl-999">专业程度：</view><view class="flex_bd">{{ item.Professional }}</view></view>
           </view>
             <view class="desc">{{ item.remark }}</view>
         </view>
