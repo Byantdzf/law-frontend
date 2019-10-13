@@ -1,0 +1,25 @@
+<!-- pages/tabBar/search/index.wxml -->
+<app-page id="app-page">
+  <view class="container page-evaluate">
+    <view class="flex-column evaluate-head">
+      <image class="lawyer-img" src="{{ lawyer.pic }}" mode="widthFix" />
+      <view class="lawyer-name">{{ lawyer.name }}</view>
+    </view>
+    <view class="page-form">
+      <view class="flex">
+        <view class="cl-999 mr-20">专业态度</view>
+        <app-score data-key="professionalAttitudeScore" bindchange="handleScoreChange"/>
+      </view>
+      <view class="flex mt-20">
+        <view class="cl-999 mr-20">服务态度</view>
+        <app-score data-key="serviceAttitudeScore" bindchange="handleScoreChange"/>
+      </view>
+      <view class="mt-20">
+        <textarea class="textarea" placeholder="请在这输入对此次服务的文字说明" bindinput="handleContentChange"></textarea>
+      </view>
+    </view>
+    <view class="btn-box">
+      <button type="primary" bindtap="submit">提交评价</button>
+    </view>
+  </view>
+</app-page>

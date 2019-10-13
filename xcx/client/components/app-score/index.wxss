@@ -1,0 +1,7 @@
+.app-score {
+  display: flex;
+  align-items: center;
+}
+.app-score__item + .app-score__item {
+  margin-left: 6rpx;
+}

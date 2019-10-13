@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "给他评价",
+  "usingComponents": {
+    "app-score": "/components/app-score/index"
+  }
+}

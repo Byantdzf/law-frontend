@@ -78,7 +78,9 @@
       "root": "pages/order",
       "pages": [
         "list/index",
-        "detail/index"
+        "detail/index",
+        "evaluate/index",
+        "appeal/index"
       ]
     }
   ],

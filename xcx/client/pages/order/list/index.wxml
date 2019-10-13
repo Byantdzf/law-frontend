@@ -61,7 +61,7 @@
               <view class="flex pt-20" wx:if="{{ fn.showLawyer(item) }}">
                 <view class="label cl-999">接单律师：</view>
                 <view class="flex flex-bd cl-666">
-                  <image class="img-lawyer" src="{{ item.pic }}"></image>
+                  <image class="img-lawyer" src="{{ item.lawyerPic }}"></image>
                   <text>{{ item.lawyer }}</text>
                 </view>
               </view>
@@ -96,7 +96,7 @@
                 wx:if="{{ fn.showComment(item) }}"
                 plain
                 size="mini"
-                data-id="{{ item.id }}"
+                data-index="{{ index }}"
                 catchtap="handleComment"
               >
                 立即评价
