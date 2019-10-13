@@ -1,6 +1,7 @@
 
 const app = getApp();
-const { orderType, orderCategory, orderStatus } = require('../../../config/global')
+const { orderType, orderCategory, orderStatus } = require('../../../config/global');
+const orderApi = require('../../../service/order');
 Page({
   data: {
     orderType,
@@ -47,7 +48,21 @@ Page({
     app.gotoPage('/pages/order/detail/index?id=' + id)
   },
   handleCancel(e) {
-
+    const { index } = e.currentTarget.dataset;
+    app.confirm({
+      content: '系统正在积极为您指派律师您确定要取消订单？'
+    }).then(() => {
+      const id = this.data.list[index].id;
+      orderApi.orderCancel(id).then(() => {
+        wx.showToast({
+          title: '订单已取消',
+          icon: 'success'
+        });
+        this.setData({
+          [`list[${index}].orderStatus`]: 70
+        });
+      });
+    }).catch(e => {});
   },
   handlePay(e) {
 

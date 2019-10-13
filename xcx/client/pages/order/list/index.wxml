@@ -78,7 +78,7 @@
                 wx:if="{{ fn.showCancel(item) }}"
                 plain
                 size="mini"
-                data-id="{{ item.id }}"
+                data-index="{{ index }}"
                 catchtap="handleCancel"
               >
                 取消订单
