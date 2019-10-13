@@ -22,6 +22,13 @@
   margin: 10rpx 0;
   font-size: 32rpx;
 }
+.img-lawyer {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+  background: #f3f3f3;
+}
 .order-item-hd {
   padding-bottom: 20rpx;
   border-bottom: 2rpx solid #f3f3f3;
@@ -33,12 +40,12 @@
   border-top: 2rpx solid #f3f3f3;
 }
 .order-item .btn-box {
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   justify-content: flex-end;
 }
 .order-item .btn-box button {
   width: 210rpx;
-  margin: 0;
+  margin: 0 0 0 20rpx;
   padding: 0 20rpx;
   border-color: #e0e0e0;
   color: #666;

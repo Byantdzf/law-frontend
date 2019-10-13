@@ -9,9 +9,7 @@ Page({
         app.setNavColor()
 
         const appList = this.selectComponent('#app-list')
-        appList.setParams(params => {
-            return params
-        })
+        appList.setParams()
     },
     updateList(e) {
         this.setData({ list: e.detail })

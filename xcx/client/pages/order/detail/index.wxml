@@ -1,6 +1,98 @@
-<!-- pages/order/index.wxml -->
+<!-- pages/order/detail/index.wxml -->
+<wxs module="fn">
+    module.exports = {
+      showLawyer: function(item) {
+        return '10,20,70'.indexOf(item.orderStatus) === -1;
+      },
+      showCancel: function(item) {
+        return '10,20'.indexOf(item.orderStatus) !== -1;
+      },
+      showPay: function(item) {
+        return item.orderStatus == 10;
+      },
+      showComment: function(item) {
+        return item.orderStatus == 50;
+      },
+      showReply: function(item) {
+        return '40,50,60'.indexOf(item.orderStatus) !== -1;
+      }
+    }
+</wxs>
 <app-page id="app-page">
-  <view class="flex-column container page-order-detail">
-    order detail
+  <view class="container page-order-detail">
+    <view class="detail-box">
+      <view class="title fw-b">基本信息</view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单编号：</text>
+        <text class="flex-bd cl-666">{{ item.orderNo }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单状态：</text>
+        <text class="flex-bd cl-primary fw-b">{{ orderStatus[item.status] }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单类型：</text>
+        <text class="flex-bd cl-666">{{ orderType[item.orderType] }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单种类：</text>
+        <text class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">所属分类：</text>
+        <text class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单金额：</text>
+        <text class="flex-bd cl-666">{{ item.amount }}元</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">是否紧急：</text>
+        <text class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</text>
+      </view>
+      <view class="flex detail-row flex-start">
+        <text class="label cl-999">咨询内容：</text>
+        <text class="flex-bd cl-666">{{ item.content }}</text>
+      </view>
+      <view class="flex detail-row flex-start">
+        <text class="label cl-999">备注信息：</text>
+        <text class="flex-bd cl-666">{{ item.remark }}</text>
+      </view>
+    </view>
+    <view class="detail-box" wx:if="{{ fn.showLawyer(item) }}">
+      <view class="flex detail-row" wx:if="{{ fn.showLawyer(item) }}">
+        <text class="label cl-999">接单律师：</text>
+        <view class="flex flex-bd cl-666">
+          <image class="img-lawyer" src="{{ item.pic }}"></image>
+          <text>{{ item.lawyer }}</text>
+        </view>
+      </view>
+      <view class="flex detail-row flex-start mt-20" wx:if="{{ fn.showReply(item) }}">
+        <text class="label cl-999">回复详情：</text>
+        <view class="flex flex-bd cl-666">
+          <view class="flex pb-20">
+            <view class="iconfont icon-yuyin cl-primary"></view>
+            <text>100秒，点击收听</text>
+          </view>
+          <view>{{ item.content }}</view>
+        </view>
+      </view>
+    </view>
+    <view class="detail-box">
+      <view class="flex detail-row flex-start">
+        <text class="label cl-999">我的追问：</text>
+        <view class="flex flex-bd cl-666">
+          <text>{{ item.askSecondContent }}</text>
+        </view>
+      </view>
+    </view>
+    <view class="detail-box">
+      <view class="flex detail-row flex-start">
+        <text class="label cl-999">我的评价：</text>
+        <view class="flex flex-bd cl-666">
+          
+        </view>
+      </view>
+    </view>
   </view>
 </app-page>

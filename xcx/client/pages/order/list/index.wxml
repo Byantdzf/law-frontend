@@ -1,32 +1,51 @@
 <!-- pages/order/index.wxml -->
+<wxs module="fn">
+    module.exports = {
+      showLawyer: function(item) {
+        return '10,20,70'.indexOf(item.orderStatus) === -1;
+      },
+      showCancel: function(item) {
+        return '10,20'.indexOf(item.orderStatus) !== -1;
+      },
+      showPay: function(item) {
+        return item.orderStatus == 10;
+      },
+      showComment: function(item) {
+        return item.orderStatus == 50;
+      },
+      showReply: function(item) {
+        return '40,50,60'.indexOf(item.orderStatus) !== -1;
+      }
+    }
+</wxs>
 <app-page id="app-page">
   <view class="flex-column container page-order">
     <app-tab items="{{ statusItems }}"/>
     <view class="flex-bd">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20">
-          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}">
+          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="gotoDetail">
             <view class="flex order-item-hd">
               <view class="flex-bd">订单编号：{{ item.orderNo }}</view>
               <view class="flex flex-ft">
-                <app-countdown
+                <!-- <app-countdown
                   wx:if="{{ item.time }}"
                   value="{{ item.time }}"
                   data-index="{{ index }}"
                   bind:timeup="handleItemTimeup"
-                />
-                <text class="pl-10 cl-primary fw-b">{{ orderStatus[item.status] }}</text>
+                /> -->
+                <text class="pl-10 cl-primary fw-b">{{ orderStatus[item.orderStatus] }}</text>
               </view>
             </view>
             <view class="order-item-bd pt-20">
               <view class="flex">
                 <view class="flex flex-bd">
                   <view class="label cl-999">下单时间：</view>
-                  <view class="flex-bd cl-666">2019年8月18日20:00</view>
+                  <view class="flex-bd cl-666">{{ item.orderTime }}</view>
                 </view>
                 <view class="flex">
                   <view class="label cl-999">订单金额：</view>
-                  <view class="flex-bd cl-red">50元</view>
+                  <view class="flex-bd cl-red">{{ item.amount }}元</view>
                 </view>
               </view>
               <view class="flex">
@@ -38,15 +57,15 @@
                 <view class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</view>
               </view>
             </view>
-            <view class="order-item-ft mt-20" wx:if="{{ item.status }}">
-              <view class="flex pt-20">
+            <view class="order-item-ft mt-20">
+              <view class="flex pt-20" wx:if="{{ fn.showLawyer(item) }}">
                 <view class="label cl-999">接单律师：</view>
                 <view class="flex flex-bd cl-666">
-                  <image src="{{ item.pic }}"></image>
+                  <image class="img-lawyer" src="{{ item.pic }}"></image>
                   <text>{{ item.lawyer }}</text>
                 </view>
               </view>
-              <view class="flex pt-10">
+              <view class="flex pt-20" wx:if="{{ fn.showReply(item) }}">
                 <view class="label cl-999">回复详情：</view>
                 <view class="flex flex-bd cl-666">
                   <view class="iconfont icon-yuyin cl-primary"></view>
@@ -55,9 +74,33 @@
               </view>
             </view>
             <view class="flex btn-box">
-              <button size="mini" plain wx:if="{{ item.status == 0 }}">取消订单</button>
-              <button size="mini" plain wx:if="{{ item.status == 2 }}">立即支付</button>
-              <button size="mini" plain wx:if="{{ item.status == 4 }}">立即评价</button>
+              <button
+                wx:if="{{ fn.showCancel(item) }}"
+                plain
+                size="mini"
+                data-id="{{ item.id }}"
+                catchtap="handleCancel"
+              >
+                取消订单
+              </button>
+              <button
+                wx:if="{{ fn.showPay(item) }}"
+                plain
+                size="mini"
+                data-id="{{ item.id }}"
+                catchtap="handlePay"
+              >
+                立即支付
+              </button>
+              <button
+                wx:if="{{ fn.showComment(item) }}"
+                plain
+                size="mini"
+                data-id="{{ item.id }}"
+                catchtap="handleComment"
+              >
+                立即评价
+              </button>
             </view>
           </view>
         </view>

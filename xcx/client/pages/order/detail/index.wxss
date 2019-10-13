@@ -1,3 +1,32 @@
 .page-order-detail {
+  /* background: #f3f3f3; */
+  padding: 30rpx;
+  line-height: 44rpx;
+}
+
+.page-order-detail .title {
+  margin-bottom: 10rpx;
+  font-size: 32rpx;
+}
+
+.img-lawyer {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
   background: #f3f3f3;
+}
+
+.detail-box {
+  position: relative;
+  padding: 30rpx 0;
+}
+
+.detail-box + .detail-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-top: 2rpx solid #f3f3f3;
 }
