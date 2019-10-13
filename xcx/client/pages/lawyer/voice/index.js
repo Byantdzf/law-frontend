@@ -72,6 +72,10 @@ Page({
           })
         })
 
+        selectApi.data({dictCode: 'PayMoney'}).then(res => {
+          console.log(res)
+        })
+
         // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
         api.getRegisterStatus().then(res => {
             let useCurrentPhone = null

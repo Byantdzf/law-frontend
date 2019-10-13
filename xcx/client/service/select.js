@@ -45,5 +45,10 @@ module.exports = {
   /**
    * 上传文件
   */
-  uploadFile: params => post('test.php', params, {requestType: 'uploadFile'}),
+  uploadFile: params => post('/applets/lawyer/uploadFile', params, {requestType: 'uploadFile'}),
+
+  /**
+   * 上传文件
+  */
+  data: params => get('/applets/lawyer/getDictData', params)
 }
