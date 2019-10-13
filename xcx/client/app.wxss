@@ -73,6 +73,7 @@ button:after {
 .cl-f3{ color:#f3f3f3; }
 .cl-pink { color: #f9879a; }
 .cl-warm { color: #ffba00; }
+.cl-link { color: #409eff; }
 
 .bg-pink { background: #f9879a; }
 .bg-primary{ background: #CF443D; }

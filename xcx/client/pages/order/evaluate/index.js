@@ -15,6 +15,7 @@ Page({
       }
     });
     this.orderId = id;
+    app.setNavColor();
   },
   handleScoreChange(e) {
     const { key } = e.currentTarget.dataset;

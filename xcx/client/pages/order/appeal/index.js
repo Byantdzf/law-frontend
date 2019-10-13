@@ -12,10 +12,11 @@ Page({
   },
   onLoad({ id }) {
     this.orderId = id;
+    app.setNavColor();
   },
   radioChange(e) {
     const { value } = e.detail
-    this.appealType = value;
+    this.data.appealType = value;
   },
   handleContentChange(e) {
     this.data.remark = e.detail.value;
@@ -27,6 +28,7 @@ Page({
       remark,
       id: this.orderId
     };
+    console.log(params)
     api.orderAppeal(params).then(res => {
       wx.navigateBack();
       wx.showToast({

@@ -2,11 +2,11 @@
 <app-page id="app-page">
   <view class="container page-evaluate">
     <view class="page-form">
-      <view class="flex">
-        <view class="cl-999 mr-20">申诉类型</view>
+      <view class="title">申诉类型</view>
+      <view class="flex mt-20">
         <radio-group class="radio-group" bindchange="radioChange">
-          <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
-            <text>{{item.value}}</text>
+          <radio class="radio pr-30" color="#CF443D" wx:for-items="{{items}}" wx:key="value" value="{{item.value}}" checked="{{item.checked}}">
+            <text>{{item.name}}</text>
           </radio>
         </radio-group>
       </view>

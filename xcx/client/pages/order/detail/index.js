@@ -10,9 +10,10 @@ Page({
     item: {}
   },
   onLoad(e) {
-    app.pages.add(this)
-    app.setNavColor()
-    this.loadData(e.id)
+    app.pages.add(this);
+    app.setNavColor();
+    this.orderId = e.id;
+    this.loadData(e.id);
   },
   loadData(id) {
     orderApi.orderDetails(id).then(res => {
@@ -20,5 +21,8 @@ Page({
       const item = res.data || {}
       this.setData({ item })
     })
+  },
+  gotoAppeal() {
+    app.gotoPage(`/pages/order/appeal/index?id=${this.orderId}`);
   }
 })

@@ -63,18 +63,23 @@
       <view class="flex detail-row" wx:if="{{ fn.showLawyer(item) }}">
         <text class="label cl-999">接单律师：</text>
         <view class="flex flex-bd cl-666">
-          <image class="img-lawyer" src="{{ item.pic }}"></image>
+          <image class="img-lawyer" src="{{ item.lawyerPic }}"></image>
           <text>{{ item.lawyer }}</text>
         </view>
       </view>
       <view class="flex detail-row flex-start mt-20" wx:if="{{ fn.showReply(item) }}">
         <text class="label cl-999">回复详情：</text>
-        <view class="flex flex-bd cl-666">
-          <view class="flex pb-20">
+        <view class="flex-column flex-bd cl-666">
+          <view class="flex">
             <view class="iconfont icon-yuyin cl-primary"></view>
-            <text>100秒，点击收听</text>
+            <view>100秒，点击收听</view>
           </view>
-          <view>{{ item.content }}</view>
+          <view class="mt-20">
+            <text class="cl-999">（对回复结果不满意？</text>
+            <text class="cl-link" bindtap="gotoAppeal">立即申诉</text>
+            <text class="cl-999">）</text>
+          </view>
+          <view class="mt-20">{{ item.content }}</view>
         </view>
       </view>
     </view>
