@@ -3,7 +3,8 @@
     "app-swiper": "/components/app-swiper/index",
     "app-text": "/components/app-text/index",
     "app-share": "/components/app-share/index",
-    "app-cityPicker": "/components/app-cityPicker/index"
+    "app-cityPicker": "/components/app-cityPicker/index",
+    "app-pop": "/components/app-pop/index"
   },
   "backgroundColorTop": "#00b0ab",
   "backgroundColorBottom": "#f3f3f3"

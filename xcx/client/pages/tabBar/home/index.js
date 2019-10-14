@@ -1,6 +1,6 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
-const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
+const { appName, PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 let page = null
 Page({
     data: {
@@ -11,99 +11,37 @@ Page({
             '/static/images/demo/banner2.png',
             '/static/images/demo/banner3.png'
         ],
-        list: [
-            // {
-            //     id: 1,
-            //     name: '何金宝律师',
-            //     imgUrl: '../../../static/images/demo/wakaka.png',
-            //     score: 4.9,
-            //     desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-            //     helpers: 249,
-            //     followers: 249
-            // }, {
-            //     id: 2,
-            //     name: '何金宝律师',
-            //     imgUrl: '../../../static/images/demo/wakaka.png',
-            //     score: 4.9,
-            //     desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-            //     helpers: 249,
-            //     followers: 249
-            // }, {
-            //     id: 3,
-            //     name: '何金宝律师',
-            //     imgUrl: '../../../static/images/demo/wakaka.png',
-            //     score: 4.9,
-            //     desc: '1995年吉林大学法学研究生院毕业后在深圳从事，林大学法学研究生院......',
-            //     helpers: 249,
-            //     followers: 249
-            // }
-        ],
-        hotNews: [
-            // {
-            //   id: 1,
-            //   imgUrl: '/static/images/demo/banner1.png',
-            //   title: '劳务合同纠纷风起云涌',
-            //   content: '劳务合同纠纷风起云涌'
-            // }, {
-            //   id: 2,
-            //   imgUrl: '/static/images/demo/banner2.png',
-            //   title: '劳务合同纠纷风起云涌',
-            //   content: '劳务合同纠纷风起云涌'
-            // }, {
-            //   id: 3,
-            //   imgUrl: '/static/images/demo/banner3.png',
-            //   title: '劳务合同纠纷风起云涌',
-            //   content: '劳务合同纠纷风起云涌'
-            // }, {
-            //   id: 4,
-            //   imgUrl: '/static/images/demo/banner1.png',
-            //   title: '劳务合同纠纷风起云涌',
-            //   content: '劳务合同纠纷风起云涌'
-            // }
-        ],
+        list: [],
+        hotNews: [],
         tools: [
             {
-                name1: '语音',
-                name2: '咨询',
+                name: '在线律师咨询',
                 url: '/pages/issue/voice/index',
-                icon: 'icon-yuyin',
-                iconBg: '#00b0ab'
+                icon: '/static/images/icon-menu01.png'
             }, {
-                name1: '1对1',
-                name2: '咨询',
+                name: '指定律师咨询',
                 url: '/pages/issue/oneByOne/index',
-                icon: 'icon-feature',
-                iconBg: '#00A2FF'
+                icon: '/static/images/icon-menu02.png'
             }, {
-                name1: '非诉讼',
-                name2: '服务',
+                name: '日常法律服务',
                 url: '/pages/legalServices/list/index?type=1',
-                icon: 'icon-feisusongzhuanxiang',
-                iconBg: '#00b0ab'
+                icon: '/static/images/icon-menu03.png'
             }, {
-                name1: '诉讼',
-                name2: '服务',
+                name: '分块法律服务',
                 url: '/pages/legalServices/list/index?type=2',
-                icon: 'icon-susong',
-                iconBg: '#F64335'
+                icon: '/static/images/icon-menu04.png'
             }, {
-                name1: '收费',
-                name2: '委托',
+                name: '收费代理',
                 url: '/pages/mandatoryLawyer/list/index?type=1',
-                icon: 'icon-shoufei',
-                iconBg: '#FFD200'
+                icon: '/static/images/icon-menu05.png'
             }, {
-                name1: '风险',
-                name2: '委托',
+                name: '风险代理',
                 url: '/pages/mandatoryLawyer/list/index?type=2',
-                icon: 'icon-fengxian',
-                iconBg: '#F9879A'
+                icon: '/static/images/icon-menu06.png'
             }, {
-                name1: '协议',
-                name2: '模版',
+                name: '协议文本',
                 url: '/pages/template/list/index',
-                icon: 'icon-xieyi',
-                iconBg: '#15B774'
+                icon: '/static/images/icon-menu07.png'
             }
         ],
         showTools: false
@@ -111,7 +49,7 @@ Page({
     onLoad() {
         app.pages.add(this)
         app.setNavColor()
-        app.setNavTitle('虎甲律师咨询平台')
+        app.setNavTitle(appName)
 
         app.getUserLocation(data => {
             const adInfo = data.adInfo || {}
@@ -166,6 +104,11 @@ Page({
         this.setData({
             showTools: !this.data.showTools
         })
+    },
+    handleClosePop() {
+      this.setData({
+        showTools: false
+      })
     },
     gotoLawyerDetail(e) {
         let { id } = e.currentTarget.dataset

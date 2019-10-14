@@ -8,7 +8,7 @@
       </view>
       <view class="flex-bd flex search-box" bind:tap="gotoSearch">
         <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
-        <view class="iconfont icon-search pl-20 pr-20"></view>
+        <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
       </view>
     </view>
     <view class="flex-bd app-scroller">
@@ -79,7 +79,7 @@
       </scroll-view>
     </view>
   </view>
-  <view class="float-tools {{ showTools ? 'show' : '' }}">
+  <!-- <view class="float-tools {{ showTools ? 'show' : '' }}">
     <view class="mask" wx:if="{{ showTools }}" bindtap="handleToolBtnTap" catch:touchmove></view>
     <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
       <text class="iconfont icon-plus"></text>
@@ -88,5 +88,27 @@
       <view class="cl-white">{{ item.name1 }}</view>
       <view class="cl-white">{{ item.name2 }}</view>
     </view>
+  </view> -->
+  <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
+    <text class="iconfont icon-plus"></text>
   </view>
+  <app-pop visible="{{ showTools }}" hideTabBar>
+    <view class="flex">
+      <view
+        class="flex-column float-tools-item"
+        wx:for="{{ tools }}"
+        wx:key="{{ index }}"
+        data-url="{{ item.url }}"
+        bind:tap="tapTools"
+      >
+        <view class="flex icon-box">
+          <image src="{{ item.icon }}" mode="widthFix"></image>
+        </view>
+        <view class="txt-box">{{ item.name }}</view>
+      </view>
+    </view>
+    <view class="pop-btn ta-c">
+      <text class="iconfont icon-close" bindtap="handleClosePop"></text>
+    </view>
+  </app-pop>
 </app-page>
