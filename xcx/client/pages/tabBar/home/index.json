@@ -2,7 +2,7 @@
   "usingComponents": {
     "app-swiper": "/components/app-swiper/index",
     "app-text": "/components/app-text/index",
-    "app-share": "/components/app-share/index",
+    "app-empty": "/components/app-empty/index",
     "app-cityPicker": "/components/app-cityPicker/index",
     "app-pop": "/components/app-pop/index"
   },

@@ -172,3 +172,11 @@
 .pop-btn .iconfont {
   color: #000;
 }
+.app-empty-wrapper {
+  margin-top: 20rpx;
+  padding: 30rpx 0;
+  background: #fff;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
+}
