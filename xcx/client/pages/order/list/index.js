@@ -8,10 +8,11 @@ Page({
     orderCategory,
     orderStatus,
     listUrl: '/applets/user/order/orderList',
-    statusItems: [],
     list: [],
+    statusItems: [],
+    curOrderStatus: -1
   },
-  onLoad() {
+  onLoad({ curOrderStatus }) {
     app.pages.add(this);
     app.setNavColor();
     let statusItems = [
@@ -32,10 +33,30 @@ Page({
     if (!this.appList) {
       this.appList = this.selectComponent('#app-list');
     }
-    this.appList.setParams();
+    if (curOrderStatus) {
+      this.setData({ curOrderStatus });
+      this.appList.setParams(params => {
+        params.orderStatus = curOrderStatus;
+        return params;
+      });
+    } else {
+      this.setData({ curOrderStatus: -1 });
+      this.appList.setParams();
+    }
   },
   updateList(e) {
     this.setData({ list: e.detail })
+  },
+  handleStatusChange(e) {
+    const orderStatus = e.detail;
+    this.appList.setParams(params => {
+      if (orderStatus != -1) {
+        params.orderStatus = orderStatus;
+      } else {
+        delete params.orderStatus;
+      }
+      return params;
+    });
   },
   // handleItemTimeup(e) {
   //   const { index } = e.currentTarget.dataset

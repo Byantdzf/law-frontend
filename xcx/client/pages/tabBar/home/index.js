@@ -42,6 +42,11 @@ Page({
                 name: '协议文本',
                 url: '/pages/template/list/index',
                 icon: '/static/images/icon-menu07.png'
+            }, {
+                name: '律师精选',
+                type: 'tab',
+                url: '/pages/tabBar/lawyer/index',
+                icon: '/static/images/icon-menu08.png'
             }
         ],
         showTools: false
@@ -132,8 +137,9 @@ Page({
         app.gotoPage('/pages/lawyer/oneByOne/index?id=' + id)
     },
     tapTools(e) {
-        let { url } = e.currentTarget.dataset
-        app.gotoPage(url)
+        let { url, type } = e.currentTarget.dataset
+        this.handleClosePop()
+        app.gotoPage(url, type)
     },
     gotoSearch() {
         app.gotoPage('/pages/search/index/index')

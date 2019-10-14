@@ -20,7 +20,7 @@
 </wxs>
 <app-page id="app-page">
   <view class="flex-column container page-order">
-    <app-tab items="{{ statusItems }}"/>
+    <app-tab items="{{ statusItems }}" current="{{ curOrderStatus }}" bindchange="handleStatusChange"/>
     <view class="flex-bd">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20">
@@ -57,8 +57,8 @@
                 <view class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</view>
               </view>
             </view>
-            <view class="order-item-ft mt-20">
-              <view class="flex pt-20" wx:if="{{ fn.showLawyer(item) }}">
+            <view class="order-item-ft mt-20" wx:if="{{ fn.showLawyer(item) }}">
+              <view class="flex pt-20">
                 <view class="label cl-999">接单律师：</view>
                 <view class="flex flex-bd cl-666">
                   <image class="img-lawyer" src="{{ item.lawyerPic }}"></image>

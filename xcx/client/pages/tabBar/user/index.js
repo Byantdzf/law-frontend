@@ -58,9 +58,7 @@ Page({
         }
     },
     gotoOrder(e) {
-        let { state } = e.currentTarget.dataset
-        let params = '';
-        state && (params = '?state=' + state)
-        app.gotoPage('/pages/order/list/index' + params)
+      let { state } = e.currentTarget.dataset;
+      app.gotoPage(`/pages/order/list/index?curOrderStatus=${state}`);
     }
 })
