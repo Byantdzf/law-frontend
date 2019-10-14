@@ -16,32 +16,32 @@
                     </view>
                 </view>
                 <view class="issue-form-item flex">
-                    <view class="issue-form-input">
+                    <view class="issue-form-input flex-bd">
                         <input class="app-input" type="text" name="phoneVerificationCode" placeholder="请输入验证码"></input>
                     </view>
                 </view> 
                 <view class="issue-form-item flex">
-                    <view class="issue-form-input">
+                    <view class="issue-form-input flex-bd">
                         <input class="app-input" type="password" name="pwd" placeholder="请输入密码"></input>
                     </view>
                 </view> 
                 <view class="issue-form-item flex">
-                    <view class="issue-form-input">
+                    <view class="issue-form-input flex-bd">
                         <input class="app-input" type="password" name="rePwd" placeholder="请重复输入密码"></input>
                     </view>
                 </view> 
                 <view class="issue-form-item flex">
-                    <view class="issue-form-input">
+                    <view class="issue-form-input flex-bd">
                         <input class="app-input" type="idcard" name="identityCard" placeholder="请输入身份证号码"></input>
                     </view>
                 </view> 
                 <view class="issue-form-item flex">
-                    <view class="issue-form-input">
+                    <view class="issue-form-input flex-bd">
                         <input class="app-input" type="text" name="lawerLicenseNo" placeholder="请输入执业证号码"></input>
                     </view>
                 </view> 
                 <view class="issue-form-item flex">
-                    <view class="issue-form-input">
+                    <view class="issue-form-input flex-bd">
                         <input class="app-input" type="text" name="belongs" placeholder="请输入执业律所"></input>
                     </view>
                 </view> 
@@ -91,16 +91,16 @@
                     <text>身份证</text>
                 </view>
                 <view class="issue-form-item img-box">
-                    <image src="{{idCard1}}" data-img="idCard1" bind:tap="uploadImage" />
+                    <image src="{{idCard1}}" data-img="idCard1" mode="aspectFit" bind:tap="uploadImage" />
                 </view>
                 <view class="issue-form-item img-box">
-                    <image src="{{idCard2}}" data-img="idCard2" bind:tap="uploadImage" />
+                    <image src="{{idCard2}}" data-img="idCard2" mode="aspectFit" bind:tap="uploadImage" />
                 </view>
                 <view class="upload-subTitle">
                     <text>执业证书（正面）</text>
                 </view>
                 <view class="issue-form-item img-box">
-                    <image src="{{idCard3}}" data-img="idCard3" bind:tap="uploadImage" />
+                    <image src="{{idCard3}}" data-img="idCard3" mode="aspectFit" bind:tap="uploadImage" />
                 </view>
                 <view class="issue-form-item form-btn-box">
                     <button class="app-input-btn" size="mini" disabled="{{btnDisable}}" plain form-type="submit">确定提交</button>

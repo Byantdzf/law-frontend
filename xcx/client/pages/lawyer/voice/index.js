@@ -35,9 +35,6 @@ Page({
       countVal: app.globalData.smsCount,
       countReg: app.globalData.smsCount,
       amountList: [
-          { id: 1, name: "30元", value: "30" },
-          { id: 2, name: "50元", value: "50" },
-          { id: 3, name: "100元", value: "100" }
       ],
       persent: 0,
       defaultPic: '/static/images/demo/img_lawyer.png',
@@ -73,7 +70,14 @@ Page({
         })
 
         selectApi.data({dictCode: 'PayMoney'}).then(res => {
-          console.log(res)
+            let amountList = []
+            res.data.forEach(item => {
+                let t = {}
+                t.name = item.name
+                t.value = item.code
+                amountList.push(t)
+            })
+            this.setData({ amountList })
         })
 
         // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示

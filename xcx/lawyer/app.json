@@ -10,7 +10,8 @@
     "pages/news/agreement/index",
     "pages/news/privacy/index",
     "pages/reg/index",
-    "pages/news/detail/index"
+    "pages/news/detail/index",
+    "pages/waitAuth/index"
   ],
   "subPackages": [
     {

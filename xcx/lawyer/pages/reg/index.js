@@ -66,17 +66,19 @@ Page({
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 var tempFilePaths = res.tempFilePaths;
                 console.log('本地图片的路径:', tempFilePaths)
-                that.upload(tempFilePaths)
+                that.upload(tempFilePaths, img)
             }
         })
     },
-    upload(path) {
+    upload(path, imgId) {
         // 获取问题类型
         let params = {}
         params.filePath = path[0]
         params.requestType = 'uploadFile'
         selectApi.uploadFile(params).then(res => {
-            console.log(res)
+            let data = this.data
+            data[imgId] = res.data
+            this.setData(data)
         })
     },
     formSubmit(e) {
@@ -124,6 +126,19 @@ Page({
             app.toastError('请选择所在地区');
             return;
         }
+        
+        if (!this.data.idCard1 == '/static/images/idcard1.jpg') {
+            app.toastError('请上传身份证（人像面）');
+            return;
+        }
+        if (!this.data.idCard2 == '/static/images/idcard2.jpg') {
+            app.toastError('请上传身份证（国徽面）');
+            return;
+        }
+        if (!this.data.idCard3 == '/static/images/businessCard.jpg') {
+            app.toastError('请上传执业证书');
+            return;
+        }
 
         params.provice = this.data.region[0]
         params.city = this.data.region[1]
@@ -156,7 +171,14 @@ Page({
         params.uploadFiles = imgArr
 
         api.register(params).then(res => {
-            console.log(res)
+            app.confirm({
+                "content": '恭喜您' + params.name + '，注册成功',
+                showCancel: false,
+            }).then(res => {
+                if (res.confirm) {
+                    app.gotoPage('/pages/tabBar/home/index', 'tab')
+                }
+            })
         })
     },
     bindRegionChange(e) {

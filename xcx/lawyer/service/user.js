@@ -20,4 +20,9 @@ module.exports = {
      * 我的优惠券列表
     */
     couponList: params =>get('/applets/user/coupon/list/', params),
+
+    /**
+     * 我的
+    */
+    getUser: params => get('/applets/lawyer/my/myInfo', params),
 }

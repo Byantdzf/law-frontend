@@ -36,9 +36,6 @@ Page({
         countVal: app.globalData.smsCount,
         countReg: app.globalData.smsCount,
         amountList: [
-            { id: 1, name: "30元", value: "30" },
-            { id: 2, name: "50元", value: "50" },
-            { id: 3, name: "100元", value: "100" }
         ],
     },
 
@@ -72,6 +69,17 @@ Page({
         // 授权失败
         this.setData({btnDisable: true})
       });
+
+      selectApi.data({dictCode: 'PayMoney'}).then(res => {
+          let amountList = []
+          res.data.forEach(item => {
+              let t = {}
+              t.name = item.name
+              t.value = item.code
+              amountList.push(t)
+          })
+          this.setData({ amountList })
+      })
     },
     questionChange(e) {
         this.setData({

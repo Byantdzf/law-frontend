@@ -1,0 +1,11 @@
+<!-- pages/waitAuth/index.wxml -->
+<app-page id="app-page">
+    <view class="container">
+        <view class="notice">
+            <image src="/static/images/auth.jpg" />
+        </view>
+        <view class="fonts">
+            <text>律师审核中，请耐心等待...</text>
+        </view>
+    </view>
+</app-page>

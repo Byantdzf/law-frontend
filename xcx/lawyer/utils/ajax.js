@@ -64,6 +64,10 @@ const ajax = (_options = {}) => {
       header,
       success: response => {
         let data = response.data || {};
+        
+        if (typeof(data) == 'string') {
+          data = JSON.parse(data)
+        }
         if (response.statusCode == 200) {
           switch (data.code) {
             case '000000':

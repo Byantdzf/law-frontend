@@ -1,0 +1,6 @@
+/* pages/waitAuth/index.wxss */
+.container { text-align: center;}
+.notice { padding-top:230rpx;}
+.notice image { width:240rpx; height:240rpx; margin: 0 auto;}
+
+.fonts { color:#CECECE; font-size: 32rpx; margin-top:30rpx;}
