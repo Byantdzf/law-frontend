@@ -7,14 +7,12 @@ Page({
      * 页面的初始数据
      */
     data: {
-        coverTransform: 'translateY(0px)',
-        coverTransition: '0s',
         moving: false,
         userInfos: {
             id: 1,
-            mobile: 18888888888,
-            name: 'Leo yo',
-            portrait: '/static/images/demo/1.jpg'
+            mobile: '',
+            name: '',
+            avatar: ''
         },
         tools: [
             {

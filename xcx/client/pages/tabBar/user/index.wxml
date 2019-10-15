@@ -5,10 +5,14 @@
             <image class="user-bg" src="/static/images/userBg.jpg" mode="widthFix" />
             <view class="flex">
                 <view class="user-avatar">
-                    <image src="{{userInfos.portrait}}" mode="widthFix" />
+                    <image src="{{userInfos.portrait}}" mode="widthFix" wx:if="{{ userInfos.avatar }}"/>
+                    <open-data type="userAvatarUrl" wx:else/>
                 </view>
                 <view class="user-fonts flex-bd">
-                    <view class="user-name">{{userInfos.name}}</view>
+                    <view class="user-name">
+                        <text wx:if="{{ userInfos.name }}">{{userInfos.name}}</text>
+                        <open-data type="userNickName" wx:else/>
+                    </view>
                     <view class="user-mobile">{{userInfos.mobile}}</view>
                 </view>
             </view>

@@ -1,6 +1,7 @@
 const app = getApp();
 Page({
     data: {
+        defaultImg: '/static/images/demo/img_lawyer.png',
         listUrl: '/applets/user/msg/list',
         list: [],
     },
