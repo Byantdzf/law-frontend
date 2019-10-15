@@ -30,5 +30,10 @@ module.exports = {
   orderEmergency: {
     0: '否',
     1: '是'
-  }
+  },
+  couponStatus: {
+    0: '待使用',
+    1: '已使用',
+    2: '已过期'
+  },
 }

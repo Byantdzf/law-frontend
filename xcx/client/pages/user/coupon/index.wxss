@@ -1,1 +1,47 @@
 /* pages/user/coupon/index.wxss */
+.page-coupon {
+  background: #f3f3f3;
+}
+.page-search {
+  background: #fff;
+}
+.list-item {
+  align-items: stretch;
+  position: relative;
+  background: #fff;
+  border-radius: 20rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.list-item + .list-item {
+  margin-top: 20rpx;
+}
+
+.item-left {
+  position: relative;
+  width: 240rpx;
+}
+
+.status-box {
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.price {
+  font-size: 50rpx;
+}
+
+.app-empty-wrapper {
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
+}

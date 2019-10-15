@@ -1,64 +1,74 @@
 <!-- pages/tabBar/search/index.wxml -->
 <app-page id="app-page">
-    <view class="container">
-        <view class="user-head">
-            <image class="user-bg" src="/static/images/userBg.jpg" mode="widthFix" />
-            <view class="flex">
-                <view class="user-avatar">
-                    <image src="{{userInfos.portrait}}" mode="widthFix" wx:if="{{ userInfos.avatar }}"/>
-                    <open-data type="userAvatarUrl" wx:else/>
+	<view class="container">
+		<view class="user-head">
+			<image class="user-bg" src="/static/images/userBg.jpg" mode="widthFix" />
+			<view class="flex">
+				<view class="user-avatar">
+					<image src="{{userInfos.portrait}}" mode="widthFix" wx:if="{{ userInfos.avatar }}" />
+					<open-data type="userAvatarUrl" wx:else />
+				</view>
+				<view class="user-fonts flex-bd">
+					<view class="user-name">
+						<text wx:if="{{ userInfos.name }}">{{userInfos.name}}</text>
+						<open-data type="userNickName" wx:else />
+					</view>
+					<view class="user-mobile">{{userInfos.mobile}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="user-order">
+			<view class="user-order-title flex" data-state="-1" bindtap="gotoOrder">
+				<view class="flex-bd">我的订单</view>
+				<view>
+					<text class="iconfont icon-arrow-right"/>
                 </view>
-                <view class="user-fonts flex-bd">
-                    <view class="user-name">
-                        <text wx:if="{{ userInfos.name }}">{{userInfos.name}}</text>
-                        <open-data type="userNickName" wx:else/>
-                    </view>
-                    <view class="user-mobile">{{userInfos.mobile}}</view>
+			</view>
+			<view class="user-order-type flex">
+				<view class="flex-bd" data-state="10" bindtap="gotoOrder">
+					<image src="/static/images/icon2.png" mode="widthFix" />
+					待支付
+				</view>
+				<view class="flex-bd" data-state="20" bindtap="gotoOrder">
+					<image src="/static/images/icon1.png" mode="widthFix" />
+					待接单
+				</view>
+				<view class="flex-bd" data-state="50" bindtap="gotoOrder">
+					<image src="/static/images/icon3.png" mode="widthFix" />
+					待评价
+				</view>
+				<view class="flex-bd" data-state="60" bindtap="gotoOrder">
+					<image src="/static/images/icon4.png" mode="widthFix" />
+					已完成
+				</view>
+			</view>
+		</view>
+		<view class="list">
+			<view
+                class="items flex"
+                wx:for="{{ tools }}"
+                wx:key="{{index}}"
+                data-code="{{ item.code }}"
+                bind:tap="tapTools"
+			>
+				<view class="item-icon">
+					<text class="iconfont {{ item.icon }}"/>
                 </view>
-            </view>
-            <!-- <view class="user-setting" data-code="setting" bindtap="tapTools">
-                <text class="iconfont icon-setting-fill"></text>
-            </view> -->
-        </view>
-        <view class="user-order">
-            <view class="user-order-title flex" data-state="-1" bindtap="gotoOrder">
-                <view class="flex-bd">我的订单</view>
-                <view>
-                    <text class="iconfont icon-arrow-right"></text>
+				<view class="flex-bd">{{ item.title }}</view>
+				<view class="item-right">
+					<text class="iconfont icon-arrow-right"/>
                 </view>
-            </view>
-            <view class="user-order-type flex">
-                <view class="flex-bd" data-state="10" bindtap="gotoOrder">
-                    <image src="/static/images/icon2.png" mode="widthFix" />
-                    待支付
-                </view>
-                <view class="flex-bd" data-state="20" bindtap="gotoOrder">
-                    <image src="/static/images/icon1.png" mode="widthFix" />
-                    待接单
-                </view>
-                <view class="flex-bd" data-state="50" bindtap="gotoOrder">
-                    <image src="/static/images/icon3.png" mode="widthFix" />
-                    待评价
-                </view>
-                <view class="flex-bd" data-state="60" bindtap="gotoOrder">
-                    <image src="/static/images/icon4.png" mode="widthFix" />
-                    已完成
-                </view>
-            </view>
-        </view>
-        <view class="list">
-            <view class="items flex" wx:for="{{ tools }}" wx:key="{{index}}" data-code="{{ item.code }}" bind:tap="tapTools">
-                <view class="item-icon">
-                    <text class="iconfont {{ item.icon }}"></text>
-                </view>
-                <view class="flex-bd">{{ item.title }}</view>
-                <view class="item-right">
-                    <text class="iconfont icon-arrow-right"></text>
-                </view>
-            </view>
-        </view>
-        <view class="logout-btn">
-            <button class="app-input-btn" size="mini" plain bindtap="logout">退出登录</button>
-        </view>
-    </view>
+			</view>
+		</view>
+		<view class="logout-btn">
+			<button
+                class="app-input-btn"
+                size="mini"
+                plain
+                bindtap="logout"
+			>退出登录
+			</button>
+		</view>
+	</view>
 </app-page>
+

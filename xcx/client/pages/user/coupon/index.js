@@ -1,66 +1,50 @@
-// pages/user/coupon/index.js
+// pages/user/collect/index.js
+const { couponStatus } = require('../../../config/global');
+let app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    couponStatus,
+    statusItems: [],
+    listUrl: '/applets/user/coupon/list',
+    list: [],
   },
+  onLoad() {
+    app.pages.add(this);
+    app.setNavColor();
+    let statusItems = [
+      {
+        id: -1,
+        name: '全部'
+      }
+    ];
+    for (let k in couponStatus) {
+      statusItems.push({
+        id: k,
+        name: couponStatus[k]
+      })
+    }
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+    this.setData({ statusItems });
+    this.appList = this.selectComponent('#app-list');
+    
+    this.loadList()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  loadList() {
+    this.appList = this.selectComponent('#app-list')
+    this.appList.setParams()
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  updateList(e) {
+    this.setData({ list: e.detail })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  handleStatusChange(e) {
+    const useStatus = e.detail;
+    this.appList.setParams(params => {
+      if (useStatus != -1) {
+        params.useStatus = useStatus;
+      } else {
+        delete params.useStatus;
+      }
+      return params;
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
