@@ -1,13 +1,7 @@
 // pages/tabBar/user/index.js
-
-let startY = 0, moveY = 0, pageAtTop = true;
 let app = getApp();
 Page({
-    /**
-     * 页面的初始数据
-     */
     data: {
-        moving: false,
         userInfos: {
             id: 1,
             mobile: '',
@@ -30,19 +24,11 @@ Page({
             }
         ],
     },
+    onLoad() {
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        // let userInfos = wx.getStorageSync('userInfo');
-        // this.setData({
-        //     userInfos
-        // });
     },
     tapTools(e) {
-        let { code } = e.currentTarget.dataset
-        console.log(code)
+        let { code } = e.currentTarget.dataset;
         switch (code) {
             case 'collect':
                 app.gotoPage('/pages/user/collect/index')

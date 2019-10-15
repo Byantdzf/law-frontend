@@ -26,11 +26,11 @@
 			</view>
 			<view class="user-order-type flex">
 				<view class="flex-bd" data-state="10" bindtap="gotoOrder">
-					<image src="/static/images/icon2.png" mode="widthFix" />
+					<image src="/static/images/icon1.png" mode="widthFix" />
 					待支付
 				</view>
 				<view class="flex-bd" data-state="20" bindtap="gotoOrder">
-					<image src="/static/images/icon1.png" mode="widthFix" />
+					<image src="/static/images/icon2.png" mode="widthFix" />
 					待接单
 				</view>
 				<view class="flex-bd" data-state="50" bindtap="gotoOrder">
