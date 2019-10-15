@@ -66,3 +66,16 @@
 .list-item .btn-box button::after {
   border-color: #e0e0e0;
 }
+
+.app-empty-wrapper {
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
+}

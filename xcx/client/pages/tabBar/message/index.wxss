@@ -19,3 +19,15 @@
 .page-message .app-cells::after {
   left: 140rpx;
 }
+
+.app-empty-wrapper {
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
+}

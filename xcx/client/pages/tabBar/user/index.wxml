@@ -17,7 +17,7 @@
             </view> -->
         </view>
         <view class="user-order">
-            <view class="user-order-title flex" bindtap="gotoOrder">
+            <view class="user-order-title flex" data-state="-1" bindtap="gotoOrder">
                 <view class="flex-bd">我的订单</view>
                 <view>
                     <text class="iconfont icon-arrow-right"></text>

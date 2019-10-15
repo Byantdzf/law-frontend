@@ -12,7 +12,7 @@ Page({
     statusItems: [],
     curOrderStatus: -1
   },
-  onLoad({ curOrderStatus }) {
+  onLoad({ curOrderStatus = '' }) {
     app.pages.add(this);
     app.setNavColor();
     let statusItems = [
@@ -33,7 +33,8 @@ Page({
     if (!this.appList) {
       this.appList = this.selectComponent('#app-list');
     }
-    if (curOrderStatus) {
+
+    if (curOrderStatus && curOrderStatus != -1) {
       this.setData({ curOrderStatus });
       this.appList.setParams(params => {
         params.orderStatus = curOrderStatus;

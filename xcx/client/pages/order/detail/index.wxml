@@ -28,7 +28,7 @@
       </view>
       <view class="flex detail-row">
         <text class="label cl-999">订单状态：</text>
-        <text class="flex-bd cl-primary fw-b">{{ orderStatus[item.status] }}</text>
+        <text class="flex-bd cl-primary fw-b">{{ orderStatus[item.orderStatus] }}</text>
       </view>
       <view class="flex detail-row">
         <text class="label cl-999">订单类型：</text>

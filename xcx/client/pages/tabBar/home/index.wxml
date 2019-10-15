@@ -1,108 +1,141 @@
 <!-- pages/home/index.wxml -->
 <app-page id="app-page">
-  <view class="flex-column container page-home">
-    <view class="flex page-search">
-      <view class="flex location pr-20">
-        <view class="iconfont icon-location"></view>
-        <view class="pl-10 ellipsis city"><app-cityPicker id="app-cityPicker" selectArea="{{currArea}}" isHome="true" bind:change="getCityResult"></app-cityPicker></view>
-      </view>
-      <view class="flex-bd flex search-box" bind:tap="gotoSearch">
-        <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
-        <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
-      </view>
-    </view>
-    <view class="flex-bd app-scroller">
-      <scroll-view scroll-y>
-        <app-swiper items="{{ banners }}" />
-        <view class="flex page-title">
-          <view class="flex-bd pl-20 title">最新法律速递</view>
-          <view class="flex-ft">
-            <navigator url="../../news/list/index">
-              <text class="cl-999">更多</text>
-              <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+	<view class="flex-column container page-home">
+		<view class="flex page-search">
+			<view class="flex location pr-20">
+				<view class="iconfont icon-location" />
+				<view class="pl-10 ellipsis city">
+					<app-cityPicker
+            id="app-cityPicker"
+            selectArea="{{currArea}}"
+            isHome="true"
+            bind:change="getCityResult"
+					/>
+				</view>
+			</view>
+			<view class="flex-bd flex search-box" bind:tap="gotoSearch">
+				<view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
+				<view class="iconfont icon-search pl-20 pr-20 cl-primary" />
+			</view>
+		</view>
+		<view class="flex-bd app-scroller">
+			<scroll-view scroll-y>
+				<app-swiper items="{{ banners }}" />
+				<view class="flex page-title">
+					<view class="flex-bd pl-20 title">最新法律速递</view>
+					<view class="flex-ft">
+						<navigator url="../../news/list/index">
+							<text class="cl-999">更多</text>
+							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
             </navigator>
-          </view>
-        </view>
-        <view class="hot-news-wrapper">
-          <scroll-view class="pa-20" scroll-x>
-            <view class="hot-news flex">
-              <view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
-                <navigator url="../../news/detail/index?id={{ item.id }}">
-                  <view class="img-box">
-                    <image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic"></image>
-                  </view>
-                  <view class="ellipsis">{{ item.title }}</view>
-                  <view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
-                </navigator>
-              </view>
-            </view>
-          </scroll-view>
-        </view>
-        <view class="flex page-title">
-          <view class="flex-bd pl-20 title">站内律师排名</view>
-          <view class="flex-ft">
-            <navigator url="../lawyer/index" open-type="switchTab">
-              <text class="cl-999">更多</text>
-              <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
+					</view>
+				</view>
+				<view class="hot-news-wrapper">
+					<scroll-view class="pa-20" scroll-x>
+						<view class="hot-news flex">
+							<view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
+								<navigator url="../../news/detail/index?id={{ item.id }}">
+									<view class="img-box">
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+									</view>
+									<view class="ellipsis">{{ item.title }}</view>
+									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+								</navigator>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+				<view class="flex page-title">
+					<view class="flex-bd pl-20 title">站内律师排名</view>
+					<view class="flex-ft">
+						<navigator url="../lawyer/index" open-type="switchTab">
+							<text class="cl-999">更多</text>
+							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
+
             </navigator>
-          </view>
-        </view>
-        <view class="pa-20 home-list" wx:if="{{ list.length }}">
-          <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
-            <view class="img-box">
-                  <image src="{{ item.pic || '/static/images/demo/img_lawyer.png' }}" binderror="imageError" data-img="list[{{index}}].pic"></image>
-            </view>
-            <view class="flex-bd pl-20">
-              <view class="flex">
-                <view class="flex-bd name">{{ item.name }}</view>
-                <view class="flex-ft score cl-red">{{ item.score }}分</view>
-              </view>
-              <view class="desc cl-666">{{ item.desc }}</view>
-              <view class="flex">
-                <view class="flex-bd">
-                  <text class="cl-999">帮助人数：</text>
-                  <text class="cl-666">{{ item.helpers }}人</text>
-                </view>
-                <view class="flex-ft">
-                  <text class="cl-999">关注人数：</text>
-                  <text class="cl-666">{{ item.followers }}人</text>
-                </view>
-              </view>
-              <view class="flex btn-box">
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">语音咨询</button>
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">一对一咨询</button>
-                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">立即关注</button>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="app-empty-wrapper" wx:else>
-          <app-empty iconClass="icon-sousuowuneirong" />
-        </view>
-      </scroll-view>
-    </view>
+					</view>
+				</view>
+				<view class="pa-20 home-list" wx:if="{{ list.length }}">
+					<view
+            class="flex list-item"
+            wx:for="{{ list }}"
+            wx:key="{{ index }}"
+            data-id="{{ item.id }}"
+            bind:tap="gotoLawyerDetail"
+					>
+						<view class="img-box">
+							<image src="{{ item.pic || '/static/images/demo/img_lawyer.png' }}" binderror="imageError" data-img="list[{{index}}].pic" />
+						</view>
+						<view class="flex-bd pl-20">
+							<view class="flex">
+								<view class="flex-bd name">{{ item.name }}</view>
+								<view class="flex-ft score cl-red">{{ item.score }}分</view>
+							</view>
+							<view class="desc cl-666">{{ item.desc }}</view>
+							<view class="flex">
+								<view class="flex-bd">
+									<text class="cl-999">帮助人数：</text>
+									<text class="cl-666">{{ item.helpers }}人</text>
+								</view>
+								<view class="flex-ft">
+									<text class="cl-999">关注人数：</text>
+									<text class="cl-666">{{ item.followers }}人</text>
+								</view>
+							</view>
+							<view class="flex btn-box">
+								<button
+                  size="mini"
+                  plain
+                  data-id="{{item.id}}"
+                  catch:tap="voiceTap"
+                >语音咨询
+								</button>
+								<button
+                  size="mini"
+                  plain
+                  data-id="{{item.id}}"
+                  catch:tap="onByOneTap"
+								>一对一咨询
+								</button>
+								<button
+                  size="mini"
+                  plain
+                  data-id="{{item.id}}"
+                  catch:tap="collect"
+								>立即关注
+								</button>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="app-empty-wrapper" wx:else>
+					<app-empty iconClass="icon-sousuowuneirong" />
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
+		<text class="iconfont icon-plus"/>
   </view>
-  <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
-    <text class="iconfont icon-plus"></text>
-  </view>
-  <app-pop visible="{{ showTools }}" hideTabBar>
-    <view class="flex">
-      <view
+	<app-pop visible="{{ showTools }}" hideTabBar>
+		<view class="flex">
+			<view
         class="flex-column float-tools-item"
         wx:for="{{ tools }}"
         wx:key="{{ index }}"
         data-url="{{ item.url }}"
         data-type="{{ item.type }}"
         bind:tap="tapTools"
-      >
-        <view class="flex icon-box">
-          <image src="{{ item.icon }}" mode="widthFix"></image>
-        </view>
-        <view class="txt-box">{{ item.name }}</view>
-      </view>
+			>
+				<view class="flex icon-box">
+					<image src="{{ item.icon }}" mode="widthFix" />
+				</view>
+				<view class="txt-box">{{ item.name }}</view>
+			</view>
+		</view>
+		<view class="pop-btn ta-c">
+			<text class="iconfont icon-close" bindtap="handleClosePop"/>
     </view>
-    <view class="pop-btn ta-c">
-      <text class="iconfont icon-close" bindtap="handleClosePop"></text>
-    </view>
-  </app-pop>
+	</app-pop>
 </app-page>
+
