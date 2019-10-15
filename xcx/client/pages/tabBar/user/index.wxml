@@ -22,7 +22,7 @@
 				<view class="flex-bd">我的订单</view>
 				<view>
 					<text class="iconfont icon-arrow-right"/>
-                </view>
+        </view>
 			</view>
 			<view class="user-order-type flex">
 				<view class="flex-bd" data-state="10" bindtap="gotoOrder">
@@ -45,27 +45,27 @@
 		</view>
 		<view class="list">
 			<view
-                class="items flex"
-                wx:for="{{ tools }}"
-                wx:key="{{index}}"
-                data-code="{{ item.code }}"
-                bind:tap="tapTools"
+				class="items flex"
+				wx:for="{{ tools }}"
+				wx:key="{{index}}"
+				data-code="{{ item.code }}"
+				bind:tap="tapTools"
 			>
 				<view class="item-icon">
 					<text class="iconfont {{ item.icon }}"/>
-                </view>
+        </view>
 				<view class="flex-bd">{{ item.title }}</view>
 				<view class="item-right">
 					<text class="iconfont icon-arrow-right"/>
-                </view>
+        </view>
 			</view>
 		</view>
 		<view class="logout-btn">
 			<button
-                class="app-input-btn"
-                size="mini"
-                plain
-                bindtap="logout"
+				class="app-input-btn"
+				size="mini"
+				plain
+				bindtap="logout"
 			>退出登录
 			</button>
 		</view>
