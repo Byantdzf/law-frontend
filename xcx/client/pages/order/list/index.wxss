@@ -83,3 +83,13 @@
 .app-empty .iconfont {
   font-size: 100rpx;
 }
+
+.order-tab-box { position: relative; z-index: 10;}
+.filter-name { padding-left:40rpx; text-align: center;}
+.order-filter-bg { position: fixed; z-index: 9; left:0; top:0; right:0; bottom:0; background: rgba(0,0,0,.5);}
+.order-child { position: relative; z-index: 10;}
+.order-filter-con { position: relative; z-index: 10; height:80rpx; border-bottom: 1rpx solid #f3f3f3; background: #fff; padding: 0 30rpx;}
+.order-child { position: absolute; top:81rpx; background: #fff; width: 100%; padding: 20rpx 30rpx;}
+.order-child .filter-item { line-height: 3; border-bottom: 1rpx solid #f8f8f8;}
+.order-child .filter-item.curr { color: #CF443D;}
+.filter-icon .iconfont { font-size: 24rpx;}

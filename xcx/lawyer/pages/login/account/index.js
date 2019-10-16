@@ -9,6 +9,7 @@ Page({
      */
     data: {
         aggreement: false,
+        wxToken: null,
     },
 
     /**
@@ -26,7 +27,10 @@ Page({
                 params.code = code
                 api.login({ code }).then(res => {
                     // 保存token
-                    wx.setStorageSync(tokenName, res.data.sessionId)
+                    this.setData({
+                        wxToken: res.data.sessionId
+                    })
+                    // wx.setStorageSync(tokenName, res.data.sessionId)
                 })
             }
         })
@@ -66,10 +70,12 @@ Page({
             app.toastError('您还未同意用户协议，隐私协议');
             return;
         }
+        params.from = 2
         console.log(params)
         api.accountLogin(params).then(res => {
-            console.log(res)
-            // app.gotoPage('/pages/issue/success/index?type=3')
+            
+            wx.setStorageSync(tokenName, res.data.sessionId)
+            app.gotoPage('/pages/waitAuth/index')
         })
     },
 })

@@ -4,13 +4,19 @@ const { orderType, orderCategory, orderStatus } = require('../../../config/globa
 const orderApi = require('../../../service/order');
 Page({
   data: {
-    orderType,
-    orderCategory,
+    selectAllObj: {id: '', name: '全部', checked: true},
     orderStatus,
     listUrl: '/applets/user/order/orderList',
     list: [],
     statusItems: [],
-    curOrderStatus: -1
+    curOrderStatus: -1,
+    orderTypeList: [],
+    orderCategoryList: [],
+    dropVisable: false,
+    dropList: [{id: '', name: '全部', checked: true}],
+    currType: 1,
+    currOrderType: {},
+    currOrderCategory: {},
   },
   onLoad({ curOrderStatus = '' }) {
     app.pages.add(this);
@@ -29,35 +35,58 @@ Page({
     }
 
     this.setData({ statusItems });
-    
+    curOrderStatus && this.setData({ curOrderStatus });
+
+    let orderTypeList = [this.data.selectAllObj]
+    for (let i in orderType) {
+      let item = {}
+      item.id = i
+      item.name = orderType[i]
+      orderTypeList.push(item)
+    }
+    let orderCategoryList = [this.data.selectAllObj]
+
+    this.setData({ 
+      orderTypeList, 
+      orderCategoryList,
+      currOrderType: orderTypeList[0],
+      currOrderCategory: orderCategoryList[0]
+    })
+
+    this.loadData()
+  },
+  loadData() {
     if (!this.appList) {
       this.appList = this.selectComponent('#app-list');
     }
-
-    if (curOrderStatus && curOrderStatus != -1) {
-      this.setData({ curOrderStatus });
-      this.appList.setParams(params => {
+    let curOrderStatus = this.data.curOrderStatus
+    let currOrderType = this.data.currOrderType || {}
+    let currOrderCategory = this.data.currOrderCategory || {}
+    this.appList.setParams(params => {
+      if (curOrderStatus != -1) {
         params.orderStatus = curOrderStatus;
-        return params;
-      });
-    } else {
-      this.setData({ curOrderStatus: -1 });
-      this.appList.setParams();
-    }
+      } else {
+        delete params.curOrderStatus;
+      }
+      if (currOrderType.id) {
+        params.orderType = currOrderType.id;
+      } else {
+        delete params.orderType;
+      }
+      if (currOrderCategory.id) {
+        params.orderCategory = currOrderCategory.id;
+      } else {
+        delete params.orderCategory;
+      }
+      return params;
+    });
   },
   updateList(e) {
     this.setData({ list: e.detail })
   },
   handleStatusChange(e) {
-    const orderStatus = e.detail;
-    this.appList.setParams(params => {
-      if (orderStatus != -1) {
-        params.orderStatus = orderStatus;
-      } else {
-        delete params.orderStatus;
-      }
-      return params;
-    });
+    const curOrderStatus = e.detail;
+    this.setData({ curOrderStatus })
   },
   // handleItemTimeup(e) {
   //   const { index } = e.currentTarget.dataset
@@ -65,6 +94,51 @@ Page({
   //     [`list[${ index }].time`]: 0
   //   })
   // },
+  changType(e) {
+    const currType = e.currentTarget.dataset.type
+    let dropList = [this.data.selectAllObj]
+
+    if (currType == 1) {
+      dropList = [...this.data.orderTypeList]
+    } else {
+      for (let k in orderCategory) {
+        if (k[0] == this.data.currOrderType.id) {
+          dropList.push({id: k, name: orderCategory[k]})
+        }
+      }
+      console.log(dropList)
+    }
+    this.setData({
+      dropList,
+      currType,
+      dropVisable: true
+    })
+  },
+  changeThis(e) {
+    const { id } = e.currentTarget.dataset
+    let index = this.data.dropList.findIndex(item => {
+      return item.id == id
+    })
+    if (this.data.currType == 1) {
+      let currOrderType = this.data.dropList[index]
+      this.setData({
+        currOrderType,
+        currOrderCategory: this.data.selectAllObj
+      })
+    } else {
+      let currOrderCategory = this.data.dropList[index]
+      this.setData({
+        currOrderCategory
+      })
+    }
+    this.dropHide()
+    this.loadData()
+  },
+  dropHide() {
+    this.setData({
+      dropVisable: false,
+    })
+  },
   gotoDetail(e) {
     const { id } = e.currentTarget.dataset
     app.gotoPage('/pages/order/detail/index?id=' + id)

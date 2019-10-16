@@ -20,7 +20,26 @@
 </wxs>
 <app-page id="app-page">
   <view class="flex-column container page-order">
-    <app-tab items="{{ statusItems }}" current="{{ curOrderStatus }}" bindchange="handleStatusChange"/>
+    <view class="order-tab-box">
+      <app-tab items="{{ statusItems }}" current="{{ curOrderStatus }}" bindchange="handleStatusChange"/>
+    </view>
+    <view class="order-filter">
+      <view class="order-filter-con flex">
+        <view class="root-filter flex flex-bd">
+          <view class="flex-bd filter-name" data-type="1" bind:tap="changType">{{currOrderType.name}}</view>
+          <view class="filter-icon"><text class="iconfont icon-arrow-down-fill"></text></view>
+        </view>
+        <view class="child-filter flex flex-bd">
+          <view class="flex-bd filter-name" data-type="2" bind:tap="changType">{{currOrderCategory.name}}</view>
+          <view class="filter-icon"><text class="iconfont icon-arrow-down-fill"></text></view>
+        </view>
+      </view>
+      <view class="order-child" wx:if="{{dropVisable}}">
+        <view class="filter-item {{ item.id == currOrderType.id || item.id == currOrderCategory.id ? 'curr' : '' }}" bind:tap="changeThis" wx:for="{{dropList}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+      </view>
+      <view class="order-filter-bg" bind:tap="dropHide" wx:if="{{dropVisable}}"></view>
+    </view>
+
     <view class="flex-bd">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20" wx:if="{{ list.length }}">
