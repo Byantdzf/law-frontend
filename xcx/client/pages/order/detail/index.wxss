@@ -1,6 +1,6 @@
 .page-order-detail {
   /* background: #f3f3f3; */
-  padding: 30rpx;
+  padding: 0 30rpx 30rpx;
   line-height: 44rpx;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .btn-box button {
-  min-width: 240rpx;
+  min-width: 260rpx;
 }
 
 .textarea {
@@ -42,4 +42,8 @@
   border: 2rpx solid #f3f3f3;
   border-radius: 4rpx;
   box-sizing: border-box;
+}
+
+.icon-wenjian {
+  font-size: 40rpx;
 }

@@ -5,5 +5,6 @@
     "app-empty":"/components/app-empty/index",
     "app-countdown":"/components/app-countdown/index",
     "app-list": "/components/app-list/index"
-  }
+  },
+  "disableScroll":true
 }

@@ -1,0 +1,92 @@
+
+<template name="orderInfo_01">
+  <view class="orderInfo">
+    <view class="flex">
+      <text class="label cl-999">咨询内容：</text>
+      <text class="label cl-999">{{ content }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">所属分类：</text>
+      <text class="label cl-999">{{ questionTypeName }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">订单金额：</text>
+      <text class="label cl-999">{{ amount }}元</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">是否紧急：</text>
+      <text class="label cl-999">{{ emergencyName }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">订单备注：</text>
+      <text class="label cl-999">{{ remark }}</text>
+    </view>
+  </view>
+</template>
+
+<template name="orderInfo_02">
+  <view class="orderInfo">
+    <view class="flex">
+      <text class="label cl-999">手机号码：</text>
+      <text class="label cl-999">{{ contactMobile }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">称呼：</text>
+      <text class="label cl-999">{{ name }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">地区：</text>
+      <text class="label cl-999">{{ province + '-' + city }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">是否紧急：</text>
+      <text class="label cl-999">{{ emergencyName }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">订单备注：</text>
+      <text class="label cl-999">{{ remark }}</text>
+    </view>
+  </view>
+</template>
+
+<template name="orderInfo_03">
+  <view class="orderInfo">
+    <view class="flex">
+      <text class="label cl-999">已选服务：</text>
+      <text class="label cl-999">{{ chooseService }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">交付期限：</text>
+      <text class="label cl-999">{{ deliveryDeadDate }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">地区：</text>
+      <text class="label cl-999">{{ province + '-' + city }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">手机号码：</text>
+      <text class="label cl-999">{{ contactMobile }}</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">订单金额：</text>
+      <text class="label cl-999">{{ amount }}元</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">我的要求：</text>
+      <text class="label cl-999">{{ customerRequirement }}</text>
+    </view>
+  </view>
+</template>
+
+<template name="orderInfo_04">
+  <view class="orderInfo">
+    <view class="flex">
+      <text class="label cl-999">订单金额：</text>
+      <text class="label cl-999">{{ amount }}元</text>
+    </view>
+    <view class="flex">
+      <text class="label cl-999">购买时间：</text>
+      <text class="label cl-999">{{ orderTime }}</text>
+    </view>
+  </view>
+</template>

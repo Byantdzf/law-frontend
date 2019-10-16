@@ -19,7 +19,7 @@
               />
               <view class="flex-column status-box">
                 <view class="{{ item.useStatus == 0 ? 'cl-white' : 'cl-primary' }}">
-                  <text class="price">{{ item.price }}</text>
+                  <text class="price">{{ item.amount }}</text>
                   <text>元</text>
                 </view>
                 <text class="status {{ item.useStatus == 0 ? 'cl-white' : 'cl-999' }}">{{ couponStatus[item.useStatus] }}</text>

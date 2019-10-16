@@ -4,12 +4,14 @@ module.exports = {
   appName: '虎甲律师问答',
   PAGE_KEY: 'pageNo',
   SIZE_KEY: 'pageSize',
+  // 订单类型
   orderType: {
     1: '咨询订单',
     2: '分块法律服务订单',
     3: '代理律师订单',
     4: '法律文件订单'
   },
+  // 订单订单种类
   orderCategory: {
     11: '语音订单',
     12: '一对一咨询',
