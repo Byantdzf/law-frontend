@@ -88,12 +88,6 @@ Page({
     const curOrderStatus = e.detail;
     this.setData({ curOrderStatus })
   },
-  // handleItemTimeup(e) {
-  //   const { index } = e.currentTarget.dataset
-  //   this.setData({
-  //     [`list[${ index }].time`]: 0
-  //   })
-  // },
   changType(e) {
     const currType = e.currentTarget.dataset.type
     let dropList = [this.data.selectAllObj]
@@ -106,7 +100,6 @@ Page({
           dropList.push({id: k, name: orderCategory[k]})
         }
       }
-      console.log(dropList)
     }
     this.setData({
       dropList,
