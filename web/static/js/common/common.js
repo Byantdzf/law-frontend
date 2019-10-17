@@ -62,6 +62,13 @@
 			});
 		},
 
+		getFoot: function () {
+			var _t = this;
+			var obj = {};
+			var html = utils.getTemp('/page/common/foot.html');
+			$('.btm').html(html);
+		},
+
 		logout: function () {
 			utils.setCookie(global.userInfoToken, '');
 			utils.setCookie(global.token, '');
@@ -76,6 +83,7 @@
 			var _t = this;
 
 			_t.getHeader();
+			_t.getFoot();
 
 			$('body').on('click', '.searchBtn', function () {
 				_t.topSearch();
@@ -135,11 +143,15 @@
 						box.removeClass('fontRed');
 					}
 				})
+
+				$('body').on('click', '.reTop', function () {
+					$('html, body').animate({ scrollTop: 0 }, 300);
+				})
 			})
 
-			if (window.location.href.indexOf('/lawyer/') == -1) {
-				_t.setFixBar();
-			}
+			// if (window.location.href.indexOf('/lawyer/') == -1) {
+			// 	_t.setFixBar();
+			// }
 
 			_t.hotCity();
 		},

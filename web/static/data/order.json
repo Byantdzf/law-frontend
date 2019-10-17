@@ -18,7 +18,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "系统推送",
 				"rootCategory": "咨询订单",
-				"childCategory": "语音咨询",
+				"childCategory": "在线律师咨询",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -28,7 +28,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "订单池",
 				"rootCategory": "法律服务",
-				"childCategory": "非诉讼法律服务",
+				"childCategory": "日常法律服务",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -48,7 +48,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "订单池",
 				"rootCategory": "代理律师",
-				"childCategory": "语音咨询",
+				"childCategory": "在线律师咨询",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -58,7 +58,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "系统推送",
 				"rootCategory": "咨询订单",
-				"childCategory": "1对1咨询",
+				"childCategory": "指定律师咨询",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -68,7 +68,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "系统推送",
 				"rootCategory": "咨询订单",
-				"childCategory": "语音咨询",
+				"childCategory": "在线律师咨询",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -78,7 +78,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "委托订单",
 				"rootCategory": "法律服务",
-				"childCategory": "非诉讼法律服务",
+				"childCategory": "日常法律服务",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -98,7 +98,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "系统推送",
 				"rootCategory": "代理律师",
-				"childCategory": "语音咨询",
+				"childCategory": "在线律师咨询",
 				"status": "已完成",
 				"amount": "140"
 			},
@@ -108,7 +108,7 @@
 				"createTime": "2019-09-27 20:35:06",
 				"source": "系统推送",
 				"rootCategory": "咨询订单",
-				"childCategory": "1对1咨询",
+				"childCategory": "指定律师咨询",
 				"status": "已完成",
 				"amount": "140"
 			}

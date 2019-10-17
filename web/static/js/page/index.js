@@ -27,7 +27,7 @@
 				},
 			});
 
-			base.openRedPacket();
+			// base.openRedPacket();
 		}
 	}
 

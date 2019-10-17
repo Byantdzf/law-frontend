@@ -25,9 +25,9 @@
 		init: function () {
 			var _t = this;
 			_t.rootCategory = [
-				{"id": 1, "name": "咨询订单", "child": [{"id": 1, "name": "语音咨询"},{"id": 2, "name": "1对1咨询"}]},
-				{"id": 2, "name": "分块法律服务订单", "child": [{"id": 3, "name": "非诉讼法律服务"},{"id": 4, "name": "诉讼法律服务"}]},
-				{"id": 3, "name": "委托律师订单", "child": [{"id": 5, "name": "收费委托"},{"id": 6, "name": "风险委托"}]}
+				{"id": 1, "name": "咨询订单", "child": [{"id": 1, "name": "在线律师咨询"},{"id": 2, "name": "指定律师咨询"}]},
+				{"id": 2, "name": "分块法律服务订单", "child": [{"id": 3, "name": "日常法律服务"},{"id": 4, "name": "分块法律服务"}]},
+				{"id": 3, "name": "委托律师订单", "child": [{"id": 5, "name": "收费代理"},{"id": 6, "name": "风险代理"}]}
 			]
 			_t.source = [
 				{"id": 1, "name": "系统推送订单"},
