@@ -6,6 +6,7 @@
     "app-cityPicker": "/components/app-cityPicker/index",
     "app-pop": "/components/app-pop/index"
   },
-  "backgroundColorTop": "#00b0ab",
-  "backgroundColorBottom": "#f3f3f3"
+  "backgroundColorTop": "#CF443D",
+  "backgroundColorBottom": "#f3f3f3",
+  "disableScroll":true
 }
