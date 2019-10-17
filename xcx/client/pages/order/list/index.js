@@ -45,7 +45,6 @@ Page({
       orderTypeList.push(item)
     }
     let orderCategoryList = [this.data.selectAllObj]
-
     this.setData({ 
       orderTypeList, 
       orderCategoryList,
@@ -78,15 +77,29 @@ Page({
       } else {
         delete params.orderCategory;
       }
+      console.log('--------123')
       return params;
     });
   },
   updateList(e) {
+    let list = e.detail || [];
+    list = list.map(v => {
+      let msgList = v.msgList || [];
+      msgList.forEach(vv => {
+        if (vv.isUser) {
+          // 找出用户追问的内容
+          v.askSecondContent = v.content || '';
+        }
+      });
+      v.msgList = msgList.filter(vv => !vv.isUser);
+      return v;
+    });
     this.setData({ list: e.detail })
   },
   handleStatusChange(e) {
     const curOrderStatus = e.detail;
-    this.setData({ curOrderStatus })
+    this.setData({ curOrderStatus });
+    this.loadData();
   },
   changType(e) {
     const currType = e.currentTarget.dataset.type
@@ -161,5 +174,16 @@ Page({
     const { index } = e.currentTarget.dataset;
     const { id, lawyer, lawyerPic } = this.data.list[index];
     app.gotoPage(`/pages/order/evaluate/index?id=${id}&lawyer=${lawyer}&lawyerPic=${lawyerPic || ''}`);
+  },
+  // 播放音频
+  handleOpenAudio(e) {
+    const { filepath: filePath } = e.currentTarget.dataset;
+    wx.playVoice({filePath});
+    // TODO：暂停功能
+  },
+  // 打开文件
+  handleOpenDoc(e) {
+    const { filepath: filePath } = e.currentTarget.dataset;
+    wx.openDocument({ filePath });
   }
 })
