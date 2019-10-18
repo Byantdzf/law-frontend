@@ -195,5 +195,20 @@ App({
     } else {
       wx.navigateTo(op)
     }
+  },
+  wechatPay(data, successCB, failCB) {
+    wx.requestPayment({
+        timeStamp: data.timeStamp,
+        nonceStr: data.nonceStr,
+        package: data.package,
+        signType: data.signType,
+        paySign: data.paySign,
+        success(res) {
+          successCB && successCB(res)
+        },
+        fail(res) {
+          failCB && failCB(res)
+        }
+    })
   }
 })

@@ -160,7 +160,11 @@ Page({
         }
         params.from = 1
         userApi.postOneByOne(params).then(res => {
-            app.gotoPage('/pages/issue/success/index?type=2')
+            app.wechatPay(res.data, function (res) {
+                app.gotoPage('/pages/issue/success/index?type=2')
+            }, function (res) {
+                app.alert('支付失败，请到我的订单再次发起支付')
+            })
         })
     },
     getCityResult(e) {

@@ -201,7 +201,11 @@ Page({
             params.couponId = this.data.selectCoupon.id
         }
         userApi.postLegalServices(params).then(res => {
-            app.gotoPage('/pages/issue/success/index?type=3')
+            app.wechatPay(res.data, function (res) {
+                app.gotoPage('/pages/issue/success/index?type=3')
+            }, function (res) {
+                app.alert('支付失败，请到我的订单再次发起支付')
+            })
         })
     },
     getCityResult(e) {
