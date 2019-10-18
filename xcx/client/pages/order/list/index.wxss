@@ -81,7 +81,7 @@
   border-radius: 20rpx;
 }
 .app-empty .iconfont {
-  font-size: 100rpx;
+  font-size: 70rpx;
 }
 
 .order-tab-box { position: relative; z-index: 10;}
