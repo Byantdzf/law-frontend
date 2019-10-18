@@ -65,7 +65,7 @@ Page({
       if (curOrderStatus != -1) {
         params.orderStatus = curOrderStatus;
       } else {
-        delete params.curOrderStatus;
+        delete params.orderStatus;
       }
       if (currOrderType.id) {
         params.orderType = currOrderType.id;

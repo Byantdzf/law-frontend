@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/news/list/index",
     "pages/tabBar/home/index",
     "pages/tabBar/lawyer/index",
     "pages/tabBar/message/index",
     "pages/tabBar/user/index",
+    "pages/news/list/index",
     "pages/news/agreement/index"
   ],
   "subPackages": [

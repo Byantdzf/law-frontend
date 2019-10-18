@@ -43,8 +43,9 @@ Component({
       let { params, defaultParams } = this.data
 
       if (typeof fn === 'function') {
-        if (isPlainObject(fn(params))) {
-          params = fn(params)
+        let res = fn(params)
+        if (isPlainObject(res)) {
+          params = res
         }
       }
       
