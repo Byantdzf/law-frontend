@@ -192,6 +192,7 @@ Page({
         params.provice = this.data.selectArea[0]
         params.city = this.data.selectArea[1]
         params.useCurrentPhone = this.data.useCurrentPhone
+        params.from = 1
         if (app.globalData.adInfo) {
             params.locationX = app.globalData.adInfo.location.lng
             params.locationY = app.globalData.adInfo.location.lat
@@ -200,7 +201,11 @@ Page({
             params.couponId = this.data.selectCoupon.id
         }
         userApi.postLegalServices(params).then(res => {
-            app.gotoPage('/pages/issue/success/index?type=3')
+            app.wechatPay(res.data, function (res) {
+                app.gotoPage('/pages/issue/success/index?type=3')
+            }, function (res) {
+                app.alert('支付失败，请到我的订单再次发起支付')
+            })
         })
     },
     getCityResult(e) {

@@ -1,0 +1,26 @@
+{
+	"code": "000000",
+	"msg": "成功",
+	"data": [
+		{
+			"dictCode": null,
+			"code": "1",
+			"name": "劳动纠纷"
+		},
+		{
+			"dictCode": null,
+			"code": "2",
+			"name": "地产纠纷"
+		},
+		{
+			"dictCode": null,
+			"code": "3",
+			"name": "经济纠纷"
+		},
+		{
+			"dictCode": null,
+			"code": "4",
+			"name": "合同纠纷"
+		}
+	]
+}

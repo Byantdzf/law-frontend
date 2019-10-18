@@ -198,10 +198,13 @@ Page({
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat
         }
-        console.log(params)
+        params.from = 1
         userApi.postVoice(params).then(res => {
-            console.log(res)
-            app.gotoPage('/pages/issue/success/index?type=1')
+            app.wechatPay(res.data, function (res) {
+                app.gotoPage('/pages/issue/success/index?type=1')
+            }, function (res) {
+                app.alert('支付失败，请到我的订单再次发起支付')
+            })
         })
     },
     getCityResult(e) {

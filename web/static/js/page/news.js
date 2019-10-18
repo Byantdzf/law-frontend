@@ -3,37 +3,46 @@
 	var gather = {
 		init: function () {
 			var _t = this;
-			_t.type = utils.getQueryString('type').toString();
+			// _t.type = utils.getQueryString('type').toString();
 
-			_t.getBranch();
+			// var box = $('.newsRight');
+			// var rightTop = box.offset().top;
 
-			var box = $('.newsRight');
-			var rightTop = box.offset().top;
+			// $(window).scroll(function () {
+			// 	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			// 	if (scrollTop >= rightTop) {
+			// 		box.addClass('fixed')
+			// 	} else {
+			// 		box.removeClass('fixed')
+			// 	}
+			// })
 
-			$(window).scroll(function () {
-				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-				if (scrollTop >= rightTop) {
-					box.addClass('fixed')
-				} else {
-					box.removeClass('fixed')
-				}
-			})
+			_t.queryList();
+
+			_t.getLawyerList();
 		},
-		getBranch: function () {
-			var _t = this;
-			var location = '';
-			switch (_t.type) {
-				case "1":
-					location = '<a href="javascript:;">精选文章</a>';
-					break;
-				case "2":
-					location = '<a href="javascript:;">公司新闻</a>';
-					break;
+
+		queryList: function () {
+			var qlps = {
+				url: URL.news.query,
+				box: '.art_list_box',
+				temp: '/page/news/newsList.html'
 			}
-			if (location) {
-				$('.bread_tips').append(location);
-				$('.clm_tt_l').html(location);
-			}
+			utils.queryTempList(qlps);
+		},
+
+		getLawyerList: function () {
+			var areas = utils.cookie(global.areaCookie);
+			var params = {}
+			params[global.rows] = 5;
+			params[global.page] = 1;
+			params.city = areas.name;
+			params.noAuth = 1;
+			utils.get(URL.lawyer.query, params, function (res) {
+				var data = res.data.list || []
+				var html = utils.getTemp('/page/common/recLawyerList.html', data)
+				$('.newsRight ul').html(html);
+			})
 		}
 	}
 

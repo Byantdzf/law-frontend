@@ -1,6 +1,6 @@
 ﻿layui.define(function (exports) {
 
-	var gahter = {
+	var gather = {
 		init: function () {
 			// 获取用户登录信息
 			utils.localusers();
@@ -8,7 +8,7 @@
 			// 获取语言包
 			utils.lang();
 
-			gahter.actions();
+			gather.actions();
 		},
 
 		getMyRoles: function () {
@@ -49,7 +49,6 @@
 		},
 
 		getHeader: function () {
-			var _t = this;
 			var obj = {};
 			obj = global.userInfo || {};
 			var html = utils.getTemp('/page/common/header.html', obj);
@@ -58,8 +57,14 @@
 
 			// 退出登录
 			$('.logout').off().on('click', function () {
-				_t.logout();
+				gather.logout();
 			});
+		},
+
+		getFoot: function () {
+			var obj = {};
+			var html = utils.getTemp('/page/common/foot.html');
+			$('.btm').html(html);
 		},
 
 		logout: function () {
@@ -72,22 +77,29 @@
 			base.post(URL.account.logout);
 		},
 
-		actions: function () {
-			var _t = this;
+		getQuestionType: function () {
+			var data = []
+			utils.getSync(URL.common.questionType, {dictCode: 'QuestionType', noAuth: 1}, function (res) {
+				data = res.data
+			});
+			return data;
+		},
 
-			_t.getHeader();
+		actions: function () {
+			gather.getHeader();
+			gather.getFoot();
 
 			$('body').on('click', '.searchBtn', function () {
-				_t.topSearch();
+				gather.topSearch();
 			});
 
 			$('body').on('click', '.eqlogin', function () {
 				$(this).closest('dd').removeClass('layui-this');
-				_t.login();
+				gather.login();
 			});
 
 			$('body').on('click', '.eqcodew', function () {
-				_t.eqcodew();
+				gather.eqcodew();
 			});
 
 			$('body').on('click', '.eqReg', function () {
@@ -95,7 +107,7 @@
 			});
 
 			$('body').on('click', '.eqService', function () {
-				_t.eqService();
+				gather.eqService();
 			});
 
 			// 选择城市
@@ -118,7 +130,7 @@
 
 			$(function () {
 				$('body').find('textarea').each(function () {
-					_t.setTextarea($(this));
+					gather.setTextarea($(this));
 				});
 
 				$('body').on('keyup', 'textarea', function () {
@@ -135,13 +147,17 @@
 						box.removeClass('fontRed');
 					}
 				})
+
+				$('body').on('click', '.reTop', function () {
+					$('html, body').animate({ scrollTop: 0 }, 300);
+				})
 			})
 
-			if (window.location.href.indexOf('/lawyer/') == -1) {
-				_t.setFixBar();
-			}
+			// if (window.location.href.indexOf('/lawyer/') == -1) {
+			// 	gather.setFixBar();
+			// }
 
-			_t.hotCity();
+			gather.hotCity();
 		},
 
 		setTextarea: function (obj) {
@@ -150,7 +166,6 @@
 		},
 
 		setFixBar: function () {
-			var _t = this;
 			//固定块
 			util.fixbar({
 				bar1: " "
@@ -182,9 +197,9 @@
 			box.on('click', 'li', function () {
 				var i = $(this).find('i');
 				if (i.hasClass('icon-user1')) {
-					_t.login();
+					gather.login();
 				} else if (i.hasClass('icon-kefu')) {
-					_t.eqService();
+					gather.eqService();
 				} else if (i.hasClass('icon-guanyuwomen')) {
 					window.location = '/about.html';
 				}
@@ -196,9 +211,9 @@
 			if (!search) {
 				utils.msg('请输入搜索关键词');
 			} else {
-				var url = "/search.html?keyword=" + search;
+				var url = "/lawyerList.html?keyword=" + search;
 				if (window.location.href.indexOf('/lawyer/') > -1) {
-					url = '/lawyer/search.html?keyword=' + search
+					url = '/lawyer/lawyerList.html?keyword=' + search
 				}
 				window.location = url;
 			}
@@ -265,26 +280,23 @@
 			utils.dialog(ops);
 		},
 		hotCity: function () {
-			var _t = this;
 			$(".region_con").eq(0).show();
-			_t.regionConList(0);
+			gather.regionConList(0);
 
 			$(".region_list span").hover(function () {
 				$(this).show().addClass('region_on').siblings().removeClass('region_on')
 				$('.region_conList .region_con').html('')
-				_t.regionConList($(this).index())
+				gather.regionConList($(this).index())
 				// $('.region_conList .region_con:eq(' + $(this).index() + ')').show().siblings().hide()
 			})
 		},
 		regionConList: function (index) {
-			var _t = this;
-
-			if (!_t.areaList) {
+			if (!gather.areaList) {
 				utils.getSync(URL.select.getArea, function (res) {
-					_t.areaList = res.data;
+					gather.areaList = res.data;
 				});
 			}
-			var list = _t.areaList[index];
+			var list = gather.areaList[index];
 			var html = '';
 			$.each(list, function (i, t) {
 				html += '<li><a href="javascript:;" data-code="' + t.id + '">' + t.name + '</a></li>';
@@ -314,8 +326,8 @@
 		},
 	}
 
-	gahter.init();
+	gather.init();
 
-	exports('base', gahter);
+	exports('base', gather);
 });
 var base = layui.base;

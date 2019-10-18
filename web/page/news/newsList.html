@@ -1,0 +1,24 @@
+{{# 
+	layui.each(d, function (i, t) { 
+}}
+<li>
+	<a href="newsDetails.html?id={{t.id}}">
+		{{# if (t.pic) { }}
+		<div class="imgBox">
+			<img src="{{ t.pic }}" alt="">
+		</div>
+		{{# } }}
+		<div>
+			<h4>{{ t.title || '' }}</h4>
+			<p>{{ t.brief || '' }}</p>
+			<div class="icons">
+				<span><i class="iconfont icon-read"></i> {{ t.readCount }}</span>
+				<span><i class="iconfont icon-share"></i> {{ t.forwardCount }}</span>
+				<span><i class="iconfont icon-zan"></i> {{ t.thumbsUpCount }}</span>
+			</div>
+		</div>
+	</a>
+</li>
+{{# 
+	})
+}}
