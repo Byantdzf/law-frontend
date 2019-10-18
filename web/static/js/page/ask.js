@@ -10,11 +10,19 @@
 				$('.oto_form_header').removeClass('hidden');
 			}
 
+			_t.getUserStatus()
+
 			form.on('submit(questionSubmit)', function (res) {
 				var params = res.field;
 				window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 			})
 		},
+
+		getUserStatus: function () {
+			utils.get(URL.common.isRegister, function (res) {
+				console.log(res);
+			})
+		}
 	}
 
 	// 点击事件

@@ -5,7 +5,7 @@
  * remove      hash.remove('id')
  * clear       hash.clear()
  */
-$(function () { (function (a, b) { "use strict"; var c = function () { var b = function () { var b = a.location.hash ? a.location.hash.substr(1).split("&") : [], c = {}; for (var d = 0; d < b.length; d++) { var e = b[d].split("="); c[e[0]] = decodeURIComponent(e[1]) } return c }; var c = function (b) { var c = []; for (var d in b) { c.push(d + "=" + encodeURIComponent(b[d])) } a.location.hash = c.join("&") }; return { get: function (a) { var c = b(); if (a) { return c[a] } else { return c } }, add: function (a) { var d = b(); for (var e in a) { d[e] = a[e] } c(d) }, remove: function (a) { a = typeof a == "string" ? [a] : a; var d = b(); for (var e = 0; e < a.length; e++) { delete d[a[e]] } c(d) }, clear: function () { c({}) } } }(); a.hash = c })(window) });
+(function (a, b) { "use strict"; var c = function () { var b = function () { var b = a.location.hash ? a.location.hash.substr(1).split("&") : [], c = {}; for (var d = 0; d < b.length; d++) { var e = b[d].split("="); c[e[0]] = decodeURIComponent(e[1]) } return c }; var c = function (b) { var c = []; for (var d in b) { c.push(d + "=" + encodeURIComponent(b[d])) } a.location.hash = c.join("&") }; return { get: function (a) { var c = b(); if (a) { return c[a] } else { return c } }, add: function (a) { var d = b(); for (var e in a) { d[e] = a[e] } c(d) }, remove: function (a) { a = typeof a == "string" ? [a] : a; var d = b(); for (var e = 0; e < a.length; e++) { delete d[a[e]] } c(d) }, clear: function () { c({}) } } }(); a.hash = c })(window);
 
 /**
  * md5 插件
@@ -49,11 +49,6 @@ layui.define(function (exports) {
 			this.ajax(url, param, callback, { "type": "POST", "asyn": true }); // POST
 		},
 
-		// del 表单
-		del: function (url, param, callback) {
-			this.ajax(url, param, callback, { "type": "DELETE", "asyn": true }); // POST
-		},
-
 		// post JSON
 		postJson: function (url, param, callback) {
 			var ct = 'application/json;charset=utf-8';
@@ -62,6 +57,7 @@ layui.define(function (exports) {
 
 		//Ajax
 		ajax: function (url, data, callback, options) {
+			var _t = this;
 			if (options.type == 'POST') {
 				if (global.LOADING_URL[url]) {
 					return;
@@ -96,7 +92,7 @@ layui.define(function (exports) {
 				areas = global.defaultArea;
 			}
 
-			gather.setCookie(global.requestAreaCookie, areas.id);
+			_t.setCookie(global.requestAreaCookie, areas.id);
 
 			return $.ajax({
 				headers: headers || '',
@@ -109,7 +105,7 @@ layui.define(function (exports) {
 				beforeSend: function () {
 					$('.submit').attr("disabled", "disabled");
 					// if (isLoading) {
-					// 	gather.loading();
+					// 	_t.loading();
 					// 	global.LOADING_URL[url] = true;
 					// }
 				},
@@ -138,7 +134,7 @@ layui.define(function (exports) {
 					// 	t && (flag = 1);
 					// });
 					// if (!flag) {
-					// 	gather.removeLoading();
+					// 	_t.removeLoading();
 					// }
 					$('.submit').removeAttr("disabled");
 				},
@@ -250,16 +246,11 @@ layui.define(function (exports) {
 								params[t] = valArr[i];
 							})
 						} else {
-							params[e.name] = $(e).attr('data-id') && val ? $(e).attr('data-id') : val;
+							params[e.name] = $(e).data('id') && val ? $(e).data('id') : val;
 						}
 					}
 				}
 			});
-			if (box.find('input[type="radio"]').length) {
-				box.find('input[type="radio"]:checked').each(function (i, e) {
-					params[e.name] = $(e).val();
-				});
-			}
 			return params;
 		},
 
@@ -317,10 +308,6 @@ layui.define(function (exports) {
 			hash.add({ p: actUrl });
 			var html = '<div class="layui-fluid"></div><script src="/static/js' + jsUrl + '.js?_t' + this.random() + '"></script>';
 			box.html(html);
-
-			_t.root = $('#APP');
-			_t.root.off('click');
-			_t.actions && _t.actions()
 
 			gather.setLocation(actUrl);
 		},
@@ -447,13 +434,14 @@ layui.define(function (exports) {
 				type: 1,
 				shade: 0.5,
 				closeBtn: 1,
-				offset: '100px',
+				// offset: '100px',
 				moveType: 1,
 				shadeClose: 1,
 				resize: 0,
 				moveOut: 1
 			}
 			params && (opts = $.extend(true, opts, params));
+			// params.offset == 'no' && delete(params.offset);
 			opts.btn && (opts.btnAlign = 'c');
 			layer.open(opts);
 		},
@@ -461,12 +449,13 @@ layui.define(function (exports) {
 		openForm: function (params) {
 			var cb = params.success;
 			var yes = params.yes;
-			delete (params.success);
-			delete (params.yes);
+			var classes = params["class"] || '';
+			delete(params.success);
+			delete(params.yes);
 			var opts = {
 				area: "800px",
 				btn: ['保存', '关闭'],
-				content: '<div class="updateBox layui-form ' + params.class + '"></div>',
+				content: '<div class="updateBox layui-form ' + classes + '"></div>',
 				success: function (layero) {
 					cb && cb(layero);
 				},
@@ -520,23 +509,45 @@ layui.define(function (exports) {
 			// 如果表单中有时间控件，初始化时间控件
 			parents.find('.dateIcon').each(function () {
 				var elem = $(this);
-				var type = $(this).attr('data-type');
+				var type = $(this).data('type');
 				if (type == 'year' || type == 'month' || type == 'date' || type == 'time' || type == 'datetime') {
-					if (elem.attr('data-range')) {
-						gather.initDateRange(elem[0], { type: type });
+					if (elem.data('range')) {
+						gather.initDateRange(elem[0], {type: type});
 					} else {
-						gather.initDate(elem[0], { type: type });
+						gather.initDate(elem[0], {type: type});
 					}
 				}
 			});
 
 			$.each(forms, function (i, t) {
-				if (t.type == 'select' && t.rs) {
-					var defaultStr = t.default || '';
+				 if (t.type == 'select' && t.rs) {
+					var defaultStr = t['default'] || '';
 					var defaultVal = item[t.field] || '';
 					gahter.getSelect(t.rs, '.edit_' + t.field, defaultStr, defaultVal);
 				}
 			})
+		},
+		
+		// 获取今天
+		now: function () {
+			var dd 	= new Date();
+			var y	= dd.getFullYear();
+			var m 	= dd.getMonth() + 1;
+			var d 	= dd.getDate();
+			return y + '-' + lay.digit(m) + '-' + lay.digit(d);
+		},
+		
+		// 获取某天的前几天，后几天
+		// nd   2017-08-08
+		// AddDayCount   +7    -7
+		// base.days("-7", "2017-12-01")
+		days: function (AddDayCount, nd) {
+			var dd = new Date(nd);
+			dd.setDate(dd.getDate()+Number(AddDayCount));
+			var y = dd.getFullYear();
+			var m = dd.getMonth()+1;
+			var d = dd.getDate();
+			return  y + '-' + lay.digit(m) + '-' + lay.digit(d);
 		},
 
 		getSelect: function (data, box, defaults, showId) {
@@ -583,14 +594,8 @@ layui.define(function (exports) {
 			var fields = '';
 			if (gather.isType(box) == 'string') {
 				fields = $(box).data('name');
-				if ($(box).data('val') && !value) {
-					value = $(box).data('val');
-				}
 			} else {
 				fields = box.data('name');
-				if (box.data('val') && !value) {
-					value = box.data('val');
-				}
 			}
 
 			var html = '';
@@ -630,9 +635,9 @@ layui.define(function (exports) {
 		getCheckbox: function (data, box, value) {
 			var fields = '';
 			if (gather.isType(box) == 'string') {
-				fields = $(box).attr('data-name');
+				fields = $(box).data('name');
 			} else {
-				fields = box.attr('data-name');
+				fields = box.data('name');
 			}
 			var html = '';
 			layui.each(data, function (i, t) {
@@ -673,7 +678,7 @@ layui.define(function (exports) {
 			console.log(url + '?' + $.param(params));
 			window.open(url + '?' + $.param(params));
 		},
-
+		
 		// 计算弹窗高度
 		setMainTableHeight: function (box) {
 			var obj = $('#APP .autoFixHeight');
@@ -705,7 +710,7 @@ layui.define(function (exports) {
 			container.html(html);
 
 			// autoFixHeight
-			gather.setMainTableHeight();
+			// gather.setMainTableHeight();
 
 			// 如果有查询条件
 			if (opts.searchParams.length) {
@@ -716,22 +721,18 @@ layui.define(function (exports) {
 				// 如果搜索框中有时间，默认加载时间控件
 				$.each(opts.searchParams, function (i, t) {
 					if (t.type == 'date') {
-						gahter.initDate(searchBox.find('.search-' + t.field)[0], {
-							done: function () {
-								global.autoSearch && searchBox.find('.search').click();
-							}
-						});
+						gahter.initDate(searchBox.find('.search-' + t.field)[0], {done: function () {
+							global.autoSearch && searchBox.find('.search').click();
+						}});
 					} else if (t.type == 'dateRange') {
-						gahter.initDateRange(searchBox.find('.search-' + t.field)[0], {
-							done: function () {
-								// 这里不加setTimeout，选择结果不会显示到页面上，被下面的操作影响掉了
-								if (global.autoSearch) {
-									setTimeout(function () {
-										searchBox.find('.search').click();
-									}, 0)
-								}
+						gahter.initDateRange(searchBox.find('.search-' + t.field)[0], {done: function () {
+							// 这里不加setTimeout，选择结果不会显示到页面上，被下面的操作影响掉了
+							if (global.autoSearch) {
+								setTimeout(function () {
+									searchBox.find('.search').click();
+								}, 0)
 							}
-						});
+						}});
 					} else if (t.type == 'select' && t.rs) {
 						gahter.getSelect(t.rs, '.search-' + t.field, global.msg.select);
 					}
@@ -772,12 +773,7 @@ layui.define(function (exports) {
 			var tabBox = container.find('.app-table-tab');
 			var tableBox = container.find('.app-table-box');
 			var pageBox = container.find('.app-page-box');
-
-			if (tableBox.find('table').length) {
-				tableId = tableBox.find('table').attr('id');
-			} else {
-				tableBox.html('<table class="layui-hide" id="' + tableId + '"></table>');
-			}
+			!tableBox.find('table').length && tableBox.html('<table class="layui-hide" id="' + tableId + '"></table>');
 
 			var params = {};
 			if (p.searchData) {
@@ -801,33 +797,20 @@ layui.define(function (exports) {
 						// 根据索引显示名字，区分颜色
 						if (t2.rs && t2.rs.length) {
 							t2.templet = function (d) {
-								var str = d[t2.field] || d[t2.field] == 0 ? d[t2.field] : '';
-								if (str || str == 0) {
-									var item = '';
-									$.each(t2.rs, function (i3, t3) {
-										t3.id == d[t2.field] && (item = t3);
-									});
-									item && (str = item.name);
-									item.type && (str = '<span class="f-' + item.type + '">' + str + '</span>');
-								}
+								var str = d[t2.field];
+								var item = '';
+								$.each(t2.rs, function (i3, t3) {
+									t3.id == d[t2.field] && (item = t3);
+								});
+								item && (str = item.name);
+								item.type && (str = '<span class="f-' + item.type + '">' + str + '</span>');
 								return str;
 							}
 						}
-
 						// 转换时间为只显示日期
-						if (t2.type == 'date') {
+						if (t2.types == 'date') {
 							t2.templet = function (d) {
 								return gahter.formatYMD(d[t2.field]);
-							}
-						} else if (t2.type == 'image') {
-							t2.templet = function (d) {
-								var imgArr = d[t2.field] ? d[t2.field].split(',') : [];
-								var html = '<div class="imgList tableImg">';
-								$.each(imgArr, function (i, t) {
-									html += '<div class="showImg" data-url="' + t + '" style="background-image:url(' + t + ');" data-url="' + t + '"></div>'
-								})
-								html += '</div>';
-								return html;
 							}
 						}
 
@@ -837,9 +820,7 @@ layui.define(function (exports) {
 								var html = '<div class="actions">';
 								$.each(t2.actions, function (i3, t3) {
 									var type = t3.type ? 'layui-btn-' + t3.type : '';
-									if ((!t3.filter && t3.filter != 0) || d[t3.filter] == t3.filterVal) {
-										html += '<button class="layui-btn layui-btn-xs ' + t3.id + ' ' + type + '" data-type="' + t3.id + '">' + t3.name + '</button>'
-									}
+									html += '<button class="layui-btn layui-btn-xs ' + type + '" data-type="' + t3.id + '">' + t3.name + '</button>'
 								});
 								html += '</div>';
 								return html;
@@ -847,7 +828,7 @@ layui.define(function (exports) {
 						}
 
 						// 如果单列没有设置排列方式，默认居中排列
-						!t2.align && (t2.align = 'center');
+						!t2.align && (t2.align =  'center');
 
 						// 如果有设置宽度
 						if (t2.width) {
@@ -872,7 +853,7 @@ layui.define(function (exports) {
 				};
 				tps = $.extend(true, tps, p);
 
-				delete (tps.url);
+				delete(tps.url);
 				table.render(tps);
 
 				tableBox.find('.layui-table-main tr').each(function (i, t) {
@@ -900,7 +881,7 @@ layui.define(function (exports) {
 						elem: pageBox[0],
 						curr: params[global.page],
 						limit: params[global.rows],
-						count: arr.totalCount,
+						count: arr.totalRow,
 					};
 					gather.getPageList(pageParams, function (obj, first) {
 						if (!first) {
@@ -966,7 +947,7 @@ layui.define(function (exports) {
 
 		getPageList: function (params, callback) {
 			var plp = {
-				layout: ['count', 'prev', 'page', 'next', 'skip', 'limit'],
+    			layout: ['count', 'prev', 'page', 'next', 'skip'],
 				limits: [10, 20, 30, 40, 50, 100],
 				jump: function (obj, first) {
 					if (callback) {
@@ -1014,96 +995,14 @@ layui.define(function (exports) {
 				table.timer[tableId] && clearInterval(table.timer[tableId]);
 			}
 		},
-
-		formatYMD: function (times) {
-			var str = '';
-			if (times) {
-				str = times.toString().split(' ')[0];
-			}
-			return str;
-		},
-
-		// 获取今天
-		now: function () {
-			var dd = new Date();
-			var y = dd.getFullYear();
-			var m = dd.getMonth() + 1;
-			var d = dd.getDate();
-			return y + '-' + lay.digit(m) + '-' + lay.digit(d);
-		},
-
-		// 获取某天的前几天，后几天
-		// nd   2017-08-08
-		// AddDayCount   +7    -7
-		// base.days("-7", "2017-12-01")
-		days: function (AddDayCount, nd) {
-			var dd = new Date(nd);
-			dd.setDate(dd.getDate() + Number(AddDayCount));
-			var y = dd.getFullYear();
-			var m = dd.getMonth() + 1;
-			var d = dd.getDate();
-			return y + '-' + lay.digit(m) + '-' + lay.digit(d);
-		},
-
-		loadEditer: function (container, params) {
-			var box;
-			if (gather.isType(container) == 'string') {
-				box = $(container);
-			} else {
-				box = container;
-			}
-
-			box.find('.editorBox').each(function () {
-				var id = $(this).find('textarea').attr('id');
-				if (!gather.loadEditFlag) {
-					$.getScript('/static/js/plugin/ueditor/ueditor.config.js', function (r) {
-						$.getScript('/static/js/plugin/ueditor/ueditor.all.min.js', function () {
-							$.getScript('/static/js/plugin/ueditor/lang/zh-cn/zh-cn.js', function () {
-								gather.loadEditFlag = 1;
-								gahter.loadEditerContent(id, params);
-							});
-						});
-					});
-				} else {
-					gahter.loadEditerContent(id, params);
-				}
-			})
-		},
-
-		loadEditerContent: function (id, params) {
-			// 加try，避免IE8报错
-			try {
-				UE.delEditor(id);	// 打开前先销毁，否则渲染失败
-			} catch (e) { }
-
-			var ue = UE.getEditor(id, {
-				//这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-				toolbars: [['fullscreen', 'Source', 'bold', 'italic', 'underline', 'forecolor', 'backcolor', 'fontborder', 'fontfamily', 'fontsize', 'Undo', 'Redo', 'Bold', 'test', '|', 'removeformat', 'formatmatch', 'autotypeset',
-					'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-					'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'simpleupload', 'insertvideo']],
-				//focus时自动清空初始化时的内容
-				autoClearinitialContent: false,
-				//关闭字数统计
-				wordCount: false,
-				//关闭elementPath
-				elementPathEnabled: false,
-				//超出高度出现滚动条
-				autoHeightEnabled: true,
-				//默认的编辑区域高度
-				initialFrameHeight: params && params.height || 200,
-				//更多其他参数，请参考ueditor.config.js中的配置项
-				serverUrl: URL.common.editor,
-				UEDITOR_HOME_URL: '/static/js/plugin/ueditor/',
-				lang: "zh-cn",
-				langPath: "/static/js/plugin/ueditor/lang/"
-			})
-
-			ue.ready(function () {
-				if (params && params.height) {
-					ue.setHeight(params.height);
-				}
-			});
-		},
+		
+        formatYMD: function (times) {
+            var str = '';
+            if (times) {
+                str = times.toString().split(' ')[0];
+            }
+            return str;
+        },
 
 		/*
 		 * params:
@@ -1111,176 +1010,65 @@ layui.define(function (exports) {
 		 * accept 限制文件，选填，格式如：{extensions: 'xls,xlsx',mimeTypes: 'application/vnd.ms-excel'}
 		 * size 限制大小，默认100M
 		 */
-		uploadFiles: function (params, callback) {
+		uploadFiles: function(params, callback){
 			var uploading;
 			var btn = params.btn ? params.btn : '#picker';
 			var size = params.size ? params.size : 100 * 1024 * 1024;
-			var url = params.url || URL.common.uploadImage;
 
-			var fileUploader = WebUploader.create({
-				swf: '/static/js/plugin/webuploader/Uploader.swf',		// swf文件路径
-				server: url,							// 文件接收服务端。
-				auto: true,
+			var opts = {
+				swf:'/static/js/plugin/webuploader/Uploader.swf',		// swf文件路径
+				server: URL.common.upload,								// 文件接收服务端。
+				auto:true,
 				duplicate: true,
-				accept: params.accept,									//文件格式过滤
-				fileSingleSizeLimit: size,    							// 单个文件最大10M
-				pick: { id: btn, multiple: false },						// 选择文件的按钮
-				resize: false 											//不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-			});
+				fileSingleSizeLimit:size,    							// 单个文件最大10M
+				pick:{id:btn, multiple: false},							// 选择文件的按钮
+				resize:false 											//不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			};
+
+			params && (opts = $.extend(true, opts, params));
+
+			var fileUploader = WebUploader.create(opts);
 
 			// 当有文件被添加进队列的时候
-			fileUploader.on('fileQueued', function (file) {
-				uploading = layer.load(2, { shade: [0.5, "#fff"] });
+			fileUploader.on('fileQueued',function(file) {
+				uploading = layer.load(2, {shade: [0.5,"#fff"]});
 			});
 
 			//上传成功
-			fileUploader.on('uploadSuccess', function (file, res) {
+			fileUploader.on('uploadSuccess', function(file,res) {
 				layer.close(uploading);
-				if (res.code == 2) {
-					layer.msg(global.msg.uploadSuccess);
+				if(res.code==2){
+					gather.msg(global.msg.uploadSuccess);
 					if (callback) {
 						callback(res);
 					}
-				} else {
-					layer.msg(global.msg.uploadFaild);
+				}else{
+					gather.msg(global.msg.uploadFaild);
 					fileUploader.removeFile(fileUploader.getFile(file.id));
 				}
 			});
 		},
 
-		singleUpload: function (container, callback) {
-			var btn;
-			var box;
-			if (gather.isType(container) == 'string') {
-				box = $(container);
-			} else {
-				box = container;
-			}
-			btn = '#' + box.find('.addPicBox').attr('id');
-
-			// 上传图片
-			var p = {};
-			p.btn = btn;
-			p.url = URL.common.uploadImage;
-			p.accept = {
-				extensions: "jpg,jpeg,png,gif",
-				mimeTypes: ".jpg,.jpeg,.png,.gif"
-			};
-			gather.uploadFiles(p, function (res) {
-				var url = res.data;
-				box.find('.prevImgs').removeClass('hidden').find('.showImg').css('background-image', 'url("'+url+'")').find('img').attr('src', url);
-				box.find('.addPicBox').addClass('hidden');
-				if (callback) {
-					callback();
+		countTimes: function (obj) {
+			var timer = window.setInterval(function () {
+				var times = obj.html();
+				var timeArr = times.split(':');
+				var s = parseInt(timeArr[0]) * 60 * 60 + parseInt(timeArr[1]) * 60 + parseInt(timeArr[2]);
+				s--;
+				if (s == 0) {
+					window.clearInterval(timer);
+					obj.closest('li').remove();
+				} else {
+					var h = Math.floor(s / (60*60));//整数部分代表小时；
+					s %= 3600; //余数代表 剩下的秒数；
+					var m = Math.floor(s / 60);
+					s %= 60;
+					obj.html(lay.digit(h) + ':' + lay.digit(m) + ':' + lay.digit(s))
+					if (h < 1 && !obj.hasClass('notice')) {
+						obj.addClass('notice');
+					}
 				}
-			});
-
-			// 删除图片
-			$(box).off().on("click", ".delImg", function (e) {
-				var obj = $(this);
-				box.find('.prevImgs').addClass('hidden').find('.showImg').css('background-image', '').find('img').attr('src', '');
-				box.find('.addPicBox').removeClass('hidden');
-				e.stopPropagation();
-			});
-		},
-
-		mutliUpload: function (container, callback) {
-			var btn;
-			var box;
-			if (gather.isType(container) == 'string') {
-				box = $(container);
-			} else {
-				box = container;
-			}
-			btn = '#' + box.find('.addPicBox').attr('id');
-
-			// 上传图片
-			var p = {};
-			p.btn = btn;
-			p.url = URL.common.uploadImage;
-			p.accept = {
-				extensions: "jpg,jpeg,png,gif",
-				mimeTypes: ".jpg,.jpeg,.png,.gif"
-			};
-			gather.uploadFiles(p, function (res) {
-				var url = res.data;
-				var prev =
-				  '<div class="prevImgs" draggable="true"><div class="showImg" data-url="' + url + '" style="background-image: url('+url+');"><img src="'+url+'" /></div><a href="javascript:;" class="delImg"><i class="layui-icon">&#x1006;</i></a></div>';
-				$(p.btn).before(prev);
-				if (callback) {
-					callback();
-				}
-			});
-
-			// 删除图片
-			$(box).off().on("click", ".delImg", function (e) {
-				var obj = $(this);
-				obj.closest(".prevImgs").remove();
-				e.stopPropagation();
-			});
-		},
-		
-		loadUploads: function (container, callback) {
-			if (!gather.loadUploadFlag) {
-				gahter.loadCss('/static/js/plugin/webuploader/css/webuploader.css');
-				$.getScript('/static/js/plugin/webuploader/webuploader.js', function (r) {
-					gather.loadUploadFlag = 1;
-					gahter.loadUploadContent(container, callback);
-				});
-			} else {
-				gahter.loadUploadContent(container, callback);
-			}
-		},
-
-		loadUploadContent: function (container, callback) {
-			var box;
-			if (gather.isType(container) == 'string') {
-				box = $(container);
-			} else {
-				box = container;
-			}
-			box.find('.imgList').each(function () {
-				var uploadBox = $(this);
-				if (uploadBox.hasClass('mutli')) {
-					gather.mutliUpload(uploadBox, callback);
-				} else if (uploadBox.hasClass('single')) {
-					gather.singleUpload(uploadBox, callback)
-				}
-			});
-		},
-		
-		loadCss: function (url) {
-			$("<link>").attr({ 
-				rel: "stylesheet",
-				type: "text/css",
-				href: url + '?_=' + Math.random()
-			}).appendTo("head");
-		},
-		
-		photos: function (params) {
-			var photosId = 'photos_' + Math.floor(Math.random() * 90000) + 10000;
-			var opts = {
-				"title": params.title || "", //相册标题
-				"id": params.id || photosId, //相册id
-				"start": params.index || 0, //初始显示的图片序号，默认0
-				"data": []
-			};
-
-			var arr = [];
-			$.each(params.data, function (i, t) {
-				var item = {};
-				item.alt = t.alt || '';
-				item.pid = t.pid || 'img_' + Math.floor(Math.random() * 90000) + 10000;
-				item.src = t.src || '';
-				item.thumb = t.thumb || '';
-				arr.push(item);
-			});
-			opts.data = arr;
-
-			layer.photos({
-				photos: opts
-				, anim: 5
-			});
+			}, 1000);
 		}
 	}
 

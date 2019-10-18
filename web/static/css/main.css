@@ -32,6 +32,8 @@ img{outline: none; border: none;}
 
 .mt60 { margin-top: 60px;}
 
+.app-page-box { text-align: center;}
+
 .couponList .itemTop,
 a {
 	-moz-transition: all .2s ease-out;
@@ -64,7 +66,7 @@ a:hover { opacity: .8;}
 .top div p>a,.top div p>span{display:inline-block;padding:0px 3px 0 7px;height:12px;line-height: 12px;border-left:1px solid #646464;cursor:pointer;}
 .top div p>*:first-child{border:none;}
 .eqcodebox{text-align:center;}
-.eqcodebox p{width:100%;height:40px;line-height:40px;position:relative;color:#fff;background-color: #feb454655;}
+.eqcodebox p{width:100%;height:40px;line-height:40px;position:relative;color:#fff;background-color: #454655;}
 .eqcodebox p b{position: absolute;right:6px;height:40px;top:0;width:40px;display:block;cursor:pointer;}
 .eqcodebox img{width:240px;margin-top:16px;}
 .eqcodebox h4{color:#333;font-size:14px;line-height:22px;padding-top:8px;}
@@ -91,8 +93,8 @@ a:hover { opacity: .8;}
 .search{overflow:hidden; padding-top:7px;}
 .search input{float:left;width:350px;height: 50px;color:#484848;padding-left:40px;line-height:36px;border:1px solid #d7d7d7;background:#f4f4f4 url("../images/icon_search.png") no-repeat 10px center;background-size:20px auto; box-sizing: border-box;}
 .search button{float:left;width:100px;height: 50px;line-height: 50px;background:#454655;cursor:pointer;color: #fff;text-align:center;font-size:16px;}
-.nav{ position:relative; font-family:"宋体";font-size:14px;height: 52px;background-color:#333; margin:0 100px 0 100px;}
-.nav::before { position: absolute; left:-60px; width:60px; content: ""; height:100%; background: #333;}
+.nav{ position:relative; font-family:"宋体";font-size:14px;height: 52px;background-color:#333;}
+/* .nav::before { position: absolute; left:-60px; width:60px; content: ""; height:100%; background: #333;} */
 .nav>div{margin:auto; width:1200px;}
 .nav h2{float: left; height: 52px;line-height:52px;color:#fff;font-size:20px;font-weight:bold;margin-right:80px;}
 .nav a{float: left; height: 52px;line-height:52px;color:#fff;font-weight:bold;width:12.5%;text-align:center;background:url("../images/nav_bg.png") no-repeat right center;background-size:2px auto;}
@@ -183,7 +185,7 @@ a:hover { opacity: .8;}
 .consult_list p{font-size:12px;color:#595959;line-height:20px;margin-left:80px;max-height:40px;overflow: hidden;}
 .consult_list p a{display:block;color:#595959;}
 .consult_list a img { display: block; width:100%; height:100%; margin-right: }
-.consult_btn{margin-left:74px;overflow: hidden;margin-top:12px;}
+.consult_btn{margin-left:25px;overflow: hidden;margin-top:12px;}
 .consult_btn a{float: left;padding:0 5px; height:30px;border:1px solid #d8d8d8;line-height:28px;text-align:center;font-size:12px;color:#000;}
 .consult_btn a.conbtn01{margin-right: 12px;}
 .consult_btn a i { color:#eb4546; font-size:18px; margin-right:5px; position: relative; top:3px;}
@@ -202,6 +204,7 @@ a:hover { opacity: .8;}
 .index_ccbox2_1 li .items .imgBox img { display: block; width:100%; height:100%; border-radius: 50%;}
 .index_ccbox2_1 li .items .imgBox span {width:18px;height:18px;position:absolute;display:block;background: url("../images/vip.png") no-repeat center center;right:2px;bottom:2px;}
 .index_ccbox2_1 li h6 { font-size: 16px; font-weight: bold; margin-bottom: 10px;}
+.index_ccbox2_1 li h6 span { font-weight: normal; margin-left: 20px;}
 .index_ccbox2_1 li h6 label { float: right; color: #eb4546;}
 .index_ccbox2_1 li p,
 .index_ccbox2_1 li p a { color:#666; line-height: 1.5;}
@@ -468,7 +471,7 @@ a:hover { opacity: .8;}
 /* 精选文章 */
 .art_list_tips{font-size:14px;line-height:24px;color: #f00;padding-top:8px;}
 .art_list_tips a{color: #f00;}
-.art_list_box li { height:100px; overflow: hidden;}
+.art_list_box li { position: relative; height:100px; overflow: hidden;}
 .art_list_box li a{overflow: hidden;display:block;}
 .art_list_box li .imgBox{float: left;width:146px;height:100px;overflow: hidden; margin-right:20px;}
 .art_list_box li .imgBox img{width:100%;}
@@ -482,7 +485,7 @@ a:hover { opacity: .8;}
     -webkit-box-orient: vertical;
 }
 .art_list_box li a:hover h4{color: #eb4546;}
-.art_list_box li .icons { text-align: right; font-size:12px;line-height:24px;color:#999;padding-top:2px;}
+.art_list_box li .icons { position: absolute; right:20px; bottom:24px; font-size:12px;line-height:24px;color:#999;padding-top:2px;}
 .art_list_box li .icons span { margin-left:20px;}
 /* 搜索页面 */
 .search_box{width:870px;margin: auto;}
@@ -531,14 +534,14 @@ a:hover { opacity: .8;}
 .server_pro_cc ul {overflow:hidden;}
 .server_pro_cc ul li>*{float:left;}
 .server_pro_cc ul li>span{font-size:16px;width:67px;text-align:center;line-height:42px;padding-top:67px;}
-.server_pro_cc ul li>font{width:154px;margin:0 20px;height:34px;border-bottom:2px solid #feb454655;}
+.server_pro_cc ul li>font{width:154px;margin:0 20px;height:34px;border-bottom:2px solid #454655;}
 .server_pro_cc ul li>span.icon_server01{background:url("../images/icon_order.png") no-repeat left top;}
 .server_pro_cc ul li>span.icon_server02{background:url("../images/icon_order.png") no-repeat -67px top;}
 .server_pro_cc ul li>span.icon_server03{background:url("../images/icon_order.png") no-repeat -134px top;}
 .server_pro_cc ul li>span.icon_server04{background:url("../images/icon_order.png") no-repeat -201px top;}
 /* 出具律师函 */
 .letter_tt{width:1060px;margin:auto;font-size:24px;color:#000;padding-top:60px;}
-.releaseall p label.pay_money{font-size:16px;line-height:44px;height:44px;color:#feb454655;}
+.releaseall p label.pay_money{font-size:16px;line-height:44px;height:44px;color:#454655;}
 .releaseall .upload {position:relative;}
 .releaseall .upload input{padding:0;width:64px;height:64px;position:absolute;left:120px;top:0;border:none;z-index:-1;}
 .releaseall p.upload>span{height:66px;line-height:66px;}
@@ -1351,10 +1354,11 @@ i, em { font-style: normal;}
 .ad1 { margin-top:70px;}
 .ad1 img { display: block; width:100%;}
 
-.lawerReg a { display: block; height: 40px; line-height: 40px; font-size: 16px; padding-left:40px; font-weight: bold;}
+.lawerReg { height: 40px; line-height: 40px;}
+.lawerReg a { font-size: 16px; padding-left:40px; font-weight: bold;}
 .lawerReg a i { position: relative; top:2px; margin-left:10px; background:url(../images/home-icon-9.png) center no-repeat; background-size:contain; width:20px; height:20px; display: inline-block;}
 
-.rightFlex { position: fixed; z-index: 999x; right:0; top:0; bottom:0; width:60px; background: #333;}
+.rightFlex { position: fixed; z-index: 999; right:0; top:0; bottom:0; width:60px; background: #333;}
 .rightFlex .flexCon { position: absolute; left:0; width: 100%; bottom:200px;}
 .rightFlex .flexCon a { display: block;}
 .rightFlex .flexCon img { display: block; margin: 40px auto 0;}

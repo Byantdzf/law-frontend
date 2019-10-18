@@ -3,7 +3,8 @@
 	var gather = {
 		init: function () {
 			var _t = this;
-			// _t.type = utils.getQueryString('type').toString();
+			_t.id = utils.getQueryString('id');
+
 
 			// var box = $('.newsRight');
 			// var rightTop = box.offset().top;
@@ -16,19 +17,22 @@
 			// 		box.removeClass('fixed')
 			// 	}
 			// })
-
-			_t.queryList();
+			_t.getData();
 
 			_t.getLawyerList();
 		},
 
-		queryList: function () {
-			var qlps = {
-				url: URL.news.query,
-				box: '.art_list_box',
-				temp: '/page/news/newsList.html'
-			}
-			utils.queryTempList(qlps);
+		getData: function () {
+			var _t = this;
+			utils.get(URL.news.getById + _t.id, function (res) {
+				var data = res.data;
+				$('.ccbox_sectiton .tt').html(data.title);
+				$('.time').html(data.createTime);
+				$('.ccbox_sectiton .icon-read').next().html(data.readCount);
+				$('.ccbox_sectiton .icon-share').next().html(data.forwardCount);
+				$('.ccbox_sectiton .icon-zan').next().html(data.thumbsUpCount);
+				$('.newsContent').html(data.content);
+			});
 		},
 
 		getLawyerList: function () {
@@ -44,6 +48,7 @@
 				$('.newsRight ul').html(html);
 			})
 		}
+
 	}
 
 	// 点击事件

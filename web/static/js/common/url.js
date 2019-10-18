@@ -1,11 +1,25 @@
 ﻿
-if (typeof (hosts) == 'undefined') {
-	hosts = '';
+// $.ajax({
+// 	async: false,
+// 	url: '/config/config.js',
+// 	dataType: "script",
+// 	success: function (res) {
+// 	}
+// })
+
+if (typeof (pcHost) == 'undefined') {
+	pcHost = '';
+}
+if (typeof (commonHost) == 'undefined') {
+	commonHost = '';
 }
 
 var URL = {
 	common: {
 		upload: '/applets/lawyer/multiUpload',
+		// questionType: commonHost + '/applets/lawyer/getDictData',
+		questionType: '/static/data/questionType.json',
+		isRegister: '/pc/user/consult/publish/page'
 	},
 	auth: {
 		login: '/static/data/login.json',
@@ -24,6 +38,10 @@ var URL = {
 		list: '/static/data/notice.json',
 	},
 	lawyer: {
-		query: '/applets/user/lawyer/list'
+		query: pcHost + '/pc/user/lawyer/list'
+	},
+	news: {
+		query: '/pc/user/article/list',
+		getById: '/pc/user/article/details/'
 	}
 }
