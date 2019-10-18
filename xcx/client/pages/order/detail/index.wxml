@@ -67,7 +67,7 @@
         <text class="label cl-999">回复详情：</text>
         <view class="flex-column flex-bd cl-666">
           <view wx:for="{{ msglist }}" wx:for-item="msg" wx:key="{{ index }}">
-            <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content }}</view>
+            <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
             <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
               <view class="iconfont icon-yuyin cl-primary"></view>
               <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>

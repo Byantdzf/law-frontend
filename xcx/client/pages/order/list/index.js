@@ -81,7 +81,18 @@ Page({
     });
   },
   updateList(e) {
-    this.setData({ list: e.detail })
+    let list = (e.detail || []).map(v => {
+      let msgList = v.msgList || [];
+      v.askSecondContent = '';
+      msgList.forEach(vv => {
+        if (vv.isUser === 'Y') {
+          v.askSecondContent = vv.content || ''
+        }
+      });
+      msgList = msgList.filter(vv => vv.isUser !== 'Y');
+      return v;
+    });
+    this.setData({ list })
   },
   handleStatusChange(e) {
     const curOrderStatus = e.detail;

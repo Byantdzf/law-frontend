@@ -3,24 +3,24 @@
     <image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
   </view>
   <view class="lawyerName">
-    <view class="scoreBox">
+    <view class="scoreBox" wx:if="{{ details.score || details.score === 0 }}">
       <view class="starBox"><text style="width:{{persent}}%"></text></view>
       <view class="score">{{details.score}}分</view>
     </view>
     <view class="name">
       {{ details.name }}
-      <text>{{ details.province }}{{ details.city }}</text>
+      <text>{{ details.province }} - {{ details.city }}</text>
     </view>
   </view>
   <view class="helper">
     <view class="flex">
       <view class="flex-bd">
         <text class="cl-999">帮助人数：</text>
-        <text class="cl-666">{{ details.helps }}人</text>
+        <text class="cl-666">{{ details.helps || 0 }}人</text>
       </view>
       <view class="flex-ft">
         <text class="cl-999">关注人数：</text>
-        <text class="cl-666">{{ details.concerns }}人</text>
+        <text class="cl-666">{{ details.concerns || 0 }}人</text>
       </view>
     </view>
   </view>

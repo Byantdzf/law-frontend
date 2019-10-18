@@ -49,9 +49,7 @@
 .page-title .icon-arrow-right {
   font-size: 24rpx;
 }
-.home-list {
-  padding-bottom: 100rpx;
-}
+
 .list-item {
   padding: 20rpx;
   background: #fff;
@@ -87,9 +85,13 @@
 .list-item .btn-box button::after {
   border-color: #e0e0e0;
 }
+.home-list {
+  padding-bottom: 0;
+}
 .hot-news-wrapper {
-  height: 250rpx;
+  height: 350rpx;
   margin-top: 20rpx;
+  padding-bottom: 100rpx;
   background: #fff;
 }
 .hot-news {

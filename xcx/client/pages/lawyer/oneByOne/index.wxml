@@ -5,24 +5,24 @@
             <image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
         </view>
         <view class="lawyerName">
-            <view class="scoreBox">
-            <view class="starBox"><text style="width:{{persent}}%"></text></view>
-            <view class="score">{{details.score}}分</view>
+            <view class="scoreBox" wx:if="{{ details.score || details.score === 0 }}">
+                <view class="starBox"><text style="width:{{persent}}%"></text></view>
+                <view class="score">{{details.score}}分</view>
             </view>
             <view class="name">
-            {{ details.name }}
-            <text>{{ details.province }}{{ details.city }}</text>
+                {{ details.name }}
+                <text>{{ details.province }} - {{ details.city }}</text>
             </view>
         </view>
         <view class="helper">
             <view class="flex">
             <view class="flex-bd">
                 <text class="cl-999">帮助人数：</text>
-                <text class="cl-666">{{ details.helps }}人</text>
+                <text class="cl-666">{{ details.helps || 0 }}人</text>
             </view>
             <view class="flex-ft">
                 <text class="cl-999">关注人数：</text>
-                <text class="cl-666">{{ details.concerns }}人</text>
+                <text class="cl-666">{{ details.concerns || 0 }}人</text>
             </view>
             </view>
         </view>
@@ -70,7 +70,7 @@
                     <view class="issue-form-label flex-bd">是否紧急</view>
                     <view class="issue-form-input">
                         <radio-group class="radio-group" bindchange="radioChange">
-                            <radio class="radio" wx:for="{{ emergencyRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
+                            <radio class="radio" color="#CF443D" wx:for="{{ emergencyRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
                                 <text>{{item.name}}</text>
                             </radio>
                         </radio-group>
@@ -80,7 +80,7 @@
                     <view class="issue-form-label flex-bd">是否用当前手机注册</view>
                     <view class="issue-form-input">
                         <radio-group class="radio-group" bindchange="regMobileChange">
-                            <radio class="radio" wx:for="{{ regRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
+                            <radio class="radio" color="#CF443D" wx:for="{{ regRadio }}" wx:key="{{index}}" value="{{item.id}}" checked="{{ item.checked }}">
                                 <text>{{item.name}}</text>
                             </radio>
                         </radio-group>
@@ -103,8 +103,8 @@
                 <view class="issue-form-item">
                     <textarea name="remark" auto-height placeholder="请填写备注说明" />
                 </view>
-                <view class="issue-form-item form-btn-box">
-                    <button class="app-input-btn" size="mini" disabled="{{btnDisable}}" plain form-type="submit">确定提交</button>
+                <view class="form-btn-box mt-20">
+                    <button type="primary" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
                 </view>
             </view>
             </form>
