@@ -93,3 +93,7 @@
 .order-child .filter-item { line-height: 3; border-bottom: 1rpx solid #f8f8f8;}
 .order-child .filter-item.curr { color: #CF443D;}
 .filter-icon .iconfont { font-size: 24rpx;}
+
+.icon-wenjian {
+  font-size: 40rpx;
+}
