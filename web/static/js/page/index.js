@@ -28,6 +28,19 @@
 			});
 
 			// base.openRedPacket();
+
+			this.loadLawyer()
+		},
+
+		loadLawyer: function () {
+			var areas = utils.cookie(global.areaCookie);
+			console.log(areas);
+			var params = {}
+			params[global.rows] = 5;
+			params[global.page] = 1;
+			utils.get(URL.lawyer.query, params, function () {
+
+			})
 		}
 	}
 

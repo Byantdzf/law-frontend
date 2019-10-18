@@ -22,5 +22,8 @@ var URL = {
 	},
 	notice: {
 		list: '/static/data/notice.json',
+	},
+	lawyer: {
+		query: '/applets/user/lawyer/list'
 	}
 }

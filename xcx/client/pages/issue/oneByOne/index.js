@@ -158,6 +158,7 @@ Page({
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat
         }
+        params.from = 1
         userApi.postOneByOne(params).then(res => {
             app.gotoPage('/pages/issue/success/index?type=2')
         })

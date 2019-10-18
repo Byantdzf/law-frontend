@@ -253,7 +253,7 @@ a:hover { opacity: .8;}
 .part3_3_border{padding-left:15px;width:265px;border-left:1px solid #d8d8d8;}
 /*  底部  */
 .btm{height:260px;background-color:#f1eff0;margin-top:50px;padding-top:54px;}
-.btm .btm-img { width: 1200px; margin:0 auto;}
+.btm .btm-img img{ display: block; margin:0 auto;}
 .btm .btm-con { color:#000; text-align:center; line-height: 2; font-weight: bold; margin-top:40px;}
 .btm .btm-con .btm_nav a { margin:0 5px;}
 

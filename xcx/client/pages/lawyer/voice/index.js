@@ -226,7 +226,7 @@ Page({
           params.locationX = app.globalData.adInfo.location.lng
           params.locationY = app.globalData.adInfo.location.lat
         }
-        console.log(params)
+        params.from = 1
         userApi.postVoice(params).then(res => {
             console.log(res)
             app.gotoPage('/pages/lawyer/success/index')
