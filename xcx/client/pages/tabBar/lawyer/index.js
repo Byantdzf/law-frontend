@@ -63,9 +63,12 @@ Page({
     },
     loadList() {
         const appList = this.selectComponent('#app-list')
+        let index = this.data.types.findIndex(items => {
+            return items.id == this.data.type
+        })
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
-            params.goodAt = this.data.type
+            params.goodAt = this.data.types[index].name
             this.data.sorts.forEach((item, i) => {
                 if (item.curr && item.code) {
                     params.orderBy = item.code + ' desc'
