@@ -67,8 +67,8 @@ Page({
             params.city = this.data.currArea[1] || ''
             params.goodAt = this.data.type
             this.data.sorts.forEach((item, i) => {
-                if (item.code) {
-                    params[item.code] = item.value
+                if (item.curr && item.code) {
+                    params.orderBy = item.code + ' desc'
                 }
             })
             return params
