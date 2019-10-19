@@ -1,0 +1,26 @@
+<div class="lawyerBasicInfo">
+	<div class="imgBox">
+		<img src="{{ d.pic || '/static/images/defaultLawyer.jpg' }}" onerror="this.src='/static/images/defaultLawyer.jpg'" />
+		<i></i>
+	</div>
+	<div class="fonts">
+		<div class="name">{{ d.name || '' }}</div>
+		<div class="score">
+			<div class="scoreBox">
+				<span style="width:20%"></span>
+			</div>
+		</div>
+		<div class="items">
+			<label>帮助人数：{{ d.helps || '0' }}人</label>
+		</div>
+		<div class="items">
+			<label>关注人数：{{ d.concerns || '0' }}人</label>
+		</div>
+		<div class="btns">
+			<a href="javascript:;">在线律师咨询</a>
+			<a href="javascript:;">指定律师咨询</a>
+			<a href="javascript:;">立即关注</a>
+			<a href="javascript:;">委托接单</a>
+		</div>
+	</div>
+</div>

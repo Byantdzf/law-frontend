@@ -4,14 +4,14 @@
 <li class="consult_list" data-id="{{t.id}}">
 	<div class="clearfix">
 		<div class="audio_header flt">
-			<a href="javascript:;"><img src="{{ t.pic || '/static/images/defaultLawyer.jpg' }}"
+			<a href="/lawyerDetails.html?id={{ t.id }}"><img src="{{ t.pic || '/static/images/defaultLawyer.jpg' }}"
 					onerror="this.src='/static/images/defaultLawyer.jpg'" /></a>
 			<span></span>
 		</div>
-		<h6><a href="javascript:;">{{ t.name || '' }}</a>　
+		<h6><a href="/lawyerDetails.html?id={{ t.id }}">{{ t.name || '' }}</a>　
 			<label>{{ t.score }}分</label>
 		</h6>
-		<p><a href="javascript:;">{{ t.brief || '' }}</a>
+		<p><a href="/lawyerDetails.html?id={{ t.id }}">{{ t.brief || '' }}</a>
 		</p>
 		<p>帮助人数:<label class="fontRed">{{ t.helps || 0 }}人</label> 关注人数:<label
 				class="fontGreen">{{ t.concerns || 0 }}人</label>

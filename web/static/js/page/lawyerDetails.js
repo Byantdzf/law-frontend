@@ -5,18 +5,6 @@
 			var _t = this;
 			_t.id = utils.getQueryString('id');
 
-
-			// var box = $('.newsRight');
-			// var rightTop = box.offset().top;
-
-			// $(window).scroll(function () {
-			// 	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-			// 	if (scrollTop >= rightTop) {
-			// 		box.addClass('fixed')
-			// 	} else {
-			// 		box.removeClass('fixed')
-			// 	}
-			// })
 			_t.getData();
 
 			_t.getLawyerList();
@@ -24,15 +12,21 @@
 
 		getData: function () {
 			var _t = this;
-			utils.get(URL.news.getById + _t.id, function (res) {
+			utils.get(URL.lawyer.getById + _t.id, function (res) {
 				var data = res.data;
-				$('.ccbox_sectiton .tt').html(data.title);
-				$('.time').html(data.createTime);
-				$('.ccbox_sectiton .icon-read').next().html(data.readCount);
-				$('.ccbox_sectiton .icon-share').next().html(data.forwardCount);
-				$('.ccbox_sectiton .icon-zan').next().html(data.thumbsUpCount);
-				$('.newsContent').html(data.content);
+				_t.getLawyerInfo(data);
+				_t.getLawyerData(data);
 			});
+		},
+
+		getLawyerInfo: function (data) {
+			var html = utils.getTemp('/page/lawyer/temp/lawyerInfo.html', data)
+			$('.lawyerInfo').html(html);
+		},
+
+		getLawyerData: function (data) {
+			var html = utils.getTemp('/page/lawyer/temp/lawyerData.html', data)
+			$('.commentsCon').html(html);
 		},
 
 		getLawyerList: function () {

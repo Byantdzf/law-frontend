@@ -33,6 +33,11 @@
 
 		getLawyerList: function () {
 			var areas = utils.cookie(global.areaCookie);
+			if (areas) {
+				areas = JSON.parse(areas) || {};
+			} else {
+				areas = global.defaultArea;
+			}
 			var params = {}
 			params[global.rows] = 5;
 			params[global.page] = 1;
@@ -40,7 +45,7 @@
 			params.noAuth = 1;
 			utils.get(URL.lawyer.query, params, function (res) {
 				var data = res.data.list || []
-				var html = utils.getTemp('/page/common/recLawyerList.html', data)
+				var html = utils.getTemp('/page/common/reclawyerList.html', data)
 				$('.newsRight ul').html(html);
 			})
 		}

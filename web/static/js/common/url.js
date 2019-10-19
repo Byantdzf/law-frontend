@@ -19,7 +19,7 @@ var URL = {
 		upload: '/applets/lawyer/multiUpload',
 		// questionType: commonHost + '/applets/lawyer/getDictData',
 		questionType: '/static/data/questionType.json',
-		isRegister: '/pc/user/consult/publish/page'
+		isRegister: pcHost + '/pc/user/consult/publish/page'
 	},
 	auth: {
 		login: '/static/data/login.json',
@@ -38,10 +38,11 @@ var URL = {
 		list: '/static/data/notice.json',
 	},
 	lawyer: {
-		query: pcHost + '/pc/user/lawyer/list'
+		query: pcHost + '/pc/user/lawyer/list',
+		getById: pcHost + '/pc/user/lawyer/details/'
 	},
 	news: {
-		query: '/pc/user/article/list',
-		getById: '/pc/user/article/details/'
+		query: pcHost + '/pc/user/article/list',
+		getById: pcHost + '/pc/user/article/details/'
 	}
 }

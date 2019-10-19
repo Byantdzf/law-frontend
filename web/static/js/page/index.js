@@ -23,6 +23,9 @@
 
 			// 公司新闻
 			this.getCompanyNews()
+
+			// 获取地区
+			base.hotCity();
 		},
 
 		getQuestionType: function () {
@@ -33,6 +36,11 @@
 
 		getLawyer: function () {
 			var areas = utils.cookie(global.areaCookie);
+			if (areas) {
+				areas = JSON.parse(areas) || {};
+			} else {
+				areas = global.defaultArea;
+			}
 			var params = {}
 			params[global.rows] = 5;
 			params[global.page] = 1;
@@ -41,7 +49,7 @@
 			utils.get(URL.lawyer.query, params, function (res) {
 				var data = res.data.list || []
 				var html = utils.getTemp('/page/home/lawyerList.html', data)
-				$('.index_ccbox2_1').html(html);
+				$('.lawyerList').html(html);
 			})
 		},
 

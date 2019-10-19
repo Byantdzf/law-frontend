@@ -86,9 +86,10 @@ Page({
   onShow: function () {
 
   },
-  changeTab() {
+  changeTab(e) {
+    let { type } = e.currentTarget.dataset
     this.setData({
-      showType: this.data.showType == 1 ? 2 : 1
+      showType: type
     })
   },
   voiceTap() {

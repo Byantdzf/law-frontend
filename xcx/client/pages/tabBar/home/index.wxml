@@ -68,18 +68,18 @@
 						</view>
 						<view class="flex-bd pl-20">
 							<view class="flex">
-								<view class="flex-bd name">{{ item.name }}</view>
-								<view class="flex-ft score cl-red">{{ item.score }}分</view>
+								<view class="flex-bd name">{{ item.name || '' }}</view>
+								<view class="flex-ft score cl-red">{{ item.score || 0 }}分</view>
 							</view>
-							<view class="desc cl-666">{{ item.desc }}</view>
+							<view class="desc cl-666">{{ item.desc || '' }}</view>
 							<view class="flex">
 								<view class="flex-bd">
 									<text class="cl-999">帮助人数：</text>
-									<text class="cl-666">{{ item.helpers }}人</text>
+									<text class="cl-666">{{ item.helpers || 0 }}人</text>
 								</view>
 								<view class="flex-ft">
 									<text class="cl-999">关注人数：</text>
-									<text class="cl-666">{{ item.followers }}人</text>
+									<text class="cl-666">{{ item.followers || 0 }}人</text>
 								</view>
 							</view>
 							<view class="flex btn-box">

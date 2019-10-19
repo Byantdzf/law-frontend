@@ -157,7 +157,6 @@
 			// 	gather.setFixBar();
 			// }
 
-			gather.hotCity();
 		},
 
 		setTextarea: function (obj) {
@@ -211,9 +210,9 @@
 			if (!search) {
 				utils.msg('请输入搜索关键词');
 			} else {
-				var url = "/lawyerList.html?keyword=" + search;
+				var url = "/lawyer.html?keyword=" + search;
 				if (window.location.href.indexOf('/lawyer/') > -1) {
-					url = '/lawyer/lawyerList.html?keyword=' + search
+					url = '/lawyer/lawyer.html?keyword=' + search
 				}
 				window.location = url;
 			}

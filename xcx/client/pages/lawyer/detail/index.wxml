@@ -5,7 +5,7 @@
   <view class="lawyerName">
     <view class="scoreBox">
       <view class="starBox"><text style="width:{{persent}}%"></text></view>
-      <view class="score">{{details.score}}分</view>
+      <view class="score">{{details.score || 0}}分</view>
     </view>
     <view class="name">
       {{ details.name }}
@@ -31,8 +31,8 @@
     <button size="mini" plain>邀请接单</button>
   </view>
   <view class="flex tab-box">
-    <view class="flex-bd {{ showType == 1 && 'curr' }}" bind:tap="changeTab">基本信息</view>
-    <view class="flex-bd {{ showType == 2 && 'curr' }}" bind:tap="changeTab">用户评论</view>
+    <view class="flex-bd {{ showType == 1 && 'curr' }}" data-type="1" bind:tap="changeTab">基本信息</view>
+    <view class="flex-bd {{ showType == 2 && 'curr' }}" data-type="2" bind:tap="changeTab">用户评论</view>
   </view>
   <view class="tab-content">
     <!-- 基本信息 -->
@@ -74,7 +74,7 @@
           <text class="cl-999">入驻时间：</text>
         </view>
         <view class="flex-bd">
-          <text class="cl-666">{{ details.joinDate }}</text>
+          <text class="cl-666">{{ details.joinDate || '' }}</text>
         </view>
       </view>
       <view class="items flex rangeList">

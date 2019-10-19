@@ -896,6 +896,7 @@ layui.define(function (exports) {
 
 				// 处理分页
 				if (rs.length && !p.noPage) {
+					pageBox.removeClass('hidden');
 					var pageParams = {
 						elem: pageBox[0],
 						curr: params[global.page],
@@ -910,7 +911,7 @@ layui.define(function (exports) {
 						}
 					});
 				} else {
-					pageBox.remove();
+					pageBox.addClass('hidden');
 				}
 			});
 		},
@@ -933,6 +934,9 @@ layui.define(function (exports) {
 			var pageBox = container.find('.app-page-box');
 
 			var params = {};
+			if (p.searchData) {
+				params = p.searchData
+			}
 			params[global.rows] = p.rows ? p.rows : global.defaultRows;
 			params[global.page] = p.page ? p.page : global.defaultPage;
 
@@ -945,6 +949,7 @@ layui.define(function (exports) {
 
 				// 处理分页
 				if (rs.length && !p.noPage) {
+					pageBox.removeClass('hidden');
 					var pageParams = {
 						elem: pageBox[0],
 						curr: params[global.page],
@@ -959,14 +964,14 @@ layui.define(function (exports) {
 						}
 					});
 				} else {
-					pageBox.remove();
+					pageBox.addClass('hidden');
 				}
 			});
 		},
 
 		getPageList: function (params, callback) {
 			var plp = {
-				layout: ['count', 'prev', 'page', 'next', 'skip', 'limit'],
+				layout: ['count', 'prev', 'page', 'next', 'skip'],
 				limits: [10, 20, 30, 40, 50, 100],
 				jump: function (obj, first) {
 					if (callback) {

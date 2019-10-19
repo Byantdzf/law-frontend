@@ -125,8 +125,17 @@ Page({
         _errObj[_errImg] = "/static/images/demo/img_lawyer.png"
         this.setData(_errObj)
     },
-    collect() {
-
+    collect(e) {
+        let { id } = e.currentTarget.dataset
+        let list = this.data.list
+        let index = list.findIndex(item => {
+            return id == item.id
+        })
+        let items = list[index]
+        selectApi.attentionLawyer({businessId: id}).then(res => {
+            console.log(res)
+        })
+        // if (items.concerns)
     },
     voiceTap(e) {
         let { id } = e.currentTarget.dataset
