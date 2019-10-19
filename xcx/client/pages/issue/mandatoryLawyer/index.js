@@ -180,7 +180,8 @@ Page({
             params.locationY = app.globalData.adInfo.location.lat
         }
         params.from = 1
-        userApi.postLegalServices(params).then(res => {
+        params.orderCategory = this.data.details.serviceType
+        userApi.postMandatoryLawyer(params).then(res => {
             app.wechatPay(res.data, function (res) {
                 app.gotoPage('/pages/issue/success/index?type=4')
             }, function (res) {

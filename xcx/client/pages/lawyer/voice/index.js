@@ -227,7 +227,8 @@ Page({
           params.locationY = app.globalData.adInfo.location.lat
         }
         params.from = 1
-        userApi.postVoice(params).then(res => {
+        params.orderCategory = 11
+        userApi.postIssue(params).then(res => {
             app.wechatPay(res.data, function (res) {
                 app.gotoPage('/pages/lawyer/success/index')
             }, function (res) {

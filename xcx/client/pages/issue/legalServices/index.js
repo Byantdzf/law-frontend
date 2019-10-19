@@ -200,7 +200,8 @@ Page({
         if (this.data.selectCoupon) {
             params.couponId = this.data.selectCoupon.id
         }
-        userApi.postLegalServices(params).then(res => {
+        params.orderCategory = this.data.details.serviceType
+        userApi.postLegals(params).then(res => {
             app.wechatPay(res.data, function (res) {
                 app.gotoPage('/pages/issue/success/index?type=3')
             }, function (res) {

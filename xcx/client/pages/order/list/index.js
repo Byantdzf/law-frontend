@@ -97,6 +97,7 @@ Page({
   handleStatusChange(e) {
     const curOrderStatus = e.detail;
     this.setData({ curOrderStatus })
+    this.loadData()
   },
   changType(e) {
     const currType = e.currentTarget.dataset.type
