@@ -22,30 +22,6 @@
 			<scroll-view scroll-y>
 				<app-swiper items="{{ banners }}" />
 				<view class="flex page-title">
-					<view class="flex-bd pl-20 title">最新法律速递</view>
-					<view class="flex-ft">
-						<navigator url="../../news/list/index">
-							<text class="cl-999">更多</text>
-							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
-            </navigator>
-					</view>
-				</view>
-				<view class="hot-news-wrapper">
-					<scroll-view class="pa-20" scroll-x>
-						<view class="hot-news flex">
-							<view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
-								<navigator url="../../news/detail/index?id={{ item.id }}">
-									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
-									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
-								</navigator>
-							</view>
-						</view>
-					</scroll-view>
-				</view>
-				<view class="flex page-title">
 					<view class="flex-bd pl-20 title">站内律师排名</view>
 					<view class="flex-ft">
 						<navigator url="../lawyer/index" open-type="switchTab">
@@ -68,8 +44,8 @@
 						</view>
 						<view class="flex-bd pl-20">
 							<view class="flex">
-								<view class="flex-bd name">{{ item.name || '' }}</view>
-								<view class="flex-ft score cl-red">{{ item.score || 0 }}分</view>
+								<view class="flex-bd name">{{ item.name }}</view>
+								<view class="flex-ft score cl-red" wx:if="{{ item.score || item.score === 0 }}">{{ item.score }}分</view>
 							</view>
 							<view class="desc cl-666">{{ item.desc || '' }}</view>
 							<view class="flex">
@@ -110,6 +86,30 @@
 				</view>
 				<view class="app-empty-wrapper" wx:else>
 					<app-empty iconClass="icon-sousuowuneirong" />
+				</view>
+				<view class="flex page-title">
+					<view class="flex-bd pl-20 title">最新法律速递</view>
+					<view class="flex-ft">
+						<navigator url="../../news/list/index">
+							<text class="cl-999">更多</text>
+							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
+            </navigator>
+					</view>
+				</view>
+				<view class="hot-news-wrapper">
+					<scroll-view class="pa-20" scroll-x>
+						<view class="hot-news flex">
+							<view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
+								<navigator url="../../news/detail/index?id={{ item.id }}">
+									<view class="img-box">
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+									</view>
+									<view class="ellipsis">{{ item.title }}</view>
+									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+								</navigator>
+							</view>
+						</view>
+					</scroll-view>
 				</view>
 			</scroll-view>
 		</view>

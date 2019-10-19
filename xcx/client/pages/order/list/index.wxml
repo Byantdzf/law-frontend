@@ -84,11 +84,11 @@
                   <text>{{ item.lawyer }}</text>
                 </view>
               </view>
-              <view class="flex pt-20" wx:if="{{ item.msglist && item.msglist.length }}">
+              <view class="flex flex-start pt-20" wx:if="{{ item.msgList && item.msgList.length }}">
                 <view class="label cl-999">回复详情：</view>
-                <view class="flex flex-bd cl-666">
-                  <view wx:for="{{ item.msglist }}" wx:for-item="msg" wx:for-index="msgIdx" wx:key="{{ msgIdx }}">
-                    <view class="{{ index ? 'mt-10' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content }}</view>
+                <view class="flex-bd cl-666">
+                  <view wx:for="{{ item.msgList }}" wx:for-item="msg" wx:for-index="msgIdx" wx:key="{{ msgIdx }}">
+                    <view class="{{ index ? 'mt-10' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
                     <view class="flex {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
                       <view class="iconfont icon-yuyin cl-primary"></view>
                       <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
@@ -100,7 +100,7 @@
                   </view>
                 </view>
               </view>
-              <view class="flex pt-20" wx:if="{{ item.askSecondContent }}">
+              <view class="flex flex-start pt-20" wx:if="{{ item.askSecondContent }}">
                 <view class="label cl-999">我的追问：</view>
                 <view class="flex flex-bd cl-666">
                   <text>{{ item.askSecondContent }}</text>

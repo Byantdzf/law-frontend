@@ -14,7 +14,7 @@ Component({
     },
     background: {
       type: String,
-      value: "rgba(0, 64, 237, 0.1)"
+      value: "#cdcdcd"
     },
     borderColor: {
       type: String,

@@ -32,7 +32,14 @@
 }
 
 .btn-box button {
-  min-width: 260rpx;
+  min-width: 300rpx;
+}
+.btn-box button[plain] {
+  border-color: #e0e0e0;
+  color: #666;
+}
+.btn-box button[plain]::after {
+  border-color: #e0e0e0;
 }
 
 .textarea {
@@ -45,5 +52,5 @@
 }
 
 .icon-wenjian {
-  font-size: 40rpx;
+  font-size: 70rpx;
 }

@@ -65,12 +65,12 @@ Page({
       const data = res.data || {};
       const msglist = data.list || [];
       msglist.forEach(v => {
-        if (v.isUser) {
+        if (v.isUser === 'Y') {
           // 找出用户追问的内容
           this.setData({ askSecondContent: v.content || '' });
         }
       });
-      this.setData({ msglist: msglist.filter(v => !v.isUser) });
+      this.setData({ msglist: msglist.filter(v => v.isUser !== 'N') });
     });
   },
   // 查询用户评价
