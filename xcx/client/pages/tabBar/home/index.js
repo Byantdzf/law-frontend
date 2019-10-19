@@ -24,19 +24,19 @@ Page({
                 icon: '/static/images/icon-menu02.png'
             }, {
                 name: '日常法律服务',
-                url: '/pages/legalServices/list/index?type=1',
+                url: '/pages/legalServices/list/index?type=21',
                 icon: '/static/images/icon-menu03.png'
             }, {
                 name: '分块法律服务',
-                url: '/pages/legalServices/list/index?type=2',
+                url: '/pages/legalServices/list/index?type=22',
                 icon: '/static/images/icon-menu04.png'
             }, {
                 name: '收费代理',
-                url: '/pages/mandatoryLawyer/list/index?type=1',
+                url: '/pages/mandatoryLawyer/list/index?type=31',
                 icon: '/static/images/icon-menu05.png'
             }, {
                 name: '风险代理',
-                url: '/pages/mandatoryLawyer/list/index?type=2',
+                url: '/pages/mandatoryLawyer/list/index?type=32',
                 icon: '/static/images/icon-menu06.png'
             }, {
                 name: '协议文本',

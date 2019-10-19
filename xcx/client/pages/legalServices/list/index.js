@@ -4,16 +4,16 @@ const legalServices = require('../../../service/legalServices')
 const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 Page({
     data: {
-        type: 1,
-        baseUrl: '/applets/user/service/info/1/',
+        type: 21,
+        baseUrl: '/applets/user/service/info/2/',
         listUrl: '',
         types: [
             {
-                id: 1,
+                id: 21,
                 name: '非诉讼法律服务'
             },
             {
-                id: 2,
+                id: 22,
                 name: '诉讼法律服务'
             }
         ],

@@ -4,8 +4,8 @@ const legalServices = require('../../../service/legalServices')
 const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 Page({
     data: {
-        type: 1,
-        listUrl: '/applets/user/service/info/1/1',
+        type: 31,
+        baseUrl: '/applets/user/service/info/3/',
         intro: {},
         list: []
     },
@@ -13,8 +13,10 @@ Page({
         let { type } = e
         app.pages.add(this)
 
+        let listUrl = this.data.baseUrl + type
         this.setData({
-            type
+            type,
+            listUrl
         })
         this.loadList()
     },
