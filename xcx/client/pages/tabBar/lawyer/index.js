@@ -66,9 +66,14 @@ Page({
         let index = this.data.types.findIndex(items => {
             return items.id == this.data.type
         })
+
+        if(index == -1) {
+            index = 0
+        }
+
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
-            params.goodAt = this.data.types[index].name
+            params.goodAt = index ? this.data.types[index].name : ''
             this.data.sorts.forEach((item, i) => {
                 if (item.curr && item.code) {
                     params.orderBy = item.code + ' desc'
