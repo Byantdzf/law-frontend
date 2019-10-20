@@ -9,7 +9,7 @@
 			<span></span>
 		</div>
 		<h6><a href="/lawyerDetails.html?id={{ t.id }}">{{ t.name || '' }}</a>　
-			<label>{{ t.score }}分</label>
+			<label>{{ t.score || 0 }}分</label>
 		</h6>
 		<p><a href="/lawyerDetails.html?id={{ t.id }}">{{ t.brief || '' }}</a>
 		</p>

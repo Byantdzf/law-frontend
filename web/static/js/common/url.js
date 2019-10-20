@@ -1,11 +1,11 @@
 ﻿
-// $.ajax({
-// 	async: false,
-// 	url: '/config/config.js',
-// 	dataType: "script",
-// 	success: function (res) {
-// 	}
-// })
+$.ajax({
+	async: false,
+	url: '/config/config.js',
+	dataType: "script",
+	success: function (res) {
+	}
+})
 
 if (typeof (pcHost) == 'undefined') {
 	pcHost = '';
@@ -39,10 +39,15 @@ var URL = {
 	},
 	lawyer: {
 		query: pcHost + '/pc/user/lawyer/list',
-		getById: pcHost + '/pc/user/lawyer/details/'
+		getById: pcHost + '/pc/user/lawyer/details/',
+		comments: commonHost + '/pc/user/lawyer/details/evaluation/list/'
 	},
 	news: {
 		query: pcHost + '/pc/user/article/list',
 		getById: pcHost + '/pc/user/article/details/'
+	},
+	legal: {
+		queryNonlitigationLegalServices: pcHost + '/pc/user/service/info/2/21',
+		queryLitigationLegalServices: pcHost + '/pc/user/service/info/2/22'
 	}
 }

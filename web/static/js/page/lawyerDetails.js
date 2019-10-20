@@ -14,6 +14,10 @@
 			var _t = this;
 			utils.get(URL.lawyer.getById + _t.id, function (res) {
 				var data = res.data;
+      
+				var score = data.score > 5 ? 5 : data.score < 0 ? 0 : data.score
+				data.persent = Math.floor(score / 5 * 100)
+
 				_t.getLawyerInfo(data);
 				_t.getLawyerData(data);
 			});
@@ -25,8 +29,8 @@
 		},
 
 		getLawyerData: function (data) {
-			var html = utils.getTemp('/page/lawyer/temp/lawyerData.html', data)
-			$('.commentsCon').html(html);
+			// var html = utils.getTemp('/page/lawyer/temp/lawyerData.html', data)
+			// $('.commentsCon').html(html);
 		},
 
 		getLawyerList: function () {

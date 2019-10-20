@@ -32,6 +32,8 @@ img{outline: none; border: none;}
 
 .mt60 { margin-top: 60px;}
 
+.pl0 { padding-left: 0!important;}
+
 .app-page-box { text-align: center;}
 .layui-laypage .layui-laypage-curr em { color:#000;}
 
@@ -1364,11 +1366,35 @@ i, em { font-style: normal;}
 .rightFlex .flexCon a { display: block;}
 .rightFlex .flexCon img { display: block; margin: 40px auto 0;}
 
-.lawyerBasicInfo { padding-top:50px; text-align: center;}
-.lawyerBasicInfo .imgBox { width: 150px; height:150px; border-radius: 50%; overflow: hidden; margin: 0 auto;}
+.lawyerDetails .score { padding-top:5px; float:left; height: 20px; width: 150px; position: relative;}
+.lawyerDetails .score .scoreBox { width: 100px; height: 100%; background: url(../images/star.png) repeat-x; background-size: auto 20px;}
+.lawyerDetails .score .scoreBox span { display: block; height: 100%; background: url(../images/star_on.png) repeat-x; background-size: auto 20px;}
+.lawyerDetails .score .scoreCount { position: absolute; right:0; top:1px; font-size: 20px; font-weight: bold; color:#eb4546;}
+
+.lawyerBasicInfo { padding:50px 0 30px 100px;}
+.lawyerBasicInfo .imgBox { width: 150px; height:150px; border-radius: 50%; overflow: hidden; float:left; margin-right: 30px;}
 .lawyerBasicInfo .imgBox img { display: block; width: 100%; height: 100%;}
-.lawyerBasicInfo .fonts .name { font-size: 22px; font-weight: bold; margin: 10px 0;}
-.lawyerBasicInfo .score { height: 20px; width: 150px; margin:0 auto 20px; position: relative;}
-.lawyerBasicInfo .score .scoreBox { width: 100px; height: 100%; background: url(../images/star.png) repeat-x; background-size: auto 20px;}
-.lawyerBasicInfo .score .scoreBox span { display: block; height: 100%; background: url(../images/star_on.png) repeat-x; background-size: auto 20px;}
-.lawyerBasicInfo .score .scoreCount { position: absolute; right:0; top:-3px; font-size: 20px; font-weight: bold; color:#eb4546;}
+.lawyerBasicInfo .fonts { float: left; width:800px;}
+.lawyerBasicInfo .fonts .name { margin-bottom:20px;}
+.lawyerBasicInfo .fonts .name label { font-size: 22px; font-weight: bold; float:left; margin-right:30px;}
+.lawyerBasicInfo .countInfo { margin-bottom: 10px;}
+.lawyerBasicInfo .items span { float:left; position: relative; width:260px;  padding-left:90px;}
+.lawyerBasicInfo .fonts .items label { color:#999;}
+.lawyerBasicInfo .btns { margin-top:20px; padding: 10px 0;}
+.lawyerBasicInfo .btns a { padding: 10px 20px; border-radius: 5px; margin-right:10px; border: 1px solid #eb4546; color:#eb4546;}
+.lawyerBasicInfo .items { position: relative; padding-left:90px; line-height: 1.8; margin-bottom: 10px;}
+.lawyerBasicInfo .items label { position: absolute; left:0; top:0;}
+.lawyerBasicInfo .items table { width: 400px; text-align: center;}
+.lawyerBasicInfo .items table th,
+.lawyerBasicInfo .items table td { text-align: center;}
+
+.lawyerComments { margin-top:30px;}
+.lawyerComments .commentsCon { float: left; width:880px;}
+.lawyerComments .items { padding: 20px 0; border-bottom:1px solid #e8e8e8;}
+.lawyerComments .items .imgBox { float: left; width:120px; margin-right:20px; padding-left:20px;} 
+.lawyerComments .items .imgBox img { display: block; width:80px; height: 80px; border-radius: 50%; margin:0 auto 10px;} 
+.lawyerComments .items .imgBox h4 { text-align: center; font-size: 16px;} 
+.lawyerComments .items .userInfo { float: left; width: 700px;}
+.lawyerComments .items .userInfo .item>div>div { position: relative; float: left; width: 200px; padding-left: 70px; line-height: 30px;}
+.lawyerComments .items .userInfo label { position: absolute; width:70px; left:0; color:#999;} 
+.lawyerComments .items .content { border:1px solid #eaeaea; border-radius: 5px; padding: 10px; margin-top:10px; font-size: 12px; color:#999;}

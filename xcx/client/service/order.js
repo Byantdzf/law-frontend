@@ -42,4 +42,8 @@ module.exports = {
     delete params.id
     return post(`/applets/user/order/appeal/${id}`, params)
   },
+  /**
+   * 订单支付
+  */
+  pay: params => get('/applets/lawyer/pay/getPrepayInfoByOrderNo', params),
 }

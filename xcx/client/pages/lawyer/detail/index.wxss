@@ -7,7 +7,7 @@
 /* .btn-box button[size=mini] { padding-left:.5em; padding-right:.5em;} */
 .btn-box button {
   /* margin: 0; */
-  padding: 0 20rpx;
+  padding: 0 10rpx;
   border-color: #e0e0e0;
   color: #666;
 }

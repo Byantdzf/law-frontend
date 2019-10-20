@@ -1,27 +1,74 @@
 <div class="lawyerBasicInfo">
-	<div class="imgBox">
-		<img src="{{ d.pic || '/static/images/defaultLawyer.jpg' }}" onerror="this.src='/static/images/defaultLawyer.jpg'" />
-		<i></i>
-	</div>
-	<div class="fonts">
-		<div class="name">{{ d.name || '' }}</div>
-		<div class="score">
-			<div class="scoreBox">
-				<span style="width:20%"></span>
+	<div class="clearfix">
+		<div class="imgBox">
+			<img src="{{ d.pic || '/static/images/defaultLawyer.jpg' }}" onerror="this.src='/static/images/defaultLawyer.jpg'" />
+			<i></i>
+		</div>
+		<div class="fonts">
+			<div class="name">
+				<div class="clearfix">
+					<label>{{ d.name || '' }}</label>
+					<div class="score">
+						<div class="scoreBox">
+							<span style="width:20%"></span>
+						</div>
+						<div class="scoreCount">2分</div>
+					</div>
+				</div>
 			</div>
-			<div class="scoreCount">2分</div>
-		</div>
-		<div class="items">
-			<label>帮助人数：{{ d.helps || '0' }}人</label>
-		</div>
-		<div class="items">
-			<label>关注人数：{{ d.concerns || '0' }}人</label>
-		</div>
-		<div class="btns">
-			<a href="javascript:;">在线律师咨询</a>
-			<a href="javascript:;">指定律师咨询</a>
-			<a href="javascript:;">立即关注</a>
-			<a href="javascript:;">委托接单</a>
+			<div class="items pl0">
+				<div class="clearfix">
+					<span><label>帮助人数：</label>{{ d.helps || '0' }}人</span>
+					<span><label>关注人数：</label>{{ d.concerns || '0' }}人</span>
+				</div>
+			</div>
+			<div class="items pl0">
+				<div class="clearfix">
+					<span><label>所属事务所：</label>{{ d.belongs || '' }}人</span>
+					<span><label>执业证号：</label>{{ d.lawyerLicenseNo || '' }}</span>
+				</div>
+			</div>
+			<div class="items">
+				<label>擅长领域：</label>{{ d.goodAt || '' }}
+			</div>
+			<div class="items">
+				<label>个人简介：</label>{{ d.brief || '' }}
+			</div>
+{{#
+	if (d.orderList && d.orderList.length) {
+}}
+			<div class="items">
+				<label>接单数据：</label>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>订单类型</th>
+							<th>接单量</th>
+							<th>评分</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{# layui.each(d.orderList, function (i, t) { }}
+						<tr>
+							<td>{{ t.orderTypeName || '' }}</td>
+							<td>{{ t.count || 0 }}</td>
+							<td>{{ t.score || 0 }}</td>
+						</tr>
+						{{# }); }}
+					</tbody>
+				</table>
+			</div>
+{{#
+	}
+}}
+			<div class="btns">
+				<div class="clearfix">
+					<a href="javascript:;">在线律师咨询</a>
+					<a href="javascript:;">指定律师咨询</a>
+					<a href="javascript:;">立即关注</a>
+					<a href="javascript:;">委托接单</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -166,7 +166,16 @@ Page({
   },
   handlePay(e) {
     const { index } = e.currentTarget.dataset;
-    const id = this.data.list[index].id;
+    console.log(this.data.list[index])
+    const orderNo = this.data.list[index].orderNo;
+    orderApi.pay({orderNo: orderNo}).then(res => {
+      app.wechatPay(res.data, function (res) {
+          app.gotoPage('/pages/issue/success/index?type=1')
+      }, function (res) {
+          app.alert('支付失败，请到我的订单再次发起支付')
+      })
+    })
+    
   },
   handleComment(e) {
     const { index } = e.currentTarget.dataset;

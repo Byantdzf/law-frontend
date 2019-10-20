@@ -31,10 +31,10 @@
                                 </view>
                                 <view class="flex btn-box">
                                     <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">
-                                        语音咨询
+                                        在线律师咨询
                                     </button>
                                     <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">
-                                        一对一咨询
+                                        指定律师咨询
                                     </button>
                                     <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">
                                         立即关注

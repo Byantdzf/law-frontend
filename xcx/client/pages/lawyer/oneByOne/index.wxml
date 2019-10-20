@@ -28,7 +28,7 @@
         </view>
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-            <view class="issue-title">一对一咨询发布</view>
+            <view class="issue-title">指定律师咨询发布</view>
             <view class="issue-form">
                 <view class="issue-form-item flex">
                     <view class="issue-form-input">

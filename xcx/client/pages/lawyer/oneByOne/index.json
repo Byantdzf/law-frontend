@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "一对一咨询",
+  "navigationBarTitleText": "指定律师咨询",
   "usingComponents": {
     "app-cityPicker": "/components/app-cityPicker/index"
   }

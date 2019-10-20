@@ -4,6 +4,9 @@
 		init: function () {
 			var _t = this;
 
+			_t.loadRecommend();
+			_t.queryList();
+
 			$('body').on('click', '.showDetial', function() {
 				_t.editBox();
 			});
@@ -11,6 +14,21 @@
 			$('body').on('click', '.buyNow', function () {
 				window.location = 'order.html?id=1&type=3';
 			});
+		},
+
+		loadRecommend: function () {
+			var params = {}
+			params[global.rows] = 1;
+			params[global.page] = 1;
+			params.noAuth = 1;
+			utils.get(URL.legal.queryNonlitigationLegalServices, params, function (res) {
+				var data = res.data.list || []
+				console.log(data)
+			})
+		},
+
+		queryList: function () {
+
 		},
 
 		editBox: function (data) {
