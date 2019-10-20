@@ -13,7 +13,7 @@
 			});
 
 			$('body').on('click', '.buyNow', function () {
-				window.location = 'order.html?id=1&type=5';
+				window.location = 'getLawyerAsk.html?id=' + $(this).closest('li').data('id');
 			});
 		},
 
@@ -88,7 +88,7 @@
 							}
 						},
 						yes: function (index) {
-							window.location = 'order.html?id='+id+'&type=5';
+							window.location = 'getLawyerAsk.html?id=' + id;
 							layer.close(index);
 						}
 					};

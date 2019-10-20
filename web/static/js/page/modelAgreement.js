@@ -4,7 +4,9 @@
 		init: function () {
 			var _t = this;
 
-			_t.loadCateList();
+			_t.loadRecommend();
+			_t.queryList();
+			_t.getQuestionType();
 
 			$('body').on('click', '.showDetail', function() {
 				_t.editBox();
@@ -15,17 +17,43 @@
 			});
 		},
 
-		loadCateList: function () {
-			var _t = this;
-			utils.get(URL.select.getCate, function (res) {
-				var list = res.data;
-				var html = '<a href="javascript:;" class="on">全部</a>';
-				$.each(list, function (i, t) {
-					var on = t.on ? ' class="on"' : '';
-					html += '<a href="javascript:;" data-id="' + t.id + '"' + on + '>' + t.name + '</a>';
-				})
-				$('.modelAgreement_cate').html(html);
-			});
+		loadRecommend: function () {
+			var params = {}
+			params[global.rows] = 1;
+			params[global.page] = 1;
+			params.noAuth = 1;
+			utils.getSync(URL.legal.queryNonlitigationLegalServices, params, function (res) {
+				var data = res.data.list || []
+				data = data[0] || {}
+				var src = data.instructionPic || '//static/images/nopic.jpg'
+				$('.services_header img').attr('src', src)
+				$('.services_header p').html(data.instruction || '')
+				
+			})
+		},
+
+		queryList: function () {
+			var qlps = {
+				url: URL.legal.queryNonlitigationLegalServices,
+				box: '.services_list',
+				temp: '/page/legal/list.html'
+			}
+			utils.queryTempList(qlps);
+		},
+
+		getQuestionType: function () {
+			var list = base.getQuestionType()
+			var html = '<a href="javascript:;" class="on">全部</a>';
+			$.each(list, function (i, t) {
+				t.id = t.code
+				var on = t.on ? ' class="on"' : '';
+				html += '<a href="javascript:;" data-id="' + t.id + '"' + on + '>' + t.name + '</a>';
+			})
+			$('.modelAgreement_cate').html(html);
+
+			$('.modelAgreement_cate').find('a').off().on('click', function () {
+				$(this).addClass('on').siblings().removeClass('on')
+			})
 		},
 
 		editBox: function (data) {

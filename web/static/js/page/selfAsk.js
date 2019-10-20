@@ -63,7 +63,7 @@
 				params.orderCategory = 12
 				utils.put(URL.issue.postIssue, params, function (res) {
 					console.log(res);return false;
-					window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})
 		},

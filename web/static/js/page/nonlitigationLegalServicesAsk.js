@@ -107,8 +107,8 @@
 				params.from = 2
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
-				utils.put(URL.issue.postIssue, params, function (res) {
-					window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+				utils.put(URL.issue.postLegals, params, function (res) {
+					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})
 		},

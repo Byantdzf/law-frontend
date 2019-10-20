@@ -18,27 +18,11 @@
 
 		getTemp: function () {
 			var _t = this;
-			var html = utils.getTemp('/page/order/temp3.html', _t.data);
+			var html = utils.getTemp('/page/order/temp5.html', _t.data);
 			$('.questions .layui-form').html(html);
 			form.render();
 
 			base.loadArea(_t);
-
-			utils.initDate('.dateIcon')
-
-			$('.mins').on('click', function () {
-				var box = $('.numsInput');
-				var inputs = parseInt($.trim(box.val()));
-				inputs > 1 && box.val(inputs - 1);
-				box.val() == 1 && $(this).addClass('hidden');
-			});
-
-			$('.plus').on('click', function () {
-				var box = $('.numsInput');
-				var inputs = parseInt($.trim(box.val()));
-				box.val(inputs + 1);
-				box.val() > 1 && $('.mins').removeClass('hidden');
-			});
 
 			$('body').on('click', '.agreementBox a', function () {
 				_t.showAgreement();
@@ -64,17 +48,9 @@
 			form.on('submit(questionSubmit)', function (res) {
 				var params = res.field;
 				
-				if (!params.customerRequirement) {
-					utils.msg('请填写我的要求')
+				if (!params.name) {
+					utils.msg('请填写联系人')
 					return
-				}
-				if(!params.selectDate){
-					utils.msg('请选择交付期限');
-					return;
-				}
-				if(!params.provice || !params.city){
-					utils.msg('请选择地区');
-					return;
 				}
 				if (base.checkMobile(params.contactMobile)) {
 					utils.msg('请输入正确的手机号码');
@@ -82,6 +58,14 @@
 				}
 				if(!params.validateCode){
 					utils.msg('请输入验证码');
+					return;
+				}
+				if(!params.provice || !params.city){
+					utils.msg('请选择地区');
+					return;
+				}
+				if(!params.customerRequirement){
+					utils.msg('请填写我的要求');
 					return;
 				}
 				if(!params.agreeProtocal){
@@ -107,8 +91,8 @@
 				params.from = 2
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
-				utils.put(URL.issue.postIssue, params, function (res) {
-					window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+				utils.put(URL.issue.postMandatoryLawyer, params, function (res) {
+					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})
 		},
