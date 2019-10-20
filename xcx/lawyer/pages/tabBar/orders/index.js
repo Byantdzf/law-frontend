@@ -15,7 +15,7 @@ Page({
     selectAllObj: {id: '', name: '全部', checked: true},
     listUrl: '/applets/user/order/orderList',
     list: [],
-    orderSource: 1,
+    orderSource: 2,
     orderSources: [
       {
         id: 1,
@@ -49,7 +49,7 @@ Page({
       }
     ],
   },
-  onLoad({ orderSource = 1 }) {
+  onLoad({ orderSource = 2 }) {
     const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
     let cityPicker = this.selectComponent('#app-cityPicker')
 

@@ -15,6 +15,7 @@
 }
 .page-order .app-tab {
   background: #fff;
+  border-bottom: 2rpx solid #f3f3f3;
 }
 .app-sort {
   padding: 20rpx 0;
