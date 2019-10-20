@@ -66,6 +66,11 @@ Page({
         let index = this.data.types.findIndex(items => {
             return items.id == this.data.type
         })
+
+        if(index == -1) {
+            index = 0
+        }
+
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
             this.data.types[index] && (params.goodAt = this.data.types[index].name)
