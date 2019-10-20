@@ -13,7 +13,7 @@
 			});
 
 			$('body').on('click', '.buyNow', function () {
-				window.location = 'order.html?id=1&type=4';
+				window.location = 'litigationLegalServicesAsk.html?id=' + $(this).closest('li').data('id');
 			});
 		},
 
@@ -87,7 +87,7 @@
 							}
 						},
 						yes: function (index) {
-							window.location = 'order.html?id='+id+'&type=4';
+							window.location = 'litigationLegalServicesAsk.html?id=' + id;
 							layer.close(index);
 						}
 					};
