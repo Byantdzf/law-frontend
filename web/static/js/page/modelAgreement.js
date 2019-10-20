@@ -5,6 +5,7 @@
 			var _t = this;
 
 			_t.loadRecommend();
+			_t.queryList();
 			_t.getQuestionType();
 
 			$('body').on('click', '.showDetail', function() {
@@ -14,6 +15,30 @@
 			$('body').on('click', '.buyNow', function () {
 				window.location = 'order.html?id=1&type=6';
 			});
+		},
+
+		loadRecommend: function () {
+			var params = {}
+			params[global.rows] = 1;
+			params[global.page] = 1;
+			params.noAuth = 1;
+			utils.getSync(URL.legal.queryNonlitigationLegalServices, params, function (res) {
+				var data = res.data.list || []
+				data = data[0] || {}
+				var src = data.instructionPic || '//static/images/nopic.jpg'
+				$('.services_header img').attr('src', src)
+				$('.services_header p').html(data.instruction || '')
+				
+			})
+		},
+
+		queryList: function () {
+			var qlps = {
+				url: URL.legal.queryNonlitigationLegalServices,
+				box: '.services_list',
+				temp: '/page/legal/list.html'
+			}
+			utils.queryTempList(qlps);
 		},
 
 		getQuestionType: function () {
