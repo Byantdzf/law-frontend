@@ -141,10 +141,6 @@
   padding: 40rpx 0rpx;
 }
 
-/* .app-pop .app-pop__mask {
-  background: rgba(255,255,255,0.5);
-} */
-
 .float-tools-item {
   width: 25%;
   padding: 20rpx 0;

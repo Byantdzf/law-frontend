@@ -86,7 +86,7 @@ Page({
         })
     },
     onShow() {
-        console.log('home show')
+        
     },
     initHome() {
         let cityPicker = this.selectComponent('#app-cityPicker')

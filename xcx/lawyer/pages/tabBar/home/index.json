@@ -1,10 +1,12 @@
 {
   "usingComponents": {
     "app-swiper": "/components/app-swiper/index",
-    "app-scroller": "/components/app-scroller/index",
     "app-text": "/components/app-text/index",
-    "app-share": "/components/app-share/index"
+    "app-empty": "/components/app-empty/index",
+    "app-cityPicker": "/components/app-cityPicker/index",
+    "app-pop": "/components/app-pop/index"
   },
-  "backgroundColorTop": "#00b0ab",
-  "backgroundColorBottom": "#f3f3f3"
+  "backgroundColorTop": "#CF443D",
+  "backgroundColorBottom": "#f3f3f3",
+  "disableScroll":true
 }

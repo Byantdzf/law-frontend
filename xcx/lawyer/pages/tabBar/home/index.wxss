@@ -8,6 +8,9 @@
 .page-search .location {
   min-width: 160rpx;
 }
+.page-search .city {
+  max-width: 160rpx;
+}
 .page-search .search-box {
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
@@ -102,4 +105,69 @@
 }
 .hot-news-item + .hot-news-item {
   margin-left: 22rpx;
+}
+
+.float-tools-btn {
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  box-shadow: 0 6rpx 10rpx rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.icon-plus {
+  font-size: 70rpx;
+  color: #ffffff;
+}
+
+.app-pop__main {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 40rpx 0rpx;
+}
+
+.float-tools-item {
+  width: 25%;
+  padding: 20rpx 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.float-tools-item .icon-box {
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 16rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 20rpx rgba(0,0,0,0.2);
+}
+.icon-box image {
+  width: 70rpx;
+  height: 70rpx;
+}
+.txt-box {
+  font-size: 24rpx;
+}
+.pop-btn {
+  margin-top: 30rpx;
+}
+.pop-btn .iconfont {
+  color: #000;
+}
+.app-empty-wrapper {
+  margin-top: 20rpx;
+  padding: 30rpx 0;
+  background: #fff;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
 }

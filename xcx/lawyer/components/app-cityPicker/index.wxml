@@ -1,6 +1,6 @@
 <!-- components/app-cityPicker/index.wxml -->
 <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{cityIndex}}" range="{{cityObj}}" range-key="name">
-    <view wx:if="{{isHome}}">
+    <view class="picker" wx:if="{{isHome}}">
         {{selectCity[1].name}}
     </view>
     <view wx:else>

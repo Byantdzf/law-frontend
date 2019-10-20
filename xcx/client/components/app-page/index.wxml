@@ -10,7 +10,7 @@
   <view class='pop-auth'>
     <view class="pop-auth__hd">
       <view class="img-box">
-        <image src="/static/images/logo-login.png" />
+        <image src="/static/images/logo.png" />
       </view>
       <text class="txt">欢迎来到{{ appName }}</text>
     </view>
