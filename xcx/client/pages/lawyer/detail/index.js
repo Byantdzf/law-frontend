@@ -55,14 +55,18 @@ Page({
   onLoad: function (options) {
     let { id } = options
     this.setData({
-      id 
+      id
     })
-    
-    selectApi.lawyerDetail({id: id}).then(res => {
+
+    this.loadData()
+  },
+
+  loadData() {
+    selectApi.lawyerDetail({ id: this.data.id }).then(res => {
       let details = res.data
       details.joinDate = details.joinDate && details.joinDate.split(' ')[0]
       details.goodAt = details.goodAt && details.goodAt.split('，')
-      
+
       let score = details.score > 5 ? 5 : details.score < 0 ? 0 : details.score
       let persent = Math.floor(score / app.globalData.maxScore * 100)
 
@@ -71,7 +75,7 @@ Page({
         details
       })
     })
-  },
+  }
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -99,9 +103,20 @@ Page({
     app.gotoPage('/pages/lawyer/oneByOne/index?id=' + this.data.id)
   },
   imageError(e) {
-      var _errImg = e.target.dataset.img
-      var _errObj = {}
-      _errObj[_errImg] = this.data.defaultPic
-      this.setData(_errObj)
-  }
+    var _errImg = e.target.dataset.img
+    var _errObj = {}
+    _errObj[_errImg] = this.data.defaultPic
+    this.setData(_errObj)
+  },
+  collect() {
+    selectApi.attentionLawyer({ businessId: this.data.id }).then(res => {
+      this.loadData()
+    })
+  },
+  cancelCollect() {
+    let details = this.data.details
+    selectApi.attentionLawyer({ businessId: this.data.id }).then(res => {
+      this.loadData()
+    })
+  },
 })

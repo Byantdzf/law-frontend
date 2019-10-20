@@ -36,6 +36,7 @@ img{outline: none; border: none;}
 
 .app-page-box { text-align: center;}
 .layui-laypage .layui-laypage-curr em { color:#000;}
+.layui-layer-btn .layui-layer-btn0 { border-color:#eb4546!important; background-color:#eb4546!important;}
 
 .couponList .itemTop,
 a {
@@ -1040,15 +1041,15 @@ i, em { font-style: normal;}
 .servicesRemark { margin: 20px 50px 20px 30px;}
 
 .orderPage { width:750px; margin:50px auto;}
-.orderPage .changNums .layui-form-mid { padding:0!important;}
-.orderPage .changNums .layui-form-mid a { font-size:24px;}
-.orderPage .changNums .layui-input-inline { width:50px;}
-.orderPage .changNums .layui-input-inline input { padding:0; text-align: center;}
-.orderPage .agreementBox .layui-form-radio { padding-right:0; margin-right:0; margin-top:0;}
-.orderPage .agreementBox a { padding-top:9px;}
-.orderPage .serviceItem { padding: 0!important;}
-.orderPage .serviceItem a { float:left; padding: 0 20px; line-height:30px; border:1px solid #e6e6e6; white-space:nowrap; margin:0 10px 10px 0;}
-.orderPage .serviceItem a i { color:#eb4546; margin-left:5px;}
+.changNums .layui-form-mid { padding:0!important;}
+.changNums .layui-form-mid a { font-size:24px;}
+.changNums .layui-input-inline { width:50px;}
+.changNums .layui-input-inline input { padding:0; text-align: center;}
+.agreementBox .layui-form-radio { padding-right:0; margin-right:0; margin-top:0;}
+.agreementBox a { padding-top:9px;}
+.serviceItem { padding: 0!important;}
+.serviceItem a { float:left; padding: 0 20px; line-height:30px; border:1px solid #e6e6e6; white-space:nowrap; margin:0 10px 10px 0;}
+.serviceItem a i { color:#eb4546; margin-left:5px;}
 
 .agreementPage { padding: 50px; line-height: 1.8;}
 
@@ -1363,8 +1364,8 @@ i, em { font-style: normal;}
 
 .rightFlex { position: fixed; z-index: 999; right:0; top:0; bottom:0; width:60px; background: #333;}
 .rightFlex .flexCon { position: absolute; left:0; width: 100%; bottom:200px;}
-.rightFlex .flexCon a { display: block;}
-.rightFlex .flexCon img { display: block; margin: 40px auto 0;}
+.rightFlex .flexCon a { display: block; padding: 0 15px;}
+.rightFlex .flexCon img { display: block; width:100%; margin: 40px auto 0;}
 
 .lawyerDetails .score { padding-top:5px; float:left; height: 20px; width: 150px; position: relative;}
 .lawyerDetails .score .scoreBox { width: 100px; height: 100%; background: url(../images/star.png) repeat-x; background-size: auto 20px;}

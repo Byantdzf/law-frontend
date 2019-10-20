@@ -4,97 +4,126 @@
 		init: function () {
 			var _t = this;
 			_t.id = utils.getQueryString('id');
-			_t.type = utils.getQueryString('type');
-			_t.hasLawyer = utils.getQueryString('hasLawyer');
-			_t.payTitle = '支付成功';
-			_t.successInfo = '';
+			_t.hasLawyer = _t.id ? 1 : '';
 
-			var index = '';
-			switch (_t.type) {
-				case "1":
-					index = 1;
-					_t.successHtml = _t.hasLawyer ? '何金宝会在第一时间进行解答' : '系统会在第一时间给您分配律师进行解答';
-					_t.returnPages = 'index.html';
-					break;
-				case "2":
-					index = 1;
-					_t.successHtml = _t.hasLawyer ? '何金宝会在第一时间进行解答' : '系统会在第一时间给您分配律师进行解答';
-					_t.returnPages = 'index.html';
-					break;
-				case "3":
-					index = 2;
-					_t.successHtml = '系统会在第一时间给您分配律师进行服务';
-					_t.temp = '/page/order/temp3.html';
-					_t.returnPages = 'nonlitigationLegalServices.html';
-					break;
-				case "4":
-					index = 3;
-					_t.successHtml = '系统会在第一时间给您分配律师进行服务';
-					_t.temp = '/page/order/temp4.html';
-					_t.returnPages = 'litigationLegalServices.html';
-					break;
-				case "5":
-					index = 4;
-					_t.payTitle = '提交成功';
-					_t.successHtml = '客服人员会在第一时间给您跟您联系';
-					_t.temp = '/page/order/temp5.html';
-					_t.returnPages = 'getLawyer.html';
-					break;
-				case "6":
-					index = 5;
-					_t.successInfo = '恭喜您！您已支付成功。<a href="javascript:;" class="fontRed">点击此处下载文件</a><br /><br />下载完成后您可在个人中心-我的法律文件中找到下载的文件。<a href="users/myFiles.html" class="fontRed">立即前往》</a><br /><br />';
-					_t.temp = '/page/order/temp5.html';
-					_t.returnPages = 'getLawyer.html';
-					break;
+			if (!_t.id) {
+				return
 			}
-			if (!index) {
-				return false;
-			}
-			$('.nav .widthCC a:eq(' + index + ')').addClass('current').siblings().removeClass('current');
+			utils.getSync(URL.legal.getById + _t.id, function (res) {
+				_t.data = res.data || {}
+			});
 
-			if (_t.type == 3 || _t.type == 4 || _t.type == 5) {
-				var data = {};
-				if (_t.type == 3 || _t.type == 4) {
-					utils.getSync(URL.legal.getById + _t.id, function (res) {
-						data = res.data || {}
-					});
-				} else if (_t.type == 5) {
-
-				}
-				_t.loadTemp(data);
-			} else {
-				_t.gotoStepTwo();
-			}
+			_t.getTemp();
 		},
 
-		loadTemp: function (data) {
-			data = data || {};
+		getTemp: function () {
 			var _t = this;
-			$('.orderPage').removeClass('hidden');
-			var html = utils.getTemp(_t.temp, data);
-			$('.orderPage .layui-form').html(html);
+			var html = utils.getTemp('/page/order/temp3.html', _t.data);
+			$('.questions .layui-form').html(html);
 			form.render();
+
+			base.loadArea(_t);
+
 			utils.initDate('.dateIcon')
 
-			form.on('submit(orderSubmit)', function (res) {
-				var params = res.field;
-				console.log(params);return false;
-				_t.gotoStepTwo();
+			$('.mins').on('click', function () {
+				var box = $('.numsInput');
+				var inputs = parseInt($.trim(box.val()));
+				inputs > 1 && box.val(inputs - 1);
+				box.val() == 1 && $(this).addClass('hidden');
+			});
+
+			$('.plus').on('click', function () {
+				var box = $('.numsInput');
+				var inputs = parseInt($.trim(box.val()));
+				box.val(inputs + 1);
+				box.val() > 1 && $('.mins').removeClass('hidden');
+			});
+
+			$('body').on('click', '.agreementBox a', function () {
+				_t.showAgreement();
 			})
 
-			form.on('submit(type3Submit)', function (res) {
-				var params = res.field;
-				_t.gotoPaySuccess();
+			$('body').on('click', '.getSmsCode', function () {
+				var mobile = $.trim($('.mobile').val())
+				if (base.checkMobile(mobile)) {
+					utils.msg('请输入正确的手机号码');
+					return
+				}
+				if (!$(this).attr('disabled')) {
+					base.timeCount('.getSmsCode', global.smsTime)
+				}
 			})
 
-			$('body').on('click', '.serviceItem i', function () {
-				var box = $(this).closest('a');
-				var fonts = box.find('label').html();
-				utils.confirm('确定删除“' + fonts + '”?', function (index) {
-					box.remove();
-					layer.close(index)
+			// 选择优惠券
+			// _t.getCoupon();
+			// form.on('select(changeCoupon)', function (res) {
+			// 	_t.resetTotal(res.value, res.othis.find('input').val())
+			// })
+
+			form.on('submit(questionSubmit)', function (res) {
+				var params = res.field;
+				
+				if (!params.customerRequirement) {
+					utils.msg('请填写我的要求')
+					return
+				}
+				if(!params.selectDate){
+					utils.msg('请选择交付期限');
+					return;
+				}
+				if(!params.provice || !params.city){
+					utils.msg('请选择地区');
+					return;
+				}
+				if (base.checkMobile(params.contactMobile)) {
+					utils.msg('请输入正确的手机号码');
+					return
+				}
+				if(!params.validateCode){
+					utils.msg('请输入验证码');
+					return;
+				}
+				if(!params.agreeProtocal){
+					utils.msg('请确定同意虎甲平台委托服务协议');
+					return;
+				}
+				
+				var proviceObj = {}
+				var cityObj = {}
+				$.each(_t.area, function (i, t) {
+					if (t.code == params.provice) {
+						proviceObj = t;
+						$.each(t.city, function (i2, t2) {
+							if (t2.code == params.city) {
+								cityObj = t2;
+							}
+						})
+					}
+				})
+				// params.couponId = 
+				params.provice = proviceObj.name
+				params.city = cityObj.name
+				params.from = 2
+				params.chooseService = _t.data.id
+				params.orderCategory = _t.data.serviceType
+				utils.put(URL.issue.postIssue, params, function (res) {
+					window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})
+		},
+
+		resetTotal: function (coupon, str) {
+			var _t = this;
+			var total = _t.data.price || 0;
+			$('.couponInfoBox').addClass('hidden');
+			$('.couponInfo').html('');
+			if (coupon) {
+				total -= coupon;
+				$('.couponInfo').html(str);
+				$('.couponInfoBox').removeClass('hidden');
+			}
+			$('.amount').html(total);
 		},
 
 		showAgreement: function () {
@@ -111,43 +140,18 @@
 			utils.dialog(ops);
 		},
 
-		gotoStepTwo: function () {
+		getCoupon: function () {
 			var _t = this;
-			$('.orderPage').addClass('hidden');
-			$('.setPay').removeClass('hidden');
-
-			form.on('submit(paySubmit)', function (res) {
-				var params = res.field;
-				_t.gotoPay();
+			var params = {}
+			params[global.rows] = 50;
+			params[global.page] = 1;
+			params.noAuth = 1;
+			utils.get(URL.common.coupon, params, function (res) {
+				if (res.data.list && res.data.list.length) {
+					utils.getSelect(res.data.list, '.coupon');
+				}
 			})
-
 		},
-
-		gotoPay: function () {
-			var _t = this;
-
-			utils.msg('支付中...');
-			setTimeout(function () {
-				utils.msg('支付完成');
-				_t.gotoPaySuccess();
-			}, 1000);
-		},
-
-		gotoPaySuccess: function () {
-			var _t = this;
-			$('.setPay, .orderPage').addClass('hidden');
-			$('.paySuccess').removeClass('hidden').find('.lawyerHtml').html(_t.successHtml);
-			$('.payTit label').html(_t.payTitle);
-			if (_t.successInfo) {
-				$('.successInfo').html(_t.successInfo);
-			}
-			$('.successInfo').removeClass('hidden');
-
-			form.on('submit(returnFirst)', function (res) {
-				var params = res.field;
-				window.location = _t.returnPages;
-			})
-		}
 	}
 
 	// 点击事件

@@ -6,7 +6,7 @@
 
 			_t.loadCateList();
 
-			$('body').on('click', '.showDetial', function() {
+			$('body').on('click', '.showDetail', function() {
 				_t.editBox();
 			});
 

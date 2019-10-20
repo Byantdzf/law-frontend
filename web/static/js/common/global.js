@@ -34,5 +34,6 @@ var global = {
     text: {},                               // 语言库中文本内容的对象
     rs: {},                                 // 语言库中数组的对象
     LOADING_URL: [],                        // 请求中的URL数组
-    menus: []                              // 目录
+    menus: [],                              // 目录,
+    smsTime: 60
 }

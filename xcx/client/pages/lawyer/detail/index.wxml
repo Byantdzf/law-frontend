@@ -27,7 +27,12 @@
   <view class="flex btn-box">
     <button size="mini" plain bind:tap="voiceTap">在线律师咨询</button>
     <button size="mini" plain bind:tap="onByOneTap">指定律师咨询</button>
-    <button size="mini" plain>立即关注</button>
+    <button size="mini" plain catch:tap="cancelCollect" wx:if="{{details.focused > 0}}">
+        取消关注
+    </button>
+    <button size="mini" plain catch:tap="collect" wx:else>
+        立即关注
+    </button>
     <button size="mini" plain>邀请接单</button>
   </view>
   <view class="flex tab-box">

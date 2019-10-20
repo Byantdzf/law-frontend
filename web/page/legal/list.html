@@ -1,0 +1,29 @@
+<ul>
+	{{# 
+		layui.each(d, function (i, t) { 
+	}}
+	<li data-id="{{t.id}}">
+		<div>
+			<a href="javascript:;" class="showDetail">
+				<h3>{{ t.title || '' }}</h3>
+				<div class="imgBox">
+					<img src="{{ d.instructionPic || '/static/images/nopic.jpg' }}" onerror="this.src='/static/images/nopic.jpg'" />
+				</div>
+				<div class="fonts">
+					<p>{{ t.instruction || ''}}
+					</p>
+					<div>
+						<label>销售量：{{t.salesCount || 0}}</label>
+						<span>价格：{{t.price || 0}}元/次</span>
+					</div>
+				</div>
+			</a>
+			<div class="btnBox">
+				<a href="javascript:;" class="layui-btn layui-btn-normal buyNow">立即购买</a>
+			</div>
+		</div>
+	</li>
+	{{# 
+		})
+	}}
+</ul>

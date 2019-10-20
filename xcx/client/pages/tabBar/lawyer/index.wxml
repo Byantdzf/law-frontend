@@ -48,7 +48,10 @@
                                 <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">
                                     指定律师咨询
                                 </button>
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect">
+                                <button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">
+                                    取消关注
+                                </button>
+                                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect" wx:else>
                                     立即关注
                                 </button>
                             </view>

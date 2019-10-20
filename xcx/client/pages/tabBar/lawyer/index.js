@@ -73,7 +73,8 @@ Page({
 
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
-            this.data.types[index] && (params.goodAt = this.data.types[index].name)
+            this.data.types[index] && (this.data.types[index].name && (params.goodAt = this.data.types[index].name))
+
             this.data.sorts.forEach((item, i) => {
                 if (item.curr && item.code) {
                     params.orderBy = item.code + ' desc'
@@ -140,5 +141,31 @@ Page({
         var _errObj = {}
         _errObj[_errImg] = "/static/images/demo/img_lawyer.png"
         this.setData(_errObj)
-    }
+    },
+    collect(e) {
+        let { id } = e.currentTarget.dataset
+        let list = this.data.list
+        let index = list.findIndex(item => {
+            return id == item.id
+        })
+        let items = list[index]
+        selectApi.attentionLawyer({businessId: id}).then(res => {
+            list[index].focused = 1
+            list[index].concerns += 1
+            this.setData({ list })
+        })
+    },
+    cancelCollect(e) {
+        let { id } = e.currentTarget.dataset
+        let list = this.data.list
+        let index = list.findIndex(item => {
+            return id == item.id
+        })
+        let items = list[index]
+        selectApi.cancelAttentionLawyer({businessId: id}).then(res => {
+            list[index].focused = 0
+            list[index].concerns -= 1
+            this.setData({ list })
+        })
+    },
 })

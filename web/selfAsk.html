@@ -24,12 +24,12 @@
 	<div class="nav">
 		<div class="widthCC">
 			<a href="/index.html">首页</a>
-			<a href="/ask.html">在线律师咨询</a>
-			<a class="current" href="/selfAsk.html">指定律师咨询</a>
+			<a class="current" href="/ask.html">在线律师咨询</a>
 			<a href="/nonlitigationLegalServices.html">日常法律服务</a>
 			<a href="/litigationLegalServices.html">分块法律服务</a>
-			<a href="/getLawyer.html">委托律师</a>
+			<a href="/getLawyer.html">全案委托律师</a>
 			<a href="/modelAgreement.html">协议文本下载</a>
+			<a href="/about.html">虎甲介绍</a>
 			<a href="/user.html">我的</a>
 		</div>
 	</div>
@@ -54,52 +54,44 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i>*</i>手机号码：</label>
 				<div class="layui-input-inline">
-				<input type="text" name="text" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+					<input type="text" name="contactMobile" placeholder="请输入手机号码" autocomplete="off" class="layui-input mobile">
 				</div>
-				<a href="javascript:;" class="layui-btn layui-btn-primary">获取验证码</a>
+				<a href="javascript:;" class="layui-btn layui-btn-primary getSmsCode">获取验证码</a>
 			</div>
 
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i>*</i>验证码：</label>
 				<div class="layui-input-inline">
-				<input type="text" name="text" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+					<input type="text" name="validateCode" placeholder="请输入验证码" autocomplete="off" class="layui-input">
 				</div>
 			</div>
 			
 			<div class="layui-form-item">
-				<label class="layui-form-label"><i>*</i>称呼</label>
+				<label class="layui-form-label"><i>*</i>称呼：</label>
 				<div class="layui-input-inline">
-					<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input">
+					<input type="text" name="name" placeholder="" autocomplete="off" class="layui-input">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i>*</i>选择地区：</label>
 				<div class="layui-input-inline">
-				  <select name="quiz1">
-					<option value="">请选择省</option>
-					<option value="浙江" selected="">浙江省</option>
-					<option value="你的工号">江西省</option>
-					<option value="你最喜欢的老师">福建省</option>
-				  </select>
+					<select name="provice" class="provice" lay-filter="changeProvice">
+						<option value="">请选择省</option>
+					</select>
 				</div>
 				<div class="layui-input-inline">
-				  <select name="quiz2">
-					<option value="">请选择市</option>
-					<option value="杭州">杭州</option>
-					<option value="宁波" disabled="">宁波</option>
-					<option value="温州">温州</option>
-					<option value="温州">台州</option>
-					<option value="温州">绍兴</option>
-				  </select>
+					<select name="city" class="city">
+						<option value="">请选择市</option>
+					</select>
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 			  <label class="layui-form-label"><i>*</i>是否紧急：</label>
 			  <div class="layui-input-inline">
-					<input type="radio" name="radio1" value="是" title="是" checked="">
-					<input type="radio" name="radio1" value="否" title="否">
+					<input type="radio" name="emergency" value="1" title="是" checked="">
+					<input type="radio" name="emergency" value="0" title="否">
 			  </div>
 			</div>
 
@@ -111,7 +103,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">备注：</label>
 				<div class="layui-input-block">
-					<textarea class="layui-textarea" maxlength="100" name="content" placeholder="请填写备注说明"></textarea>
+					<textarea class="layui-textarea" maxlength="100" name="remark" placeholder="请填写备注说明"></textarea>
 					<div class="textarea_counter"><span>0</span>/<em>0</em></div>
 				</div>
 			</div>
@@ -123,67 +115,7 @@
 		</div>
 	</div>
 
-	<div class="widthCC setPay hidden">
-		<div class="payTit"><i class="iconfont icon-money"></i>在线支付</div>
-		<p>支付金额为<em class="amount">50</em>元，请选择以下支付方式支付，建议您使用微信支付，打开微信，扫描二维码即可支付，方便快速。</p>
-		
-		<div class="layui-form">
-			<div class="layui-form-item">
-				<label class="layui-form-label">支付方式：</label>
-				<div class="layui-input-block">
-						<input type="radio" name="payment" value="1" title="<img src='/static/images/wxpay.png' />" checked="">
-				</div>
-				<div class="layui-input-block">
-						<input type="radio" name="payment" value="2" title="<img src='/static/images/alipay.png' />">
-				</div>
-			</div>
-
-			<div class="layui-form-item tac">
-				<a href="javascript:;" class="layui-btn layui-btn-red marginTop40 paySubmit" lay-submit="" lay-filter="paySubmit">确定提交</a>
-			</div>
-		</div>
-	</div>
-
-	<div class="widthCC paySuccess hidden">
-		<div class="payTit"><i class="iconfont icon-money"></i>提交成功</div>
-		<p>恭喜您！您已提交成功，<span class="lawyerName">何金宝</span>会在第一时间进行解答，请及时留意信息通知。</p>
-		<p>扫码公众号二维码，第一时间掌握信息回复。</p>
-		<div class="paySuccessQr">
-			<img src="static/images/eqcode_240.png" />
-		</div>
-		<div class="layui-form">
-			<div class="layui-form-item tac">
-				<a href="javascript:;" class="layui-btn layui-btn-red marginTop40 returnFirst" lay-submit="" lay-filter="returnFirst">完成</a>
-			</div>
-		</div>
-	</div>
-
 	<div class="btm">
-		<div class="widthCC overflowh">
-			<div class="btm_lft flt">
-				<img src="/static/images/logo_btm.png" alt="">
-				<div class="btm_eq"><img src="/static/images/eqcode_240.png" alt="">
-				</div>
-			</div>
-			<div class="btm_rt">
-				<div class="btm_rt_nav">
-					<a href="/">首页</a>
-					<a href="/ask.html">咨询</a>
-					<a href="/nonlitigationLegalServices.html">法律服务</a>
-					<a href="/getLawyer.html">代理律师</a>
-					<a href="/modelAgreement.html">法律文件</a>
-					<a href="/about.html">关于我们</a>
-					<a href="/declare.html">免责声明</a>
-				</div>
-				<div>
-					<h4><i class="iconfont icon-tel"></i>客服热线：400-618-8116</h4>
-					<p>创辉律师科技有限公司版权所有</p>
-					<p>Copyright 2015-2019 hujiawenda.com All Rights Reserved. 粤ICP备xxxxxxxx号</p>
-					<p>深圳市xxx水泉西路98号山东财经大学大学生创业园</p>
-				</div>
-
-			</div>
-		</div>
 	</div>
 
 	<script src="/static/js/plugin/layui/layui.all.js"></script>

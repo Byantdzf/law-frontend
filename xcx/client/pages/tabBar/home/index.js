@@ -133,9 +133,19 @@ Page({
         })
         let items = list[index]
         selectApi.attentionLawyer({businessId: id}).then(res => {
-            console.log(res)
+            this.getLawyerList()
         })
-        // if (items.concerns)
+    },
+    cancelCollect(e) {
+        let { id } = e.currentTarget.dataset
+        let list = this.data.list
+        let index = list.findIndex(item => {
+            return id == item.id
+        })
+        let items = list[index]
+        selectApi.cancelAttentionLawyer({businessId: id}).then(res => {
+            this.getLawyerList()
+        })
     },
     voiceTap(e) {
         let { id } = e.currentTarget.dataset
