@@ -49,6 +49,12 @@ layui.define(function (exports) {
 			this.ajax(url, param, callback, { "type": "POST", "asyn": true }); // POST
 		},
 
+		// put 表单
+		put: function (url, param, callback) {
+			var ct = 'application/json;charset=utf-8';
+			this.ajax(url, JSON.stringify(param), callback, { "type": "PUT", "ct": ct, "asyn": true });
+		},
+
 		// del 表单
 		del: function (url, param, callback) {
 			this.ajax(url, param, callback, { "type": "DELETE", "asyn": true }); // POST

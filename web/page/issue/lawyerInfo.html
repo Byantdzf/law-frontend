@@ -1,0 +1,10 @@
+<div class="audio_header audio_header_big flt"><a href="/lawyerDetails.html?id={{d.id}}"
+		style="background:url('{{d.pic || \'/static/images/defaultLawyer.jpg\'}}') no-repeat center center;background-size:cover;"></a><span></span>
+</div>
+<h6><a href="/lawyerDetails.html?id={{d.id}}">刘丹律师</a>　<label
+		class="fontRed">{{ d.score || 0 }}分</label></h6>
+<p class="oto_form_header_intro">{{ d.brief || '' }}</p>
+<p class="num">
+	<span class="flr">帮助人数：<label class="fontGreen">{{ d.helps || '0' }}人</label> 关注人数：<label class="fontGreen">{{ d.concerns || '0' }}人</label></span>
+	<span>付费咨询：<label class="fontRed">{{ d.price || '0' }}元/次</label></span>
+</p>

@@ -19,7 +19,9 @@ var URL = {
 		upload: '/applets/lawyer/multiUpload',
 		// questionType: commonHost + '/applets/lawyer/getDictData',
 		questionType: '/static/data/questionType.json',
-		isRegister: pcHost + '/pc/user/consult/publish/page'
+		isRegister: pcHost + '/pc/user/consult/publish/page',
+		getSmsCode: commonHost + '/applets/lawyer/getPhoneVerificationCode',
+		coupon: pcHost + '/pc/user/couponPool/list'
 	},
 	auth: {
 		login: '/static/data/login.json',
@@ -48,6 +50,14 @@ var URL = {
 	},
 	legal: {
 		queryNonlitigationLegalServices: pcHost + '/pc/user/service/info/2/21',
-		queryLitigationLegalServices: pcHost + '/pc/user/service/info/2/22'
+		queryLitigationLegalServices: pcHost + '/pc/user/service/info/2/22',
+		queryLawyer: pcHost + '/pc/user/service/info/3/31',
+		getById: pcHost + '/pc/user/service/details/'
+	},
+	issue: {
+		postIssue: pcHost + '/pc/user/consult/publish/1',                // 咨询订单
+		postLegals: pcHost + '/pc/user/consult/publish/2',               // 分块法律
+		postMandatoryLawyer: pcHost + '/pc/user/consult/publish/3',      // 代理律师服务
+		postTemplate: pcHost + '/pc/user/consult/publish/4'              // 法律文件购买
 	}
 }

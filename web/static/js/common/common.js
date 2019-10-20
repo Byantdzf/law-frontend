@@ -323,6 +323,50 @@
 			};
 			utils.dialog(ops);
 		},
+		timeCount: function (box, time) {
+			$(box).attr('disabled', true);
+			$(box).html('重新获取(' +　time + ')');
+			var timer = window.setInterval(function () {
+				time--;
+				$(box).html('重新获取(' +　time + ')');
+				if (time == 0) {
+					window.clearInterval(timer);
+					$(box).attr('disabled', false).html('获取验证码');
+				}
+			}, 1000);
+		},
+		checkMobile: function (mobile) {
+			var flag = false;
+			if(!/(^1[3|4|5|7|8][0-9]{9}$)/.test(mobile)){
+				flag = true
+			}
+			return flag
+		},
+		loadArea: function (_t) {
+			utils.get(URL.select.getProvCity, function (res) {
+				var data = res.data;
+				_t.area = data;
+				$.each(data, function (i, t) {
+					t.id = t.code
+				});
+				utils.getSelect(data, '.provice', '请选择省');
+				
+				form.on('select(changeProvice)', function (res) {
+					var code = res.value
+					
+					var cityData = []
+					$.each(data, function (i, t) {
+						if (t.code == code) {
+							cityData = t.city
+							$.each(cityData, function (i2, t2) {
+								t2.id = t2.code;
+							});
+						}
+					});
+					utils.getSelect(cityData, '.city', '请选择市');
+				})
+			});
+		},
 	}
 
 	gather.init();
