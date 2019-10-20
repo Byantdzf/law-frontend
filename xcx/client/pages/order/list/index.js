@@ -4,8 +4,10 @@ const { orderType, orderCategory, orderStatus } = require('../../../config/globa
 const orderApi = require('../../../service/order');
 Page({
   data: {
-    selectAllObj: {id: '', name: '全部', checked: true},
+    orderType,
+    orderCategory,
     orderStatus,
+    selectAllObj: {id: '', name: '全部', checked: true},
     listUrl: '/applets/user/order/orderList',
     list: [],
     statusItems: [],

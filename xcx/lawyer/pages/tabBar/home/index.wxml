@@ -47,13 +47,13 @@
                 </view>
                 <view class="flex-bd flex">
                   <view class="label cl-999">联系方式：</view>
-                  <view class="flex-bd cl-666">{{ item.phone }}</view>
+                  <view class="flex-bd cl-666">{{ item.contactMobile }}</view>
                 </view>
               </view>
               <view class="flex">
                 <view class="flex-bd flex">
                   <view class="label cl-999">ID号：</view>
-                  <view class="flex-bd cl-666">123456789</view>
+                  <view class="flex-bd cl-666">{{ item.id }}</view>
                 </view>
                 <view class="flex-bd flex">
                   <view class="label cl-999">所在城市：</view>
@@ -76,7 +76,7 @@
               <view class="flex">
                 <view class="flex-bd flex">
                   <view class="label cl-999">订单金额：</view>
-                  <view class="flex-bd cl-666">50元</view>
+                  <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>
                 </view>
                 <view class="flex-bd flex">
                   <view class="label cl-999">是否紧急：</view>
@@ -85,7 +85,7 @@
               </view>
               <view class="flex">
                 <view class="label cl-999">发布时间：</view>
-                <view class="flex-bd cl-666">2019年8月18日20:00</view>
+                <view class="flex-bd cl-666">{{ item.createTime || '' }}</view>
               </view>
             </view>
             <view class="flex btn-box">
@@ -120,6 +120,7 @@
 						</view>
 					</scroll-view>
 				</view>
+        <view class="bottom-empty-box"></view>
       </scroll-view>
     </view>
   </view>

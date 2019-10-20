@@ -69,9 +69,6 @@
   padding-bottom: 10rpx;
   border-bottom: 2rpx solid #f3f3f3;
 }
-.order-item-bd {
-  
-}
 .order-item .btn-box {
   margin-top: 30rpx;
   justify-content: space-between;
@@ -105,6 +102,11 @@
 }
 .hot-news-item + .hot-news-item {
   margin-left: 22rpx;
+}
+
+.bottom-empty-box {
+  width: 100%;
+  height: 120rpx;
 }
 
 .float-tools-btn {

@@ -148,7 +148,6 @@ Component({
   pageLifetimes: {
     // 进入页面触发，在ready之前执行
     show() {
-      console.log('app page show')
       !pages.get('appPage') && pages.add(this, 'appPage')
     },
     // 离开页面触发

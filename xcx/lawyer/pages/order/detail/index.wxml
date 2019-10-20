@@ -1,0 +1,132 @@
+<!-- pages/order/detail/index.wxml -->
+<import src="/template/order/detail"/>
+
+<wxs module="fn">
+    module.exports = {
+      showLawyer: function(item) {
+        return '10,20,70'.indexOf(item.orderStatus) === -1;
+      },
+      showCancel: function(item) {
+        return '10,20'.indexOf(item.orderStatus) !== -1;
+      },
+      showPay: function(item) {
+        return item.orderStatus == 10;
+      },
+      showComment: function(item) {
+        return item.orderStatus == 50;
+      },
+      showReply: function(item) {
+        return '40,50,60'.indexOf(item.orderStatus) !== -1;
+      },
+      getOrderInfoTpl: function(item) {
+        var str = '01';
+        if (item.orderType == 4) {
+          str = '04';
+        } else if (item.orderType == 2 || item.orderType == 3) {
+          str = '03';
+        } else if (item.orderCategory == 12) {
+          str = '02';
+        }
+        return str;
+      }
+    }
+</wxs>
+
+<app-page id="app-page">
+  <view class="page-order-detail">
+    <view class="detail-box">
+      <view class="title fw-b">基本信息</view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单编号：</text>
+        <text class="flex-bd cl-666">{{ item.orderNo }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单状态：</text>
+        <text class="flex-bd cl-primary fw-b">{{ orderStatus[item.orderStatus] }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单类型：</text>
+        <text class="flex-bd cl-666">{{ orderType[item.orderType] }}</text>
+      </view>
+      <view class="flex detail-row">
+        <text class="label cl-999">订单种类：</text>
+        <text class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</text>
+      </view>
+      <view class="title fw-b">订单信息</view>
+      <template is="orderInfo_{{ fn.getOrderInfoTpl(item) }}" data="{{...item}}"/>
+    </view>
+    <view class="detail-box" wx:if="{{ fn.showLawyer(item) }}">
+      <view class="flex detail-row" wx:if="{{ fn.showLawyer(item) }}">
+        <text class="label cl-999">接单律师：</text>
+        <view class="flex flex-bd cl-666">
+          <image class="img-lawyer" src="{{ item.lawyerPic }}"></image>
+          <text>{{ item.lawyer }}</text>
+        </view>
+      </view>
+      <view class="flex detail-row flex-start mt-20" wx:if="{{ msglist.length }}">
+        <text class="label cl-999">回复详情：</text>
+        <view class="flex-column flex-bd cl-666">
+          <view wx:for="{{ msglist }}" wx:for-item="msg" wx:key="{{ index }}">
+            <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
+            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
+              <view class="iconfont icon-yuyin cl-primary"></view>
+              <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
+            </view>
+            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
+              <view class="iconfont icon-wenjian cl-primary"></view>
+              <view>{{ msg.fileName || '' }}</view>
+            </view>
+          </view>
+          <view class="mt-20">
+            <text class="cl-999">（对回复结果不满意？</text>
+            <text class="cl-link" bindtap="gotoAppeal">立即申诉</text>
+            <text class="cl-999">）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="detail-box" wx:if="{{ askSecondContent }}">
+      <view class="flex detail-row flex-start">
+        <text class="label cl-999">我的追问：</text>
+        <view class="flex flex-bd cl-666">
+          <text>{{ askSecondContent }}</text>
+        </view>
+      </view>
+    </view>
+    <view class="detail-box" wx:if="{{ orderScoreList.length }}">
+      <view class="flex detail-row flex-start">
+        <text class="label cl-999">我的评价：</text>
+        <view class="flex flex-bd cl-666">
+          <view class="flex">
+            <text class="label cl-999 pr-20">专业态度</text>
+            <app-score value="{{ orderScoreList[0].professionalAttitudeScore }}" readonly/>
+          </view>
+          <view class="flex mt-20">
+            <text class="label cl-999 pr-20">服务态度</text>
+            <app-score value="{{ orderScoreList[0].serviceAttitudeScore }}" readonly/>
+          </view>
+          <view class="mt-20 cl-666">{{ orderScoreList[0].content || '' }}</view>
+        </view>
+      </view>
+    </view>
+    <view class="ask-wrapper" wx:if="{{ showAskWrapper }}">
+      <view>
+        <textarea class="textarea" placeholder="请输入您要追问的问题" bindinput="handleAskContentChange"></textarea>
+      </view>
+      <view class="flex btn-box mt-20">
+        <button plain bindtap="handleCancelAsk">取消</button>
+        <button type="primary" bindtap="handleConfirmAsk">确认</button>
+      </view>
+    </view>
+    <view class="btn-box mt-20" wx:if="{{ fn.showCancel(item) }}">
+      <button type="primary" bindtap="handleCancel">取消订单</button>
+    </view>
+    <view class="btn-box mt-20" wx:if="{{ fn.showComment(item) }}">
+      <button type="primary" bindtap="handleComment">立即评价</button>
+    </view>
+    <view class="flex btn-box mt-20" wx:if="{{ (item.orderStatus == 30 || item.orderStatus == 40) && !showAskWrapper }}">
+      <button plain bindtap="handleAsk">追问</button>
+      <button type="primary" bindtap="handleConfirm">确认订单完成</button>
+    </view>
+  </view>
+</app-page>
