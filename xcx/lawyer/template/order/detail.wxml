@@ -3,7 +3,7 @@
   <view class="orderInfo">
     <view class="flex">
       <text class="label cl-999">咨询内容：</text>
-      <text class="label cl-999">{{ orderType == 1 ? content || '' : customerRequirement || '' }}</text>
+      <text class="label cl-999">{{ content }}</text>
     </view>
     <view class="flex">
       <text class="label cl-999">所属分类：</text>

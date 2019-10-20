@@ -1,0 +1,31 @@
+.order-item {
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  align-items: flex-start;
+}
+.order-item + .order-item {
+  margin-top: 20rpx;
+}
+.order-item .subtitle {
+  margin: 10rpx 0;
+  font-size: 32rpx;
+}
+.order-item-hd {
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #f3f3f3;
+}
+.order-item .btn-box {
+  margin-top: 30rpx;
+  justify-content: space-between;
+}
+.order-item .btn-box button {
+  width: 210rpx;
+  margin: 0;
+  padding: 0 20rpx;
+  border-color: #e0e0e0;
+  color: #666;
+}
+.order-item .btn-box button::after {
+  border-color: #e0e0e0;
+}

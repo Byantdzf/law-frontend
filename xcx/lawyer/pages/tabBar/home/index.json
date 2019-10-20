@@ -4,7 +4,8 @@
     "app-text": "/components/app-text/index",
     "app-empty": "/components/app-empty/index",
     "app-cityPicker": "/components/app-cityPicker/index",
-    "app-pop": "/components/app-pop/index"
+    "app-pop": "/components/app-pop/index",
+    "app-order-item": "/components/app-order-item/index"
   },
   "backgroundColorTop": "#CF443D",
   "backgroundColorBottom": "#f3f3f3",

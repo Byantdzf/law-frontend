@@ -36,4 +36,9 @@ module.exports = {
    * 上传文件
   */
   uploadFile: params => post('/applets/lawyer/multiUpload', params, {requestType: 'uploadFile'}),
+
+  /**
+   * 数据字典
+  */
+  data: params => get('/applets/lawyer/getDictData', params),
 }

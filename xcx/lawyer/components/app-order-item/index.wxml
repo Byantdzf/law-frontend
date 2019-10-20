@@ -1,0 +1,61 @@
+<view class="order-item" bindtap="gotoDetail">
+  <view class="flex order-item-hd">
+    <view class="flex-bd cl-primary fw-b">{{ orderCategoryMap[item.orderCategory] }}</view>
+    <view class="iconfont icon-guanzhu"></view>
+  </view>
+  <view class="order-item-bd">
+    <view class="cl-999 subtitle">发布人信息</view>
+    <view class="flex">
+      <view class="flex-bd flex">
+        <view class="label cl-999">姓名：</view>
+        <view class="flex-bd cl-666">{{ item.name }}</view>
+      </view>
+      <view class="flex-bd flex">
+        <view class="label cl-999">联系方式：</view>
+        <view class="flex-bd cl-666">{{ item.contactMobile }}</view>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="flex-bd flex">
+        <view class="label cl-999">ID号：</view>
+        <view class="flex-bd cl-666">{{ item.id }}</view>
+      </view>
+      <view class="flex-bd flex">
+        <view class="label cl-999">所在城市：</view>
+        <view class="flex-bd cl-666">{{ item.province }} - {{ item.city }}</view>
+      </view>
+    </view>
+  </view>
+  <view class="order-item-bd">
+    <view class="cl-999 subtitle">订单信息</view>
+    <view class="flex">
+      <view class="flex-bd flex">
+        <view class="label cl-999">订单类型：</view>
+        <view class="flex-bd cl-666">{{ orderTypeMap[item.orderType] }}</view>
+      </view>
+      <view class="flex-bd flex">
+        <view class="label cl-999">所属问题：</view>
+        <view class="flex-bd cl-666">{{ questionTypeMap[item.questionType] }}</view>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="flex-bd flex">
+        <view class="label cl-999">订单金额：</view>
+        <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>
+      </view>
+      <view class="flex-bd flex">
+        <view class="label cl-999">是否紧急：</view>
+        <view class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</view>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="label cl-999">发布时间：</view>
+      <view class="flex-bd cl-666">{{ item.createTime || '' }}</view>
+    </view>
+  </view>
+  <view class="flex btn-box">
+    <button size="mini" plain catchtap="handleForward">转发</button>
+    <button size="mini" plain catchtap="handleRefuse">拒绝接单</button>
+    <button size="mini" plain catchtap="handleReceive">立即接单</button>
+  </view>
+</view>

@@ -50,4 +50,17 @@ module.exports = {
    * 订单支付
   */
   pay: params => get('/applets/lawyer/pay/getPrepayInfoByOrderNo', params),
+
+  /**
+   * 转发
+  */
+  orderForward: params => get(`/applets/lawyer/order/operateOrder`, params),
+  /**
+   * 拒绝接单
+  */
+  orderRefuse: params => get(`/applets/lawyer/order/rejectOrder`, params),
+  /**
+   * 接单
+  */
+  orderReceive: params => put(`/applets/lawyer/order/acceptOrder`, params),
 }

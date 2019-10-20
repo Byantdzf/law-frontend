@@ -24,7 +24,7 @@
     {
       "root": "pages/order",
       "pages": [
-        "details/index"
+        "detail/index"
       ]
     }
   ],

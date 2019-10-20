@@ -48,7 +48,7 @@
         <text class="label cl-999">订单类型：</text>
         <text class="flex-bd cl-666">{{ orderType[item.orderType] }}</text>
       </view>
-      <view class="flex detail-row">
+      <view class="flex detail-row" wx:if="{{ item.orderType != 4 }}">
         <text class="label cl-999">订单种类：</text>
         <text class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</text>
       </view>

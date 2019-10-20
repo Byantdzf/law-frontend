@@ -1,10 +1,13 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
 const orderApi = require('../../../service/order')
-const { appName, PAGE_KEY, SIZE_KEY } = require('../../../config/global')
+const { appName, PAGE_KEY, SIZE_KEY, orderType, orderCategory, orderStatus } = require('../../../config/global')
 let page = null
 Page({
   data: {
+    orderType,
+    orderCategory,
+    orderStatus,
     currArea: [],
     //图片地址
     banners: [
@@ -12,7 +15,9 @@ Page({
       '/static/images/demo/banner2.png',
       '/static/images/demo/banner3.png'
     ],
-    list: [],
+    list1: [],
+    list2: [],
+    list4: [],
     hotNews: [],
     tools: [
       {
@@ -42,8 +47,7 @@ Page({
       }
     ],
     showTools: false,
-    orderTypeMap: {},
-    orderCategoryMap: {},
+    questionTypeMap: {}
   },
   onLoad() {
     app.pages.add(this)
@@ -83,19 +87,48 @@ Page({
   initHome() {
     let cityPicker = this.selectComponent('#app-cityPicker')
     cityPicker.init(this.data.currArea)
-    this.getOrderList()
+
+    selectApi.data({ dictCode: 'QuestionType' }).then(res => {
+      const items = res.data || []
+      let questionTypeMap = {}
+
+      items.forEach(v => {
+        questionTypeMap[v.code] = v.name
+      })
+
+      this.setData({ questionTypeMap })
+
+      this.getOrderList(1)
+      this.getOrderList(2)
+      this.getOrderList(4)
+    });
   },
-  getOrderList() {
+  getOrderList(orderSource) {
     // 获取本地律师
     let params = {}
     params[PAGE_KEY] = 1
     params[SIZE_KEY] = 5
+    params.orderSource = orderSource
     params.city = this.data.currArea[1] || ''
     // params.city = 'shenzhen'
     orderApi.orderList(params).then(res => {
         let list = res.data.list || []
-        this.setData({ list })
+        let listName = 'list' + orderSource
+        this.setData({ [listName]: list })
     })
+  },
+  handleRefreshOrderList({ key }) {
+    switch(key) {
+      case 'isSystem':
+        this.getOrderList(1)
+        break;
+      case 'isOrders':
+        this.getOrderList(2)
+        break;
+      case 'isFindMe':
+        this.getOrderList(4)
+        break;
+    }
   },
   handleToolBtnTap(e) {
     this.setData({
