@@ -1,32 +1,32 @@
 <!-- 需要获取用户授权的页面 -->
 <app-loading show="{{ isLoading }}" fixed mask />
-
 <view class="app-page" wx:if="{{ hasNetwork }}">
-	<slot></slot>
+  <slot></slot>
 </view>
-
 <view class="app-page network-offline" wx:else>
-	<image src="/static/images/default/noNetwork.jpg" mode="widthFix"></image>
+  <image src="/static/images/default/noNetwork.jpg" mode="widthFix"></image>
 </view>
-
-<app-pop 
-  direction="bottom"
-  visible="{{ authVisible }}" 
-  hideTabBar="{{ hideTabBar }}"
-  styles="{{ authStyles }}">
+<app-pop direction="bottom" visible="{{ authVisible }}" hideTabBar="{{ hideTabBar }}" styles="{{ authStyles }}">
   <view class='pop-auth'>
     <view class="pop-auth__hd">
       <view class="img-box">
-        <image src="/static/images/logo-login.png" />
+        <image src="/static/images/logo.png" />
       </view>
       <text class="txt">欢迎来到{{ appName }}</text>
-		</view>
-		<view class="pop-auth__bd">
-			<view>为提供优质服务，{{ appName }}需要获取以下信息</view>
-			<view class="subtxt">您的公开信息（昵称、头像等）</view>
-		</view>
-    <view class="pop-auth__ft">
-			<button type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">确认微信授权</button>
-		</view>
+    </view>
+    <view class="pop-auth__bd">
+      <view>为提供优质服务，{{ appName }}需要获取以下信息</view>
+      <view class="subtxt">您的公开信息（昵称、头像等）</view>
+    </view>
+    <view class="pop-auth__ft flex">
+      <view class="flex-bd">
+        <button bind:tap="hideAuth">取消</button>
+      </view>
+      <view class="flex-bd">
+        <button type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+          确认微信授权
+        </button>
+      </view>
+    </view>
   </view>
 </app-pop>

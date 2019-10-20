@@ -1,7 +1,7 @@
 Component({
-  externalClasses: ['iconfont'],
   options: {
-    multipleSlots: true 
+    multipleSlots: true,
+    addGlobalClass: true
   },
   properties: { 
     tips:{
@@ -14,16 +14,7 @@ Component({
     },
     imgSrc:{
       type: String,
-      value: '../../static/images/empty-list.png'
+      value: '/static/images/default/noData.jpg'
     }
-  },
-  data: {
-    
-  },
-  ready(){
-    
-  },
-  methods:{
-    
   }
 })

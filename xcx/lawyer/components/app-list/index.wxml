@@ -1,0 +1,19 @@
+<!-- 滚动加载 -->
+<scroll-view
+  class="app-scroller"
+  scroll-y
+  bindscrolltolower="loadMore"
+  lower-threshold="{{ threshold }}"
+>
+	<slot></slot>
+  <view class="loading-box pb-20">
+    <app-loading
+      show="{{ isLoadMoreLoading }}"
+      type="circle"
+      size="{{ 36 }}"
+      borderWidth="{{ 4 }}"
+      inline
+      text="努力加载中"
+    />
+  </view>
+</scroll-view>

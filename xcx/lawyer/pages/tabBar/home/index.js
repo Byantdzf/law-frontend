@@ -1,125 +1,135 @@
 const app = getApp()
-// const productModel = require('../../../model/product/index.js')
+const selectApi = require('../../../service/select')
+const orderApi = require('../../../service/order')
+const { appName, PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 let page = null
 Page({
   data: {
+    currArea: [],
     //图片地址
     banners: [
       '/static/images/demo/banner1.png',
       '/static/images/demo/banner2.png',
       '/static/images/demo/banner3.png'
     ],
-    list: [
-      {
-        orderType:'语音咨询订单',
-        name: '陆先生',
-        phone: '181******01',
-        score: 4.9,
-        helpers: 249,
-        followers: 249
-      }, {
-        orderType: '语音咨询订单',
-        name: '陆先生',
-        phone: '181******01',
-        score: 4.9,
-        helpers: 249,
-        followers: 249
-      }, {
-        orderType: '语音咨询订单',
-        name: '陆先生',
-        phone: '181******01',
-        score: 4.9,
-        helpers: 249,
-        followers: 249
-      }
-    ],
-    hotNews: [
-      {
-        id: 1,
-        imgUrl: '/static/images/demo/banner1.png',
-        title: '劳务合同纠纷风起云涌',
-        content: '劳务合同纠纷风起云涌'
-      }, {
-        id: 2,
-        imgUrl: '/static/images/demo/banner2.png',
-        title: '劳务合同纠纷风起云涌',
-        content: '劳务合同纠纷风起云涌'
-      }, {
-        id: 3,
-        imgUrl: '/static/images/demo/banner3.png',
-        title: '劳务合同纠纷风起云涌',
-        content: '劳务合同纠纷风起云涌'
-      }, {
-        id: 4,
-        imgUrl: '/static/images/demo/banner1.png',
-        title: '劳务合同纠纷风起云涌',
-        content: '劳务合同纠纷风起云涌'
-      }
-    ],
+    list: [],
+    hotNews: [],
     tools: [
       {
-        name1: '语音',
-        name2: '咨询',
-        icon: 'icon-yuyin',
-        iconBg: '#00b0ab'
+          name: '在线律师咨询',
+          url: '/pages/issue/voice/index',
+          icon: '/static/images/icon-menu01.png'
       }, {
-        name1: '1对1',
-        name2: '咨询',
-        icon: 'icon-feature',
-        iconBg: '#00A2FF'
+          name: '指定律师咨询',
+          url: '/pages/issue/oneByOne/index',
+          icon: '/static/images/icon-menu02.png'
       }, {
-        name1: '非诉讼',
-        name2: '服务',
-        icon: 'icon-feisusongzhuanxiang',
-        iconBg: '#00b0ab'
+          name: '日常法律服务',
+          url: '/pages/legalServices/list/index?type=21',
+          icon: '/static/images/icon-menu03.png'
       }, {
-        name1: '诉讼',
-        name2: '服务',
-        icon: 'icon-susong',
-        iconBg: '#F64335'
+          name: '分块法律服务',
+          url: '/pages/legalServices/list/index?type=22',
+          icon: '/static/images/icon-menu04.png'
       }, {
-        name1: '收费',
-        name2: '委托',
-        icon: 'icon-shoufei',
-        iconBg: '#FFD200'
+          name: '收费代理',
+          url: '/pages/mandatoryLawyer/list/index?type=31',
+          icon: '/static/images/icon-menu05.png'
       }, {
-        name1: '风险',
-        name2: '委托',
-        icon: 'icon-fengxian',
-        iconBg: '#F9879A'
-      }, {
-        name1: '协议',
-        name2: '模版',
-        icon: 'icon-xieyi',
-        iconBg: '#15B774'
+          name: '风险代理',
+          url: '/pages/mandatoryLawyer/list/index?type=32',
+          icon: '/static/images/icon-menu06.png'
       }
     ],
-    showTools: false
+    showTools: false,
+    orderTypeMap: {},
+    orderCategoryMap: {},
   },
   onLoad() {
     app.pages.add(this)
     app.setNavColor()
-    app.setNavTitle('虎甲律师咨询平台')
+    app.setNavTitle(appName)
+
+    app.getUserLocation(data => {
+        const adInfo = data.adInfo || {}
+        this.setData({
+            currArea: [adInfo.province.replace('省', ''), adInfo.city.replace('市', '')]
+        })
+        this.initHome()
+
+        // 获取地址完成以后再判断授权
+        page = this.selectComponent('#app-page')
+        page.checkAuth().then((data) => {
+            // 授权成功
+            console.log(data)
+        }).catch((e) => {
+            // 授权失败
+        });
+    })
+
+    // 获取热门新闻
+    let params = {}
+    params[PAGE_KEY] = 1
+    params[SIZE_KEY] = 5
+    selectApi.newsList(params).then(res => {
+        let hotNews = res.data.list
+        this.setData({ hotNews })
+    })
   },
 
   onShow() {
-    console.log('home show')
-    page = this.selectComponent('#app-page')
-    // productModel.query().then(data => {})
-    // page.checkAuth().then((data) =>{
-    //   // 授权成功
-    //   console.log('index auth')
-    //   console.log(data)
-    // }).catch((e) =>{
-    //   // 授权失败
-    //   console.log('index auth reject')
-    //   console.log(e)
-    // });
+
   },
-  handleToolBtnTap() {
-    this.setData({
-      showTools: !this.data.showTools
+  initHome() {
+    let cityPicker = this.selectComponent('#app-cityPicker')
+    cityPicker.init(this.data.currArea)
+    this.getOrderList()
+  },
+  getOrderList() {
+    // 获取本地律师
+    let params = {}
+    params[PAGE_KEY] = 1
+    params[SIZE_KEY] = 5
+    params.city = this.data.currArea[1] || ''
+    // params.city = 'shenzhen'
+    orderApi.orderList(params).then(res => {
+        let list = res.data.list || []
+        this.setData({ list })
     })
-    console.log(this.data.showTools)
+  },
+  handleToolBtnTap(e) {
+    this.setData({
+        showTools: !this.data.showTools
+    })
+  },
+  handleClosePop() {
+    this.setData({
+      showTools: false
+    })
+  },
+  gotoLawyerDetail(e) {
+      let { id } = e.currentTarget.dataset
+      app.gotoPage('/pages/lawyer/detail/index?id=' + id)
+  },
+  imageError(e) {
+      var _errImg = e.target.dataset.img
+      var _errObj = {}
+      _errObj[_errImg] = "/static/images/demo/img_lawyer.png"
+      this.setData(_errObj)
+  },
+  tapTools(e) {
+    let { url, type } = e.currentTarget.dataset
+    this.handleClosePop()
+    app.gotoPage(url, type)
+  },
+  gotoSearch() {
+    app.gotoPage('/pages/search/index/index')
+  },
+  getCityResult(e) {
+    this.setData({
+        currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
+    })
+    app.getCityLocation(e.detail[0].name, e.detail[1].name)
+    this.initHome()
   }
 })

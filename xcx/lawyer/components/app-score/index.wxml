@@ -1,0 +1,25 @@
+<view class="app-score">
+    <block wx:if="{{ icons.length }}">
+      <text
+        wx:for="{{ levels }}"
+        wx:key="item"
+        class="app-score__item {{ item <= value ? icons[1] || icons[0] : icons[0] }}"
+        style="{{ itemStyles }}"
+        data-item="{{ item }}"
+        bindtap="handlerClick"
+      >
+      </text>
+    </block>
+    <block wx:else>
+      <image
+        wx:for="{{ levels }}"
+        wx:key="item"
+        src="{{ item <= value ? imgs[1] || imgs[0] : imgs[0] }}"
+        style="{{ itemStyles }}"
+        class="app-score__item"
+        mode="widthFix"
+        data-item="{{ item }}"
+        bindtap="handlerClick"
+      />
+    </block>
+  </view>

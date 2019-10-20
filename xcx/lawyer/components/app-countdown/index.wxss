@@ -1,0 +1,4 @@
+.app-countdown {
+	display: flex;
+	align-items: center;
+}
