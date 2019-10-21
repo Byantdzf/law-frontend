@@ -73,8 +73,7 @@ Page({
 
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
-            this.data.types[index] && (this.data.types[index].name && (params.goodAt = this.data.types[index].name))
-
+            this.data.types[index] && (this.data.types[index].name && this.data.types[index].key  && (params.goodAt = this.data.types[index].name))
             this.data.sorts.forEach((item, i) => {
                 if (item.curr && item.code) {
                     params.orderBy = item.code + ' desc'
