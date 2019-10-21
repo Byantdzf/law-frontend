@@ -1,8 +1,6 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
-const orderApi = require('../../../service/order')
 const { orderType, orderCategory, orderStatus } = require('../../../config/global')
-let page = null
 Page({
   data: {
     currArea: [],
