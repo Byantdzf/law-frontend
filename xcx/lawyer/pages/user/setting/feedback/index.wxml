@@ -1,0 +1,11 @@
+<!--pages/user/suggestion/index.wxml-->
+<app-page id="app-page">
+    <view class="container">
+        <form bindsubmit="formSubmit">
+            <view class="row">
+                <textarea focus="{{focus}}" name="content" maxlength="500" placeholder="说点什么吧..." />
+            </view>
+            <button class="add-btn" form-type="submit">提交</button>
+        </form>
+    </view>
+</app-page>

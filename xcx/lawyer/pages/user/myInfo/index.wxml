@@ -1,0 +1,95 @@
+<!-- pages/user/collect/index.wxml -->
+<app-page id="app-page">
+    <view class="container page-myData">
+        <view class="section">
+            <view class="tit">基本资料</view>
+
+            <view class="items flex">
+                <view class="label flex-bd">头像：</view>
+                <view class="avatarBox">
+                    <image class="userimg" src="{{ data.pic }}" wx:if="{{ userInfos.photo }}"></image>
+                    <open-data class="userimg" type="userAvatarUrl" wx:else></open-data>
+                </view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">姓名：</view>
+                <view class="value flex-bd">{{ data.name }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">联系方式：</view>
+                <view class="value flex-bd">{{ data.phone }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">邮箱：</view>
+                <view class="value flex-bd">{{ data.email || '' }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">所在地区：</view>
+                <view class="value flex-bd">{{ data.city || '' }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">执业证书：</view>
+                <view class="value flex-bd">{{ data.lawyerLicenseNo || '' }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">身份证号：</view>
+                <view class="value flex-bd">{{ data.identityCard || '' }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">擅长领域：</view>
+                <view class="value flex-bd">{{ data.goodAt || '' }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+            <view class="items flex">
+                <view class="label">个人简介：</view>
+                <view class="value flex-bd">{{ data.brief || '' }}</view>
+                <view>
+                    <text class="iconfont icon-arrow-right"></text>
+                </view>
+            </view>
+
+        </view>
+        <view class="section">
+            <view class="tit">实名认证信息</view>
+            
+            <view class="items">
+                <view class="cardImage">
+                    <image src="{{ data.pic }}"></image>
+                </view>
+            </view>
+            <view class="items">
+                <view class="cardImage">
+                    <image src="{{ data.pic }}"></image>
+                </view>
+            </view>
+            <view class="items">
+                <view class="cardImage">
+                    <image src="{{ data.pic }}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</app-page>

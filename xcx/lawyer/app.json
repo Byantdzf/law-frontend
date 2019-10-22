@@ -15,6 +15,22 @@
   ],
   "subPackages": [
     {
+      "root": "pages/user",
+      "pages": [
+        "myData/index",
+        "myInfo/index",
+        "myCollect/index",
+        "myWallet/home/index",
+        "myWallet/list/index",
+        "myWallet/withDraw/index",
+        "setting/home/index",
+        "setting/about/index",
+        "setting/help/index",
+        "setting/agreement/index",
+        "setting/feedback/index"
+      ]
+    },
+    {
       "root": "pages/product",
       "pages": [
         "details/index",

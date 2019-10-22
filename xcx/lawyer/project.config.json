@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 10,
 			"list": [
 				{
 					"id": 2,
@@ -88,6 +88,27 @@
 					"id": -1,
 					"name": "waitAuth",
 					"pathName": "pages/waitAuth/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "myData",
+					"pathName": "pages/user/myData/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "myInfo",
+					"pathName": "pages/user/myInfo/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "myWallet/home/",
+					"pathName": "pages/user/myWallet/home/index",
 					"scene": null
 				}
 			]

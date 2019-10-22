@@ -1,0 +1,15 @@
+<!--pages/user/setting/home/index.wxml-->
+<app-page id="app-page">
+    <view class="container">
+        <view class="list">
+            <view class="items flex" wx:for="{{list}}" wx:key="{{index}}" data-code="{{item.code}}" bindtap="tapTools">
+                <view class="item-label flex-bd">{{item.title}}</view>
+                <view class="item-right"><text class="iconfont icon-arrow-right"></text></view>
+            </view>
+            <view class="items flex">
+                <view class="item-label flex-bd"><button open-type="contact" bindcontact="handleContact">联系客服</button></view>
+                <view class="item-right"><text class="iconfont icon-arrow-right"></text></view>
+            </view>
+        </view>
+    </view>
+</app-page>

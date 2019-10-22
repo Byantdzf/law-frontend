@@ -1,0 +1,24 @@
+<!-- pages/user/collect/index.wxml -->
+<app-page id="app-page">
+    <view class="container page-myData">
+        <view class="section">
+            <view class="icon">
+                <text>￥</text>
+            </view>
+            <view class="tit">
+                我的余额
+            </view>
+            <view class="money">
+                <text class="sup">￥</text>123123
+            </view>
+            <view class="withDrawBtn">
+                <button class="btn" type="primary" bindtap="withDraw">
+                    提现
+                </button>
+            </view>
+            <view class="listBtn">
+                <button plain catchtap="viewList">明细</button>
+            </view>
+        </view>
+    </view>
+</app-page>

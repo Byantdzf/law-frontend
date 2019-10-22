@@ -1,0 +1,6 @@
+/* pages/user/suggestion/index.wxss */
+page { background: #f8f8f8; padding-top: 30rpx; }
+.row { position: relative; padding: 30rpx; background: #fff; }
+.row textarea { width:100%;}
+
+.add-btn { margin:40rpx; height: 90rpx; line-height: 90rpx; border-radius: 90rpx; font-size: 32rpx; color: #fff; background-color: #e1251b; box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4); } 

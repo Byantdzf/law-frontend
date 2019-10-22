@@ -1,0 +1,14 @@
+/* pages/user/setting/home/index.wxss */
+page { background: #f3f3f3; }
+
+.list { background: #fff;}
+.list .items { height: 100rpx; line-height: 100rpx; padding: 0 30rpx; border-bottom: 1rpx solid #f3f3f3;}
+.list .items .item-icon text { font-size: 30rpx; margin-right:20rpx;}
+.list .items .flex-bd { font-size: 30rpx;}
+.list .items .item-right { margin-left:20rpx;}
+.list .items .item-right text { color: #e6e6e6; font-size: 28rpx;}
+.list .updateBase { height:160rpx; line-height: 160rpx;}
+
+.list .items .img-box image { width:100rpx; height:100rpx; border-radius: 50%;}
+
+.list .items button { background: none; text-align: left; font-size: 30rpx; padding-left:0; margin-left:0; color:#333;}

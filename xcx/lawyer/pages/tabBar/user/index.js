@@ -17,22 +17,27 @@ Page({
       {
         url: '',
         label: '我的数据',
+        code: 'myData',
         icon: 'iconfont icon-attention-fill'
       }, {
         url: '',
         label: '个人资料',
+        code: 'myInfo',
         icon: 'iconfont icon-coupon'
       }, {
         url: '',
         label: '我的关注',
+        code: 'myCollect',
         icon: 'iconfont icon-order-fill'
       }, {
         url: '',
         label: '我的钱包',
+        code: 'myWallet',
         icon: 'iconfont icon-order-fill'
       }, {
         url: '',
         label: '设置',
+        code: 'mySetting',
         icon: 'iconfont icon-setting-fill'
       }
     ]
@@ -48,7 +53,7 @@ Page({
     });
     app.setNavTitle(' ')
     app.setNavColor()
-      
+
   },
 
   /**
@@ -61,7 +66,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+
   },
 
   /**
@@ -76,5 +81,25 @@ Page({
    */
   onUnload: function () {
 
+  },
+  tapTools(e) {
+    let { code } = e.currentTarget.dataset;
+    switch (code) {
+      case 'myData':
+        app.gotoPage('/pages/user/myData/index')
+        break;
+      case 'myInfo':
+        app.gotoPage('/pages/user/myInfo/index')
+        break;
+      case 'myCollect':
+        app.gotoPage('/pages/user/myCollect/index')
+        break;
+      case 'myWallet':
+        app.gotoPage('/pages/user/myWallet/home/index')
+        break;
+      case 'mySetting':
+        app.gotoPage('/pages/user/mySetting/home/index')
+        break;
+    }
   },
 })

@@ -19,7 +19,7 @@
     </view>
     <view class="panel-user--bd mt-20">
       <view class="app-cells">
-        <view class="app-cell" wx:for="{{ menus }}" wx:key="{{ index }}">
+        <view class="app-cell" wx:for="{{ menus }}" wx:key="{{ index }}" data-code="{{item.code}}" bind:tap="tapTools">
           <view class="flex-hd pl-20">
             <text class="{{ item.icon }}"></text>
           </view>

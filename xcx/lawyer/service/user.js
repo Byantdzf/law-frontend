@@ -25,4 +25,14 @@ module.exports = {
      * 我的
     */
     getUser: params => get('/applets/lawyer/my/myInfo', params),
+
+    /**
+     * 我的数据
+    */
+    getMyData: params => get('/applets/lawyer/my/myData', params),
+
+    /**
+     * 我的余额
+    */
+    getMyBalance: params => get('/applets/lawyer/my/myMoney', params),
 }

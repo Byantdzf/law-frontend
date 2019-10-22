@@ -1,0 +1,6 @@
+/* pages/user/collect/index.wxss */
+.page-myData { text-align: center; padding-top:60rpx;}
+.page-myData .section { margin-bottom: 100rpx;}
+.page-myData .tit { text-align: left; padding: 0 0 30rpx 30rpx; font-weight: bold;}
+.page-myData .numsBox { height: 150rpx; width:150rpx; margin:0 auto; text-align: center; line-height: 148rpx; border:1rpx solid #e8e8e8;}
+.page-myData .fonts { font-size: 24rpx; margin-top:10rpx;}

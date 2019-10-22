@@ -1,0 +1,47 @@
+<!-- pages/user/collect/index.wxml -->
+<app-page id="app-page">
+  <view class="container page-myData">
+    <view class="section">
+      <view class="tit">我的订单数据</view>
+      <view class="flex">
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.todayOrderCount }}</view>
+          <view class="fonts">今日订单数据</view>
+        </view>
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.weeklyOrderCount }}</view>
+          <view class="fonts">本周订单数据</view>
+        </view>
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.monthOrderCount }}</view>
+          <view class="fonts">本月订单数据</view>
+        </view>
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.historyOrderCount }}</view>
+          <view class="fonts">历史订单数据</view>
+        </view>
+      </view>
+    </view>
+    <view class="section">
+      <view class="tit">我的收益数据</view>
+      <view class="flex">
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.todayEarnings }}</view>
+          <view class="fonts">今日收入</view>
+        </view>
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.weeklyEarnings }}</view>
+          <view class="fonts">本周收入</view>
+        </view>
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.monthEarnings }}</view>
+          <view class="fonts">本月收入</view>
+        </view>
+        <view class="flex-bd">
+          <view class="numsBox">{{ data.historyEarnings }}</view>
+          <view class="fonts">历史收入</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</app-page>
