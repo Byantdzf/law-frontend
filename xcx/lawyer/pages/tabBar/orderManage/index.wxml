@@ -1,21 +1,38 @@
-<!-- pages/lawyer/index.wxml -->
+<!-- pages/order/index.wxml -->
 <app-page id="app-page">
-  <view class="flex-column page-message">
-    <view class="app-cells">
-      <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
-        <view class="flex-hd img-box pl-20">
-          <image src="{{ item.imgUrl }}" mode="widthFix"></image>
-        </view>
-        <view class="flex-bd con-box pl-20 pr-20">
-          <view class="flex">
-            <view class="title flex-bd">{{ item.name }}</view>
-            <view class="cl-999">{{ item.updateTime }}</view>
-          </view>
-          <view class="ellipsis desc">
-            <text class="cl-666">{{ item.desc }}</text>
-          </view>
-        </view>
+  <view class="flex-column container page-order">
+    <view class="flex page-search">
+      <view class="flex-bd flex search-box">
+        <input
+          class="flex-bd pl-20"
+          type="text"
+          placeholder="关键字搜索相关信息"
+          placeholder-class="placeholder"
+        />
+        <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
       </view>
+    </view>
+    <app-tab items="{{ orderTypes }}" bindchange="handleOrderTypeChange"/>
+    <app-tab items="{{ orderSources }}" current="{{ orderSource }}" bindchange="handleOrderSourceChange"/>
+    <view class="flex-bd app-scroller">
+      <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
+        <view class="pa-20" wx:if="{{ list.length }}">
+          <view class="mb-20" wx:for="{{ list }}" wx:key="{{ index }}">
+            <app-order-item
+              type="2"
+              item="{{ item }}"
+              index="{{ index }}"
+              orderTypeMap="{{ orderType }}"
+              orderStatusMap="{{ orderStatus }}"
+              orderCategoryMap="{{ orderCategory }}"
+              questionTypeMap="{{ questionTypeMap }}"
+            />
+          </view>
+        </view>
+        <view class="app-empty-wrapper" wx:else>
+          <app-empty iconClass="icon-sousuowuneirong" />
+        </view>
+      </app-list>
     </view>
   </view>
 </app-page>

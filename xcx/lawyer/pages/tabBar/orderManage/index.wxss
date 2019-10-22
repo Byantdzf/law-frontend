@@ -1,21 +1,47 @@
-.page-message {
-  width: 100%;
-  overflow-x: hidden;
+.page-order {
+  background: #f3f3f3;
 }
-.page-message .img-box image{
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
+.page-search {
+  padding: 20rpx 30rpx 0;
+  background: #fff;
 }
-.page-message .desc {
-  max-width: 580rpx;
-  margin-top: 12rpx;
+.page-search .location {
+  min-width: 160rpx;
 }
-.page-message .title {
-  font-size: 32rpx;
-  font-weight: bold;
+.page-search .search-box {
+  padding: 8rpx 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 20rpx;
 }
-.page-message .app-cell::before,
-.page-message .app-cells::after {
-  left: 140rpx;
+.page-order .app-tab {
+  background: #fff;
+  border-bottom: 2rpx solid #f3f3f3;
+}
+.app-sort {
+  padding: 20rpx 0;
+  background: #dcdcdc;
+}
+.app-sort .flex-bd {
+  justify-content: center;
+}
+.app-sort .iconfont {
+  margin-left: 6rpx;
+  font-size: 22rpx;
+}
+
+.order-list {
+  padding-bottom: 0;
+}
+
+.app-empty-wrapper {
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 70rpx;
 }

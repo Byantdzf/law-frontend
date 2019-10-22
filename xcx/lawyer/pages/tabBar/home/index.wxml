@@ -32,7 +32,7 @@
           </view>
         </view>
         <view class="pa-20 order-list" wx:if="{{ list1.length }}">
-          <view wx:for="{{ list1 }}" wx:key="{{ index }}">
+          <view class="mb-20" wx:for="{{ list1 }}" wx:key="{{ index }}">
             <app-order-item
               key="isSystem"
               item="{{ item }}"
@@ -56,7 +56,7 @@
           </view>
         </view>
         <view class="pa-20 order-list" wx:if="{{ list2.length }}">
-          <view wx:for="{{ list2 }}" wx:key="{{ index }}">
+          <view class="mb-20" wx:for="{{ list2 }}" wx:key="{{ index }}">
             <app-order-item
               key="isOrders"
               item="{{ item }}"
@@ -80,7 +80,7 @@
           </view>
         </view>
         <view class="pa-20 order-list" wx:if="{{ list4.length }}">
-          <view wx:for="{{ list4 }}" wx:key="{{ index }}">
+          <view class="mb-20" wx:for="{{ list4 }}" wx:key="{{ index }}">
             <app-order-item
               key="isFindMe"
               item="{{ item }}"

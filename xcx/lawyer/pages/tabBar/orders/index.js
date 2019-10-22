@@ -11,7 +11,7 @@ Page({
     questionTypeMap: {},
     currQuestionType: -1,
     selectAllObj: {id: '', name: '全部', checked: true},
-    listUrl: '/applets/user/order/orderList',
+    listUrl: '/applets/lawyer/order/orderList',
     list: [],
     orderSource: 2,
     orderSources: [
@@ -78,9 +78,14 @@ Page({
       this.appList = this.selectComponent('#app-list');
     }
     let currQuestionType = this.data.currQuestionType || -1
+    let currArea = this.data.currArea || []
 
     this.appList.setParams(params => {
       params.orderSource = this.data.orderSource
+
+      if (currArea.length) {
+        params.city = currArea[1] || ''
+      }
 
       if (currQuestionType != -1) {
         params.questionType = currQuestionType

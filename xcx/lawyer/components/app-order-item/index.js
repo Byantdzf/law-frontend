@@ -16,6 +16,10 @@ Component({
       type: Object,
       value: {}
     },
+    orderStatusMap: {
+      type: Object,
+      value: {}
+    },
     orderCategoryMap: {
       type: Object,
       value: {}
@@ -24,9 +28,16 @@ Component({
       type: Object,
       value: {}
     },
+    // 用于做标记
     key: String,
+    // 索引
     index: {
       type: [String, Number]
+    },
+    // 1为订单池订单，2为订单管理订单
+    type: {
+      type: [String, Number],
+      value: 1
     }
   },
   data: {

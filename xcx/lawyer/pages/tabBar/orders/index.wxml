@@ -29,7 +29,7 @@
     <view class="flex-bd app-scroller">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20" wx:if="{{ list.length }}">
-          <view wx:for="{{ list }}" wx:key="{{ index }}">
+          <view class="mb-20" wx:for="{{ list }}" wx:key="{{ index }}">
             <app-order-item
               item="{{ item }}"
               index="{{ index }}"

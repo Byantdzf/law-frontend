@@ -1,7 +1,9 @@
 {
-  "navigationBarTitleText": "消息",
+  "navigationBarTitleText": "订单管理",
   "usingComponents": {
-    "app-tab": "../../../components/app-tab/index",
-    "app-pop": "../../../../components/app-pop/index"
+    "app-tab":"../../../../components/app-tab/index",
+    "app-empty":"../../../../components/app-empty/index",
+    "app-list": "/components/app-list/index",
+    "app-order-item": "/components/app-order-item/index"
   }
 }
