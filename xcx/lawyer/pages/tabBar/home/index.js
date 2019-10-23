@@ -61,14 +61,14 @@ Page({
         })
         this.initHome()
 
-        // 获取地址完成以后再判断授权
-        page = this.selectComponent('#app-page')
-        page.checkAuth().then((data) => {
-            // 授权成功
-            console.log(data)
-        }).catch((e) => {
-            // 授权失败
-        });
+        // // 获取地址完成以后再判断授权
+        // page = this.selectComponent('#app-page')
+        // page.checkAuth().then((data) => {
+        //     // 授权成功
+        //     console.log(data)
+        // }).catch((e) => {
+        //     // 授权失败
+        // });
     })
 
     // 获取热门新闻

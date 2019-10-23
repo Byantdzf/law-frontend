@@ -8,7 +8,7 @@ module.exports = {
    * @param[String]  password   密码
    * @param[String]  code       小程序登录code
   */
-  login: params => get('/applets/lawyer/login/user', params, { auth: false, loading: false }),
+  login: params => get('/applets/lawyer/login', params, { auth: false, loading: false }),
 
   /**
    * 保存用户信息

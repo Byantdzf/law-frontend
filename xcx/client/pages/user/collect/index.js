@@ -1,5 +1,6 @@
 // pages/user/collect/index.js
 let app = getApp();
+const selectApi = require('../../../service/select')
 Page({
   data: {
     listUrl: '/applets/user/focused',

@@ -21,9 +21,9 @@ Page({
             let params = detail.userInfo
             api.getUserInfo(params).then(res => {
                 console.log(res)
-                app.globalData.userInfo = params
-                wx.setStorageSync('userInfo', params)
-                app.gotoPage('/pages/reg/index')
+                // app.globalData.userInfo = params
+                // wx.setStorageSync('userInfo', params)
+                // app.gotoPage('/pages/reg/index')
             })
         }
     },
