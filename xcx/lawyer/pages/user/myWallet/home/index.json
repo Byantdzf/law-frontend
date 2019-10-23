@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的数据",
+  "navigationBarTitleText": "我的钱包",
   "usingComponents": {
     "app-empty": "/components/app-empty/index",
     "app-list":"../../../../components/app-list/index"
