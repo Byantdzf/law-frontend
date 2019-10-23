@@ -34,7 +34,7 @@ Component({
             params.locationX = app.globalData.adInfo.location.lng
             params.locationY = app.globalData.adInfo.location.lat
           }
-          api.login({ code }).then(res => {
+          api.login(params).then(res => {
             // 保存token
             wx.setStorageSync(tokenName, res.data.sessionId)
 

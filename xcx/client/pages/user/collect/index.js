@@ -18,8 +18,13 @@ Page({
   loadList() {
     const appList = this.selectComponent('#app-list')
     appList.setParams(params => {
+      params.operateBusiness = 2
+      params.operateType = 4
       return params
     })
+  },
+  updateList(e) {
+      this.setData({ list: e.detail })
   },
   imageError(e) {
     var _errImg = e.target.dataset.img

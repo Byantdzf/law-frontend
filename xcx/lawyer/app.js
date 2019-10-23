@@ -2,6 +2,8 @@
 const test = require('utils/test.js')
 const pages = require('plugins/pages.js')
 const QQMapWX = require('plugins/qqmap-wx-jssdk.min.js')
+const api = require('service/auth')
+const { tokenName } = require('config/global')
 const qqmapsdk = new QQMapWX({
   key: 'LW5BZ-ZTFA4-QXNUJ-XWKTM-5VAB5-J6BTM'
 })
@@ -26,6 +28,16 @@ App({
     this.pages = pages
     this.globalData.scene = e.scene
     this.qqmapsdk = qqmapsdk
+
+    wx.login({
+      success:({ code }) => {
+        if(!code) return
+        api.login({ code }).then(res => {
+          // 保存token
+          wx.setStorageSync(tokenName, res.data.sessionId)
+        })
+      }
+    })
   },
   onShow(o) {
     // console.log(o)
