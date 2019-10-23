@@ -71,8 +71,15 @@ Page({
             let params = {}
             params.chooseService = id
             params.fileType = this.data.list[index].businessTypeName
+            params.form = 1
+            params.orderCategory = 0
+            params.amount = this.data.list[index].price
             userApi.postTemplate(params).then(res => {
-                app.gotoPage('/pages/issue/success/index?type=5&id=' + id)
+                app.wechatPay(res.data, function (res) {
+                    app.gotoPage('/pages/issue/success/index?type=5&id=' + id)
+                }, function (res) {
+                    app.alert('支付失败，请到我的订单再次发起支付')
+                })
             })
         }).catch((e) => {
             // 授权失败
