@@ -6,6 +6,7 @@ Page({
     orderType,
     orderCategory,
     orderStatus,
+    orderTypeMap: {},
     questionTypeMap: {},
     curOrderType: -1,
     orderTypes: [
@@ -44,6 +45,22 @@ Page({
     app.pages.add(this)
     app.setNavColor()
     
+    selectApi.data({ dictCode: 'OrderType' }).then(res => {
+      const items = res.data || []
+      let orderTypeMap = {}
+
+      items.forEach(v => {
+        v.id = v.code
+        orderTypeMap[v.code] = v.name
+      })
+
+      this.setData({
+        orderTypeMap,
+        orderTypes: this.data.orderTypes.concat(items.filter(v => v.code != 4))
+      })
+      
+    });
+
     selectApi.data({ dictCode: 'QuestionType' }).then(res => {
       const items = res.data || []
       let questionTypeMap = {}
@@ -56,8 +73,10 @@ Page({
       this.setData({
         questionTypeMap
       })
-      this.loadList()
+      
     });
+
+    this.loadList()
 
   },
   loadList() {

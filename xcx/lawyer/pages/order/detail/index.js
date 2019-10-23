@@ -15,8 +15,7 @@ Page({
     // 评价列表
     orderScoreList: [],
     // 追问内容
-    askSecondContent: '',
-    showAskWrapper: false
+    askSecondContent: ''
   },
   onLoad(e) {
     app.pages.add(this);
@@ -86,28 +85,6 @@ Page({
       this.setData({ orderScoreList });
     });
   },
-  // 处理取消订单操作
-  handleCancel() {
-    const id = this.orderId;
-    app.confirm({
-      content: '系统正在积极为您指派律师，您确定要取消订单？'
-    }).then(() => {
-      orderApi.orderCancel(id).then(() => {
-        wx.showToast({
-          title: '订单已取消',
-          icon: 'success'
-        });
-        this.setData({
-          [`item.orderStatus`]: 70
-        });
-      });
-    }).catch(e => {});
-  },
-  // 点击评价按钮
-  handleComment() {
-    const { id, lawyer, lawyerPic } = this.data.item;
-    app.gotoPage(`/pages/order/evaluate/index?id=${id}&lawyer=${lawyer}&lawyerPic=${lawyerPic || ''}`);
-  },
   // 处理确认完成订单操作
   handleConfirm() {
     const { id, lawyer, lawyerPic } = this.data.item;
@@ -123,17 +100,9 @@ Page({
       });
     }).catch(e => {});
   },
-  // 点击追问按钮
-  handleAsk() {
-    this.setData({ showAskWrapper: true });
-  },
   // 处理追问文本域值改变
   handleAskContentChange(e) {
     this.askContent = e.detail.value;
-  },
-  // 点击取消评价
-  handleCancelAsk() {
-    this.setData({ showAskWrapper: false });
   },
   // 确认提交追问
   handleConfirmAsk() {
@@ -151,12 +120,7 @@ Page({
         title: '您的追问已提交'
       });
       this.loadData(this.orderId);
-      this.setData({ showAskWrapper: false });
     })
-  },
-  // 点击申诉
-  gotoAppeal() {
-    app.gotoPage(`/pages/order/appeal/index?id=${this.orderId}`);
   },
   // 播放音频
   handleOpenAudio(e) {
