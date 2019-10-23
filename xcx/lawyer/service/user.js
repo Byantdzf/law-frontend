@@ -35,4 +35,9 @@ module.exports = {
      * 我的余额
     */
     getMyBalance: params => get('/applets/lawyer/my/myMoney', params),
+
+    /**
+     * 提现
+    */
+    withDraw: params => post('/applets/lawyer/pay/cashOut', params)
 }

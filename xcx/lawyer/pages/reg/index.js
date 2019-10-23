@@ -160,7 +160,7 @@ Page({
                 fileName: this.data.idCard1
             },
             {
-                businessType: 1,
+                businessType: 10,
                 fileName: this.data.idCard2
             },
             {

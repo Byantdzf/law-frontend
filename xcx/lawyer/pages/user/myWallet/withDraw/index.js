@@ -1,10 +1,11 @@
 // pages/user/collect/index.js
 let app = getApp();
+const userApi = require('../../../../service/user')
 Page({
   data: {
-    listUrl: '/applets/user/focused',
-    defaultImg: '/static/images/demo/img_lawyer.png',
-    list: [],
+    data: {},
+    type: 1,
+    inputVal: ''
   },
 
   /**
@@ -13,43 +14,55 @@ Page({
   onLoad: function (options) {
     app.pages.add(this)
     app.setNavColor()
-    this.loadList()
+    this.loadData()
   },
-  loadList() {
-    const appList = this.selectComponent('#app-list')
-    appList.setParams(params => {
-      return params
+  loadData() {
+    userApi.getMyBalance().then(res => {
+      let data = res.data
+      this.setData({ data })
     })
   },
-  imageError(e) {
-    var _errImg = e.target.dataset.img
-    var _errObj = {}
-    _errObj[_errImg] = this.data.defaultImg
-    this.setData(_errObj)
-  },
-  gotoLawyerDetail(e) {
+  changeType(e) {
     let { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/lawyer/detail/index?id=' + id)
+    this.setData({ type: id })
   },
-  voiceTap(e) {
-    let { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/lawyer/voice/index?id=' + id)
+  clearInput() {
+    this.setData({ inputVal: '' }) 
   },
-  onByOneTap(e) {
-    let { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/lawyer/oneByOne/index?id=' + id)
+  checkAmount(e) {
+    let val = e.detail.value
+    let balance = this.data.data.balanceAmount
+    if (val > balance) {
+      app.alert('输入金额超过余额')
+      this.setData({ inputVal: balance }) 
+    } else {
+      if (val < 1) {
+        app.alert('最低提现金额为 1.00 元')
+        this.setData({ inputVal: 1 }) 
+      }
+    }
   },
-  cancelCollect(e) {
-    let { id } = e.currentTarget.dataset
-    selectApi.cancelAttentionLawyer({ businessId: id }).then(res => {
-      let list = this.data.list
-      let index = list.findIndex(item => {
-        return item.id == id
-      })
-      list.splice(index, 1)
-      this.setData({
-        list
-      })
+  formSubmit(e) {
+    let params = e.detail.value
+    if (!params.cashOutAmount) {
+      app.toastError('请输入提现金额');
+      return;
+    }
+    if (this.data.type == 2) {
+      if (!params.cashOutAccount) {
+        app.toastError('请输入提现帐户');
+        return;
+      }
+      if (!params.cashOutAccountName) {
+        app.toastError('请输入提现账号真实姓名');
+        return;
+      }
+    }
+
+    params.operateType = 1
+    params.cashOutWay = this.data.type
+    userApi.withDraw(params).then(res => {
+      console.log(res)
     })
   }
 })

@@ -17,8 +17,13 @@ Page({
   loadData() {
     userApi.getMyBalance().then(res => {
       let data = res.data
-      console.log(data)
       this.setData({ data })
     })
+  },
+  withDraw() {
+    app.gotoPage('../withDraw/index')
+  },
+  viewList() {
+    app.gotoPage('../list/index')
   }
 })

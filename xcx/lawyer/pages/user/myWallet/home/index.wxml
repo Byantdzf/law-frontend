@@ -9,7 +9,7 @@
                 我的余额
             </view>
             <view class="money">
-                <text class="sup">￥</text>123123
+                <text class="sup">￥</text>{{ data.balanceAmount || 0 }}
             </view>
             <view class="withDrawBtn">
                 <button class="btn" type="primary" bindtap="withDraw">

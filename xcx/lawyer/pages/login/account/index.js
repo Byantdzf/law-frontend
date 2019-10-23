@@ -1,6 +1,7 @@
 // pages/login/index.js
 const app = getApp()
 const api = require('../../../service/auth')
+const userApi = require('../../../service/user')
 const { tokenName } = require('../../../config/global')
 Page({
 
@@ -16,7 +17,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.wxLogin()
+        // this.wxLogin()
     },
     wxLogin() {
         wx.login({
@@ -71,11 +72,34 @@ Page({
             return;
         }
         params.from = 2
-        console.log(params)
         api.accountLogin(params).then(res => {
-            
             wx.setStorageSync(tokenName, res.data.sessionId)
-            app.gotoPage('/pages/waitAuth/index')
+            if (res.data.isOpenIdEmpty) {
+                app.confirm({ content: '您的帐号还未绑定微信，是否绑定？' }), then(res => {
+
+                    // wx.login({
+                    //     success: ({ code }) => {
+                    //         if (!code) return
+                    //         api.login({ code }).then(res => {
+                    //             // 保存token
+                    //             wx.setStorageSync(tokenName, res.data.sessionId)
+
+                    //             api.getUserInfo(params).then(res => {
+                    //                 console.log(res)
+                    //             })
+                    //         })
+                    //     }
+                    // })
+                })
+            } else {
+                userApi.getUser().then(res => {
+                    if (res.data.applyStatus == 2) {
+                        app.gotoPage('/pages/tabBar/order/index', 'tab')
+                    } else {
+                        app.gotoPage('/pages/waitAuth/index')
+                    }
+                })
+            }
         })
     },
 })

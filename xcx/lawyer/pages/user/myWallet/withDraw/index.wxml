@@ -1,71 +1,52 @@
-<!--pages/user/collect/index.wxml-->
+<!-- pages/user/collect/index.wxml -->
 <app-page id="app-page">
-	<view class="flex-column container page-lawyer">
-    <view class="flex-bd app-scroller">
-      <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
-        <view class="pa-20" wx:if="{{ list.length }}">
-          <view
-            class="flex list-item"
-            wx:for="{{ list }}"
-            wx:key="{{ index }}"
-            data-id="{{ item.id }}"
-            bind:tap="gotoLawyerDetail"
-          >
-            <view class="img-box">
-              <image
-                src="{{ item.pic || defaultImg }}"
-                mode="widthFix"
-                binderror="imageError"
-                data-img="list[{{index}}].pic"
-              />
-            </view>
-            <view class="flex-bd pl-20">
-              <view class="flex">
-                <view class="flex-bd name">{{ item.name }}</view>
-                <view class="flex-ft score cl-red">{{ item.score }}分</view>
-              </view>
-              <view class="desc cl-666">{{ item.brief || '' }}</view>
-              <view class="flex">
-                <view class="flex-bd">
-                  <text class="cl-999">帮助人数：</text>
-                  <text class="cl-666">{{ item.helps }}人</text>
+    <view class="panel-user">
+        <form bindsubmit="formSubmit">
+            <view class="panel-user--bd">
+                <view class="app-cells">
+                    <view class="app-cell">
+                        <view class="flex-hd pl-20">提现金额</view>
+                        <view class="flex-bd">
+                            <input class="app-input" type="digit" name="cashOutAmount" bindblur="checkAmount" bindfocus="clearInput" value="{{inputVal}}" placeholder="请输入提现金额"></input>
+                        </view>
+                        <view class="flex-ft pr-30">
+                            元
+                        </view>
+                    </view>
                 </view>
-                <view class="flex-ft">
-                  <text class="cl-999">关注人数：</text>
-                  <text class="cl-666">{{ item.concerns }}人</text>
+                <view class="app-cells type">
+                    <view class="label">选择提现方式</view>
+                    <view class="app-cell">
+                        <view class="flex-bd" data-id="1" bind:tap="changeType">
+                            <view class="{{ type == 1 && 'curr'}}"><text class="iconfont icon-wechatpay"></text>微信</view>
+                        </view>
+                        <view class="flex-bd" data-id="2" bind:tap="changeType">
+                            <view class="{{ type == 2 && 'curr'}}"><text class="iconfont icon-ziyuan"></text>支付宝</view>
+                        </view>
+                    </view>
                 </view>
-              </view>
-              <view class="flex btn-box">
-                <button
-                size="mini"
-                plain
-                data-id="{{item.id}}"
-                catch:tap="voiceTap"
-                >在线律师咨询
-                </button>
-                <button
-                size="mini"
-                plain
-                data-id="{{item.id}}"
-                catch:tap="onByOneTap"
-                >指定律师咨询
-                </button>
-                <button
-                size="mini"
-                plain
-                data-id="{{item.id}}"
-                catch:tap="cancelCollect"
-                >已关注
-                </button>
-              </view>
             </view>
-          </view>
-        </view>
-        <view class="app-empty-wrapper" wx:else>
-          <app-empty iconClass="icon-sousuowuneirong" />
-        </view>
-      </app-list>
-    </view>
-	</view>
-</app-page>
 
+            <view class="panel-user--bd" wx:if="{{ type == 2}}">
+                <view class="app-cells">
+                    <view class="app-cell">
+                        <view class="flex-hd pl-20">提现帐户</view>
+                        <view class="flex-bd">
+                            <input class="app-input" type="text" name="cashOutAccount" placeholder="请输入提现帐户"></input>
+                        </view>
+                    </view>
+                    <view class="app-cell">
+                        <view class="flex-hd pl-20">提现账号真实姓名</view>
+                        <view class="flex-bd">
+                            <input class="app-input" type="text" name="cashOutAccountName" placeholder="请输入提现账号真实姓名"></input>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="notice">最低提现金额：1.00 元</view>
+            <view class="form-btn-box">
+                <button class="app-input-btn" type="primary" disabled="{{btnDisable}}" form-type="submit">确认</button>
+            </view>
+        </form>
+    </view>
+</app-page>

@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": 2,
@@ -109,6 +109,13 @@
 					"id": -1,
 					"name": "myWallet/home/",
 					"pathName": "pages/user/myWallet/home/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withDraw",
+					"pathName": "pages/user/myWallet/withDraw/index",
 					"scene": null
 				}
 			]

@@ -77,17 +77,17 @@
             
             <view class="items">
                 <view class="cardImage">
-                    <image src="{{ data.pic }}"></image>
+                    <image mode="widthFix" src="{{ idCard1.filePath }}"></image>
                 </view>
             </view>
             <view class="items">
                 <view class="cardImage">
-                    <image src="{{ data.pic }}"></image>
+                    <image mode="widthFix" src="{{ idCard2.filePath }}"></image>
                 </view>
             </view>
             <view class="items">
                 <view class="cardImage">
-                    <image src="{{ data.pic }}"></image>
+                    <image mode="widthFix" src="{{ idCard3.filePath }}"></image>
                 </view>
             </view>
         </view>

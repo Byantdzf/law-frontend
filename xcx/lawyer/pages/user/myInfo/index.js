@@ -4,6 +4,9 @@ const userApi = require('../../../service/user')
 Page({
   data: {
     data: [],
+    idCard1: {},
+    idCard2: {},
+    idCard3: {}
   },
 
   /**
@@ -17,7 +20,20 @@ Page({
   loadData() {
     userApi.getUser().then(res => {
       let data = res.data
-      this.setData({ data })
+      let files = data.files || []
+      let idCard1 = {}
+      let idCard2 = {}
+      let idCard3 = {}
+      files.forEach(item => {
+        if (item.businessType == 1) {
+          idCard1 = item
+        } else if (item.businessType == 10) {
+          idCard2 = item
+        } else if (item.businessType == 2) {
+          idCard3 = item
+        }
+      })
+      this.setData({ data, idCard1, idCard2, idCard3 })
     })
   }
 })
