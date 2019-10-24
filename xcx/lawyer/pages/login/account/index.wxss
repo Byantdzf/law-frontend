@@ -4,7 +4,8 @@
 .page-login { padding: 100rpx 50rpx;}
 .no-border { border:none;}
 .login-title { font-size: 40rpx; text-align: center;}
+.login-logo image { display: block; width:160rpx; height:160rpx; border-radius: 10rpx; margin: 0rpx auto 50rpx;}
 
 .forget { margin-top: 30rpx; font-size: 24rpx;}
-.icon-check { top:-7rpx; margin-right: 0;}
+.icon-check { top:-10rpx; margin-right: 0;}
 .iconfont:after { font-size: 36rpx;}

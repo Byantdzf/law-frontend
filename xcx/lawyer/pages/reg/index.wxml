@@ -102,8 +102,8 @@
                 <view class="issue-form-item img-box">
                     <image src="{{idCard3}}" data-img="idCard3" mode="aspectFit" bind:tap="uploadImage" />
                 </view>
-                <view class="issue-form-item form-btn-box">
-                    <button class="app-input-btn" size="mini" disabled="{{btnDisable}}" plain form-type="submit">确定提交</button>
+                <view class="form-btn-box">
+                    <button type="primary" class="app-input-btn" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
                 </view>
             </view>
             </form>

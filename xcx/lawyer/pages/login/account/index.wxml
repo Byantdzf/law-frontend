@@ -1,7 +1,9 @@
 <!-- pages/login/index.wxml -->
 <app-page id="app-page">
     <view class="flex-column container page-login">
-        <view class="login-title">登录</view>
+        <view class="login-logo">
+            <image src="/static/images/logo.png"></image>
+        </view>
         <view class="flex-bd">
             <form bindsubmit="formSubmit">
                 <view class="issue-form-item">
@@ -26,12 +28,14 @@
                         <label class="checkbox cl-999">
                             <checkbox value="1" />
                             <icon class="iconfont icon-check"></icon>
-                            我同意<text catchtap="showAgreement">《用户协议》</text>、<text catchtap="showPrivacy">《隐私协议》</text>
+                            我同意
+                            <text class="cl-primary" catchtap="showAgreement">《用户协议》</text>、
+                            <text class="cl-primary" catchtap="showPrivacy">《隐私协议》</text>
                         </label>
                     </checkbox-group>
                 </view>
                 <view class="issue-form-item form-btn-box no-border">
-                    <button class="app-input-btn" size="mini" type="primary" form-type="submit">
+                    <button class="app-input-btn" type="primary" form-type="submit">
                         登录
                     </button>
                 </view>

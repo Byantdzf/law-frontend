@@ -45,8 +45,8 @@
     }
   ],
   "window": {
-    "navigationBarBackgroundColor": "white",
-    "navigationBarTitleText": "虎甲律师咨询平台",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "虎甲问答",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "light"
   },
