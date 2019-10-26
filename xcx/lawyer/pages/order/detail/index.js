@@ -11,11 +11,11 @@ Page({
     // 存放订单信息
     item: {},
     // 回复列表
-    msglist: [],
+    msgList: [],
     // 评价列表
     orderScoreList: [],
-    // 追问内容
-    askSecondContent: ''
+    // 律师回复的内容
+    content: ''
   },
   onLoad(e) {
     app.pages.add(this);
@@ -62,14 +62,8 @@ Page({
     };
     orderApi.orderMsglist(params).then(res => {
       const data = res.data || {};
-      const msglist = data.list || [];
-      msglist.forEach(v => {
-        if (v.isUser === 'Y') {
-          // 找出用户追问的内容
-          this.setData({ askSecondContent: v.content || '' });
-        }
-      });
-      this.setData({ msglist: msglist.filter(v => v.isUser !== 'N') });
+      const msgList = data.list || [];
+      this.setData({ msgList });
     });
   },
   // 查询用户评价
@@ -101,23 +95,24 @@ Page({
     }).catch(e => {});
   },
   // 处理追问文本域值改变
-  handleAskContentChange(e) {
-    this.askContent = e.detail.value;
+  handleContentChange(e) {
+    this.content = e.detail.value;
   },
   // 确认提交追问
   handleConfirmAsk() {
-    if (!this.askContent) {
+    if (!this.content) {
       wx.showToast({
-        title: '请输入要追问的问题'
+        title: '请输入您的回复'
       });
       return false;
     }
-    orderApi.orderAskSecond({
+    orderApi.orderReply({
       id: this.orderId,
-      content: this.askContent
+      content: this.content,
+      operateType: 2
     }).then(() => {
       wx.showToast({
-        title: '您的追问已提交'
+        title: '回复成功！'
       });
       this.loadData(this.orderId);
     })

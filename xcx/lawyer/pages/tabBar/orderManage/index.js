@@ -106,6 +106,12 @@ Page({
         delete params.orderType
       }
 
+      if (this.keyWord) {
+        params.keyWord = this.keyWord
+      } else {
+        delete params.keyWord
+      }
+
       return params;
     });
   },
@@ -119,5 +125,11 @@ Page({
   },
   updateList(e) {
     this.setData({ list: e.detail })
+  },
+  handleKeyWordChange(e) {
+    this.keyWord = e.detail.value
+  },
+  handleSearch(e) {
+    this.loadList()
   }
 })

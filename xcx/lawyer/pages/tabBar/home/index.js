@@ -155,14 +155,15 @@ Page({
     this.handleClosePop()
     app.gotoPage(url, type)
   },
-  gotoSearch() {
-    app.gotoPage('/pages/search/index/index')
-  },
   getCityResult(e) {
     this.setData({
         currArea: [e.detail[0].name.replace('省', ''), e.detail[1].name.replace('市', '')]
     })
     app.getCityLocation(e.detail[0].name, e.detail[1].name)
     this.initHome()
+  },
+  gotoSearch() {
+    wx.setStorageSync('searchFocus', 'true')
+    app.gotoPage('/pages/tabBar/orders/index', 'tab')
   }
 })

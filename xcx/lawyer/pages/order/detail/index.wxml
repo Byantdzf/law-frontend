@@ -74,11 +74,11 @@
         <text>{{ item.contactMobile }}</text>
       </view>
     </view>
-    <view class="detail-box" wx:if="{{ fn.showLawyer(item) }}">
-      <view class="flex detail-row flex-start mt-20" wx:if="{{ msglist.length }}">
-        <text class="label cl-999">回复详情：</text>
-        <view class="flex-column flex-bd cl-666">
-          <view wx:for="{{ msglist }}" wx:for-item="msg" wx:key="{{ index }}">
+    <view class="detail-box" wx:if="{{ msgList.length }}">
+      <view class="detail-row mt-20" wx:for-item="msg" wx:key="{{ index }}">
+        <view class="flex flex-start" wx:if="{{msg.isUser !== 'Y'}}">
+          <text class="label cl-999">回复详情：</text>
+          <view class="flex-column flex-bd cl-666">
             <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
             <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
               <view class="iconfont icon-yuyin cl-primary"></view>
@@ -90,13 +90,11 @@
             </view>
           </view>
         </view>
-      </view>
-    </view>
-    <view class="detail-box" wx:if="{{ askSecondContent }}">
-      <view class="flex detail-row flex-start">
-        <text class="label cl-999">用户的追问：</text>
-        <view class="flex flex-bd cl-666">
-          <text>{{ askSecondContent }}</text>
+        <view class="flex flex-start" wx:else>
+          <text class="label cl-999">用户的追问：</text>
+          <view class="flex flex-bd cl-666">
+            <text>{{ msg.content || '' }}</text>
+          </view>
         </view>
       </view>
     </view>
@@ -118,7 +116,7 @@
     </view>
     <view class="ask-wrapper" wx:if="{{ item.orderStatus == 30 || item.orderStatus == 40 }}">
       <view>
-        <textarea class="textarea" placeholder="请输入您的回复" bindinput="handleAskContentChange"></textarea>
+        <textarea class="textarea" placeholder="请输入您的回复" bindinput="handleContentChange"></textarea>
       </view>
     </view>
     <view class="btn-box mt-20" wx:if="{{ item.orderStatus == 30 || item.orderStatus == 40 }}">

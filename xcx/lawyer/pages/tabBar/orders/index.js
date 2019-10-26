@@ -1,6 +1,6 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
-const { orderType, orderCategory, orderStatus } = require('../../../config/global')
+const { PAGE_KEY, orderType, orderCategory, orderStatus } = require('../../../config/global')
 Page({
   data: {
     currArea: [],
@@ -28,6 +28,8 @@ Page({
         name: '找到我的'
       }
     ],
+    curSortIndex: 0,
+    curSortBy: '',
     sorts: [
       {
         id: 1,
@@ -46,6 +48,7 @@ Page({
         name: '距离'
       }
     ],
+    searchFocus: false
   },
   onLoad({ orderSource = 2 }) {
     const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
@@ -73,6 +76,11 @@ Page({
     });
 
   },
+  onShow() {
+    const searchFocus = wx.getStorageSync('searchFocus')
+    this.setData({ searchFocus })
+    wx.removeStorageSync('searchFocus')
+  },
   loadList() {
     if (!this.appList) {
       this.appList = this.selectComponent('#app-list');
@@ -91,6 +99,27 @@ Page({
         params.questionType = currQuestionType
       } else {
         delete params.questionType
+      }
+
+      if (this.keyWord) {
+        params.keyWord = this.keyWord
+      } else {
+        delete params.keyWord
+      }
+
+      let curSortIndex = this.data.curSortIndex
+      let curSortBy = this.data.curSortBy
+
+      if (curSortIndex > 0 && curSortBy) {
+        let orderBy = {
+          1: [10, 11],
+          2: [40, 41],
+          3: [30, 31],
+        }[curSortIndex][curSortBy - 1];
+
+        params.orderBy = orderBy
+      } else {
+        delete params.orderBy
       }
 
       return params;
@@ -115,16 +144,55 @@ Page({
     this.loadList()
   },
   handleRefreshOrderList({ index, type }) {
-    switch(type) {
-      case 'Forward':
+    // switch(type) {
+    //   case 'Forward':
         
-        break;
-      case 'Refuse':
+    //     break;
+    //   case 'Refuse':
         
-        break;
-      case 'Receive':
+    //     break;
+    //   case 'Receive':
         
-        break;
+    //     break;
+    // }
+    this.appList.setParams(params => {
+      params[PAGE_KEY] = 1
+      return params
+    })
+  },
+  handleKeyWordChange(e) {
+    this.keyWord = e.detail.value
+  },
+  handleSearch(e) {
+    this.loadList()
+  },
+  handleSortChange(e) {
+    const { index } = e.currentTarget.dataset
+    let curSortIndex = this.data.curSortIndex
+    let curSortBy = this.data.curSortBy
+    if (index > 0) {
+      if (curSortIndex == index) {
+        if (!curSortBy) {
+          curSortBy = 1
+        } else if (curSortBy == 1) {
+          curSortBy = 2
+        } else {
+          curSortBy = ''
+        }
+      } else {
+        curSortBy = 1
+      }
+      this.setData({
+        curSortIndex: index,
+        curSortBy
+      })
+    } else {
+      this.setData({
+        curSortIndex: 0,
+        curSortBy: ''
+      })
     }
+
+    this.loadList()
   }
 })

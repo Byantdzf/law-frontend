@@ -8,8 +8,10 @@
           type="text"
           placeholder="关键字搜索相关信息"
           placeholder-class="placeholder"
+          bindinput="handleKeyWordChange"
+          bindconfirm="handleSearch"
         />
-        <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
+        <view class="iconfont icon-search pl-20 pr-20 cl-primary" bindtap="loadList"></view>
       </view>
     </view>
     <app-tab items="{{ orderTypes }}" bindchange="handleOrderTypeChange"/>

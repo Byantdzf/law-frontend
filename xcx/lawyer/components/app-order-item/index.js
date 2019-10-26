@@ -50,7 +50,7 @@ Component({
       app.gotoPage('/pages/order/detail/index?id=' + this.data.item.id)
     },
     handleForward() {
-      app.confirm({ content: '确认转发此订单吗？' }),then(res => {
+      app.confirm({ content: '确认转发此订单吗？' }).then(() => {
         const params = {
           operateType: 2,
           operateBusiness: 1,
@@ -67,7 +67,7 @@ Component({
       })
     },
     handleRefuse() {
-      app.confirm({ content: '确认拒绝此订单吗？' }),then(res => {
+      app.confirm({ content: '确认拒绝此订单吗？' }).then(() => {
         const params = {
           orderId: this.data.item.id
         }
@@ -82,7 +82,7 @@ Component({
       })
     },
     handleReceive() {
-      app.confirm({ content: '确认接此订单吗？' }),then(res => {
+      app.confirm({ content: '确认接此订单吗？' }).then(() => {
         const params = {
           orderId: this.data.item.id
         }

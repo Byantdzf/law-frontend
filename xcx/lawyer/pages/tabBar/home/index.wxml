@@ -13,7 +13,7 @@
 					/>
         </view>
       </view>
-      <view class="flex-bd flex search-box">
+      <view class="flex-bd flex search-box" bindtap="gotoSearch">
         <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
         <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
       </view>

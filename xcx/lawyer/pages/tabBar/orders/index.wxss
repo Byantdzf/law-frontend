@@ -45,3 +45,8 @@
 .app-empty .iconfont {
   font-size: 70rpx;
 }
+
+.icons {
+  padding-left: 4rpx;
+  line-height: 0.7;
+}
