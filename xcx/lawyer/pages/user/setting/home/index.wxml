@@ -11,5 +11,15 @@
                 <view class="item-right"><text class="iconfont icon-arrow-right"></text></view>
             </view>
         </view>
+
+        <view class="logout-btn">
+			<button
+				class="app-input-btn"
+				size="mini"
+				plain
+				bindtap="logout"
+			>退出登录
+			</button>
+		</view>
     </view>
 </app-page>

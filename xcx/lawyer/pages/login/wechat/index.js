@@ -27,4 +27,10 @@ Page({
             })
         }
     },
+    showAgreement() {
+        app.gotoPage('/pages/user/setting/agreement/index')
+    },
+    showPrivacy() {
+        app.gotoPage('/pages/user/setting/privacy/index')
+    },
 })

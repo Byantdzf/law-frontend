@@ -5,7 +5,7 @@
 }
 
 .page-order-detail .title {
-  margin-bottom: 10rpx;
+  padding: 20rpx 0;
   font-size: 32rpx;
 }
 
@@ -52,5 +52,30 @@
 }
 
 .icon-wenjian {
-  font-size: 70rpx;
+  font-size: 100rpx;
+  line-height: 1;
+}
+
+.reply-wrapper .radio-box {
+  padding-left: 40rpx;
+}
+
+.icon-stop,
+.icon-yuyin {
+  font-size: 60rpx;
+  padding-right: 10rpx;
+}
+
+.file-item {
+  justify-content: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+.upload-btn {
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 4rpx;
+  border: 2rpx dashed #e0e0e0;
 }

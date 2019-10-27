@@ -15,7 +15,17 @@ Page({
     // 评价列表
     orderScoreList: [],
     // 律师回复的内容
-    content: ''
+    content: '',
+    // 咨询订单是回复语音还是文本内容
+    replyIscontent: false,
+    // 是否正在录音
+    isRecording: false,
+    filePath: '',
+    recordTime: 0,
+    // 是否正在上传文件
+    isUpload: false,
+    // 选择的文件
+    files: []
   },
   onLoad(e) {
     app.pages.add(this);
@@ -27,6 +37,11 @@ Page({
   },
   // 加载订单详情数据
   loadData(id) {
+    this.setData({
+      isRecording: false,
+      filePath: '',
+      recordTime: 0
+    });
     orderApi.orderDetails(id).then(res => {
       const item = res.data || {};
       item.questionTypeName = '';
@@ -79,43 +94,10 @@ Page({
       this.setData({ orderScoreList });
     });
   },
-  // 处理确认完成订单操作
-  handleConfirm() {
-    const { id, lawyer, lawyerPic } = this.data.item;
-    app.confirm({
-      content: '您确定要完成此订单吗？'
-    }).then(() => {
-      orderApi.orderConfirm(id).then(() => {
-        wx.showToast({
-          title: '操作成功',
-          icon: 'success'
-        });
-        app.gotoPage(`/pages/order/evaluate/index?id=${id}&lawyer=${lawyer}&lawyerPic=${lawyerPic || ''}`);
-      });
-    }).catch(e => {});
-  },
+  
   // 处理追问文本域值改变
   handleContentChange(e) {
     this.content = e.detail.value;
-  },
-  // 确认提交追问
-  handleConfirmAsk() {
-    if (!this.content) {
-      wx.showToast({
-        title: '请输入您的回复'
-      });
-      return false;
-    }
-    orderApi.orderReply({
-      id: this.orderId,
-      content: this.content,
-      operateType: 2
-    }).then(() => {
-      wx.showToast({
-        title: '回复成功！'
-      });
-      this.loadData(this.orderId);
-    })
   },
   // 播放音频
   handleOpenAudio(e) {
@@ -127,5 +109,125 @@ Page({
   handleOpenDoc(e) {
     const { filepath: filePath } = e.currentTarget.dataset;
     wx.openDocument({ filePath });
+  },
+  // 回复方式改变，语音回复还是内容回复
+  replyRadioChange(e) {
+    const { value } = e.detail;
+    this.setData({
+      replyIscontent: value === 'content'
+    })
+  },
+  // 开始录音，结束录音
+  toggleRecording() {
+    const isRecording = this.data.isRecording;
+    if (isRecording) {
+      if (this.RecorderManager) {
+        this.RecorderManager.stop();
+        this.RecorderManager.onStop((res) => {
+          const { tempFilePath, duration } = res || {};
+          this.setData({
+            isRecording: false,
+            filePath: tempFilePath,
+            recordTime: Math.round(duration/1000),
+            isUpload: true
+          });
+          selectApi.uploadFile({ filePath: tempFilePath }).then(res => {
+            this.setData({
+              filePath: res.data || '',
+              isUpload: false
+            });
+          }).catch(() => {
+            this.setData({
+              filePath: '',
+              recordTime: 0,
+              isUpload: false
+            });
+          })
+        });
+      } else {
+        this.setData({
+          isRecording: false
+        })
+      }
+    } else {
+      this.RecorderManager = wx.getRecorderManager();
+      this.RecorderManager.start({
+        duration: 180000
+      });
+      this.RecorderManager.onStart(() => {
+        this.setData({
+          isRecording: true
+        })
+      });
+    }
+  },
+  // 选择文件上传
+  handleUpload() {
+    wx.chooseMessageFile({
+      count: 10,
+      type: 'file',
+      success: (res) => {
+        const items = res.tempFiles || [];
+        const paths = items.map(v => v.path);
+        console.log(paths)
+        for(let i = 0; i < paths.length; i ++) {
+          selectApi.uploadFile({ filePath: paths[i] }).then(res1 => {
+            const data = res1.data || '';
+            let files = this.data.files;
+            this.setData({
+              files: files.concat([data])
+            })
+          })
+        }
+      }
+    })
+  },
+
+  // 处理确认完成订单操作
+  handleConfirm() {
+    const { id, orderType } = this.data.item;
+    app.confirm({
+      content: '您确定要完成此订单吗？'
+    }).then(() => {
+      let params = {
+        orderId: this.orderId,
+        operateType: 2
+      };
+      if (orderType == 1) {
+        // 咨询类订单
+        if (this.data.replyIscontent) {
+          // 回复文字内容
+          if (!this.data.content) {
+            wx.showToast({
+              title: '请输入回复的内容',
+              icon: 'none',
+              duration: 3500
+            });
+            return false;
+          }
+          params.msgType = 1;
+          params.content = this.data.content;
+        } else {
+          if (this.data.recordTime < 30 || this.data.recordTime > 180) {
+            wx.showToast({
+              title: '语音时长不能小于30s，且不大于180s',
+              icon: 'none',
+              duration: 3500
+            });
+            return false;
+          }
+          // 回复语音
+          params.msgType = 2;
+          params.filePath = this.data.filePath;
+          params.recordTime = this.data.recordTime;
+        }
+      } else {
+
+      }
+      orderApi.orderConfirm(params).then(() => {
+        app.toastSuccess('操作成功');
+        this.loadData(this.orderId);
+      });
+    }).catch(e => {});
   }
 })

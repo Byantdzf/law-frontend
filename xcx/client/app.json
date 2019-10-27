@@ -5,7 +5,7 @@
     "pages/tabBar/message/index",
     "pages/tabBar/user/index",
     "pages/news/list/index",
-    "pages/news/agreement/index"
+    "pages/news/detail/index"
   ],
   "subPackages": [
     {
@@ -85,7 +85,7 @@
     }
   ],
   "window": {
-    "navigationBarBackgroundColor": "white",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "虎甲律师问答",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "light"

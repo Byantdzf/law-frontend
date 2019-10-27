@@ -1,7 +1,5 @@
 
 const app = getApp();
-const selectApi = require('../../../service/select')
-
 Page({
   data: {
     id: null,
@@ -16,9 +14,15 @@ Page({
   },
   loadData() {
     let id = this.data.id
-    selectApi.newsDetails({id: id}).then(res => {
-      let item = res.data || {}
-      this.setData({ item })
+
+    let item = {
+      name: '',
+      content: '',
+      updateTime: ''
+    }
+
+    this.setData({
+      item
     })
   }
 })

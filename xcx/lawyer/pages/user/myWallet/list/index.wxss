@@ -1,52 +1,27 @@
-/* pages/user/collect/index.wxss */
-.page-lawyer {
+
+.page-wallet-list {
   background: #f3f3f3;
 }
-  .list-item {
-    padding: 30rpx;
-    background: #fff;
-    border-radius: 20rpx;
-    align-items: flex-start;
-    border-bottom: 1rpx solid #f3f3f3;
-  }
-  .list-item + .list-item {
-    margin-top: 20rpx;
-  }
-  .list-item .img-box {
-    width: 120rpx;
-    height: 120rpx;
-  }
-  .list-item .img-box image {
-    border-radius: 50%;
-  }
-  .list-item .name {
-    font-size: 32rpx;
-  }
-  .list-item .desc {
-    margin: 10rpx 0;
-  }
-  .list-item .btn-box {
-    margin-top: 16rpx;
-    justify-content: space-between;
-  }
-  .list-item .btn-box button {
-    margin: 0;
-    padding: 0 10rpx;
-    border-color: #e0e0e0;
-    color: #666;
-  }
-  .list-item .btn-box button::after {
-    border-color: #e0e0e0;
-  }
-
-  .app-empty-wrapper {
-    padding: 20rpx;
-  }
-  .app-empty {
-    padding: 40rpx 0;
-    background: #fff;
-    border-radius: 20rpx;
-  }
-  .app-empty .iconfont {
-    font-size: 100rpx;
-  }
+.page-wallet-list .app-cells {
+  padding: 30rpx 0;
+}
+.page-wallet-list .app-cell {
+  padding: 20rpx 0;
+  background: #fff;
+}
+.page-wallet-list .title {
+  margin-bottom: 6rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.app-empty-wrapper {
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
+}

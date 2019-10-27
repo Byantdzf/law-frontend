@@ -2,8 +2,17 @@
 .page-myData { text-align: center; padding-top:60rpx;}
 .page-myData .icon { padding:50rpx 0;}
 .page-myData .icon text { display: block; width:80rpx; height: 80rpx; line-height: 80rpx; background: sandybrown; color: #fff; font-size: 50rpx; border-radius: 50%; margin:0 auto; font-weight: bold;}
-.page-myData .withDrawBtn { margin-top:200rpx;}
-.page-myData button { margin: 30rpx 200rpx; font-size: 32rpx; line-height: 2;}
 .page-myData .money { font-size: 60rpx; margin-top: 30rpx;}
 
 .page-myData .money .sup{ font-size: 36rpx; vertical-align:text-top; position: relative; top:10rpx;}
+
+.page-myData .btn-box { margin-top:200rpx;}
+.page-myData .btn-box button{ width: 300rpx;}
+
+.btn-box button[plain] {
+  border-color: #e0e0e0;
+  color: #666;
+}
+.btn-box button[plain]::after {
+  border-color: #e0e0e0;
+}

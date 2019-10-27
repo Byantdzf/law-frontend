@@ -49,10 +49,10 @@ Page({
         this.setData({ btnDisable: !this.data.aggreement })
     },
     showAgreement() {
-        app.gotoPage('/pages/news/agreement/index')
+        app.gotoPage('/pages/user/setting/agreement/index')
     },
     showPrivacy() {
-        app.gotoPage('/pages/news/privacy/index')
+        app.gotoPage('/pages/user/setting/privacy/index')
     },
     gotoWechatLogin() {
         app.gotoPage('/pages/login/wechat/index')

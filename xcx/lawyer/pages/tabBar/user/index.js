@@ -98,7 +98,7 @@ Page({
         app.gotoPage('/pages/user/myWallet/home/index')
         break;
       case 'mySetting':
-        app.gotoPage('/pages/user/mySetting/home/index')
+        app.gotoPage('/pages/user/setting/home/index')
         break;
     }
   },

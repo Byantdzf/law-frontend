@@ -7,10 +7,9 @@
     "pages/tabBar/orders/index",
     "pages/tabBar/orderManage/index",
     "pages/findPassword/index",
-    "pages/news/agreement/index",
-    "pages/news/privacy/index",
-    "pages/reg/index",
+    "pages/news/list/index",
     "pages/news/detail/index",
+    "pages/reg/index",
     "pages/waitAuth/index"
   ],
   "subPackages": [
@@ -27,6 +26,7 @@
         "setting/about/index",
         "setting/help/index",
         "setting/agreement/index",
+        "setting/privacy/index",
         "setting/feedback/index"
       ]
     },

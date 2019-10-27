@@ -11,13 +11,9 @@
             <view class="money">
                 <text class="sup">￥</text>{{ data.balanceAmount || 0 }}
             </view>
-            <view class="withDrawBtn">
-                <button class="btn" type="primary" bindtap="withDraw">
-                    提现
-                </button>
-            </view>
-            <view class="listBtn">
+            <view class="btn-box flex">
                 <button plain catchtap="viewList">明细</button>
+                <button type="primary" bindtap="withDraw">提现</button>
             </view>
         </view>
     </view>

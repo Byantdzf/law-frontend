@@ -28,6 +28,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        app.setNavColor()
     },
     tapTools(e) {
         let { code } = e.currentTarget.dataset
@@ -49,5 +50,12 @@ Page({
     handleContact (e) {
         console.log(e.detail.path)
         console.log(e.detail.query)
+    },
+    logout() {
+        app.confirm({ content: '确认退出登录吗？' }).then(() => {
+            wx.reLaunch({
+            url: '/pages/login/account/index'
+            })
+        })
     }
 })

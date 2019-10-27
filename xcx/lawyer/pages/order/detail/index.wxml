@@ -114,13 +114,50 @@
         </view>
       </view>
     </view>
-    <view class="ask-wrapper" wx:if="{{ item.orderStatus == 30 || item.orderStatus == 40 }}">
-      <view>
-        <textarea class="textarea" placeholder="请输入您的回复" bindinput="handleContentChange"></textarea>
+    <view wx:if="{{ item.orderStatus == 30 || item.orderStatus == 40 }}">
+      <view class="reply-wrapper" wx:if="{{ item.orderType == 1 }}">
+        <view class="title fw-b">我的回复</view>
+        <radio-group class="flex-column" bindchange="replyRadioChange">
+          <view class="flex flex-start">
+            <view class="flex flex-bd pt-20 pb-20" bindtap="toggleRecording">
+              <view class="iconfont icon-stop cl-primary" wx:if="{{ isRecording }}"></view>
+              <view class="iconfont icon-yuyin cl-primary" wx:else></view>
+              <view class="cl-999" wx:if="{{ isRecording }}">正在录音...</view>
+              <view class="cl-999" wx:else>
+                <text wx:if="{{ recordTime > 0 && isUpload }}">正在上传...</text>
+                <text wx:elif="{{ recordTime > 0 }}">时长{{ recordTime }}s</text>
+                <text wx:else>点击开始录音</text>
+              </view>
+            </view>
+            <view class="radio-box">
+              <radio class="radio" color="#CF443D" value="recording" checked="{{ !replyIscontent }}"></radio>
+            </view>
+          </view>
+          <view class="flex flex-start mt-20">
+            <view class="flex-bd">
+              <textarea class="textarea" placeholder="请输入您的回复" maxlength="{{ 400 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange"></textarea>
+            </view>
+            <view class="radio-box">
+              <radio class="radio" color="#CF443D" value="content" checked="{{ replyIscontent }}"></radio>
+            </view>
+          </view>
+        </radio-group>
       </view>
-    </view>
-    <view class="btn-box mt-20" wx:if="{{ item.orderStatus == 30 || item.orderStatus == 40 }}">
-      <button type="primary" bindtap="handleConfirm">回复并发送订单确认</button>
+      <view class="reply-wrapper" wx:else>
+        <view class="title fw-b">{{ item.orderType == 2 ? '法律文件' : '结案法律文书' }}</view>
+        <view class="flex flex-start files">
+          <view class="flex-column file-item" wx:for="{{ files }}" wx:for-item="file" wx:key="{{ index }}" data-index="{{ index }}">
+            <text class="iconfont icon-wenjian"></text>
+            <text>文件{{ index + 1 }}</text>
+          </view>
+          <view class="flex upload-btn" bindtap="handleUpload">
+            <text class="iconfont icon-plus cl-999"></text>
+          </view>
+        </view>
+      </view>
+      <view class="btn-box mt-45">
+        <button type="primary" bindtap="handleConfirm">回复并发送订单确认</button>
+      </view>
     </view>
   </view>
 </app-page>

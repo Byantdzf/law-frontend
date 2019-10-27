@@ -62,7 +62,7 @@ module.exports = {
   /**
    * 接单
   */
-  orderReceive: params => put(`/applets/lawyer/order/acceptOrder`, params),
+  orderReceive: params => get(`/applets/lawyer/order/acceptOrder`, params),
   /**
    * 律师回复
   */

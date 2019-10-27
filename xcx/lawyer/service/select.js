@@ -38,6 +38,11 @@ module.exports = {
   uploadFile: params => post('/applets/lawyer/multiUpload', params, {requestType: 'uploadFile'}),
 
   /**
+   * 上传文件
+  */
+  uploadFile1: params => post('/applets/lawyer/uploadFile', params, {requestType: 'uploadFile'}),
+
+  /**
    * 数据字典
   */
   data: params => get('/applets/lawyer/getDictData', params),

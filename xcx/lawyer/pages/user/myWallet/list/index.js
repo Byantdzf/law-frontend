@@ -2,8 +2,15 @@
 let app = getApp();
 Page({
   data: {
-    listUrl: '/applets/user/focused',
-    defaultImg: '/static/images/demo/img_lawyer.png',
+    listUrl: '/applets/lawyer/my/balanceAmountDetail',
+    // 1-提现 2-用户订单充值 3-接订单收入 4-系统拨款 5-系统扣款
+    types: {
+      1: '提现',
+      2: '用户订单充值',
+      3: '接订单收入',
+      4: '系统拨款',
+      5: '系统扣款'
+    },
     list: [],
   },
 
@@ -21,35 +28,4 @@ Page({
       return params
     })
   },
-  imageError(e) {
-    var _errImg = e.target.dataset.img
-    var _errObj = {}
-    _errObj[_errImg] = this.data.defaultImg
-    this.setData(_errObj)
-  },
-  gotoLawyerDetail(e) {
-    let { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/lawyer/detail/index?id=' + id)
-  },
-  voiceTap(e) {
-    let { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/lawyer/voice/index?id=' + id)
-  },
-  onByOneTap(e) {
-    let { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/lawyer/oneByOne/index?id=' + id)
-  },
-  cancelCollect(e) {
-    let { id } = e.currentTarget.dataset
-    selectApi.cancelAttentionLawyer({ businessId: id }).then(res => {
-      let list = this.data.list
-      let index = list.findIndex(item => {
-        return item.id == id
-      })
-      list.splice(index, 1)
-      this.setData({
-        list
-      })
-    })
-  }
 })

@@ -21,7 +21,7 @@
                         还没帐号？
                         <span class="cl-red" bind:tap="gotoReg">立即注册</span>
                     </view>
-                    <view class="cl-999" bind:tap="findPassword">忘记密码</view>
+                    <!-- <view class="cl-999" bind:tap="findPassword">忘记密码</view> -->
                 </view>
                 <view class="issue-form-item flex no-border">
                     <checkbox-group bindchange="checkboxChange">

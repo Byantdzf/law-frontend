@@ -125,9 +125,9 @@
     </view>
   </view>
 
-  <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
+  <!-- <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
 		<text class="iconfont icon-plus"/>
-  </view>
+  </view> -->
   <app-pop visible="{{ showTools }}" hideTabBar>
 		<view class="flex">
 			<view
