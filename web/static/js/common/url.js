@@ -17,8 +17,8 @@ if (typeof (commonHost) == 'undefined') {
 var URL = {
 	common: {
 		upload: '/applets/lawyer/multiUpload',
-		// questionType: commonHost + '/applets/lawyer/getDictData',
-		questionType: '/static/data/questionType.json',
+		questionType: pcHost + '/getDictData?dictCode=QuestionType',
+		// questionType: '/static/data/questionType.json',
 		isRegister: pcHost + '/pc/user/consult/publish/page',
 		getSmsCode: commonHost + '/applets/lawyer/getPhoneVerificationCode',
 		coupon: pcHost + '/pc/user/couponPool/list'
@@ -33,11 +33,9 @@ var URL = {
 		getArea: '/static/data/area.json',
 		getProvCity: '/static/data/city_code.json',
 	},
-	order: {
-		list: '/static/data/order.json',
-	},
 	notice: {
-		list: '/static/data/notice.json',
+		list: pcHost + '/pc/user/msg/list',
+		details: pcHost + '/pc/user/msg/details/'
 	},
 	lawyer: {
 		query: pcHost + '/pc/user/lawyer/list',
@@ -59,5 +57,14 @@ var URL = {
 		postLegals: pcHost + '/pc/user/consult/publish/2',               // 分块法律
 		postMandatoryLawyer: pcHost + '/pc/user/consult/publish/3',      // 代理律师服务
 		postTemplate: pcHost + '/pc/user/consult/publish/4'              // 法律文件购买
+	},
+	user: {
+		attention: pcHost + '/pc/user/focused',
+		cancelattention: pcHost + '/pc/user/order/operateOrder',
+		coupon: pcHost + '/pc/user/coupon/list',
+		feedback: pcHost + '/pc/user/feedback',
+		order: {
+			query: pcHost + '/pc/user/order/orderList'
+		}
 	}
 }

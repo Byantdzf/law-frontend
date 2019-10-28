@@ -15,17 +15,20 @@
 				{ "id": 8, "name": "意见反馈", "code": "feedback", "url": "/page/user/feedback.js" },
 				{ "id": 9, "name": "退出登录", "code": "logout" }
 			];
-			_t.code = hash.get('c') || _t.userMenu[0].code;
 
-			if ($.isEmptyObject(global.userInfo)) {
-				// 如果没有本地用户
-				_t.loadChooseUserType();
-				$('.userPage').addClass('noMinHeight');
-			} else {
-				// 如果有本地用户
-				_t.loadUserPage();
-				$('.userPage').removeClass('noMinHeight');
-			}
+			$(function () {
+				_t.code = hash.get('c') || _t.userMenu[0].code;
+
+				if ($.isEmptyObject(utils.cookie(global.token))) {
+					// 如果没有本地用户
+					_t.loadChooseUserType();
+					$('.userPage').addClass('noMinHeight');
+				} else {
+					// 如果有本地用户
+					_t.loadUserPage();
+					$('.userPage').removeClass('noMinHeight');
+				}
+			})
 		},
 
 		loadChooseUserType: function () {
@@ -34,10 +37,15 @@
 			$('.userPage').html(html);
 
 			$('body').on('click', '.user', function () {
-				base.login(function () {
-					utils.setCookie(global.userInfoToken, global.testUserInfo);
+				utils.get(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
+					utils.setCookie('account', '13600001111');
+					utils.setCookie(global.token, res.data.sessionId);
 					_t.loadUserPage();
-				});
+				})
+				// base.login(function () {
+				// 	utils.setCookie(global.userInfoToken, global.testUserInfo);
+				// 	_t.loadUserPage();
+				// });
 			});
 
 			$('body').on('click', '.lawyer', function () {

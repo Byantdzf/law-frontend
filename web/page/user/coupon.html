@@ -1,32 +1,25 @@
-<div class="layui-tab couponTab" lay-filter="couponType">
-	<ul class="layui-tab-title">
-		<li class="layui-this">待使用</li>
-		<li>已使用</li>
-		<li>已过期</li>
-	</ul>
-</div>
 <div class="couponList">
 	<div class="clearfix">
 		{{# 
-	layui.each(d.list, function(i, t) {
+	layui.each(d, function(i, t) {
 		var clz = '';
 		var str = '';
-		if (t.status == 2) {
+		if (t.useStatus == 1) {
 			clz = 'used';
 			str = '已使用';
-		} else if (t.status == 3) {
+		} else if (t.useStatus == 2) {
 			clz = 'over';
 			str = '已过期';
 		}
 }}
 		<div class="items {{ clz }}">
 			<div class="itemTop">
-				<span><label>￥</label>{{ t.price }}</span>
+				<span><label>￥</label>{{ t.amount }}</span>
 				{{# if (str) { }}<em>{{str}}</em>{{# } }}
 			</div>
 			<div class="itemBottom">
-				<div><em>{{ t.name }}</em> {{ t.info || '' }}</div>
-				<p>有效期：{{ t.getDate }} 至 {{ t.validDate }}</p>
+				<div>{{ t.note || '' }}</div>
+				<p>有效期：{{ t.fetchDate }} 至 {{ t.validityPeriod }}</p>
 			</div>
 		</div>
 		{{# }); }}
