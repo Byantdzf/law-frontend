@@ -62,18 +62,29 @@
 		queryList: function () {
 			var qlps = {
 				box: '.orderList',
-				url: URL.order.list,
+				url: URL.user.order.query,
 				cols: tableParams
 			}
 			utils.queryList(qlps);
 		},
 
-		viewBox: function () {
-			utils.msg('查看订单详细');
+		viewBox: function (data) {
+			var _t = this;
+
+			var html = utils.getTemp('/page/user/orderDetailVoice.html', data);
+			
+			var ops = {
+				type: 1,
+				area: ['1000px', '80%'],
+				title: "订单详情",
+				content: html
+			};
+			utils.dialog(ops);
 		},
 
 		actions: function () {
 			var _t = this;
+
 			form.on('select(rootCategory)', function (e) {
 				var item = {};
 				$.each(_t.rootCategory, function (i, t) {

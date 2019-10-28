@@ -79,7 +79,7 @@
 
 		getQuestionType: function () {
 			var data = []
-			utils.getSync(URL.common.questionType, {dictCode: 'QuestionType', noAuth: 1}, function (res) {
+			utils.getSync(URL.common.questionType, {noAuth: 1}, function (res) {
 				data = res.data
 			});
 			return data;

@@ -37,6 +37,7 @@ img{outline: none; border: none;}
 .app-page-box { text-align: center;}
 .layui-laypage .layui-laypage-curr em { color:#000;}
 .layui-layer-btn .layui-layer-btn0 { border-color:#eb4546!important; background-color:#eb4546!important;}
+.app-table-box .layui-table-page { display: none!important;}
 
 .couponList .itemTop,
 a {
@@ -1399,3 +1400,7 @@ i, em { font-style: normal;}
 .lawyerComments .items .userInfo .item>div>div { position: relative; float: left; width: 200px; padding-left: 70px; line-height: 30px;}
 .lawyerComments .items .userInfo label { position: absolute; width:70px; left:0; color:#999;} 
 .lawyerComments .items .content { border:1px solid #eaeaea; border-radius: 5px; padding: 10px; margin-top:10px; font-size: 12px; color:#999;}
+
+.noticeDetails,
+.orderDetail { padding: 50px;}
+.orderDetail .layui-form-item { margin-bottom: 0;}

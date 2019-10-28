@@ -11,6 +11,8 @@
 
 			// base.openRedPacket();
 
+			this.getLocation()
+
 			this.getLawyer()
 
 			this.getQuestionType()
@@ -26,6 +28,10 @@
 
 			// 获取地区
 			base.hotCity();
+		},
+
+		getLocation: function () {
+			$.getScript('https://apis.map.qq.com/ws/location/v1/ip?callback=showLocation&key=LW5BZ-ZTFA4-QXNUJ-XWKTM-5VAB5-J6BTM&output=jsonp');
 		},
 
 		getQuestionType: function () {
@@ -116,4 +122,17 @@
 
 	// 点击事件
 	gather.init();
+
+	exports('index', gather);
 });
+
+function showLocation(data) {
+	var city = data.result.ad_info.city || ''
+	if (city) {
+		city = city.replace('市', '')
+	}
+	var items = {"id":'',"name":city}
+	utils.cookie(global.areaCookie, JSON.stringify());
+	var index = layui.index;
+	index.getLawyer()
+}

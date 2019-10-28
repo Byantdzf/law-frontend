@@ -86,12 +86,18 @@ layui.define(function (exports) {
 			delete (data.notLoading);
 
 			// 判断接口是否需要授权，处理授权相关信息
-			var isAuth = !data.noAuth;
-			delete (data.noAuth);
-			if (isAuth && gather.cookie(global.token)) {
-				var headers = {
-					Authorization: 'Bearer ' + gather.cookie(global.token)
-				};
+			var headers = {}
+			// var isAuth = !data.noAuth;
+			// delete (data.noAuth);
+			// if (isAuth && gather.cookie(global.token)) {
+			// 	var headers = {
+			// 		Authorization: 'Bearer ' + gather.cookie(global.token)
+			// 	};
+			// 	data.account = gahter.cookie('account');
+			// }
+
+			if (gahter.cookie('account')) {
+				data.account = gahter.cookie('account');
 			}
 
 			// 读取当前默认城市
@@ -104,6 +110,12 @@ layui.define(function (exports) {
 
 			gather.setCookie(global.requestAreaCookie, areas.id);
 
+			if (url.indexOf('?') > -1) {
+				url = url + '&_=' + Math.random()
+			} else {
+				url = url + '?_=' + Math.random()
+			}
+
 			return $.ajax({
 				headers: headers || '',
 				type: options.type || 'POST',
@@ -111,7 +123,7 @@ layui.define(function (exports) {
 				contentType: options.ct || 'application/x-www-form-urlencoded; charset=UTF-8',
 				async: options.asyn,
 				data: data,
-				url: url + '?_=' + Math.random(),
+				url: url,
 				beforeSend: function () {
 					$('.submit').attr("disabled", "disabled");
 					// if (isLoading) {
@@ -127,12 +139,12 @@ layui.define(function (exports) {
 						if (callback) {
 							callback(res);
 						}
-					} else if (res.code === 3) {
+					} else if (res.code == '01') {
 						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
 						gather.setCookie(global.token, '');
 						gather.setCookie(global.backToken, '');
 
-						window.parent.location.pathname != '/index.html' && (window.location = '/index.html');
+						window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else {
 						gather.msg(res.msg || res.code);
 					}
@@ -149,6 +161,11 @@ layui.define(function (exports) {
 					$('.submit').removeAttr("disabled");
 				},
 				error: function (e) {
+					if (e.responseJSON.message == '非法访问用户') {
+						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+						gather.setCookie(global.token, '');
+						gather.setCookie(global.backToken, '');
+					}
 					gather.msg(options.error || '请求异常，请重试', {
 						shift: 6
 					});
@@ -711,7 +728,7 @@ layui.define(function (exports) {
 			container.html(html);
 
 			// autoFixHeight
-			gather.setMainTableHeight();
+			// gather.setMainTableHeight();
 
 			// 如果有查询条件
 			if (opts.searchParams.length) {
@@ -870,7 +887,7 @@ layui.define(function (exports) {
 
 			gahter.get(p.url, params, function (response) {
 				var arr = response.data;
-				var rs = arr.dataList || arr || [];
+				var rs = arr.list || arr || [];
 				var tps = {
 					elem: '#' + tableId,
 					data: rs,
@@ -907,7 +924,7 @@ layui.define(function (exports) {
 						elem: pageBox[0],
 						curr: params[global.page],
 						limit: params[global.rows],
-						count: arr.totalCount,
+						count: arr.totalRow,
 					};
 					gather.getPageList(pageParams, function (obj, first) {
 						if (!first) {
@@ -949,9 +966,11 @@ layui.define(function (exports) {
 			gahter.get(p.url, params, function (response) {
 				var arr = response.data;
 				var rs = arr.list || arr || [];
-
 				var html = gather.getTemp(p.temp, rs);
+
 				tableBox.html(html);
+
+				actions && actions(params[global.page])
 
 				// 处理分页
 				if (rs.length && !p.noPage) {
