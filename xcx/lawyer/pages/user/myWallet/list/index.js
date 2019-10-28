@@ -28,4 +28,7 @@ Page({
       return params
     })
   },
+  updateList(e) {
+    this.setData({ list: e.detail })
+  }
 })

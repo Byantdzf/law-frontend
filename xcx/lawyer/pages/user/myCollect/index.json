@@ -1,7 +1,10 @@
 {
   "navigationBarTitleText": "我的关注",
   "usingComponents": {
-    "app-empty": "/components/app-empty/index",
-    "app-list":"../../../../components/app-list/index"
+    "app-tab":"/components/app-tab/index",
+    "app-empty":"/components/app-empty/index",
+    "app-cityPicker": "/components/app-cityPicker/index",
+    "app-list": "/components/app-list/index",
+    "app-order-item": "/components/app-order-item/index"
   }
 }

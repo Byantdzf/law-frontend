@@ -45,5 +45,6 @@ module.exports = {
   /**
    * 数据字典
   */
-  data: params => get('/applets/lawyer/getDictData', params),
+  // data: params => get('/applets/lawyer/getDictData', params),
+  data: params => get('/getDictData', params),
 }

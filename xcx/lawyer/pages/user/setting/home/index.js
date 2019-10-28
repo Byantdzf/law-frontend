@@ -1,5 +1,6 @@
 // pages/user/setting/home/index.js
 const app = getApp();
+const { tokenName } = require('../../../../config/global')
 
 Page({
 
@@ -53,8 +54,9 @@ Page({
     },
     logout() {
         app.confirm({ content: '确认退出登录吗？' }).then(() => {
+            wx.removeStorageSync(tokenName)
             wx.reLaunch({
-            url: '/pages/login/account/index'
+                url: '/pages/login/account/index'
             })
         })
     }

@@ -35,7 +35,18 @@
 <app-page id="app-page">
   <view class="page-order-detail">
     <view class="detail-box">
-      <view class="title fw-b">基本信息</view>
+      <view class="title flex">
+        <text class="flex-bd fw-b">基本信息</text>
+        <button
+          wx:if="{{ item.orderStatus == 20 && item.orderSource == 2 }}"
+          size="mini"
+          open-type="share"
+          type="primary"
+          hover-class="other-button-hover"
+          plain>
+          转发
+        </button>
+      </view>
       <view class="flex detail-row">
         <text class="label cl-999">订单编号：</text>
         <text class="flex-bd cl-666">{{ item.orderNo }}</text>
@@ -148,7 +159,7 @@
         <view class="flex flex-start files">
           <view class="flex-column file-item" wx:for="{{ files }}" wx:for-item="file" wx:key="{{ index }}" data-index="{{ index }}">
             <text class="iconfont icon-wenjian"></text>
-            <text>文件{{ index + 1 }}</text>
+            <text class="ellipsis">{{ file.fileName }}</text>
           </view>
           <view class="flex upload-btn" bindtap="handleUpload">
             <text class="iconfont icon-plus cl-999"></text>

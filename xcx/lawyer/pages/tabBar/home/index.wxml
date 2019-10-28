@@ -120,7 +120,7 @@
 						</view>
 					</scroll-view>
 				</view>
-        <view class="bottom-empty-box"></view>
+        <!-- <view class="bottom-empty-box"></view> -->
       </scroll-view>
     </view>
   </view>

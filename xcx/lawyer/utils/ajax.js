@@ -73,6 +73,17 @@ const ajax = (_options = {}) => {
             case '000000':
               resolve(data);
               break;
+            case 'E00006':
+              toast &&
+              wx.showToast({
+                title: data.data || data.msg || '登录过期，请重新登录',
+                icon: 'none',
+                duration: 2000
+              })
+              wx.removeStorageSync(tokenName)
+              wx.reLaunch({ url: '/pages/login/account/index' })
+              reject(response)
+              break;
             default:
               toast &&
               wx.showToast({

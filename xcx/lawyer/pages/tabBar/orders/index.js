@@ -143,22 +143,30 @@ Page({
     app.getCityLocation(e.detail[0].name, e.detail[1].name)
     this.loadList()
   },
-  handleRefreshOrderList({ index, type }) {
-    // switch(type) {
-    //   case 'Forward':
-        
-    //     break;
-    //   case 'Refuse':
-        
-    //     break;
-    //   case 'Receive':
-        
-    //     break;
-    // }
-    this.appList.setParams(params => {
-      params[PAGE_KEY] = 1
-      return params
-    })
+  handleRefreshOrderList(e) {
+    const { index, type } = e.detail
+    let { list } = this.data
+    switch(type) {
+      case 'Focused':
+        this.setData({
+          [`list[${ index }].focused`]: 1
+        })
+        break;
+      case 'CancelFocused':
+        this.setData({
+          [`list[${ index }].focused`]: 0
+        })
+        break;
+      case 'Refuse':
+      case 'Receive':
+        list.splice(index, 1)
+        this.setData({ list })
+        break;
+    }
+    // this.appList.setParams(params => {
+    //   params[PAGE_KEY] = 1
+    //   return params
+    // })
   },
   handleKeyWordChange(e) {
     this.keyWord = e.detail.value

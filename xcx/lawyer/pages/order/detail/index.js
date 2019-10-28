@@ -169,13 +169,19 @@ Page({
       success: (res) => {
         const items = res.tempFiles || [];
         const paths = items.map(v => v.path);
-        console.log(paths)
+        const names = items.map(v => v.name);
+        // console.log(paths)
         for(let i = 0; i < paths.length; i ++) {
           selectApi.uploadFile({ filePath: paths[i] }).then(res1 => {
             const data = res1.data || '';
             let files = this.data.files;
             this.setData({
-              files: files.concat([data])
+              files: files.concat([{
+                filePath: data,
+                fileName: names[i],
+                // 类型 1：文字；2：音频；3：红包；4：文件；5：位置；6：图片
+                fileType: 4
+              }])
             })
           })
         }
@@ -185,12 +191,13 @@ Page({
 
   // 处理确认完成订单操作
   handleConfirm() {
-    const { id, orderType } = this.data.item;
+    const { id, orderType, orderStatus } = this.data.item;
     app.confirm({
       content: '您确定要完成此订单吗？'
     }).then(() => {
       let params = {
         orderId: this.orderId,
+        // 操作类型 1-回复 2回复并确认
         operateType: 2
       };
       if (orderType == 1) {
@@ -201,7 +208,7 @@ Page({
             wx.showToast({
               title: '请输入回复的内容',
               icon: 'none',
-              duration: 3500
+              duration: 3000
             });
             return false;
           }
@@ -221,13 +228,54 @@ Page({
           params.filePath = this.data.filePath;
           params.recordTime = this.data.recordTime;
         }
-      } else {
 
+        orderApi.orderConfirm(params).then(() => {
+          app.toastSuccess('操作成功');
+          this.loadData(this.orderId);
+        });
+      } else {
+        // 分块法律服务订单, 代理律师订单, 法律文件订单
+        if (!this.data.files.length) {
+          wx.showToast({
+            title: '请上传文件',
+            icon: 'none',
+            duration: 3000
+          });
+          return false;
+        }
+
+        params.curOrderStatus = orderStatus;
+        params.attachmentList = this.data.files;
+
+        orderApi.orderReplyForManyAttachment(params).then(() => {
+          app.toastSuccess('操作成功');
+          this.loadData(this.orderId);
+        });
       }
-      orderApi.orderConfirm(params).then(() => {
-        app.toastSuccess('操作成功');
-        this.loadData(this.orderId);
-      });
+      
     }).catch(e => {});
+  },
+
+  onShareAppMessage: function (ops) {
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    return {
+      title: '虎甲问答',
+      path: `pages/order/detail/index?id=${ this.orderId }`,  // 路径，传递参数到指定页面。
+      imageUrl: '../../../static/images/logo.png',
+      success: function (res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+        app.toastSuccess('转发成功')
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+        app.toastError('转发失败')
+      }
+    }
+ 
   }
 })

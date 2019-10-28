@@ -117,7 +117,8 @@ Page({
         this.setData({ [listName]: list })
     })
   },
-  handleRefreshOrderList({ key }) {
+  handleRefreshOrderList(e) {
+    const { key } = e.detail
     switch(key) {
       case 'isSystem':
         this.getOrderList(1)

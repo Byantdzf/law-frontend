@@ -66,6 +66,33 @@ Component({
         })
       })
     },
+    // 关注
+    handleFocused() {
+      app.confirm({ content: '确认关注此订单吗？' }).then(() => {
+        orderApi.orderFocused(this.data.item.id).then(() => {
+          app.toastSuccess('操作成功')
+          this.triggerEvent('refresh', {
+            key: this.data.key,
+            index: this.data.index,
+            type: 'Focused'
+          })
+        })
+      })
+    },
+    // 取消关注
+    handleCancelFocused() {
+      app.confirm({ content: '确认取消关注此订单吗？' }).then(() => {
+        orderApi.orderCancelFocused(this.data.item.id).then(() => {
+          app.toastSuccess('操作成功')
+          this.triggerEvent('refresh', {
+            key: this.data.key,
+            index: this.data.index,
+            type: 'CancelFocused'
+          })
+        })
+      })
+    },
+    // 拒绝接单
     handleRefuse() {
       app.confirm({ content: '确认拒绝此订单吗？' }).then(() => {
         const params = {
@@ -81,6 +108,7 @@ Component({
         })
       })
     },
+    // 接受订单
     handleReceive() {
       app.confirm({ content: '确认接此订单吗？' }).then(() => {
         const params = {

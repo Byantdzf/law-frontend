@@ -55,6 +55,25 @@ module.exports = {
    * 转发
   */
   orderForward: params => get(`/applets/lawyer/order/operateOrder`, params),
+  // 关注
+  orderFocused: function (businessId) {
+    const params = {
+      businessId,
+      operateBusiness: 1,  // 操作对象1-订单 2-律师 3-文章 4-系统
+      operateType: 4      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+    }          
+    return get('/applets/lawyer/order/operateOrder', params)
+  },
+
+  // 取消关注
+  orderCancelFocused: function (businessId) {
+    const params = {
+      businessId,
+      operateBusiness: 1,  // 操作对象1-订单 2-律师 3-文章 4-系统
+      operateType: 40      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+    }          
+    return get('/applets/lawyer/order/operateOrder', params)
+  },
   /**
    * 拒绝接单
   */
@@ -67,4 +86,8 @@ module.exports = {
    * 律师回复
   */
   orderReply: params => postJson(`/applets/lawyer/order/orderReply`, params),
+  /**
+   * 律师订单回复-多个附件
+  */
+  orderReplyForManyAttachment: params => postJson(`/applets/lawyer/order/orderReplyForManyAttachment`, params),
 }

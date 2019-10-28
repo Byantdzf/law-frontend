@@ -1,52 +1,52 @@
-/* pages/user/collect/index.wxss */
-.page-lawyer {
+.page-order {
   background: #f3f3f3;
 }
-  .list-item {
-    padding: 30rpx;
-    background: #fff;
-    border-radius: 20rpx;
-    align-items: flex-start;
-    border-bottom: 1rpx solid #f3f3f3;
-  }
-  .list-item + .list-item {
-    margin-top: 20rpx;
-  }
-  .list-item .img-box {
-    width: 120rpx;
-    height: 120rpx;
-  }
-  .list-item .img-box image {
-    border-radius: 50%;
-  }
-  .list-item .name {
-    font-size: 32rpx;
-  }
-  .list-item .desc {
-    margin: 10rpx 0;
-  }
-  .list-item .btn-box {
-    margin-top: 16rpx;
-    justify-content: space-between;
-  }
-  .list-item .btn-box button {
-    margin: 0;
-    padding: 0 10rpx;
-    border-color: #e0e0e0;
-    color: #666;
-  }
-  .list-item .btn-box button::after {
-    border-color: #e0e0e0;
-  }
+.page-search {
+  padding: 20rpx 30rpx 0;
+  background: #fff;
+}
+.page-search .location {
+  min-width: 160rpx;
+}
+.page-search .search-box {
+  padding: 8rpx 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 20rpx;
+}
+.page-order .app-tab {
+  background: #fff;
+  border-bottom: 2rpx solid #f3f3f3;
+}
+.app-sort {
+  padding: 20rpx 0;
+  background: #dcdcdc;
+}
+.app-sort .flex-bd {
+  justify-content: center;
+}
+.app-sort .iconfont {
+  margin-left: 6rpx;
+  font-size: 22rpx;
+}
 
-  .app-empty-wrapper {
-    padding: 20rpx;
-  }
-  .app-empty {
-    padding: 40rpx 0;
-    background: #fff;
-    border-radius: 20rpx;
-  }
-  .app-empty .iconfont {
-    font-size: 100rpx;
-  }
+.order-list {
+  padding-bottom: 0;
+}
+
+.app-empty-wrapper {
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 70rpx;
+}
+
+.icons {
+  padding-left: 4rpx;
+  line-height: 0.7;
+}
