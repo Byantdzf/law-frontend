@@ -29,15 +29,15 @@ App({
     this.globalData.scene = e.scene
     this.qqmapsdk = qqmapsdk
 
-    // wx.login({
-    //   success:({ code }) => {
-    //     if(!code) return
-    //     api.login({ code }).then(res => {
-    //       // 保存token
-    //       wx.setStorageSync(tokenName, res.data.sessionId)
-    //     })
-    //   }
-    // })
+    wx.login({
+      success:({ code }) => {
+        if(!code) return
+        api.login({ code }).then(res => {
+          // 保存token
+          wx.setStorageSync(tokenName, res.data.sessionId)
+        })
+      }
+    })
   },
   onShow(o) {
     // console.log(o)

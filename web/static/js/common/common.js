@@ -367,6 +367,37 @@
 				})
 			});
 		},
+
+		playAudio: function (url) {
+			if(!audioCanPlay){
+				return;
+			}
+			
+			var borswer = window.navigator.userAgent.toLowerCase();
+			var op = null;
+			if (borswer.indexOf("trident") >= 0) {
+				op = '<embed id="audio" src="' + url + '" autostart="true" hidden="true" loop="false"></embed>';
+			} else {
+				var op = document.createElement("audio");
+				op.autoplay = true;
+				op.style = 'display:none;';
+				op.id = 'audio';
+				op.src = url;
+			}
+			if ($('#audio').length > 0) {	
+				var audio = document.getElementById('audio');
+				audio.pause();			
+				$('#audio').remove();
+			}
+			
+			$('body').append(op);
+			audioCanPlay = false;
+
+			setTimeout(function(){
+				audioCanPlay = true;
+			},1000)
+				
+		},
 	}
 
 	gather.init();

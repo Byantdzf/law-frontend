@@ -21,9 +21,9 @@ Page({
 
     getUserInfo() {
         userModel.getUser().then(res => {
-            if (res.data.applyStatus == 1) {
+            if (res.data.auditStatus == 1) {
                 app.gotoPage('/pages/tabBar/order/index', 'tab')
-            } else if (res.data.applyStatus == 2) {
+            } else if (res.data.auditStatus == 2) {
               app.gotoPage('/pages/reg/index')
             }
         })

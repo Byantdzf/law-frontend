@@ -9,6 +9,7 @@ if (!window.console.log) {
 var _t = null;  // 保存页面模块对象
 var appName = '虎甲律师问答'; // 项目名称
 var appToken = 'HJLAWYER';
+var audioCanPlay = true;
 
 var global = {
     tel: '0755-123456',

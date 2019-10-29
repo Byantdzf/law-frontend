@@ -22,21 +22,21 @@
 			params[global.rows] = 1;
 			params[global.page] = 1;
 			params.noAuth = 1;
-			utils.getSync(URL.legal.queryNonlitigationLegalServices, params, function (res) {
+			utils.getSync(URL.template.query, params, function (res) {
 				var data = res.data.list || []
 				data = data[0] || {}
-				var src = data.instructionPic || '//static/images/nopic.jpg'
+				var src = data.image || '/static/images/nopic.jpg'
 				$('.services_header img').attr('src', src)
-				$('.services_header p').html(data.instruction || '')
+				$('.services_header p').html(data.brief || '')
 				
 			})
 		},
 
 		queryList: function () {
 			var qlps = {
-				url: URL.legal.queryNonlitigationLegalServices,
+				url: URL.template.query,
 				box: '.services_list',
-				temp: '/page/legal/list.html'
+				temp: '/page/temp/list.html'
 			}
 			utils.queryTempList(qlps);
 		},

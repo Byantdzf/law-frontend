@@ -2,10 +2,12 @@
 	"btn": {
 		"login": "登录",
 		"addBtn": "新增",
-		"viewBtn": "查看详情",
+		"viewBtn": "查看",
+		"viewDetailsBtn": "查看详情",
 		"exportBtn": "导出",
 		"searchBtn": "查询",
 		"resetBtn": "清除",
+		"downloadBtn": "下载",
 		"delBtn": "删除"
 	},
 	"msg": {
@@ -74,6 +76,28 @@
 			{"id": "3", "name": "运营人员2", "type": "warning"},
 			{"id": "4", "name": "运营人员3", "type": "success"},
 			{"id": "6", "name": "运营人员4", "type": "warm"}
+		],
+		"orderStatus": [
+			{"id": "10", "name": "待支付"},
+			{"id": "20", "name": "待接单"},
+			{"id": "30", "name": "已接单"},
+			{"id": "40", "name": "完成待确认"},
+			{"id": "50", "name": "待评价"},
+			{"id": "60", "name": "已完成"}
+		],
+		"orderType": [
+			{"id": "1", "name": "咨询订单"},
+			{"id": "2", "name": "分块法律服务订单"},
+			{"id": "3", "name": "代理律师服务订单"},
+			{"id": "4", "name": "法律文件订单"}
+		],
+		"orderCategory": [
+			{"id": "11", "name": "在线律师咨询"},
+			{"id": "12", "name": "指定律师咨询"},
+			{"id": "21", "name": "日常法律服务"},
+			{"id": "22", "name": "分块法律服务"},
+			{"id": "31", "name": "收费代理"},
+			{"id": "32", "name": "风险代理"}
 		]
 	}
 }

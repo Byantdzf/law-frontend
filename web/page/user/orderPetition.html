@@ -1,0 +1,17 @@
+<div class="orderPetition">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">申诉类型选择：</label>
+            <div class="layui-input-block">
+                <div class="chooseType" data-name="appealType"></div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <textarea name="remark" lay-verify="required" class="layui-textarea" placeholder="请输入您申诉的想法，后台工作人员会在第一时间进行处理"></textarea>
+        </div>
+        <div class="layui-form-item tac">
+            <a href="javascript:;" class="layui-btn layui-btn-red feedbackSubmit" lay-submit="" lay-filter="feedbackSubmit">提交</a>
+            <a href="javascript:;" class="layui-btn layui-btn-primary cancel">取消</a>
+        </div>
+    </div>
+</div>

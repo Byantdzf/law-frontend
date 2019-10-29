@@ -74,32 +74,32 @@ Page({
         params.from = 2
         api.accountLogin(params).then(res => {
             wx.setStorageSync(tokenName, res.data.sessionId)
-            if (res.data.isOpenIdEmpty) {
-                app.confirm({ content: '您的帐号还未绑定微信，是否绑定？' }), then(res => {
+            // if (res.data.isOpenIdEmpty) {
+            //     app.confirm({ content: '您的帐号还未绑定微信，是否绑定？' }), then(res => {
 
-                    // wx.login({
-                    //     success: ({ code }) => {
-                    //         if (!code) return
-                    //         api.login({ code }).then(res => {
-                    //             // 保存token
-                    //             wx.setStorageSync(tokenName, res.data.sessionId)
+            //         // wx.login({
+            //         //     success: ({ code }) => {
+            //         //         if (!code) return
+            //         //         api.login({ code }).then(res => {
+            //         //             // 保存token
+            //         //             wx.setStorageSync(tokenName, res.data.sessionId)
 
-                    //             api.getUserInfo(params).then(res => {
-                    //                 console.log(res)
-                    //             })
-                    //         })
-                    //     }
-                    // })
-                })
-            } else {
+            //         //             api.getUserInfo(params).then(res => {
+            //         //                 console.log(res)
+            //         //             })
+            //         //         })
+            //         //     }
+            //         // })
+            //     })
+            // } else {
                 userApi.getUser().then(res => {
-                    if (res.data.applyStatus == 2) {
-                        app.gotoPage('/pages/tabBar/order/index', 'tab')
+                    if (res.data.auditStatus == 2) {
+                        app.gotoPage('/pages/tabBar/home/index', 'tab')
                     } else {
                         app.gotoPage('/pages/waitAuth/index')
                     }
                 })
-            }
+            // }
         })
     },
 })

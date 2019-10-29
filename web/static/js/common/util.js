@@ -110,7 +110,7 @@ layui.define(function (exports) {
 
 			gather.setCookie(global.requestAreaCookie, areas.id);
 
-			if (url.indexOf('?') > -1) {
+			if (url && url.indexOf('?') > -1) {
 				url = url + '&_=' + Math.random()
 			} else {
 				url = url + '?_=' + Math.random()
@@ -970,7 +970,7 @@ layui.define(function (exports) {
 
 				tableBox.html(html);
 
-				actions && actions(params[global.page])
+				actions && actions(params[global.page], arr)
 
 				// 处理分页
 				if (rs.length && !p.noPage) {

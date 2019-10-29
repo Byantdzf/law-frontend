@@ -58,13 +58,27 @@ var URL = {
 		postMandatoryLawyer: pcHost + '/pc/user/consult/publish/3',      // 代理律师服务
 		postTemplate: pcHost + '/pc/user/consult/publish/4'              // 法律文件购买
 	},
+	template: {
+		query: pcHost + '/pc/user/template/list',
+		details: pcHost + '/pc/user/template/list/',
+		downloadUrl: pcHost + '/applets/lawyer/downloadFile'
+	},
 	user: {
 		attention: pcHost + '/pc/user/focused',
 		cancelattention: pcHost + '/pc/user/order/operateOrder',
 		coupon: pcHost + '/pc/user/coupon/list',
 		feedback: pcHost + '/pc/user/feedback',
 		order: {
-			query: pcHost + '/pc/user/order/orderList'
+			query: pcHost + '/pc/user/order/orderList',
+			getById: pcHost + '/pc/user/order/orderDetail',
+			cancel: pcHost + '/pc/user/order/cancel',
+			reply: pcHost + '/pc/user/msg/orderMsglist',
+			petition: pcHost + '/pc/user/order/appeal/',
+			askAgain: pcHost + '/pc/user/order/askSecond/',
+			confirm: pcHost	 + '/pc/user/order/confirm/'
 		}
+	},
+	lawyerObj: {
+		login: pcHost + '/applets/lawyer/loginByAccount'
 	}
 }

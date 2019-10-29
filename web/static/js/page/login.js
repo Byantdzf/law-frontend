@@ -4,14 +4,19 @@
 		init: function () {
 			var _t = this;
 
-			form.on('submit(loginSubmit)', function () {
-				utils.alert('还未绑定微信，立即绑定', {}, function () {
-					utils.msg('绑定成功');
-					utils.setCookie(global.userInfoToken, global.testUserInfo);
-					setTimeout(function () {
-						window.location = '/lawyer/auth.html';
-					}, 1000);
-				});
+			form.on('submit(loginSubmit)', function (res) {
+				var params = res.field;
+				params.from = 2;
+				utils.get(URL.lawyerObj.login, params, function (res) {
+					console.log(res)
+				})
+				// utils.alert('还未绑定微信，立即绑定', {}, function () {
+				// 	utils.msg('绑定成功');
+				// 	utils.setCookie(global.userInfoToken, global.testUserInfo);
+				// 	setTimeout(function () {
+				// 		window.location = '/lawyer/auth.html';
+				// 	}, 1000);
+				// });
 			})
 
 			$('.wechatLogin').click(function () {
