@@ -3,7 +3,7 @@
     <el-row class="login-box">
       <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginForm">
         <el-form-item class="logo-item">
-          <img class="logo-img" src="/img/logo1.png" alt="logo" />
+          <img class="logo-img" src="/img/logo.png" alt="logo" />
           <p class="cl-666 ta-c logo-txt">{{ appTitle }}</p>
         </el-form-item>
         <el-form-item class="input-item" prop="accountName">
@@ -50,9 +50,10 @@ import { mapActions } from 'vuex'
 import { treeToList } from '@/utils/tools'
 import SYSTEM from '@/utils/system'
 import Bus from '@/utils/bus'
-import bg1 from '@/assets/images/login_bg1.jpg'
-import bg2 from '@/assets/images/login_bg2.jpg'
-import bg3 from '@/assets/images/login_bg3.jpg'
+import loginBg from '@/assets/images/login_bg.jpg'
+// import bg1 from '@/assets/images/login_bg1.jpg'
+// import bg2 from '@/assets/images/login_bg2.jpg'
+// import bg3 from '@/assets/images/login_bg3.jpg'
 
 const md5 = require('md5')
 
@@ -62,7 +63,8 @@ export default {
       appTitle: SYSTEM.title,
       copyright: SYSTEM.copyright,
       isLoading: false,
-      bgItems: [bg1, bg2, bg3],
+      // bgItems: [bg1, bg2, bg3],
+      bgItems: [loginBg],
       loginForm: {
         accountName: '',
         password: ''
@@ -158,12 +160,14 @@ export default {
         !this.isLoading && this.loginSubmit()
       })
 
-      this.bgTimer = setInterval(() => {
-        this.curBgIndex ++
-        if (this.curBgIndex > this.bgItems.length - 1) {
-          this.curBgIndex = 0
-        }
-      }, 5000)
+      if (this.bgItems.length > 1) {
+        this.bgTimer = setInterval(() => {
+          this.curBgIndex ++
+          if (this.curBgIndex > this.bgItems.length - 1) {
+            this.curBgIndex = 0
+          }
+        }, 5000)
+      }
     })
   },
   beforeDestroy() {
@@ -243,7 +247,7 @@ export default {
     .login-box {
       position: relative;
       width: 400px;
-      margin: 12% auto 0;
+      margin: 10% auto 0;
       padding: 10px;
       border-radius:20px;
       z-index: 100;

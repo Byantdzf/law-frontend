@@ -14,10 +14,7 @@
         class="app-side__bd"
         :reset="menuFold"
       >
-        <app-menu
-          @clickTime="clickTime"
-
-          :collapse="menuFold" />
+        <app-menu :collapse="menuFold" />
       </app-scroll-box>
     </el-row>
     <el-row class="app-main" id="app-main">
@@ -26,7 +23,7 @@
           {{ item.name }}
         </el-breadcrumb-item>
       </el-breadcrumb>
-      <router-view class="app-main-box pl-20 pr-20" :key="keyTime"/>
+      <router-view class="app-main-box pl-20 pr-20" />
       <app-loading :show="ajaxLoading" />
     </el-row>
     <app-dialog
@@ -67,7 +64,6 @@
     mixins: [Dialog, Form],
     data() {
       return {
-        keyTime:new Date().getTime(),
         formItems: [
           {
             label: '旧密码：',
@@ -128,14 +124,7 @@
         body.className = classNames.join(' ')
       }
     },
-    mounted(){
-      console.log('123')
-
-    },
     methods: {
-      clickTime(){
-        this.keyTime=new Date().getTime();
-      },
       toggleMenuVisible() {
         this.setState({
           menuFold: !this.menuFold
