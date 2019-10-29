@@ -14,6 +14,7 @@ export default {
     append: [String, Number, Object],
     field: [String, Array],
     placeholder: String,
+    maxlength: Number,
     size: String,
     type: String,
     password: Boolean,
@@ -57,14 +58,15 @@ export default {
             size,
             disabled,
             autosize,
-            autocomplete
+            autocomplete,
+            maxlength
           } = this.$props
 
       type == 'input' && (type = 'text')
 
       this.password && (type = 'password')
 
-      return { placeholder, type, size, disabled, autosize, autocomplete }
+      return { placeholder, type, size, disabled, autosize, autocomplete, maxlength }
     }
   },
   watch: {

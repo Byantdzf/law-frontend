@@ -12,6 +12,7 @@
 <script>
   export default {
     name: 'app-table-swtich',
+    inheritAttrs: false,
     props: ['row', 'col', 'value', 'disabled'],
     data() {
       return {

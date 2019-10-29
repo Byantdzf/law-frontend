@@ -1,7 +1,7 @@
 
 <template>
   <div :class="['el-input readonly', `el-input--${ size || 'small' }`, defaultUnitValue ? 'el-input-group el-input-group--append' : '']">
-    <span :class="['el-input__inner', { 'is-empty': !defaultValue && defaultValue !== 0 }]">{{ defaultValue || '--' }}</span>
+    <span :class="['el-input__inner', { 'is-empty': !defaultValue && defaultValue !== 0 }]">{{ defaultValue || defaultValue === 0 ? defaultValue : '--' }}</span>
     <span class="el-input-group__append" v-if="defaultUnitValue">{{ defaultUnitValue }}</span>
   </div>
 </template>

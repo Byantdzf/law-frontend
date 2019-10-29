@@ -31,24 +31,24 @@ export default {
         <div class="app-table-btns">
           {
             items.map((item, index) =>
-              <el-button
-                type={ item.type || 'text' }
+              <el-link
+                type={ item.type || 'primary' }
                 nativeOn-click={ ($event) => this.$emit('click', { ...params, index }, $event) }
               >
                 { item.label }
-              </el-button>
+              </el-link>
             )
           }
         </div>
       )
     } else {
       return (
-        <el-button
-          type="text"
+        <el-link
+          type="primary"
           nativeOn-click={ ($event) => this.$emit('click', params, $event) }
         >
           { text }
-        </el-button>
+        </el-link>
       )
     }
   }

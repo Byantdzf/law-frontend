@@ -57,10 +57,10 @@ export default {
         {
           itemWidth: '33.3333%',
           label: '商户名称：',
-          field: 'tenantId|id',
+          field: 'tenant',
           placeholder: '模糊搜索',
           type: 1,
-          value: row.tenantId,
+          value: row.tenant,
           fetchSuggestions: (value, cb) => {
             const name = value.trim()
             const tenantType = this.tenantType
@@ -141,12 +141,7 @@ export default {
     },
     // 表单提交
     formSubmit(form) {
-      // console.log(form)
-      let params = { ...form }
-      if(this.row && this.row.hasOwnProperty('id')) {
-        params.id = this.row.id
-      }
-      this.$emit('submit', params)
+      this.$emit('submit', form)
     },
     formReset() {
       this.initForm({})

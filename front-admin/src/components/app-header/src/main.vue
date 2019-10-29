@@ -71,7 +71,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import bus from '@/utils/bus'
+  import Bus from '@/utils/bus'
 
 	export default {
     name: 'app-header',
@@ -87,7 +87,7 @@
             title: this.$t('text.tips'),
             type: 'warning'
           })
-          bus.$emit('reLogin')
+          Bus.$emit('logout')
         } catch (error) {
           // error
         }

@@ -10,6 +10,7 @@
 			:key="menu.id"
 			:menu="menu"
 			:root="menu"
+			@itemClick="itemClick"
 		/>
 	</el-menu>
 </template>
@@ -46,6 +47,10 @@
 			}
 		},
 		methods: {
+			itemClick(){
+				this.$emit("clickTime")
+			},
+
 			setCurMenuId() {
 				let _t = this
 				let	menu = null
@@ -73,6 +78,9 @@
 					}
 				})(this.menus)
 			}
+		},
+		created() {
+			this.setCurMenuId()
 		}
 	}
 </script>

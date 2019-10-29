@@ -85,30 +85,6 @@ export default {
         },
         {
           itemWidth: '33.3333%',
-          label: '供应商户：',
-          field: 'tenantId|id',
-          placeholder: '模糊搜索',
-          type: 1,
-          fetchSuggestions: (value, cb) => {
-            const name = value.trim()
-            let params = {}
-
-            if (!name) {
-              cb([])
-              return false
-            } else {
-              params.name = name
-            }
-
-            this.tenantGetKV(params).then(res => {
-              cb(res.data || [])
-            }).catch(() => {
-              cb([])
-            })
-          }
-        },
-        {
-          itemWidth: '33.3333%',
           label: '下单时间：',
           field: 'registerTime',
           type: 7,

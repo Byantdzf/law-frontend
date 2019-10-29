@@ -18,7 +18,7 @@ const data = {
     // 目的地 -- 添加
     destAdd: (context, payload) => postJson('ptDataDestination/add', payload),
     // 目的地 -- 修改
-    destUpdate: (context, payload) => postJson('ptDataDestination/update', payload),
+    destUpdate: (context, payload) => postJson('ptDataDestination/update', payload)
   }
 }
   

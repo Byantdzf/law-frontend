@@ -23,8 +23,13 @@
         </template>
         <template v-else>
           <p v-if="saleUnitItems.includes('1')">成人：{{ $val(scope.row, 'adultQty') }}</p>
-          <p v-if="saleUnitItems.includes('2')">儿童：{{ $val(scope.row, 'childQty') }}</p>
+          <p v-if="saleUnitItems.includes('2')">
+            {{ saleUnitItems.includes('5') ? '占床儿童' : '儿童' }}：
+            {{ $val(scope.row, 'childQty') }}
+          </p>
+          <p v-if="saleUnitItems.includes('5')">不占床儿童：{{ $val(scope.row, 'noBedChildQty') }}</p>
           <p v-if="saleUnitItems.includes('3')">婴儿：{{ $val(scope.row, 'babyQty') }}</p>
+          <p v-if="saleUnitItems.includes('6')">单房差：{{ $val(scope.row, 'roomDisparityQty') }}</p>
         </template>
       </template>
     </el-table-column>

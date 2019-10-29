@@ -7,17 +7,13 @@
         :key="index"
         @click="handleItemClick(item)"
       >
-        <a
-          class="file-con"
-          :href="item[fConfig.urlKey]"
-          title="查看/下载"
-          target="_blank"
-        >
-          <img 
+        <a class="file-con">
+          <el-image 
             v-if="fConfig.preview"
             class="file-img"
             :alt="item[fConfig.nameKey]"
             :src="`${item[fConfig.urlKey]}?x-oss-process=image/resize,m_fill,w_66,h_66`"
+            :preview-src-list="files.map(v => v[fConfig.urlKey])"
           />
           <el-button
             v-else

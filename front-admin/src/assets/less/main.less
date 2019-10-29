@@ -54,6 +54,11 @@
   }
 }
 
+.app-container {
+  position: relative;
+  height: 100%;
+}
+
 /* 布局相关 end */
 
 /* 文本相关 start */
@@ -140,6 +145,12 @@
         padding: 6px 0;
         text-align: center;
         line-height: 26px;
+        &.is-left {
+          text-align: left;
+        }
+        &.is-right {
+          text-align: right;
+        }
       }
       .el-table__empty-text {
         padding: 60px 0;

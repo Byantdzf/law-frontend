@@ -28,16 +28,16 @@
 		props: {
       row: Object,
       col: Object,
-      options: Array,
+      options: {
+        type: [Array, Object],
+        default: () => []
+      },
       labelFormater: Function,
       value: [String, Number, Array],
       field: String,
 			placeholder: String,
       size: String,
-      clearable: {
-        type: Boolean,
-        default: false
-      },
+      clearable: Boolean,
       multiple: Boolean,
       disabled: Boolean,
       'popper-append-to-body': {
@@ -63,20 +63,28 @@
         return bind
       },
       renderOptions() {
-        let arr = this.options || []
+        let arr = []
 
-        arr = arr.reduce((res, cur) => {
-          if(isString(cur) || isNumber(cur)) {
-            res.push({
-              id: cur,
-              name: cur
+        if (isPlainObject(this.options)) {
+          for (let k in this.options) {
+            arr.push({
+              id: isNumber(+k) ? +k : k,
+              name: this.options[k]
             })
-          } else if(isPlainObject(cur)) {
-            res.push(cur)
           }
-
-          return res
-        }, [])
+        } else {
+          arr = this.options.reduce((res, cur) => {
+            if (isString(cur) || isNumber(cur)){
+              res.push({
+                id: cur,
+                name: cur
+              })
+            } else if(isPlainObject(cur)) {
+              res.push(cur)
+            }
+            return res
+          }, [])
+        }
 
         return arr
       }
@@ -97,8 +105,12 @@
         }
       },
       handleChange(value) {
+        const curItem = this.renderOptions.filter(v => v.id == value)[0]
+
         this.$emit('change', { 
           value,
+          curItem,
+          type: 2,
           field: this.field,
           row: this.row,
           col: this.col

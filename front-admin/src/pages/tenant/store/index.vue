@@ -153,6 +153,7 @@
             field: 'tenantId|id',
             placeholder: '模糊搜索',
             type: 1,
+            autofill: true,
             fetchSuggestions: (value, cb) => {
               const name = value.trim()
               const tenantType = this.tenantType
@@ -200,16 +201,37 @@
         ]
       },
       // 表单提交
-      async formSubmit(hqTenantId) {
+      async formSubmit(form) {
         try {
+          const searchForm = this.$refs.searchForm
+          const tenantId = this.$val(form, 'tenant.id')
           let params = {
             tenantId: this.curRow.id,
-            hqTenantId
+            hqTenantId: form
           }
-          await this.tenantDivideHq(params)
-          this.$msgSuccess('操作成功')
-          this.closeDialog()
-          this.refreshTable()
+          switch (this.dialogComponent) {
+            case 'HqDivide':
+              await this.tenantDivideHq(params)
+              this.$msgSuccess('操作成功')
+              this.closeDialog()
+              this.refreshTable()
+              break;
+            case 'MoreFilter':
+              this.searchTenant = form.tenant
+              this.tableParams = {
+                ...this.tableParams,
+                ...form,
+                tenantId
+              }
+              delete this.tableParams.tenant
+              if (searchForm) {
+                searchForm.updateFormItem('tenantId|id', 'value', form.tenant)
+                searchForm.updateFormItem('tenantNo', 'value', form.tenantNo)
+                searchForm.updateFormItem('tenantType', 'value', form.tenantType)
+              }
+              this.closeDialog()
+              break;
+          }
         } catch (e) {
           // error
         }
@@ -236,9 +258,14 @@
             break;
         }
       },
+      searchChange({ field, value }) {
+        if(field == 'tenantId|id') {
+          this.searchTenant = value
+        }
+      },
       moreFilter() {
         this.dialogTitle = '高级检索'
-        this.dialogForm = this.tableParams
+        this.dialogForm = { ...this.tableParams, tenant: this.searchTenant }
         this.dialogComponent = 'MoreFilter'
         this.dialogVisible = true
       },

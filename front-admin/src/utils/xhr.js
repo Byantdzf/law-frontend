@@ -12,7 +12,8 @@
 */
 
 import axios from 'axios'
-import bus from './bus'
+import VueCookie from 'vue-cookie'
+import Bus from './bus'
 import SYSTEM from '@/utils/system'
 
 let tasks = []
@@ -31,12 +32,20 @@ const Ajax = function(options = {}) {
       auth = true,
       contentType = 'application/x-www-form-urlencoded; charset=utf-8'
     } = options
+
+    if (url === '/' && path.indexOf('/') === 0) {
+      path = path.replace('/', '')
+    }
     
     // 合并header
     headers = Object.assign({
       'Content-Type': contentType,
-      'authentication': auth ? SYSTEM.userToken() : null
+      // 'authentication': auth ? SYSTEM.userToken() : null
     }, headers)
+
+    if (auth) {
+      VueCookie.set(SYSTEM.tokenName, SYSTEM.userToken())
+    }
     
     // axios config
     let config = {
@@ -65,13 +74,13 @@ const Ajax = function(options = {}) {
     // 是否显示loading
     if (loading) {
       tasks.push(path)
-      tasks.length === 1 && bus.$emit('loading', true)
+      tasks.length === 1 && Bus.$emit('loading', true)
     }
 
     const hideLoading = () => {
       if (loading) {
         tasks = tasks.filter(v => v != path)
-        !tasks.length && bus.$emit('loading', false)
+        !tasks.length && Bus.$emit('loading', false)
       }
     }
 
@@ -84,8 +93,8 @@ const Ajax = function(options = {}) {
       if (code === successCode || successCode === 'any') {
         resolve(data)
       } else {
-        code === 3 && bus.$emit('reLogin')
-        bus.$emit('message', {
+        code === 3 && Bus.$emit('logout')
+        Bus.$emit('message', {
           type: 'error',
           msg: data ? data.msg : 'data is null'
         })
@@ -96,8 +105,8 @@ const Ajax = function(options = {}) {
       const status = err && err.response ? err.response.status : 0
 
       hideLoading()
-      status === 401 && bus.$emit('reLogin')
-      bus.$emit('message', {
+      status === 401 && Bus.$emit('logout')
+      Bus.$emit('message', {
         type: 'error',
         msg: err.message || '服务异常！'
       })

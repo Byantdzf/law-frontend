@@ -14,7 +14,7 @@
         <span class="con">{{ $val(row, 'order.remarkDist') }}</span>
       </el-row>
     </el-col>
-    <el-col :sm="12" :lg="8">
+    <el-col :sm="12" :lg="7">
       <el-row>
         <span class="label cl-999">订单号：</span>
         <span class="con">{{ $val(row, 'order.orderNo') }}</span>
@@ -32,7 +32,7 @@
         </span>
       </el-row>
     </el-col>
-    <el-col :sm="12" :lg="4">
+    <el-col :sm="12" :lg="6">
       <el-row>
         <span class="label cl-999">单价/数量：</span>
         <span class="con">
@@ -41,23 +41,42 @@
             <span class="pr-10">
               <i class="cl-error">￥{{ $val(row, 'order.unitPriceAdults') }}</i> / {{ $val(row, 'order.qtyAdults') }}
             </span>
+            <br />
           </template>
           <template v-if="$val(row, 'order.qtyChild')">
-            <span>儿童：</span>
+            <span>
+              {{ $val(row, 'order.qtyNoBedChild') ? '占床儿童' : '儿童' }}：
+            </span>
             <span class="pr-10">
               <i class="cl-error">￥{{ $val(row, 'order.unitPriceChild') }}</i> / {{ $val(row, 'order.qtyChild') }}
             </span>
+            <br />
+          </template>
+          <template v-if="$val(row, 'order.qtyNoBedChild')">
+            <span>不占床儿童：</span>
+            <span class="pr-10">
+              <i class="cl-error">￥{{ $val(row, 'order.unitPriceNoBedChild') }}</i> / {{ $val(row, 'order.qtyNoBedChild') }}
+            </span>
+            <br />
           </template>
           <template v-if="$val(row, 'order.qtyBaby')">
             <span>婴儿：</span>
             <span>
               <i class="cl-error">￥{{ $val(row, 'order.unitPriceBaby') }}</i> / {{ $val(row, 'order.qtyBaby') }}
             </span>
+            <br />
           </template>
           <template v-if="$val(row, 'order.qty')">
             <span>数量：</span>
             <span>
               <i class="cl-error">￥{{ $val(row, 'order.unitPrice') }}</i> / {{ $val(row, 'order.qty') }}
+            </span>
+            <br />
+          </template>
+          <template v-if="$val(row, 'order.qtyRoomDisparity')">
+            <span>单房差：</span>
+            <span>
+              <i class="cl-error">￥{{ $val(row, 'order.unitPriceRoomDisparity') }}</i> / {{ $val(row, 'order.qtyRoomDisparity') }}
             </span>
           </template>
         </span>
@@ -66,10 +85,10 @@
         <span class="label cl-999">退款中：</span>
         <span class="con cl-error">￥{{ $val(row, 'order.applyRefundAmount') }}</span>
       </el-row>
-      <el-row v-else>
+      <!--<el-row v-else>
         <span class="label cl-999">退款金额：</span>
         <span class="con cl-error">￥{{ $val(row, 'order.refundAmount') }}</span>
-      </el-row>
+      </el-row>-->
       <el-row>
         <span class="label cl-999">附加费：</span>
         <span class="con cl-error">￥{{ $val(row, 'order.additionalAmount', 0) }}</span>
@@ -79,7 +98,7 @@
         <span class="con cl-error">￥{{ $val(row, 'order.orderAmount') }}</span>
       </el-row>
     </el-col>
-    <el-col :sm="12" :lg="6">
+    <el-col :sm="12" :lg="5">
       <el-row>
         <span class="label cl-999">下单时间：</span>
         <span class="con">{{ $val(row, 'order.orderTime') }}</span>

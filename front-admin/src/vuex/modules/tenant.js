@@ -13,6 +13,8 @@ const tenant = {
     tenantUpdate: (context, payload) => postJson('ptTenant/update', payload),
     // 商户 -- 总部划分
     tenantDivideHq: (context, payload) => post('ptTenant/divideHq', payload),
+    // 商户 -- 分配销售
+    tenantDivideSell: (context, payload) => post('/ptTenant/divideSell', payload),
 
     // 商户 -- 详情
     tenantLevelView: (context, payload) => get('ptTenantLevel/selectOne', payload),

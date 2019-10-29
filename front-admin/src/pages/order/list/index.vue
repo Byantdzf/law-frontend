@@ -69,6 +69,7 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import { getTimestamp } from '@/utils/tools'
   import AppTable from '@/mixins/table'
   import AppDialog from '@/mixins/dialog'
   import AppSearch from '@/mixins/search'
@@ -80,7 +81,7 @@
 
   export default {
     components: {
-      DetailTravel: () => import('@/pages/order/detail/travel'),
+      TravelOrderDetail: () => import('@/pages/order/detail/travel'),
       FilterForm: () => import('./filterForm')
     },
     mixins: [AppTable, AppDialog, AppSearch],
@@ -126,7 +127,9 @@
             field: 'payType',
             width: 120,
             align: 'center',
-            default: '--'
+            formater: ({ payType }) => {
+              return this.$t('rs.payType')[payType] || '--'
+            }
           },{
             label: '订单来源',
             field: 'orderSource',
@@ -197,10 +200,17 @@
             type: 1
           },
           {
+            label: '地接团号：',
+            field: 'groupNo',
+            placeholder: '地接团号',
+            type: 1
+          },
+          {
             label: '下单商户：',
             field: 'tenantId|id',
             placeholder: '模糊搜索',
             type: 1,
+            autofill: true,
             fetchSuggestions: (value, cb) => {
               const name = value.trim()
               let params = {}
@@ -220,27 +230,23 @@
             }
           },
           {
-            label: '供应商户：',
-            field: 'tenantId|id',
-            placeholder: '模糊搜索',
-            type: 1,
-            fetchSuggestions: (value, cb) => {
-              const name = value.trim()
-              let params = {}
-
-              if (!name) {
-                cb([])
-                return false
-              } else {
-                params.name = name
+            label: '下单时间：',
+            field: ['orderTimeStart', 'orderTimeEnd'],
+            startPlaceholder: '开始时间',
+            endPlaceholder: '结束时间',
+            type: 10,
+            pickerOptions: {
+              disabledDate(time) {
+                return time.getTime() > Date.now()
               }
-
-              this.tenantGetKV(params).then(res => {
-                cb(res.data || [])
-              }).catch(() => {
-                cb([])
-              })
             }
+          },
+          {
+            label: '出行时间：',
+            field: ['travelDateStart', 'travelDateEnd'],
+            startPlaceholder: '开始时间',
+            endPlaceholder: '结束时间',
+            type: 10
           }
         ]
 
@@ -248,10 +254,12 @@
           {
             label: '确认',
             code: 'confirm'
-          }, {
-            label: '高级检索',
-            code: 'more-filter'
-          }, {
+          }, 
+          // {
+          //   label: '高级检索',
+          //   code: 'more-filter'
+          // }, 
+          {
             label: '重置',
             code: 'reset',
             type: 'default'
@@ -300,15 +308,44 @@
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
+        const url = `/orderDist/export`
+        const searchData = this.$refs.searchForm.getData()
+        const { orderTimeStart: ots, orderTimeEnd: ote, travelDateStart: tds, travelDateEnd: tde } = searchData
+        let params = []
+        let ids = this.tableSelected.map(v => v.id)
+        const origin = window.location.origin
+
         switch (type) {
           case 'detail':
-            this.dialogIsFull = true
-            res = await this.orderView(row.id)
-            this.dialogTitle = '订单号：' + row.orderNo
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'DetailTravel'
-            this.dialogVisible = true
+            this.$router.openNewTab('/order/detail/travel', { id: row.id })
+            break;
+          case 'export':
+            if (ids.length) {
+              params.ids = ids.join(',')
+            } else {
+              for(let k in searchData) {
+                if (searchData[k] || searchData[k] === 0) {
+                  params.push(`${ k }=${ searchData[k] }`)
+                }
+              }
+  
+              if (!ots && !tds) {
+                this.$msgError('请选择下单或出行的起始时间，且不超过30天')
+                return false
+              }
+  
+              if (ots && ote && (getTimestamp(ote) - getTimestamp(ots)) > 30*24*3600*1000) {
+                this.$msgError('下单时间不能超过30天')
+                return false
+              }
+  
+              if (tds && tde && (getTimestamp(tde) - getTimestamp(tds)) > 30*24*3600*1000) {
+                this.$msgError('出行时间不能超过30天')
+                return false
+              }
+            }
+            
+            window.open(`${ origin + url }?${ params.join('&') }`)
             break;
         }
       },
@@ -321,6 +358,9 @@
       },
       ...mapActions('order', [
         'orderView',
+      ]),
+      ...mapActions('tenant', [
+        'tenantGetKV'
       ])
     },
     created() {

@@ -6,13 +6,13 @@
 import { isString, isFunction } from 'lodash-es'
 export default {
 	name: 'app-rs-text',
-  props: ["row", "col", "type"],
+  props: ["row", "col", "type", "rsKey"],
   computed: {
     int() {
       return this.row[this.col.prop]
     },
     rs() {
-      return this.col.rs || this.col.prop
+      return this.rsKey || this.col.rs || this.col.prop
     },
     text() {
       let str = ''

@@ -122,18 +122,18 @@
 
 				obj = [...this.formItems].reduce((res, cur) => {
 					let formValue = this.getValByCompare(form[cur.field], '')
-
+					
 					if (isArray(cur.field) || (isString(cur.field) && ~cur.field.indexOf(','))) {
 						let fields = isArray(cur.field) ? cur.field : cur.field.split(',')
 						
 						fields.forEach((k, i) => {
 							let [key, newKey] = this.getValueKeyName(k)
-
+							
 							if (isString(formValue) || isNumber(formValue)) {
 								res[key] = isNumber(formValue) ? formValue : formValue.split(',')[i]
 							} else if(isPlainObject(formValue)) {
 								res[key] = this.getValByCompare(formValue[newKey], formValue[key])
-							} else if(isArray(formValue)) {
+							} else if(isArray(formValue) && formValue.length) {
 								if (formValue.every(v => isPlainObject(v))) {
 									res[key] = formValue.map(v => this.getValByCompare(v[newKey], v[key]))
 								} else if(formValue.every(v => isArray(v))) {
@@ -141,6 +141,8 @@
 								} else {
 									res[key] = formValue[i] ? this.getValByCompare(formValue[i][newKey], formValue[i]) : formValue[i]
 								}
+							} else {
+								res[key] = ''
 							}
 						})
 					} else {
@@ -332,7 +334,7 @@
 				return vm || {}
 			},
 			// 表单form发生变化
-			formChange({ field, value, index }) {
+			formChange({ field, value, index, curItem, type }) {
 
 				this.updateFormItem(field, 'value', value)
 
@@ -346,12 +348,12 @@
 					}
 
 					links.forEach(link => {
+						const v = type == 2 ? curItem : value
 						let [ to, from ] = this.getValueKeyName(link)
-
 						if (this.form.hasOwnProperty(link)) {
-							this.updateFormItem(link, 'value', from ? value[from] : value[to])
+							this.updateFormItem(link, 'value', from ? v[from] : v[to])
 						} else if(this.form.hasOwnProperty(to)) {
-							this.updateFormItem(to, 'value', from ? value[from] : value[to])
+							this.updateFormItem(to, 'value', from ? v[from] : v[to])
 						}
 					})
 				}

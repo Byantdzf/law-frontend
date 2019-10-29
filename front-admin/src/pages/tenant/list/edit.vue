@@ -121,6 +121,7 @@ export default {
           field: 'tenantAccount',
           type: 1,
           value: row.tenantAccount,
+          maxlength: 64,
           required: true,
           disabled: !!this.id
         },
@@ -129,6 +130,7 @@ export default {
           field: 'tenantName',
           type: 1,
           value: row.tenantName,
+          maxlength: 64,
           required: true
         },
         {
@@ -138,7 +140,7 @@ export default {
           type: 2,
           value: row.destinations || [],
           options: [],
-          required: true,
+          required: !this.id,
           disabled: true,
           multiple: true,
           on: {
@@ -159,6 +161,7 @@ export default {
           label: '详细地址',
           field: 'info.address',
           type: 1,
+          maxlength: 250,
           value: this.info.address,
           required: true
         },
@@ -167,6 +170,7 @@ export default {
           field: 'info.contactName',
           type: 1,
           value: this.info.contactName,
+          maxlength: 32,
           required: true
         },
         {
@@ -194,6 +198,7 @@ export default {
           label: '银行账户名',
           field: 'identification.bankAccountName',
           type: 1,
+          maxlength: 32,
           value: this.identification.bankAccountName,
           required: true
         },
@@ -201,6 +206,7 @@ export default {
           label: '开户银行',
           field: 'identification.bankOpenBranch',
           type: 1,
+          maxlength: 64,
           value: this.identification.bankOpenBranch,
           required: true
         },
@@ -208,6 +214,7 @@ export default {
           label: '银行账号',
           field: 'identification.bankAccountNo',
           type: 1,
+          maxlength: 32,
           value: this.identification.bankAccountNo,
           required: true
         },
@@ -215,6 +222,7 @@ export default {
           label: '统一社会信用代码',
           field: 'identification.societyCode',
           type: 1,
+          maxlength: 64,
           value: this.identification.societyCode,
           required: true
         },

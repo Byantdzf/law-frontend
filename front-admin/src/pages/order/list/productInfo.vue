@@ -14,16 +14,26 @@
         <span class="con pr-10">￥{{ $val(row, 'unitPriceAdults') }}/{{ $val(row, 'qtyAdults') }}</span>
       </template>
       <template v-if="$val(row, 'qtyChild')">
-        <span class="label">儿童：</span>
+        <span class="label">
+          {{ $val(row, 'qtyNoBedChild') ? '占床儿童' : '儿童' }}：
+        </span>
         <span class="con pr-10">￥{{ $val(row, 'unitPriceChild') }}/{{ $val(row, 'qtyChild') }}</span>
+      </template>
+      <template v-if="$val(row, 'qtyNoBedChild')">
+        <span class="label">不占床儿童：</span>
+        <span class="con pr-10">￥{{ $val(row, 'unitPriceNoBedChild') }}/{{ $val(row, 'qtyNoBedChild') }}</span>
       </template>
       <template v-if="$val(row, 'qtyBaby')">
         <span class="label">婴儿：</span>
-        <span class="con">￥{{ $val(row, 'unitPriceBaby') }}/{{ $val(row, 'qtyBaby') }}</span>
+        <span class="con pr-10">￥{{ $val(row, 'unitPriceBaby') }}/{{ $val(row, 'qtyBaby') }}</span>
       </template>
       <template v-if="$val(row, 'qty')">
         <span class="label">数量：</span>
         <span class="con">￥{{ $val(row, 'unitPrice') }}/{{ $val(row, 'qty') }}</span>
+      </template>
+      <template v-if="$val(row, 'qtyRoomDisparity')">
+        <span class="label">单房差：</span>
+        <span class="con">￥{{ $val(row, 'unitPriceRoomDisparity') }}/{{ $val(row, 'qtyRoomDisparity') }}</span>
       </template>
     </p>
     <p>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { get, post } from '@/utils/xhr'
+import { get, post, postJson } from '@/utils/xhr'
 import AppForm from '@/mixins/form'
 export default {
   mixins: [AppForm],
@@ -37,7 +37,7 @@ export default {
           field: 'method',
           type: 3,
           value: 'get',
-          options: ['get', 'post']
+          options: ['get', 'post', 'postJson']
         },
         {
           label: 'params：',
@@ -54,15 +54,17 @@ export default {
       if (path.indexOf('/') === 0) {
         path = path.replace('/', '')
       }
+      let p = {}
+      params.split('&').forEach(param => {
+        let [k, v] = param.split('=')
+        p[k] = v
+      })
       if (method === 'get') {
-        get(path, params)
-      } else {
-        let p = {}
-        params.split('&').forEach(param => {
-          let [k, v] = param.split('=')
-          p[k] = v
-        })
+        get(path, p)
+      } else if (method === 'post') {
         post(path, p)
+      } else {
+        postJson(path, p)
       }
     }
   },

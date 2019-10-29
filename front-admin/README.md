@@ -1,4 +1,4 @@
-# pt-front-admin
+# hujia-front-admin
 
 ## Project setup
 ```

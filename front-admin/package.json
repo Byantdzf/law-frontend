@@ -1,5 +1,5 @@
 {
-  "name": "pt-front-admin",
+  "name": "hujia-front-admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,8 +14,9 @@
     "lodash-es": "^4.17.15",
     "md5": "^2.2.1",
     "vue": "^2.6.10",
+    "vue-cookie": "^1.1.4",
     "vue-i18n": "^8.12.0",
-    "vue-router": "^3.0.7",
+    "vue-router": "3.0.7",
     "vuex": "^3.1.1"
   },
   "devDependencies": {

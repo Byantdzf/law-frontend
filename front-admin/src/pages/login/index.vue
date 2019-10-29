@@ -49,6 +49,7 @@
 import { mapActions } from 'vuex'
 import { treeToList } from '@/utils/tools'
 import SYSTEM from '@/utils/system'
+import Bus from '@/utils/bus'
 import bg1 from '@/assets/images/login_bg1.jpg'
 import bg2 from '@/assets/images/login_bg2.jpg'
 import bg3 from '@/assets/images/login_bg3.jpg'
@@ -99,20 +100,28 @@ export default {
             saveStorage: true
           })
 
-          this.$router.push({ query: { uid: accountId } })
+          // this.$router.push({ query: { uid: accountId } })
 
           SYSTEM.userToken(this.$val(res, 'data.accessToken'))
           
-          let menus = await this.getMenus()
+          const { routes } = this.$router.options
+          let menus = await this.getMenus(routes)
           let menusList = treeToList(menus)
           
           this.isLoading = false
-
+          
           if (menusList.some(v => v.url == SYSTEM.routeHomePath)) {
             this.$router.push({ path: SYSTEM.routeHomePath })
           } else {
             if (menusList.length) {
-              let path = this.getUrl(menusList[0])
+              let idx = 0
+              let path = ''
+
+              while(!path && menusList[idx]) {
+                path = this.getUrl(menusList[idx])
+                idx ++
+              }
+              
               this.$router.push({ path })
             } else {
               this.$msgError('暂无授权目录，请联系管理员！')
@@ -125,20 +134,15 @@ export default {
     },
     // 获取登录后的首页
     getUrl(node) {
-      let url = node.url || ''
+      let url = node.url && node.url != '/404' ?  node.url : ''
       let child = node.children ? node.children[0] : null
 
       while(!url && child) {
-        url = child.url
+        url = child.url && child.url != '/404' ? child.url : ''
         child = child.children ? child.children[0] : null
       }
 
       return url
-    },
-    bodyListener(e) {
-      if (e.keyCode == 13 && !this.isLoading) {
-        this.loginSubmit()
-      }
     },
     ...mapActions('auth', [
       'login',
@@ -147,9 +151,12 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$router.push({ query: {} })
+      
       this.loginForm.accountName = localStorage.getItem('accountName') || ''
-      document.body.addEventListener('keyup', this.bodyListener, false)
+
+      Bus.$on('keyup', () => {
+        !this.isLoading && this.loginSubmit()
+      })
 
       this.bgTimer = setInterval(() => {
         this.curBgIndex ++
@@ -160,7 +167,7 @@ export default {
     })
   },
   beforeDestroy() {
-    document.body.removeEventListener('keyup', this.bodyListener)
+    Bus.$off('keyup')
     this.bgTimer && clearInterval(this.bgTimer)
     this.bgTimer = null
   }

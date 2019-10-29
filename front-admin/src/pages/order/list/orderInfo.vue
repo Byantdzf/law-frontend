@@ -5,6 +5,10 @@
       <span class="con">{{ $val(row, 'orderNo') }}</span>
     </p>
     <p>
+      <span class="label">地接团号：</span>
+      <span class="con">{{ $val(row, 'groupNo') }}</span>
+    </p>
+    <p>
       <span class="label">下单时间：</span>
       <span class="con">{{ $val(row, 'orderTime') }}</span>
     </p>

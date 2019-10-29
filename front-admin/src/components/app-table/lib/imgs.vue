@@ -3,7 +3,7 @@
     <el-image 
       v-for="(item, idx) in imgs"
       :key="idx"
-      :src="`${item[srcKey]}?x-oss-process=image/resize,m_fill,w_66,h_66`"
+      :src="`${item[srcKey]}?x-oss-process=image/resize,m_fill,w_40,h_40`"
       :preview-src-list="urls"
       @click.native="cellClick(item, idx)"
     >

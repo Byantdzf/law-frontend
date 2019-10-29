@@ -8,6 +8,7 @@
         :btns="searchBtns"
         @confirm="confirmSearch"
         @reset="confirmSearch"
+        @change="searchChange"
         @more-filter="moreFilter"
         ref="searchForm"
       />
@@ -34,7 +35,6 @@
         tooltip-effect="light"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         :max-height="tableMaxHieght"
         @selection-change="tableSelect"
       />
@@ -77,8 +77,9 @@
   export default {
     components: {
       [TableColumn.name]: TableColumn,
-      Edit: () => import("./edit"),
-      MoreFilter: () => import("./moreFilter")
+      DivideSell: () => import('@/pages/common/divideSell'),
+      Edit: () => import('./edit'),
+      MoreFilter: () => import('./moreFilter')
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -110,7 +111,15 @@
             type: 'button',
             width: 140,
             default: '待分配',
-            align: 'center'
+            align: 'center',
+            formater: (row) => {
+              return this.$val(row, 'sellBo.userName')
+            },
+            on: {
+              click: ({ row }) => {
+                this.handleBtnAction(row, 'divideSell')
+              }
+            }
           },{
             label: '账户启用状态',
             field: 'status',
@@ -138,9 +147,6 @@
             }
           }
         ],
-        columnsProps: {
-          minWidth: 100,
-        },
         showHeaderTab: false,
         curDialogTab: ''
       }
@@ -172,6 +178,7 @@
             field: 'tenantId|id',
             placeholder: '模糊搜索',
             type: 1,
+            autofill: true,
             fetchSuggestions: (value, cb) => {
               const name = value.trim()
               const tenantType = this.tenantType
@@ -221,6 +228,7 @@
       async formSubmit(form) {
         try {
           const searchForm = this.$refs.searchForm
+          const tenantId = this.$val(form, 'tenant.id')
           switch (this.dialogComponent) {
             case 'Edit':
               if(form.id) {
@@ -234,15 +242,24 @@
               this.refreshTable()
               break;
             case 'MoreFilter':
+              this.searchTenant = form.tenant
               this.tableParams = {
                 ...this.tableParams,
-                ...form
+                ...form,
+                tenantId
               }
+              delete this.tableParams.tenant
               if (searchForm) {
+                searchForm.updateFormItem('tenantId|id', 'value', form.tenant)
                 searchForm.updateFormItem('tenantNo', 'value', form.tenantNo)
                 searchForm.updateFormItem('tenantType', 'value', form.tenantType)
               }
               this.closeDialog()
+              break;
+            case 'DivideSell':
+              await this.tenantDivideSell(form)
+              this.closeDialog()
+              this.refreshTable()
               break;
           }
         } catch (e) {
@@ -253,6 +270,15 @@
         let res = {}
         this.dialogIsFull = true
         switch (type) {
+          case 'divideSell':
+            this.showHeaderTab = false
+            this.dialogIsFull = false
+            this.dialogWidth = '600px'
+            this.dialogTitle = '分配销售'
+            this.dialogForm = row
+            this.dialogComponent = 'DivideSell'
+            this.dialogVisible = true
+            break;
           case 'detail':
             this.curDialogTab = 'detail'
             this.showHeaderTab = true
@@ -281,11 +307,16 @@
             break;
         }
       },
+      searchChange({ field, value }) {
+        if(field == 'tenantId|id') {
+          this.searchTenant = value
+        }
+      },
       moreFilter() {
         this.dialogIsFull = false
         this.showHeaderTab = false
         this.dialogTitle = '高级检索'
-        this.dialogForm = this.tableParams
+        this.dialogForm = { ...this.tableParams, tenant: this.searchTenant }
         this.dialogComponent = 'MoreFilter'
         this.dialogVisible = true
       },
@@ -293,7 +324,8 @@
         'tenantView',
         'tenantAdd',
         'tenantUpdate',
-        'tenantGetKV'
+        'tenantGetKV',
+        'tenantDivideSell'
       ])
     },
     created() {

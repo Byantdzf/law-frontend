@@ -120,11 +120,18 @@
         }
       },
       columnKeyMap: Object,
-      columnsProps: Object,
+      columnsProps: {
+        type: Object,
+        default() {
+          return {
+            minWidth: 100
+          }
+        }
+      },
       columnsSchema: Object,
       columnsHandler: Function,
       theaderSchema: Object,
-      init: {
+      isReady: {
         type: Boolean,
         default: true
       },
@@ -137,7 +144,15 @@
       },
       url: String,
       radio: Boolean,
-      dataFormater: Function
+      dataFormater: Function,
+      listKey: {
+        type: String,
+        default: 'dataList'
+      },
+      totalKey: {
+        type: String,
+        default: 'totalCount'
+      }
     },
     data () {
       return {
@@ -262,10 +277,18 @@
       url() {
         this.getList()
       },
+      params: {
+        handler: function(newval) {
+          if (!newval[PAGE_KEY]) {
+            this.setLocationQuery(this.pageHashKey, 1)
+          }
+        },
+        deep: true
+      },
       tableParams: {
         handler: function(newval) {
           this.currentPage = newval[PAGE_KEY]
-          this.init && this.getList()
+          this.isReady && this.getList()
         },
         deep: true
       }
@@ -319,7 +342,7 @@
           const data = res.data || {}
 
           if(isPlainObject(data)) {
-            this.list = data.dataList || []
+            this.list = data[this.listKey] || []
           } else {
             this.list = data || []
           }
@@ -332,20 +355,22 @@
             }
           }
 
-          this.total = data.totalCount
+          this.total = data[this.totalKey]
 
           this.pagerLimit()
 
           this.$emit('dataReady', {
             list: this.list,
             total: this.total,
-            currentPage: this.currentPage
+            currentPage: this.currentPage,
+            res
           })
         } catch (error) {
           this.$emit('dataReady', {
             list: [],
             total: 0,
-            currentPage: 1
+            currentPage: 1,
+            error
           })
         }
       },
@@ -413,6 +438,11 @@
           height: 0;
           overflow: hidden;
         }
+      }
+    }
+    .app-table-btns {
+      .el-link + .el-link {
+        margin-left: 10px;
       }
     }
   }

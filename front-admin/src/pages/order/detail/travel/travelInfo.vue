@@ -54,7 +54,14 @@
       </el-row>
     </el-col>
     <el-col :sm="12" :lg="6">
-      <h4 class="sub-title mb-10">出行人信息</h4>
+      <el-row>
+        <el-col :span="18">
+          <h4 class="sub-title mb-10">出行人信息</h4>
+        </el-col>
+        <el-col :span="6">
+          <el-button size="mini" type="text" @click="exporterTraveller">导出</el-button>
+        </el-col>
+      </el-row>
       <el-row v-for="(item, index) in orderTravellers" :key="index">
         <el-row v-for="(v, idx) in item.orderTravellersItems" :key="idx">
           <span class="label cl-999">{{ v.itemName }}：</span>
@@ -66,7 +73,8 @@
 </template>
 
 <script>
-export default {
+  import { mapActions } from 'vuex'
+  export default {
   props: {
     row: Object
   },
@@ -84,6 +92,15 @@ export default {
         return item
       })
     }
+  },
+  methods:{
+    exporterTraveller:function () {
+      const origin = window.location.origin;
+      const url='/pt/order/exportTravelList?orderId='+this.row.orderId;
+      window.open(`${ origin + url }`)
+    },
+    ...mapActions('order', ['exportTravelList']),
+
   }
 }
 </script>

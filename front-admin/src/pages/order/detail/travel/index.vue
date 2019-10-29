@@ -6,7 +6,8 @@
           <span class="title">订单信息</span>
         </el-row>
         <el-row class="fr">
-          <el-button size="mini" type="primary">订单日志</el-button>
+          <el-button size="mini" type="primary" @click="sendEmail" v-if="orderStatus != 1">出行确认函</el-button>
+          <el-button size="mini" type="primary" @click="getOrderLog">订单日志</el-button>
         </el-row>
       </el-row>
       <BaseInfo :row="row" />
@@ -35,23 +36,85 @@
       </el-row>
       <TravelInfo :row="row" />
     </el-card>
+
+    <app-dialog
+      class="page-dialog"
+      :width="dialogWidth"
+      :height="dialogHeight"
+      :title="dialogTitle"
+      :visible="dialogVisible"
+      :full="dialogIsFull"
+      @close="closeDialog"
+    >
+      <component
+        v-if="dialogVisible"
+        ref="dialogComponent"
+        :is="dialogComponent"
+        :row="dialogForm"
+        @cancel="closeDialog"
+      />
+    </app-dialog>
+
+
+
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import BaseInfo from './baseInfo'
 import BookingInfo from './bookingInfo'
 import AddtionalInfo from './addtionalInfo'
 import TravelInfo from './travelInfo'
+import AppDialog from '@/mixins/dialog'
+import Log from './log'
+
+
 export default {
   components: {
     BaseInfo,
     BookingInfo,
     AddtionalInfo,
-    TravelInfo
+    TravelInfo,
+    Log,
+    OrderSend: () => import('./orderSend')
   },
-  props: {
-    row: Object
+  mixins: [AppDialog],
+  data() {
+    return {
+      row: {},
+      orderStatus:'',
+    }
+  },
+  methods: {
+    sendEmail(){
+      this.$router.openNewTab("/pages/order/detail/travel/orderSend", {
+        orderId: this.row.orderId
+      });
+    },
+    getOrderLog(){
+      this.dialogIsFull = false;
+      this.dialogWidth = "75%";
+      this.dialogTitle = "订单日志";
+      this.dialogForm = this.row || {};
+      this.dialogVisible = true;
+      this.dialogComponent = 'Log';
+    },
+    closeDialog(){
+      this.dialogVisible = false;
+    },
+    async getDetails(id) {
+      const res = await this.orderView(id)
+      this.row = res.data || {}
+      this.orderStatus=this.row.order.status
+    },
+    ...mapActions('order', [
+      'orderView','orderLog',
+    ])
+  },
+  mounted() {
+    const { id } = this.$route.query
+    this.getDetails(id)
   }
 }
 </script>

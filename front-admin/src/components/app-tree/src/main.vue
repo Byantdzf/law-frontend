@@ -46,7 +46,7 @@
 
 <script>
 	import { Tree } from 'element-ui'
-	import tools from '@/utils/tools'
+	import { getTreeData, arrSort } from '@/utils/tools'
 	export default {
 		name: 'app-tree',
 		components: {
@@ -122,8 +122,8 @@
 
 				if(this.data && this.data.length) {
 					arr = this.dataType == 'flat' ?
-					tools.getTreeData(tools.arrSort(this.data, keyName)) :
-					tools.arrSort(this.data, keyName);
+					getTreeData(arrSort(this.data, keyName)) :
+					arrSort(this.data, keyName);
 
 					(function buildData(arr) {
 						arr.forEach(v => {
@@ -140,7 +140,6 @@
 			},
 			checkedNodes() {
 				let checkeds = this.$refs.appTree.getCheckedNodes()
-
 				return this.restaurants.reduce((res, cur) => {
 					if(~JSON.stringify(checkeds).indexOf(JSON.stringify(cur))) {
 						res.push(cur)
@@ -214,7 +213,8 @@
 						data = this.restaurants
 						break;
 					case 'checked':
-						data = this.checkedNodes
+						// data = this.checkedNodes
+						data = this.$refs.appTree.getCheckedNodes()
 						break;
 					case 'old':
 					default:

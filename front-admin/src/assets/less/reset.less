@@ -142,6 +142,16 @@ a {
     color: transparent;
   }
 }
+.el-form {
+  .el-form-item.is-required {
+    .el-form-item__label:before {
+      display: none;
+    }
+  }
+  .el-date-editor--daterange.el-input, .el-date-editor--daterange.el-input__inner {
+    width: 280px;
+  }
+}
 .el-table {
   .el-button--mini,
   .el-button--mini.is-round {
@@ -211,5 +221,8 @@ a {
     line-height: 100px;
   }
 }
-
+.el-autocomplete-suggestion.el-popper {
+  width: auto !important;
+  min-width: 140px;
+}
 /* element-ui end */

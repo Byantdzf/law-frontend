@@ -1,3 +1,4 @@
+import VueCookie from 'vue-cookie'
 import { getQueryString } from '@/utils/tools'
 
 const SYSTEM = {
@@ -6,16 +7,26 @@ const SYSTEM = {
   copyright: process.env.VUE_APP_COPYRIGHT,
   baseUrl: process.env.BASE_URL,
   routeHomePath: process.env.VUE_APP_HOME_PATH,
+  isDevEnv: process.env.NODE_ENV === 'development',
+  isProEnv: process.env.NODE_ENV === 'production',
+  tokenName: 'LOGIN_ACCESS_TOKEN',
   userTokenKey() {
     return `${this.name}_${getQueryString('uid') || ''}_TOKEN`
   },
-  userToken(val) {
-    const key = this.userTokenKey()
+  // userToken(val) {
+  //   const key = this.userTokenKey()
     
+  //   if (val) {
+  //     localStorage.setItem(key, val)
+  //   } else {
+  //     return localStorage.getItem(key) || ''
+  //   }
+  // }
+  userToken(val) {
     if (val) {
-      localStorage.setItem(key, val)
+      VueCookie.set(this.tokenName, val)
     } else {
-      return localStorage.getItem(key) || ''
+      return VueCookie.get(this.tokenName) || ''
     }
   }
 }

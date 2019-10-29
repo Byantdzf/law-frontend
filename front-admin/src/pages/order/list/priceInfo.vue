@@ -16,10 +16,10 @@
       <span class="label">退款中：</span>
       <span class="con">￥{{ $val(row, 'applyRefundAmount') }}</span>
     </p>
-    <p v-else>
+    <!--<p v-else>
       <span class="label">退款金额：</span>
       <span class="con">￥{{ $val(row, 'refundAmount') }}</span>
-    </p>
+    </p>-->
   </div>
 </template>
 
