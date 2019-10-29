@@ -18,6 +18,17 @@ Page({
      */
     onLoad: function (options) {
         // this.wxLogin()
+        const token = wx.getStorageSync(tokenName)
+
+        if (token) {
+            userApi.getUser().then(res => {
+                if (res.data.auditStatus == 2) {
+                    app.gotoPage('/pages/tabBar/home/index', 'tab')
+                } else {
+                    app.gotoPage('/pages/waitAuth/index')
+                }
+            })
+        }
     },
     wxLogin() {
         wx.login({
