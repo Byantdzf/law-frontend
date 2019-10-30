@@ -25,7 +25,7 @@
 			utils.getSync(URL.legal.queryNonlitigationLegalServices, params, function (res) {
 				var data = res.data.list || []
 				data = data[0] || {}
-				var src = data.instructionPic || '//static/images/nopic.jpg'
+				var src = data.instructionPic || '/static/images/nopic.jpg'
 				$('.services_header img').attr('src', src)
 				$('.services_header p').html(data.instruction || '')
 				

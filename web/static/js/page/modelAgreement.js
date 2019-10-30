@@ -35,8 +35,8 @@
 		queryList: function () {
 			var qlps = {
 				url: URL.template.query,
-				box: '.services_list',
-				temp: '/page/temp/list.html'
+				box: '.modelAgreementListBox',
+				temp: '/page/template/list.html'
 			}
 			utils.queryTempList(qlps);
 		},
