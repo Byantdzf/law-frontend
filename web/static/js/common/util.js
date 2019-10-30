@@ -145,6 +145,8 @@ layui.define(function (exports) {
 						gather.setCookie(global.backToken, '');
 
 						window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+					} else if (res.code == 'E00006') {
+						
 					} else {
 						gather.msg(res.msg || res.code);
 					}

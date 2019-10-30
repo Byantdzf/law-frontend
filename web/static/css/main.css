@@ -1401,6 +1401,7 @@ i, em { font-style: normal;}
 .lawyerComments .items .userInfo label { position: absolute; width:70px; left:0; color:#999;} 
 .lawyerComments .items .content { border:1px solid #eaeaea; border-radius: 5px; padding: 10px; margin-top:10px; font-size: 12px; color:#999;}
 
+.orderComment,
 .orderPetition,
 .noticeDetails,
 .orderDetail { padding: 30px 50px;}
@@ -1413,3 +1414,14 @@ i, em { font-style: normal;}
 
 .orderPetition .layui-form-label { width:100px;}
 .orderPetition .layui-input-block { margin-left:130px;}
+
+.myComment .starBox,
+.orderComment .starBox { position: relative; width: 100px; height:20px;}
+.orderComment .starBox span { float: left; width:20px; height:20px; background: url(../images/star.png) center no-repeat; background-size:20px;}
+.orderComment .starBox span.on { background-image: url(../images/star_on.png);}
+.orderComment .commentLawyer { text-align: center;}
+.orderComment .commentLawyer img { width:80px; height:80px;}
+.orderComment .commentLawyer h3 { margin-top:10px; font-size: 20px;}
+.myComment .starBox { background: url(../images/star.png) left center repeat-x; background-size:20px;}
+.myComment .starBox i { display: block; height: 100%; background: url(../images/star_on.png) left center repeat-x; background-size:20px;}
+.myComment { overflow: hidden;}

@@ -42,7 +42,7 @@
 	var gather = {
 		init: function () {
 			var _t = this;
-			_t.tableParams = normalTableParams;
+			_t.tableParams = $.extend(true, [], normalTableParams);
 			_t.rootCategory = [
 				{ "id": 1, "name": "咨询订单", "child": [{ "id": 11, "name": "在线律师咨询" }, { "id": 12, "name": "指定律师咨询" }] },
 				{ "id": 2, "name": "分块法律服务订单", "child": [{ "id": 21, "name": "日常法律服务" }, { "id": 22, "name": "分块法律服务" }] },
@@ -60,7 +60,8 @@
 
 			utils.getSelect(_t.rootCategory, '.rootCategory', global.text.all);
 
-			var orderStatus = global.rs.orderStatus;
+			var orderStatus = $.extend(true, [], global.rs.orderStatus);
+
 			orderStatus.unshift({ id: '', name: '全部' });
 
 			var ips = {
@@ -91,6 +92,21 @@
 		viewBox: function (item) {
 			var _t = this;
 
+				var ops = {
+					type: 1,
+					area: ['1000px', '80%'],
+					title: "订单详情",
+					scrollbar: false,
+					content: '<div class="orderDetailBox"></div>',
+					success: function (layero, index) {
+						_t.loadOrderDetails(item)
+					}
+				};
+				utils.dialog(ops);
+		},
+
+		loadOrderDetails: function (item) {
+			var _t = this;
 			var type = item.orderType;
 			var category = item.orderCategory;
 			var temp = '';
@@ -109,97 +125,175 @@
 					temp = '/page/user/orderDetailTemplate.html';
 				}
 			}
-			if (temp) {
-				utils.get(URL.user.order.getById, {orderId: item.id}, function (res) {
-					var data = res.data;
-					$.each(global.rs.orderStatus, function (i, t) {
-						if (t.id == data.orderStatus) {
-							data.statusName = t.name;
-						}
+			utils.get(URL.user.order.getById, { orderId: item.id }, function (res) {
+				var data = res.data;
+				$.each(global.rs.orderStatus, function (i, t) {
+					if (t.id == data.orderStatus) {
+						data.statusName = t.name;
+					}
+				})
+				$.each(global.rs.orderType, function (i, t) {
+					if (t.id == data.orderType) {
+						data.typeName = t.name;
+					}
+				})
+				$.each(global.rs.orderCategory, function (i, t) {
+					if (t.id == data.orderCategory) {
+						data.categoryName = t.name;
+					}
+				})
+				var html = utils.getTemp(temp, data);
+				$('.orderDetailBox').html(html);
+				
+				if (data.orderStatus != 10 && data.orderStatus != 20) {
+					_t.queryReply(data.id)
+				}
+
+				// 获取评论
+				var params = {}
+				params[global.rows] = 10;
+				params[global.page] = 1;
+				params.orderId = data.id;
+				utils.get(URL.user.order.getComments, params, function (res) {
+					var data = res.data.list[0]
+					if (data) {
+						let professionalAttitudeScore = data.professionalAttitudeScore > 5 ? 5 : data.professionalAttitudeScore < 0 ? 0 : data.professionalAttitudeScore
+						let serviceAttitudeScore = data.serviceAttitudeScore > 5 ? 5 : data.serviceAttitudeScore < 0 ? 0 : data.serviceAttitudeScore
+						data.score1 = Math.floor(professionalAttitudeScore / 5 * 100)
+						data.score2 = Math.floor(serviceAttitudeScore / 5 * 100)
+						var html = utils.getTemp('/page/user/orderMyComment.html', data)
+						$('.myComment').removeClass('hidden').find('.layui-input-block').html(html);
+					}
+				})
+
+				// 取消订单
+				$('.cancelOrder').off().on('click', function () {
+					utils.confirm('系统正在积极为您指派律师，您确定要取消订单？', function (i) {
+						layer.close(i);
+						layer.close(index);
+						utils.get(URL.user.order.cancel, { orderId: data.id }, function (res) {
+							utils.msg('取消成功');
+							_t.queryList(_t.currPage);
+						})
 					})
-					$.each(global.rs.orderType, function (i, t) {
-						if (t.id == data.orderType) {
-							data.typeName = t.name;
-						}
+				})
+
+				// 追问
+				$('.isAskAgain').off().on('click', function () {
+					$('.askAgain').removeClass('hidden')
+				})
+
+				// 追问提交
+				$('.askAgainBtn').off().on('click', function () {
+					var val = $.trim($('.askAgainContent').val())
+					if (!val) {
+						utils.msg('请输入追问内容');
+						return
+					}
+					utils.post(URL.user.order.askAgain + data.id, { content: val }, function (res) {
+						var box = $('.askAgainContent').parent();
+						box.html('<div class="layui-form-mid">' + val + '</div>');
+						$('.askAgainBtn').parent().addClass('hidden').remove();
 					})
-					$.each(global.rs.orderCategory, function (i, t) {
-						if (t.id == data.orderCategory) {
-							data.categoryName = t.name;
-						}
+				})
+
+				// 确认订单
+				$('.finishOrder').off().on('click', function () {
+					utils.get(URL.user.order.confirm + data.id, function (res) {
+						utils.msg('操作成功')
+						layer.close(index);
+						_t.showCommentBox(data)
+						_t.queryList(_t.currPage)
 					})
-					var html = utils.getTemp(temp, data);
-					var ops = {
-						type: 1,
-						area: ['1000px', '80%'],
-						title: "订单详情",
-						scrollbar: false,
-						content: html,
-						success: function (layero, index) {
-							if (data.orderStatus == 30) {
-								_t.queryReply(data.id)
+				})
+
+				// 评价订单
+				$('.commentOrder').off().on('click', function () {
+					_t.showCommentBox(data);
+				})
+			});
+		},
+
+		showCommentBox: function (data) {
+			var _t = this;
+			var html = utils.getTemp('/page/user/orderComment.html', data);
+			var ops = {
+				type: 1,
+				area: '600px',
+				title: "给他评价",
+				scrollbar: false,
+				content: html,
+				success: function (layero, index) {
+					$('.starBox').off().on('click', 'span', function () {
+						var index = $(this).index();
+						$(this).closest('.starBox').find('span').each(function () {
+							$(this).removeClass('on');
+							if ($(this).index() <= index) {
+								$(this).addClass('on');
 							}
+						})
+					});
 
-							// 取消订单
-							$('.cancelOrder').off().on('click', function () {
-								utils.confirm('系统正在积极为您指派律师，您确定要取消订单？', function (i) {
-									layer.close(i);
-									layer.close(index);
-									utils.get(URL.user.order.cancel, {orderId: data.id}, function (res) {
-										utils.msg('取消成功');
-										_t.queryList(_t.currPage);
-									})
-								})
-							})
+					form.on('submit(commentSubmit)', function (res) {
+						var professionalAttitudeScore = $('.professionalAttitudeScore').find('.on').length
+						var serviceAttitudeScore = $('.serviceAttitudeScore').find('.on').length
+						var content = $.trim($('.content').val())
 
-							// 追问
-							$('.isAskAgain').off().on('click', function () {
-								$('.askAgain').removeClass('hidden')
-							})
-
-							// 追问提交
-							$('.askAgainBtn').off().on('click', function () {
-								var val = $.trim($('.askAgainContent').val())
-								if (!val) {
-									utils.msg('请输入追问内容');
-									return
-								}
-								utils.post(URL.user.order.askAgain + data.id, {content: val}, function (res) {
-									var box = $('.askAgainContent').parent();
-									box.html('<div class="layui-form-mid">' + val + '</div>');
-									$('.askAgainBtn').parent().addClass('hidden').remove();
-								})
-							})
-
-							// 确认订单
-							$('.finishOrder').off().on('click', function () {
-								utils.put(URL.user.order.confirm + data.id, function (res) {
-									console.log(res)
-								})
-							})
-							
+						if (!professionalAttitudeScore || professionalAttitudeScore < 1) {
+							layer.msg('请给律师专业态度评分')
+							return
 						}
-					};
-					utils.dialog(ops);
-				});
+						if (!professionalAttitudeScore || professionalAttitudeScore < 1) {
+							layer.msg('请给律师服务态度评分')
+							return
+						}
+						console.log(professionalAttitudeScore)
+						if (!content) {
+							layer.msg('请填写评论内容')
+							return
+						}
+						var params = {
+							professionalAttitudeScore: professionalAttitudeScore,
+							serviceAttitudeScore: serviceAttitudeScore,
+							content: content
+						};
+						utils.post(URL.user.order.comment + data.id, params, function () {
+							layer.msg('评论成功')
+							layer.close(index);
+							_t.loadOrderDetails(data);
+						})
+					});
+				}
 			}
+			utils.dialog(ops);
 		},
 
 		queryReply: function (orderId) {
 			var _t = this;
 			var qlps = {
 				url: URL.user.order.reply,
-				searchData: {orderId: orderId},
+				searchData: { orderId: orderId },
 				box: '.replyList',
 				temp: '/page/user/orderReplyList.html'
 			}
 			utils.queryTempList(qlps, function (curr, obj) {
-				setTimeout(function () {
-					if (obj.totalRow > 10) {
-						$(qlps.box).find('.app-page-box').removeClass('hidden')
-					} else {
-						$(qlps.box).find('.app-page-box').addClass('hidden')
-					}
-				}, 0)
+				if (obj.totalRow > 0) {
+					$(qlps.box).removeClass('hidden');
+					setTimeout(function () {
+						if (obj.totalRow > 10) {
+							$(qlps.box).find('.app-page-box').removeClass('hidden')
+						} else {
+							$(qlps.box).find('.app-page-box').addClass('hidden')
+						}
+					}, 0)
+				} else {
+					$(qlps.box).addClass('hidden');
+				}
+
+				$('.downloadFiles').off().on('click', function () {
+					var url = $(this).data('url');
+					window.open(url);
+				})
 			});
 
 			$('.replyList').off().on('click', '.soundPlay', function () {
@@ -221,15 +315,15 @@
 				content: html,
 				success: function (layero, index) {
 					var arr = [
-						{id: 1, name: "言语辱骂"},
-						{id: 2, name: "答非所问"},
-						{id: 3, name: "其他"}
+						{ id: 1, name: "言语辱骂" },
+						{ id: 2, name: "答非所问" },
+						{ id: 3, name: "其他" }
 					]
 					utils.getRadio(arr, '.chooseType')
 
 					form.on('submit(feedbackSubmit)', function (res) {
 						var params = res.field
-						
+
 						var ids = []
 						$('.chooseType').find('input[type="radio"]:checked').each(function () {
 							ids.push($(this).val())
@@ -254,7 +348,7 @@
 			var id = data.chooseService
 			if (id) {
 				utils.get(URL.template.details + id, function (res) {
-					utils.get(URL.template.downloadUrl, {targetName: res.data.filePath}, function (response) {
+					utils.get(URL.template.downloadUrl, { targetName: res.data.filePath }, function (response) {
 						window.open(response.data)
 					})
 				})
@@ -273,9 +367,9 @@
 				});
 
 				if (e.value == 4) {
-					_t.tableParams = filesTableParams;
+					_t.tableParams = $.extend(true, [], filesTableParams);
 				} else {
-					_t.tableParams = normalTableParams;
+					_t.tableParams = $.extend(true, [], normalTableParams);
 				}
 
 				if (item.child && item.child.length > 0) {
@@ -285,7 +379,9 @@
 					$('.orderSearchBox .child').addClass('hidden');
 				}
 				// 更改筛选
-				$('.app-table-tab li:eq(0)').click();
+				// $('.app-table-tab li:eq(0)').click();
+				$('.app-table-tab').find('li').removeClass('layui-this')
+				$('.app-table-tab li:eq(0)').addClass('layui-this')
 				element.render();
 				_t.queryList();
 			});

@@ -75,7 +75,9 @@ var URL = {
 			reply: pcHost + '/pc/user/msg/orderMsglist',
 			petition: pcHost + '/pc/user/order/appeal/',
 			askAgain: pcHost + '/pc/user/order/askSecond/',
-			confirm: pcHost	 + '/pc/user/order/confirm/'
+			confirm: pcHost	 + '/pc/user/order/confirm/',
+			comment: pcHost + '/pc/user/order/evaluate/',
+			getComments: pcHost + '/pc/lawyer/orderScore/queryOrderScoreByOrderId'
 		}
 	},
 	lawyerObj: {
