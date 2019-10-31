@@ -86,6 +86,7 @@ var URL = {
 		login: pcHost + '/pc/lawyer/login',
 		reg: pcHost + '/pc/lawyer/register',
 		info: pcHost + '/pc/lawyer/my/myInfo',
+		myData: pcHost + '/pc/lawyer/my/myData',
 		news: {
 			query: pcHost + '/pc/lawyer/article/list',
 			getById: pcHost + '/pc/lawyer/article/details/'

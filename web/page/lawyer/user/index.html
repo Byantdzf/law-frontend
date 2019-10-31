@@ -8,7 +8,7 @@
 					<a href="javascript:;" class="layui-btn flr withdraw">提现</a>
 				<h3>{{ d.name || '' }}</h3>
 				<p>
-					我的余额：<em>{{ d.balanceAmount || '' }}</em> 元
+					我的余额：<em>{{ d.balanceAmount || '0' }}</em> 元
 					<span>
 						<a href="javascript:;" class="getList">明细</a>
 					</span>
@@ -23,13 +23,13 @@
 		<div class="layui-row">
 			<div class="layui-col-md6 layui-col-sm6 data-block">
 				<div class="items">
-					<div class="data-num">246</div>
+					<div class="data-num">{{ d.helps || 0 }}</div>
 					<div class="data-lavel">帮助人数</div>
 				</div>
 			</div>
 			<div class="layui-col-md6 layui-col-sm6 data-block">
 				<div class="items">
-					<div class="data-num">246</div>
+					<div class="data-num">{{ d.concerns || 0 }}</div>
 					<div class="data-lavel">关注人数</div>
 				</div>
 			</div>
@@ -44,19 +44,19 @@
 	<div class="layui-card-body">
 		<div class="layui-row">
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">0</div>
+				<div class="data-num">{{ d.todayOrderCount || 0 }}</div>
 				<div class="data-lavel">今日</div>
 			</div>
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">0</div>
+				<div class="data-num">{{ d.weeklyOrderCount || 0 }}</div>
 				<div class="data-lavel">本周</div>
 			</div>
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">6</div>
+				<div class="data-num">{{ d.monthOrderCount || 0 }}</div>
 				<div class="data-lavel">本月</div>
 			</div>
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">6</div>
+				<div class="data-num">{{ d.historyOrderCount || 0 }}</div>
 				<div class="data-lavel">总数</div>
 			</div>
 		</div>
@@ -70,19 +70,19 @@
 	<div class="layui-card-body">
 		<div class="layui-row">
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">0</div>
+				<div class="data-num">{{ d.todayEarnings || 0 }}</div>
 				<div class="data-lavel">今日</div>
 			</div>
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">0</div>
+				<div class="data-num">{{ d.weeklyEarnings || 0 }}</div>
 				<div class="data-lavel">本周</div>
 			</div>
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">6</div>
+				<div class="data-num">{{ d.monthEarnings || 0 }}</div>
 				<div class="data-lavel">本月</div>
 			</div>
 			<div class="layui-col-md3 layui-col-sm3 data-block">
-				<div class="data-num">6</div>
+				<div class="data-num">{{ d.historyEarnings || 0 }}</div>
 				<div class="data-lavel">总收入</div>
 			</div>
 		</div>
