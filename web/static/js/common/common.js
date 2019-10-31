@@ -51,6 +51,11 @@
 		getHeader: function () {
 			var obj = {};
 			obj = global.userInfo || {};
+			
+			var keyworkds = $.trim(utils.getQueryString('keyword'));
+			if (keyworkds) {
+				obj.keyWord = keyworkds;
+			}
 			var html = utils.getTemp('/page/common/header.html', obj);
 			$('.appTop').html(html);
 			element.init();
@@ -63,7 +68,11 @@
 
 		getFoot: function () {
 			var obj = {};
-			var html = utils.getTemp('/page/common/foot.html');
+			var temp = '/page/common/foot.html';
+			if (window.location.href.indexOf('/lawyer/') > -1) {
+				temp = '/page/common/lawyerFoot.html'
+			}
+			var html = utils.getTemp(temp);
 			$('.btm').html(html);
 		},
 
@@ -157,6 +166,62 @@
 			// 	gather.setFixBar();
 			// }
 
+			// 律师订单操作
+			// 关注
+			$('body').on('click', '.focusd', function () {
+				var a = $(this);
+				var id = a.closest('li').data('id')
+				var params = {
+				  businessId: id,
+				  operateBusiness: 1,  // 操作对象1-订单 2-律师 3-文章 4-系统
+				  operateType: 4      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+				}
+				utils.get(URL.lawyerObj.order.operate, params, function () {
+					utils.msg('操作成功');
+					a.removeClass('focusd').addClass('cancelFocus').html('取消关注')
+				})
+			});
+			
+			// 取消关注
+			$('body').on('click', '.cancelFocus', function () {
+				var a = $(this);
+				var id = a.closest('li').data('id')
+				var params = {
+				  businessId: id,
+				  operateBusiness: 1,  // 操作对象1-订单 2-律师 3-文章 4-系统
+				  operateType: 40      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+				}
+				utils.get(URL.lawyerObj.order.operate, params, function () {
+					utils.msg('操作成功');
+					a.removeClass('cancelFocus').addClass('focusd').html('关注订单')
+				})
+			});
+
+			//接受订单
+			$('body').on('click', '.handleReceive', function () {
+				var a = $(this);
+				var id = a.closest('li').data('id')
+				var params = {
+					orderId: id
+				}
+				utils.get(URL.lawyerObj.order.accept, params, function () {
+					utils.msg('操作成功');
+					a.removeClass('handleReceive').removeClass('layui-btn-red').addClass('layui-btn-disabled').html('立即接单')
+				})
+			});
+
+			// 拒绝接单 
+			$('body').on('click', '.handleRefuse', function () {
+				var a = $(this);
+				var id = a.closest('li').data('id')
+				var params = {
+					orderId: id
+				}
+				utils.get(URL.lawyerObj.order.refuse, params, function () {
+					utils.msg('操作成功');
+					a.removeClass('handleRefuse').removeClass('layui-btn-primary').addClass('layui-btn-disabled').html('已拒绝')
+				})
+			});
 		},
 
 		setTextarea: function (obj) {
@@ -212,7 +277,7 @@
 			} else {
 				var url = "/lawyer.html?keyword=" + search;
 				if (window.location.href.indexOf('/lawyer/') > -1) {
-					url = '/lawyer/lawyer.html?keyword=' + search
+					url = '/lawyer/search.html?keyword=' + search
 				}
 				window.location = url;
 			}
@@ -365,6 +430,30 @@
 					});
 					utils.getSelect(cityData, '.city', '请选择市');
 				})
+
+				if (_t.hasZone == 1) {
+					form.on('select(changeCity)', function (res) {
+						var code = res.value
+						var prov = $('.provice').val();
+						var cityData = []
+						var zoneData = []
+						$.each(data, function (i, t) {
+							if (t.code == prov) {
+								cityData = t.city
+								$.each(cityData, function (i2, t2) {
+									if (t2.code == code) {
+										zoneData = t2.area || []
+										$.each(zoneData, function (i3, t3) {
+											t3.id = t3.code;
+										});
+									}
+								});
+							}
+						});
+						utils.getSelect(zoneData, '.zone', '请选择区');
+					})
+				}
+
 			});
 		},
 
@@ -397,6 +486,43 @@
 				audioCanPlay = true;
 			},1000)
 				
+		},
+
+		getLawyerOrderList: function () {
+			var _t = this;
+			// 获取本地律师
+			var params = {}
+			params[global.rows] = 4;
+			params[global.page] = 1;
+			params.orderSource = 2;
+			utils.get(URL.lawyerObj.order.query, params, function (res) {
+				let list = res.data.list || []
+
+				$.each(list, function (index, item) {
+					$.each(global.rs.orderStatus, function (i, t) {
+						if (t.id == item.orderStatus) {
+							item.statusName = t.name;
+						}
+					})
+					$.each(global.rs.orderType, function (i, t) {
+						if (t.id == item.orderType) {
+							item.typeName = t.name;
+						}
+					})
+					$.each(global.rs.orderCategory, function (i, t) {
+						if (t.id == item.orderCategory) {
+							item.categoryName = t.name;
+						}
+					})
+					$.each(_t.questionType, function (i, t) {
+						if (t.id == item.questionType) {
+							item.questionTypeName = t.name;
+						}
+					})
+				})
+				var html = utils.getTemp('/lawyer/temp/common/orderItem.html', list)
+				$('.newsRight').find('ul').html(html);
+			})
 		},
 	}
 

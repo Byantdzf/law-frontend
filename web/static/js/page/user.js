@@ -40,10 +40,14 @@
 				utils.get(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
 					utils.setCookie('account', '13600001111');
 					utils.setCookie(global.token, res.data.sessionId);
+					utils.get(URL.user.info, function (res) {
+						utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
+						_t.loadUserPage();
+					})
 					_t.loadUserPage();
 				})
 				// base.login(function () {
-				// 	utils.setCookie(global.userInfoToken, global.testUserInfo);
+				// 	utils.setCookie(global.userInfoToken, global.userInfo);
 				// 	_t.loadUserPage();
 				// });
 			});
@@ -56,7 +60,7 @@
 		loadUserPage: function () {
 			var _t = this;
 			var data = _t;
-			data.userInfo = global.testUserInfo || {};
+			data.userInfo = global.userInfo || {};
 			data.menu = _t.userMenu || [];
 			var html = utils.getTemp('/page/user/userPage.html', data);
 			$('.userPage').html(html);

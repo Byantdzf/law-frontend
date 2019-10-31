@@ -18,6 +18,7 @@ var URL = {
 	common: {
 		upload: '/applets/lawyer/multiUpload',
 		questionType: pcHost + '/getDictData?dictCode=QuestionType',
+		uploadImage: pcHost + '/applets/lawyer/multiUpload',
 		// questionType: '/static/data/questionType.json',
 		isRegister: pcHost + '/pc/user/consult/publish/page',
 		getSmsCode: commonHost + '/applets/lawyer/getPhoneVerificationCode',
@@ -68,6 +69,7 @@ var URL = {
 		cancelattention: pcHost + '/pc/user/order/operateOrder',
 		coupon: pcHost + '/pc/user/coupon/list',
 		feedback: pcHost + '/pc/user/feedback',
+		info: pcHost + '/pc/user/base/info',
 		order: {
 			query: pcHost + '/pc/user/order/orderList',
 			getById: pcHost + '/pc/user/order/orderDetail',
@@ -81,6 +83,18 @@ var URL = {
 		}
 	},
 	lawyerObj: {
-		login: pcHost + '/applets/lawyer/loginByAccount'
+		login: pcHost + '/pc/lawyer/login',
+		reg: pcHost + '/pc/lawyer/register',
+		info: pcHost + '/pc/lawyer/my/myInfo',
+		news: {
+			query: pcHost + '/pc/lawyer/article/list',
+			getById: pcHost + '/pc/lawyer/article/details/'
+		},
+		order: {
+			query: pcHost + '/pc/lawyer/order/orderList',
+			operate: pcHost + '/pc/lawyer/order/recordOperate',
+			accept: pcHost + '/pc/lawyer/order/acceptOrder',
+			refuse: pcHost + '/pc/lawyer/order/rejectOrder',
+		}
 	}
 }

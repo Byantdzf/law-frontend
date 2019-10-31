@@ -89,14 +89,14 @@ layui.define(function (exports) {
 			var headers = {}
 			// var isAuth = !data.noAuth;
 			// delete (data.noAuth);
-			// if (isAuth && gather.cookie(global.token)) {
-			// 	var headers = {
-			// 		Authorization: 'Bearer ' + gather.cookie(global.token)
-			// 	};
-			// 	data.account = gahter.cookie('account');
-			// }
+			if (data.isLawyer && gather.cookie(global.token)) {
+				var headers = {
+					Authorization: 'Bearer ' + gather.cookie(global.token)
+				};
+				// data.account = gahter.cookie('account');
+			}
 
-			if (gahter.cookie('account')) {
+			if (gahter.cookie('account') && !data.isLawyer) {
 				data.account = gahter.cookie('account');
 			}
 
@@ -139,12 +139,12 @@ layui.define(function (exports) {
 						if (callback) {
 							callback(res);
 						}
-					} else if (res.code == '01') {
-						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
-						gather.setCookie(global.token, '');
-						gather.setCookie(global.backToken, '');
+					// } else if (res.code == '01') {
+						// gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+						// gather.setCookie(global.token, '');
+						// gather.setCookie(global.backToken, '');
 
-						window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+						// window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else if (res.code == 'E00006') {
 						
 					} else {
@@ -1168,7 +1168,7 @@ layui.define(function (exports) {
 			//上传成功
 			fileUploader.on('uploadSuccess', function (file, res) {
 				layer.close(uploading);
-				if (res.code == 2) {
+				if (res.code == '000000') {
 					layer.msg(global.msg.uploadSuccess);
 					if (callback) {
 						callback(res);

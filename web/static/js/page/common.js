@@ -75,6 +75,9 @@
 		actions: function () {
 			var _t = this;
 
+			global.userInfo = utils.cookie(global.userInfoToken)
+			console.log("global.userInfo")
+			console.log(global.userInfo)
 			_t.getHeader();
 
 			$('body').on('click', '.searchBtn', function () {
@@ -160,7 +163,7 @@
 					var t = 3;
 					var timer = null;
 					var href = window.location.href;
-					utils.setCookie(global.userInfoToken, global.testUserInfo);
+					utils.setCookie(global.userInfoToken, global.userInfo);
 					timer = window.setInterval(function () {
 						t--;
 						$('.showTestCount').html('登录倒计时：' + t);

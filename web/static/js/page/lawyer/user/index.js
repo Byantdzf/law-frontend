@@ -9,7 +9,7 @@
 
 		loadPage: function () {
 			var _t = this;
-			var data = {};
+			var data = global.userInfo || {};
 			var html = utils.getTemp('/page/lawyer/user/index.html', data);
 			$('.userPageCon').html(html);
 		}

@@ -1253,24 +1253,24 @@ i, em { font-style: normal;}
 .searchPage .searchBox li.filterBox a i.curr { color: #eb4546;}
 
 
-.systemPush li { position: relative;}
-.systemPush li .items { padding: 20px 30px;}
-.systemPush dd { width:40%; float:left; position: relative; padding-left:80px; box-sizing: border-box; line-height: 2; color:#333;}
-.systemPush dd label { position: absolute; left:0; top:0; width:80px; color:#999;}
-.systemPush dd:nth-child(even) { width:60%;}
-.systemPush li .rightTop { position: absolute;right:20px; top:20px;}
-.systemPush li .rightTop i { font-size: 30px; color:#eb4546; margin-right: 20px;}
-.systemPush li .rightTop .countTimes { float:right; background:rgba(70,70,70,0.5); padding: 5px 10px; color: #fff; border-radius: 5px;}
-.systemPush li .rightTop .countTimes.notice { background:rgba(255,85,85,0.5);}
-.systemPush li .btnList { position: absolute; right: 20px; bottom: 20px;}
-.systemPush li .btnList a { margin-left: 10px;}
-.systemPush li .btnList .share { padding-bottom: 0;}
-.systemPush li .btnList .share i { color: #333; font-size:22px; position: relative; top:5px; margin-right:0;}
-.systemPush .cateList { border:1px solid #d8d8d8; margin-bottom: 10px; padding:10px;}
-.systemPush .cateList li { float:left; text-align: center; padding: 0 20px;}
-.systemPush .cateList li a { display: block;}
-.systemPush .cateList li a:hover,
-.systemPush .cateList li.curr a { color: #eb4546;}
+.lawyerOrderList li { position: relative;}
+.lawyerOrderList li .items { padding: 20px 30px;}
+.lawyerOrderList dd { width:40%; float:left; position: relative; padding-left:80px; box-sizing: border-box; line-height: 2; color:#333;}
+.lawyerOrderList dd label { position: absolute; left:0; top:0; width:80px; color:#999;}
+.lawyerOrderList dd:nth-child(even) { width:60%;}
+.lawyerOrderList li .rightTop { position: absolute;right:20px; top:20px;}
+.lawyerOrderList li .rightTop i { font-size: 30px; color:#eb4546; margin-right: 20px;}
+.lawyerOrderList li .rightTop .countTimes { float:right; background:rgba(70,70,70,0.5); padding: 5px 10px; color: #fff; border-radius: 5px;}
+.lawyerOrderList li .rightTop .countTimes.notice { background:rgba(255,85,85,0.5);}
+.lawyerOrderList li .btnList { position: absolute; right: 20px; bottom: 20px;}
+.lawyerOrderList li .btnList a { margin-left: 10px;}
+.lawyerOrderList li .btnList .share { padding-bottom: 0;}
+.lawyerOrderList li .btnList .share i { color: #333; font-size:22px; position: relative; top:5px; margin-right:0;}
+.lawyerOrderList .cateList { border:1px solid #d8d8d8; margin-bottom: 10px; padding:10px;}
+.lawyerOrderList .cateList li { float:left; text-align: center; padding: 0 15px;}
+.lawyerOrderList .cateList li a { display: block;}
+.lawyerOrderList .cateList li a:hover,
+.lawyerOrderList .cateList li.curr a { color: #eb4546;}
 
 .lawyerIndex .index_ccbox2_1,
 .lawyerIndex .clm_3_1 { margin-top:0;}
@@ -1292,13 +1292,13 @@ i, em { font-style: normal;}
 .orderRight .clm_3_1 { padding: 20px 0;}
 .orderRight ul li { margin-top:0; padding-top: 0; border-top:none;}
 
-.systemPush .newsRight .items { padding-left:10px; padding-right:10px;}
-.systemPush .newsRight dd { float:none; width:100%!important;}
-.systemPush .newsRight li .rightTop { right:0; top:0;}
-.systemPush .newsRight li .rightTop em { border-radius: 0;}
-.systemPush .newsRight li .rightTop i { position: absolute; right:0; top:35px; margin-right:0;}
-.systemPush .newsRight li .btnList { position: relative; right:0; bottom:0; margin-top:10px;}
-.systemPush .newsRight li .btnList a { margin-left:8px;}
+.lawyerOrderList .newsRight .items { padding-left:10px; padding-right:10px;}
+.lawyerOrderList .newsRight dd { float:none; width:100%!important;}
+.lawyerOrderList .newsRight li .rightTop { right:0; top:0;}
+.lawyerOrderList .newsRight li .rightTop em { border-radius: 0;}
+.lawyerOrderList .newsRight li .rightTop i { position: absolute; right:0; top:35px; margin-right:0;}
+.lawyerOrderList .newsRight li .btnList { position: relative; right:0; bottom:0; margin-top:10px;}
+.lawyerOrderList .newsRight li .btnList a { margin-left:8px;}
 
 .userHome1 { border-bottom:1px solid #ccc;}
 .userHome1 .items { width:300px; height:100px; padding-top:30px; box-sizing: border-box; margin: 20px auto;}
@@ -1323,7 +1323,7 @@ i, em { font-style: normal;}
 .infoAuthForm .layui-elem-field legend { font-size: 16px;}
 .infoAuthForm img { width:240px;}
 
-.userPageCon .systemPush .index_ccbox2_1 li { margin-right: 0; width: 100%; float:none;}
+.userPageCon .lawyerOrderList .index_ccbox2_1 li { margin-right: 0; width: 100%; float:none;}
 
 .userInfoModel { background: #f5f5f5; color:#333; text-align: left; padding:20px; box-sizing: border-box;}
 .userInfoModel .myAvatar { float:left; width:100px; height:100px; margin-right:30px; border-radius: 50%; overflow: hidden;}
@@ -1425,3 +1425,7 @@ i, em { font-style: normal;}
 .myComment .starBox { background: url(../images/star.png) left center repeat-x; background-size:20px;}
 .myComment .starBox i { display: block; height: 100%; background: url(../images/star_on.png) left center repeat-x; background-size:20px;}
 .myComment { overflow: hidden;}
+
+.layui-form-upload .webuploader-pick,
+.layui-form-upload a { display: block; width: 339px; height:207px; overflow: hidden;}
+.layui-form-upload img { display: block; width: 100%; height:100%;}

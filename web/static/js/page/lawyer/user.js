@@ -16,21 +16,25 @@
 				{ "id": 9, "name": "意见反馈", "code": "feedback", "url": "/page/lawyer/user/feedback.js" },
 				{ "id": 10, "name": "退出登录", "code": "logout" }
 			];
-			_t.code = hash.get('c') || _t.userMenu[0].code;
+			
+			$(function () {
+				_t.code = hash.get('c') || _t.userMenu[0].code;
 
-			_t.loadUserPage();
-			$('.userPage').removeClass('noMinHeight');
+				_t.loadUserPage();
+				$('.userPage').removeClass('noMinHeight');
+			});
 		},
 
 		loadUserPage: function () {
 			var _t = this;
 			var data = _t;
-			data.userInfo = global.testUserInfo || {};
+			data.userInfo = global.userInfo || {};
 			data.menu = _t.userMenu || [];
 			var html = utils.getTemp('/page/user/userPage.html', data);
 			$('.userPage').html(html);
 
-			$('.userHead').append('<em class="userScore">4.9分</em>');
+			var score = data.userInfo.score || 0;
+			$('.userHead').append('<em class="userScore">' + score + '分</em>');
 
 			// 默认跳转到哪个页面
 			_t.getPageByCode();

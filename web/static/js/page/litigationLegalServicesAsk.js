@@ -51,7 +51,9 @@
 					return
 				}
 				if (!$(this).attr('disabled')) {
-					base.timeCount('.getSmsCode', global.smsTime)
+					utils.get(URL.common.getSmsCode, {phone: mobile}, function (res) {
+						base.timeCount('.getSmsCode', global.smsTime)
+					})
 				}
 			})
 

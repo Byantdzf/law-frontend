@@ -1,8 +1,9 @@
 <li><a href="/lawyer.html" class="fontRed">全部</a></li>
 {{# 
-	layui.each(d, function (i, t) { 
+	layui.each(d, function (i, t) {
+		var url = t.url || '/lawyer.html';
 }}
-<li><a href="/lawyer.html?id={{ t.code }}">{{ t.name || '' }}</a></li>
+<li><a href="{{url}}?id={{ t.code }}">{{ t.name || '' }}</a></li>
 {{# 
 	})
 }}
