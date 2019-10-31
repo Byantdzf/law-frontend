@@ -2,6 +2,7 @@
 
 // const authModel = require('../../../model/auth/index.js');
 let app = getApp();
+const userApi = require('../../../service/user')
 Page({
   ...app.loadMoreMethods,
   /**
@@ -48,8 +49,11 @@ Page({
    */
   onLoad: function (options) {
     let userInfos = wx.getStorageSync('userInfo');
-    this.setData({
-      userInfos
+    
+    userApi.getUser().then(res => {
+      this.setData({
+        userInfos: res.data
+      });
     });
     app.setNavTitle(' ')
     app.setNavColor()

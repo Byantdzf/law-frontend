@@ -2,13 +2,13 @@
 	<div class="layui-card-body">
 		<div class="clearfix">
 			<div class="myAvatar">
-				<img src="/static/images/avatar.jpg" />
+				<img src="{{d.avatarUrl || '/static/images/default.jpg' }}" onerror="this.src='/static/images/default.jpg'" />
 			</div>
 			<div class="myFonts">
 					<a href="javascript:;" class="layui-btn flr withdraw">提现</a>
-				<h3>Wakaka</h3>
+				<h3>{{ d.name || '' }}</h3>
 				<p>
-					我的余额：<em>500</em> 元
+					我的余额：<em>{{ d.balanceAmount || '' }}</em> 元
 					<span>
 						<a href="javascript:;" class="getList">明细</a>
 					</span>
