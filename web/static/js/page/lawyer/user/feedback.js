@@ -13,6 +13,14 @@
 			var html = utils.getTemp('/page/user/feedback.html', data);
 			$('.userPageCon').html(html);
 			form.render();
+
+			form.on('submit(feedbackSubmit)', function (res) {
+				var params = res.field
+				utils.post(URL.lawyerObj.feedback, params, function (res) {
+					utils.alert('提交成功');
+					$('textarea').val('');
+				})
+			})
 		}
 	}
 

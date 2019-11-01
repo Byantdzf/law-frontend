@@ -2,7 +2,7 @@
 	<div class="userLeft">
 		<div class="userHead">
 			<div class="imgBox">
-				<img src="{{d.userInfo.avatarUrl || d.defaultPic }}" />
+				<img src="{{d.userInfo.avatarUrl || d.userInfo.pic || d.defaultPic }}" />
 			</div>
 			<h3>{{ d.userInfo.name || '' }}</h3>
 		</div>

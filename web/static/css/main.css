@@ -38,6 +38,7 @@ img{outline: none; border: none;}
 .layui-laypage .layui-laypage-curr em { color:#000;}
 .layui-layer-btn .layui-layer-btn0 { border-color:#eb4546!important; background-color:#eb4546!important;}
 .app-table-box .layui-table-page { display: none!important;}
+.layui-table td, .layui-table th { font-size: 12px;}
 
 .couponList .itemTop,
 a {
@@ -1429,3 +1430,11 @@ i, em { font-style: normal;}
 .layui-form-upload .webuploader-pick,
 .layui-form-upload a { display: block; width: 339px; height:207px; overflow: hidden;}
 .layui-form-upload img { display: block; width: 100%; height:100%;}
+
+.replyIcon { position: relative; padding-left:40px!important; color: #999; line-height: 1.5;}
+.replyIcon .iconfont { position: absolute; left:0; top:10px; font-size: 30px;}
+.fileList { height: 50px;}
+.fileList a { float:left; position: relative; margin-right:10px; padding: 10px; border: 1px solid #e8e8e8;}
+.fileList a img { width:50px;}
+.fileList a .del { position: absolute; right: 0; top:0; padding: 3px; font-size: 12px;}
+.uploadFiles { display: block; margin-top:10px;}

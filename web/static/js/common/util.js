@@ -148,7 +148,7 @@ layui.define(function (exports) {
 					} else if (res.code == 'E00006') {
 						
 					} else {
-						gather.msg(res.msg || res.code);
+						gather.msg(res.data || res.msg || res.code);
 					}
 				},
 				complete: function () {
@@ -1178,6 +1178,13 @@ layui.define(function (exports) {
 					fileUploader.removeFile(fileUploader.getFile(file.id));
 				}
 			});
+			// fileUploader.on( 'uploadError', function( file ) {
+			// 	console.log('11111111111111111111111')
+			// });
+			
+			// fileUploader.on( 'uploadComplete', function( file ) {
+			// 	console.log('22222222222222222222')
+			// });
 		},
 
 		singleUpload: function (container, callback) {

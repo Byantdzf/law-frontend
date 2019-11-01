@@ -2,7 +2,7 @@
 	<div class="layui-card-body">
 		<div class="clearfix">
 			<div class="myAvatar">
-				<img src="{{d.avatarUrl || '/static/images/default.jpg' }}" onerror="this.src='/static/images/default.jpg'" />
+				<img src="{{d.avatarUrl || d.pic || '/static/images/default.jpg' }}" onerror="this.src='/static/images/default.jpg'" />
 			</div>
 			<div class="myFonts">
 					<a href="javascript:;" class="layui-btn flr withdraw">提现</a>

@@ -56,6 +56,9 @@
 			if (keyworkds) {
 				obj.keyWord = keyworkds;
 			}
+			if (window.location.href.indexOf('/lawyer/') > -1) {
+				obj.isLawyer = 1;
+			}
 			var html = utils.getTemp('/page/common/header.html', obj);
 			$('.appTop').html(html);
 			element.init();
@@ -514,7 +517,8 @@
 							item.categoryName = t.name;
 						}
 					})
-					$.each(_t.questionType, function (i, t) {
+					var questionType = _t.getQuestionType();
+					$.each(questionType, function (i, t) {
 						if (t.id == item.questionType) {
 							item.questionTypeName = t.name;
 						}

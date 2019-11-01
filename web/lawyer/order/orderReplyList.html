@@ -1,0 +1,24 @@
+{{# 
+    layui.each(d, function(i, t) { 
+        if (t.msgType == 2) {
+}}
+<div class="items">
+    <a href="javascript:;" class="soundPlay" data-url="{{ t.msgDocumentFileId }}"><i class="iconfont icon-yuyin"></i> {{ t.recordTime || 0 }}秒，点击收听</a>
+    <span class="fontGrey">（对回复结果不满意？点击<a href="javascript:;" class="fontRed petition">立即申诉</a>）</span>
+</div>
+{{# 
+        } else if (t.msgType == 1) {
+}}
+<div class="items">
+    {{ t.content || '' }}
+</div>
+{{# 
+        } else if (t.msgType == 4) {
+}}
+<div class="items">
+    <a href="javascript:;" class="downloadFiles" data-url="{{ t.filePath }}">{{ t.fileName || '' }}</a>
+</div>
+{{# 
+        }
+    }) 
+}}

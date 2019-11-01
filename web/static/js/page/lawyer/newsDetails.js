@@ -8,6 +8,19 @@
 			_t.getData();
 
 			base.getLawyerOrderList();
+
+			$('.handleZan').off().on('click', function () {
+				var params = {
+				  businessId: _t.id,
+				  operateBusiness: 3,  // 操作对象1-订单 2-律师 3-文章 4-系统
+				  operateType: 3,      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+				  isLawyer: 1
+				}
+				utils.get(URL.lawyerObj.order.operate, params, function () {
+					utils.msg('操作成功');
+					_t.getData();
+				})
+			})
 		},
 
 		getData: function () {

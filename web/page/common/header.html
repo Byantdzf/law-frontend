@@ -26,13 +26,22 @@
 			</ul>
 		</div>
 
-		<p><a href="/index.html">首页</a>
-			<a href="/ask.html">在线法律咨询</a>
-			<a href="/nonlitigationLegalServices.html">日常法律服务</a>
-			<a href="/litigationLegalServices.html">分块法律服务</a>
-			<a href="/getLawyer.html">全案委托律师</a>
-			<a href="/modelAgreement.html">协议文本下载</a>
-			<a href="/user.html">我的</a>
+		<p>
+			{{# if (d.isLawyer) { }}				
+				<a href="/lawyer/index.html">首页</a>
+				<a href="/lawyer/systemPush.html">系统推送</a>
+				<a href="/lawyer/orderList.html">订单池</a>
+				<a href="/lawyer/customerAssign.html">客户指定</a>
+				<a href="/lawyer/user.html">我的</a>
+			{{# } else { }}
+				<a href="/index.html">首页</a>
+				<a href="/ask.html">在线法律咨询</a>
+				<a href="/nonlitigationLegalServices.html">日常法律服务</a>
+				<a href="/litigationLegalServices.html">分块法律服务</a>
+				<a href="/getLawyer.html">全案委托律师</a>
+				<a href="/modelAgreement.html">协议文本下载</a>
+				<a href="/user.html">我的</a>
+			{{# } }}
 			<a href="javascript:;" class="eqcodew">公众号</a>
 			<a href="javascript:;" class="eqService">联系客服</a>
 		</p>

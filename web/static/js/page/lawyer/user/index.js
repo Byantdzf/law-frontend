@@ -10,9 +10,8 @@
 		loadPage: function () {
 			var _t = this;
 			var data = global.userInfo || {};
-			utils.get(URL.lawyerObj.myData, function (res) {
+			utils.get(URL.lawyerObj.myData, {isLawyer: 1}, function (res) {
 				data = $.extend(true, {}, data, res.data);
-				console.log(data);
 				var html = utils.getTemp('/page/lawyer/user/index.html', data);
 				$('.userPageCon').html(html);
 			});

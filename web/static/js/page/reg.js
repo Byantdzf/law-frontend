@@ -55,10 +55,18 @@
 						fileName: $('.idCard2').attr('src') != '/static/images/idcard2.jpg' ? $('.idCard2').attr('src') : ''
 					},
 					{
+						businessType: 20,
+						fileName: $('.idCard4').attr('src') != '/static/images/idcard3.jpg' ? $('.idCard4').attr('src') : ''
+					},
+					{
 						businessType: 2,
 						fileName: $('.idCard3').attr('src') != '/static/images/businessCard.jpg' ? $('.idCard3').attr('src') : ''
+					},
+					{
+						businessType: 30,
+						fileName: $('.idCard5').attr('src') != '/static/images/otherCard.jpg' ? $('.idCard5').attr('src') : ''
 					}
-				]
+				];
 				params.uploadFiles = imgArr
 				utils.postJson(URL.lawyerObj.reg, params, function (res) {
 					utils.alert('注册成功，点击登录', {}, function () {
@@ -89,7 +97,7 @@
 		},
     
 		// 初始化图片上传功能
-		initUpload: function (btn, callback) {
+		initUpload: function (btn) {
 			// 上传图片
 			var p = {};
 			p.btn = btn;

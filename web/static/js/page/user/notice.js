@@ -1,6 +1,5 @@
 ﻿layui.define(function (exports) {
 
-
 	var tableParams = [
 		[
 			{title: "来自", align: "left", width:"200", templet: function (d) {
@@ -43,8 +42,6 @@
 			utils.initPage(ips, '.userPageCon');
 
 			_t.queryList();
-
-			_t.actions();
 		},
 
 		queryList: function () {

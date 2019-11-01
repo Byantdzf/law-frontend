@@ -13,9 +13,19 @@
 			var html = utils.getTemp('/page/lawyer/user/attention.html', data);
 			$('.userPageCon').html(html);
 			
-			$('.countTimes').each(function () {
-				utils.countTimes($(this));
-			});
+			_t.queryList();
+			// $('.countTimes').each(function () {
+			// 	utils.countTimes($(this));
+			// });
+		},
+
+		queryList: function () {
+			var qlps = {
+				url: URL.lawyerObj.attention,
+				box: '.systemPush_box',
+				temp: '/lawyer/temp/common/orderList.html'
+			}
+			utils.queryTempList(qlps);
 		}
 	}
 
