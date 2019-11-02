@@ -312,7 +312,7 @@
 			};
 			utils.uploadFiles(p, function(res) {
 				var url = res.data;
-				$('.fileList').append('<a href="javascript:;" data-url="'+url+'"><img src="/static/images/word.png"><i class="iconfont icon-close del"></i></a>');
+				$('.fileList').append('<a href="javascript:;" data-url="'+url+'"><i class="iconfont icon-wenjian"></i><i class="iconfont icon-close del"></i></a>');
 				$('.fileList').find('.del').off().on('click', function () {
 					$(this).closest('a').remove();
 				});

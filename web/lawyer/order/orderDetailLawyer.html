@@ -35,108 +35,106 @@
                 </div>
                 <div class="layui-col-sm4">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">已选服务：</label>
+                        <label class="layui-form-label">所属分类：</label>
                         <div class="layui-input-block">
-                            <div class="layui-form-mid">{{ d.chooseService || '' }}</div>
+                            <div class="layui-form-mid">{{ d.questionTypeName || '' }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="layui-col-sm4">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">交付期限：</label>
-                        <div class="layui-input-block">
-                            <div class="layui-form-mid">{{ d.deliveryDeadDate || '' }}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-sm4">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">地区：</label>
-                        <div class="layui-input-block">
-                            <div class="layui-form-mid">{{ d.province || '' }}-{{ d.city || '' }}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-sm4">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">手机号码：</label>
-                        <div class="layui-input-block">
-                            <div class="layui-form-mid">{{ d.contactMobile || '' }}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-sm4">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">费用：</label>
+                        <label class="layui-form-label">金额：</label>
                         <div class="layui-input-block">
                             <div class="layui-form-mid">{{ d.amount || '' }}元</div>
                         </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">我的要求：</label>
-                    <div class="layui-input-block">
-                        <div class="layui-form-mid">{{ d.customerRequirement || '' }}</div>
+                <div class="layui-col-sm4">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否紧急：</label>
+                        <div class="layui-input-block">
+                            <div class="layui-form-mid">{{ d.emergency == 1 ? '是' : '否' }}</div>
+                        </div>
                     </div>
                 </div>
-                <!-- 取消订单 -->
-                {{# if (d.orderStatus == 10 || d.orderStatus == 20) { }}
-                <div class="layui-form-item orderBtnBox">
-                    <a href="javascript:;" class="layui-btn cancelOrder">取消订单</a>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">咨询内容：</label>
+                    <div class="layui-input-block">
+                        <div class="layui-form-mid">{{ d.customerRequirement || d.content || '' }}</div>
+                    </div>
                 </div>
-                {{# } }}
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注：</label>
+                    <div class="layui-input-block">
+                        <div class="layui-form-mid">{{ d.remark || '' }}</div>
+                    </div>
+                </div>
+                <hr />
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发布人：</label>
+                    <div class="layui-input-block">
+                        <div class="layui-form-mid">
+                            {{ d.name || '' }}
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">ID：</label>
+                    <div class="layui-input-block">
+                        <div class="layui-form-mid">
+                            {{ d.userId || '' }}
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">电话：</label>
+                    <div class="layui-input-block">
+                        <div class="layui-form-mid">
+                            {{ d.contactMobile || '' }}
+                        </div>
+                    </div>
+                </div>
     
                 <!-- 已接单 -->
                 {{# if (d.orderStatus != 10 && d.orderStatus != 20) { }}
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回复详情：</label>
+                    <div class="layui-input-block">
+                        <div class="replyList">
+                            <div class="app-list"></div>
+                            <div class="app-page-box"></div>
+                        </div>
+                    </div>
+                </div>
+                {{# if (d.orderStatus == 40) { }}
+                <div class="layui-form-item">
+                    <div class="layui-form-mid">何律师已发起订单确认，请您尽快确认，超过xx小时未确认，系统将默认该订单完成。</div>
+                </div>
+                {{# } }}
+                {{# if (d.orderStatus == 30 || d.orderStatus == 40) { }}
+                <div class="askAgain">
                     <hr />
                     <div class="layui-form-item">
-                        <label class="layui-form-label">接单律师：</label>
+                        <label class="layui-form-label">上传文件：</label>
                         <div class="layui-input-block">
-                            <div class="layui-form-mid">
-                                {{ d.lawyer || '' }}
-                                {{# if (d.lawyerPic) { }}<img class="orderLawyerAavatar"
-                                    src="{{ d.lawyerPic || '/static/images/defaultLawyer.jpg' }}"
-                                    onerror="this.src='/static/images/defaultLawyer.jpg'" />{{# } }}
+                            <div class="clearfix">
+                                <div class="fileList">
+                                </div>
                             </div>
+                            <a href="javascript:;" class="uploadFiles fontRed">上传结案法律文书</a>
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">接单时间：</label>
-                        <div class="layui-input-block">
-                                <div class="layui-form-mid">{{ d.acceptTime || '' }}</div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">结案文书：</label>
-                        <div class="layui-input-block">
-                            <div class="replyList">
-                                <div class="app-list"></div>
-                                <div class="app-page-box"></div>
-                            </div>
-                        </div>
-                    </div>
-                    {{# if (d.orderStatus == 40) { }}
-                    <div class="layui-form-item">
-                        <div class="layui-form-mid">{{ d.lawyer || '' }}律师已发起订单确认，请您尽快确认，超过xx小时未确认，系统将默认该订单完成。</div>
-                    </div>
-                        {{# if (d.orderType == 2) { }}
-                        <div class="layui-form-item">
-                            <div class="layui-form-mid">{{ d.lawyer || '' }}律师已确认了订单完成，快去给他评论吧！（对服务不满意？<a href="javascript:;" class="fontRed petition">点击进行申诉</a>）</div>
-                        </div>
-                        {{# } }}
-                    {{# } }}
-                    {{# if (d.orderStatus == 30 || d.orderStatus == 40) { }}
                     <div class="layui-form-item orderBtnBox">
-                        <a href="javascript:;" class="layui-btn finishOrder">确认订单完成</a>
+                        <a href="javascript:;" class="layui-btn legalSevicesSubmit">回复并发送订单确认</a>
                     </div>
-                    {{# } }}
-                    <!-- 评价订单 -->
-                    {{# if (d.orderStatus == 50) { }}
-                    <div class="layui-form-item orderBtnBox">
-                        <a href="javascript:;" class="layui-btn commentOrder">立即评价</a>
-                    </div>
-                    {{# } }}
+                </div>
                 {{# } }}
+                {{# } }}
+                <!-- 我的评价 -->
+                <div class="layui-form-item myComment hidden">
+                    <label class="layui-form-label">用户评价：</label>
+                    <div class="layui-input-block"></div>
+                </div>
             </div>
         </div>
     </div>

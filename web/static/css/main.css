@@ -1433,8 +1433,10 @@ i, em { font-style: normal;}
 
 .replyIcon { position: relative; padding-left:40px!important; color: #999; line-height: 1.5;}
 .replyIcon .iconfont { position: absolute; left:0; top:10px; font-size: 30px;}
+.replyList .icon-wenjian { font-size:18px; margin-right:10px;}
 .fileList { height: 50px;}
 .fileList a { float:left; position: relative; margin-right:10px; padding: 10px; border: 1px solid #e8e8e8;}
 .fileList a img { width:50px;}
+.fileList a .icon-wenjian { font-size: 30px;}
 .fileList a .del { position: absolute; right: 0; top:0; padding: 3px; font-size: 12px;}
 .uploadFiles { display: block; margin-top:10px;}
