@@ -13,12 +13,12 @@
 			switch (_t.type) {
 				case "1":
 					index = 1;
-					_t.successHtml = _t.hasLawyer ? '何金宝会在第一时间进行解答' : '系统会在第一时间给您分配律师进行解答';
+					_t.successHtml = _t.hasLawyer ? '{{lawyer}}会在第一时间进行解答' : '系统会在第一时间给您分配律师进行解答';
 					_t.returnPages = 'index.html';
 					break;
 				case "2":
 					index = 1;
-					_t.successHtml = _t.hasLawyer ? '何金宝会在第一时间进行解答' : '系统会在第一时间给您分配律师进行解答';
+					_t.successHtml = _t.hasLawyer ? '{{lawyer}}会在第一时间进行解答' : '系统会在第一时间给您分配律师进行解答';
 					_t.returnPages = 'index.html';
 					break;
 				case "3":
@@ -52,19 +52,24 @@
 			}
 			$('.nav .widthCC a:eq(' + index + ')').addClass('current').siblings().removeClass('current');
 
-			if (_t.type == 3 || _t.type == 4 || _t.type == 5) {
-				var data = {};
-				if (_t.type == 3 || _t.type == 4) {
-					utils.getSync(URL.legal.getById + _t.id, function (res) {
-						data = res.data || {}
-					});
-				} else if (_t.type == 5) {
+			utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
+				_t.orderInfo = res.data;
+			});
 
-				}
-				_t.loadTemp(data);
-			} else {
-				_t.gotoStepTwo();
-			}
+			// if (_t.type == 3 || _t.type == 4 || _t.type == 5) {
+			// 	var data = {};
+			// 	if (_t.type == 3 || _t.type == 4) {
+			// 		utils.getSync(URL.legal.getById + _t.id, function (res) {
+			// 			data = res.data || {}
+			// 		});
+			// 	} else if (_t.type == 5) {
+
+			// 	}
+			// 	_t.loadTemp(data);
+			// } else {
+			// 	_t.gotoStepTwo();
+			// }
+			_t.gotoStepTwo();
 		},
 
 		loadTemp: function (data) {
@@ -78,7 +83,7 @@
 
 			form.on('submit(orderSubmit)', function (res) {
 				var params = res.field;
-				console.log(params);return false;
+				// console.log(params);return false;
 				_t.gotoStepTwo();
 			})
 
@@ -115,16 +120,29 @@
 			var _t = this;
 			$('.orderPage').addClass('hidden');
 			$('.setPay').removeClass('hidden');
+			$('.setPay .amount').html(_t.orderInfo.amount)
 
 			form.on('submit(paySubmit)', function (res) {
 				var params = res.field;
-				_t.gotoPay();
+				_t.gotoPay(params.payment);
 			})
 
 		},
 
-		gotoPay: function () {
+		gotoPay: function (payment) {
 			var _t = this;
+
+			// 支付宝支付
+			if (payment == 2) {
+				var params = {
+					orderNo: _t.id,
+					fee: _t.orderInfo.amount,
+					subject: '咨询费'
+				};
+				utils.get(URL.common.alipay, params, function (res) {
+					console.log(res);
+				});
+			}
 
 			utils.msg('支付中...');
 			setTimeout(function () {
@@ -136,6 +154,10 @@
 		gotoPaySuccess: function () {
 			var _t = this;
 			$('.setPay, .orderPage').addClass('hidden');
+			if (_t.orderInfo) {
+				var lawyer = _t.orderInfo.lawyer || '';
+				_t.successHtml = _t.successHtml.replace('{{lawyer}}', lawyer)
+			}
 			$('.paySuccess').removeClass('hidden').find('.lawyerHtml').html(_t.successHtml);
 			$('.payTit label').html(_t.payTitle);
 			if (_t.successInfo) {

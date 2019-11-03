@@ -110,6 +110,8 @@
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postLegals, params, function (res) {
+					var orderId = res.data;
+					window.location = 'order.html?id=' + orderId + '&type=3';
 					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})

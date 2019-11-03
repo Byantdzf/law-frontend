@@ -64,8 +64,10 @@
 				params.from = 2
 				params.orderCategory = 12
 				utils.put(URL.issue.postIssue, params, function (res) {
-					console.log(res);return false;
-					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+					var orderId = res.data;
+					// utils.alert('下单成功，订单号为：' + orderId)
+					// console.log(res);return false;
+					window.location = 'order.html?id=' + orderId + '&type=2&hasLawyer=' + _t.hasLawyer;
 				})
 			})
 		},
@@ -87,6 +89,9 @@
 				data.persent = Math.floor(score / 5 * 100)
 				var html = utils.getTemp('/page/issue/lawyerInfo.html', data)
 				$('.oto_form_header').html(html).removeClass('hidden');
+
+				var price = data.price || 0;
+				$('.askPrice label').html(price);
 			})
 		}
 	}

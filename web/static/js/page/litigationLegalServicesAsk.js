@@ -4,7 +4,6 @@
 		init: function () {
 			var _t = this;
 			_t.id = utils.getQueryString('id');
-			_t.hasLawyer = _t.id ? 1 : '';
 
 			if (!_t.id) {
 				return
@@ -110,7 +109,8 @@
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postLegals, params, function (res) {
-					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+					var orderId = res.data;
+					window.location = 'order.html?id=' + orderId + '&type=4';
 				})
 			})
 		},

@@ -37,15 +37,21 @@
 			$('.userPage').html(html);
 
 			$('body').on('click', '.user', function () {
-				utils.get(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
-					utils.setCookie('account', '13600001111');
-					utils.setCookie(global.token, res.data.sessionId);
-					utils.get(URL.user.info, function (res) {
-						utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
-						_t.loadUserPage();
-					})
-					_t.loadUserPage();
-				})
+				var params = {
+					accessPage: 'http://localhost:9999/user.html'
+				};
+				utils.get(URL.user.wxLogin, params, function (res) {
+					console.log(res);
+				});
+				// utils.get(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
+				// 	utils.setCookie('account', '13600001111');
+				// 	utils.setCookie(global.token, res.data.sessionId);
+				// 	utils.get(URL.user.info, function (res) {
+				// 		utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
+				// 		_t.loadUserPage();
+				// 	})
+				// 	_t.loadUserPage();
+				// })
 				// base.login(function () {
 				// 	utils.setCookie(global.userInfoToken, global.userInfo);
 				// 	_t.loadUserPage();

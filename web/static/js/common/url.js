@@ -22,7 +22,9 @@ var URL = {
 		// questionType: '/static/data/questionType.json',
 		isRegister: pcHost + '/pc/user/consult/publish/page',
 		getSmsCode: commonHost + '/applets/lawyer/getPhoneVerificationCode',
-		coupon: pcHost + '/pc/user/couponPool/list'
+		coupon: pcHost + '/pc/user/couponPool/list',
+		askMoney: pcHost + '/getDictData?dictCode=PayMoney',
+		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC'
 	},
 	auth: {
 		login: '/static/data/login.json',
@@ -70,6 +72,7 @@ var URL = {
 		coupon: pcHost + '/pc/user/coupon/list',
 		feedback: pcHost + '/pc/user/feedback',
 		info: pcHost + '/pc/user/base/info',
+		wxLogin: pcHost + '/pc/user/login/url',
 		order: {
 			query: pcHost + '/pc/user/order/orderList',
 			getById: pcHost + '/pc/user/order/orderDetail',
