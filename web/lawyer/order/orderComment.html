@@ -1,0 +1,49 @@
+<div class="orderComment">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <div class="commentLawyer">
+                <div class="imgBox"><img class="orderLawyerAavatar"
+                        src="{{ d.lawyerPic || '/static/images/defaultLawyer.jpg' }}"
+                        onerror="this.src='/static/images/defaultLawyer.jpg'" /></div>
+                <h3>{{ d.lawyer || '' }}</h3>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">专业态度：</label>
+            <div class="layui-input-block">
+                <div class="layui-form-mid">
+                    <div class="starBox professionalAttitudeScore">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">服务态度：</label>
+            <div class="layui-input-block">
+                <div class="layui-form-mid">
+                    <div class="starBox serviceAttitudeScore">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <textarea name="content" class="layui-textarea content"
+                placeholder="请在这输入对此次服务的文字说明"></textarea>
+        </div>
+        <div class="layui-form-item tac">
+            <a href="javascript:;" class="layui-btn layui-btn-red commentSubmit" lay-submit=""
+                lay-filter="commentSubmit">提交</a>
+            <a href="javascript:;" class="layui-btn layui-btn-primary cancel">取消</a>
+        </div>
+    </div>
+</div>

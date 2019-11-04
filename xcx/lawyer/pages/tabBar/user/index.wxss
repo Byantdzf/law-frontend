@@ -111,3 +111,7 @@
 .panel-user--bd .app-cell::before {
   left: 30rpx;
 }
+.userNums {
+  margin-top:30rpx;
+  color:#fff;
+}

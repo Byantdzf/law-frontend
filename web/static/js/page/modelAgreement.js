@@ -9,7 +9,7 @@
 			_t.getQuestionType();
 
 			$('body').on('click', '.showDetail', function() {
-				_t.editBox();
+				_t.editBox($(this).closest('li').data('id'));
 			});
 
 			$('body').on('click', '.buyNow', function () {
@@ -35,8 +35,8 @@
 		queryList: function () {
 			var qlps = {
 				url: URL.template.query,
-				box: '.services_list',
-				temp: '/page/temp/list.html'
+				box: '.modelAgreementListBox',
+				temp: '/page/template/list.html'
 			}
 			utils.queryTempList(qlps);
 		},
@@ -56,66 +56,69 @@
 			})
 		},
 
-		editBox: function (data) {
-			var formitem = [
-				{
-					title: "文件名称",
-					label: "这是文件名称",
-					cols: 12
-				}, {
-					title: "所属分类",
-					label: "劳务纠纷",
-					cols: 12
-				}, {
-					title: "更新时间",
-					label: "2019年8月20日",
-					cols: 12
-				}, {
-					title: "销量",
-					label: "1000",
-					cols: 12
-				}, {
-					title: "价格",
-					label: "100元",
-					cols: 12
-				}, {
-					title: "文件简介",
-					type: "html",
-					html: "这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介，这是这份文件的简介。",
-					cols: 12
-				}, {
-					title: "适用范围",
-					type: "html",
-					html: "这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明，这是关于服务的说明。",
-					cols: 12
-				}
-			]
-			var ops = {
-				title: "模板说明",
-				btn: ["立即购买"],
-				class: "servicesRemark",
-				success: function (layero) {
-					$('.layui-layer-btn1').addClass('hidden');
-					var obj = {};
-					if (data) {
-						if (utils.isType(data) == 'object') {
-							utils.loadUpdateForm(layero, formitem, data);
-						} else {
-							utils.get(URL.select.getById, { id: data }, function (res) {
-								obj = res.data || {};
-								utils.loadUpdateForm(layero, formitem, obj);
-							});
-						}
-					} else {
-						utils.loadUpdateForm(layero, formitem);
+		editBox: function (id) {
+			utils.get(URL.template.details + id, function (res) {
+				var data = res.data;
+				data.price = data.price || 0;
+				console.log(data);
+				var formitem = [
+					{
+						title: "文件名称",
+						label: data.fileName || '',
+						cols: 12
+					}, {
+						title: "所属分类",
+						label: data.businessTypeName || '',
+						cols: 12
+					}, {
+						title: "更新时间",
+						label: data.updateTime || '',
+						cols: 12
+					}, {
+						title: "销量",
+						label: data.sales || '',
+						cols: 12
+					}, {
+						title: "价格",
+						label: data.price + "元",
+						cols: 12
+					}, {
+						title: "文件简介",
+						label: data.brief || '',
+						cols: 12
+					}, {
+						title: "适用范围",
+						label: data.serviceRange || '',
+						cols: 12
 					}
-				},
-				yes: function (index) {
-					window.location = 'order.html?id=1&type=6';
-					layer.close(index);
-				}
-			};
-			utils.openForm(ops);
+				]
+				var ops = {
+					title: data.fileName || '',
+					btn: ["立即购买"],
+					class: "servicesRemark",
+					success: function (layero) {
+						$('.layui-layer-btn1').addClass('hidden');
+						var obj = {};
+						if (data) {
+							if (utils.isType(data) == 'object') {
+								utils.loadUpdateForm(layero, formitem, data);
+							} else {
+								utils.get(URL.select.getById, { id: data }, function (res) {
+									obj = res.data || {};
+									utils.loadUpdateForm(layero, formitem, obj);
+								});
+							}
+						} else {
+							utils.loadUpdateForm(layero, formitem);
+						}
+					},
+					yes: function (index) {
+						window.location = 'order.html?id=1&type=6';
+						layer.close(index);
+					}
+				};
+				utils.openForm(ops);
+			})
 		}
 	}
 

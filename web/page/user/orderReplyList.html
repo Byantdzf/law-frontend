@@ -7,10 +7,16 @@
     <span class="fontGrey">（对回复结果不满意？点击<a href="javascript:;" class="fontRed petition">立即申诉</a>）</span>
 </div>
 {{# 
-        } else {
+        } else if (t.msgType == 1) {
 }}
 <div class="items">
     {{ t.content || '' }}
+</div>
+{{# 
+        } else if (t.msgType == 4) {
+}}
+<div class="items">
+    <a href="javascript:;" class="downloadFiles" data-url="{{ t.filePath }}">{{ t.fileName || '' }}</a>
 </div>
 {{# 
         }

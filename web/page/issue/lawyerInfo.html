@@ -1,7 +1,7 @@
 <div class="audio_header audio_header_big flt"><a href="/lawyerDetails.html?id={{d.id}}"
 		style="background:url('{{d.pic || \'/static/images/defaultLawyer.jpg\'}}') no-repeat center center;background-size:cover;"></a><span></span>
 </div>
-<h6><a href="/lawyerDetails.html?id={{d.id}}">刘丹律师</a>　<label
+<h6><a href="/lawyerDetails.html?id={{d.id}}">{{ d.name || '' }}</a>　<label
 		class="fontRed">{{ d.score || 0 }}分</label></h6>
 <p class="oto_form_header_intro">{{ d.brief || '' }}</p>
 <p class="num">

@@ -12,6 +12,10 @@
             <text wx:if="{{ userInfos.userName }}">{{ userInfos.userName }}</text>
             <open-data class="username" type="userNickName" wx:else></open-data>
           </view>
+          <view class="userNums flex">
+            <view class="flex-bd">帮助人数：{{ userInfos.helps || 0 }}人</view>
+            <view class="flex-bd">关注人数：{{ userInfos.concerns || 0 }}人</view>
+          </view>
         </view>
       </view>
       <view class="cr cr-l"></view>

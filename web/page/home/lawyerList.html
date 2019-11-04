@@ -2,12 +2,16 @@
 	{{# 
 		layui.each(d, function (i, t) { 
 	}}
-	<li>
+	<li data-id="{{ t.id }}">
 		<div class="items">
 			<div class="imgBox"><a href="/lawyerDetails.html?id={{ t.id }}"><img src="{{ t.pic || '/static/images/defaultLawyer.jpg' }}" onerror="this.src='/static/images/defaultLawyer.jpg'" /></a><span></span></div>
 			<h6>
-				<a href="/lawyerDetails.html?id={{ t.id }}">{{ t.name || '' }}</a><span>{{ t.province || '' }} - {{ t.city || '' }}</span><label>{{ t.score }}分</label>
-				<a href="javascript:;" class="conbtn05">关注</a>
+				<a href="/lawyerDetails.html?id={{ t.id }}">{{ t.name || '' }}</a><span>{{ t.province || '' }} - {{ t.city || '' }}</span><label>{{ t.score || 0 }}分</label>
+				{{# if (t.focused > 0) { }}
+				<a href="javascript:;" class="conbtn05 cancelCollect">取消关注</a>
+				{{# } else { }}
+				<a href="javascript:;" class="conbtn05 collect">关注</a>
+				{{# } }}
 			</h6>
 			<p>
 				<a href="/lawyerDetails.html?id={{ t.id }}">{{ t.brief || '' }}</a>

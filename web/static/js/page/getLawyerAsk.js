@@ -35,7 +35,9 @@
 					return
 				}
 				if (!$(this).attr('disabled')) {
-					base.timeCount('.getSmsCode', global.smsTime)
+					utils.get(URL.common.getSmsCode, {phone: mobile}, function (res) {
+						base.timeCount('.getSmsCode', global.smsTime)
+					})
 				}
 			})
 
@@ -92,7 +94,8 @@
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postMandatoryLawyer, params, function (res) {
-					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+					var orderId = res.data;
+					window.location = 'order.html?id=' + orderId + '&type=5';
 				})
 			})
 		},

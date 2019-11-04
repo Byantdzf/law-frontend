@@ -18,10 +18,13 @@ var URL = {
 	common: {
 		upload: '/applets/lawyer/multiUpload',
 		questionType: pcHost + '/getDictData?dictCode=QuestionType',
+		uploadImage: pcHost + '/applets/lawyer/multiUpload',
 		// questionType: '/static/data/questionType.json',
 		isRegister: pcHost + '/pc/user/consult/publish/page',
 		getSmsCode: commonHost + '/applets/lawyer/getPhoneVerificationCode',
-		coupon: pcHost + '/pc/user/couponPool/list'
+		coupon: pcHost + '/pc/user/couponPool/list',
+		askMoney: pcHost + '/getDictData?dictCode=PayMoney',
+		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC'
 	},
 	auth: {
 		login: '/static/data/login.json',
@@ -68,6 +71,8 @@ var URL = {
 		cancelattention: pcHost + '/pc/user/order/operateOrder',
 		coupon: pcHost + '/pc/user/coupon/list',
 		feedback: pcHost + '/pc/user/feedback',
+		info: pcHost + '/pc/user/base/info',
+		wxLogin: pcHost + '/pc/user/login/url',
 		order: {
 			query: pcHost + '/pc/user/order/orderList',
 			getById: pcHost + '/pc/user/order/orderDetail',
@@ -75,10 +80,37 @@ var URL = {
 			reply: pcHost + '/pc/user/msg/orderMsglist',
 			petition: pcHost + '/pc/user/order/appeal/',
 			askAgain: pcHost + '/pc/user/order/askSecond/',
-			confirm: pcHost	 + '/pc/user/order/confirm/'
+			confirm: pcHost	 + '/pc/user/order/confirm/',
+			comment: pcHost + '/pc/user/order/evaluate/',
+			getComments: pcHost + '/pc/lawyer/orderScore/queryOrderScoreByOrderId'
 		}
 	},
 	lawyerObj: {
-		login: pcHost + '/applets/lawyer/loginByAccount'
+		login: pcHost + '/pc/lawyer/login',
+		reg: pcHost + '/pc/lawyer/register',
+		info: pcHost + '/pc/lawyer/my/myInfo',
+		myData: pcHost + '/pc/lawyer/my/myData',
+		update: pcHost + '/pc/lawyer/updateLawyerInfo',
+		attention: pcHost + '/pc/lawyer/my/myFollow',
+		feedback: pcHost + '/pc/lawyer/feedback',
+		news: {
+			query: pcHost + '/pc/lawyer/article/list',
+			getById: pcHost + '/pc/lawyer/article/details/'
+		},
+		order: {
+			query: pcHost + '/pc/lawyer/order/orderList',
+			getById: pcHost + '/pc/lawyer/order/orderDetail',
+			operate: pcHost + '/pc/lawyer/order/recordOperate',
+			accept: pcHost + '/pc/lawyer/order/acceptOrder',
+			refuse: pcHost + '/pc/lawyer/order/rejectOrder',
+			replyList: pcHost + '/pc/lawyer/msg/orderMsglist',
+			reply: pcHost + '/pc/lawyer/order/orderReply',
+			replyFiles: pcHost + '/pc/lawyer/order/orderReplyForManyAttachment',
+			getComments: pcHost + '/pc/lawyer/orderScore/queryOrderScoreByOrderId'
+		},
+		notice: {
+			list: pcHost + '/pc/lawyer/msg/list',
+			details: pcHost + '/pc/lawyer/msg/details/'
+		},
 	}
 }

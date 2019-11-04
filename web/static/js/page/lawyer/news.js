@@ -3,29 +3,19 @@
 	var gather = {
 		init: function () {
 			var _t = this;
-			_t.type = utils.getQueryString('type').toString();
 
-			_t.getBranch();
+			_t.queryList();
 
-			$('.countTimes').each(function () {
-				utils.countTimes($(this));
-			});
+			base.getLawyerOrderList();
 		},
-		getBranch: function () {
-			var _t = this;
-			var location = '';
-			switch (_t.type) {
-				case "1":
-					location = '<a href="javascript:;">精选文章</a>';
-					break;
-				case "2":
-					location = '<a href="javascript:;">公司新闻</a>';
-					break;
+
+		queryList: function () {
+			var qlps = {
+				url: URL.lawyerObj.news.query,
+				box: '.art_list_box',
+				temp: '/page/news/newsList.html'
 			}
-			if (location) {
-				$('.bread_tips').append(location);
-				$('.clm_tt_l').html(location);
-			}
+			utils.queryTempList(qlps);
 		}
 	}
 

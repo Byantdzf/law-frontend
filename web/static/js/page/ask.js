@@ -8,9 +8,13 @@
 
 			if (_t.id) {
 				_t.getLawyerInfo()
+			} else {
+				_t.loadAskMoney();
 			}
+
 			_t.getQuestionType()
 			base.loadArea(_t);
+
 
 			$('body').on('click', '.getSmsCode', function () {
 				var mobile = $.trim($('.mobile').val())
@@ -72,8 +76,21 @@
 				params.from = 2
 				params.orderCategory = 11
 				utils.put(URL.issue.postIssue, params, function (res) {
-					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
+					var orderId = res.data;
+					// utils.alert('下单成功，订单号为：' + orderId)
+					// console.log(res);return false;
+					window.location = 'order.html?id=' + orderId + '&type=1&hasLawyer=' + _t.hasLawyer;
 				})
+			})
+		},
+
+		loadAskMoney: function (price) {
+			utils.get(URL.common.askMoney, function (res) {
+				var data = res.data;
+				$.each(data, function (i, t) {
+					t.id = t.code;
+				})
+				utils.getSelect(data, '.amount', '请选择支付金额', price)
 			})
 		},
 
@@ -94,6 +111,7 @@
 				data.persent = Math.floor(score / 5 * 100)
 				var html = utils.getTemp('/page/issue/lawyerInfo.html', data)
 				$('.oto_form_header').html(html).removeClass('hidden');
+				_t.loadAskMoney(data.price);
 			})
 		}
 	}

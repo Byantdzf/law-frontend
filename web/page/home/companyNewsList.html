@@ -2,7 +2,7 @@
 	layui.each(d, function (i, t) { 
 }}
 <div class="swiper-slide">
-	<a href="newsDetails.html?id=={{t.id}}">
+	<a href="newsDetails.html?id={{t.id}}">
 		<div class="imgBox"><img src="{{ t.pic || '/static/images/nopic.jpg' }}" /></div>
 		<h3>{{ t.title || '' }}</h3>
 		<p>{{ t.brief || '' }}</p>

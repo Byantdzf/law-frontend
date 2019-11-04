@@ -2,24 +2,28 @@
 	{{# 
 		layui.each(d, function (i, t) { 
 	}}
-	<li>
-		<a href="newsDetails.html?id={{t.id}}">
-			{{# if (t.pic) { }}
-			<div class="imgBox">
-				<img src="{{ t.pic }}" alt="">
-			</div>
-			{{# } }}
+	<li data-id="{{t.id}}">
 			<div>
-				<h4>{{ t.title || '' }}</h4>
-				<p>{{ t.brief || '' }}</p>
-				<div class="icons">
-					<span><i class="iconfont icon-read"></i> {{ t.readCount }}</span>
-					<span><i class="iconfont icon-share"></i> {{ t.forwardCount }}</span>
-					<span><i class="iconfont icon-zan"></i> {{ t.thumbsUpCount }}</span>
+				<a href="javascript:;" class="showDetail">
+					<div class="imgBox">
+						<img src="{{ t.pic || '/static/images/nopic.jpg' }}" onerror="this.src='/static/images/nopic.jpg'">
+					</div>
+					<h3>{{ t.title || '' }}</h3>
+					<div class="fonts">
+						<p>{{ t.brief || '' }}
+						</p>
+						<div>
+							<label>销售量：{{ t.sales || 0 }}</label>
+							<span>价格：{{ t.price || '' }}元</span>
+						</div>
+					</div>
+				</a>
+				<div class="btnBox">
+					<a href="javascript:;" class="layui-btn buyNow">立即下单</a>
 				</div>
 			</div>
-		</a>
-	</li>
+		</li>
+
 	{{# 
 		})
 	}}

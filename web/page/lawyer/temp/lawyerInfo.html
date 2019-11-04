@@ -7,7 +7,7 @@
 		<div class="fonts">
 			<div class="name">
 				<div class="clearfix">
-					<label>{{ d.name || '' }}</label>
+					<label>{{ d.name || '&nbsp;' }}</label>
 					<div class="score">
 						<div class="scoreBox">
 							<span style="width:20%"></span>
@@ -24,15 +24,15 @@
 			</div>
 			<div class="items pl0">
 				<div class="clearfix">
-					<span><label>所属事务所：</label>{{ d.belongs || '' }}人</span>
-					<span><label>执业证号：</label>{{ d.lawyerLicenseNo || '' }}</span>
+					<span><label>所属事务所：</label>{{ d.belongs || '&nbsp;' }}</span>
+					<span><label>执业证号：</label>{{ d.lawyerLicenseNo || '&nbsp;' }}</span>
 				</div>
 			</div>
 			<div class="items">
-				<label>擅长领域：</label>{{ d.goodAt || '' }}
+				<label>擅长领域：</label>{{ d.goodAt || '&nbsp;' }}
 			</div>
 			<div class="items">
-				<label>个人简介：</label>{{ d.brief || '' }}
+				<label>个人简介：</label>{{ d.brief || '&nbsp;' }}
 			</div>
 {{#
 	if (d.orderList && d.orderList.length) {
@@ -63,9 +63,13 @@
 }}
 			<div class="btns">
 				<div class="clearfix">
-					<a href="javascript:;">在线律师咨询</a>
-					<a href="javascript:;">指定律师咨询</a>
-					<a href="javascript:;">立即关注</a>
+					<a href="ask.html?id={{ d.id }}">在线律师咨询</a>
+					<a href="selfAsk.html?id={{ d.id }}">指定律师咨询</a>
+					{{# if (d.focused > 0) { }}
+					<a href="javascript:;" class="cancelCollect">取消关注</a>
+					{{# } else { }}
+					<a href="javascript:;" class="collect">立即关注</a>
+					{{# } }}
 					<a href="javascript:;">委托接单</a>
 				</div>
 			</div>
