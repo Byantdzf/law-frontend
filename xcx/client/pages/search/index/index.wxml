@@ -8,7 +8,7 @@
         <view class="search-action" wx:if="{{history.length}}">
             <view class="tit">历史搜索</view>
             <view class="search-list flex">
-                <view wx:for="{{ history }}" wx:key="{{ index }}" data-name="{{ item }}" bind:tap="gotoSearch">
+                <view wx:for="{{ history }}" wx:key="{{ index }}" data-name="{{ item }}" bind:tap="historySearch">
                     {{ item }}
                 </view>
             </view>

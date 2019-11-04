@@ -1,5 +1,6 @@
 // pages/mandatoryLawyer/list/index.js
 const app = getApp();
+const selectApi = require('../../../service/select')
 Page({
     data: {
         listUrl: '/applets/user/global/search',
@@ -60,8 +61,16 @@ Page({
         let { id } = e.currentTarget.dataset
         app.gotoPage('/pages/lawyer/detail/index?id=' + id)
     },
-    collect() {
-
+    collect(e) {
+        let { id } = e.currentTarget.dataset
+        let list = this.data.list
+        let index = list.findIndex(item => {
+            return id == item.id
+        })
+        let items = list[index]
+        selectApi.attentionLawyer({businessId: id}).then(res => {
+            this.getLawyerList()
+        })
     },
     voiceTap(e) {
         let { id } = e.currentTarget.dataset

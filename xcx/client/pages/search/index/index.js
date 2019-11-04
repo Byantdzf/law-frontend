@@ -25,6 +25,10 @@ Page({
         wx.setStorageSync('history', history)
         app.gotoPage('/pages/search/list/index?t=' + name)
     },
+    historySearch(e) {
+        let { name } = e.currentTarget.dataset
+        app.gotoPage('/pages/search/list/index?t=' + name)
+    },
 })
 
 

@@ -4,6 +4,8 @@
 .page-search {
   padding: 20rpx 30rpx 0;
   background: #fff;
+  position: relative;
+  z-index: 10;
 }
 .page-search .location {
   min-width: 160rpx;
@@ -13,11 +15,14 @@
   border: 1px solid #e0e0e0;
   border-radius: 20rpx;
 }
+.tabBox { position: relative; z-index: 10;}
 .page-lawyer .app-tab {
   background: #fff;
 }
-.app-sort {
+.app-sort-con {
   background: #dcdcdc;
+  position: relative;
+  z-index: 10;
 }
 .app-sort .flex-bd {
   padding: 20rpx 0;
@@ -79,3 +84,8 @@
 .app-empty .iconfont {
   font-size: 100rpx;
 }
+
+.order-filter-bg { position: fixed; z-index: 9; left:0; top:0; right:0; bottom:0; background: rgba(0,0,0,.5);}
+.order-child { position: absolute; z-index: 10; top:76rpx; background: #fff; width: 100%; padding: 20rpx 30rpx;}
+.order-child .filter-item { line-height: 3; border-bottom: 1rpx solid #f8f8f8;}
+.order-child .filter-item.curr { color: #CF443D;}

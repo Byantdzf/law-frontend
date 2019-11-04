@@ -1440,3 +1440,5 @@ i, em { font-style: normal;}
 .fileList a .icon-wenjian { font-size: 30px;}
 .fileList a .del { position: absolute; right: 0; top:0; padding: 3px; font-size: 12px;}
 .uploadFiles { display: block; margin-top:10px;}
+
+.myList { padding: 20px 30px;}
