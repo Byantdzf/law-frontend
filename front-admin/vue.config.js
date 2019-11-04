@@ -4,7 +4,8 @@ module.exports = {
 
   devServer: {
      port: "8012",
-     proxy: "http://testadmin2.pt.mytriptest.com"
+     proxy: "http://139.9.188.68:8073"
+    //  proxy: "http://testadmin2.pt.mytriptest.com"
     // proxy: "http://devadmin2.ptdev.mytriptest.com"
     // port: "9012",
     // proxy: "http://192.168.0.42:2900"
