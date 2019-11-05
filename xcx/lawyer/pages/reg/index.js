@@ -157,15 +157,15 @@ Page({
         var imgArr = [
             {
                 businessType: 1,
-                fileName: this.data.idCard1
+                filePath: this.data.idCard1
             },
             {
                 businessType: 10,
-                fileName: this.data.idCard2
+                filePath: this.data.idCard2
             },
             {
                 businessType: 2,
-                fileName: this.data.idCard3
+                filePath: this.data.idCard3
             }
         ]
         params.uploadFiles = imgArr
