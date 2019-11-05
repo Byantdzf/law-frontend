@@ -11,12 +11,18 @@
                 <view class="iconfont icon-search pl-20 pr-20"></view>
             </view>
         </view>
-        <app-tab items="{{ types }}" bind:change="changeType" />
-        <view class="flex app-sort">
-            <view class="flex-bd flex {{ item.curr && 'curr'}}" wx:for="{{ sorts }}" wx:key="{{ index }}" data-index="{{index}}" bind:tap="changeOrder">
-                <text>{{ item.name }}</text>
-                <text class="iconfont icon-arrow-down-fill"></text>
+        <view class="tabBox"><app-tab items="{{ types }}" bind:change="changeType" wx:if="{{ types.length > 1}}" /></view>
+        <view class="app-sort">
+            <view class="flex app-sort-con">
+                <view class="flex-bd flex {{ item.curr && 'curr'}}" wx:for="{{ sorts }}" wx:key="{{ index }}" data-index="{{index}}" bind:tap="changeOrder">
+                    <text>{{ item.name }}</text>
+                    <text class="iconfont {{ item.value == 'desc' ? 'icon-arrow-down-fill' : item.value == 'asc' ? 'icon-arrow-up-fill' : '' }}" wx:if="{{item.value}}"></text>
+                </view>
             </view>
+            <view class="order-child" wx:if="{{dropVisable}}">
+                <view class="filter-item {{ item.id == currOrderType.id ? 'curr' : '' }}" bind:tap="changeThis" wx:for="{{dropList}}" wx:key="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+            </view>
+            <view class="order-filter-bg" bind:tap="dropHide" wx:if="{{dropVisable}}"></view>
         </view>
         <view class="flex-bd app-scroller">
             <app-list url="/applets/user/lawyer/list" id="app-list" bind:change="updateList">

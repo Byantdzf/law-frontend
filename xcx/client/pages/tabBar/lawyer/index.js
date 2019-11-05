@@ -3,7 +3,9 @@ const app = getApp();
 const selectApi = require('../../../service/select')
 Page({
     data: {
+        dropVisable: false,
         currArea: [],
+        dropList: [],
         types: [{
             key: '',
             value: '全部'
@@ -20,19 +22,31 @@ Page({
                 id: 2,
                 name: '评分高低',
                 code: 'score',
-                value: ''
+                value: '',
+                rs: [
+                    {id: 1, name: '从高到低'},
+                    {id: 2, name: '从低到高'}
+                ]
             },
             {
                 id: 3,
                 name: '帮助人数',
                 code: 'helps',
-                value: ''
+                value: '',
+                rs: [
+                    {id: 1, name: '从多至少'},
+                    {id: 2, name: '从少至多'}
+                ]
             },
             {
                 id: 4,
                 name: '关注人数',
                 code: 'concerns',
-                value: ''
+                value: '',
+                rs: [
+                    {id: 1, name: '从多至少'},
+                    {id: 2, name: '从少至多'}
+                ]
             }
         ],
         list: [],
@@ -70,15 +84,17 @@ Page({
         if(index == -1) {
             index = 0
         }
-
+console.log(this.data.sorts)
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
             this.data.types[index] && (this.data.types[index].name && this.data.types[index].key  && (params.goodAt = this.data.types[index].name))
+            let sortArr = []
             this.data.sorts.forEach((item, i) => {
-                if (item.curr && item.code) {
-                    params.orderBy = item.code + ' desc'
+                if (item.code && item.value) {
+                    sortArr.push(item.code + ' ' + item.value)
                 }
             })
+            params.orderBy = sortArr.join(', ')
             return params
         })
     },
@@ -92,19 +108,48 @@ Page({
     changeOrder(e) {
         let { index } = e.currentTarget.dataset
         let sorts = this.data.sorts
+        let dropList = []
+        let dropVisable = true
+        let isReload = false
         sorts.forEach((item, i) => {
             if (index == i) {
                 item.curr = true
-                i > 0 && (item.value = '0')
+                dropList = item.rs
             } else {
                 item.curr = false
+            }
+            if (index == 0) {
+                dropVisable = false
+                dropList = []
                 item.value = ''
+                isReload = true
             }
         })
         this.setData({
-            sorts
+            dropList,
+            sorts,
+            dropVisable
         })
-        this.loadList()
+        isReload && this.loadList()
+    },
+    changeThis(e) {
+      const { id } = e.currentTarget.dataset
+      let sorts = this.data.sorts
+      sorts.forEach((item, i) => {
+          if (item.curr) {
+            item.value = id == 1 ? 'desc' : 'asc'
+          }
+      })
+      this.setData({
+        sorts
+      })
+      this.dropHide()
+      this.loadList()
+    },
+    dropHide() {
+      this.setData({
+        dropVisable: false,
+      })
     },
     updateList(e) {
         this.setData({ list: e.detail })

@@ -112,5 +112,8 @@ var URL = {
 			list: pcHost + '/pc/lawyer/msg/list',
 			details: pcHost + '/pc/lawyer/msg/details/'
 		},
+		user: {
+			myList: '/pc/lawyer/my/balanceAmountDetail'
+		}
 	}
 }
