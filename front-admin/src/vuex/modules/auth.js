@@ -8,7 +8,7 @@ const auth = {
   },
   actions: {
     // 登录
-    login: (context, payload) => post('/ptUser/login', payload, { loading: false }),
+    login: (context, payload) => post('/pc/mgr/login', payload, { loading: false, auth: false }),
 
     // 获取登录用户导航菜单
     getMenus({ rootState }, routes) {
