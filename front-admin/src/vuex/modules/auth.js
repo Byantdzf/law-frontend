@@ -1,4 +1,4 @@
-import { get, post } from '@/utils/xhr.js'
+import { get, postJson } from '@/utils/xhr.js'
 import { getTreeData, treeToList } from "@/utils/tools"
 
 const auth = {
@@ -8,16 +8,16 @@ const auth = {
   },
   actions: {
     // 登录
-    login: (context, payload) => post('/pc/mgr/login', payload, { loading: false, auth: false }),
+    login: (context, payload) => postJson('/pc/mgr/login', payload, { loading: false, auth: false }),
 
     // 获取登录用户导航菜单
     getMenus({ rootState }, routes) {
       return new Promise((resolve, reject) => {
-        get('/ptMenu/myMenu').then(res => {
-        // get('menu.json', payload, { successCode: 'any' }).then(response => {
-          // let data = response
+        // get('/ptMenu/myMenu').then(res => {
+        get('menu.json', {}, { successCode: 'any' }).then(response => {
+          let data = response
           // rootState.navs = getTreeData(arrSort(data, 'id'))
-          let data = res.data || []
+          // let data = res.data || []
           if (routes && routes.length) {
             routes = treeToList(routes).map(v => v.path)
           }
