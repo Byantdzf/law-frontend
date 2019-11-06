@@ -7,7 +7,6 @@
 			form.on('submit(loginSubmit)', function (res) {
 				var params = res.field;
 				params.from = 2;
-				params.isLawyer = 1;
 				utils.get(URL.lawyerObj.login, params, function (res) {
 					utils.setCookie(global.token, res.data.sessionId);
 					utils.get(URL.lawyerObj.info, params, function (res) {

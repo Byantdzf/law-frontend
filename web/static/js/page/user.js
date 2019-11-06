@@ -43,8 +43,7 @@
 				utils.get(URL.user.wxLogin, params, function (res) {
 					console.log(res);
 				});
-				// utils.get(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
-				// 	utils.setCookie('account', '13600001111');
+				// utils.post(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
 				// 	utils.setCookie(global.token, res.data.sessionId);
 				// 	utils.get(URL.user.info, function (res) {
 				// 		utils.setCookie(global.userInfoToken, JSON.stringify(res.data));

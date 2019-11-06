@@ -14,7 +14,7 @@
 
 		loadData: function () {
 			var _t = this;
-			utils.get(URL.lawyerObj.info, { isLawyer: 1}, function (res) {
+			utils.get(URL.lawyerObj.info, function (res) {
 				_t.data = res.data;
 				_t.loadPage();
 			});

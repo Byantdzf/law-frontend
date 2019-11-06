@@ -89,15 +89,11 @@ layui.define(function (exports) {
 			var headers = {}
 			// var isAuth = !data.noAuth;
 			// delete (data.noAuth);
-			if (data.isLawyer && gather.cookie(global.token)) {
+			if (gather.cookie(global.token)) {
 				var headers = {
 					Authorization: 'Bearer ' + gather.cookie(global.token)
 				};
 				// data.account = gahter.cookie('account');
-			}
-
-			if (gahter.cookie('account') && !data.isLawyer) {
-				data.account = gahter.cookie('account');
 			}
 
 			// 读取当前默认城市
@@ -132,6 +128,7 @@ layui.define(function (exports) {
 					// }
 				},
 				success: function (res) {
+					console.log(res);
 					if (!res.data) {
 						res.data = {};
 					}
@@ -140,11 +137,11 @@ layui.define(function (exports) {
 							callback(res);
 						}
 					// } else if (res.code == '01') {
-						// gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
-						// gather.setCookie(global.token, '');
-						// gather.setCookie(global.backToken, '');
+					// 	gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+					// 	gather.setCookie(global.token, '');
+					// 	gather.setCookie(global.backToken, '');
 
-						// window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+					// 	window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else if (res.code == 'E00006') {
 						
 					} else {
@@ -163,6 +160,7 @@ layui.define(function (exports) {
 					$('.submit').removeAttr("disabled");
 				},
 				error: function (e) {
+					console.log(e);
 					if (e.responseJSON.message == '非法访问用户') {
 						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
 						gather.setCookie(global.token, '');
