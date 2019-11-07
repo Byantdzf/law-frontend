@@ -38,10 +38,18 @@
 
 			$('body').on('click', '.user', function () {
 				var params = {
-					accessPage: 'http://localhost:9999/user.html'
+					access_page: 'http://localhost:9999/user.html'
 				};
 				utils.get(URL.user.wxLogin, params, function (res) {
-					console.log(res);
+					//弹出 500 * 500 的窗口
+					
+					window.open(res.data)
+					// window.open(res.data, 'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')
+
+					// 通过监听，父页面可以拿到子页面传递的token，父(前端页面)，子(小窗)
+					// window.addEventListener('message', function (e) {
+					//   console.log(e.data);
+					// }, false);
 				});
 				// utils.post(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
 				// 	utils.setCookie(global.token, res.data.sessionId);
