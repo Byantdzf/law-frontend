@@ -7,6 +7,7 @@ const SYSTEM = {
   copyright: process.env.VUE_APP_COPYRIGHT,
   // baseUrl: process.env.BASE_URL,
   baseUrl: 'http://139.9.188.68:8073',
+  // baseUrl: 'https://hujiaonline.com:8073',
   routeHomePath: process.env.VUE_APP_HOME_PATH,
   isDevEnv: process.env.NODE_ENV === 'development',
   isProEnv: process.env.NODE_ENV === 'production',
