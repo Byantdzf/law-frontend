@@ -139,9 +139,10 @@
 					fee: _t.orderInfo.amount,
 					subject: '咨询费'
 				};
-				utils.get(URL.common.alipay, params, function (res) {
-					console.log(res);
-				});
+				window.open(URL.common.alipay + '?' + $.param(params));
+				// utils.get(URL.common.alipay, params, function (res) {
+				// 	console.log(res);
+				// });
 			}
 
 			utils.msg('支付中...');
