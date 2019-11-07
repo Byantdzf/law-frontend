@@ -97,10 +97,10 @@
 
       document.body.addEventListener('keyup', this.bodyListener, false)
 
-      if (SYSTEM.userToken()) {
+      // if (SYSTEM.userToken()) {
         const { routes } = this.$router.options
         this.getMenus(routes)
-      }
+      // }
     },
     destroyed() {
       Bus.$off('loading')

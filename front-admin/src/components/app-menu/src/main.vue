@@ -6,7 +6,7 @@
 		:default-active="activeMenuId"
 	>
 		<app-menu-item
-			v-for="menu in menus"
+			v-for="menu in navs"
 			:key="menu.id"
 			:menu="menu"
 			:root="menu"
@@ -37,6 +37,7 @@
 				return String(this.curMenuId)
 			},
 			...mapState([
+				"navs",
 				"curMenuId",
 				"curNav"
 			])
@@ -76,7 +77,7 @@
 
 						i ++ 
 					}
-				})(this.menus)
+				})(this.navs)
 			}
 		},
 		created() {

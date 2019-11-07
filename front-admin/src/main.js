@@ -6,7 +6,7 @@ import { get } from 'lodash-es'
 import App from './App.vue'
 import routes from './router'
 import store from './vuex'
-import SYSTEM from './utils/system'
+// import SYSTEM from './utils/system'
 import AppLoading from '@/components/app-loading'
 
 // 引入element ui
@@ -93,20 +93,25 @@ Router.prototype.openNewTab = function(path, query) {
 
 // router跳转前相关逻辑处理
 router.beforeEach((to, from, next) => {
-  const token = SYSTEM.userToken()
+  // const token = SYSTEM.userToken()
 
-  if (!token) {
-    if (to.path === '/login') {
-      next()
-    } else {
-      next('/login')
-    }
+  // if (!token) {
+  //   if (to.path === '/login') {
+  //     next()
+  //   } else {
+  //     next('/login')
+  //   }
+  // } else {
+  //   if (to.path === '/' || to.path === '') {
+  //     next(SYSTEM.routeHomePath)
+  //   } else {
+  //     next()
+  //   }
+  // }
+  if (to.path === '/' || to.path === '') {
+    next('/login')
   } else {
-    if (to.path === '/' || to.path === '') {
-      next(SYSTEM.routeHomePath)
-    } else {
-      next()
-    }
+    next()
   }
 })
 

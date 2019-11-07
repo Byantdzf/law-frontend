@@ -3,6 +3,7 @@
     <el-col class="app-header__left">
       <slot name="logo">
         <img class="logo" src="/img/logo2.png" alt="logo" />
+        <h2 class="ib">{{ appTitle }}</h2>
       </slot>
     </el-col>
     <el-col class="app-header__center">
@@ -10,20 +11,15 @@
     </el-col>
     <div class="app-header__right">
       <ul class="app-header__tools">
-        <li class="ib">
+        <!-- <li class="ib">
           <el-popover
             popper-class="app-header__popover"
-            width="400"
+            width="80"
             trigger="hover">
-            <el-row class="header-popover-hd pb-10">
-              <el-col :span="12">账户信息</el-col>
-              <el-col class="ta-r" :span="12">账户设置</el-col>
-            </el-row>
-            <el-row class="header-popover-bd pt-10">
-              <p>
-                <span>所在部门：</span>
-                <span>--</span>
-              </p>
+            <el-row>
+              <el-col>
+                <i class="iconfont icon-password"></i> 修改密码
+              </el-col>
             </el-row>
             <span class="reference" slot="reference">
               <span class="icon-box ib">
@@ -32,12 +28,20 @@
               <span class="ib header-username ellipsis">{{ accountName }}</span>
             </span>
           </el-popover>
-        </li>
+        </li> -->
         <slot name="tools">
-          <li class="ib" v-if="showHomeIcon">
-            <router-link class="reference" to="/home/index">
-              <i class="iconfont icon-home cl-inverse"></i>
-            </router-link>
+          <li class="ib">
+            <span class="reference">
+              <span class="icon-box ib">
+                <i class="iconfont icon-manager cl-primary"></i>
+              </span>
+              <span class="ib header-username ellipsis">{{ accountName }}</span>
+            </span>
+          </li>
+          <li class="ib">
+            <span class="reference">
+              <i class="iconfont icon-password"></i>
+            </span>
           </li>
           <li class="ib" @click="logout">
             <span class="reference">
@@ -52,6 +56,7 @@
 
 <script>
   import { mapState } from 'vuex'
+  import SYSTEM from '@/utils/system'
   import Bus from '@/utils/bus'
 
 	export default {
@@ -61,8 +66,10 @@
         'accountName'
       ])
     },
-    props: {
-      showHomeIcon: Boolean
+    data() {
+      return {
+        appTitle: SYSTEM.title,
+      }
     },
     methods: {
       async logout() {

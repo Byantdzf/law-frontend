@@ -2,14 +2,14 @@
   <el-row class="app-container">
     <el-row class="app-header-wrapper">
       <app-header showHomeIcon>
-        <app-nav />
+        <!-- <app-nav /> -->
       </app-header>
     </el-row>
     <el-row class="app-side" id="app-side">
-      <el-row class="app-side__hd">
+      <!-- <el-row class="app-side__hd">
         <span class="cl-999" v-if="!menuFold">{{ curNav ? curNav.name : '' }}</span>
-        <!-- <i class="iconfont icon-menu-toggle fr cl-666" @click="toggleMenuVisible"></i> -->
-      </el-row>
+        <i class="iconfont icon-menu-toggle fr cl-666" @click="toggleMenuVisible"></i>
+      </el-row> -->
       <app-scroll-box
         class="app-side__bd"
         :reset="menuFold"
@@ -18,12 +18,12 @@
       </app-scroll-box>
     </el-row>
     <el-row class="app-main" id="app-main">
-      <el-breadcrumb class="pl-20 pr-20" separator-class="el-icon-arrow-right">
+      <!-- <el-breadcrumb class="pl-20 pr-20" separator-class="el-icon-arrow-right">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index">
           {{ item.name }}
         </el-breadcrumb-item>
-      </el-breadcrumb>
-      <router-view class="app-main-box pl-20 pr-20" />
+      </el-breadcrumb> -->
+      <router-view class="app-main-box pa-10" />
       <app-loading :show="ajaxLoading" />
     </el-row>
     <app-dialog
@@ -179,16 +179,20 @@
         line-height: @headerHeight;
       }
       .app-header__left {
-        width: @menuWidth;
+        // width: @menuWidth;
         position: relative;
         z-index: 100;
-        text-align: center;
+        // text-align: center;
+        padding-left: 10px;
         overflow: hidden;
         .logo {
           display: inline-block;
           max-width: 100%;
-          max-height: @headerHeight;
+          max-height: @headerHeight - 10px;
           vertical-align: middle;
+        }
+        h2 {
+          font-size: 20px;
         }
       }
       .app-header__center {
@@ -221,7 +225,8 @@
     .app-side {
       position: absolute !important; 
       z-index: 3000;
-      top: @headerHeight;
+      // top: @headerHeight;
+      top: 0;
       left: 0;
       bottom: 0;
       width: @menuWidth;
@@ -242,7 +247,8 @@
       }
       .app-side__bd {
         position: absolute;
-        top: @menuHeight;
+        // top: @menuHeight;
+        top: @headerHeight;
         right: 0;
         bottom: 0;
         left: 0;

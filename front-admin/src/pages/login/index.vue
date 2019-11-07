@@ -55,7 +55,7 @@ import loginBg from '@/assets/images/login_bg.jpg'
 // import bg2 from '@/assets/images/login_bg2.jpg'
 // import bg3 from '@/assets/images/login_bg3.jpg'
 
-const md5 = require('md5')
+// const md5 = require('md5')
 
 export default {
   data() {
@@ -119,14 +119,14 @@ export default {
                 path = this.getUrl(menusList[idx])
                 idx ++
               }
-              
+              console.log(path)
               this.$router.push({ path })
             } else {
               this.$msgError('暂无授权目录，请联系管理员！')
             }
           }
         } catch (error) {
-          console.log(error)
+          // console.log(error)
           this.isLoading = false
         }
       })
@@ -135,7 +135,7 @@ export default {
     getUrl(node) {
       let url = node.url && node.url != '/404' ?  node.url : ''
       let child = node.children ? node.children[0] : null
-
+      
       while(!url && child) {
         url = child.url && child.url != '/404' ? child.url : ''
         child = child.children ? child.children[0] : null

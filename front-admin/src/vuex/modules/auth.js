@@ -28,7 +28,7 @@ const auth = {
             }
           })
 
-          rootState.navs = getTreeData({ list: data, pid: 'parent', cid: 'id' })
+          rootState.navs = getTreeData({ list: data, pid: 'parentId', cid: 'id' })
           
           resolve(rootState.navs)
         }).catch(error => {

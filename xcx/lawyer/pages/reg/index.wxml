@@ -4,7 +4,7 @@
             <form bindsubmit="formSubmit">
             <view class="issue-form">
                 <view class="issue-form-item">
-                    <input class="app-input" type="texts" name="name" placeholder="请输入您的姓名"></input>
+                    <input class="app-input" type="text" name="name" placeholder="请输入您的姓名"></input>
                 </view>
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
