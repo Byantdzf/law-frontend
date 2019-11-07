@@ -6,6 +6,7 @@
 			_t.id = utils.getQueryString('id');
 			_t.type = utils.getQueryString('type');
 			_t.hasLawyer = utils.getQueryString('hasLawyer');
+			_t.success = utils.getQueryString('success');
 			_t.payTitle = '支付成功';
 			_t.successInfo = '';
 
@@ -69,7 +70,11 @@
 			// } else {
 			// 	_t.gotoStepTwo();
 			// }
-			_t.gotoStepTwo();
+			if (_t.success) {
+				_t.gotoPaySuccess();
+			} else {
+				_t.gotoStepTwo();
+			}
 		},
 
 		loadTemp: function (data) {
@@ -121,7 +126,6 @@
 			$('.orderPage').addClass('hidden');
 			$('.setPay').removeClass('hidden');
 			$('.setPay .amount').html(_t.orderInfo.amount)
-
 			form.on('submit(paySubmit)', function (res) {
 				var params = res.field;
 				_t.gotoPay(params.payment);
@@ -137,8 +141,10 @@
 				var params = {
 					orderNo: _t.id,
 					fee: _t.orderInfo.amount,
-					subject: '咨询费'
+					subject: '咨询费',
+					returnUrl: window.location.href
 				};
+				console.log(URL.common.alipay + '?' + $.param(params))
 				window.open(URL.common.alipay + '?' + $.param(params));
 				// utils.get(URL.common.alipay, params, function (res) {
 				// 	console.log(res);
