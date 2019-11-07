@@ -6,8 +6,8 @@
           <img class="logo-img" src="/img/logo.png" alt="logo" />
           <p class="cl-666 ta-c logo-txt">{{ appTitle }}</p>
         </el-form-item>
-        <el-form-item class="input-item" prop="accountName">
-          <el-input type="text" placeholder="请输入账号" v-model="loginForm.accountName" autofocus>
+        <el-form-item class="input-item" prop="userName">
+          <el-input type="text" placeholder="请输入账号" v-model="loginForm.userName" autofocus>
             <i slot="prefix" class="iconfont icon-user color-999"></i>
           </el-input>
         </el-form-item>
@@ -66,11 +66,11 @@ export default {
       // bgItems: [bg1, bg2, bg3],
       bgItems: [loginBg],
       loginForm: {
-        accountName: '',
+        userName: '',
         password: ''
       },
       rules: {
-        accountName: [
+        userName: [
           { required: true, message: '账号不能为空', trigger: 'change' }
         ],
         password: [
@@ -87,18 +87,14 @@ export default {
 
         try {
           this.isLoading = true
-          const { accountName: account, password } = this.loginForm
-          const res = await this.login({ accountName: account, password: md5(md5(password)) })
-          const accountName = this.$val(res, 'data.accountName')
+          const { userName: account, password } = this.loginForm
+          const res = await this.login({ userName: account, password })
+          const userName = this.$val(res, 'data.userName')
           const accountId = this.$val(res, 'data.id')
-          const tenantName = this.$val(res, 'data.tenantName')
-          const tenantId = this.$val(res, 'data.tenantId')
 
           this.setState({
-            accountName,
+            userName,
             accountId,
-            tenantName,
-            tenantId,
             saveStorage: true
           })
 
@@ -130,6 +126,7 @@ export default {
             }
           }
         } catch (error) {
+          console.log(error)
           this.isLoading = false
         }
       })
@@ -154,7 +151,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       
-      this.loginForm.accountName = localStorage.getItem('accountName') || ''
+      this.loginForm.userName = localStorage.getItem('userName') || ''
 
       Bus.$on('keyup', () => {
         !this.isLoading && this.loginSubmit()

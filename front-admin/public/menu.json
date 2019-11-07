@@ -1,7 +1,7 @@
 [
   { "id": 100, "name": "首页", "url": "/home/index", "parentId": 0 },
   { "id": 101, "name": "系统首页", "url": "/home/index", "icon": "iconfont icon-shouye", "parentId": 100 },
-  { "id": 200, "name": "会员管理", "url": "", "parentId": 0 },
+  { "id": 200, "name": "会员管理", "url": "/member/consultants", "parentId": 0 },
   { "id": 201, "name": "咨询者会员管理", "url": "/member/consultants", "icon": "iconfont icon-member", "parentId": 200 },
   { "id": 202, "name": "律师管理", "url": "/member/lawyer", "icon": "iconfont icon-lawyer", "parentId": 200 },
   { "id": 202, "name": "律师审核管理", "url": "/member/lawyerCheck", "icon": "iconfont icon-lawyer", "parentId": 200 },

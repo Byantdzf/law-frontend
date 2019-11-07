@@ -27,11 +27,15 @@ const Ajax = function(options = {}) {
       headers,
       params,
       timeout = 60000,
-      successCode = 2,
+      successCode = '000000',
       loading = true,
       auth = true,
       contentType = 'application/x-www-form-urlencoded; charset=utf-8'
     } = options
+
+    if (path.indexOf('.json') !== -1) {
+      url = '/'
+    }
 
     if (url === '/' && path.indexOf('/') === 0) {
       path = path.replace('/', '')

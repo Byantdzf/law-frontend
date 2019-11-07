@@ -2,7 +2,7 @@
 <app-page id="app-page">
     <view class="flex-column container page-lawyer">
         <view class="tab-bar">
-            <app-tab items="{{ types }}" current="{{ type }}" bind:change="changeType" />
+            <app-tab items="{{ types }}" current="{{ type }}" bind:change="changeType" wx:if="{{ types.length > 1}}"/>
         </view>
         <view class="flex-bd app-scroller">
             <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">

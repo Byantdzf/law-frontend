@@ -121,13 +121,6 @@ const routes = [
 				"component": () => import('@/pages/statistics/sales').then(m => m.default)
 			},
 
-			// init
-			{
-				"name": "init.data",
-				"path": "/init/data",
-				"component": () => import('@/pages/init/data').then(m => m.default)
-			},
-
 			// 404
 			{
 				"name": "404",
