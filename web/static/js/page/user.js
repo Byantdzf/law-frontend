@@ -3,6 +3,7 @@
 	var gather = {
 		init: function () {
 			var _t = this;
+			// _t.userId = utils.getQueryString('userId')
 			_t.defaultPic = '/static/images/default.jpg';
 			_t.userMenu = [
 				{ "id": 1, "name": "我的关注", "code": "attention", "url": "/page/user/attention.js" },
@@ -17,6 +18,13 @@
 			];
 
 			$(function () {
+				
+				utils.get(URL.user.info, function (res) {
+					console.log(res);
+					// utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
+					// _t.loadUserPage();
+				})
+
 				_t.code = hash.get('c') || _t.userMenu[0].code;
 
 				if ($.isEmptyObject(utils.cookie(global.token))) {
@@ -43,7 +51,7 @@
 				utils.get(URL.user.wxLogin, params, function (res) {
 					//弹出 500 * 500 的窗口
 					
-					window.open(res.data)
+					window.location = res.data;
 					// window.open(res.data, 'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')
 
 					// 通过监听，父页面可以拿到子页面传递的token，父(前端页面)，子(小窗)
