@@ -3,7 +3,7 @@
   { "id": 200, "name": "会员管理", "url": "", "parentId": 0 },
   { "id": 201, "name": "咨询者会员管理", "url": "/member/consultants", "parentId": 200 },
   { "id": 202, "name": "律师管理", "url": "/member/lawyer", "parentId": 200 },
-  { "id": 202, "name": "律师审核管理", "url": "/member/lawyerCheck", "parentId": 200 },
+  { "id": 203, "name": "律师审核管理", "url": "/member/lawyerCheck", "parentId": 200 },
   { "id": 300, "name": "管理员管理", "url": "", "parentId": 0 },
   { "id": 301, "name": "管理员列表", "url": "/admin/list", "parentId": 300 },
   { "id": 302, "name": "角色管理", "url": "/admin/role", "parentId": 300 },

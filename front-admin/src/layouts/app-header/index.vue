@@ -35,7 +35,7 @@
               <span class="icon-box ib">
                 <i class="iconfont icon-manager cl-primary"></i>
               </span>
-              <span class="ib header-username ellipsis">{{ accountName }}</span>
+              <span class="ib header-username ellipsis">{{ userName }}</span>
             </span>
           </li>
           <li class="ib">
@@ -63,7 +63,7 @@
     name: 'app-header',
     computed: {
       ...mapState([
-        'accountName'
+        'userName'
       ])
     },
     data() {

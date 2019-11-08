@@ -119,7 +119,7 @@ export default {
                 path = this.getUrl(menusList[idx])
                 idx ++
               }
-              console.log(path)
+              
               this.$router.push({ path })
             } else {
               this.$msgError('暂无授权目录，请联系管理员！')
