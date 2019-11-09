@@ -4,7 +4,7 @@
 .mp-top-box input { background: #ECECEC; box-sizing: border-box; border-radius: 64rpx; height:80rpx; line-height: 80rpx; text-align: center; padding:0 20rpx 0 60rpx; text-align: left;}
 .mp-top-box .icon-search { position: absolute; left:50rpx; top:30rpx; font-size: 30rpx; line-height: 80rpx;}
 
-.search-items { padding:0 30rpx;}
+.search-items { padding:0 20rpx;}
 
 .list-item {
 padding: 20rpx;
@@ -39,6 +39,7 @@ justify-content: space-between;
 margin: 0;
 padding: 0 10rpx;
 border-color: #e0e0e0;
+font-size: 26rpx;
 color: #666;
 }
 .list-item .btn-box button::after {

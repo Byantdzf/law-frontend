@@ -170,5 +170,13 @@
         <button type="primary" bindtap="handleConfirm">回复并发送订单确认</button>
       </view>
     </view>
+    <view wx:if="{{ item.orderStatus == 20 }}">
+      <view class="flex btn-box btns mt-45">
+        <button plain catchtap="handleFocused" wx:if="{{ item.focused == 0 }}">关注</button>
+        <button plain catchtap="handleCancelFocused" wx:else>取消关注</button>
+        <button plain catchtap="handleRefuse">拒绝接单</button>
+        <button plain catchtap="handleReceive">立即接单</button>
+      </view>
+    </view>
   </view>
 </app-page>

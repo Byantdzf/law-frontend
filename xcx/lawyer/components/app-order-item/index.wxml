@@ -15,19 +15,17 @@
         <view class="flex-bd cl-666">{{ item.name }}</view>
       </view>
       <view class="flex-bd flex">
-        <view class="label cl-999">联系方式：</view>
-        <view class="flex-bd cl-666">{{ item.contactMobile }}</view>
-      </view>
-    </view>
-    <view class="flex">
-      <view class="flex-bd flex">
-        <view class="label cl-999">ID号：</view>
-        <view class="flex-bd cl-666">{{ item.id }}</view>
-      </view>
-      <view class="flex-bd flex">
         <view class="label cl-999">所在城市：</view>
         <view class="flex-bd cl-666">{{ item.province || '' }} - {{ item.city || '' }}</view>
       </view>
+    </view>
+    <view class="flex">
+      <view class="label cl-999">联系方式：</view>
+      <view class="flex-bd cl-666">{{ item.contactMobile }}</view>
+    </view>
+    <view class="flex">
+      <view class="label cl-999">ID号：</view>
+      <view class="flex-bd cl-666">{{ item.id }}</view>
     </view>
   </view>
 

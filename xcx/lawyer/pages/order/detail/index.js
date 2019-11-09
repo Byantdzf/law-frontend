@@ -256,6 +256,49 @@ Page({
     }).catch(e => {});
   },
 
+  // 关注
+  handleFocused() {
+    app.confirm({ content: '确认关注此订单吗？' }).then(() => {
+      orderApi.orderFocused(this.orderId).then(() => {
+        app.toastSuccess('操作成功')
+        this.loadData(this.orderId);
+      })
+    })
+  },
+  // 取消关注
+  handleCancelFocused() {
+    app.confirm({ content: '确认取消关注此订单吗？' }).then(() => {
+      orderApi.orderCancelFocused(this.orderId).then(() => {
+        app.toastSuccess('操作成功')
+        this.loadData(this.orderId);
+      })
+    })
+  },
+  // 拒绝接单
+  handleRefuse() {
+    app.confirm({ content: '确认拒绝此订单吗？' }).then(() => {
+      const params = {
+        orderId: this.orderId
+      }
+      orderApi.orderRefuse(params).then(() => {
+        app.toastSuccess('操作成功');
+        wx.navigateBack();
+      })
+    })
+  },
+  // 接受订单
+  handleReceive() {
+    app.confirm({ content: '确认接此订单吗？' }).then(() => {
+      const params = {
+        orderId: this.orderId
+      }
+      orderApi.orderReceive(params).then(() => {
+        app.toastSuccess('操作成功')
+        this.loadData(this.orderId);
+      })
+    })
+  },
+
   onShareAppMessage: function (ops) {
     if (ops.from === 'button') {
       // 来自页面内转发按钮

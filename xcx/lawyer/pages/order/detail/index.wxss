@@ -41,6 +41,9 @@
 .btn-box button[plain]::after {
   border-color: #e0e0e0;
 }
+.btns.btn-box button {
+  min-width: 200rpx;
+}
 
 .textarea {
   width: 100%;

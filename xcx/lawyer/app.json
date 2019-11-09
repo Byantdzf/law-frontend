@@ -70,8 +70,8 @@
       },
       {
         "pagePath": "pages/tabBar/orderManage/index",
-        "iconPath": "static/images/tabbar/icon-order.png",
-        "selectedIconPath": "static/images/tabbar/icon-order-active.png",
+        "iconPath": "static/images/tabbar/icon-order-mg.png",
+        "selectedIconPath": "static/images/tabbar/icon-order-mg-active.png",
         "text": "订单管理"
       },
       {
