@@ -453,7 +453,7 @@ layui.define(function (exports) {
 			}
 			var opts = {
 				icon: 3,
-				title: '提示'
+				title: params.title || '提示'
 			};
 			params && (opts = $.extend(true, opts, params));
 			layer.confirm(content, opts, yes, no);
