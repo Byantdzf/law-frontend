@@ -142,20 +142,37 @@
 					orderNo: _t.id,
 					fee: _t.orderInfo.amount,
 					subject: '咨询费',
-					returnUrl: window.location.href
+					returnUrl: window.location.href + '&success=1'
 				};
-				console.log(URL.common.alipay + '?' + $.param(params))
-				window.open(URL.common.alipay + '?' + $.param(params));
+
+				utils.confirm(
+					'支付完成前，请不要关闭此支付验证窗口。<br />支付完成后，请根据您支付的情况点击下面按钮。',
+					{ 
+						title: '网上支付提示',
+						success: function () {
+							console.log(URL.common.alipay + '?' + $.param(params));
+							window.open(URL.common.alipay + '?' + $.param(params));
+						}
+					},
+					// yes
+					function () {
+						window.location = '/user.html#c=order'
+					},
+					// no
+					function () {
+						window.location = '/user.html#c=order'
+					}
+				)
 				// utils.get(URL.common.alipay, params, function (res) {
 				// 	console.log(res);
 				// });
 			}
 
-			utils.msg('支付中...');
-			setTimeout(function () {
-				utils.msg('支付完成');
-				_t.gotoPaySuccess();
-			}, 1000);
+			// utils.msg('支付中...');
+			// setTimeout(function () {
+			// 	utils.msg('支付完成');
+			// 	_t.gotoPaySuccess();
+			// }, 1000);
 		},
 
 		gotoPaySuccess: function () {
