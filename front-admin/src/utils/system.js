@@ -30,6 +30,9 @@ const SYSTEM = {
     } else {
       return VueCookie.get(this.tokenName) || ''
     }
+  },
+  userName() {
+    return localStorage.getItem('userName')
   }
 }
 

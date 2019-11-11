@@ -88,7 +88,7 @@
     prop: 'field'
   }
 
-  const PAGE_KEY = 'pageIndex'
+  const PAGE_KEY = 'pageNo'
   const SIZE_KEY = 'pageSize'
 
   let vmCount = 0
@@ -147,11 +147,11 @@
       dataFormater: Function,
       listKey: {
         type: String,
-        default: 'dataList'
+        default: 'list'
       },
       totalKey: {
         type: String,
-        default: 'totalCount'
+        default: 'totalRow'
       }
     },
     data () {
@@ -346,6 +346,11 @@
           } else {
             this.list = data || []
           }
+
+          this.list.forEach((v, i) => {
+            const idx = (params[PAGE_KEY] - 1) * params[SIZE_KEY] + i + 1
+            v.index = v.index || idx
+          });
 
           if(isFunction(this.dataFormater)) {
             const arr = this.dataFormater([...this.list])

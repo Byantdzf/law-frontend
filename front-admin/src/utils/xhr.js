@@ -49,6 +49,7 @@ const Ajax = function(options = {}) {
 
     if (auth) {
       VueCookie.set(SYSTEM.tokenName, SYSTEM.userToken())
+      params.userName = SYSTEM.userName();
     }
     
     // axios config
