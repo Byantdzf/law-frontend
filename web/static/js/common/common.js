@@ -97,6 +97,24 @@
 			return data;
 		},
 
+		wxLogin: function (cb) {
+			var params = {
+				access_page: 'http://' + window.location.host + window.location.pathname
+			};
+			utils.get(URL.user.wxLogin, params, function (res) {
+				window.open(res.data)
+				var timer = null;
+				timer = window.setInterval(function () {
+					utils.get(URL.user.wxLoginStatus, function (res) {
+						if (res.code == '000000') {
+							window.clearInterval(timer);
+							cb && cb(res.data)
+						}
+					});
+				}, 1000)
+			});
+		},
+
 		actions: function () {
 			gather.getHeader();
 			gather.getFoot();
@@ -105,9 +123,11 @@
 				gather.topSearch();
 			});
 
+			// 用户微信登录
 			$('body').on('click', '.eqlogin', function () {
-				$(this).closest('dd').removeClass('layui-this');
-				gather.login();
+				base.wxLogin(function (data) {
+					window.location = '/user.html';
+				})
 			});
 
 			$('body').on('click', '.eqcodew', function () {

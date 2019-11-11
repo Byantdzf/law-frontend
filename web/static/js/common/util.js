@@ -128,7 +128,6 @@ layui.define(function (exports) {
 					// }
 				},
 				success: function (res) {
-					console.log(res);
 					if (!res.data) {
 						res.data = {};
 					}

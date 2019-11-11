@@ -167,7 +167,7 @@ App({
         }
       })
   },
-  getCityLocation(provice, city) {
+  getCityLocation(province, city) {
     console.log('city', city)
     this.qqmapsdk &&
       this.qqmapsdk.geocoder({
@@ -176,17 +176,17 @@ App({
           console.log('res111', res.result)
           if (res.result) {
             let adInfo = {}
-            adInfo.province = provice
+            adInfo.province = province
             adInfo.city = city
             adInfo.location = res.result.location
             this.globalData.adInfo = adInfo
           } else {
             this.qqmapsdk.geocoder({
-              address: provice,
+              address: province,
               complete: res => {
                 if (res.result && res.result.length) {
                   let adInfo = {}
-                  adInfo.province = provice
+                  adInfo.province = province
                   adInfo.city = city
                   adInfo.location = res.result.location
                   this.globalData.adInfo = adInfo

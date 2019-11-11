@@ -176,7 +176,7 @@ Page({
                 showCancel: false,
             }).then(res => {
                 if (res.confirm) {
-                    app.gotoPage('/pages/tabBar/home/index', 'tab')
+                    app.gotoPage('/pages/login/account/index')
                 }
             })
         })

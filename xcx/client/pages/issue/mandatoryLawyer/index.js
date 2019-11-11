@@ -172,7 +172,7 @@ Page({
         params.chooseService = this.data.id
         params.deliveryDeadDate = this.data.selectDate
         params.amount = this.data.selectAmount
-        params.provice = this.data.selectArea[0]
+        params.province = this.data.selectArea[0]
         params.city = this.data.selectArea[1]
         params.useCurrentPhone = this.data.useCurrentPhone
         if (app.globalData.adInfo) {

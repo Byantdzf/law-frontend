@@ -45,22 +45,9 @@
 			$('.userPage').html(html);
 
 			$('body').on('click', '.user', function () {
-				var params = {
-					access_page: 'http://localhost:9999/user.html'
-				};
-				utils.get(URL.user.wxLogin, params, function (res) {
-					window.open(res.data)
-					var timer = null;
-					timer = window.setInterval(function () {
-						utils.get(URL.user.wxLoginStatus, function (res) {
-							console.log(res)
-							if (res.code == '000000') {
-								window.clearInterval(timer);
-								_t.loadUserPage();
-							}
-						});
-					}, 1000)
-				});
+				base.wxLogin(function (data) {
+					_t.loadUserPage();
+				})
 				// utils.post(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
 				// 	utils.setCookie(global.token, res.data.sessionId);
 				// 	utils.get(URL.user.info, function (res) {

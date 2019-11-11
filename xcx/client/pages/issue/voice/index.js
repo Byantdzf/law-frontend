@@ -192,7 +192,7 @@ Page({
         params.amount = this.data.selectAmount.value
         params.emergency = this.data.emergency
         params.useCurrentPhone = this.data.useCurrentPhone
-        params.provice = this.data.selectArea[0]
+        params.province = this.data.selectArea[0]
         params.city = this.data.selectArea[1]
         if (app.globalData.adInfo) {
           params.locationX = app.globalData.adInfo.location.lng
