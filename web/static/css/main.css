@@ -1076,7 +1076,7 @@ i, em { font-style: normal;}
 .floatCart .delItems:hover { opacity: .8;}
 .floatCart .toSmall { cursor: pointer; position: absolute; left: -14px; top: 40%; border: 1px solid #eb4546; background: #eb4546; color: #fff; font-size: 12px; padding: 10px 0}
 
-.modelAgreement_list { padding-left:150px; position: relative;}
+.modelAgreement_list { padding-left:150px; min-height: 300px; position: relative;}
 .modelAgreement_cate { position: absolute; left:0; top:0; width:120px;}
 .modelAgreement_cate a { display: block; text-align: center; margin-bottom:10px; border: 1px solid #e6e6e6; line-height: 32px; border-radius: 5px;}
 .modelAgreement_cate a:hover { background: #efefef;}
