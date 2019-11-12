@@ -22,7 +22,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="ptTenant/queryPage"
+        url="/member/user/list"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
@@ -56,6 +56,7 @@
   import AppDialog from '@/mixins/dialog'
   import AppSearch from '@/mixins/search'
   import AppRsText from '@/components/app-table/lib/rsText'
+  import AppTableImgs from '@/components/app-table/lib/imgs'
   export default {
     components: {
       // Detail: () => import("./detail"),
@@ -67,30 +68,31 @@
         columns: [
           {
             label: '序号',
-            field: 'field1',
+            field: 'index',
             width: 100
           },{
             label: '微信头像',
-            field: 'field2',
-            width: 100
+            field: 'avatarUrl',
+            width: 100,
+            component: AppTableImgs
           },{
             label: '微信昵称',
-            field: 'field3',
+            field: 'name',
           },{
             label: '微信号',
-            field: 'field4',
+            field: 'account',
           },{
             label: '手机号',
-            field: 'field5',
+            field: 'phone',
           },{
             label: '近一周登陆次数',
-            field: 'field6',
+            field: 'loginCount',
           },{
             label: '最近登陆时间',
-            field: 'field7',
+            field: 'createTime',
           },{
             label: '下单次数',
-            field: 'field8',
+            field: 'orderCount',
             width: 120,
             align: 'center'
           },{
@@ -124,7 +126,7 @@
           minWidth: 100,
         },
         tableParams: {
-          tenantType: 6
+          // tenantType: 6
         }
       }
     },
@@ -139,7 +141,7 @@
             label: '状态：',
             field: 'status',
             type: 2,
-            options: []
+            options: this.$t('rs.status')
           },
           {
             label: '最近登录时间：',

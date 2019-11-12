@@ -14,13 +14,15 @@
     <el-card class="table-card mt-10">
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
+          <span class="title">操作日志</span>
+        </el-row>
+        <el-row class="fr">
           <el-button type="primary">导出</el-button>
         </el-row>
       </el-row>
       <app-table 
         ref="appTable"
         url="/log"
-        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"

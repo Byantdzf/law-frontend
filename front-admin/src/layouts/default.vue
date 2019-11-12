@@ -213,6 +213,7 @@
         position: absolute;
         top: 0;
         right: 0;
+        z-index: 100;
       }
       .app-header__tools {
         .reference {
