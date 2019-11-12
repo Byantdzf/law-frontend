@@ -38,12 +38,12 @@
               <span class="ib header-username ellipsis">{{ userName }}</span>
             </span>
           </li>
-          <li class="ib">
+          <li class="ib" title="修改密码">
             <span class="reference">
               <i class="iconfont icon-password"></i>
             </span>
           </li>
-          <li class="ib" @click="logout">
+          <li class="ib" @click="logout" title="退出登录">
             <span class="reference">
               <i class="iconfont icon-logout"></i>
             </span>

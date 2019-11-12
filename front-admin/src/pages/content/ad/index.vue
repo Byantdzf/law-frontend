@@ -22,7 +22,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="/pc/mgr/adv"
+        url="/adv"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
