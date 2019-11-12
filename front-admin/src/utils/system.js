@@ -31,6 +31,13 @@ const SYSTEM = {
       return VueCookie.get(this.tokenName) || ''
     }
   },
+  userInfo(val) {
+    if (val) {
+      VueCookie.set('userInfo', val)
+    } else {
+      return VueCookie.get('userInfo') || ''
+    }
+  },
   userName() {
     return localStorage.getItem('userName')
   }

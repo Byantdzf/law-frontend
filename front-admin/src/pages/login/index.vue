@@ -100,8 +100,8 @@ export default {
 
           // this.$router.push({ query: { uid: accountId } })
 
-          SYSTEM.userToken(this.$val(res, 'data.accessToken'))
-          
+          SYSTEM.userToken(this.$val(res, 'data.token'))
+
           const { routes } = this.$router.options
           let menus = await this.getMenus(routes)
           let menusList = treeToList(menus)
