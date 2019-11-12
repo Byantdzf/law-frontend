@@ -6,7 +6,7 @@
 		<div class="items">
 			<div class="imgBox"><a href="/lawyerDetails.html?id={{ t.id }}"><img src="{{ t.pic || '/static/images/defaultLawyer.jpg' }}" onerror="this.src='/static/images/defaultLawyer.jpg'" /></a><span></span></div>
 			<h6>
-				<a href="/lawyerDetails.html?id={{ t.id }}">{{ t.name || '' }}</a><span>{{ t.province || '' }} - {{ t.city || '' }}</span><label>{{ t.score || 0 }}分</label>
+				<a href="/lawyerDetails.html?id={{ t.id }}">{{ t.name || '' }}<span>{{ t.province || '' }} - {{ t.city || '' }}</span><label>{{ t.score || 0 }}分</label></a>
 				{{# if (t.focused > 0) { }}
 				<a href="javascript:;" class="conbtn05 cancelCollect">取消关注</a>
 				{{# } else { }}
@@ -17,7 +17,7 @@
 				<a href="/lawyerDetails.html?id={{ t.id }}">{{ t.brief || '' }}</a>
 			</p>
 			<div class="others">
-				帮助人数：<label class="fontRed mr_30">{{ t.helps || 0 }}人</label>关注人数：<label class="fontRed">{{ t.concerns || 0 }}人</label>
+				<a href="/lawyerDetails.html?id={{ t.id }}">帮助人数：<label class="fontRed mr_30">{{ t.helps || 0 }}人</label>关注人数：<label class="fontRed">{{ t.concerns || 0 }}人</label></a>
 			</div>
 			<div class="consult_btn02">
 				<a href="ask.html?id={{ t.id }}" class="conbtn03"><i class="iconfont icon-yuyin"></i>在线律师咨询</a>

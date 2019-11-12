@@ -1,7 +1,7 @@
 {{# 
 	layui.each(d, function (i, t) { 
 }}
-<div class="swiper-slide">
+<li>
 	<a href="newsDetails.html?id={{t.id}}">
 		<div class="imgBox"><img src="{{ t.pic || '/static/images/nopic.jpg' }}" /></div>
 		<h3>{{ t.title || '' }}</h3>
@@ -12,7 +12,8 @@
 			<span><i class="iconfont icon-zan"></i> {{ t.thumbsUpCount }}</span>
 		</p>
 	</a>
-</div>
+</li>
 {{# 
 	})
 }}
+

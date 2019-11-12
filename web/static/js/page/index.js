@@ -2,6 +2,7 @@
 
 	var gather = {
 		init: function () {
+			var _t = this;
 
 			carousel.render({
 				elem: '#indexBanner'
@@ -11,23 +12,25 @@
 
 			// base.openRedPacket();
 
-			this.getLocation()
+			_t.getLocation()
 
-			this.getLawyer()
+			_t.getLawyer()
 
-			this.getQuestionType()
-
-			// 法律文章精选
-			this.getLegalNews()
-
-			// 最新法律速递
-			this.getNewLegal()
-
-			// 公司新闻
-			this.getCompanyNews()
+			_t.getQuestionType()
 
 			// 获取地区
 			base.hotCity();
+
+			$.get('/static/js/plugin/jquery.SuperSlide.2.1.3.js', function () {
+				// 法律文章精选
+				_t.getLegalNews()
+
+				// 最新法律速递
+				_t.getNewLegal()
+
+				// 公司新闻
+				_t.getCompanyNews()
+			})
 		},
 
 		getLocation: function () {
@@ -95,13 +98,9 @@
 			utils.get(URL.news.query, params, function (res) {
 				var data = res.data.list || []
 				var html = utils.getTemp('/page/home/newsList.html', data)
-				$('.index_legalNewsList .swiper-wrapper').html(html);
-
-				new Swiper('.index_legalNewsList .swiper-container', {
-					slidesPerView: 4.5,
-					spaceBetween: 30,
-					freeMode: true
-				});
+				$('.index_legalNewsList .picList').html(html);
+				
+				$(".index_legalNewsList .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:5,interTime:50});
 			})
 		},
 
@@ -113,13 +112,9 @@
 			utils.get(URL.news.query, params, function (res) {
 				var data = res.data.list || []
 				var html = utils.getTemp('/page/home/newsList.html', data)
-				$('.index_newLegalList .swiper-wrapper').html(html);
-
-				new Swiper('.index_newLegalList .swiper-container', {
-					slidesPerView: 4.5,
-					spaceBetween: 30,
-					freeMode: true
-				});
+				$('.index_newLegalList .picList').html(html);
+				
+				$(".index_newLegalList .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:5,interTime:50});
 			})
 		},
 
@@ -131,19 +126,9 @@
 			utils.get(URL.news.query, params, function (res) {
 				var data = res.data.list || []
 				var html = utils.getTemp('/page/home/companyNewsList.html', data)
-				$('.index_company_news .swiper-wrapper').html(html);
-
-				new Swiper('.index_company_news .swiper-container', {
-					slidesPerView: 3,
-					spaceBetween: 30,
-					slidesPerGroup: 3,
-					loop: true,
-					loopFillGroupWithBlank: true,
-					pagination: {
-					  el: '.swiper-pagination',
-					  clickable: true,
-					},
-				});
+				$('.index_company_news .picList').html(html);
+				
+				$(".index_company_news .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:4,interTime:50});
 			})
 		},
 	}
