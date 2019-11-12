@@ -31,6 +31,9 @@ const SYSTEM = {
       return VueCookie.get(this.tokenName) || ''
     }
   },
+  clearUserToken() {
+    VueCookie.set(this.tokenName, '')
+  },
   userInfo(val) {
     if (val) {
       VueCookie.set('userInfo', val)

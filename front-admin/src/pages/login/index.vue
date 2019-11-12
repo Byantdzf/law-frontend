@@ -171,6 +171,9 @@ export default {
     Bus.$off('keyup')
     this.bgTimer && clearInterval(this.bgTimer)
     this.bgTimer = null
+  },
+  created() {
+    SYSTEM.clearUserToken()
   }
 }
 </script>

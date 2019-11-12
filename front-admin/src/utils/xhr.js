@@ -43,14 +43,16 @@ const Ajax = function(options = {}) {
     
     // 合并header
     headers = Object.assign({
-      'Content-Type': contentType,
-      'authentication': auth ? SYSTEM.userToken() : null
+      'Content-Type': contentType
     }, headers)
 
-    // if (auth) {
-    //   VueCookie.set(SYSTEM.tokenName, SYSTEM.userToken())
-    //   params.userName = SYSTEM.userName();
-    // }
+    if (auth && SYSTEM.userToken()) {
+      // 合并header
+      headers = Object.assign({
+        'authentication':  'Bearer ' + SYSTEM.userToken()
+      }, headers)
+      // VueCookie.set(SYSTEM.tokenName, SYSTEM.userToken())
+    }
     
     // axios config
     let config = {
