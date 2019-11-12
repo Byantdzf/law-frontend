@@ -49,7 +49,7 @@ const Ajax = function(options = {}) {
     if (auth && SYSTEM.userToken()) {
       // 合并header
       headers = Object.assign({
-        'authentication':  'Bearer ' + SYSTEM.userToken()
+        'Authorization':  'Bearer ' + SYSTEM.userToken()
       }, headers)
       // VueCookie.set(SYSTEM.tokenName, SYSTEM.userToken())
     }

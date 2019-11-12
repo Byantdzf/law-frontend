@@ -20,6 +20,7 @@
       <app-table 
         ref="appTable"
         url="/log"
+        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
