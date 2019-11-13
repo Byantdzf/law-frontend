@@ -21,7 +21,7 @@
 
 				_t.code = hash.get('c') || _t.userMenu[0].code;
 
-				if ($.isEmptyObject(utils.cookie(global.token))) {
+				if ($.isEmptyObject(global.userInfo)) {
 					// 如果没有本地用户
 					_t.loadChooseUserType();
 					$('.userPage').addClass('noMinHeight');

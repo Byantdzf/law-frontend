@@ -51,7 +51,7 @@
 			if (!index) {
 				return false;
 			}
-			$('.nav .widthCC a:eq(' + index + ')').addClass('current').siblings().removeClass('current');
+			$('.nav .layui-nav-item:eq(' + index + ')').addClass('layui-this').siblings().removeClass('layui-this');
 
 			utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
 				_t.orderInfo = res.data;
