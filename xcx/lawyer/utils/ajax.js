@@ -53,6 +53,11 @@ const ajax = (_options = {}) => {
       header["Authorization"] = "Bearer " + token
     }
 
+    if (_options.params.wxLoginCode) {
+      header["Authorization"] = "Bearer " + _options.params.wxLoginCode
+      delete(_options.params.wxLoginCode)
+    }
+
     if (path.indexOf('http:') > -1 || path.indexOf('https:') > -1) {
       url = path;
     } else {
@@ -73,6 +78,18 @@ const ajax = (_options = {}) => {
             case '000000':
               resolve(data);
               break;
+            case 'E00010':
+                wx.showModal({
+                  title: '温馨提示',
+                  content: data.data || data.msg,
+                  showCancel: true,
+                  cancelText: '取消',
+                  confirmText: '确认',
+                  success(res) {
+                    wx.removeStorageSync(tokenName)
+                    wx.reLaunch({ url: '/pages/reg/index' })
+                  }
+                })
             case 'E00006':
               toast &&
               wx.showToast({

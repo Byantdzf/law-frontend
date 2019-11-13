@@ -10,13 +10,8 @@
 				utils.get(URL.lawyerObj.login, params, function (res) {
 					utils.setCookie(global.token, res.data.sessionId);
 					utils.get(URL.lawyerObj.info, params, function (res) {
-						console.log(res)
-						// utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
-						// if (res.data.auditStatus == 2) {
-						// 	window.location = '/lawyer/index.html'
-						// } else {
-						// 	window.location = '/lawyer/auth.html';
-						// }
+						utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
+						window.location = '/lawyer/index.html'
 					})
 				})
 				// utils.alert('还未绑定微信，立即绑定', {}, function () {

@@ -10,7 +10,7 @@
 				{ "id": 2, "name": "我的关注", "code": "attention", "url": "/page/lawyer/user/attention.js" },
 				{ "id": 3, "name": "我的订单", "code": "order", "url": "/page/lawyer/user/order.js" },
 				{ "id": 5, "name": "消息中心", "code": "notice", "url": "/page/lawyer/user/notice.js" },
-				{ "id": 6, "name": "关于我们", "code": "about", "url": "/about.html" },
+				{ "id": 6, "name": "关于我们", "code": "about", "url": "/lawyer/about.html" },
 				{ "id": 7, "name": "帮助中心", "code": "help", "url": "/page/lawyer/user/help.js" },
 				{ "id": 8, "name": "用户协议", "code": "agreement", "url": "/page/lawyer/user/agreement.js" },
 				{ "id": 9, "name": "意见反馈", "code": "feedback", "url": "/page/lawyer/user/feedback.js" },

@@ -12,11 +12,13 @@
 
 			this.getQuestionType();
 
-			// 法律文章精选
-			this.getLegalNews()
+			$.get('/static/js/plugin/jquery.SuperSlide.2.1.3.js', function () {
+				// 法律文章精选
+				_t.getLegalNews()
 
-			// 公司新闻
-			this.getCompanyNews()
+				// 公司新闻
+				_t.getCompanyNews()
+			})
 
 			this.getOrderList(1, 'systemPush')
 			this.getOrderList(2, 'orderList')
@@ -89,13 +91,9 @@
 			utils.get(URL.lawyerObj.news.query, params, function (res) {
 				var data = res.data.list || []
 				var html = utils.getTemp('/page/home/newsList.html', data)
-				$('.index_legalNewsList .swiper-wrapper').html(html);
-
-				new Swiper('.index_legalNewsList .swiper-container', {
-					slidesPerView: 4.5,
-					spaceBetween: 30,
-					freeMode: true
-				});
+				$('.index_legalNewsList .picList').html(html);
+				
+				$(".index_legalNewsList .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:5,interTime:50});
 			})
 		},
 
@@ -107,19 +105,9 @@
 			utils.get(URL.lawyerObj.news.query, params, function (res) {
 				var data = res.data.list || []
 				var html = utils.getTemp('/page/home/companyNewsList.html', data)
-				$('.index_company_news .swiper-wrapper').html(html);
-
-				new Swiper('.index_company_news .swiper-container', {
-					slidesPerView: 3,
-					spaceBetween: 30,
-					slidesPerGroup: 3,
-					loop: true,
-					loopFillGroupWithBlank: true,
-					pagination: {
-						el: '.swiper-pagination',
-						clickable: true,
-					},
-				});
+				$('.index_company_news .picList').html(html);
+				
+				$(".index_company_news .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:4,interTime:50});
 			})
 		},
 
