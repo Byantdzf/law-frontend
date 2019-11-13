@@ -34,8 +34,7 @@ App({
         if(!code) return
         api.login({ code }).then(res => {
           // 保存token
-          // wx.setStorageSync(tokenName, res.data.sessionId)
-          console.log(res)
+          wx.setStorageSync('wechatLoginCode', res.data.sessionId)
         })
       }
     })

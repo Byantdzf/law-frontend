@@ -53,6 +53,11 @@ const ajax = (_options = {}) => {
       header["Authorization"] = "Bearer " + token
     }
 
+    if (_options.params.wxLoginCode) {
+      header["Authorization"] = "Bearer " + _options.params.wxLoginCode
+      delete(_options.params.wxLoginCode)
+    }
+
     if (path.indexOf('http:') > -1 || path.indexOf('https:') > -1) {
       url = path;
     } else {

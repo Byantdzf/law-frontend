@@ -8,7 +8,12 @@ module.exports = {
    * @param[String]  password   密码
    * @param[String]  code       小程序登录code
   */
-  login: params => get('/applets/lawyer/applets/lawyer/wechatGetSession', params, { auth: false, loading: false }),
+  login: params => get('/applets/lawyer/wechatGetSession', params, { auth: false, loading: false }),
+
+  /**
+   * 微信登录
+   */
+  wechatLogin: params => get('/applets/lawyer/login', params),
 
   /**
    * 保存用户信息
