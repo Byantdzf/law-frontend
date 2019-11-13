@@ -110,7 +110,10 @@
 							utils.setCookie(global.token, res.data);
 							window.clearInterval(timer);
 							test.close()
-							cb && cb(res.data)
+							utils.get(URL.user.info, function (response) {
+								utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
+								cb && cb(response.data)
+							})
 						}
 					});
 				}, 1000)

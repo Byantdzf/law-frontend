@@ -18,12 +18,6 @@
 			];
 
 			$(function () {
-				
-				utils.get(URL.user.info, function (res) {
-					console.log(res);
-					// utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
-					// _t.loadUserPage();
-				})
 
 				_t.code = hash.get('c') || _t.userMenu[0].code;
 
@@ -46,20 +40,8 @@
 
 			$('body').on('click', '.user', function () {
 				base.wxLogin(function (data) {
-					_t.loadUserPage();
+					window.location.reload()
 				})
-				// utils.post(pcHost + '/pc/user/loginByAccount', {account: '13600001111', pwd: '123456', from: 1}, function (res) {
-				// 	utils.setCookie(global.token, res.data.sessionId);
-				// 	utils.get(URL.user.info, function (res) {
-				// 		utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
-				// 		_t.loadUserPage();
-				// 	})
-				// 	_t.loadUserPage();
-				// })
-				// base.login(function () {
-				// 	utils.setCookie(global.userInfoToken, global.userInfo);
-				// 	_t.loadUserPage();
-				// });
 			});
 
 			$('body').on('click', '.lawyer', function () {

@@ -128,7 +128,6 @@ layui.define(function (exports) {
 					// }
 				},
 				success: function (res) {
-
 					if (!res.data) {
 						res.data = {};
 					}
@@ -143,7 +142,10 @@ layui.define(function (exports) {
 
 					// 	window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else if (res.code == 'E00006') {
-						
+							gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+							gather.setCookie(global.token, '');
+							gather.setCookie(global.backToken, '');
+							window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else {
 						if (url.indexOf('/pc/user/wechat/login/result') == -1) {
 							gather.msg(res.data || res.msg || res.code);
@@ -162,7 +164,6 @@ layui.define(function (exports) {
 					$('.submit').removeAttr("disabled");
 				},
 				error: function (e) {
-					console.log(e);
 					if (e.responseJSON.message == '非法访问用户') {
 						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
 						gather.setCookie(global.token, '');

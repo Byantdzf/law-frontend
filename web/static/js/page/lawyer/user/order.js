@@ -186,6 +186,7 @@
 				})
 
 				// 取消订单
+				console.log("sos");
 				$('.cancelOrder').off().on('click', function () {
 					utils.confirm('系统正在积极为您指派律师，您确定要取消订单？', function (i) {
 						layer.close(i);

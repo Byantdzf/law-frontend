@@ -50,6 +50,7 @@ a {
 a:hover { opacity: .8;}
 
 /*  顶部  */
+.appTop { height: 153px;}
 .top{height: 28px;line-height:28px;font-family:"宋体";color:#646464;border-bottom:1px solid #e6e6e6;font-size:12px;}
 .top>div{height: 28px;}
 .top .welcome{float: left;}
@@ -1446,3 +1447,7 @@ i, em { font-style: normal;}
 .uploadFiles { display: block; margin-top:10px;}
 
 .myList { padding: 20px 30px;}
+
+@media screen and (max-width: 1600px) {
+    .nav { margin:0;}
+}
