@@ -99,15 +99,17 @@
 
 		wxLogin: function (cb) {
 			var params = {
-				access_page: 'http://' + window.location.host + window.location.pathname
+				accessCode: 'http://' + window.location.host + window.location.pathname
 			};
 			utils.get(URL.user.wxLogin, params, function (res) {
-				window.open(res.data)
+				var test = window.open(res.data.url)
 				var timer = null;
 				timer = window.setInterval(function () {
-					utils.get(URL.user.wxLoginStatus, function (res) {
+					utils.get(URL.user.wxLoginStatus, {state: res.data.state}, function (res) {
 						if (res.code == '000000') {
+							utils.setCookie(global.token, res.data);
 							window.clearInterval(timer);
+							test.close()
 							cb && cb(res.data)
 						}
 					});

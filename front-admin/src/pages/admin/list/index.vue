@@ -12,7 +12,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="/role/list"
+        url="/manage"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"

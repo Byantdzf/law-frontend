@@ -19,11 +19,11 @@
 
 			$(function () {
 				
-				// utils.get(URL.user.info, function (res) {
-				// 	console.log(res);
-				// 	// utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
-				// 	// _t.loadUserPage();
-				// })
+				utils.get(URL.user.info, function (res) {
+					console.log(res);
+					// utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
+					// _t.loadUserPage();
+				})
 
 				_t.code = hash.get('c') || _t.userMenu[0].code;
 

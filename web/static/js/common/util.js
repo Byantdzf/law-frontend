@@ -128,6 +128,7 @@ layui.define(function (exports) {
 					// }
 				},
 				success: function (res) {
+
 					if (!res.data) {
 						res.data = {};
 					}
@@ -144,7 +145,9 @@ layui.define(function (exports) {
 					} else if (res.code == 'E00006') {
 						
 					} else {
-						gather.msg(res.data || res.msg || res.code);
+						if (url.indexOf('/pc/user/wechat/login/result') == -1) {
+							gather.msg(res.data || res.msg || res.code);
+						}
 					}
 				},
 				complete: function () {
