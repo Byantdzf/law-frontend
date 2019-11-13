@@ -87,13 +87,13 @@
             field: 'sendCount',
           },{
             label: '领取总数',
-            field: '',
+            field: 'getCount',
           },{
             label: '使用总数',
-            field: '',
+            field: 'useCount',
           },{
             label: '未使用总数',
-            field: '',
+            field: 'remainCount',
           },{
             label: '开始时间',
             field: 'rangeStartTime',

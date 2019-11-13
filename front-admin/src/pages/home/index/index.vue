@@ -14,7 +14,7 @@
             <div class="con">
               <p>昨日总收入（元）</p>
               <p class="num">4713.5</p>
-              <p>
+              <p class="fontRed">
                 <span>较上日</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
@@ -25,7 +25,7 @@
             <div class="con">
               <p>上周总收入（元）</p>
               <p class="num">4713.5</p>
-              <p>
+              <p class="fontRed">
                 <span>较上周</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
@@ -36,7 +36,7 @@
             <div class="con">
               <p>上月总收入（元）</p>
               <p class="num">4713.5</p>
-              <p>
+              <p class="fontRed">
                 <span>较上月</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
@@ -53,7 +53,7 @@
             <div class="con">
               <p>昨日总利润（元）</p>
               <p class="num">4713.5</p>
-              <p>
+              <p class="fontRed">
                 <span>较上日</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
@@ -64,7 +64,7 @@
             <div class="con">
               <p>上周总利润（元）</p>
               <p class="num">4713.5</p>
-              <p>
+              <p class="fontRed">
                 <span>较上周</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
@@ -75,9 +75,9 @@
             <div class="con">
               <p>上月总利润（元）</p>
               <p class="num">4713.5</p>
-              <p>
+              <p class="fontGreen">
                 <span>较上月</span>
-                <i class="el-icon-top"></i>
+                <i class="el-icon-bottom"></i>
                 <span>5</span>
               </p>
             </div>
