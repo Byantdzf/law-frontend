@@ -38,7 +38,7 @@
               <span class="ib header-username ellipsis">{{ userName }}</span>
             </span>
           </li>
-          <li class="ib" title="修改密码">
+          <li class="ib" title="修改密码" @click="openUpdatePwdDialog">
             <span class="reference">
               <i class="iconfont icon-password"></i>
             </span>
@@ -51,6 +51,21 @@
         </slot>
       </ul>
     </div>
+    <app-dialog
+      class="custom-dialog"
+      :title="dialogTitle"
+      :width="dialogWidth"
+      :visible="dialogVisible"
+      @close="closeDialog"
+    >
+      <component
+        v-if="dialogVisible"
+        :is="dialogComponent"
+        @submit="formSubmit"
+        @cancel="closeDialog"
+        ref="dialogComponent"
+      />
+    </app-dialog>
   </el-row>
 </template>
 
@@ -58,9 +73,14 @@
   import { mapState } from 'vuex'
   import SYSTEM from '@/utils/system'
   import Bus from '@/utils/bus'
+  import AppDialog from "@/mixins/dialog"
 
 	export default {
     name: 'app-header',
+    components: {
+      UpdatePwdForm: () => import("@/pages/password/updateForm")
+    },
+    mixins: [AppDialog],
     computed: {
       ...mapState([
         'userName'
@@ -81,6 +101,25 @@
           Bus.$emit('logout')
         } catch (error) {
           // error
+        }
+      },
+      openUpdatePwdDialog() {
+        this.dialogTitle = "修改密码"
+        this.dialogWidth = "400px"
+        this.dialogComponent = "UpdatePwdForm"
+        this.dialogVisible = true
+      },
+      // 表单提交
+      formSubmit() {
+        switch (this.dialogComponent) {
+          case "UpdatePwdForm":
+            this.closeDialog();
+            this.$confirm('密码修改成功，是否重新登录？', '温馨提示', {
+              type: 'warning'
+            }).then(() => {
+              Bus.$emit('logout')
+            })
+            break;
         }
       }
     }

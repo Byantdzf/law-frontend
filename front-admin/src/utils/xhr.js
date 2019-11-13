@@ -152,16 +152,6 @@ const put = (path, params, opt) => Ajax({
 
 const postJson = (path, params, opt) => {
 
-  // 后台需要将参数全部转string （待改进） --- start
-  if (params) {
-    for (let key in params) {
-      if(typeof(params[key]) == 'number') {
-        params[key] = String(params[key])
-      }
-    }
-  }
-  // 后台需要将参数全部转string --- end
-
   params = params ? JSON.stringify(params) : ''
 
   return Ajax({
@@ -173,10 +163,24 @@ const postJson = (path, params, opt) => {
   })
 }
 
+const putJson = (path, params, opt) => {
+
+  params = params ? JSON.stringify(params) : ''
+
+  return Ajax({
+    path,
+    params,
+    ...opt,
+    method: 'put',
+    contentType: 'application/json'
+  })
+}
+
 export {
   get,
   post,
   postJson,
   put,
-  del
+  del,
+  putJson
 }

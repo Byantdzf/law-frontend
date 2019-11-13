@@ -25,7 +25,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="ptTenant/queryPage"
+        url="/member/lawyer/pending"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
@@ -70,23 +70,23 @@
         columns: [
           {
             label: '序号',
-            field: 'field1',
-            width: 100
+            field: 'index',
+            width: 70
           },{
             label: '姓名',
-            field: 'field3',
+            field: 'name',
           },{
             label: '手机号',
-            field: 'field5',
+            field: 'phone',
           },{
             label: '执业证号',
-            field: 'field51',
+            field: 'lawyerLicenseNo',
           },{
             label: '执业律所',
-            field: 'field52',
+            field: 'belongs',
           },{
             label: '申请时间',
-            field: 'field7',
+            field: 'createTime',
           },{
             label: '操作',
             field: 'operate',
@@ -130,7 +130,7 @@
           {
             labelWidth: '80px',
             label: '所在律所：',
-            field: 'status',
+            field: 'belongs',
             type: 2,
             options: []
           },

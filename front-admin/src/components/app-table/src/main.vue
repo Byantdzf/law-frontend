@@ -450,5 +450,12 @@
         margin-left: 10px;
       }
     }
+    .app-table-imgs {
+      line-height: 1;
+      .el-image {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
 </style>

@@ -14,6 +14,9 @@
     <el-card class="table-card mt-10">
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
+          <span class="title">咨询者会员管理</span>
+        </el-row>
+        <el-row class="fr">
           <el-button type="primary">启用</el-button>
           <el-button type="primary">禁用</el-button>
           <el-button type="primary">删除</el-button>
@@ -27,7 +30,6 @@
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
-        :max-height="tableMaxHieght"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -36,12 +38,20 @@
       :height="dialogHeight"
       :title="dialogTitle"
       :visible="dialogVisible"
+      :full="dialogIsFull"
       @close="closeDialog"
     >
+      <template slot="title" v-if="showHeaderTab">
+        <el-radio-group v-model="curDialogTab" size="small">
+          <el-radio-button label="detail">个人资料</el-radio-button>
+          <el-radio-button label="orderInfo">订单信息</el-radio-button>
+        </el-radio-group>
+      </template>
       <component
         v-if="dialogVisible"
         :is="dialogComponent"
         :row="dialogForm"
+        :tab="curDialogTab"
         @submit="formSubmit"
         @cancel="closeDialog"
         ref="dialogComponent"
@@ -59,8 +69,7 @@
   import AppTableImgs from '@/components/app-table/lib/imgs'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -69,7 +78,7 @@
           {
             label: '序号',
             field: 'index',
-            width: 100
+            width: 70
           },{
             label: '微信头像',
             field: 'avatarUrl',
@@ -87,18 +96,20 @@
           },{
             label: '近一周登陆次数',
             field: 'loginCount',
+            align: 'center',
           },{
             label: '最近登陆时间',
             field: 'createTime',
+            align: 'center',
           },{
             label: '下单次数',
             field: 'orderCount',
-            width: 120,
+            width: 100,
             align: 'center'
           },{
             label: '状态',
             field: 'status',
-            width: 110,
+            width: 100,
             align: 'center',
             component: AppRsText,
             propsHandler ({ col, row }) {
@@ -125,9 +136,8 @@
         columnsProps: {
           minWidth: 100,
         },
-        tableParams: {
-          // tenantType: 6
-        }
+        showHeaderTab: false,
+        curDialogTab: ''
       }
     },
     methods: {
@@ -193,30 +203,23 @@
       },
       async handleBtnAction(row, type) {
         let res = {}
+        this.dialogIsFull = true
         switch (type) {
           case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
+            this.curDialogTab = 'detail'
+            this.showHeaderTab = true
+            res = await this.memberView(row.id)
             this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
+            this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
+          case 'edit':
+            
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('member', [
+        'memberView',
       ])
     },
     created() {

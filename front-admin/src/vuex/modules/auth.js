@@ -1,4 +1,4 @@
-import { get, postJson } from '@/utils/xhr.js'
+import { get, postJson, putJson } from '@/utils/xhr.js'
 import { getTreeData, treeToList } from "@/utils/tools"
 
 const auth = {
@@ -9,6 +9,9 @@ const auth = {
   actions: {
     // 登录
     login: (context, payload) => postJson('/pc/mgr/login', payload, { loading: false, auth: false }),
+
+    // 修改密码
+    updatePassword: (context, payload) => putJson('/pc/mgr/update/password', payload, { loading: false }),
 
     // 获取登录用户导航菜单
     getMenus({ rootState }, routes) {
