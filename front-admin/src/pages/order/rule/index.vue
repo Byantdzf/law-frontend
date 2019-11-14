@@ -9,7 +9,6 @@
       <app-table 
         ref="appTable"
         url="/order/rule"
-        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"

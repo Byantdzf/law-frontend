@@ -9,7 +9,6 @@
       <app-table 
         ref="appTable"
         url="/pc/coupon/pool"
-        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"

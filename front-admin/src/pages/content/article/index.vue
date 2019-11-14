@@ -27,11 +27,13 @@
         </el-radio-group>
         <el-row class="fr">
           <el-button type="primary">新增</el-button>
+          <el-button type="primary">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
         ref="appTable"
         url="/pc/mgr/article"
+        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
@@ -76,7 +78,7 @@
           {
             label: '编号',
             field: 'id',
-            width: 100
+            width: 160
           },{
             label: '端口',
             field: 'terminal',

@@ -24,6 +24,7 @@
       <app-table 
         ref="appTable"
         url="/feedback"
+        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
@@ -102,7 +103,7 @@
             label: '操作',
             field: 'operate',
             align: 'center',
-            width: 150,
+            width: 200,
             type: 'button',
             items: ['标记为已处理', '查看', '删除'],
             on: {

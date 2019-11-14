@@ -24,6 +24,7 @@
       <app-table 
         ref="appTable"
         url="/sensitive"
+        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"

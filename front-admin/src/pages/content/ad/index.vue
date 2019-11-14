@@ -18,11 +18,13 @@
         </el-row>
         <el-row class="fr">
           <el-button type="primary">新增</el-button>
+          <el-button type="primary">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
         ref="appTable"
         url="/adv"
+        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"

@@ -13,6 +13,7 @@
       <app-table 
         ref="appTable"
         url="/role/list"
+        columnType="selection"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
