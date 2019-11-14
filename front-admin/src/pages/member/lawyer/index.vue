@@ -14,6 +14,9 @@
     <el-card class="table-card mt-10">
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
+          <span class="title">律师管理</span>
+        </el-row>
+        <el-row class="fr">
           <el-button type="primary">启用</el-button>
           <el-button type="primary">禁用</el-button>
           <el-button type="primary">删除</el-button>
@@ -22,12 +25,10 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="ptTenant/queryPage"
+        url="/member/lawyer/pending"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
-        :max-height="tableMaxHieght"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -55,6 +56,7 @@
   import AppTable from '@/mixins/table'
   import AppDialog from '@/mixins/dialog'
   import AppSearch from '@/mixins/search'
+  import AppTableImgs from '@/components/app-table/lib/imgs'
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
@@ -67,42 +69,44 @@
         columns: [
           {
             label: '序号',
-            field: 'field1',
-            width: 100
+            field: 'index',
+            width: 70
           },{
             label: '微信头像',
-            field: 'field2',
-            width: 100
+            field: 'pic',
+            width: 100,
+            component: AppTableImgs
           },{
             label: '姓名',
-            field: 'field3',
+            field: 'name',
           },{
             label: '微信号',
-            field: 'field4',
+            field: 'account',
           },{
             label: '手机号',
-            field: 'field5',
+            field: 'phone',
           },{
             label: '执业证号',
-            field: 'field51',
+            field: 'lawyerLicenseNo',
           },{
             label: '执业律所',
-            field: 'field52',
+            field: 'belongs',
           },{
             label: '接单次数',
-            field: 'field8',
-            width: 120,
+            field: 'orderCount',
+            width: 80,
             align: 'center'
           },{
             label: '近一周登陆次数',
-            field: 'field6',
+            field: 'loginCount',
+            align: 'center',
           },{
             label: '最近登陆时间',
-            field: 'field7',
+            field: 'createTime',
           },{
             label: '状态',
             field: 'status',
-            width: 110,
+            width: 70,
             align: 'center',
             component: AppRsText,
             propsHandler ({ col, row }) {
@@ -116,7 +120,7 @@
             label: '操作',
             field: 'operate',
             align: 'center',
-            width: 120,
+            width: 100,
             type: 'button',
             items: ['修改', '查看'],
             on: {
@@ -126,12 +130,7 @@
             }
           }
         ],
-        columnsProps: {
-          minWidth: 100,
-        },
-        tableParams: {
-          tenantType: 6
-        }
+        tableParams: {}
       }
     },
     methods: {
@@ -143,7 +142,7 @@
           {
             labelWidth: '80px',
             label: '所在律所：',
-            field: 'status',
+            field: 'belongs',
             type: 2,
             options: []
           },{
@@ -151,7 +150,7 @@
             label: '状态：',
             field: 'status',
             type: 2,
-            options: []
+            options: this.$t('rs.status')
           },
           {
             label: '最近登录时间：',

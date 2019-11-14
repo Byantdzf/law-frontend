@@ -125,10 +125,11 @@
             align: 'center',
             width: 120,
             type: 'button',
-            items: ['修改', '查看'],
+            // items: ['修改', '查看'],
+            formater: (row) => [ row.status == 1 ? '禁用' : '启用', '查看'],
             on: {
               click: ({ row, index }) => {
-                this.handleBtnAction(row, index == 0 ? 'edit' : 'detail')
+                this.handleBtnAction(row, index == 0 ? 'status' : 'detail')
               }
             }
           }
@@ -203,23 +204,31 @@
       },
       async handleBtnAction(row, type) {
         let res = {}
+        let data = {}
+        let tips = ''
         this.dialogIsFull = true
         switch (type) {
           case 'detail':
             this.curDialogTab = 'detail'
             this.showHeaderTab = true
             res = await this.memberView(row.id)
-            this.dialogForm = res.data || {}
+            data = res.data || {}
+            data.id = row.id
+            this.dialogForm = data
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
-          case 'edit':
-            
+          case 'status':
+            tips = `确认${ row.status == 1 ? '禁用' : '启用' }会员${ row.name }吗？`
+            await this.$confirm(tips, '温馨提示', { type: 'warning' })
+            await this.memberUpdateStatus(row.id)
+            this.$msgSuccess('操作成功！')
             break;
         }
       },
       ...mapActions('member', [
         'memberView',
+        'memberUpdateStatus',
       ])
     },
     created() {

@@ -122,15 +122,7 @@ export default {
   },
   data() {
     return {
-      idFields: {
-        bankAccountName: '银行账户名',
-        bankOpenBranch: '开户银行',
-        bankAccountNo: '银行账号',
-        contactName: '财务联系人',
-        contactPhone: '联系电话',
-        societyCode: '统一社会信用代码',
-        qualificationFile: '资质文件'
-      }
+
     }
   },
   computed: {

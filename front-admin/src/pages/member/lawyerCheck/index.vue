@@ -13,23 +13,16 @@
     </el-card>
     <el-card class="table-card mt-10">
       <el-row slot="header" class="clearfix">
-        <el-radio-group class="table-card-tabs fl" v-model="checkStatus">
-          <el-radio-button
-            v-for="(item, index) in orderStatusItems"
-            :key="index"
-            :label="item.id"
-          >
-            {{ item.name }}
-          </el-radio-button>
-        </el-radio-group>
+        <el-row class="fl">
+          <span class="title">律师审核管理</span>
+        </el-row>
       </el-row>
       <app-table 
         ref="appTable"
-        url="/member/lawyer/pending"
+        url="/member/lawyer/audit"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         :max-height="tableMaxHieght"
         @selection-change="tableSelect"
       />
@@ -99,24 +92,6 @@
                 this.handleBtnAction(row, index == 0 ? 'edit' : 'detail')
               }
             }
-          }
-        ],
-        columnsProps: {
-          minWidth: 100,
-        },
-        checkStatus: 0,
-        orderStatusItems: [
-          {
-            id: 0,
-            name: '待审核'
-          },
-          {
-            id: 1,
-            name: '已通过'
-          },
-          {
-            id: 2,
-            name: '已拒绝'
           }
         ]
       }

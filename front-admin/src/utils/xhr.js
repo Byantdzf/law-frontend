@@ -100,7 +100,7 @@ const Ajax = function(options = {}) {
       if (code === successCode || successCode === 'any') {
         resolve(data)
       } else {
-        code === 3 && Bus.$emit('logout')
+        code === 'E00006' && Bus.$emit('logout')
         Bus.$emit('message', {
           type: 'error',
           msg: data ? data.msg : 'data is null'
