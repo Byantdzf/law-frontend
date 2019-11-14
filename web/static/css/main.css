@@ -1451,6 +1451,9 @@ i, em { font-style: normal;}
 
 .myList { padding: 20px 30px;}
 
+.wechatPayQrCode { text-align: center;}
+.wechatPayQrCode canvas { margin: 50px auto 20px;}
+
 @media screen and (max-width: 1600px) {
     .nav { margin:0;}
 }

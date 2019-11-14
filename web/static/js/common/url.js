@@ -24,7 +24,8 @@ var URL = {
 		getSmsCode: commonHost + '/applets/lawyer/getPhoneVerificationCode',
 		coupon: pcHost + '/pc/user/couponPool/list',
 		askMoney: pcHost + '/getDictData?dictCode=PayMoney',
-		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC'
+		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC',
+		wechatPay: pcHost + '/pc/lawyer/pay/getPrepayInfoQr'
 	},
 	auth: {
 		login: '/static/data/login.json',

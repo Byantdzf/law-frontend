@@ -9,6 +9,7 @@
 			_t.success = utils.getQueryString('success');
 			_t.payTitle = '支付成功';
 			_t.successInfo = '';
+			_t.orderInfo = {};
 
 			var index = '';
 			switch (_t.type) {
@@ -135,7 +136,7 @@
 
 		gotoPay: function (payment) {
 			var _t = this;
-
+console.log("sos")
 			// 支付宝支付
 			if (payment == 2) {
 				var params = {
@@ -166,6 +167,27 @@
 				// utils.get(URL.common.alipay, params, function (res) {
 				// 	console.log(res);
 				// });
+			} else {
+				var ops = {
+					type: 1,
+					area: ['450px', '450px'],
+					title: '微信支付',
+					content: '<div class="wechatPayQrCode"><div class="imgBox"></div><p>打开微信扫一扫支付订单</p></div>',
+					success: function (layero, index) {
+						var params = {
+							orderNo: _t.id,
+							fee: 0.01
+						};
+						
+						utils.get(URL.common.wechatPay, params, function (res) {
+							var url = res.data.codeUrl;
+							$.getScript('/static/js/plugin/jquery.qrcode.min.js', function () {
+								$('.wechatPayQrCode .imgBox').qrcode(url);
+							})
+						})
+					}
+				};
+				utils.dialog(ops);
 			}
 
 			// utils.msg('支付中...');

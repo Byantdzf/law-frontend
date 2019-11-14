@@ -18,7 +18,6 @@
 			];
 
 			$(function () {
-
 				_t.code = hash.get('c') || _t.userMenu[0].code;
 
 				if ($.isEmptyObject(global.userInfo)) {
