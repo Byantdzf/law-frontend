@@ -18,7 +18,9 @@ Page({
     list1: [],
     list2: [],
     list4: [],
-    hotNews: [],
+    hotNews1: [],
+    hotNews2: [],
+    hotNews3: [],
     tools: [
       {
           name: '在线律师咨询',
@@ -75,9 +77,18 @@ Page({
     let params = {}
     params[PAGE_KEY] = 1
     params[SIZE_KEY] = 5
-    selectApi.newsList(params).then(res => {
-        let hotNews = res.data.list
-        this.setData({ hotNews })
+
+    selectApi.newsList({ ...params, type: 1}).then(res => {
+      let hotNews1 = res.data.list
+      this.setData({ hotNews1 })
+    })
+    selectApi.newsList({ ...params, type: 2}).then(res => {
+        let hotNews2 = res.data.list
+        this.setData({ hotNews2 })
+    })
+    selectApi.newsList({ ...params, type: 3}).then(res => {
+        let hotNews3 = res.data.list
+        this.setData({ hotNews3 })
     })
   },
 

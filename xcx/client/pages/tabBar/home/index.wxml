@@ -27,7 +27,6 @@
 						<navigator url="../lawyer/index" open-type="switchTab">
 							<text class="cl-999">更多</text>
 							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
-
             </navigator>
 					</view>
 				</view>
@@ -85,7 +84,7 @@
 				</view>
 				<view class="app-empty-wrapper" wx:else>
 					<app-empty iconClass="icon-sousuowuneirong" />
-                </view>
+        </view>
                 
 				<view class="flex page-title">
 					<view class="flex-bd pl-20 title">法律文章精选</view>
@@ -99,7 +98,7 @@
 				<view class="hot-news-wrapper">
 					<scroll-view class="pa-20" scroll-x>
 						<view class="hot-news flex">
-							<view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
+							<view class="hot-news-item" wx:for="{{ hotNews1 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
 										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
@@ -110,7 +109,7 @@
 							</view>
 						</view>
 					</scroll-view>
-                </view>
+        </view>
                 
 				<view class="flex page-title">
 					<view class="flex-bd pl-20 title">最新法律速递</view>
@@ -124,7 +123,7 @@
 				<view class="hot-news-wrapper">
 					<scroll-view class="pa-20" scroll-x>
 						<view class="hot-news flex">
-							<view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
+							<view class="hot-news-item" wx:for="{{ hotNews2 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
 										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
@@ -135,7 +134,7 @@
 							</view>
 						</view>
 					</scroll-view>
-                </view>
+        </view>
                 
 				<view class="flex page-title">
 					<view class="flex-bd pl-20 title">最新公司动态</view>
@@ -149,7 +148,7 @@
 				<view class="hot-news-wrapper">
 					<scroll-view class="pa-20" scroll-x>
 						<view class="hot-news flex">
-							<view class="hot-news-item" wx:for="{{ hotNews }}" wx:key="{{ index }}">
+							<view class="hot-news-item" wx:for="{{ hotNews3 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
 										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
