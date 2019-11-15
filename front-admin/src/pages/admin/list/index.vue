@@ -16,7 +16,6 @@
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -101,10 +100,7 @@
               }
             }
           }
-        ],
-        columnsProps: {
-          minWidth: 100,
-        }
+        ]
       }
     },
     methods: {

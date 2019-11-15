@@ -16,7 +16,6 @@
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -56,7 +55,8 @@
         columns: [
           {
             label: '序号',
-            field: 'index'
+            field: 'index',
+            width: 70
           },{
             label: '角色名称',
             field: 'roleValue',
@@ -94,10 +94,7 @@
               }
             }
           }
-        ],
-        columnsProps: {
-          minWidth: 100,
-        }
+        ]
       }
     },
     methods: {
