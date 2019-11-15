@@ -20,11 +20,8 @@
       <app-table 
         ref="appTable"
         url="/member/lawyer/audit"
-        columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :max-height="tableMaxHieght"
-        @selection-change="tableSelect"
       />
     </el-card>
     <app-dialog
@@ -32,12 +29,15 @@
       :height="dialogHeight"
       :title="dialogTitle"
       :visible="dialogVisible"
+      :full="true"
       @close="closeDialog"
     >
       <component
+        class="dialog-content"
         v-if="dialogVisible"
         :is="dialogComponent"
         :row="dialogForm"
+        showBtns
         @submit="formSubmit"
         @cancel="closeDialog"
         ref="dialogComponent"
@@ -54,8 +54,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Detail: () => import('../lawyer/detail'),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -88,8 +87,8 @@
             type: 'button',
             items: ['查看详情'],
             on: {
-              click: ({ row, index }) => {
-                this.handleBtnAction(row, index == 0 ? 'edit' : 'detail')
+              click: ({ row }) => {
+                this.handleBtnAction(row, 'detail')
               }
             }
           }
@@ -137,52 +136,28 @@
         ]
       },
       // 表单提交
-      async formSubmit(form) {
-        try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
-          }
-        } catch (e) {
-          // error
-        }
+      async formSubmit() {
+        this.closeDialog()
+        this.refreshTable()
       },
       async handleBtnAction(row, type) {
         let res = {}
+        let data = {}
         switch (type) {
           case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
+            res = await this.lawyerAuditView(row.id)
+            data = res.data || {}
+            data.id = row.id
+            this.dialogTitle = '认证详情页面'
+            this.dialogForm = data
             this.dialogComponent = 'Detail'
-            this.dialogVisible = true
-            break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
             this.dialogVisible = true
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('member', [
+        'lawyerAuditView',
+        'lawyerUpdateStatus',
       ])
     },
     created() {
@@ -190,3 +165,10 @@
     }
   }
 </script>
+
+<style lang="less">
+.dialog-content {
+  width: 800px;
+  margin: 0 auto;
+}
+</style>

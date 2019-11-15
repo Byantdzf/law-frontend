@@ -37,12 +37,20 @@
       :height="dialogHeight"
       :title="dialogTitle"
       :visible="dialogVisible"
+      :full="dialogIsFull"
       @close="closeDialog"
     >
+      <template slot="title" v-if="showHeaderTab">
+        <el-radio-group v-model="curDialogTab" size="small">
+          <el-radio-button label="detail">个人资料</el-radio-button>
+          <el-radio-button label="orderInfo">订单信息</el-radio-button>
+        </el-radio-group>
+      </template>
       <component
         v-if="dialogVisible"
         :is="dialogComponent"
         :row="dialogForm"
+        :tab="curDialogTab"
         @submit="formSubmit"
         @cancel="closeDialog"
         ref="dialogComponent"
@@ -60,8 +68,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -122,15 +129,16 @@
             align: 'center',
             width: 100,
             type: 'button',
-            items: ['修改', '查看'],
+            formater: (row) => [ row.status == 1 ? '禁用' : '启用', '查看'],
             on: {
               click: ({ row, index }) => {
-                this.handleBtnAction(row, index == 0 ? 'edit' : 'detail')
+                this.handleBtnAction(row, index == 0 ? 'status' : 'detail')
               }
             }
           }
         ],
-        tableParams: {}
+        showHeaderTab: false,
+        curDialogTab: ''
       }
     },
     methods: {
@@ -182,50 +190,38 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
-          }
+          
         } catch (e) {
           // error
         }
       },
       async handleBtnAction(row, type) {
         let res = {}
+        let data = {}
+        let tips = ''
+        this.dialogIsFull = true
         switch (type) {
           case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
+            this.curDialogTab = 'detail'
+            this.showHeaderTab = true
+            res = await this.lawyerView(row.id)
+            data = res.data || {}
+            data.id = row.id
+            this.dialogForm = data
+            this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
+          case 'status':
+            tips = `确认${ row.status == 1 ? '禁用' : '启用' }律师${ row.name }吗？`
+            await this.$confirm(tips, '温馨提示', { type: 'warning' })
+            await this.lawyerUpdateStatus(row.id)
+            this.$msgSuccess('操作成功！')
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('member', [
+        'lawyerView',
+        'lawyerUpdateStatus',
       ])
     },
     created() {

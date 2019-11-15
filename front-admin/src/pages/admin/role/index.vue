@@ -6,7 +6,7 @@
           <span class="title">角色列表</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">新增</el-button>
+          <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
           <el-button type="danger">删除</el-button>
         </el-row>
       </el-row>
@@ -48,8 +48,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -69,14 +68,14 @@
             field: 'accountNum',
           },{
             label: '状态',
-            field: 'status',
+            field: 'isDisable',
             align: 'center',
             component: AppRsText,
             propsHandler ({ col, row }) {
               return {
                 col,
                 row,
-                type: row[col.prop] == 1 ? 'success' : 'danger'
+                type: row[col.prop] == 0 ? 'success' : 'danger'
               } 
             }
           },{
@@ -86,12 +85,12 @@
             label: '操作',
             field: 'operate',
             align: 'center',
-            width: 150,
+            width: 120,
             type: 'button',
-            items: ['编辑', '查看', '删除'],
+            items: ['编辑', '删除'],
             on: {
               click: ({ row, index }) => {
-                this.handleBtnAction(row, ['edit', 'detail', 'del'][index])
+                this.handleBtnAction(row, ['edit', 'del'][index])
               }
             }
           }
@@ -109,19 +108,17 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
+          console.log(form)
+          if ('id' in form) {
+            await this.roleUpdate(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
+          } else {
+            await this.roleAdd(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('添加成功')
           }
         } catch (e) {
           // error
@@ -130,29 +127,26 @@
       async handleBtnAction(row, type) {
         let res = {}
         switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
+          case 'add':
+            this.dialogWidth = '400px'
+            this.dialogTitle = '新增角色'
+            this.dialogForm = null
+            this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
+          case 'edit':
+            this.dialogWidth = '400px'
+            this.dialogTitle = '编辑角色'
+            this.dialogForm = row
+            this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('admin', [
+        'roleAdd',
+        'roleUpdate',
+        'roleDel'
       ])
     },
     created() {

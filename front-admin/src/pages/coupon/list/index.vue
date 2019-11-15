@@ -18,8 +18,8 @@
         </el-row>
         <el-row class="fr">
           <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
-          <el-button type="primary">修改</el-button>
-          <el-button type="primary">删除</el-button>
+          <!-- <el-button type="primary">修改</el-button>
+          <el-button type="primary">删除</el-button> -->
         </el-row>
       </el-row>
       <app-table 
@@ -139,10 +139,11 @@
             align: 'center',
             width: 100,
             type: 'button',
-            default: '修改',
+            // default: '修改',
+            items: ['修改', '删除'],
             on: {
-              click: ({ row }) => {
-                this.handleBtnAction(row, 'edit')
+              click: ({ row, index }) => {
+                this.handleBtnAction(row, ['edit', 'del'][index])
               }
             }
           }
@@ -197,13 +198,11 @@
       async handleBtnAction(row, type) {
         let res = {}
         switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
+          case 'del':
+            await this.$confirm('确认删除此优惠券吗?', '温馨提示', { type: 'warning' })
+            await this.couponDel(row.id)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
             break;
           case 'add':
             this.dialogWidth = '600px'
@@ -214,10 +213,10 @@
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('system', [
+        'couponAdd',
+        'couponUpdate',
+        'couponDel'
       ])
     },
     created() {

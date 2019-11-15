@@ -6,7 +6,7 @@
           <span class="title">管理员列表</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">新增</el-button>
+          <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
           <el-button type="danger">删除</el-button>
         </el-row>
       </el-row>
@@ -48,8 +48,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -57,35 +56,36 @@
         columns: [
           {
             label: '序号',
-            field: 'index'
+            field: 'index',
+            width: 70
           },{
             label: '管理员账号',
-            field: 'account',
+            field: 'userName',
           },{
             label: '姓名',
-            field: 'remark',
+            field: 'realName',
           },{
             label: '角色',
-            field: 'accountNum',
+            field: 'roleName',
           },{
             label: '手机',
-            field: 'createTime'
+            field: 'phone'
           },{
             label: '累积登录次数',
-            field: 'createTime'
+            field: 'loginCount'
           },{
             label: '上次登录时间',
-            field: 'createTime'
+            field: 'lastLoginTime'
           },{
             label: '状态',
-            field: 'status',
+            field: 'isDisable',
             align: 'center',
             component: AppRsText,
             propsHandler ({ col, row }) {
               return {
                 col,
                 row,
-                type: row[col.prop] == 1 ? 'success' : 'danger'
+                type: row[col.prop] == 0 ? 'success' : 'danger'
               } 
             }
           },{
@@ -115,20 +115,20 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
-          }
+          // const searchForm = this.$refs.searchForm
+          // const tenantId = this.$val(form, 'tenant.id')
+          // let params = {
+          //   tenantId: this.curRow.id,
+          //   hqTenantId: form
+          // }
+          // switch (this.dialogComponent) {
+          //   case 'HqDivide':
+          //     await this.tenantDivideHq(params)
+          //     this.$msgSuccess('操作成功')
+          //     this.closeDialog()
+          //     this.refreshTable()
+          //     break;
+          // }
         } catch (e) {
           // error
         }
@@ -137,28 +137,26 @@
         let res = {}
         switch (type) {
           case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
+            // this.dialogWidth = '800px'
+            // this.dialogTitle = row.tenantName
+            // res = await this.tenantView({ id: row.id })
+            // this.dialogForm = res.data || {}
+            // this.dialogComponent = 'Detail'
+            // this.dialogVisible = true
             break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
+          case 'add':
+            this.dialogWidth = '500px'
+            this.dialogTitle = '新增管理员'
+            this.dialogForm = null
+            this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('admin', [
+        'managerAdd',
+        'managerUpdate',
+        'managerDel'
       ])
     },
     created() {

@@ -5,6 +5,8 @@ import member from './member.js'
 import user from './user.js'
 import count from './count.js'
 import finance from './finance.js'
+import system from './system.js'
+import admin from './admin.js'
 
 const modules = {
   auth,
@@ -13,7 +15,9 @@ const modules = {
   member,
   user,
   count,
-  finance
+  finance,
+  system,
+  admin
 }
 
 export default modules

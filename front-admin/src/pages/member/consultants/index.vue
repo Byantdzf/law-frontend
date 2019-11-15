@@ -29,7 +29,6 @@
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -134,9 +133,6 @@
             }
           }
         ],
-        columnsProps: {
-          minWidth: 100,
-        },
         showHeaderTab: false,
         curDialogTab: ''
       }
@@ -184,20 +180,7 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
-          }
+          
         } catch (e) {
           // error
         }
