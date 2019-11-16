@@ -34,9 +34,7 @@
 			<div class="items">
 				<label>个人简介：</label>{{ d.brief || '&nbsp;' }}
 			</div>
-{{#
-	if (d.orderList && d.orderList.length) {
-}}
+
 			<div class="items">
 				<label>接单数据：</label>
 				<table class="layui-table">
@@ -58,9 +56,7 @@
 					</tbody>
 				</table>
 			</div>
-{{#
-	}
-}}
+
 			<div class="btns">
 				<div class="clearfix">
 					<a href="ask.html?id={{ d.id }}">在线律师咨询</a>
