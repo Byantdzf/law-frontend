@@ -19,7 +19,7 @@
 				data.persent = Math.floor(score / 5 * 100)
 
 				_t.getLawyerInfo(data);
-				_t.getLawyerData(data);
+				_t.getLawyerData();
 			});
 		},
 
@@ -55,8 +55,11 @@
 		},
 
 		getLawyerData: function (data) {
-			// var html = utils.getTemp('/page/lawyer/temp/lawyerData.html', data)
-			// $('.commentsCon').html(html);
+			var _t = this;
+			utils.get(URL.lawyer.comments + _t.id, function (res) {
+				var html = utils.getTemp('/page/lawyer/temp/lawyerData.html', res.data)
+				$('.commentsCon').html(html);
+			})
 		},
 
 		getLawyerList: function () {
