@@ -17,8 +17,8 @@
           <span class="title">意见反馈列表</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">标记已处理</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="primary" @click="handleMultiMark">标记为已处理</el-button>
+          <el-button type="danger" @click="handleMultiDel">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -27,7 +27,6 @@
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -59,8 +58,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Detail: () => import("./detail"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -68,7 +66,8 @@
         columns: [
           {
             label: '序号',
-            field: 'index'
+            field: 'index',
+            width: 70
           },{
             label: '反馈人昵称',
             field: 'userName',
@@ -105,17 +104,24 @@
             align: 'center',
             width: 200,
             type: 'button',
-            items: ['标记为已处理', '查看', '删除'],
+            formater: (row) => {
+              let arr = ['查看', '删除']
+              if (row.dealStatus != 1) {
+                arr = ['标记为已处理', ...arr]
+              }
+              return arr
+            },
             on: {
               click: ({ row, index }) => {
-                this.handleBtnAction(row, ['mark', 'detail', 'del'][index])
+                let types = ['detail', 'del']
+                if (row.dealStatus != 1) {
+                  types = ['mark', ...types]
+                }
+                this.handleBtnAction(row, types[index])
               }
             }
           }
-        ],
-        columnsProps: {
-          minWidth: 100,
-        }
+        ]
       }
     },
     methods: {
@@ -158,50 +164,78 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
+          if ('id' in form) {
+            await this.feedbackUpdate(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
           }
         } catch (e) {
           // error
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
-        switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
-            break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
-            break;
+        try {
+          switch (type) {
+            case 'detail':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '反馈意见详情'
+              this.dialogForm = row
+              this.dialogComponent = 'Detail'
+              this.dialogVisible = true
+              break;
+            case 'mark':
+              await this.$confirm('确认将此意见反馈标记为已处理吗?', '温馨提示', { type: 'warning' })
+              await this.feedbackMark(row.id)
+              this.$msgSuccess('操作成功！')
+              this.refreshTable()
+              break;
+            case 'del':
+              await this.$confirm('确认删除此意见反馈吗?', '温馨提示', { type: 'warning' })
+              await this.feedbackDel(row.id)
+              this.$msgSuccess('操作成功！')
+              this.refreshTable()
+              break;
+          }
+        } catch (error) {
+          
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      async handleMultiDel() {
+        if (this.tableSelected.length) {
+          try {
+            let ids = this.tableSelected.map(v => v.id).join(',')
+            await this.$confirm('确认删除选中的意见反馈吗?', '温馨提示', { type: 'warning' })
+            await this.feedbackDel(ids)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+          } catch (error) {
+            
+          }
+        } else {
+          this.$msgError('请选择需要删除的数据')
+        }
+      },
+      async handleMultiMark() {
+        if (this.tableSelected.length) {
+          try {
+            let ids = this.tableSelected.map(v => v.id).join(',')
+            await this.$confirm('确认将选中的意见反馈标记为已处理吗?', '温馨提示', { type: 'warning' })
+            await this.feedbackMark(ids)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+          } catch (error) {
+            
+          }
+        } else {
+          this.$msgError('请选择需要标记的数据')
+        }
+      },
+      ...mapActions('content', [
+        'feedbackAdd',
+        'feedbackUpdate',
+        'feedbackMark',
+        'feedbackDel',
       ])
     },
     created() {

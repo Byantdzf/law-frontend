@@ -17,17 +17,16 @@
           <span class="title">广告列表</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">新增</el-button>
-          <el-button type="primary">删除</el-button>
+          <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
+          <el-button type="danger" @click="handleMultiDel">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
         ref="appTable"
-        url="/adv"
+        url="/pc/mgr/adv"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -59,17 +58,16 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit")
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
       return {
         columns: [
           {
-            label: '编号',
-            field: 'id',
-            width: 100
+            label: '序号',
+            field: 'index',
+            width: 70
           },{
             label: '端口',
             field: 'terminal',
@@ -77,17 +75,14 @@
           },{
             label: '位置',
             field: 'location',
-            formater: ({ location }) => ({
-              1: '首页Banner图3～5张',
-              2: '律师详情页下方1张'
-            }[location])
+            formater: ({ location }) => this.$t('rs.adLocation')[location]
           },{
             label: '类型',
             field: 'type',
             formater: ({ type }) => this.$t('rs.adType')[type]
           },{
             label: '缩略图',
-            field: 'picture',
+            field: 'coverPhoto',
             component: AppTableImgs
           },{
             label: '排序',
@@ -122,10 +117,7 @@
               }
             }
           }
-        ],
-        columnsProps: {
-          minWidth: 100,
-        }
+        ]
       }
     },
     methods: {
@@ -161,50 +153,68 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
+          if ('id' in form) {
+            await this.advUpdate(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
+          } else {
+            await this.advAdd(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('添加成功')
           }
         } catch (e) {
           // error
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
-        switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
-            break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
-            break;
+        try {
+          switch (type) {
+            case 'add':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '新增广告'
+              this.dialogForm = null
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
+              break;
+            case 'edit':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '编辑广告'
+              this.dialogForm = row
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
+              break;
+            case 'del':
+              await this.$confirm('确认删除此广告吗?', '温馨提示', { type: 'warning' })
+              await this.advDel(row.id)
+              this.$msgSuccess('操作成功！')
+              this.refreshTable()
+              break;
+          }
+        } catch (error) {
+          
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      async handleMultiDel() {
+        if (this.tableSelected.length) {
+          try {
+            let ids = this.tableSelected.map(v => v.id).join(',')
+            await this.$confirm('确认删除选中的广告吗?', '温馨提示', { type: 'warning' })
+            await this.advDel(ids)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+          } catch (error) {
+            
+          }
+        } else {
+          this.$msgError('请选择需要删除的数据')
+        }
+      },
+      ...mapActions('content', [
+        'advAdd',
+        'advUpdate',
+        'advDel'
       ])
     },
     created() {

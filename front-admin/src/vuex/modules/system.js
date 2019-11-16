@@ -1,4 +1,4 @@
-import { get, postJson, del, putJson } from '@/utils/xhr.js'
+import { get, postJson, del, put, putJson } from '@/utils/xhr.js'
 
 const system = {
   namespaced: true,
@@ -11,6 +11,9 @@ const system = {
     couponUpdate: (context, params) => putJson(`/pc/coupon/pool`, params),
     // 优惠券 -- 删除
     couponDel: (context, id) => del(`/pc/coupon/pool/${id}`),
+
+    servicePhoneQuery: () => get('/platform/phone'),
+    servicePhoneSetting: (context, params) => put('/platform/phone', params),
   }
 }
   

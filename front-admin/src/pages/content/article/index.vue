@@ -26,8 +26,8 @@
           </el-radio-button>
         </el-radio-group>
         <el-row class="fr">
-          <el-button type="primary">新增</el-button>
-          <el-button type="primary">删除</el-button>
+          <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
+          <el-button type="danger" @click="handleMultiDel">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -36,7 +36,6 @@
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -68,17 +67,16 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit")
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
       return {
         columns: [
           {
-            label: '编号',
-            field: 'id',
-            width: 160
+            label: '序号',
+            field: 'index',
+            width: 70
           },{
             label: '端口',
             field: 'terminal',
@@ -121,24 +119,19 @@
             }
           }
         ],
-        columnsProps: {
-          minWidth: 100,
-        },
-        articleType: 0,
-        articleTypeItems: [
-          {
-            id: 0,
-            name: '基本文章'
-          },
-          {
-            id: 1,
-            name: '文章推荐管理'
-          },
-          {
-            id: 2,
-            name: '新闻管理'
-          }
-        ]
+        articleType: 1,
+        articleTypeItems: [],
+        tableParams: {
+          type: 1
+        }
+      }
+    },
+    watch: {
+      articleType(type) {
+        this.tableParams = {
+          ...this.tableParams,
+          type
+        }
       }
     },
     methods: {
@@ -170,54 +163,79 @@
             type: 'default'
           }
         ]
+
+        for(let k in this.$t('rs.articleType')) {
+          this.articleTypeItems.push({
+            id: +k,
+            name: this.$t('rs.articleType')[k]
+          })
+        }
       },
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
+          if ('id' in form) {
+            await this.articleUpdate(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
+          } else {
+            await this.articleAdd(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('添加成功')
           }
         } catch (e) {
           // error
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
-        switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
-            break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
-            break;
+        try {
+          switch (type) {
+            case 'add':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '新增文章'
+              this.dialogForm = null
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
+              break;
+            case 'edit':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '编辑文章'
+              this.dialogForm = row
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
+              break;
+            case 'del':
+              await this.$confirm('确认删除此文章吗?', '温馨提示', { type: 'warning' })
+              await this.articleDel(row.id)
+              this.$msgSuccess('操作成功！')
+              this.refreshTable()
+              break;
+          }
+        } catch (error) {
+          
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      async handleMultiDel() {
+        if (this.tableSelected.length) {
+          try {
+            let ids = this.tableSelected.map(v => v.id).join(',')
+            await this.$confirm('确认删除选中的文章吗?', '温馨提示', { type: 'warning' })
+            await this.articleDel(ids)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+          } catch (error) {
+            
+          }
+        } else {
+          this.$msgError('请选择需要删除的数据')
+        }
+      },
+      ...mapActions('content', [
+        'articleAdd',
+        'articleUpdate',
+        'articleDel'
       ])
     },
     created() {

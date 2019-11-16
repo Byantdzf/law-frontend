@@ -7,6 +7,7 @@ import count from './count.js'
 import finance from './finance.js'
 import system from './system.js'
 import admin from './admin.js'
+import content from './content.js'
 
 const modules = {
   auth,
@@ -17,7 +18,8 @@ const modules = {
   count,
   finance,
   system,
-  admin
+  admin,
+  content
 }
 
 export default modules

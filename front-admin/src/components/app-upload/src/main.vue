@@ -12,7 +12,7 @@
             v-if="fConfig.preview"
             class="file-img"
             :alt="item[fConfig.nameKey]"
-            :src="`${item[fConfig.urlKey]}?x-oss-process=image/resize,m_fill,w_66,h_66`"
+            :src="`${item[fConfig.urlKey]}`"
             :preview-src-list="files.map(v => v[fConfig.urlKey])"
           />
           <el-button
@@ -40,17 +40,18 @@
 		</ul>    
 		<el-upload
       class="inline-item"
-			:action="action || `${ baseUrl }upload/uploadFile`"
+			:action="action || `${ baseUrl }/applets/lawyer/multiUpload`"
 			:before-upload="beforeUpload"
 			:on-success="handleUploadSuccess"
 			:on-error="handleUploadError"
       :disabled="readonly"
 			:show-file-list="false"
+      :headers="headers"
     >
       <el-row class="file-item" v-if="fConfig.preview && fConfig.max == 1 && files && files[0]">
         <img
           class="file-img"
-          :src="`${files[0][fConfig.urlKey]}?x-oss-process=image/resize,m_fill,w_32,h_32`"
+          :src="`${files[0][fConfig.urlKey]}`"
           :title="files[0][fConfig.nameKey]"
         />
         <i
@@ -86,6 +87,7 @@
 <script>
   import { Upload } from 'element-ui'
   import { isArray, isString, isPlainObject } from 'lodash-es'
+  import SYSTEM from '@/utils/system'
   export default {
     name: 'app-upload',
     components: {
@@ -103,7 +105,10 @@
     },
     data() {
       return {
-        baseUrl: process.env.BASE_URL,
+        baseUrl: SYSTEM.baseUrl,
+        headers: {
+          'Authorization':  'Bearer ' + SYSTEM.userToken()
+        },
         files: [],
         uploading: false
       }
@@ -322,6 +327,9 @@
     display: inline-block;
     position: relative;
     & + .file-item {
+      margin-left: 10px;
+    }
+    & + .upload-btn {
       margin-left: 10px;
     }
     &:hover {

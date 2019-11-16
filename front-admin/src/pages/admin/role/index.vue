@@ -7,7 +7,7 @@
         </el-row>
         <el-row class="fr">
           <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="danger" @click="handleMultiDel">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -105,7 +105,6 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          console.log(form)
           if ('id' in form) {
             await this.roleUpdate(form)
             this.closeDialog()
@@ -138,6 +137,27 @@
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
+          case 'del':
+            await this.$confirm('确认删除此角色吗?', '温馨提示', { type: 'warning' })
+            await this.roleDel(row.id)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+            break;
+        }
+      },
+      async handleMultiDel() {
+        if (this.tableSelected.length) {
+          try {
+            let ids = this.tableSelected.map(v => v.id).join(',')
+            await this.$confirm('确认删除选中的角色吗?', '温馨提示', { type: 'warning' })
+            await this.roleDel(ids)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+          } catch (error) {
+            
+          }
+        } else {
+          this.$msgError('请选择需要删除的数据')
         }
       },
       ...mapActions('admin', [

@@ -12,7 +12,7 @@
 */
 
 import axios from 'axios'
-import VueCookie from 'vue-cookie'
+// import VueCookie from 'vue-cookie'
 import Bus from './bus'
 import SYSTEM from '@/utils/system'
 

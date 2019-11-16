@@ -15,7 +15,7 @@
         </el-form-item>
         <el-form-item v-else>
           <el-button type="primary" @click="onSubmit">保存</el-button>
-          <el-button type="primary" plain @click="isEdit = false">取消</el-button>
+          <el-button type="primary" plain @click="handleCancel">取消</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -36,26 +36,31 @@
       }
     },
     methods: {
-      // 初始化页面
-      initPage() {
-        
+      async fetchData() {
+        const res = await this.servicePhoneQuery()
+        this.telphone = res.data || ''
       },
       // 表单提交
-      async onSubmit(form) {
+      async onSubmit() {
         try {
-          
+          await this.servicePhoneSetting({ code: this.telphone })
+          this.$msgSuccess('更新成功！')
+          this.handleCancel()
         } catch (e) {
           // error
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      handleCancel() {
+        this.isEdit = false
+        this.fetchData()
+      },
+      ...mapActions('system', [
+        'servicePhoneQuery',
+        'servicePhoneSetting'
       ])
     },
     created() {
-      this.initPage()
+      this.fetchData()
     }
   }
 </script>

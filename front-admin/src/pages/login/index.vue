@@ -87,9 +87,8 @@ export default {
 
         try {
           this.isLoading = true
-          const { userName: account, password } = this.loginForm
-          const res = await this.login({ userName: account, password })
-          const userName = this.$val(res, 'data.userName')
+          const { userName, password } = this.loginForm
+          const res = await this.login({ userName, password })
           const accountId = this.$val(res, 'data.id')
 
           this.setState({

@@ -12,6 +12,7 @@
 
 <script>
 import AppForm from '@/mixins/form'
+import { mapActions } from 'vuex'
 export default {
   mixins: [AppForm],
   props: {
@@ -60,7 +61,7 @@ export default {
           label: '角色选择',
           field: 'roleId',
           type: 2,
-          value: row.roleId,
+          value: row.roleId ? +row.roleId : '',
           options: []
         },
         {
@@ -98,16 +99,20 @@ export default {
       ]
 
       this.formResaveDone()
+
+      this.roleKV().then(res => {
+        this.updateFormItem('roleId', 'options', res.data || [])
+      })
     },
     // 表单提交
     formSubmit(form) {
-      // console.log(form)
       let params = { ...form }
       if(this.row && this.row.hasOwnProperty('id')) {
         params.id = this.row.id
       }
       this.$emit('submit', params)
-    }
+    },
+    ...mapActions('data', ['roleKV'])
   },
   mounted() {
     this.initForm(this.row)
