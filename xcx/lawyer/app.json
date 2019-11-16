@@ -27,7 +27,8 @@
         "setting/help/index",
         "setting/agreement/index",
         "setting/privacy/index",
-        "setting/feedback/index"
+        "setting/feedback/index",
+        "updateInfo/index"
       ]
     },
     {

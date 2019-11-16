@@ -37,15 +37,6 @@
     <view class="detail-box">
       <view class="title flex">
         <text class="flex-bd fw-b">基本信息</text>
-        <button
-          wx:if="{{ item.orderStatus == 20 && item.orderSource == 2 }}"
-          size="mini"
-          open-type="share"
-          type="primary"
-          hover-class="other-button-hover"
-          plain>
-          转发
-        </button>
       </view>
       <view class="flex detail-row">
         <text class="label cl-999">订单编号：</text>
@@ -174,7 +165,8 @@
       <view class="flex btn-box btns mt-45">
         <button plain catchtap="handleFocused" wx:if="{{ item.focused == 0 }}">关注</button>
         <button plain catchtap="handleCancelFocused" wx:else>取消关注</button>
-        <button plain catchtap="handleRefuse">拒绝接单</button>
+        <button plain open-type="share" wx:if="{{ item.orderSource == 2 }}">转发</button>
+        <button plain catchtap="handleRefuse" wx:else>拒绝接单</button>
         <button plain catchtap="handleReceive">立即接单</button>
       </view>
     </view>

@@ -127,7 +127,8 @@ Component({
   },
   pageLifetimes: {
     show() {
-      
+      console.log('sssssssssssssssss')
+      console.log(this.orderTypeMap)
     }
   }
 })

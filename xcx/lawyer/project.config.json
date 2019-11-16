@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "0.0.01",
+	"libVersion": "2.9.3",
 	"appid": "wxa8febe9e68fcbd41",
 	"projectname": "hujia-lawyer",
 	"scripts": {},
@@ -95,6 +95,20 @@
 					"name": "orderDetail2",
 					"pathName": "pages/order/detail/index",
 					"query": "id=118610832262168576",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/myInfo/index",
+					"pathName": "pages/user/myInfo/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "updateInfo",
+					"pathName": "pages/user/updateInfo/index",
+					"query": "type=name",
 					"scene": null
 				}
 			]

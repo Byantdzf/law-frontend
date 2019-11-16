@@ -53,7 +53,7 @@ const ajax = (_options = {}) => {
       header["Authorization"] = "Bearer " + token
     }
 
-    if (_options.params.wxLoginCode) {
+    if (_options.params && _options.params.wxLoginCode) {
       header["Authorization"] = "Bearer " + _options.params.wxLoginCode
       delete(_options.params.wxLoginCode)
     }
@@ -69,7 +69,7 @@ const ajax = (_options = {}) => {
       header,
       success: response => {
         let data = response.data || {};
-        
+
         if (typeof(data) == 'string') {
           data = JSON.parse(data)
         }
@@ -90,6 +90,7 @@ const ajax = (_options = {}) => {
                     wx.reLaunch({ url: '/pages/reg/index' })
                   }
                 })
+                break;
             case 'E00006':
               toast &&
               wx.showToast({

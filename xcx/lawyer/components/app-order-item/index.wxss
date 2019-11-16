@@ -26,6 +26,9 @@
   border-color: #e0e0e0;
   color: #666;
 }
+.orderListBtn button {
+  width:320rpx!important;
+}
 .order-item .btn-box button::after {
   border-color: #e0e0e0;
 }

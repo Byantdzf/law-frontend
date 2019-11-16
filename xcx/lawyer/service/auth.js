@@ -36,4 +36,9 @@ module.exports = {
    * 注册
    */
   register: params => postJson('/applets/lawyer/register', params),
+
+  /**
+   * 修改用户资料
+   */
+  updateInfo: params => postJson('/applets/lawyer/updateLawyerInfo', params),
 }

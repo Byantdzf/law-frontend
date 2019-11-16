@@ -34,6 +34,11 @@ Page({
         }
       })
       this.setData({ data, idCard1, idCard2, idCard3 })
+      wx.setStorageSync('updateUserInfo', data)
     })
+  },
+  updateInfo(e) {
+    let { type } = e.currentTarget.dataset
+    app.gotoPage('/pages/user/updateInfo/index?type=' + type)
   }
 })

@@ -1,0 +1,40 @@
+<!--pages/user/updateInfo/index.wxml--><app-page id="app-page">
+    <view class="pa-20 home-list">
+        <view class="issueBox">
+            <form bindsubmit="formSubmit">
+            <view class="issue-form">
+                <view class="issue-form-item" wx:if="{{ updateType == 'name'}}">
+                    <input class="app-input" type="text" name="name" focus="{{focus}}" value="{{userInfo.name || ''}}" placeholder="请输入您的姓名"></input>
+                </view>
+                <view class="issue-form-item" wx:if="{{ updateType == 'area'}}">
+                    <view class="issue-form-input flex">
+                        <view class="question flex-bd">
+                            <picker mode="region" bindchange="bindRegionChange">
+                                <view wx:if="{{region}}">
+                                    所在地区：{{regionStr}}
+                                </view>
+                                <view wx:else>请选择所在地区</view>
+                            </picker>
+                        </view>
+                        <view>
+                            <text class="cl-999 iconfont icon-arrow-right"></text>
+                        </view>
+                    </view>
+                </view>
+                <view class="issue-form-item goodAtBox" wx:if="{{ updateType == 'goodAt'}}">
+                    <view class="goodAtTit">请选择擅长领域<text>（可多选）</text></view>
+                    <view class="flex">
+                        <text class="at-item {{item.selected && 'curr'}}" wx:for="{{questionType}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="selectAt">{{item.value}}</text>
+                    </view>
+                </view>
+                <view class="issue-form-item" wx:if="{{ updateType == 'brief'}}">
+                    <textarea name="remark" focus="{{focus}}" auto-height maxlength="100" placeholder="请填写简介（不超过100个字）" />
+                </view>
+                <view class="form-btn-box">
+                    <button type="primary" class="app-input-btn" form-type="submit">确定提交</button>
+                </view>
+            </view>
+            </form>
+        </view>
+    </view>
+</app-page>
