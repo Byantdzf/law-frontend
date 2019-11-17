@@ -47,7 +47,7 @@
 			// 	_t.resetTotal(res.value, res.othis.find('input').val())
 			// })
 
-			form.on('submit(questionSubmit)', function (res) {
+			form.on('submit(type3Submit)', function (res) {
 				var params = res.field;
 				
 				if (!params.name) {
