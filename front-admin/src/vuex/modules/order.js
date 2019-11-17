@@ -45,6 +45,19 @@ const order = {
     */
     orderCancel: (context, params) => get(`/mng/order/cancel`, params),
 
+    /* 删除评论
+     * orderScoreId
+    */
+    orderScoreDel: (context, params) => get(`/mng/orderScore/delOrderScore`, params),
+    /* 隐藏评论
+     * orderScoreId
+    */
+    orderScoreHide: (context, params) => get(`/mng/orderScore/hideOrderScore`, params),
+    /* 评论置顶
+     * orderScoreId
+    */
+    orderScoreToTop: (context, params) => get(`/mng/orderScore/toTopOrderScore`, params),
+
     // 派单规则 -- 添加
     orderRuleAdd: (context, params) => post(`/order/rule`, params),
     // 派单规则 -- 修改

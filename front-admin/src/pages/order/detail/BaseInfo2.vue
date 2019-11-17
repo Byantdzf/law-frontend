@@ -11,7 +11,7 @@
       </el-row>
       <el-row>
         <span class="label cl-999">订单金额：</span>
-        <span class="con">{{ $val(row, 'amount') }}</span>
+        <span class="con">{{ $val(row, 'amount') }}元</span>
       </el-row>
     </el-col>
     <el-col :span="8">

@@ -1,106 +1,60 @@
 <template>
-  <el-row class="travelInfo-box" :gutter="10">
-    <el-col :sm="12" :lg="6">
-      <h4 class="sub-title mb-10">联系人信息</h4>
-      <el-row>
-        <span class="label cl-999">姓名：</span>
-        <span class="con">{{ $val(row, 'orderContact.name') }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">姓名拼音：</span>
-        <span class="con">{{ $val(row, 'orderContact.familyNamePinyin') }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">邮箱：</span>
-        <span class="con">{{ $val(row, 'orderContact.email') }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">国内手机号：</span>
-        <span class="con">{{ $val(row, 'orderContact.phoneChina') }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">境外手机号：</span>
-        <span class="con">{{ $val(row, 'orderContact.phoneForeign') }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">微信号：</span>
-        <span class="con">{{ $val(row, 'orderContact.wechat') }}</span>
-      </el-row>
-    </el-col>
-    <el-col :sm="12" :lg="8">
-      <h4 class="sub-title mb-10">客人行程信息</h4>
-      <el-row v-for="(item, index) in orderTrip" :key="index">
-        <span class="label cl-999">{{ item.itemName }}：</span>
-        <span class="con">{{ item.itemValue }}</span>
-      </el-row>
-    </el-col>
-    <el-col :sm="12" :lg="4">
-      <h4 class="sub-title mb-10">接送附加费</h4>
-      <el-row>
-        <span class="label cl-999">附加费金额：</span>
-        <span class="con">
-          <i class="cl-error">￥{{ $val(row, 'orderAdditional.unitAmount', 0) }}</i>
-          <span v-if="$val(row, 'orderAdditional.shuttleType') == 2">/趟</span>
-          <span v-else>/人</span>
-        </span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">附加费总额：</span>
-        <span class="con cl-error">￥{{ $val(row, 'orderAdditional.totalAmount', 0) }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">支付凭证：</span>
-        <span class="con">{{ $val(row, 'orderAdditional.paidVoucher') }}</span>
-      </el-row>
-    </el-col>
-    <el-col :sm="12" :lg="6">
-      <el-row>
-        <el-col :span="18">
-          <h4 class="sub-title mb-10">出行人信息</h4>
-        </el-col>
-        <el-col :span="6">
-          <el-button size="mini" type="text" @click="exporterTraveller">导出</el-button>
-        </el-col>
-      </el-row>
-      <el-row v-for="(item, index) in orderTravellers" :key="index">
-        <el-row v-for="(v, idx) in item.orderTravellersItems" :key="idx">
-          <span class="label cl-999">{{ v.itemName }}：</span>
-          <span class="con">{{ v.itemValue }}</span>
-        </el-row>
-      </el-row>
-    </el-col>
+  <el-row class="baseInfo-box">
+    <el-row>
+      <span class="label cl-999">律师姓名：</span>
+      <span class="con">
+        {{ $val(row, 'lawyerDto.name') }}
+        <span class="pl-10 cl-red">{{ $val(row, 'lawyerDto.score') }}分</span>
+      </span>
+    </el-row>
+    <el-row>
+      <span class="label cl-999">律师头像：</span>
+      <span class="con">{{ $val(row, 'lawyerDto.pic') }}</span>
+      <span class="con">
+        <el-image 
+          style="width: 70px; height: 70px; border-radius: 4px;"
+          :src="$val(row, 'lawyerDto.pic')" 
+          :preview-src-list="[$val(row, 'lawyerDto.pic')]">
+        </el-image>
+      </span>
+    </el-row>
+    <el-row>
+      <span class="label cl-999">律师ID：</span>
+      <span class="con">{{ $val(row, 'lawyerDto.id') }}</span>
+    </el-row>
+    <el-row>
+      <span class="label cl-999">接单时间：</span>
+      <span class="con">{{ $val(row, 'acceptTime') }}</span>
+    </el-row>
+    <template v-if="$val(row, 'msgList', []).length">
+      <span class="label cl-999">回复详情：</span>
+      <div class="con">
+        <p v-for="(item, index) in $val(row, 'msgList', [])" :key="index">
+          <span v-if="item.msgType == 1">{{ item.content || '' }}</span>
+          <span v-else-if="item.msgType == 2">
+            <span class="el-icon-microphone cl-primary"></span>
+            <span>{{ item.recordTime ? item.recordTime + '秒，' : '' }}点击收听</span>
+          </span>
+          <span v-else-if="item.msgType == 4">
+            <span class="el-icon-document cl-primary"></span>
+            <span>{{ item.fileName || '' }}</span>
+          </span>
+        </p>
+      </div>
+    </template>
   </el-row>
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  export default {
+export default {
   props: {
     row: Object
   },
   computed: {
-    orderTrip() {
-      const items = this.$val(this.row, 'orderTrip', [])
-      
-      return items.filter(item => item.checkbox == 1)
-    },
-    orderTravellers() {
-      const items = this.$val(this.row, 'orderTravellers', [])
-      return items.map(item => {
-        let arr = item.orderTravellersItems || []
-        item.orderTravellersItems = arr.filter(v => v.checkbox == 1)
-        return item
-      })
+    orderStatus() {
+      const stauts = this.$val(this.row, 'orderStatus')
+      return this.$t('rs.orderStatus')[stauts]
     }
-  },
-  methods:{
-    exporterTraveller:function () {
-      const origin = window.location.origin;
-      const url='/pt/order/exportTravelList?orderId='+this.row.orderId;
-      window.open(`${ origin + url }`)
-    },
-    ...mapActions('order', ['exportTravelList']),
-
   }
 }
 </script>

@@ -20,7 +20,7 @@ const content = {
     // 敏感词 -- 添加
     sensitiveAdd: (context, params) => postJson(`/sensitive`, params),
     // 敏感词 -- 修改
-    sensitiveUpdate: (context, params) => put(`/sensitive`, params),
+    sensitiveUpdate: (context, params) => putJson(`/sensitive`, params),
     // 敏感词 -- 删除
     sensitiveDel: (context, ids) => del(`/sensitive/${ids}`),
 

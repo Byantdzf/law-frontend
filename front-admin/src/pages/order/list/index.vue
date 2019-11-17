@@ -80,7 +80,6 @@
         v-if="dialogVisible"
         :is="dialogComponent"
         :row="dialogForm"
-        :tab="curDialogTab"
         @submit="formSubmit"
         @cancel="closeDialog"
         ref="dialogComponent"
@@ -99,7 +98,8 @@
   export default {
     components: {
       Detail: () => import("../detail"),
-      // HqDivide: () => import("./hqDivide"),
+      OrderConfirmAmount: () => import('../detail/OrderConfirmAmount'),
+      OrderRuleEdit: () => import('../rule/edit')
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -296,16 +296,17 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
+          let { id: orderId, rule: dispatchWay, amount: fee } = form
+          switch(this.dialogComponent) {
+            case 'OrderRuleEdit':
+              await this.orderModifyDispatchWay({ orderId, dispatchWay })
+              this.$msgSuccess('操作成功！')
+              this.closeDialog()
+              this.refreshTable()
+              break;
+            case 'OrderConfirmAmount':
+              await this.orderComfirmOrderAmount({ orderId, fee })
+              this.$msgSuccess('操作成功！')
               this.closeDialog()
               this.refreshTable()
               break;
@@ -316,7 +317,7 @@
       },
       async handleBtnAction(row, type) {
         try {
-          let res = {}
+          // let res = {}
           switch (type) {
             case 'topping':
               await this.$confirm('确认置顶此订单吗?', '温馨提示', { type: 'warning' })
@@ -325,14 +326,26 @@
               this.refreshTable()
               break;
             case 'modifyAmount':
+              this.dialogIsFull = false
+              this.dialogWidth = '400px'
+              this.dialogTitle = '确认订单金额'
+              this.dialogForm = row
+              this.dialogComponent = 'OrderConfirmAmount'
+              this.dialogVisible = true
               break;
             case 'modifyDispatchWay':
+              row.rule = row.dispatchWay
+              this.dialogIsFull = false
+              this.dialogWidth = '400px'
+              this.dialogTitle = '修改派单规则'
+              this.dialogForm = row
+              this.dialogComponent = 'OrderRuleEdit'
+              this.dialogVisible = true
               break;
             case 'detail':
               this.dialogIsFull = true
               this.dialogTitle = '订单详情'
-              res = await this.orderView({ orderId: row.id })
-              this.dialogForm = res.data || {}
+              this.dialogForm = row
               this.dialogComponent = 'Detail'
               this.dialogVisible = true
               break;
