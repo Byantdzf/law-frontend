@@ -135,20 +135,19 @@ layui.define(function (exports) {
 						if (callback) {
 							callback(res);
 						}
-					// } else if (res.code == '01') {
-					// 	gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
-					// 	gather.setCookie(global.token, '');
-					// 	gather.setCookie(global.backToken, '');
-
-					// 	window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+					} else if (res.code == '01') {
+						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+						gather.setCookie(global.token, '');
+						gather.setCookie(global.backToken, '');
+						window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else if (res.code == 'E00006') {
-						// gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
-						// gather.setCookie(global.token, '');
-						// gather.setCookie(global.backToken, '');
-						// window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+						gather.setCookie(global.token, '');
+						gather.setCookie(global.backToken, '');
+						window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else {
 						if (url.indexOf('/pc/user/wechat/login/result') == -1) {
-							// gather.msg(res.data || res.msg || res.code);
+							gather.msg(res.data || res.msg || res.code);
 						}
 					}
 				},

@@ -25,7 +25,8 @@ var URL = {
 		coupon: pcHost + '/pc/user/couponPool/list',
 		askMoney: pcHost + '/getDictData?dictCode=PayMoney',
 		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC',
-		wechatPay: pcHost + '/pc/lawyer/pay/getPrepayInfoQr'
+		wechatPay: pcHost + '/pc/lawyer/pay/getPrepayInfoQr',
+		wechatPayResult: pcHost + '/pc/lawyer/getWeixinOrderByOrderNo'
 	},
 	auth: {
 		login: '/static/data/login.json',
