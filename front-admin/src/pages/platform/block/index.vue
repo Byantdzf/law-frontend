@@ -61,8 +61,9 @@
                     :on-success="handleUploadSuccess"
                     :on-error="handleUploadError"
                     :headers="headers"
+			              :show-file-list="false"
                   >
-                    <el-button type="primary" @click="handleUpload">图片更换</el-button>
+                    <el-button type="primary" :loading="uploading">{{ uploading ? '正在上传' : '图片更换' }}</el-button>
                   </el-upload>
                 </div>
               </td>
@@ -118,15 +119,16 @@
 
 <script>
 import { mapActions } from "vuex";
+import { Upload } from 'element-ui';
 import AppTable from "@/mixins/table";
 import AppDialog from "@/mixins/dialog";
 import AppSearch from "@/mixins/search";
 import AppRsText from "@/components/app-table/lib/rsText";
-import AppUpload from "@/components/app-upload";
 import SYSTEM from '@/utils/system'
 export default {
   components: {
-    Edit: () => import("./edit")
+    Edit: () => import("./edit"),
+    [Upload.name]: Upload
   },
   mixins: [AppTable, AppDialog, AppSearch],
   data() {
@@ -183,6 +185,7 @@ export default {
       headers: {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
+      uploading: false,
       img: require("@/assets/images/img_404.png"),
     };
   },
@@ -192,6 +195,14 @@ export default {
         ...this.tableParams,
         serviceType: type
       };
+      
+      let obj = {}
+      this.articleTypeItems.forEach(item => {
+        if (type == item.id) {
+          obj = item
+        }
+      })
+      this.currTypeName = obj.name
     }
   },
   methods: {
@@ -203,12 +214,12 @@ export default {
     async formSubmit(form) {
       try {
         if ("id" in form) {
-          await this.articleUpdate(form);
+          await this.blockUpdate(form);
           this.closeDialog();
           this.refreshTable();
           this.$msgSuccess("修改成功");
         } else {
-          await this.articleAdd(form);
+          await this.blockAdd(form);
           this.closeDialog();
           this.refreshTable();
           this.$msgSuccess("添加成功");
@@ -222,23 +233,23 @@ export default {
         switch (type) {
           case "add":
             this.dialogWidth = "600px";
-            this.dialogTitle = "新增文章";
+            this.dialogTitle = "新增服务类型";
             this.dialogForm = null;
             this.dialogComponent = "Edit";
             this.dialogVisible = true;
             break;
           case "edit":
             this.dialogWidth = "600px";
-            this.dialogTitle = "编辑文章";
+            this.dialogTitle = "编辑服务类型";
             this.dialogForm = row;
             this.dialogComponent = "Edit";
             this.dialogVisible = true;
             break;
           case "del":
-            await this.$confirm("确认删除此文章吗?", "温馨提示", {
+            await this.$confirm("确认删除选定的服务类型吗?", "温馨提示", {
               type: "warning"
             });
-            await this.articleDel(row.id);
+            await this.blockDel(row.id);
             this.$msgSuccess("操作成功！");
             this.refreshTable();
             break;
@@ -249,10 +260,10 @@ export default {
       if (this.tableSelected.length) {
         try {
           let ids = this.tableSelected.map(v => v.id).join(",");
-          await this.$confirm("确认删除选中的文章吗?", "温馨提示", {
+          await this.$confirm("确认删除选定的服务类型吗?", "温馨提示", {
             type: "warning"
           });
-          await this.articleDel(ids);
+          await this.blockDel(ids);
           this.$msgSuccess("操作成功！");
           this.refreshTable();
         } catch (error) {
@@ -262,7 +273,6 @@ export default {
         this.$msgError("请选择需要删除的数据");
       }
     },
-    async handleUpload() {},
     async handleIntroEdit() {
       this.isEditRemark = !this.isEditRemark;
     },
@@ -271,18 +281,20 @@ export default {
     },
       //上传之前的事件
       beforeUpload(file) {
+          this.uploading = true
       },
       // 上传成功的事件
       handleUploadSuccess(res, file) {
         let fileUrl = res.data || ''
         this.img = fileUrl
+        this.uploading = false
       },
       // 上传失败
       handleUploadError() {
         this.uploading = false
         this.$msgError('上传失败，请稍后再试！')
       },
-    ...mapActions("content", ["articleAdd", "articleUpdate", "articleDel"])
+    ...mapActions("content", ["blockAdd", "blockUpdate", "blockDel"])
   },
   created() {
     this.initPage();

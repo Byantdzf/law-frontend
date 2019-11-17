@@ -1,4 +1,4 @@
-import { postJson, del, put, putJson } from '@/utils/xhr.js'
+import { post, postJson, del, put, putJson } from '@/utils/xhr.js'
 
 const content = {
   namespaced: true,
@@ -32,6 +32,27 @@ const content = {
     feedbackMark: (context, ids) => put(`/feedback/mark/${ids}`),
     // 反馈信息 -- 删除
     feedbackDel: (context, ids) => del(`/feedback/${ids}`),
+
+    // 分块法律服务 -- 添加
+    blockAdd: (context, params) => post(`/blockLaw`, params),
+    // 分块法律服务 -- 修改
+    blockUpdate: (context, params) => put(`/blockLaw`, params),
+    // 分块法律服务 -- 删除
+    blockDel: (context, ids) => del(`/blockLaw/${ids}`),
+
+    // 分类 -- 添加
+    categoryAdd: (context, params) => post(`/category`, params),
+    // 分类 -- 修改
+    categoryUpdate: (context, params) => put(`/category`, params),
+    // 分类 -- 删除
+    categoryDel: (context, ids) => del(`/category/${ids}`),
+
+    // 模板 -- 添加
+    templateAdd: (context, params) => post(`/template`, params),
+    // 模板 -- 修改
+    templateUpdate: (context, params) => put(`/template`, params),
+    // 模板 -- 删除
+    templateDel: (context, ids) => del(`/template/${ids}`),
   }
 }
   

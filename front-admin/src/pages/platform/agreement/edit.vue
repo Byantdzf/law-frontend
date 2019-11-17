@@ -12,6 +12,7 @@
 
 <script>
 import AppForm from '@/mixins/form'
+import AppUpload from '@/components/app-upload'
 export default {
   mixins: [AppForm],
   props: {
@@ -35,10 +36,27 @@ export default {
       
       this.formItems = [
         {
-          label: '服务类型名称',
-          field: 'title',
+          label: '文件名称',
+          field: 'fileName',
           type: 1,
-          value: row.title,
+          value: row.fileName,
+          required: true
+        },
+        {
+          label: '所属分类',
+          field: 'businessType',
+          required: true,
+          type: 2,
+          value: row.businessType ? +row.businessType : '',
+          options: this.$t('rs.orderBusinessType')
+        },
+        {
+          label: '更新时间',
+          field: 'updateTime',
+          type: 9,
+          value: row.updateTime,
+          format: 'yyyy-MM-dd hh:mm:ss',
+          valueFormat: 'yyyy-MM-dd hh:mm:ss',
           required: true
         },
         {
@@ -49,10 +67,10 @@ export default {
           required: true
         },
         {
-          label: '服务说明',
-          field: 'instruction',
+          label: '文件简介',
+          field: 'brief',
           type: 5,
-          value: row.instruction,
+          value: row.brief,
           required: true
         },
         {
@@ -63,10 +81,37 @@ export default {
           required: true
         },
         {
+          label: '文件封面图',
+          field: 'image',
+          value: row.image || '',
+          component: AppUpload,
+          config: {
+            max: 1,
+            preview: true,
+            dataType: 'string',
+            fileType: 'jpg,jpeg,png',
+            btnIcon: 'el-icon-plus',
+            tips: '建议300*300'
+          }
+        },
+        {
+          label: '文件上传',
+          field: 'doc',
+          value: row.doc || '',
+          component: AppUpload,
+          config: {
+            max: 1,
+            preview: false,
+            dataType: 'string',
+            fileSize: 1024 * 1024 * 500,
+            // btnIcon: 'el-icon-plus'
+          }
+        },
+        {
           label: '真实销量数据',
-          field: 'salesCount',
+          field: 'realSales',
           type: 1,
-          value: row.salesCount,
+          value: row.realSales,
           required: true
         },
         {
@@ -78,9 +123,9 @@ export default {
         },
         {
           label: '展示销量数据',
-          field: 'showCount',
+          field: 'sales',
           type: 1,
-          value: row.showCount
+          value: row.sales
         }
       ]
 

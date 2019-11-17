@@ -3,7 +3,7 @@
     <el-card class="table-card">
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
-          <span class="title">平台收入列表</span>
+          <span class="title">{{typeObj.label}}</span>
         </el-row>
         <el-row class="fr">
           <el-select v-model="typeValue" placeholder="请选择">
@@ -22,80 +22,80 @@
         <el-row :gutter="20">
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>昨日总收入（元）</p>
-              <p class="num">4713.5</p>
-              <p class="fontGreen">
+              <p>昨日{{typeObj.str}}总收入（元）</p>
+              <p class="num">{{staticsData.todayOrderAmount}}</p>
+              <!-- <p class="fontGreen">
                 <span>较上日</span>
                 <i class="el-icon-bottom"></i>
                 <span>5</span>
-              </p>
+              </p> -->
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>上周总收入（元）</p>
-              <p class="num">4713.5</p>
-              <p class="fontRed">
+              <p>上周{{typeObj.str}}总收入（元）</p>
+              <p class="num">{{staticsData.weeklyOrderAmount}}</p>
+              <!-- <p class="fontRed">
                 <span>较上周</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
-              </p>
+              </p> -->
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>上月总收入（元）</p>
-              <p class="num">4713.5</p>
-              <p class="fontRed">
+              <p>上月{{typeObj.str}}总收入（元）</p>
+              <p class="num">{{staticsData.monthOrderAmount}}</p>
+              <!-- <p class="fontRed">
                 <span>较上月</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
-              </p>
+              </p> -->
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>历史总收入</p>
-              <p class="num">4713.5</p>
+              <p>历史{{typeObj.str}}总收入</p>
+              <p class="num">{{staticsData.historyOrderAmount}}</p>
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>昨日总利润（元）</p>
-              <p class="num">4713.5</p>
-              <p class="fontRed">
+              <p>昨日{{typeObj.str}}总利润（元）</p>
+              <p class="num">{{staticsData.todayEarnings}}</p>
+              <!-- <p class="fontRed">
                 <span>较上日</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
-              </p>
+              </p> -->
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>上周总利润（元）</p>
-              <p class="num">4713.5</p>
-              <p class="fontRed">
+              <p>上周{{typeObj.str}}总利润（元）</p>
+              <p class="num">{{staticsData.weeklyEarnings}}</p>
+              <!-- <p class="fontRed">
                 <span>较上周</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
-              </p>
+              </p> -->
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>上月总利润（元）</p>
-              <p class="num">4713.5</p>
-              <p class="fontRed">
+              <p>上月{{typeObj.str}}总利润（元）</p>
+              <p class="num">{{staticsData.monthEarnings}}</p>
+              <!-- <p class="fontRed">
                 <span>较上月</span>
                 <i class="el-icon-top"></i>
                 <span>5</span>
-              </p>
+              </p> -->
             </div>
           </el-col>
           <el-col class="statistics-box" :span="6">
             <div class="con">
-              <p>历史总利润</p>
-              <p class="num">4713.5</p>
+              <p>历史{{typeObj.str}}总利润</p>
+              <p class="num">{{staticsData.historyEarnings}}</p>
             </div>
           </el-col>
         </el-row>
@@ -198,22 +198,29 @@
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
       return {
+        staticsData: {},
         typeValue: '',
+        typeObj: {},
         options: [{
           value: '',
-          label: '平台收入列表'
+          label: '平台收入列表',
+          str: ''
         }, {
           value: '1',
-          label: '咨询收入列表'
+          label: '咨询服务板块',
+          str: '咨询服务'
         }, {
           value: '2',
-          label: '分块法律服务收入列表'
+          label: '分块法律服务板块',
+          str: '分块法律服务'
         }, {
           value: '3',
-          label: '委托律师服务收入列表'
+          label: '委托律师服务板块',
+          str: '委托律师服务'
         }, {
           value: '4',
-          label: '协议模版收入列表'
+          label: '协议模版销售板块',
+          str: '协议模版销售'
         }],
         columns: [
           {
@@ -278,9 +285,25 @@
         }
       }
     },
+    watch: {
+      typeValue(type) {
+        let obj = {}
+        this.options.forEach(item => {
+          if (type == item.value) {
+            obj = item
+          }
+        })
+        this.typeObj = obj
+        this.selectStatics()
+      }
+    },
     methods: {
       // 初始化页面
       initPage() {
+        this.typeObj = this.options[0]
+
+        this.selectStatics()
+
         this.$set(this.searchFormInit, 'align', 'left')
 
         this.searchItems = [
@@ -318,6 +341,16 @@
             type: 'default'
           }
         ]
+      },
+      selectStatics() {
+        let params = {}
+        let val = this.typeObj.value
+        if (val) {
+          params.orderType = this.typeObj.value
+        }
+        this.statics(params).then(res => {
+          this.staticsData = res.data || {}
+        })
       },
       // 表单提交
       async formSubmit(form) {
@@ -362,10 +395,8 @@
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('finance', [
+        'statics'
       ])
     },
     created() {
