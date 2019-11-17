@@ -33,7 +33,7 @@ export default {
             items.map((item, index) =>
               <el-link
                 type={ item.type || 'primary' }
-                nativeOn-click={ ($event) => this.$emit('click', { ...params, index }, $event) }
+                nativeOn-click={ ($event) => this.$emit('click', { ...params, index, btn: item }, $event) }
               >
                 { item.label }
               </el-link>

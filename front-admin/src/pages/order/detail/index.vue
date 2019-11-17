@@ -1,40 +1,38 @@
 <template>
-  <div class="order-detail-travel">
+  <div class="order-detail">
     <el-card>
+      <el-row slot="header">
+        <el-row class="fl">
+          <span class="title">发布人信息</span>
+        </el-row>
+      </el-row>
+      <PublishInfo :row="row" />
+    </el-card>
+    <el-card class="mt-10">
       <el-row slot="header">
         <el-row class="fl">
           <span class="title">订单信息</span>
         </el-row>
-        <el-row class="fr">
-          <el-button size="mini" type="primary" @click="sendEmail" v-if="orderStatus != 1">出行确认函</el-button>
-          <el-button size="mini" type="primary" @click="getOrderLog">订单日志</el-button>
-        </el-row>
       </el-row>
-      <BaseInfo :row="row" />
+      <BaseInfo1 :row="row" v-if="$t(row, 'orderType') == 1"/>
+      <BaseInfo3 :row="row" v-else-if="$t(row, 'orderType') == 4"/>
+      <BaseInfo2 :row="row" v-else/>
     </el-card>
     <el-card class="mt-10">
       <el-row slot="header">
         <el-row class="fl">
-          <span class="title">预定信息</span>
+          <span class="title">支付流水信息</span>
         </el-row>
       </el-row>
-      <BookingInfo :row="row" />
+      <PaymentFlowInfo :row="row" />
     </el-card>
     <el-card class="mt-10">
       <el-row slot="header">
         <el-row class="fl">
-          <span class="title">附加项信息</span>
+          <span class="title">接单律师信息</span>
         </el-row>
       </el-row>
-      <AddtionalInfo :row="row" />
-    </el-card>
-    <el-card class="mt-10">
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">出行信息（TRAVEL INFORMATION）</span>
-        </el-row>
-      </el-row>
-      <TravelInfo :row="row" />
+      <LawyerInfo :row="row" />
     </el-card>
 
     <app-dialog
@@ -54,30 +52,27 @@
         @cancel="closeDialog"
       />
     </app-dialog>
-
-
-
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import BaseInfo from './baseInfo'
-import BookingInfo from './bookingInfo'
-import AddtionalInfo from './addtionalInfo'
-import TravelInfo from './travelInfo'
+import PublishInfo from './PublishInfo'
+import BaseInfo1 from './BaseInfo1'
+import BaseInfo2 from './BaseInfo2'
+import BaseInfo3 from './BaseInfo3'
+import PaymentFlowInfo from './PaymentFlowInfo'
+import LawyerInfo from './LawyerInfo'
 import AppDialog from '@/mixins/dialog'
-import Log from './log'
-
 
 export default {
   components: {
-    BaseInfo,
-    BookingInfo,
-    AddtionalInfo,
-    TravelInfo,
-    Log,
-    OrderSend: () => import('./orderSend')
+    PublishInfo,
+    BaseInfo1,
+    BaseInfo2,
+    BaseInfo3,
+    PaymentFlowInfo,
+    LawyerInfo,
   },
   mixins: [AppDialog],
   data() {
@@ -120,7 +115,7 @@ export default {
 </script>
 
 <style lang="less">
-  .order-detail-travel {
+  .order-detail {
     .el-card__header {
       padding: 10px 20px;
       border-bottom: 0;
@@ -132,8 +127,6 @@ export default {
     .el-card__body {
       padding-top: 0px;
     }
-
-    .travelInfo-box,
     .baseInfo-box {
       .label {
         position: relative;

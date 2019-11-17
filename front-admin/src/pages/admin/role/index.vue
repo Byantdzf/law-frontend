@@ -121,7 +121,6 @@
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
         switch (type) {
           case 'add':
             this.dialogWidth = '400px'

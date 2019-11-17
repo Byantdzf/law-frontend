@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-card class="table-card mt-10">
+    <el-card class="table-card">
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
           <span class="title">派单规则</span>
@@ -9,9 +9,7 @@
       <app-table 
         ref="appTable"
         url="/order/rule"
-        :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -38,29 +36,31 @@
   import { mapActions } from 'vuex'
   import AppTable from '@/mixins/table'
   import AppDialog from '@/mixins/dialog'
-  import AppSearch from '@/mixins/search'
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit"),
     },
-    mixins: [AppTable, AppDialog, AppSearch],
+    mixins: [AppTable, AppDialog],
     data() {
       return {
         columns: [
           {
+            label: '序号',
+            field: 'index',
+            width: 70
+          },{
             label: '订单类型',
             field: 'orderType',
-            formater: ({ type }) => this.$t('rs.orderType')[type]
+            formater: ({ orderType }) => this.$t('rs.orderType')[orderType]
           },{
             label: '订单种类',
             field: 'orderCategory',
-            formater: ({ type }) => this.$t('rs.orderCategory')[type]
+            formater: ({ orderCategory }) => this.$t('rs.orderCategory')[orderCategory]
           },{
             label: '当前派单方式',
             field: 'rule',
-            formater: ({ type }) => this.$t('rs.orderRule')[type]
+            formater: ({ rule }) => this.$t('rs.orderRule')[rule]
           },{
             label: '操作',
             field: 'operate',
@@ -74,10 +74,7 @@
               }
             }
           }
-        ],
-        columnsProps: {
-          minWidth: 100,
-        }
+        ]
       }
     },
     methods: {
@@ -87,50 +84,41 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
+          if ('id' in form) {
+            await this.orderRuleUpdate(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
+          } else {
+            await this.orderRuleAdd(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('添加成功')
           }
         } catch (e) {
           // error
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
         switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
+          case 'edit':
+            this.dialogWidth = '400px'
+            this.dialogTitle = '修改派单规则'
+            this.dialogForm = row
+            this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
+          case 'del':
+            await this.$confirm('确认删除此派单规则吗?', '温馨提示', { type: 'warning' })
+            await this.orderRuleDel(row.id)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('order', [
+        'orderRuleUpdate',
+        'orderRuleDel',
       ])
     },
     created() {

@@ -33,10 +33,9 @@
 
       <app-table 
         ref="appTable"
-        url="/pc/mgr/article"
+        url="/mng/order/orderList"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -77,8 +76,8 @@
         columns: [
           {
             label: '序号',
-            field: 'id',
-            width: 100
+            field: 'index',
+            width: 70
           },{
             label: '订单编号',
             field: 'orderNo'
@@ -113,17 +112,14 @@
             align: 'center',
             width: 120,
             type: 'button',
-            items: ['修改', '删除'],
+            items: ['查看详情'],
             on: {
               click: ({ row, index }) => {
-                this.handleBtnAction(row, index == 0 ? 'edit' : 'del')
+                this.handleBtnAction(row, 'detail')
               }
             }
           }
         ],
-        columnsProps: {
-          minWidth: 100,
-        },
         articleType: 0,
         orderTypeValue: '',
         orderSourceValue: '',
@@ -150,8 +146,11 @@
           { id: '', name: '全部' },
           { id: 1, name: '系统推送订单' },
           { id: 2, name: '订单池订单' },
-          { id: 3, name: '委托我的订单' }
+          { id: 3, name: '委托律师订单' }
         ],
+        tableParams: {
+          onlyAppealOrder: 'Y'
+        }
       }
     },
 		watch: {

@@ -168,7 +168,7 @@
             await this.feedbackUpdate(form)
             this.closeDialog()
             this.refreshTable()
-            this.$msgSuccess('修改成功')
+            this.$msgSuccess('操作成功！')
           }
         } catch (e) {
           // error
