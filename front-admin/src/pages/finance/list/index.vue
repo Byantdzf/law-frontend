@@ -208,15 +208,27 @@
         }, {
           value: '1',
           label: '咨询服务板块',
-          str: '咨询服务'
+          str: '咨询服务',
+          child: [
+            { id: 11, name: '在线律师咨询' },
+            { id: 12, name: '指定律师咨询' }
+          ]
         }, {
           value: '2',
           label: '分块法律服务板块',
-          str: '分块法律服务'
+          str: '分块法律服务',
+          child: [
+            { id: 21, name: '日常法律服务' },
+            { id: 22, name: '分块法律服务' }
+          ]
         }, {
           value: '3',
           label: '委托律师服务板块',
-          str: '委托律师服务'
+          str: '委托律师服务',
+          child: [
+            { id: 31, name: '收费代理' },
+            { id: 32, name: '风险代理' }
+          ]
         }, {
           value: '4',
           label: '协议模版销售板块',
@@ -295,6 +307,7 @@
         })
         this.typeObj = obj
         this.selectStatics()
+        this.setSearchParams()
       }
     },
     methods: {
@@ -306,30 +319,7 @@
 
         this.$set(this.searchFormInit, 'align', 'left')
 
-        this.searchItems = [
-          {
-            label: '支付时间',
-            field: ['rangeStartTime', 'rangeEndTime'],
-            startPlaceholder: '开始时间',
-            endPlaceholder: '结束时间',
-            type: 10
-          },
-          {
-            label: '会员号',
-            field: 'couponName',
-            type: 1,
-          },
-          {
-            label: '流水号',
-            field: 'couponName',
-            type: 1,
-          },
-          {
-            label: '&nbsp;',
-            field: 'couponName',
-            type: 1,
-          },
-        ]
+        this.setSearchParams()
 
         this.searchBtns = [
           {
@@ -341,6 +331,42 @@
             type: 'default'
           }
         ]
+      },
+      setSearchParams() {
+        this.searchItems = [
+          {
+            label: '支付时间',
+            field: ['startDate', 'endDate'],
+            startPlaceholder: '开始时间',
+            endPlaceholder: '结束时间',
+            type: 10
+          },
+          {
+            label: '会员号',
+            field: 'userId',
+            type: 1,
+          },
+          {
+            label: '流水号',
+            field: 'cashRecordId',
+            type: 1,
+          }
+        ]
+
+        if (this.typeObj.value && this.typeObj.child && this.typeObj.child.length) {
+          this.searchItems = [...this.searchItems, {
+            label: '&nbsp;',
+            field: 'orderCategory',
+            type: 2,
+            options: this.typeObj.child
+          }]
+        }
+
+        this.searchItems = [...this.searchItems, {
+            label: '&nbsp;',
+            field: 'keyword',
+            type: 1,
+          }]
       },
       selectStatics() {
         let params = {}
