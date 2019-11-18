@@ -82,6 +82,10 @@ Page({
         this.setData({btnDisable: true})
       });
     },
+    onShow() {
+        let selectArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
+        this.setData({selectArea})
+    },
     imageError(e) {
         var _errImg = e.target.dataset.img
         var _errObj = {}

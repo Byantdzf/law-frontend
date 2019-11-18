@@ -33,9 +33,6 @@ Component({
             let selectArea = this.properties.selectArea || []
                 let cityIndex = []
                 if (selectArea.length) {
-                    console.log('------------------------------------------------')
-                    console.log(selectArea)
-                    console.log('------------------------------------------------')
                 let pIndex = cityList.findIndex(items => {
                     return items.name == selectArea[0]
                 })
