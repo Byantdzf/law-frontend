@@ -65,7 +65,7 @@ Page({
     selectApi.lawyerDetail({ id: this.data.id }).then(res => {
       let details = res.data
       details.joinDate = details.joinDate && details.joinDate.split(' ')[0]
-      details.goodAt = details.goodAt && details.goodAt.split('，')
+      details.goodAt = details.goodAt && details.goodAt.split(',')
 
       let score = details.score > 5 ? 5 : details.score < 0 ? 0 : details.score
       let persent = Math.floor(score / app.globalData.maxScore * 100)

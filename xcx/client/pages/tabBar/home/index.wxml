@@ -44,9 +44,9 @@
 						<view class="flex-bd pl-20">
 							<view class="flex">
 								<view class="flex-bd name">{{ item.name }}</view>
-								<view class="flex-ft score cl-red" wx:if="{{ item.score || item.score === 0 }}">{{ item.score }}分</view>
+								<view class="flex-ft score cl-red">{{ item.score || 0 }}分</view>
 							</view>
-							<view class="desc cl-666">{{ item.desc || '' }}</view>
+							<view class="desc cl-666">{{ item.brief || '' }}</view>
 							<view class="flex">
 								<view class="flex-bd">
 									<text class="cl-999">帮助人数：</text>

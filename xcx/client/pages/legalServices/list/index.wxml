@@ -1,9 +1,9 @@
 <!-- pages/legalServices/list/index.wxml -->
 <app-page id="app-page">
     <view class="flex-column container page-lawyer">
-        <view class="tab-bar">
+        <!-- <view class="tab-bar">
             <app-tab items="{{ types }}" current="{{ type }}" bind:change="changeType" />
-        </view>
+        </view> -->
         <view class="flex-bd flex-column">
             <view class="flex-bd list-box">
                 <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
