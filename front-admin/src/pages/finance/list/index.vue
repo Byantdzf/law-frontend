@@ -122,7 +122,7 @@
     <el-card class="table-card">
       <app-table 
         ref="appTable"
-        url="/pc/coupon/pool"
+        url="/mng/financialManage/queryCashOrderInfoList"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
@@ -135,6 +135,7 @@
       :height="dialogHeight"
       :title="dialogTitle"
       :visible="dialogVisible"
+      :full="dialogIsFull"
       @close="closeDialog"
     >
       <component
@@ -192,8 +193,8 @@
   export default {
     components: {
       AppSelect: () => import('@/components/app-select'),
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Detail: () => import("../../order/detail"),
+      Edit: () => import("./edit"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -241,53 +242,59 @@
             width: 100
           },{
             label: '订单类型',
-            field: 'couponName',
+            field: 'orderType',
+            formater: ({ orderType }) => this.$t('rs.orderType')[orderType]
           },{
             label: '订单种类',
-            field: 'scene',
+            field: 'orderCategory',
+            formater: ({ orderCategory }) => this.$t('rs.orderCategory')[orderCategory]
           },{
             label: '订单号',
-            field: 'type',
+            field: 'orderNo',
+            width: '150',
           },{
             label: '会员昵称',
-            field: 'remark',
+            field: 'name',
           },{
             label: '会员ID',
-            field: 'sendCount',
+            field: 'userId',
+            width: '150',
           },{
             label: '应付金额',
-            field: 'pay',
+            field: 'orgAmount',
           },{
-            label: '使用优惠券信息',
-            field: 'conpon',
+            label: '优惠券',
+            field: 'couponDesc',
           },{
             label: '实付金额',
-            field: 'realPay',
+            field: 'amount',
           },{
             label: '平台利润',
-            field: 'rangeStartTime',
+            field: 'platformProfitAmount',
           },{
             label: '支付方式',
-            field: 'rangeEndTime',
+            field: 'payWay',
+            formater: ({ payWay }) => this.$t('rs.payment')[payWay]
           },{
             label: '支付账号',
-            field: 'dataStatus',
+            field: 'payAccount',
+            width: '150',
           },{
             label: '支付时间',
-            field: 'dataStatus1',
+            field: 'payTime',
           },{
             label: '备注',
-            field: 'dataStatus2',
+            field: 'remark',
           },{
             label: '操作',
             field: 'operate',
             align: 'center',
             width: 120,
             type: 'button',
-            default: ['修改备注', '详情'],
+            items: ['修改备注', '详情'],
             on: {
-              click: ({ row }) => {
-                this.handleBtnAction(row, index == 0 ? 'edit' : 'view')
+              click: ({ row, index }) => {
+                this.handleBtnAction(row, index == 0 ? 'edit' : 'detail')
               }
             }
           }
@@ -299,6 +306,10 @@
     },
     watch: {
       typeValue(type) {
+        this.tableParams = {
+          ...this.tableParams,
+          orderType: type
+        }
         let obj = {}
         this.options.forEach(item => {
           if (type == item.value) {
@@ -368,6 +379,7 @@
             type: 1,
           }]
       },
+
       selectStatics() {
         let params = {}
         let val = this.typeObj.value
@@ -381,48 +393,39 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
+          if ('id' in form) {
+            await this.updateRemark(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
           }
         } catch (e) {
           // error
+          console.log(e)
         }
       },
       async handleBtnAction(row, type) {
         let res = {}
         switch (type) {
           case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
+            this.dialogIsFull = true
+            this.dialogTitle = '订单详情'
+            this.dialogForm = row
             this.dialogComponent = 'Detail'
             this.dialogVisible = true
             break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
+          case 'edit':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '编辑备注'
+              this.dialogForm = row
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
             break;
         }
       },
       ...mapActions('finance', [
-        'statics'
+        'statics',
+        'updateRemark'
       ])
     },
     created() {

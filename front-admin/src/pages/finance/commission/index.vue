@@ -8,7 +8,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="/pc/coupon/pool"
+        url="/mng/financialManage/queryPlatformCommissionRatio"
         :params="tableParams"
         :columns="columns"
         :columns-props="columnsProps"
@@ -42,8 +42,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -51,16 +50,24 @@
         columns: [
           {
             label: '服务类型',
-            field: 'couponName',
+            field: 'orderType',
+            formater: ({ orderType }) => this.$t('rs.orderType')[orderType]
           },{
             label: '服务种类',
-            field: 'scene',
+            field: 'orderCategory',
+            formater: ({ orderCategory }) => this.$t('rs.orderCategory')[orderCategory]
           },{
             label: '律师佣金比例',
-            field: 'type',
+            field: 'lawyerRatio',
+            formater: ({lawyerRatio}) => {
+              return (lawyerRatio * 100) + '%'
+            }
           },{
             label: '平台佣金比例',
-            field: 'remark',
+            field: 'platformRatio',
+            formater: ({platformRatio}) => {
+              return (platformRatio * 100) + '%'
+            }
           },{
             label: '操作',
             field: 'operate',
@@ -87,15 +94,9 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
           switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
+            case 'Edit':
+              // await this.commissionUpdate(params)
               this.$msgSuccess('操作成功')
               this.closeDialog()
               this.refreshTable()
@@ -108,29 +109,17 @@
       async handleBtnAction(row, type) {
         let res = {}
         switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
-            break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
+          case 'edit':
+              this.dialogWidth = '300px'
+              this.dialogTitle = '分佣'
+              this.dialogForm = row
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
             break;
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('finance', [
+        'commissionUpdate'
       ])
     },
     created() {

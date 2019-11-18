@@ -17,19 +17,18 @@
           <span class="title">提现管理</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">审核通过</el-button>
-          <el-button type="primary">审核不通过</el-button>
-          <el-button type="primary">确认转帐</el-button>
-          <el-button type="primary">导出</el-button>
+          <el-button type="primary" @click="handleMultiPass">审核通过</el-button>
+          <el-button type="primary" @click="handleMultiRefuse">审核不通过</el-button>
+          <el-button type="primary" @click="handleMultiSubmit">确认转帐</el-button>
+          <el-button type="primary" @click="handleMultiExport">导出</el-button>
         </el-row>
       </el-row>
       <app-table 
         ref="appTable"
-        url="/pc/coupon/pool"
+        url="/mng/financialManage/queryCapitalApprovalInfoList"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
-        :columns-props="columnsProps"
         @selection-change="tableSelect"
       />
     </el-card>
@@ -60,64 +59,79 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
+      Edit: () => import("./edit"),
+      Audit: () => import("./audit"),
       // Detail: () => import("./detail"),
       // HqDivide: () => import("./hqDivide"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
       return {
-        columns: [
+        defaultColumns: [
           {
             label: '序号',
             field: 'index',
             width: 100
           },{
             label: '律师姓名',
-            field: 'couponName',
+            field: 'lawyerName',
           },{
             label: '律师ID',
-            field: 'scene',
+            field: 'lawyerId',
           },{
             label: '审核状态',
-            field: 'type',
+            field: 'approvalStatus',
+            formater: ({ approvalStatus }) => this.$t('rs.approvalStatus')[approvalStatus]
           },{
             label: '提现金额',
-            field: 'remark',
+            field: 'amount',
           },{
             label: '账号类型',
-            field: 'sendCount',
+            field: 'cashOutAccountType',
+            formater: ({ approvalStatus }) => this.$t('rs.payment')[approvalStatus]
           },{
             label: '提现账号',
-            field: 'account',
+            field: 'cashOutAccount',
           },{
             label: '账号姓名',
-            field: 'name',
+            field: 'cashOutAccountName',
           },{
             label: '申请时间',
             field: 'applyTime',
           },{
             label: '审核人',
-            field: 'rangeStartTime',
+            field: 'approverName',
           },{
             label: '备注',
-            field: 'rangeEndTime',
-          },{
-            label: '操作',
-            field: 'operate',
-            align: 'center',
-            width: 120,
-            type: 'button',
-            default: ['审核', '确认转帐', '修改备注'],
-            on: {
-              click: ({ row }) => {
-                this.handleBtnAction(row, index == 0 ? 'audit' : index == 1 ? 'submit' : 'edit')
-              }
+            field: 'remark',
+          }
+        ]
+      }
+    },
+    computed: {
+      columns() {
+        let operateItem = {
+          label: '操作',
+          field: 'operate',
+          align: 'center',
+          width: 120,
+          type: 'button',
+          formater: (row) => {
+            let items = [{ label: '修改备注', code: 'edit' }]
+            if (row.approvalStatus == '0') {
+              items.push({ label: '审核', code: 'audit' })
+            } else if (row.approvalStatus == '2') {
+              items.push({ label: '确认转帐', code: 'submit' })
+            }
+            return items
+          },
+          on: {
+            click: ({ row, btn }) => {
+              this.handleBtnAction(row, btn.code)
             }
           }
-        ],
-        columnsProps: {
-          minWidth: 100,
         }
+        return this.defaultColumns.concat([operateItem])
       }
     },
     methods: {
@@ -128,19 +142,19 @@
         this.searchItems = [
           {
             label: '申请时间',
-            field: ['rangeStartTime', 'rangeEndTime'],
+            field: ['startDate', 'endDate'],
             startPlaceholder: '开始时间',
             endPlaceholder: '结束时间',
             type: 10
           },
           {
             label: '会员号',
-            field: 'couponName',
+            field: 'lawyerId',
             type: 1,
           },
           {
             label: '&nbsp;',
-            field: 'couponName',
+            field: 'keyWord',
             type: 1,
           },
         ]
@@ -159,18 +173,24 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          const searchForm = this.$refs.searchForm
-          const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
           switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
+            case 'Edit':
+              await this.withDrawStatics(form)
               this.closeDialog()
               this.refreshTable()
+              this.$msgSuccess('修改成功')
+              break;
+            case 'Audit':
+              if (form.actionType == 'submit') {
+                delete(form.actionType)
+                await this.authSubmit(form)
+              } else {
+                delete(form.actionType)
+                await this.authRefuse(form)
+              }
+              this.closeDialog()
+              this.refreshTable()
+              this.$msgSuccess('修改成功')
               break;
           }
         } catch (e) {
@@ -178,31 +198,44 @@
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
-        switch (type) {
-          case 'detail':
-            this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'Detail'
-            this.dialogVisible = true
-            break;
-          case 'hqDivide':
-            this.dialogWidth = '1000px'
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
-            this.dialogVisible = true
-            break;
+        try {
+          // let res = {}
+          switch (type) {
+            case 'submit':
+              await this.$confirm('确认转帐?', '温馨提示', { type: 'warning' })
+              await this.withDrawTransfer({ id: row.id })
+              this.$msgSuccess('操作成功！')
+              this.refreshTable()
+              break;
+            case 'audit':
+              this.dialogIsFull = false
+              this.dialogWidth = '400px'
+              this.dialogTitle = '确认订单金额'
+              this.dialogForm = row
+              this.dialogComponent = 'Audit'
+              this.dialogVisible = true
+              break;
+            case 'edit':
+              this.dialogWidth = '600px'
+              this.dialogTitle = '编辑备注'
+              this.dialogForm = row
+              this.dialogComponent = 'Edit'
+              this.dialogVisible = true
+              break;
+          }
+        } catch (error) {
+          // error
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      handleMultiPass() {},
+      handleMultiRefuse() {},
+      handleMultiSubmit() {},
+      handleMultiExport() {},
+      ...mapActions('finance', [
+        'withDrawStatics',
+        'withDrawAuthSubmit',
+        'withDrawAuthRefuse',
+        'withDrawTransfer'
       ])
     },
     created() {
