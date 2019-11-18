@@ -14,7 +14,7 @@
         <view class="iconfont icon-search pl-20 pr-20 cl-primary" bindtap="loadList"></view>
       </view>
     </view>
-    <app-tab items="{{ orderTypes }}" bindchange="handleOrderTypeChange"/>
+    <app-tab items="{{ orderTypes }}" wx:if="{{orderTypes.length > 1}}" bindchange="handleOrderTypeChange"/>
     <app-tab items="{{ orderSources }}" current="{{ orderSource }}" bindchange="handleOrderSourceChange"/>
     <view class="flex-bd app-scroller">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">

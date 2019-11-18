@@ -45,7 +45,7 @@ Page({
     app.pages.add(this)
     app.setNavColor()
     
-    selectApi.data({ dictCode: 'OrderType' }).then(res => {
+    selectApi.data({ dictCode: 'OrderCategory' }).then(res => {
       const items = res.data || []
       let orderTypeMap = {}
 
@@ -101,9 +101,9 @@ Page({
         delete params.orderSource
       }
       if (curOrderType != -1) {
-        params.orderType = curOrderType
+        params.orderCategory = curOrderType
       } else {
-        delete params.orderType
+        delete params.orderCategory
       }
 
       if (this.keyWord) {
