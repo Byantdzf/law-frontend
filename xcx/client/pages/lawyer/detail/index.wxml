@@ -3,7 +3,7 @@
     <image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
   </view>
   <view class="lawyerName">
-    <view class="scoreBox" wx:if="{{ details.score || details.score === 0 }}">
+    <view class="scoreBox">
       <view class="starBox"><text style="width:{{persent}}%"></text></view>
       <view class="score">{{details.score || 0}}分</view>
     </view>
