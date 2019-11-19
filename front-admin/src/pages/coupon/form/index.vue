@@ -19,6 +19,12 @@
           <el-option v-for="item in sceneItems" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item v-if="form.scene == 2">
+        <el-radio-group v-model="form.sceneRule">
+          <el-radio label="1">邀请别人，别人打开链接后即可获得</el-radio>
+          <el-radio class="pt-10" label="2">邀请别人，别人在平台消费后即可获得</el-radio>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="优惠券备注">
         <el-input type="textarea" v-model="form.remark"></el-input>
       </el-form-item>
@@ -156,6 +162,7 @@ export default {
         sendCount: this.$val(this.row, 'sendCount'),
         overAmount: this.$val(this.row, 'overAmount'),
         amount: this.$val(this.row, 'amount'),
+        sceneRule: '1'
       },
       useTarget: '1',
       columns: [
