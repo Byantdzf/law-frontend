@@ -56,11 +56,12 @@
 							type: 'shadow'
 						}
 					},
-					dataset: {
-						source: this.data || []
-					},
+					// dataset: {
+					// 	source: this.data || []
+					// },
 					xAxis: {
 						type: 'category',
+						data: (this.data || []).map(v => v.x || ''),
 						axisLabel: {
 							color: '#666'
 						},
@@ -91,37 +92,15 @@
 							}
 						}
 					},
-					series: []
+					series: [
+						{
+							type: 'bar',
+							data: (this.data || []).map(v => v.y || ''),
+						}
+					]
 				}
 
 				let opt = Object.assign({}, d, this.options)
-
-				let len = 0
-
-				if(isArray(this.data)) {
-					if(this.data.every(v => isArray(v))) {
-						len = this.data.length - 1
-					}else if(this.data.every(v => isPlainObject(v))) {
-						len = Object.keys(this.data[0]).length - 1
-					}
-				}else if(isPlainObject(this.data)) {
-					len = Object.keys(this.data) - 1
-				}
-
-				for(let i = 0;i < len; i++) {
-					let s = {
-						type: 'bar',
-						smooth: this.smooth
-					}
-
-					if(this.area) {
-						s.areaStyle = {
-							color: this.colors[i]
-						}
-					}
-
-					opt.series.push(s)
-				}
 
 				return opt
 			}

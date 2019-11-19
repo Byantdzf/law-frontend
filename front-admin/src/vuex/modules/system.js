@@ -10,7 +10,7 @@ const system = {
     // 优惠券 -- 修改
     couponUpdate: (context, params) => putJson(`/pc/coupon/pool`, params),
     // 优惠券 -- 删除
-    couponDel: (context, id) => del(`/pc/coupon/pool/${id}`),
+    couponDel: (context, ids) => del(`/pc/coupon/pool/${ids}`),
 
     servicePhoneQuery: () => get('/platform/phone'),
     servicePhoneSetting: (context, params) => put('/platform/phone', params),

@@ -18,8 +18,7 @@
         </el-row>
         <el-row class="fr">
           <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
-          <!-- <el-button type="primary">修改</el-button>
-          <el-button type="primary">删除</el-button> -->
+          <el-button type="danger" @click="handleMultiDel">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -36,6 +35,7 @@
       :height="dialogHeight"
       :title="dialogTitle"
       :visible="dialogVisible"
+      :full="dialogIsFull"
       @close="closeDialog"
     >
       <component
@@ -190,7 +190,17 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          console.log(form)
+          if ('id' in form) {
+            await this.couponUpdate(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('修改成功')
+          } else {
+            await this.couponAdd(form)
+            this.closeDialog()
+            this.refreshTable()
+            this.$msgSuccess('添加成功')
+          }
         } catch (e) {
           // error
         }
@@ -205,12 +215,34 @@
             this.refreshTable()
             break;
           case 'add':
-            this.dialogWidth = '600px'
+            this.dialogIsFull = true
             this.dialogTitle = '新增优惠券'
             this.dialogForm = null
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
             break;
+          case 'edit':
+            this.dialogIsFull = true
+            this.dialogTitle = '编辑优惠券'
+            this.dialogForm = row
+            this.dialogComponent = 'Edit'
+            this.dialogVisible = true
+            break;
+        }
+      },
+      async handleMultiDel() {
+        if (this.tableSelected.length) {
+          try {
+            let ids = this.tableSelected.map(v => v.id).join(',')
+            await this.$confirm('确认删除选中的优惠券吗?', '温馨提示', { type: 'warning' })
+            await this.couponDel(ids)
+            this.$msgSuccess('操作成功！')
+            this.refreshTable()
+          } catch (error) {
+            
+          }
+        } else {
+          this.$msgError('请选择需要删除的数据')
         }
       },
       ...mapActions('system', [

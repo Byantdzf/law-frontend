@@ -1,4 +1,4 @@
-import { get, post, postJson } from '@/utils/xhr.js'
+import { get } from '@/utils/xhr.js'
 
 const tenant = {
   namespaced: true,
@@ -20,6 +20,12 @@ const tenant = {
 
     // 确认转帐
     withDrawTransfer: (context, payload) => get('/mng/financialManage/updateCashDetailRecordPayed', payload),
+
+    // 平台收入图（按天、周、月、年汇总）
+    summaryReceipts: (context, payload) => get('/mng/financialManage/summaryReceipts', payload),
+
+    // 平台利润图（按天、周、月、年汇总）
+    summaryProfit: (context, payload) => get('/mng/financialManage/summaryProfit', payload),
 
     commissionUpdate: function () {
       

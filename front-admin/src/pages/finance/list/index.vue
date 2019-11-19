@@ -153,15 +153,32 @@
         <el-row class="fl">
           <span class="title">平台收入图</span>
         </el-row>
+        <el-form class="fl pl-20" :inline="true">
+          <el-form-item label="时间">
+            <el-select v-model="form1.dateDimension" style="width: 100px;">
+              <el-option v-for="(item, index) in timeItems" :key="index" :label="item.name" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-date-picker
+              v-model="form1.dates"
+              type="daterange"
+              range-separator="-"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="getSummaryReceipts">搜索</el-button>
+          </el-form-item>
+        </el-form>
       </el-row>
-
-      <el-row class="prl-20">
-        <el-row :gutter="20">
-          <el-col class="statistics-box" :span="6">
-          </el-col>
-        </el-row>
+      <el-row class="pa-20 radio-box">
+        <el-radio-group v-model="form1.dateDimension">
+          <el-radio-button v-for="item in radioItems" :key="item.id" :label="item.id">{{ item.name }}</el-radio-button>
+        </el-radio-group>
       </el-row>
-
+      <AppChartBar :data="chartData1"/>
     </el-card>
     
     <el-card class="table-card mt-10">
@@ -169,17 +186,34 @@
         <el-row class="fl">
           <span class="title">平台利润图</span>
         </el-row>
+        <el-form class="fl pl-20" :inline="true">
+          <el-form-item label="时间">
+            <el-select v-model="form2.dateDimension" style="width: 100px;">
+              <el-option v-for="(item, index) in timeItems" :key="index" :label="item.name" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-date-picker
+              v-model="form1.dates"
+              type="daterange"
+              range-separator="-"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="getSummaryProfit">搜索</el-button>
+          </el-form-item>
+        </el-form>
       </el-row>
-
-      <el-row class="prl-20">
-        <el-row :gutter="20">
-          <el-col class="statistics-box" :span="6">
-          </el-col>
-        </el-row>
+      <el-row class="pa-20 radio-box">
+        <el-radio-group v-model="form2.dateDimension">
+          <el-radio-button v-for="item in radioItems" :key="item.id" :label="item.id">{{ item.name }}</el-radio-button>
+        </el-radio-group>
       </el-row>
+      <AppChartBar :data="chartData2"/>
 
     </el-card>
-    
   </el-row>
 </template>
 
@@ -190,15 +224,19 @@
   import AppDialog from '@/mixins/dialog'
   import AppSearch from '@/mixins/search'
   import AppRsText from '@/components/app-table/lib/rsText'
+  import AppChartBar from '@/components/app-chart-bar'
   export default {
     components: {
       AppSelect: () => import('@/components/app-select'),
       Detail: () => import("../../order/detail"),
       Edit: () => import("./edit"),
+      AppChartBar
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
       return {
+        chartData1: [],
+        chartData2: [],
         staticsData: {},
         typeValue: '',
         typeObj: {},
@@ -301,7 +339,17 @@
         ],
         columnsProps: {
           minWidth: 100,
-        }
+        },
+        form1: {
+          dateDimension: -1,
+          dates: []
+        },
+        form2: {
+          dateDimension: -1,
+          dates: []
+        },
+        radioItems: [],
+        timeItems: [],
       }
     },
     watch: {
@@ -319,7 +367,13 @@
         this.typeObj = obj
         this.selectStatics()
         this.setSearchParams()
-      }
+      },
+      'form1.dateDimension'() {
+        this.getSummaryReceipts()
+      },
+      'form2.dateDimension'() {
+        this.getSummaryProfit()
+      },
     },
     methods: {
       // 初始化页面
@@ -341,6 +395,32 @@
             code: 'reset',
             type: 'default'
           }
+        ]
+
+        let times = [
+          {
+            id: 1,
+            name: '天'
+          },{
+            id: 2,
+            name: '周'
+          },{
+            id: 3,
+            name: '月'
+          },{
+            id: 4,
+            name: '年'
+          }
+        ]
+
+        this.radioItems = times
+        
+        this.timeItems = [
+          {
+            id: -1,
+            name: '全部'
+          },
+          ...times
         ]
       },
       setSearchParams() {
@@ -405,7 +485,6 @@
         }
       },
       async handleBtnAction(row, type) {
-        let res = {}
         switch (type) {
           case 'detail':
             this.dialogIsFull = true
@@ -415,21 +494,85 @@
             this.dialogVisible = true
             break;
           case 'edit':
-              this.dialogWidth = '600px'
-              this.dialogTitle = '编辑备注'
-              this.dialogForm = row
-              this.dialogComponent = 'Edit'
-              this.dialogVisible = true
+            this.dialogIsFull = false
+            this.dialogWidth = '600px'
+            this.dialogTitle = '编辑备注'
+            this.dialogForm = row
+            this.dialogComponent = 'Edit'
+            this.dialogVisible = true
             break;
+        }
+      },
+      async getSummaryReceipts() {
+        try {
+          let params = {}
+          let { dateDimension, dates } = this.form1
+          if(this.typeValue) {
+            params.orderType = this.typeValue
+          }
+          if(dateDimension != -1) {
+            params.dateDimension = dateDimension
+          }
+          if(dates && dates.length) {
+            params.startDate = dates[0]
+            params.endDate = dates[1]
+          }
+          const res = await this.summaryReceipts(params)
+          
+          let items = res.data || []
+          this.chartData1 = []
+
+          items.forEach(v => {
+            this.chartData1.push({
+              y: v.amount,
+              x: v.createTime
+            })
+          })
+
+        } catch (error) {
+          // error
+        }
+      },
+      async getSummaryProfit() {
+        try {
+          let params = {}
+          let { dateDimension, dates } = this.form2
+          if(this.typeValue) {
+            params.orderType = this.typeValue
+          }
+          if(dateDimension != -1) {
+            params.dateDimension = dateDimension
+          }
+          if(dates && dates.length) {
+            params.startDate = dates[0]
+            params.endDate = dates[1]
+          }
+          const res = await this.summaryProfit(params)
+          
+          let items = res.data || []
+          this.chartData2 = []
+
+          items.forEach(v => {
+            this.chartData2.push({
+              y: v.amount,
+              x: v.createTime
+            })
+          })
+        } catch (error) {
+          // error
         }
       },
       ...mapActions('finance', [
         'statics',
-        'updateRemark'
+        'updateRemark',
+        'summaryReceipts',
+        'summaryProfit',
       ])
     },
     created() {
       this.initPage()
+      this.getSummaryReceipts()
+      this.getSummaryProfit()
     }
   }
 </script>
@@ -455,5 +598,8 @@
       padding: 6px 0;
       font-size: 18px;
     }
+  }
+  .radio-box {
+    margin-left: 100px;
   }
 </style>
