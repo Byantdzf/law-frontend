@@ -36,13 +36,15 @@ Page({
         couponList: [],
         startDate: '',
         aggreement: false,
+        showInputNumber: false,
+        selectNums: 1
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let { id } = options
+        let { id, t } = options
         
         page = this.selectComponent('#app-page')
         page.checkAuth().then((data) => {
@@ -57,7 +59,8 @@ Page({
                     startDate,
                     selectAmount: res.data.price,
                     details: res.data,
-                    id
+                    id,
+                    showInputNumber: t ? true : false
                 })
             })
 
@@ -88,6 +91,11 @@ Page({
     onShow() {
         let selectArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
         this.setData({selectArea})
+    },
+    // 改变商品数量
+    changeCount(e) {
+        let { value } = e.detail;
+        this.setData({ selectNums: value })
     },
     setValidateMobie(e) {
         let { value } = e.detail
@@ -189,6 +197,9 @@ Page({
                 app.toastError('请输入验证码');
                 return;
             }
+        }
+        if (this.data.showInputNumber) {
+            params.serviceSum = selectNums
         }
         params.chooseService = this.data.id
         params.deliveryDeadDate = this.data.selectDate

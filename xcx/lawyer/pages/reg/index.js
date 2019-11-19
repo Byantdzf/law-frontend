@@ -76,6 +76,7 @@ Page({
             wx.canvasToTempFilePath({
                 canvasId: 'canvas',
                 fileType: 'jpg',
+                quality: 0.6,
                 success: function (res) {
                     // ctx = null
                     // if (that.data.showFlag) {
