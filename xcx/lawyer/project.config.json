@@ -110,6 +110,12 @@
 					"pathName": "pages/user/updateInfo/index",
 					"query": "type=name",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "reg",
+					"pathName": "pages/reg/index",
+					"scene": null
 				}
 			]
 		}

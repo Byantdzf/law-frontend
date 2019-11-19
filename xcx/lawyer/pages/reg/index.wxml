@@ -105,7 +105,8 @@
                 <view class="form-btn-box">
                     <button type="primary" class="app-input-btn" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
                 </view>
-                <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;position:absolute;top:200%" ></canvas>
+                <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;position:fixed;top:200%; left: 500%;" ></canvas>
+                <!-- <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;" ></canvas> -->
             </view>
             </form>
         </view>

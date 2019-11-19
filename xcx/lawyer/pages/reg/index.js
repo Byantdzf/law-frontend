@@ -19,6 +19,8 @@ Page({
         idCard1: '/static/images/idcard1.jpg',
         idCard2: '/static/images/idcard2.jpg',
         idCard3: '/static/images/businessCard.jpg',
+        imageWidth: 0,
+        imageHeight: 0,
     },
 
     /**
@@ -56,17 +58,154 @@ Page({
             [showConObj]: !this.data.questionType[index].selected
         })
     },
+    createImg(tempFilePaths, res, cb) {
+        let that = this;
+        let width = res.width;
+        let height = res.height;
+        let ctx = wx.createCanvasContext('canvas')
+        ctx.translate(height / 2, width / 2)
+        that.setData({
+            imageWidth: height,
+            imageHeight: width,
+        })
+        //顺时针旋转270度
+        ctx.rotate(270 * Math.PI / 180)
+        ctx.drawImage(tempFilePaths[0], - width / 2, - height / 2, width, height);
+
+        ctx.draw(false, function () {
+            wx.canvasToTempFilePath({
+                canvasId: 'canvas',
+                fileType: 'jpg',
+                success: function (res) {
+                    // ctx = null
+                    // if (that.data.showFlag) {
+                    //     console.log('aaaaaa')
+                        // that.createImg(tempFilePaths, res, cb)
+                        // that.setData({ showFlag: false })
+                    // } else {
+                    //     console.log('bbbbbbbbbb')
+                        cb && cb(res.tempFilePath)
+                    // }
+                }
+            })
+        })
+    },
     uploadImage(e) {
         let { img } = e.currentTarget.dataset
 
-        var that = this;
+        let that = this;
+        this.setData({showFlag: true})
         wx.chooseImage({
             count: 1, // 默认9
-            success: function (res) {
+            success: function (response) {
+                let tempFilePaths = response.tempFilePaths;
+                
+                wx.getImageInfo({
+                    src: tempFilePaths[0],
+                    success: (res) => {
+                        let width = res.width
+                        let height = res.height
+                        that.setData({
+                            imageWidth: width,
+                            imageHeight: height,
+                        })
+                        if (height <= width) {
+                            that.upload(tempFilePaths, img)
+                        } else {
+                            that.createImg(tempFilePaths, res, function (url) {
+                                // that.setData({idCard1: url})
+                                that.upload([url], img)
+                                
+                                // wx.saveImageToPhotosAlbum({
+                                //     filePath: url,
+                                //     success: function (res) {
+                                //     wx.showToast({
+                                //         title: '保存图片成功',
+                                //     })
+                                //     }, fail: function (err) {
+                                //     wx.showToast({
+                                //         title: '保存图片失败',
+                                //     })
+                                //     }
+                                // })
+                            })
+                        }
+                    }
+                })
+                // wx.getImageInfo({
+                //     src: tempFilePaths[0],
+                //     success: (res) => {
+                //         console.log(res)
+                //         //获得exif中的orientation信息   
+                //         if (res.orientation == "up") {
+                //             that.setData({
+                //                 chosenImage: tempFilePaths[0],
+                //             })
+                //         } else {
+                //             let canvasContext = wx.createCanvasContext('canvas')
+                //             console.log(res)
+                //             switch (res.orientation) {
+                //                 case ("down"):
+                //                     let width = res.width;
+                //                     let height = res.height
+                //                     //需要旋转180度
+                //                     that.setData({
+                //                         imageWidth: width,
+                //                         imageHeight: height,
+                //                     })
+                //                     canvasContext.translate(width / 2, height / 2)
+                //                     canvasContext.rotate(180 * Math.PI / 180)
+                //                     canvasContext.drawImage(tempFilePaths[0], -width / 2, -height / 2, width, height);
+                //                     break;
+                //                 case ("left"):
+                //                     let width = res.width;
+                //                     let height = res.height;
+                //                     canvasContext.translate(height / 2, width / 2)
+                //                     that.setData({
+                //                         imageWidth: height,
+                //                         imageHeight: width,
+                //                     })
+                //                     //顺时针旋转270度
+                //                     canvasContext.rotate(270 * Math.PI / 180)
+                //                     canvasContext.drawImage(tempFilePaths[0], - width / 2, - height / 2, width, height);
+                //                     break;
+                //                 case ("right"):
+                //                     let width = res.width;
+                //                     let height = res.height;
+                //                     that.setData({
+                //                         imageWidth: height,
+                //                         imageHeight: width,
+                //                     })
+                //                     canvasContext.translate(height / 2, width / 2)
+                //                     //顺时针旋转90度
+                //                     canvasContext.rotate(90 * Math.PI / 180)
+                //                     canvasContext.drawImage(tempFilePaths[0], - width / 2, - height / 2, width, height);
+                //                     break;
+                //             }
+                //             canvasContext.draw()
+                //             that.drawImage()
+                //         }
+                //     }
+                // })
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-                var tempFilePaths = res.tempFilePaths;
-                console.log('本地图片的路径:', tempFilePaths)
-                that.upload(tempFilePaths, img)
+                // console.log('本地图片的路径:', tempFilePaths)
+                // that.upload(tempFilePaths, img)
+            }
+        })
+    },
+    drawImage:function() {
+        let that = this;
+        // 将生成的canvas图片，转为真实图片
+        wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            canvasId: 'canvas',
+            success(res) {
+                that.setData({
+                    idCard1: res.tempFilePath,
+                })
+            },
+            fail: function (res) {
             }
         })
     },
@@ -126,7 +265,7 @@ Page({
             app.toastError('请选择所在地区');
             return;
         }
-        
+
         if (!this.data.idCard1 == '/static/images/idcard1.jpg') {
             app.toastError('请上传身份证（人像面）');
             return;
@@ -154,7 +293,7 @@ Page({
             return;
         }
 
-        var imgArr = [
+        let imgArr = [
             {
                 businessType: 1,
                 filePath: this.data.idCard1
