@@ -122,7 +122,11 @@
 				
 				// params.couponId = 
 				params.from = 2
-				params.chooseService = _t.data.id
+				if (_t.id) {
+					params.chooseService = _t.id
+				} else if (_t.ids) {
+					params.chooseService = _t.ids.join(',')
+				}
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postLegals, params, function (res) {
 					var orderId = res.data.orderId;

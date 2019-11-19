@@ -97,6 +97,7 @@
 			var params = {}
 			params[global.rows] = 10;
 			params[global.page] = 1;
+			params.type = 1;
 			params.noAuth = 1;
 			utils.get(URL.news.query, params, function (res) {
 				var data = res.data.list || []
@@ -111,6 +112,7 @@
 			var params = {}
 			params[global.rows] = 10;
 			params[global.page] = 1;
+			params.type = 2;
 			params.noAuth = 1;
 			utils.get(URL.news.query, params, function (res) {
 				var data = res.data.list || []
@@ -125,6 +127,7 @@
 			var params = {}
 			params[global.rows] = 10;
 			params[global.page] = 1;
+			params.type = 3;
 			params.noAuth = 1;
 			utils.get(URL.news.query, params, function (res) {
 				var data = res.data.list || []
