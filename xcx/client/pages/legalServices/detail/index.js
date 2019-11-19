@@ -17,6 +17,6 @@ Page({
         })
     },
     buyNow() {
-        app.gotoPage('/pages/issue/legalServices/index?id=' + this.data.id)
+        app.gotoPage('/pages/issue/legalServices/index?id=' + this.data.id + '&t=1')
     }
 })

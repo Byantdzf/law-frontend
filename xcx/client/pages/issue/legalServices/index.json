@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "app-cityPicker": "/components/app-cityPicker/index"
+    "app-cityPicker": "/components/app-cityPicker/index",
+    "app-input-number": "/components/app-input-number/index"
   }
 }

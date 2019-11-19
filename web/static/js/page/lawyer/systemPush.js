@@ -108,7 +108,7 @@
 				orderSource: 1,
 			};
 			if ($('.provList .curr').data('id')) {
-				searchData.provice = $.trim($('.provList .curr').html());
+				searchData.province = $.trim($('.provList .curr').html());
 			}
 			if ($('.cityList .curr').data('id')) {
 				searchData.city = $.trim($('.cityList .curr').html());

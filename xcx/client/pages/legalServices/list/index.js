@@ -74,6 +74,6 @@ Page({
     },
     buyNow(e) {
         let { id } = e.currentTarget.dataset
-        app.gotoPage('/pages/issue/legalServices/index?id=' + id)
+        app.gotoPage('/pages/issue/legalServices/index?id=' + id + '&t=1')
     }
 })

@@ -3,9 +3,37 @@
 	var gather = {
 		init: function () {
 			var _t = this;
+			_t.selectArr = [];
+			_t.selectObjArr = {};
 
 			_t.loadRecommend();
 			_t.queryList();
+
+			$('body').on('click', '.addCart', function () {
+				_t.addCarts($(this));
+			});
+
+			$('body').on('click', '.floatCart', function () {
+				_t.showSelectList($(this));
+			});
+
+			$('body').on('click', '.toSmall', function () {
+				$('.floatCart .fonts').addClass('hidden')
+				$('.floatCart .imgBox').removeClass('hidden')
+			});
+
+			$('body').on('click', '.toFull', function () {
+				$('.floatCart .imgBox').addClass('hidden')
+				$('.floatCart .fonts').removeClass('hidden')
+			});
+
+			// 我要下单
+			$('body').on('click', '.floatSubmit', function () {
+				var ids = _t.selectArr.join(',');
+				_t.selectArr = [];
+				_t.selectObjArr = {};
+				window.location = 'litigationLegalServicesAsk.html?ids=' + ids;
+			});
 
 			$('body').on('click', '.showDetail', function() {
 				var id = $(this).closest('li').data('id')
@@ -28,7 +56,6 @@
 				var src = data.instructionPic || '/static/images/nopic.jpg'
 				$('.services_header img').attr('src', src)
 				$('.services_header p').html(data.instruction || '')
-				
 			})
 		},
 
@@ -36,9 +63,75 @@
 			var qlps = {
 				url: URL.legal.queryLitigationLegalServices,
 				box: '.services_list',
-				temp: '/page/legal/list.html'
+				temp: '/page/legal/list2.html'
 			}
 			utils.queryTempList(qlps);
+		},
+
+		addCarts: function (btn) {
+			var _t = this;
+
+			var id = btn.closest('li').attr('data-id');
+			var item = btn.closest('li')[0].data
+			if ($.inArray(id, _t.selectArr) == -1) {
+				_t.selectArr.push(id);
+				_t.selectObjArr[id] = item;
+				btn.removeClass('layui-btn-red').addClass('layui-btn-disabled').html('已加入')
+			}
+			_t.setFloatIcon();
+		},
+
+		setFloatIcon: function () {
+			var _t = this;
+			var len = _t.selectArr.length;
+			var box = $('.floatCart');
+			if (len) {
+				_t.showSelectList();
+				box.removeClass('hidden').find('.imgBox em').html(len);
+			} else {
+				box.addClass('hidden');
+			}
+		},
+
+		showSelectList: function () {
+			var _t = this;
+			var html = '<table class="layui-table" lay-size="sm"><tbody>';
+			var total = 0;
+			$.each(_t.selectObjArr, function (i, t) {
+				html += '<tr data-id="' + t.id + '"><td><div class="nowrap">' + t.title + '</div></td><td><label class="fontRed">' + t.price + '元</label></td><td><i class="iconfont icon-fail delItems"></i></td></tr>';
+				total += t.price;
+			})
+
+			html += '</tbody></table>';
+			$('.floatCart .list').html(html);
+			$('.floatCart .floatAmount em').html(total);
+
+			// 清空
+			$('.floatCart').off().on('click', '.clearFloat', function () {
+				_t.selectArr = [];
+				_t.setFloatIcon();
+				$('.services_list').find('li').each(function () {
+					var box = $(this);
+					box.find('.addCart').html('选择加入').removeClass('layui-btn-disabled').addClass('layui-btn-red');
+				})
+			});
+
+			// 删除单项
+			$('.floatCart').on('click', '.delItems', function () {
+				var id = $(this).closest('tr').attr('data-id');
+				var newArr = [];
+				$.each(_t.selectArr, function (i, t) {
+					if (id != t) {
+						newArr.push(t)
+					}
+				});
+				delete(_t.selectObjArr[id])
+				_t.selectArr = newArr;
+				$('.services_list').find('li').each(function () {
+					id == $(this).attr('data-id') && $(this).find('.addCart').html('选择加入').removeClass('layui-btn-disabled').addClass('layui-btn-red');
+				})
+				_t.setFloatIcon();
+			});
 		},
 
 		editBox: function (id) {

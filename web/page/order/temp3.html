@@ -17,7 +17,7 @@
 </div>
 
 <div class="layui-form-item">
-	<label class="layui-form-label">我的要求：</label>
+	<label class="layui-form-label"><i>*</i>我的要求：</label>
 	<div class="layui-input-block">
 		<textarea class="layui-textarea" maxlength="100" name="customerRequirement" placeholder="请填写我的要求"></textarea>
 		<div class="textarea_counter"><span>0</span>/<em>0</em></div>
@@ -25,7 +25,7 @@
 </div>
 
 <div class="layui-form-item">
-	<label class="layui-form-label">交付期限：</label>
+	<label class="layui-form-label"><i>*</i>交付期限：</label>
 	<div class="layui-input-inline">
 		<input type="text" name="selectDate" placeholder="" autocomplete="off" class="layui-input dateIcon needDate">
 	</div>
@@ -34,7 +34,7 @@
 <div class="layui-form-item">
 	<label class="layui-form-label"><i>*</i>选择地区：</label>
 	<div class="layui-input-inline">
-		<select name="provice" class="provice" lay-filter="changeProvice">
+		<select name="province" class="province" lay-filter="changeprovince">
 			<option value="">请选择省</option>
 		</select>
 	</div>
@@ -63,10 +63,8 @@
 <div class="layui-form-item">
   <label class="layui-form-label">优惠券：</label>
   <div class="layui-input-inline">
-		<select name="coupon" class="coupon" lay-filter="changeCoupon">
-				<option value="">请选择优惠券</option>
-				<option value="15">151515</option>
-				<option value="30">303030</option>
+		<select name="couponId" class="coupon" lay-filter="changeCoupon">
+			<option value="">请选择优惠券</option>
 		</select>
   </div>
 </div>

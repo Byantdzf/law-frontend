@@ -11,10 +11,12 @@
       <view class="flex-bd flex search-box">
         <input
           class="flex-bd pl-20"
-          type="text"
+          type="search"
           placeholder="关键字搜索相关信息"
           placeholder-class="placeholder"
           bindinput="handleKeyWordChange"
+          bindblur="handleBlurChange"
+          bindconfirm="handleBlurChange"
           bindconfirm="handleSearch"
           focus="{{ searchFocus }}"
         />

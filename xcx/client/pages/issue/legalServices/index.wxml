@@ -4,6 +4,17 @@
         <view class="issueBox">
             <form bindsubmit="formSubmit">
                 <view class="issue-title">{{details.title}}</view>
+                
+                <view class="issue-form-item" wx:if="{{showInputNumber}}">
+                    <view class="issue-form-input flex">
+                        <view class="amount flex-bd">
+                            <view>已选数量：</view>
+                        </view>
+                        <view class="numsBox">
+                            <app-input-number quantity="{{ selectNums || 1 }}" className="cartNumInput" bind:change="changeCount" />
+                        </view>
+                    </view>
+                </view>
                 <view class="issue-form">
                     <view class="issue-form-item">
                         <textarea name="customerRequirement" auto-height placeholder="在此编辑服务内容及大致要求（不得少于10个字）" />

@@ -101,8 +101,8 @@ Page({
         delete params.questionType
       }
 
-      if (this.keyWord) {
-        params.keyWord = this.keyWord
+      if (this.data.keyWord) {
+        params.keyWord = this.data.keyWord
       } else {
         delete params.keyWord
       }
@@ -169,7 +169,10 @@ Page({
     // })
   },
   handleKeyWordChange(e) {
-    this.keyWord = e.detail.value
+    this.setData({keyWord: e.detail.value})
+  },
+  handleBlurChange(e) {
+    this.setData({keyWord: e.detail.value})
   },
   handleSearch(e) {
     this.loadList()

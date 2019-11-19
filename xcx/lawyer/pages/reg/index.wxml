@@ -37,7 +37,7 @@
                 </view> 
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
-                        <input class="app-input" type="text" name="lawerLicenseNo" placeholder="请输入执业证号码"></input>
+                        <input class="app-input" type="text" name="lawyerLicenseNo" placeholder="请输入执业证号码"></input>
                     </view>
                 </view> 
                 <view class="issue-form-item flex">
@@ -82,7 +82,7 @@
                     </view>
                 </view> -->
                 <view class="issue-form-item">
-                    <textarea name="remark" auto-height maxlength="100" placeholder="请填写简介（不超过100个字）" />
+                    <textarea name="brief" auto-height maxlength="100" placeholder="请填写简介（不超过100个字）" />
                 </view>
                 <view class="upload-title">
                     <text>证件信息上传</text>
@@ -105,6 +105,8 @@
                 <view class="form-btn-box">
                     <button type="primary" class="app-input-btn" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
                 </view>
+                <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;position:fixed;top:200%; left: 500%;" ></canvas>
+                <!-- <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;" ></canvas> -->
             </view>
             </form>
         </view>

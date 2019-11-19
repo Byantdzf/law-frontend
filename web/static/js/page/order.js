@@ -58,6 +58,10 @@
 				_t.orderInfo = res.data;
 			});
 
+			utils.get(URL.user.info, function (response) {
+				utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
+			})
+
 			// if (_t.type == 3 || _t.type == 4 || _t.type == 5) {
 			// 	var data = {};
 			// 	if (_t.type == 3 || _t.type == 4) {
@@ -175,10 +179,11 @@
 					content: '<div class="wechatPayQrCode"><div class="imgBox"></div><p>打开微信扫一扫支付订单</p></div>',
 					success: function (layero, index) {
 						var orderNo = _t.orderInfo && _t.orderInfo.orderNo ? _t.orderInfo.orderNo : ''
+						var fee = _t.orderInfo && _t.orderInfo.amount ? _t.orderInfo.amount : ''
 						if (orderNo) {
 							var params = {
 								orderNo: orderNo,
-								fee: 0.01
+								fee: fee
 							};
 							
 							utils.get(URL.common.wechatPay, params, function (res) {

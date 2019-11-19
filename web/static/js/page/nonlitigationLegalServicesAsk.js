@@ -21,6 +21,17 @@
 			var html = utils.getTemp('/page/order/temp3.html', _t.data);
 			$('.questions .layui-form').html(html);
 			form.render();
+			
+			// 选择优惠券
+			if (utils.cookie(global.token)) {
+				var params = {}
+				params[global.rows] = 1000;
+				params[global.page] = 1;
+				utils.get(URL.user.coupon, params, function (res) {
+					var list = res.data.list || []
+					utils.getSelect(list, '.coupon', '请选择优惠券')
+				});
+			}
 
 			base.loadArea(_t);
 
@@ -57,12 +68,6 @@
 				}
 			})
 
-			// 选择优惠券
-			// _t.getCoupon();
-			// form.on('select(changeCoupon)', function (res) {
-			// 	_t.resetTotal(res.value, res.othis.find('input').val())
-			// })
-
 			form.on('submit(questionSubmit)', function (res) {
 				var params = res.field;
 				
@@ -74,7 +79,7 @@
 					utils.msg('请选择交付期限');
 					return;
 				}
-				if(!params.provice || !params.city){
+				if(!params.province || !params.city){
 					utils.msg('请选择地区');
 					return;
 				}
@@ -90,27 +95,14 @@
 					utils.msg('请确定同意虎甲平台委托服务协议');
 					return;
 				}
-				
-				var proviceObj = {}
-				var cityObj = {}
-				$.each(_t.area, function (i, t) {
-					if (t.code == params.provice) {
-						proviceObj = t;
-						$.each(t.city, function (i2, t2) {
-							if (t2.code == params.city) {
-								cityObj = t2;
-							}
-						})
-					}
-				})
 				// params.couponId = 
-				params.provice = proviceObj.name
-				params.city = cityObj.name
 				params.from = 2
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postLegals, params, function (res) {
-					var orderId = res.data;
+					var orderId = res.data.orderId;
+					var token = res.data.token;
+					utils.setCookie(global.token, token);
 					window.location = 'order.html?id=' + orderId + '&type=3';
 					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
@@ -142,19 +134,6 @@
 				content: html
 			};
 			utils.dialog(ops);
-		},
-
-		getCoupon: function () {
-			var _t = this;
-			var params = {}
-			params[global.rows] = 50;
-			params[global.page] = 1;
-			params.noAuth = 1;
-			utils.get(URL.common.coupon, params, function (res) {
-				if (res.data.list && res.data.list.length) {
-					utils.getSelect(res.data.list, '.coupon');
-				}
-			})
 		},
 	}
 

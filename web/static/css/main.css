@@ -1058,12 +1058,13 @@ i, em { font-style: normal;}
 .agreementBox .layui-form-radio { padding-right:0; margin-right:0; margin-top:0;}
 .agreementBox a { padding-top:9px;}
 .serviceItem { padding: 0!important;}
-.serviceItem a { float:left; padding: 0 20px; line-height:30px; border:1px solid #e6e6e6; white-space:nowrap; margin:0 10px 10px 0;}
+.serviceItem a { position: relative; float:left; padding: 0 20px; line-height:30px; border:1px solid #e6e6e6; white-space:nowrap; margin:0 10px 10px 0;}
 .serviceItem a i { color:#eb4546; margin-left:5px;}
+.serviceItem .closeItem { position: absolute; right:-7px; top:-7px; background: #eb4546; color: #fff; border-radius: 50%; font-size:12px; width:22px; height:22px; line-height: 22px; text-align: center; transform: scale(.8,.8);}
 
 .agreementPage { padding: 50px; line-height: 1.8;}
 
-.floatCart { position: fixed; z-index: 9; right:10px; top:30%;}
+.floatCart { position: fixed; z-index: 99; right:70px; top:30%;}
 
 .floatCart .imgBox { width: 50px; height:50px; cursor: pointer;}
 .floatCart .imgBox img { display: block; width:100%; height:100%;}

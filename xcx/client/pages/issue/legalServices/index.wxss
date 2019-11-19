@@ -1,2 +1,4 @@
 /* pages/issue/legalServices/index.wxss */
 @import "/static/css/issue.wxss";
+
+.numsBox { width:200rpx;}

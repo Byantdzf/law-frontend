@@ -152,8 +152,28 @@
 				var thisCity = {};
 				thisCity.id = $(this).data('code');
 				thisCity.name = $(this).text();
-				utils.setCookie(global.areaCookie, thisCity, { expires: 30 });
-				window.location = '/index.html';
+				var list = [];
+				utils.get(URL.select.getProvCity, function (res) {
+					var provs = res.data;
+					$.each(provs, function (i, t) {
+						if (t.code == thisCity.id) {
+							list[0] = t.name
+						}
+					});
+					if (!list.length) {
+						$.each(provs, function (i, t) {
+							var citys = t.city;
+							$.each(citys, function (i2, t2) {
+								if (t2.code == thisCity.id) {
+									list[0] = t.name;
+									list[1] = t2.name;
+								}
+							});
+						});
+					}
+					utils.setCookie(global.areaCookie, JSON.stringify(list));
+					window.location = '/index.html?c=1';
+				});
 			});
 
 			// 读取当前默认城市
@@ -163,7 +183,8 @@
 			} else {
 				areas = global.defaultArea;
 			}
-			$('.showAreaName').html(areas.name)
+			var cityName = areas[1] || areas[0];
+			$('.showAreaName').html(cityName)
 
 			$(function () {
 				$('body').find('textarea').each(function () {
@@ -436,49 +457,64 @@
 			return flag
 		},
 		loadArea: function (_t) {
+			var areas = utils.cookie(global.areaCookie);
+			_t.selectArea = areas ? JSON.parse(areas) : [];
 			utils.get(URL.select.getProvCity, function (res) {
 				var data = res.data;
 				_t.area = data;
 				$.each(data, function (i, t) {
-					t.id = t.code
+					t.id = t.name
 				});
-				utils.getSelect(data, '.provice', '请选择省');
+				utils.getSelect(data, '.province', '请选择省', _t.selectArea[0]);
+
+				if (_t.selectArea[0] && _t.selectArea[1]) {
+					var cityData = []
+					$.each(data, function (i, t) {
+						if (t.id == _t.selectArea[0]) {
+							cityData = t.city
+							$.each(cityData, function (i2, t2) {
+								t2.id = t2.name;
+							});
+						}
+					});
+					utils.getSelect(cityData, '.city', '请选择市', _t.selectArea[1]);
+				}
 				
-				form.on('select(changeProvice)', function (res) {
+				form.on('select(changeprovince)', function (res) {
 					var code = res.value
 					
 					var cityData = []
 					$.each(data, function (i, t) {
-						if (t.code == code) {
+						if (t.id == code) {
 							cityData = t.city
 							$.each(cityData, function (i2, t2) {
-								t2.id = t2.code;
+								t2.id = t2.name;
 							});
 						}
 					});
-					utils.getSelect(cityData, '.city', '请选择市');
+					utils.getSelect(cityData, '.city', '请选择市', _t.selectArea[1]);
 				})
 
 				if (_t.hasZone == 1) {
 					form.on('select(changeCity)', function (res) {
 						var code = res.value
-						var prov = $('.provice').val();
+						var prov = $('.province').val();
 						var cityData = []
 						var zoneData = []
 						$.each(data, function (i, t) {
-							if (t.code == prov) {
+							if (t.id == prov) {
 								cityData = t.city
 								$.each(cityData, function (i2, t2) {
-									if (t2.code == code) {
+									if (t2.id == code) {
 										zoneData = t2.area || []
 										$.each(zoneData, function (i3, t3) {
-											t3.id = t3.code;
+											t3.id = t3.name;
 										});
 									}
 								});
 							}
 						});
-						utils.getSelect(zoneData, '.zone', '请选择区');
+						utils.getSelect(zoneData, '.zone', '请选择区', _t.selectArea[2]);
 					})
 				}
 
