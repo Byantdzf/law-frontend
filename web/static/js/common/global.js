@@ -24,7 +24,7 @@ var global = {
     userInfoToken: appToken + '_USERINFO',  // 登录的用户信息
     areaCookie: 'thisArea',                 // 当前城市cookie名称
     requestAreaCookie: 'AREA_ACCESS_TOKEN',
-    defaultArea: {"id": "440300", "name": "深圳"},
+    defaultArea: ['广东', '深圳'],
     userInfo: {},                           // 登录的用户信息
     autoSearch: false,                      // 基础页搜索，控制是否 改变值后立即搜索 的开关
     expires: 30,                            // 本地cookie保存时长

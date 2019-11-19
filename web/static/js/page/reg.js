@@ -40,7 +40,7 @@
 				$('.checkboxList').find('input:checked').each(function () {
 					ids.push($(this).val());
 				})
-				params.provice = $('.provice').find('option:selected').html();
+				params.province = $('.province').find('option:selected').html();
 				params.city = $('.city').find('option:selected').html();
 				params.zone = $('.zone').find('option:selected').html();
 				params.goodAt = ids.join(',')

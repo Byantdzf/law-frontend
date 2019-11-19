@@ -2,29 +2,32 @@
 	<label class="layui-form-label">已选服务：</label>
 	<div class="layui-input-block">
 		<div class="layui-form-mid serviceItem">
+{{# layui.each(d.list, function (i, t) { }}
+			<a href="javascript:;" data-id="{{ t.id }}">{{ t.name }}<i class="iconfont icon-close closeItem"></i></a>
+{{# }) }}
 		</div>
 	</div>
 </div>
 
 <div class="layui-form-item">
-	<label class="layui-form-label">我的要求：</label>
+	<label class="layui-form-label"><i>*</i>我的要求：</label>
 	<div class="layui-input-block">
-		<textarea class="layui-textarea" maxlength="100" name="content" placeholder="请填写备注说明"></textarea>
+		<textarea class="layui-textarea" maxlength="100" name="customerRequirement" placeholder="请填写我的要求"></textarea>
 		<div class="textarea_counter"><span>0</span>/<em>0</em></div>
 	</div>
 </div>
 
 <div class="layui-form-item">
-	<label class="layui-form-label">交付期限：</label>
+	<label class="layui-form-label"><i>*</i>交付期限：</label>
 	<div class="layui-input-inline">
-		<input type="text" name="text" placeholder="" autocomplete="off" class="layui-input dateIcon needDate">
+		<input type="text" name="selectDate" placeholder="" autocomplete="off" class="layui-input dateIcon needDate">
 	</div>
 </div>
 
 <div class="layui-form-item">
 	<label class="layui-form-label"><i>*</i>选择地区：</label>
 	<div class="layui-input-inline">
-		<select name="provice" class="provice" lay-filter="changeProvice">
+		<select name="province" class="province" lay-filter="changeprovince">
 			<option value="">请选择省</option>
 		</select>
 	</div>
@@ -38,25 +41,23 @@
 <div class="layui-form-item">
 	<label class="layui-form-label"><i>*</i>手机号码：</label>
 	<div class="layui-input-inline">
-		<input type="text" name="text" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+		<input type="text" name="contactMobile" placeholder="请输入手机号码" autocomplete="off" class="layui-input mobile">
 	</div>
-	<a href="javascript:;" class="layui-btn layui-btn-primary">获取验证码</a>
+	<a href="javascript:;" class="layui-btn layui-btn-primary getSmsCode">获取验证码</a>
 </div>
 
 <div class="layui-form-item">
 	<label class="layui-form-label"><i>*</i>验证码：</label>
 	<div class="layui-input-inline">
-		<input type="text" name="text" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+		<input type="text" name="validateCode" placeholder="请输入验证码" autocomplete="off" class="layui-input">
 	</div>
 </div>
 
 <div class="layui-form-item">
   <label class="layui-form-label">优惠券：</label>
   <div class="layui-input-inline">
-		<select name="quiz2">
-			<option value="全部">全部</option>
-			<option selected="" value="50">新人优惠券</option>
-			<option value="100">800减100优惠券</option>
+		<select name="couponId" class="coupon" lay-filter="changeCoupon">
+			<option value="">请选择优惠券</option>
 		</select>
   </div>
 </div>
@@ -64,17 +65,17 @@
 <div class="layui-form-item">
 	<label class="layui-form-label">合计费用：</label>
 	<div class="layui-input-block	">
-		<div class="layui-form-mid fontRed"><span class="amount">950</span>元（优惠券优惠金额<em class="reduce">50</em>元）</div>
+		<div class="layui-form-mid fontRed"><span class="amount">{{ d.price }}</span>元 <span class="couponInfoBox hidden">（优惠券：<label class="couponInfo"></label>)</span></div>
 	</div>
 </div>
 
 <div class="layui-form-item">
 	<div class="layui-input-block agreementBox">
-		<input type="radio" name="payment" value="1" title="确认同意">
+		<input type="radio" name="agreeProtocal" value="1" title="确认同意">
 		<a href="javascript:;" class="fontRed">《虎甲平台委托服务协议》</a>
 	</div>
 </div>
 
 <div class="layui-form-item tac">
-	<a href="javascript:;" class="layui-btn layui-btn-red orderSubmit" lay-submit="" lay-filter="orderSubmit">确定提交</a>
+	<a href="javascript:;" class="layui-btn layui-btn-red questionSubmit" lay-submit="" lay-filter="questionSubmit">确定提交</a>
 </div>

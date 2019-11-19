@@ -254,7 +254,7 @@ Page({
             app.toastError('请输入身份证号码');
             return;
         }
-        if (!params.lawerLicenseNo) {
+        if (!params.lawyerLicenseNo) {
             app.toastError('请输入执业证号码');
             return;
         }
@@ -280,9 +280,9 @@ Page({
             return;
         }
 
-        params.provice = this.data.region[0]
-        params.city = this.data.region[1]
-        params.zone = this.data.region[2]
+        params.provice = this.data.region[0] ? this.data.region[0].replace('省', '') : ''
+        params.city = this.data.region[1] ? this.data.region[1].replace('市', '') : ''
+        params.zone = this.data.region[2] ? this.data.region[2].replace('区', '') : ''
 
         let arr = []
         this.data.questionType.forEach(item => {

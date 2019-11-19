@@ -3,6 +3,7 @@
 	var gather = {
 		init: function () {
 			var _t = this;
+			_t.c = utils.getQueryString('c');
 
 			carousel.render({
 				elem: '#indexBanner'
@@ -12,7 +13,9 @@
 
 			// base.openRedPacket();
 
-			_t.getLocation()
+			var areas = utils.cookie(global.areaCookie);
+
+			!_t.c && !areas && _t.getLocation()
 
 			_t.getLawyer()
 
@@ -54,7 +57,7 @@
 			var params = {}
 			params[global.rows] = 5;
 			params[global.page] = 1;
-			params.city = areas.name;
+			params.city = areas[1] || areas[0];
 			params.noAuth = 1;
 			utils.get(URL.lawyer.query, params, function (res) {
 				var data = res.data.list || []
@@ -140,12 +143,20 @@
 });
 
 function showLocation(data) {
+	var province = data.result.ad_info.province || ''
 	var city = data.result.ad_info.city || ''
+	var district = data.result.ad_info.district || ''
+	if (province) {
+		province = province.replace('省', '')
+	}
 	if (city) {
 		city = city.replace('市', '')
 	}
-	var items = {"id":'',"name":city}
-	utils.cookie(global.areaCookie, JSON.stringify());
+	if (district) {
+		district = district.replace('区', '')
+	}
+	var areas = [province, city, district]
+	utils.setCookie(global.areaCookie, JSON.stringify(areas));
 	var index = layui.index;
 	index.getLawyer()
 }

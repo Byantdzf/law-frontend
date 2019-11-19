@@ -34,8 +34,8 @@
 			$.each(_t.areaList, function (i, t) {
 				t.id = t.name
 			});
-			utils.getSelect(_t.areaList, '.provice', '请选择省', data.provice);
-			form.on('select(changeProvice)', function (res) {
+			utils.getSelect(_t.areaList, '.province', '请选择省', data.province);
+			form.on('select(changeprovince)', function (res) {
 				var code = res.value
 				
 				var cityData = []
@@ -51,7 +51,7 @@
 			})
 			form.on('select(changeCity)', function (res) {
 				var code = res.value
-				var prov = $('.provice').val();
+				var prov = $('.province').val();
 				var cityData = []
 				var zoneData = []
 				$.each(_t.areaList, function (i, t) {

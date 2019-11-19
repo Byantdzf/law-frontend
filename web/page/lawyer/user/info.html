@@ -67,7 +67,7 @@
 				<div class="layui-input-block">
 					{{# if (d.isEdit) { }}
 					<div class="layui-input-inline">
-							<select name="provice" class="provice" lay-verify="required" lay-filter="changeProvice">
+							<select name="province" class="province" lay-verify="required" lay-filter="changeprovince">
 								<option value="">请选择省</option>
 							</select>
 					</div>
@@ -82,7 +82,7 @@
 							</select>
 					</div>
 					{{# } else { }}
-					<div class="layui-form-mid">{{ d.provice || '' }}-{{ d.city || '' }}-{{ d.zone || '' }}</div>
+					<div class="layui-form-mid">{{ d.province || '' }}-{{ d.city || '' }}-{{ d.zone || '' }}</div>
 					{{# } }}
 				</div>
 			</div>
@@ -102,9 +102,9 @@
 				<label class="layui-form-label">执业律所</label>
 				<div class="layui-input-inline">
 					{{# if (d.isEdit) { }}
-					<input type="text" name="lawerLicenseNo" value="{{ d.lawerLicenseNo || '' }}" lay-verify="required" autocomplete="off" class="layui-input">
+					<input type="text" name="lawyerLicenseNo" value="{{ d.lawyerLicenseNo || '' }}" lay-verify="required" autocomplete="off" class="layui-input">
 					{{# } else { }}
-					<div class="layui-form-mid">{{ d.lawerLicenseNo || '' }}</div>
+					<div class="layui-form-mid">{{ d.lawyerLicenseNo || '' }}</div>
 					{{# } }}
 				</div>
 			</div>

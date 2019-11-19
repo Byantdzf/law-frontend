@@ -49,7 +49,6 @@
 
 			form.on('submit(type3Submit)', function (res) {
 				var params = res.field;
-				
 				if (!params.name) {
 					utils.msg('请填写联系人')
 					return
@@ -62,7 +61,7 @@
 					utils.msg('请输入验证码');
 					return;
 				}
-				if(!params.provice || !params.city){
+				if(!params.province || !params.city){
 					utils.msg('请选择地区');
 					return;
 				}
@@ -74,27 +73,14 @@
 					utils.msg('请确定同意虎甲平台委托服务协议');
 					return;
 				}
-				
-				var proviceObj = {}
-				var cityObj = {}
-				$.each(_t.area, function (i, t) {
-					if (t.code == params.provice) {
-						proviceObj = t;
-						$.each(t.city, function (i2, t2) {
-							if (t2.code == params.city) {
-								cityObj = t2;
-							}
-						})
-					}
-				})
 				// params.couponId = 
-				params.provice = proviceObj.name
-				params.city = cityObj.name
 				params.from = 2
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postMandatoryLawyer, params, function (res) {
-					var orderId = res.data;
+					var orderId = res.data.orderId;
+					var token = res.data.token;
+					utils.setCookie(global.token, token);
 					window.location = 'order.html?id=' + orderId + '&type=5';
 				})
 			})

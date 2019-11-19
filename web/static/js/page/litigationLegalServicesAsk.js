@@ -4,20 +4,45 @@
 		init: function () {
 			var _t = this;
 			_t.id = utils.getQueryString('id');
+			_t.ids = utils.getQueryString('ids');
+			_t.ids && (_t.ids = _t.ids.split(','))
 
-			if (!_t.id) {
+			if (!_t.id && !_t.ids) {
 				return
 			}
-			utils.getSync(URL.legal.getById + _t.id, function (res) {
-				_t.data = res.data || {}
-			});
+			_t.loadData();
+		},
+
+		loadData: function () {
+			var _t = this;
+			var data = {};
+			var total = 0;
+			var list = [];
+
+			if (_t.id) {
+				utils.getSync(URL.legal.getById + _t.id, function (res) {
+					data = res.data;
+					data.list = [{id: data.id, name: data.title}];
+					_t.data = data;
+				});
+			} else {
+				$.each(_t.ids, function (i, t) {
+					utils.getSync(URL.legal.getById + t, function (res) {
+						res.data.price && (total += res.data.price)
+						list.push({id: res.data.id, name: res.data.title});
+					});
+				})
+				data.price = total;
+				data.list = list;
+				_t.data = data;
+			}
 
 			_t.getTemp();
 		},
 
 		getTemp: function () {
 			var _t = this;
-			var html = utils.getTemp('/page/order/temp3.html', _t.data);
+			var html = utils.getTemp('/page/order/temp4.html', _t.data);
 			$('.questions .layui-form').html(html);
 			form.render();
 
@@ -25,19 +50,19 @@
 
 			utils.initDate('.dateIcon')
 
-			$('.mins').on('click', function () {
-				var box = $('.numsInput');
-				var inputs = parseInt($.trim(box.val()));
-				inputs > 1 && box.val(inputs - 1);
-				box.val() == 1 && $(this).addClass('hidden');
-			});
-
-			$('.plus').on('click', function () {
-				var box = $('.numsInput');
-				var inputs = parseInt($.trim(box.val()));
-				box.val(inputs + 1);
-				box.val() > 1 && $('.mins').removeClass('hidden');
-			});
+			if ($('.serviceItem').find('a').length == 1) {
+				$('.serviceItem').find('a').find('.closeItem').remove()
+			}
+			
+			$('.closeItem').off().on('click', function () {
+				$(this).closest('a').remove();
+				var ids = [];
+				$('.serviceItem').find('a').each(function () {
+					ids.push($(this).data('id'))
+				})
+				_t.ids = ids;
+				_t.loadData();
+			})
 
 			$('body').on('click', '.agreementBox a', function () {
 				_t.showAgreement();
@@ -57,10 +82,15 @@
 			})
 
 			// 选择优惠券
-			// _t.getCoupon();
-			// form.on('select(changeCoupon)', function (res) {
-			// 	_t.resetTotal(res.value, res.othis.find('input').val())
-			// })
+			if (utils.cookie(global.token)) {
+				var params = {}
+				params[global.rows] = 1000;
+				params[global.page] = 1;
+				utils.get(URL.user.coupon, params, function (res) {
+					var list = res.data.list || []
+					utils.getSelect(list, '.coupon', '请选择优惠券')
+				});
+			}
 
 			form.on('submit(questionSubmit)', function (res) {
 				var params = res.field;
@@ -73,7 +103,7 @@
 					utils.msg('请选择交付期限');
 					return;
 				}
-				if(!params.provice || !params.city){
+				if(!params.province || !params.city){
 					utils.msg('请选择地区');
 					return;
 				}
@@ -90,26 +120,14 @@
 					return;
 				}
 				
-				var proviceObj = {}
-				var cityObj = {}
-				$.each(_t.area, function (i, t) {
-					if (t.code == params.provice) {
-						proviceObj = t;
-						$.each(t.city, function (i2, t2) {
-							if (t2.code == params.city) {
-								cityObj = t2;
-							}
-						})
-					}
-				})
 				// params.couponId = 
-				params.provice = proviceObj.name
-				params.city = cityObj.name
 				params.from = 2
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
 				utils.put(URL.issue.postLegals, params, function (res) {
-					var orderId = res.data;
+					var orderId = res.data.orderId;
+					var token = res.data.token;
+					utils.setCookie(global.token, token);
 					window.location = 'order.html?id=' + orderId + '&type=4';
 				})
 			})
@@ -140,19 +158,6 @@
 				content: html
 			};
 			utils.dialog(ops);
-		},
-
-		getCoupon: function () {
-			var _t = this;
-			var params = {}
-			params[global.rows] = 50;
-			params[global.page] = 1;
-			params.noAuth = 1;
-			utils.get(URL.common.coupon, params, function (res) {
-				if (res.data.list && res.data.list.length) {
-					utils.getSelect(res.data.list, '.coupon');
-				}
-			})
 		},
 	}
 

@@ -40,31 +40,19 @@
 					utils.msg('请输入验证码');
 					return;
 				}
-				if(!params.provice || !params.city){
+				if(!params.province || !params.city){
 					utils.msg('请选择地区');
 					return;
 				}
-				var proviceObj = {}
-				var cityObj = {}
-				$.each(_t.area, function (i, t) {
-					if (t.code == params.provice) {
-						proviceObj = t;
-						$.each(t.city, function (i2, t2) {
-							if (t2.code == params.city) {
-								cityObj = t2;
-							}
-						})
-					}
-				})
 				if (_t.id) {
 					params.lawyerId = _t.id
 				}
-				params.provice = proviceObj.name
-				params.city = cityObj.name
 				params.from = 2
 				params.orderCategory = 12
 				utils.put(URL.issue.postIssue, params, function (res) {
-					var orderId = res.data;
+					var orderId = res.data.orderId;
+					var token = res.data.token;
+					utils.setCookie(global.token, token);
 					// utils.alert('下单成功，订单号为：' + orderId)
 					// console.log(res);return false;
 					window.location = 'order.html?id=' + orderId + '&type=2&hasLawyer=' + _t.hasLawyer;
