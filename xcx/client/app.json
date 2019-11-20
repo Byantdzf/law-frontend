@@ -79,6 +79,7 @@
       "root": "pages/order",
       "pages": [
         "list/index",
+        "waiting/index",
         "detail/index",
         "evaluate/index",
         "appeal/index"

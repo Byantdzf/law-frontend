@@ -1,0 +1,97 @@
+.page-order {
+  background: #f3f3f3;
+}
+
+.page-order .app-tab {
+  background: #fff;
+}
+
+.order-list {
+  padding-bottom: 0;
+}
+.order-item {
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  align-items: flex-start;
+}
+.order-item + .order-item {
+  margin-top: 20rpx;
+}
+.order-item .subtitle {
+  margin: 10rpx 0;
+  font-size: 32rpx;
+}
+.img-lawyer {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+  background: #f3f3f3;
+}
+.order-item-hd {
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #f3f3f3;
+}
+.order-item-bd {
+  line-height: 46rpx;
+}
+.order-item-ft {
+  border-top: 2rpx solid #f3f3f3;
+}
+.order-item .btn-box {
+  margin-top: 20rpx;
+  justify-content: flex-end;
+}
+.order-item .btn-box button {
+  padding: 0 20rpx;
+  border-color: #e0e0e0;
+  color: #666;
+}
+.order-item .btn-box button::after {
+  border-color: #e0e0e0;
+}
+
+/* .app-countdown {
+  padding: 8rpx 16rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8rpx;
+}
+.app-countdown text {
+  color: #fff;
+} */
+
+.app-countdown {
+  padding: 0rpx 16rpx;
+}
+.app-countdown .app-countdown__con {
+  padding: 0 4rpx;
+  color: #CF443D;
+}
+
+.app-empty-wrapper {
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 70rpx;
+}
+
+.order-tab-box { position: relative; z-index: 10;}
+.filter-name { padding-left:40rpx; text-align: center;}
+.order-filter-bg { position: fixed; z-index: 9; left:0; top:0; right:0; bottom:0; background: rgba(0,0,0,.5);}
+.order-child { position: relative; z-index: 10;}
+.order-filter-con { position: relative; z-index: 10; height:80rpx; border-bottom: 1rpx solid #f3f3f3; background: #fff; padding: 0 30rpx;}
+.order-child { position: absolute; top:81rpx; background: #fff; width: 100%; padding: 20rpx 30rpx;}
+.order-child .filter-item { line-height: 3; border-bottom: 1rpx solid #f8f8f8;}
+.order-child .filter-item.curr { color: #CF443D;}
+.filter-icon .iconfont { font-size: 24rpx;}
+
+.icon-wenjian {
+  font-size: 40rpx;
+}
