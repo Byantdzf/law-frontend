@@ -76,6 +76,7 @@ var URL = {
 		feedback: pcHost + '/pc/user/feedback',
 		info: pcHost + '/pc/user/base/info',
 		wxLogin: pcHost + '/pc/user/login/url',
+		wxLawyerLogin: pcHost + '/pc/user/login/lawyer/url',
 		wxLoginStatus: pcHost + '/pc/user/wechat/login/result',
 		order: {
 			query: pcHost + '/pc/user/order/orderList',

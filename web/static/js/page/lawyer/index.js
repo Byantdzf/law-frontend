@@ -144,32 +144,36 @@
 			//接受订单
 			$('body').on('click', '.handleReceive', function () {
 				var a = $(this);
-				var id = a.closest('li').data('id')
-				var params = {
-					orderId: id
-				}
-				utils.get(URL.lawyerObj.order.accept, params, function () {
-					utils.msg('操作成功');
-
-					_t.getOrderList(1, 'systemPush')
-					_t.getOrderList(2, 'orderList')
-					_t.getOrderList(4, 'customerAssign')
+				utils.confirm('确定接单？', function () {
+					var id = a.closest('li').data('id')
+					var params = {
+						orderId: id
+					}
+					utils.get(URL.lawyerObj.order.accept, params, function () {
+						utils.msg('操作成功');
+	
+						_t.getOrderList(1, 'systemPush')
+						_t.getOrderList(2, 'orderList')
+						_t.getOrderList(4, 'customerAssign')
+					})
 				})
 			});
 
 			// 拒绝接单 
 			$('body').on('click', '.handleRefuse', function () {
 				var a = $(this);
-				var id = a.closest('li').data('id')
-				var params = {
-					orderId: id
-				}
-				utils.get(URL.lawyerObj.order.refuse, params, function () {
-					utils.msg('操作成功');
-
-					_t.getOrderList(1, 'systemPush')
-					_t.getOrderList(2, 'orderList')
-					_t.getOrderList(4, 'customerAssign')
+				utils.confirm('确定拒绝接单？', function () {
+					var id = a.closest('li').data('id')
+					var params = {
+						orderId: id
+					}
+					utils.get(URL.lawyerObj.order.refuse, params, function () {
+						utils.msg('操作成功');
+	
+						_t.getOrderList(1, 'systemPush')
+						_t.getOrderList(2, 'orderList')
+						_t.getOrderList(4, 'customerAssign')
+					})
 				})
 			});
 		}

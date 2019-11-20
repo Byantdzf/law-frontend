@@ -24,10 +24,30 @@
 			})
 
 			$('.wechatLogin').click(function () {
-				utils.alert('扫码登录成功，点击确定，跳转到绑定手机页面', {}, function () {
-					utils.setCookie(global.userInfoToken, global.userInfo);
-					window.location = '/lawyer/bind.html';
+				var params = {
+					accessCode: 'http://' + window.location.host + window.location.pathname
+				};
+				utils.get(URL.user.wxLogin, params, function (res) {
+					var test = window.open(res.data.url)
+					var timer = null;
+					timer = window.setInterval(function () {
+						utils.get(URL.user.wxLoginStatus, {state: res.data.state}, function (res) {
+							if (res.code == '000000') {
+								utils.setCookie(global.token, res.data);
+								window.clearInterval(timer);
+								test.close()
+								utils.get(URL.user.info, function (response) {
+									utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
+									// cb && cb(response.data)
+								})
+							}
+						});
+					}, 1000)
 				});
+				// utils.alert('扫码登录成功，点击确定，跳转到绑定手机页面', {}, function () {
+				// 	utils.setCookie(global.userInfoToken, global.userInfo);
+				// 	window.location = '/lawyer/bind.html';
+				// });
 			});
 		}
 	}

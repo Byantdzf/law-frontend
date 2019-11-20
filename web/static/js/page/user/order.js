@@ -77,10 +77,12 @@
 
 		queryList: function (page) {
 			var _t = this;
+			var searchData = utils.formData('.orderSearchBox');
+			searchData.onlyUserOwner = 'Y';
 			var qlps = {
 				box: '.orderList',
 				url: URL.user.order.query,
-				searchData: utils.formData('.orderSearchBox'),
+				searchData: searchData,
 				page: page,
 				cols: _t.tableParams
 			}
@@ -176,6 +178,33 @@
 							_t.queryList(_t.currPage);
 						})
 					})
+				})
+
+				// 支付订单
+				$('.payOrder').off().on('click', function () {
+					var type = data.orderType;
+					var category = data.orderCategory;
+					var urlType = '';
+					if (type) {
+						if (type == 1) {
+							if (category == 11) {
+								urlType = 1
+							} else if (category == 12) {
+								urlType = 2
+							}
+						} else if (type == 2) {
+							if (category == 21) {
+								urlType = 3
+							} else if (category == 22) {
+								urlType = 4
+							}
+						} else if (type == 3) {
+							urlType = 5
+						} else if (type == 4) {
+							urlType = 6
+						}
+					}
+					window.location = '/order.html?id=' + data.id + '&type=' + urlType + '&c=u'
 				})
 
 				// 追问

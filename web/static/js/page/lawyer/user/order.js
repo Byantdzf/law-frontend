@@ -5,6 +5,7 @@
 			{title: "序号", type: "numbers"},
 			{title: "订单编号", field: "orderNo"},
 			{title: "订单时间", field: "createTime", width:"150"}, 
+			{ title: "客户", field: "name", width: "100" },
 			{title: "订单来源", field: "orderSource", width:"100", rs: global.rs.orderSource}, 
 			{title: "订单类型", field: "orderType", width:"130", rs: global.rs.orderType}, 
 			{title: "订单种类", field: "orderCategory", width:"110", rs: global.rs.orderCategory}, 
@@ -64,7 +65,7 @@
 			utils.getSelect(_t.rootCategory, '.rootCategory', global.text.all);
 			utils.getSelect(_t.source, '.source', global.text.all);
 
-			var orderStatus = $.extend(true, [], global.rs.orderStatus);
+			var orderStatus = $.extend(true, [], global.rs.lawyerOrderStatus);
 
 			orderStatus.unshift({ id: '', name: '全部' });
 			
@@ -81,10 +82,12 @@
 
 		queryList: function (page) {
 			var _t = this;
+			var searchData = utils.formData('.orderSearchBox');
+			searchData.onlyLawyerOwner = 'Y';
 			var qlps = {
 				box: '.orderList',
 				url: URL.lawyerObj.order.query,
-				searchData: utils.formData('.orderSearchBox'),
+				searchData: searchData,
 				page: page,
 				cols: _t.tableParams
 			}

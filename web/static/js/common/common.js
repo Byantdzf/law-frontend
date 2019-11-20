@@ -253,7 +253,7 @@
 			// 律师分享订单
 			$('body').on('click', '.share', function () {
 				var id = $(this).closest('li').data('id');
-				var url = 'http://' + window.location.host + '/lawyer/order.html?id=' + id;
+				var url = 'http://' + window.location.host + '/lawyer/orderDetails.html?id=' + id;
 				var html = '<div class="shareBox">';
 				html += '<p>复制订单链接：<br />' + url + '</p>';
 				html += '</div>';
@@ -583,6 +583,7 @@
 			params[global.page] = 1;
 			params.orderSource = 2;
 			params.orderStatus = 20;
+			params.recommend = 2;
 			utils.get(URL.lawyerObj.order.query, params, function (res) {
 				let list = res.data.list || []
 
