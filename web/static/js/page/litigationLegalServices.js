@@ -50,6 +50,7 @@
 			params[global.rows] = 1;
 			params[global.page] = 1;
 			params.noAuth = 1;
+			params.serviceType = 22;
 			utils.getSync(URL.legal.queryLitigationLegalServices, params, function (res) {
 				var data = res.data.list || []
 				data = data[0] || {}
@@ -62,6 +63,9 @@
 		queryList: function () {
 			var qlps = {
 				url: URL.legal.queryLitigationLegalServices,
+				searchData: {
+					serviceType: 22
+				},
 				box: '.services_list',
 				temp: '/page/legal/list2.html'
 			}

@@ -52,9 +52,9 @@ var URL = {
 		getById: pcHost + '/pc/user/article/details/'
 	},
 	legal: {
-		queryNonlitigationLegalServices: pcHost + '/pc/user/service/info/2/21',
-		queryLitigationLegalServices: pcHost + '/pc/user/service/info/2/22',
-		queryLawyer: pcHost + '/pc/user/service/info/3/31',
+		queryNonlitigationLegalServices: pcHost + '/pc/user/service/info/2',
+		queryLitigationLegalServices: pcHost + '/pc/user/service/info/2',
+		queryLawyer: pcHost + '/pc/user/service/info/3',
 		getById: pcHost + '/pc/user/service/details/'
 	},
 	issue: {
