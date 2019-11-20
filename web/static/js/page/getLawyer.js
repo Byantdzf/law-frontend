@@ -3,6 +3,7 @@
 	var gather = {
 		init: function () {
 			var _t = this;
+			_t.type = utils.getQueryString('id');
 
 			_t.loadRecommend();
 			_t.queryList();
@@ -18,10 +19,12 @@
 		},
 
 		loadRecommend: function () {
+			var _t = this;
 			var params = {}
 			params[global.rows] = 1;
 			params[global.page] = 1;
 			params.noAuth = 1;
+			params.serviceType = _t.type;
 			utils.getSync(URL.legal.queryLawyer, params, function (res) {
 				var data = res.data.list || []
 				data = data[0] || {}
@@ -33,8 +36,12 @@
 		},
 
 		queryList: function () {
+			var _t = this;
 			var qlps = {
 				url: URL.legal.queryLawyer,
+				searchData: {
+					serviceType: _t.type
+				},
 				box: '.services_list',
 				temp: '/page/legal/list.html'
 			}
