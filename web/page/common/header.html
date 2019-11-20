@@ -5,14 +5,14 @@
 		<div class="welcome">
 			<ul class="layui-nav" lay-filter="">
 				<li class="layui-nav-item topUserBox">
-					您好，{{# if (d.name) { }}<a href="/user.html" class="topUser">{{ d.name || '' }}</a>
+					您好，{{# if (d.isLogin) { }}<a href="/user.html" class="topUser">{{ d.name || '' }}</a>
 					{{# } }}欢迎来到虎甲问答
 					<dl class="layui-nav-child">
 						<!-- 二级菜单 -->
 						<dd><a href="javascript:;" class="logout">退出登录</a></dd>
 					</dl>
 				</li>
-				{{# if (!d.name) { }}
+				{{# if (!d.isLogin) { }}
 				<li class="layui-nav-item"><a href="javascript:;" class="eqReg">免费注册</a></li>
 				<li class="layui-nav-item">
 					<a href="javascript:;">登陆</a>

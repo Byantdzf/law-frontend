@@ -128,6 +128,7 @@
 					params.chooseService = _t.ids.join(',')
 				}
 				params.orderCategory = _t.data.serviceType
+				params.token = utils.cookie(global.token)
 				utils.put(URL.issue.postLegals, params, function (res) {
 					var orderId = res.data.orderId;
 					var token = res.data.token;

@@ -54,13 +54,15 @@
 			}
 			$('.nav .layui-nav-item:eq(' + index + ')').addClass('layui-this').siblings().removeClass('layui-this');
 
-			utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
-				_t.orderInfo = res.data;
-			});
+			if (_t.type != 5) {
+				utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
+					_t.orderInfo = res.data;
+				});
 
-			utils.get(URL.user.info, function (response) {
-				utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
-			})
+				utils.get(URL.user.info, function (response) {
+					utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
+				})
+			}
 
 			// if (_t.type == 3 || _t.type == 4 || _t.type == 5) {
 			// 	var data = {};
@@ -75,7 +77,7 @@
 			// } else {
 			// 	_t.gotoStepTwo();
 			// }
-			if (_t.success) {
+			if (_t.success || _t.type==5) {
 				_t.gotoPaySuccess();
 			} else {
 				_t.gotoStepTwo();

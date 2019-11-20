@@ -66,16 +66,24 @@
 
 				// 关注
 				$('.collect').off().on('click', function () {
-					var id = $(this).closest('li').data('id');
-					var params = {
-					businessId: id,
-					operateBusiness: 2,  // 操作对象1-订单 2-律师 3-文章 4-系统
-					operateType: 4,      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+					if (utils.cookie(global.token)) {
+						var id = $(this).closest('li').data('id');
+						var params = {
+						businessId: id,
+						operateBusiness: 2,  // 操作对象1-订单 2-律师 3-文章 4-系统
+						operateType: 4,      // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
+						}
+						utils.get(URL.user.cancelattention, params, function () {
+							utils.msg('操作成功');
+							_t.getLawyer()
+						})
+					} else {
+						utils.confirm('登录以后才可以操作，是否登录？', function () {
+							base.wxLogin(function (data) {
+								window.location.reload();
+							})
+						})
 					}
-					utils.get(URL.user.cancelattention, params, function () {
-						utils.msg('操作成功');
-						_t.getLawyer()
-					})
 				})
 				// 取消关注
 				$('.cancelCollect').off().on('click', function () {
@@ -100,7 +108,9 @@
 			params.type = 1;
 			params.noAuth = 1;
 			utils.get(URL.news.query, params, function (res) {
-				var data = res.data.list || []
+				var data = {}
+				data.list = res.data.list || []
+				data.type = params.type
 				var html = utils.getTemp('/page/home/newsList.html', data)
 				$('.index_legalNewsList .picList').html(html);
 				
@@ -115,7 +125,9 @@
 			params.type = 2;
 			params.noAuth = 1;
 			utils.get(URL.news.query, params, function (res) {
-				var data = res.data.list || []
+				var data = {}
+				data.list = res.data.list || []
+				data.type = params.type
 				var html = utils.getTemp('/page/home/newsList.html', data)
 				$('.index_newLegalList .picList').html(html);
 				
@@ -130,7 +142,9 @@
 			params.type = 3;
 			params.noAuth = 1;
 			utils.get(URL.news.query, params, function (res) {
-				var data = res.data.list || []
+				var data = {}
+				data.list = res.data.list || []
+				data.type = params.type
 				var html = utils.getTemp('/page/home/companyNewsList.html', data)
 				$('.index_company_news .picList').html(html);
 				

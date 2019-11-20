@@ -4,7 +4,7 @@
 	<div class="items">
 		<div class=clearfix>
 			<dl>
-				<dd><label>发布人：</label><span>{{ t.name || '&nbsp;' }}</span></dd>
+				<dd><label>发布人：</label><span title="{{ t.name || '' }}">{{ t.name || '&nbsp;' }}</span></dd>
 				<dd><label>联系方式：</label><span>{{ t.contactMobile || '&nbsp;' }}</span></dd>
 				<dd><label>ID号：</label><span>{{ t.id }}</span></dd>
 				<dd><label>所在城市：</label><span>{{ t.province || '&nbsp;' }} - {{ t.city || '&nbsp;' }}</span></dd>

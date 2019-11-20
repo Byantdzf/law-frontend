@@ -23,7 +23,7 @@ img{outline: none; border: none;}
 .fontRed{color:#eb4546!important;}
 .fontGrey{color:#999!important;}
 .clearBth{clear: both;}
-.singleLine{text-overflow: ellipsis;white-space:nowrap;overflow: hidden;}
+.singleLine{ text-overflow: ellipsis;white-space:nowrap;overflow: hidden;}
 
 .clearfix { margin: 0!important; padding: 0!important;}
 .clearfix:before,
@@ -1000,8 +1000,9 @@ div.clm_tt_m.font_16 a{font-size:16px}
 .questions { margin-top:50px; width:800px;}
 i, em { font-style: normal;}
 .textarea_counter { font-size:12px; text-align: right; color:#999;}
-.layui-form-label { color:#999;}
+.layui-form-label { color:#999; width:120px;}
 .layui-form-label i { color:#f00; margin-right:3px;}
+.layui-input-block { margin-left:150px;}
 
 .setPay { width:500px;}
 .paySuccess { width:800px;}
@@ -1267,6 +1268,7 @@ i, em { font-style: normal;}
 .lawyerOrderList li .items { padding: 20px 30px;}
 .lawyerOrderList dd { width:40%; float:left; position: relative; padding-left:80px; box-sizing: border-box; line-height: 2; color:#333;}
 .lawyerOrderList dd label { position: absolute; left:0; top:0; width:80px; color:#999;}
+.lawyerOrderList dd span { display:block; width:100%; text-overflow: ellipsis;white-space:nowrap;overflow: hidden;}
 .lawyerOrderList dd:nth-child(even) { width:60%;}
 .lawyerOrderList li .rightTop { position: absolute;right:20px; top:20px;}
 .lawyerOrderList li .rightTop i { font-size: 30px; color:#eb4546; margin-right: 20px;}
@@ -1455,6 +1457,10 @@ i, em { font-style: normal;}
 .wechatPayQrCode { text-align: center;}
 .wechatPayQrCode canvas { margin: 50px auto 20px;}
 
+.shareBox { padding: 30px; line-height: 2;}
+
 @media screen and (max-width: 1600px) {
     .nav { margin:0;}
 }
+
+.withDrawBox { padding: 30px 0;}

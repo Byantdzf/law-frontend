@@ -1,0 +1,35 @@
+<div class="withDrawBox layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">我的余额：</label>
+		<div class="layui-input-inline">
+			<div class="layui-form-mid">{{ d.balanceAmount || '0' }}</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label"><i>*</i>提现金额：</label>
+		<div class="layui-input-inline">
+			<input type="text" name="cashOutAmount" placeholder="" autocomplete="off" lay-verify="required" data-max="{{ d.balanceAmount || '0' }}" class="layui-input cashOutAmount">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">提现方式：</label>
+		<div class="layui-input-inline">
+			<div class="withDrawType" data-name="cashOutWay"></div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label"><i>*</i>真实姓名：</label>
+		<div class="layui-input-inline">
+			<input type="text" name="cashOutAccountName" placeholder="" autocomplete="off" lay-verify="required" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label"><i>*</i>提现帐号：</label>
+		<div class="layui-input-inline">
+			<input type="text" name="cashOutAccount" placeholder="" autocomplete="off" lay-verify="required" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item tac">
+		<a href="javascript:;" class="layui-btn layui-btn-red withDrawSubmit" placeholder="请输入您遇到的问题" lay-submit="" lay-filter="withDrawSubmit">申请提现</a>
+	</div>
+</div>

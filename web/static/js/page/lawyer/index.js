@@ -16,6 +16,9 @@
 				// 法律文章精选
 				_t.getLegalNews()
 
+				// 最新法律速递
+				_t.getNewLegal()
+
 				// 公司新闻
 				_t.getCompanyNews()
 			})
@@ -53,6 +56,7 @@
 			params[global.rows] = 5;
 			params[global.page] = 1;
 			params.orderSource = orderSource
+			params.orderStatus = 20;
 			utils.get(URL.lawyerObj.order.query, params, function (res) {
 				let list = res.data.list || []
 
@@ -79,7 +83,7 @@
 					})
 				})
 				var html = utils.getTemp('/lawyer/temp/home/' + box + '.html', list)
-				$('.' + box).find('ul').html(html);
+				$('.' + box).find('.index_ccbox2_1').html(html);
 			})
 		},
 
@@ -87,9 +91,12 @@
 			var params = {}
 			params[global.rows] = 10;
 			params[global.page] = 1;
+			params.type = 1;
 			params.noAuth = 1;
 			utils.get(URL.lawyerObj.news.query, params, function (res) {
-				var data = res.data.list || []
+				var data = {}
+				data.list = res.data.list || []
+				data.type = params.type
 				var html = utils.getTemp('/page/home/newsList.html', data)
 				$('.index_legalNewsList .picList').html(html);
 				
@@ -97,13 +104,33 @@
 			})
 		},
 
+		getNewLegal: function () {
+			var params = {}
+			params[global.rows] = 10;
+			params[global.page] = 1;
+			params.type = 2;
+			params.noAuth = 1;
+			utils.get(URL.lawyerObj.news.query, params, function (res) {
+				var data = {}
+				data.list = res.data.list || []
+				data.type = params.type
+				var html = utils.getTemp('/page/home/newsList.html', data)
+				$('.index_newLegalList .picList').html(html);
+				
+				$(".index_newLegalList .picMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:5,interTime:50});
+			})
+		},
+
 		getCompanyNews: function () {
 			var params = {}
 			params[global.rows] = 10;
 			params[global.page] = 1;
+			params.type = 3;
 			params.noAuth = 1;
 			utils.get(URL.lawyerObj.news.query, params, function (res) {
-				var data = res.data.list || []
+				var data = {}
+				data.list = res.data.list || []
+				data.type = params.type
 				var html = utils.getTemp('/page/home/companyNewsList.html', data)
 				$('.index_company_news .picList').html(html);
 				
@@ -113,6 +140,38 @@
 
 		actions: function () {
 			var _t = this;
+
+			//接受订单
+			$('body').on('click', '.handleReceive', function () {
+				var a = $(this);
+				var id = a.closest('li').data('id')
+				var params = {
+					orderId: id
+				}
+				utils.get(URL.lawyerObj.order.accept, params, function () {
+					utils.msg('操作成功');
+
+					_t.getOrderList(1, 'systemPush')
+					_t.getOrderList(2, 'orderList')
+					_t.getOrderList(4, 'customerAssign')
+				})
+			});
+
+			// 拒绝接单 
+			$('body').on('click', '.handleRefuse', function () {
+				var a = $(this);
+				var id = a.closest('li').data('id')
+				var params = {
+					orderId: id
+				}
+				utils.get(URL.lawyerObj.order.refuse, params, function () {
+					utils.msg('操作成功');
+
+					_t.getOrderList(1, 'systemPush')
+					_t.getOrderList(2, 'orderList')
+					_t.getOrderList(4, 'customerAssign')
+				})
+			});
 		}
 	}
 

@@ -135,13 +135,13 @@ layui.define(function (exports) {
 						if (callback) {
 							callback(res);
 						}
-					} else if (res.code == '01') {
-						// gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
-						// gather.setCookie(global.token, '');
-						// gather.setCookie(global.backToken, '');
-						// window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+					// } else if (res.code == '01') {
+					// 	gather.setCookie(global.userInfoToken, '');	// 清除cookie
+					// 	gather.setCookie(global.token, '');
+					// 	gather.setCookie(global.backToken, '');
+					// 	window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else if (res.code == 'E00006') {
-						// gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
+						// gather.setCookie(global.userInfoToken, '');	// 清除cookie
 						// gather.setCookie(global.token, '');
 						// gather.setCookie(global.backToken, '');
 						// window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
@@ -163,7 +163,7 @@ layui.define(function (exports) {
 					$('.submit').removeAttr("disabled");
 				},
 				error: function (e) {
-					if (e.responseJSON.message == '非法访问用户') {
+					if (e.responseJSON && e.responseJSON.message == '非法访问用户') {
 						gather.setCookie(global.userInfoToken, '');	// 登录信息存入cookie
 						gather.setCookie(global.token, '');
 						gather.setCookie(global.backToken, '');
@@ -325,6 +325,11 @@ layui.define(function (exports) {
 		// 读取用户登录cookie
 		localusers: function () {
 			global.userInfo = this.cookie(global.userInfoToken) ? JSON.parse(this.cookie(global.userInfoToken)) : {};
+			if (gather.cookie(global.token) && !global.userInfo) {
+				utils.getSync(URL.user.info, function (response) {
+					utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
+				})
+			}
 		},
 
 		// 跳转路由
@@ -451,7 +456,7 @@ layui.define(function (exports) {
 			if (typeof params === 'function') {
 				no = yes;
 				yes = params;
-				params = null;
+				params = {};
 			}
 			var opts = {
 				icon: 3,
@@ -472,12 +477,12 @@ layui.define(function (exports) {
 				type: 1,
 				shade: 0.5,
 				closeBtn: 1,
-				offset: '100px',
 				moveType: 1,
 				shadeClose: 1,
 				resize: 0,
 				moveOut: 1
 			}
+			!params.center && (params.offset = '100px')
 			params && (opts = $.extend(true, opts, params));
 			opts.btn && (opts.btnAlign = 'c');
 			layer.open(opts);

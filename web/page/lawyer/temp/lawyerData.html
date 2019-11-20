@@ -1,14 +1,15 @@
+{{# layui.each(d, function (i, t) { }}
 <div class="items">
 	<div class="clearfix">
 		<div class="imgBox">
-			<img src="/static/images/default.jpg" />
-			<h4>Wakaka</h4>
+			<img src="{{ t.userName || '/static/images/default.jpg' }}" />
+			<h4>{{ t.userName || '' }}</h4>
 		</div>
 		<div class="userInfo">
 			<div class="item">
 				<div class="clearfix">
-					<div><label>服务类型：</label>aaa</div>
-					<div><label>服务时间：</label>aaa</div>
+					<div><label>服务类型：</label>{{ global.rs.servicesType[t.serviceType] || '' }}</div>
+					<div><label>服务时间：</label>{{ t.orderUpdateTime || '' }}</div>
 				</div>
 			</div>
 			<div class="item">
@@ -17,7 +18,7 @@
 						<label>服务态度：</label>
 						<div class="score">
 							<div class="scoreBox">
-								<span style="width:80%"></span>
+								<span style="width:{{ t.serviceAttitudeScore ? t.serviceAttitudeScore * 100 : '0' }}%"></span>
 							</div>
 						</div>
 					</div>
@@ -25,15 +26,16 @@
 						<label>专业度：</label>
 						<div class="score">
 							<div class="scoreBox">
-								<span style="width:80%"></span>
+								<span style="width:{{ t.professionalAttitudeScore ? t.professionalAttitudeScore * 100 : '0' }}%"></span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="content">
-				dsdhjljkhjkhlkjhjgjhghhjgkjh
+				{{ t.content || '' }}
 			</div>
 		</div>
 	</div>
 </div>
+{{# }); }}

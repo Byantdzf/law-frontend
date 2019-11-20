@@ -77,6 +77,7 @@
 				params.from = 2
 				params.chooseService = _t.data.id
 				params.orderCategory = _t.data.serviceType
+				params.token = utils.cookie(global.token)
 				utils.put(URL.issue.postMandatoryLawyer, params, function (res) {
 					var orderId = res.data.orderId;
 					var token = res.data.token;

@@ -5,10 +5,10 @@
 			var _t = this;
 
 			$('body').on('click', '.switchCity a[data-code]', function () {
-				var thisCity = {};
-				thisCity.id = $(this).attr('data-code');
-				thisCity.name = $(this).text();
-				utils.setCookie(global.areaCookie, thisCity, { expires: 30 });
+				var prov = $(this).closest('dl').find('dt').text()
+				var city = $(this).text();
+				var list = [prov, city]
+				utils.setCookie(global.areaCookie, JSON.stringify(list));
 				window.location = '/index.html';
 			})
 		},

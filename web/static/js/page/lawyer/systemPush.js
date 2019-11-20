@@ -5,6 +5,17 @@
 			var _t = this;
 			_t.defaultStr = '<a href="javascript:;" class="curr">全部</a>';
 
+			_t.type = utils.getQueryString('t');
+			if (_t.type) {
+				$('.lawyerOrderList').find('li').removeClass('curr');
+				
+				$('.lawyerOrderList').find('li').each(function () {
+					if ($(this).find('a').data('id') == _t.type) {
+						$(this).addClass('curr');
+					}
+				})
+			}
+
 			_t.getQuestionType();
 
 			_t.loadArea();

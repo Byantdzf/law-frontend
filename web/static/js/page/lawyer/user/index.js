@@ -34,7 +34,7 @@
 			
 				// 提现
 				$('.withdraw').off().on('click', function () {
-					_t.withdrawBox();
+					_t.withdrawBox(data);
 				});
 			});
 		},
@@ -61,6 +61,28 @@
 					utils.initPage(ips, _t.box);
 
 					_t.queryList();
+				}
+			};
+			utils.dialog(ops);
+		},
+
+		withdrawBox: function (data) {
+			var _t = this;
+			var html = utils.getTemp('/page/lawyer/user/withDraw.html', data);
+			var ops = {
+				type: 1,
+				title: '提现',
+				area: '500px',
+				// title: false,
+				shadeClose: true,
+				// closeBtn: 0,
+				content: html,
+				success: function (layero, index) {
+					utils.getRadio(global.rs.payment, '.withDrawType');
+					form.on('submit(withDrawSubmit)', function (res) {
+						var params = res.field;
+						console.log(params);
+					})
 				}
 			};
 			utils.dialog(ops);

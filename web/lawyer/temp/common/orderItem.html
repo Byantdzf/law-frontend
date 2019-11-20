@@ -1,19 +1,21 @@
 {{# layui.each(d, function (i, t) { }}
-<li>
+<li data-id="{{ t.id }}">
 	<div class="items">
 		<div class=clearfix>
-			<dl>
-				<dd><label>发布人：</label><span>{{ t.name || '&nbsp;' }}</span></dd>
-				<dd><label>联系方式：</label><span>{{ t.contactMobile || '&nbsp;' }}</span></dd>
-				<dd><label>ID号：</label><span>{{ t.id }}</span></dd>
-				<dd><label>所在城市：</label><span>{{ t.province || '&nbsp;' }} - {{ t.city || '&nbsp;' }}</span></dd>
-				<dd><label>订单类型：</label><span>{{ t.typeName || '&nbsp;' }}</span></dd>
-				<dd><label>发布时间：</label><span>{{ t.createTime || '&nbsp;' }}</span></dd>
-				<dd><label>订单种类：</label><span>{{ t.categoryName || '&nbsp;' }}</span></dd>
-				<dd><label>所属问题：</label><span>{{ t.questionTypeName || '&nbsp;' }}</span></dd>
-				<dd><label>是否紧急：</label><span class="fontRed">{{ t.emergency == 1 ? '是' : '否' }}</span></dd>
-				<dd><label>订单金额：</label><span class="fontRed">{{ t.amount || 0 }}元</span></dd>
-			</dl>
+			<a href="/lawyer/order.html?id={{ t.id }}">
+				<dl>
+					<dd><label>发布人：</label><span>{{ t.name || '&nbsp;' }}</span></dd>
+					<dd><label>联系方式：</label><span>{{ t.contactMobile || '&nbsp;' }}</span></dd>
+					<dd><label>ID号：</label><span>{{ t.id }}</span></dd>
+					<dd><label>所在城市：</label><span>{{ t.province || '&nbsp;' }} - {{ t.city || '&nbsp;' }}</span></dd>
+					<dd><label>订单类型：</label><span>{{ t.typeName || '&nbsp;' }}</span></dd>
+					<dd><label>发布时间：</label><span>{{ t.createTime || '&nbsp;' }}</span></dd>
+					<dd><label>订单种类：</label><span>{{ t.categoryName || '&nbsp;' }}</span></dd>
+					<dd><label>所属问题：</label><span>{{ t.questionTypeName || '&nbsp;' }}</span></dd>
+					<dd><label>是否紧急：</label><span class="fontRed">{{ t.emergency == 1 ? '是' : '否' }}</span></dd>
+					<dd><label>订单金额：</label><span class="fontRed">{{ t.amount || 0 }}元</span></dd>
+				</dl>
+			</a>
 			<div class="rightTop">
 				{{# if (t.userIsFocusedLawyer == 1) { }}<i class="iconfont icon-guanzhu" title="被他关注"></i>{{# } }}
 				<!-- <em class="countTimes" title="推送给其他律师剩余时间">01:00:05</em> -->

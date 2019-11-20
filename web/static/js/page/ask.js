@@ -61,6 +61,7 @@
 				}
 				params.from = 2
 				params.orderCategory = 11
+				params.token = utils.cookie(global.token)
 				utils.put(URL.issue.postIssue, params, function (res) {
 					var orderId = res.data.orderId;
 					var token = res.data.token;

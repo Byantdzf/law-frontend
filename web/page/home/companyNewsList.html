@@ -1,8 +1,8 @@
 {{# 
-	layui.each(d, function (i, t) { 
+	layui.each(d.list, function (i, t) { 
 }}
 <li>
-	<a href="newsDetails.html?id={{t.id}}">
+	<a href="newsDetails.html?id={{t.id}}&type={{d.type}}">
 		<div class="imgBox"><img src="{{ t.pic || '/static/images/nopic.jpg' }}" /></div>
 		<h3>{{ t.title || '' }}</h3>
 		<p>{{ t.brief || '' }}</p>

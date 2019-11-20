@@ -51,7 +51,8 @@
 		getHeader: function () {
 			var obj = {};
 			obj = global.userInfo || {};
-			
+			obj.isLogin = utils.cookie(global.token) ? 1 : 0;
+
 			var keyworkds = $.trim(utils.getQueryString('keyword'));
 			if (keyworkds) {
 				obj.keyWord = keyworkds;
@@ -90,10 +91,13 @@
 		},
 
 		getQuestionType: function () {
-			var data = []
-			utils.getSync(URL.common.questionType, {noAuth: 1}, function (res) {
-				data = res.data
-			});
+			var data = this.questionType || []
+			if (!data.length) {
+				utils.getSync(URL.common.questionType, {noAuth: 1}, function (res) {
+					data = res.data
+				});
+				this.questionType = data;
+			}
 			return data;
 		},
 
@@ -227,7 +231,7 @@
 				}
 				utils.get(URL.lawyerObj.order.operate, params, function () {
 					utils.msg('操作成功');
-					a.removeClass('focusd').addClass('cancelFocus').html('取消关注')
+					a.removeClass('focusd').addClass('cancelFocus').removeClass('layui-btn-warm').addClass('layui-btn-primary').html('取消关注')
 				})
 			});
 			
@@ -242,35 +246,54 @@
 				}
 				utils.get(URL.lawyerObj.order.operate, params, function () {
 					utils.msg('操作成功');
-					a.removeClass('cancelFocus').addClass('focusd').html('关注订单')
+					a.removeClass('cancelFocus').addClass('focusd').removeClass('layui-btn-primary').addClass('layui-btn-warm').html('关注订单')
 				})
 			});
+
+			// 律师分享订单
+			$('body').on('click', '.share', function () {
+				var id = $(this).closest('li').data('id');
+				var url = 'http://' + window.location.host + '/lawyer/order.html?id=' + id;
+				var html = '<div class="shareBox">';
+				html += '<p>复制订单链接：<br />' + url + '</p>';
+				html += '</div>';
+	
+				var ops = {
+					type: 1,
+					title: '转发',
+					area: '600px',
+					center: 1,
+					content: html
+				};
+				utils.dialog(ops);
+			});
+			
 
 			//接受订单
-			$('body').on('click', '.handleReceive', function () {
-				var a = $(this);
-				var id = a.closest('li').data('id')
-				var params = {
-					orderId: id
-				}
-				utils.get(URL.lawyerObj.order.accept, params, function () {
-					utils.msg('操作成功');
-					a.removeClass('handleReceive').removeClass('layui-btn-red').addClass('layui-btn-disabled').html('立即接单')
-				})
-			});
+			// $('body').on('click', '.handleReceive', function () {
+			// 	var a = $(this);
+			// 	var id = a.closest('li').data('id')
+			// 	var params = {
+			// 		orderId: id
+			// 	}
+			// 	utils.get(URL.lawyerObj.order.accept, params, function () {
+			// 		utils.msg('操作成功');
+			// 		a.removeClass('handleReceive').removeClass('layui-btn-red').addClass('layui-btn-disabled').html('立即接单')
+			// 	})
+			// });
 
 			// 拒绝接单 
-			$('body').on('click', '.handleRefuse', function () {
-				var a = $(this);
-				var id = a.closest('li').data('id')
-				var params = {
-					orderId: id
-				}
-				utils.get(URL.lawyerObj.order.refuse, params, function () {
-					utils.msg('操作成功');
-					a.removeClass('handleRefuse').removeClass('layui-btn-primary').addClass('layui-btn-disabled').html('已拒绝')
-				})
-			});
+			// $('body').on('click', '.handleRefuse', function () {
+			// 	var a = $(this);
+			// 	var id = a.closest('li').data('id')
+			// 	var params = {
+			// 		orderId: id
+			// 	}
+			// 	utils.get(URL.lawyerObj.order.refuse, params, function () {
+			// 		utils.msg('操作成功');
+			// 		a.removeClass('handleRefuse').removeClass('layui-btn-primary').addClass('layui-btn-disabled').html('已拒绝')
+			// 	})
+			// });
 		},
 
 		setTextarea: function (obj) {
@@ -559,6 +582,7 @@
 			params[global.rows] = 4;
 			params[global.page] = 1;
 			params.orderSource = 2;
+			params.orderStatus = 20;
 			utils.get(URL.lawyerObj.order.query, params, function (res) {
 				let list = res.data.list || []
 
