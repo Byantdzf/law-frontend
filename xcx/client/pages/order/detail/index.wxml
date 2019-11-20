@@ -118,7 +118,7 @@
         <button type="primary" bindtap="handleConfirmAsk">确认</button>
       </view>
     </view>
-    <view class="btn-box mt-20" wx:if="{{ fn.showCancel(item) }}">
+    <view class="btn-box mt-20" wx:if="{{ fn.showCancel(item) && item.orderType != 4 }}">
       <button type="primary" bindtap="handleCancel">取消订单</button>
     </view>
     <view class="btn-box mt-20" wx:if="{{ fn.showComment(item) }}">

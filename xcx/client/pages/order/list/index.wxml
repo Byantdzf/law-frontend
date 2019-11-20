@@ -111,7 +111,7 @@
             </view>
             <view class="flex btn-box">
               <button
-                wx:if="{{ fn.showCancel(item) }}"
+                wx:if="{{ fn.showCancel(item) && item.orderType != 4 }}"
                 plain
                 size="mini"
                 data-index="{{ index }}"
