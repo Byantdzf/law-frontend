@@ -72,33 +72,39 @@ Page({
     },
     buyNow(e) {
         let { id } = e.currentTarget.dataset
-        app.gotoPage('/pages/issue/legalServices/index?id=' + id + '&t=1')
+        app.gotoPage('/pages/issue/legalServices/index?id=' + id)
     },
     addCart(e) {
         let { id } = e.currentTarget.dataset
         let cartList = this.data.cartList
         let cartNameList = this.data.cartNameList
         let dataList = this.data.list
+        let total = this.data.total || 0
         let index = cartList.findIndex(item => {
             return id == item
         })
         if (index == -1) {
             cartList.push(id)
-            cartNameList.push(cartList[index].title)
             let dataIndex = dataList.findIndex(item => {
                 return id == item.id
             })
             dataList[dataIndex].addCart = 1
+            cartNameList.push(dataList[dataIndex].title)
+            total += dataList[dataIndex].price
         }
         this.setData({
+            total,
             cartList,
-            list: dataList
+            list: dataList,
+            cartNameStr: cartNameList.join(',')
         })
     },
     removeCart(e) {
         let { id } = e.currentTarget.dataset
         let cartList = this.data.cartList
+        let cartNameList = this.data.cartNameList
         let dataList = this.data.list
+        let total = this.data.total || 0
         let index = cartList.findIndex(item => {
             return id == item
         })
@@ -109,14 +115,17 @@ Page({
                 return id == item.id
             })
             dataList[dataIndex].addCart = 0
+            total -= dataList[dataIndex].price
         }
         this.setData({
+            total,
             cartList,
-            list: dataList
+            list: dataList,
+            cartNameStr: cartNameList.join(',')
         })
     },
     buyMutliNow() {
         let ids = this.data.cartList.join(',')
-        app.gotoPage('/pages/issue/legalServices/index?ids=' + ids + '&t=1')
+        app.gotoPage('/pages/issue/legalServices/index?ids=' + ids)
     }
 })

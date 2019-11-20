@@ -31,3 +31,8 @@ page { background: #f3f3f3;}
 .list-item .price-box { padding: 20rpx 0;}
 .list-item .btn-box { text-align: right;}
 .list-item .btn-box button:last-child { margin-left: 20rpx;}
+
+.bottomCart { background: #fff; border-top:1px solid #dedede; padding: 30rpx;}
+.bottomCart .icon-susong { background: blue; color: #fff; font-size: 40rpx; border-radius: 50%; padding: 20rpx; margin-right:30rpx;}
+.bottomCart .fonts { width:350rpx; overflow: hidden;}
+.bottomCart .total { font-size: 30rpx; color: #f00;}

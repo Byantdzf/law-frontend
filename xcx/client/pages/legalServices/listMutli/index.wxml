@@ -57,7 +57,7 @@
                 <view class="iconfont icon-susong"></view>
                 <view class="flex-bd">
                     <view class="total"><text>￥</text>{{total}}</view>
-                    <view class="fonts ellipsis">您选择的服务：{{ cartNameList.join(',') }}</view>
+                    <view class="fonts ellipsis">您选择的服务：{{ cartNameStr || '' }}</view>
                 </view>
                 <view class="bottomBtn">
                     <button size="mini" plain data-id="{{item.id}}" catch:tap="buyMutliNow">

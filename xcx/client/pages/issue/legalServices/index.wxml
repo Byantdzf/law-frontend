@@ -3,11 +3,11 @@
     <view class="pa-20 home-list">
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-                <view class="issue-form-item">
-                    <view class="issue-form-input flex">
+                <view class="issue-form-title">
+                    <view class="flex">
                         <view>已选服务：</view>
                         <view class="titleBox flex-bd">
-                            <text>{{details.title}}</text>
+                            <text wx:for="{{list}}" wx:key="{{index}}">{{item}}</text>  
                         </view>
                     </view>
                 </view>
@@ -92,7 +92,7 @@
                             <input class="app-input" type="text" name="registerValidateCode" placeholder="请输入验证码"></input>
                         </view>
                     </view>
-                    <view class="issue-form-item">
+                    <view class="issue-form-item" wx:if="{{showInputNumber}}">
                         <view class="issue-form-input flex">
                             <view class="amount flex-bd">
                                 <view>

@@ -54,26 +54,33 @@ Page({
 
             let startDate = formatTime(new Date())
             startDate = startDate.split(' ')[0]
+            this.setData({startDate})
 
             if (id) {
                 legalServices.getById({id: id}).then(res => {
                     this.setData({
-                        startDate,
                         selectAmount: res.data.price,
-                        details: res.data,
+                        list: [res.data.title],
                         id,
                         showInputNumber: t ? true : false
                     })
                 })
             } else {
-                // let idsArr = ids.split(',')
-                // let list = []
-                // idsArr.forEach(item => {
-
-                // })
+                let idsArr = ids.split(',')
+                let list = []
+                let total = 0
+                idsArr.forEach(item => {
+                    legalServices.getById({id: item}).then(res => {
+                        list.push(res.data.title)
+                        total += res.data.price
+                        this.setData({
+                            list,
+                            ids,
+                            selectAmount: total
+                        })
+                    })
+                })
             }
-
-
 
             // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
             api.getRegisterStatus().then(res => {
@@ -212,7 +219,11 @@ Page({
         if (this.data.showInputNumber) {
             params.serviceSum = selectNums
         }
-        params.chooseService = this.data.id
+        if (this.data.id) {
+            params.chooseService = this.data.id
+        } else {
+            params.chooseService = this.data.ids
+        }
         params.deliveryDeadDate = this.data.selectDate
         params.amount = this.data.selectAmount
         params.province = this.data.selectArea[0]
