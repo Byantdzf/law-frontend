@@ -3,10 +3,10 @@
 
 .numsBox { width:200rpx;}
 
-.titleBox text { border: 1rpx solid #333; padding: 6rpx 10rpx; border-radius: 10rpx; margin: 0 10rpx 10rpx 0;}
+.titleBox .items { float:left; border: 1rpx solid #333; padding: 6rpx 10rpx; border-radius: 10rpx; margin: 0 10rpx 20rpx 0;}
+.titleBox .items text { color: #f00; font-size: 24rpx; margin-left:10rpx;}
 
 .issue-form-title {
     border-bottom: 1rpx solid #e8e8e8;
     padding: 20rpx 0;
 }
-.issue-form-title text { float:left; margin-bottom: 20rpx;}

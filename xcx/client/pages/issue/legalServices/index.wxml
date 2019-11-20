@@ -7,7 +7,7 @@
                     <view class="flex">
                         <view>已选服务：</view>
                         <view class="titleBox flex-bd">
-                            <text wx:for="{{list}}" wx:key="{{index}}">{{item}}</text>  
+                            <view class="items" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bind:tap="removeItem">{{item.name}}<text class="iconfont icon-close" wx:if="{{list.length > 1}}"></text></view>  
                         </view>
                     </view>
                 </view>
