@@ -37,7 +37,8 @@ Page({
         startDate: '',
         aggreement: false,
         showInputNumber: false,
-        selectNums: 1
+        selectNums: 1,
+        list: []
     },
 
     /**
@@ -54,15 +55,25 @@ Page({
             let startDate = formatTime(new Date())
             startDate = startDate.split(' ')[0]
 
-            legalServices.getById({id: id}).then(res => {
-                this.setData({
-                    startDate,
-                    selectAmount: res.data.price,
-                    details: res.data,
-                    id,
-                    showInputNumber: t ? true : false
+            if (id) {
+                legalServices.getById({id: id}).then(res => {
+                    this.setData({
+                        startDate,
+                        selectAmount: res.data.price,
+                        details: res.data,
+                        id,
+                        showInputNumber: t ? true : false
+                    })
                 })
-            })
+            } else {
+                // let idsArr = ids.split(',')
+                // let list = []
+                // idsArr.forEach(item => {
+
+                // })
+            }
+
+
 
             // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
             api.getRegisterStatus().then(res => {
