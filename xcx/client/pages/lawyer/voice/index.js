@@ -185,7 +185,7 @@ Page({
         // app.gotoPage('/pages/issue/success/index?type=1')
         // return 
         let params = e.detail.value
-        if (!params.customerRequirement || params.customerRequirement.length < 10) {
+        if (!params.content || params.content.length < 10) {
             app.toastError('问题不能少于10个字')
             return
         }
