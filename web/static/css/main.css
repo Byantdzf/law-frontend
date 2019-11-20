@@ -1333,7 +1333,7 @@ i, em { font-style: normal;}
 .checkboxList { margin-bottom: 10px;}
 .infoAuthForm .layui-elem-field { border:none;}
 .infoAuthForm .layui-elem-field legend { font-size: 16px;}
-.infoAuthForm img { width:240px;}
+.infoAuthForm img { width:240px; height: 146px;}
 
 .userPageCon .lawyerOrderList .index_ccbox2_1 li { margin-right: 0; width: 100%; float:none;}
 

@@ -15,6 +15,9 @@
 		loadData: function () {
 			var _t = this;
 			utils.get(URL.lawyerObj.info, function (res) {
+				res.data.province = res.data.province ? res.data.province.replace('省', '') : '';
+				res.data.city = res.data.city ? res.data.city.replace('市', '') : '';
+				res.data.zone = res.data.zone ? res.data.zone.replace('区', '') : '';
 				_t.data = res.data;
 				_t.loadPage();
 			});
@@ -35,6 +38,18 @@
 				t.id = t.name
 			});
 			utils.getSelect(_t.areaList, '.province', '请选择省', data.province);
+			if (data.city) {
+				var cityData = []
+				$.each(_t.areaList, function (i, t) {
+					if (t.name == data.province) {
+						cityData = t.city
+						$.each(cityData, function (i2, t2) {
+							t2.id = t2.name;
+						});
+					}
+				});
+				utils.getSelect(cityData, '.city', '请选择市', data.city);
+			}
 			form.on('select(changeprovince)', function (res) {
 				var code = res.value
 				
@@ -130,10 +145,10 @@
 						businessType: 10,
 						fileName: $('.idCard2').attr('src') != '/static/images/idcard2.jpg' ? $('.idCard2').attr('src') : ''
 					},
-					{
-						businessType: 20,
-						fileName: $('.idCard4').attr('src') != '/static/images/idcard3.jpg' ? $('.idCard4').attr('src') : ''
-					},
+					// {
+					// 	businessType: 20,
+					// 	fileName: $('.idCard4').attr('src') != '/static/images/idcard3.jpg' ? $('.idCard4').attr('src') : ''
+					// },
 					{
 						businessType: 2,
 						fileName: $('.idCard3').attr('src') != '/static/images/businessCard.jpg' ? $('.idCard3').attr('src') : ''
@@ -171,6 +186,7 @@
 			var data = base.getQuestionType()
 			var html = '';
 			$.each(data, function (i, t) {
+				t.id = t.name;
 				var clz = ''
 				if ($.inArray(t.name, arr) > -1) {
 					clz = 'checked';
