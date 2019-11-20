@@ -3,7 +3,15 @@
     <view class="pa-20 home-list">
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-                <view class="issue-title">{{details.title}}</view>
+                <view class="issue-form-item">
+                    <view class="issue-form-input flex">
+                        <view>已选服务：</view>
+                        <view class="titleBox flex-bd">
+                            <text>{{details.title}}</text>
+                        </view>
+                    </view>
+                </view>
+                <!-- <view class="issue-title">{{details.title}}</view> -->
                 
                 <view class="issue-form-item" wx:if="{{showInputNumber}}">
                     <view class="issue-form-input flex">

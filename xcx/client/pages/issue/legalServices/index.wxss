@@ -2,3 +2,5 @@
 @import "/static/css/issue.wxss";
 
 .numsBox { width:200rpx;}
+
+.titleBox text { border: 1rpx solid #333; padding: 6rpx 10rpx; border-radius: 10rpx; margin: 0 10rpx 10rpx 0;}

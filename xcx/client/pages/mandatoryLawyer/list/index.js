@@ -5,7 +5,7 @@ const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 Page({
     data: {
         type: 31,
-        baseUrl: '/applets/user/service/info/3/',
+        baseUrl: '/applets/user/service/info/3',
         intro: {},
         list: []
     },
@@ -13,16 +13,15 @@ Page({
         let { type } = e
         app.pages.add(this)
 
-        let listUrl = this.data.baseUrl + type
         this.setData({
-            type,
-            listUrl
+            type
         })
         this.loadList()
     },
     loadList() {
         const appList = this.selectComponent('#app-list')
         appList.setParams(params => {
+            params.serviceType = this.data.type
             return params
         })
     },

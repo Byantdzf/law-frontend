@@ -43,8 +43,12 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
-			"current": 23,
+			"current": -1,
 			"list": [
 				{
 					"id": 2,
@@ -111,13 +115,6 @@
 					"id": -1,
 					"name": "issueOneByOne",
 					"pathName": "pages/issue/oneByOne/index",
-					"query": "type=1",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "legalServices",
-					"pathName": "pages/legalServices/list/index",
 					"query": "type=1",
 					"scene": null
 				},
@@ -210,6 +207,13 @@
 					"name": "lawyerDetail",
 					"pathName": "pages/lawyer/detail/index",
 					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": 23,
+					"name": "pages/legalServices/listMutli/index",
+					"pathName": "pages/legalServices/listMutli/index",
+					"query": "type=22",
 					"scene": null
 				}
 			]

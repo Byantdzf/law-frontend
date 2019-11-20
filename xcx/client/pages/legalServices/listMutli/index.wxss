@@ -30,3 +30,4 @@ page { background: #f3f3f3;}
 }
 .list-item .price-box { padding: 20rpx 0;}
 .list-item .btn-box { text-align: right;}
+.list-item .btn-box button:last-child { margin-left: 20rpx;}

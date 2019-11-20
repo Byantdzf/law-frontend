@@ -35,14 +35,35 @@
                                     </view>
                                 </view>
                                 <view class="btn-box">
+                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="addCart" wx:if="{{ !item.addCart }}">
+                                        选择加入
+                                    </button>
+                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="removeCart" wx:else>
+                                        移除
+                                    </button>
                                     <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
-                                        立即购买
+                                        单独购买
                                     </button>
                                 </view>
                             </view>
                         </view>
                     </view>
                 </app-list>
+            </view>
+        </view>
+
+        <view class="bottomCart">
+            <view class="flex">
+                <view class="iconfont icon-susong"></view>
+                <view class="flex-bd">
+                    <view class="total"><text>￥</text>{{total}}</view>
+                    <view class="fonts ellipsis">您选择的服务：{{ cartNameList.join(',') }}</view>
+                </view>
+                <view class="bottomBtn">
+                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyMutliNow">
+                        我要下单
+                    </button>
+                </view>
             </view>
         </view>
     </view>

@@ -26,15 +26,15 @@
 					_t.data = data;
 				});
 			} else {
-				$.each(_t.ids, function (i, t) {
-					utils.getSync(URL.legal.getById + t, function (res) {
-						res.data.price && (total += res.data.price)
-						list.push({id: res.data.id, name: res.data.title});
-					});
-				})
-				data.price = total;
-				data.list = list;
-				_t.data = data;
+				// $.each(_t.ids, function (i, t) {
+				// 	utils.getSync(URL.legal.getById + t, function (res) {
+				// 		res.data.price && (total += res.data.price)
+				// 		list.push({id: res.data.id, name: res.data.title});
+				// 	});
+				// })
+				// data.price = total;
+				// data.list = list;
+				// _t.data = data;
 			}
 
 			_t.getTemp();

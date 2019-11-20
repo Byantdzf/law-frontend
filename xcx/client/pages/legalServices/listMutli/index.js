@@ -17,7 +17,9 @@ Page({
             }
         ],
         intro: {},
-        list: []
+        list: [],
+        cartList: [],
+        cartNameList: []
     },
     onLoad(e) {
         let { type } = e
@@ -71,5 +73,50 @@ Page({
     buyNow(e) {
         let { id } = e.currentTarget.dataset
         app.gotoPage('/pages/issue/legalServices/index?id=' + id + '&t=1')
+    },
+    addCart(e) {
+        let { id } = e.currentTarget.dataset
+        let cartList = this.data.cartList
+        let cartNameList = this.data.cartNameList
+        let dataList = this.data.list
+        let index = cartList.findIndex(item => {
+            return id == item
+        })
+        if (index == -1) {
+            cartList.push(id)
+            cartNameList.push(cartList[index].title)
+            let dataIndex = dataList.findIndex(item => {
+                return id == item.id
+            })
+            dataList[dataIndex].addCart = 1
+        }
+        this.setData({
+            cartList,
+            list: dataList
+        })
+    },
+    removeCart(e) {
+        let { id } = e.currentTarget.dataset
+        let cartList = this.data.cartList
+        let dataList = this.data.list
+        let index = cartList.findIndex(item => {
+            return id == item
+        })
+        if (index != -1) {
+            cartList.splice(index, 1)
+            cartNameList.splice(index, 1)
+            let dataIndex = dataList.findIndex(item => {
+                return id == item.id
+            })
+            dataList[dataIndex].addCart = 0
+        }
+        this.setData({
+            cartList,
+            list: dataList
+        })
+    },
+    buyMutliNow() {
+        let ids = this.data.cartList.join(',')
+        app.gotoPage('/pages/issue/legalServices/index?ids=' + ids + '&t=1')
     }
 })

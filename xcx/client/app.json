@@ -25,6 +25,7 @@
       "root": "pages/legalServices",
       "pages": [
         "list/index",
+        "listMutli/index",
         "detail/index"
       ]
     },

@@ -2,7 +2,7 @@
 <app-page id="app-page">
     <view class="flex-column container page-lawyer">
         <view class="flex-bd">
-            <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
+            <app-list url="{{baseUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
                 <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
                     <view class="img-box">
                         <image src="{{ item.instructionPic }}" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
