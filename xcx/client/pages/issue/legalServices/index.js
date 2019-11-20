@@ -46,6 +46,7 @@ Page({
      */
     onLoad: function (options) {
         let { id, ids, t } = options
+        this.setData({id, ids})
         
         page = this.selectComponent('#app-page')
         page.checkAuth().then((data) => {
@@ -56,31 +57,7 @@ Page({
             startDate = startDate.split(' ')[0]
             this.setData({startDate})
 
-            if (id) {
-                legalServices.getById({id: id}).then(res => {
-                    this.setData({
-                        selectAmount: res.data.price,
-                        list: [res.data.title],
-                        id,
-                        showInputNumber: t ? true : false
-                    })
-                })
-            } else {
-                let idsArr = ids.split(',')
-                let list = []
-                let total = 0
-                idsArr.forEach(item => {
-                    legalServices.getById({id: item}).then(res => {
-                        list.push(res.data.title)
-                        total += res.data.price
-                        this.setData({
-                            list,
-                            ids,
-                            selectAmount: total
-                        })
-                    })
-                })
-            }
+            this.loadData()
 
             // 获取用户注册状态  1-用户未注册，需要用户注册；2-用户已注册，不需要提示
             api.getRegisterStatus().then(res => {
@@ -106,9 +83,46 @@ Page({
             this.setData({ btnDisable: true })
         });
     },
+    loadData() {
+        if (this.data.id) {
+            legalServices.getById({id: this.data.id}).then(res => {
+                this.setData({
+                    selectAmount: res.data.price,
+                    list: [{id: res.data.id, name: res.data.title}],
+                    showInputNumber: t ? true : false
+                })
+            })
+        } else {
+            let idsArr = this.data.ids.split(',')
+            let list = []
+            let total = 0
+            idsArr.forEach(item => {
+                legalServices.getById({id: item}).then(res => {
+                    list.push({id: res.data.id, name: res.data.title})
+                    total += res.data.price
+                    this.setData({
+                        list,
+                        selectAmount: total
+                    })
+                })
+            })
+        }
+    },
     onShow() {
         let selectArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
         this.setData({selectArea})
+    },
+    removeItem(e) {
+        let { id } = e.currentTarget.dataset
+        let idsArr = this.data.ids.split(',')
+        let newArr = []
+        idsArr.forEach(item => {
+            if (item != id) {
+                newArr.push(item)
+            }
+        })
+        this.setData({ids: newArr.join(',')})
+        this.loadData()
     },
     // 改变商品数量
     changeCount(e) {
