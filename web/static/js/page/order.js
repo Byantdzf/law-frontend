@@ -5,6 +5,7 @@
 			var _t = this;
 			_t.id = utils.getQueryString('id');
 			_t.type = utils.getQueryString('type');
+			_t.c = utils.getQueryString('c');
 			_t.hasLawyer = utils.getQueryString('hasLawyer');
 			_t.success = utils.getQueryString('success');
 			_t.payTitle = '支付成功';
@@ -146,12 +147,12 @@
 			// 支付宝支付
 			if (payment == 2) {
 				var params = {
-					orderNo: _t.id,
+					orderNo: _t.orderInfo && _t.orderInfo.orderNo ? _t.orderInfo.orderNo : '',
 					fee: _t.orderInfo.amount,
 					subject: '咨询费',
 					returnUrl: window.location.href + '&success=1'
 				};
-
+console.log(params)
 				utils.confirm(
 					'支付完成前，请不要关闭此支付验证窗口。<br />支付完成后，请根据您支付的情况点击下面按钮。',
 					{ 
@@ -237,7 +238,11 @@
 
 			form.on('submit(returnFirst)', function (res) {
 				var params = res.field;
-				window.location = _t.returnPages;
+				if (_t.c == 'u') {
+					window.location = '/user.html#c=order'
+				} else {
+					window.location = _t.returnPages;
+				}
 			})
 		}
 	}
