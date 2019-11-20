@@ -6,9 +6,9 @@
                 <view class="iconfont icon-location"></view>
                 <view class="pl-10"><app-cityPicker id="app-cityPicker" selectArea="{{currArea}}" isHome="true" bind:change="getCityResult"></app-cityPicker></view>
             </view>
-            <view class="flex-bd flex search-box" bind:tap="gotoSearch">
-                <input class="flex-bd pl-20" type="text" name="keyWord" placeholder="关键字搜索相关信息" placeholder-class="placeholder" />
-                <view class="iconfont icon-search pl-20 pr-20"></view>
+            <view class="flex-bd flex search-box">
+                <input class="flex-bd pl-20" type="text" name="keyWord" placeholder="关键字搜索相关信息" placeholder-class="placeholder" bindinput="searchChange" confirm-type="search" bindconfirm="handleSearch"/>
+                <view class="iconfont icon-search pl-20 pr-20" bind:tap="handleSearch"></view>
             </view>
         </view>
         <view class="tabBox"><app-tab items="{{ types }}" bind:change="changeType" wx:if="{{ types.length > 1}}" /></view>

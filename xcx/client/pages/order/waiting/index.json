@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的待接订单",
+  "usingComponents": {
+    "app-empty":"/components/app-empty/index",
+    "app-list": "/components/app-list/index"
+  },
+  "disableScroll":true
+}

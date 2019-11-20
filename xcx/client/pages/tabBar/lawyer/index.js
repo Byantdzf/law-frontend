@@ -84,7 +84,7 @@ Page({
         if(index == -1) {
             index = 0
         }
-console.log(this.data.sorts)
+
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
             this.data.types[index] && (this.data.types[index].name && this.data.types[index].key  && (params.goodAt = this.data.types[index].name))
@@ -95,6 +95,11 @@ console.log(this.data.sorts)
                 }
             })
             params.orderBy = sortArr.join(', ')
+            if (this.keyWord) {
+                params.keyWord = this.keyWord
+            } else {
+                delete params.keyWord
+            }
             return params
         })
     },
@@ -154,8 +159,15 @@ console.log(this.data.sorts)
     updateList(e) {
         this.setData({ list: e.detail })
     },
+    searchChange(e) {
+        this.keyWord = e.detail.value
+    },
+    handleSearch() {
+        this.loadList()
+    },
     gotoSearch() {
-        app.gotoPage('/pages/search/index/index')
+        // app.gotoPage('/pages/search/index/index')
+
     },
     gotoLawyerDetail(e) {
         let { id } = e.currentTarget.dataset

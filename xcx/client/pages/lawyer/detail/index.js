@@ -1,6 +1,7 @@
 // pages/lawyer/detail/index.js
 const app = getApp()
 const selectApi = require('../../../service/select')
+const userApi = require('../../../service/user')
 Page({
 
   /**
@@ -12,41 +13,7 @@ Page({
     gender: ['', '男', '女'],
     defaultPic: '/static/images/demo/img_lawyer.png',
     details: {},
-    comments: [
-      // {
-      //   id: 1,
-      //   name: 'Silent Li',
-      //   area: '广东-深圳',
-      //   imgUrl: '../../../static/images/demo/wakaka.png',
-      //   type: '风险代理律师',
-      //   servicesScore: '5',
-      //   servicesTime: '2019年8月8日',
-      //   Professional: '5',
-      //   remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
-      // },
-      // {
-      //   id: 2,
-      //   name: '泼辣丸子',
-      //   area: '广东-深圳',
-      //   imgUrl: '../../../static/images/demo/wakaka.png',
-      //   type: '风险代理律师',
-      //   servicesScore: '5',
-      //   servicesTime: '2019年8月8日',
-      //   Professional: '5',
-      //   remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
-      // },
-      // {
-      //   id: 3,
-      //   name: '我在旧城等待花开',
-      //   area: '广东-深圳',
-      //   imgUrl: '../../../static/images/demo/wakaka.png',
-      //   type: '风险代理律师',
-      //   servicesScore: '5',
-      //   servicesTime: '2019年8月8日',
-      //   Professional: '5',
-      //   remark: '这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情，这是用户的评论详情',
-      // }
-    ]
+    comments: []
   },
 
   /**
@@ -57,7 +24,7 @@ Page({
     this.setData({
       id
     })
-
+    app.pages.add(this)
     this.loadData()
   },
 
@@ -101,6 +68,15 @@ Page({
   },
   onByOneTap() {
     app.gotoPage('/pages/lawyer/oneByOne/index?id=' + this.data.id)
+  },
+  inviteTap() {
+    app.gotoPage('/pages/order/waiting/index?lawyerId=' + this.data.id)
+  },
+  triggerInvite({ lawyerId, orderId }) {
+    userApi.orderModifyDispatchWayByUser({ lawyerId, orderId }).then(res => {
+      app.toastSuccess('邀请律师请求成功！')
+      this.loadData()
+    })
   },
   imageError(e) {
     var _errImg = e.target.dataset.img
