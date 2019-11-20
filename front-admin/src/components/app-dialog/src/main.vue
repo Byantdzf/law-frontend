@@ -104,6 +104,8 @@
 
 				if (this.full) {
 					names.push('is-full')
+				} else {
+					names.push('is-normal')
 				}
 
 				return names
@@ -244,6 +246,11 @@
 	}
 	.el-dialog__body {
 		overflow: auto;
+	}
+	&.is-normal {
+		.el-dialog__body {
+			max-height: 500px;
+		}
 	}
 }
 </style>
