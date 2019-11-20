@@ -48,6 +48,8 @@ border-color: #e0e0e0;
 
 .news-items .desc {
 margin-top: 12rpx;
+max-height: 110rpx;
+  overflow: hidden;
 }
 .news-items .title {
 font-size: 32rpx;

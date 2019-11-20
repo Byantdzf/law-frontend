@@ -223,7 +223,6 @@
   import AppTable from '@/mixins/table'
   import AppDialog from '@/mixins/dialog'
   import AppSearch from '@/mixins/search'
-  import AppRsText from '@/components/app-table/lib/rsText'
   import AppChartBar from '@/components/app-chart-bar'
   export default {
     components: {
@@ -481,7 +480,6 @@
           }
         } catch (e) {
           // error
-          console.log(e)
         }
       },
       async handleBtnAction(row, type) {
