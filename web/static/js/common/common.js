@@ -355,7 +355,7 @@
 			}
 		},
 		login: function (eb) {
-			var html = '<div class="eqcodebox"><p>请用微信扫码登录，测试版，实际上会跳到微信的二维码页面<b class="layui-layer-close">X</b></p><img src="/static/images/eqcode_240.png" width="244"></div><p style="text-align:center; margin-top:10px;" class="showTestCount">登录倒计时：3</p>';
+			var html = '<div class="eqcodebox"><p>请用微信扫码登录，测试版，实际上会跳到微信的二维码页面<b class="layui-layer-close">X</b></p><img src="/static/images/eqcode_240.png?_=1" width="244"></div><p style="text-align:center; margin-top:10px;" class="showTestCount">登录倒计时：3</p>';
 
 			var ops = {
 				type: 1,
@@ -390,7 +390,7 @@
 			utils.dialog(ops);
 		},
 		eqcodew: function () {
-			var html = '<div class="eqcodebox"><p style="font-size:12px;">关注虎甲问答，立即获取100元法律咨询优惠券<b class="layui-layer-close">X</b></p><img src="/static/images/eqcode_240.png" width="244"><h4>扫码立即微信咨询</h4></div>';
+			var html = '<div class="eqcodebox"><p style="font-size:12px;">关注虎甲问答，立即获取100元法律咨询优惠券<b class="layui-layer-close">X</b></p><img src="/static/images/eqcode_240.png?_=1" width="244"><h4>扫码立即微信咨询</h4></div>';
 
 			var ops = {
 				type: 1,
@@ -403,7 +403,7 @@
 			utils.dialog(ops);
 		},
 		eqService: function () {
-			var html = '<div class="eqcodebox"><p style="font-size:18px;">客服电话：' + global.tel + '<b class="layui-layer-close" style=" font-size:12px;">X</b></p><img src="/static/images/eqcode_240.png" width="244"><h4>扫码添加客服微信咨询</h4></div>';
+			var html = '<div class="eqcodebox"><p style="font-size:18px;">客服电话：' + global.tel + '<b class="layui-layer-close" style=" font-size:12px;">X</b></p><img src="/static/images/eqcode_240.png?_=1" width="244"><h4>扫码添加客服微信咨询</h4></div>';
 
 			var ops = {
 				type: 1,
