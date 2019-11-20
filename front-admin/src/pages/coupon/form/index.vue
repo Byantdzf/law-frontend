@@ -20,9 +20,19 @@
         </el-select>
       </el-form-item>
       <el-form-item v-if="form.scene == 2">
-        <el-radio-group v-model="form.sceneRule">
-          <el-radio label="1">邀请别人，别人打开链接后即可获得</el-radio>
-          <el-radio class="pt-10" label="2">邀请别人，别人在平台消费后即可获得</el-radio>
+        <el-radio-group v-model="form.shareRule">
+          <el-radio label="21">邀请别人，别人打开链接后即可获得</el-radio>
+          <el-radio class="pt-10" label="22">邀请别人，别人在平台消费后即可获得</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item v-if="form.scene == 3">
+        <el-radio-group v-model="form.shareRule">
+          <el-radio label="31">
+            <span class="pr-10">消费满</span>
+            <el-input size="mini" v-model.number="form.ruleAmout" :disabled="form.shareRule != '31'" style="width: 100px;"></el-input>
+            <span class="pl-10">即赠送</span>
+          </el-radio>
+          <el-radio class="pt-10" label="32">无限制，所有用户/选择的客户均可得</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="优惠券备注">
@@ -162,7 +172,8 @@ export default {
         sendCount: this.$val(this.row, 'sendCount'),
         overAmount: this.$val(this.row, 'overAmount'),
         amount: this.$val(this.row, 'amount'),
-        sceneRule: '1'
+        shareRule: this.$val(this.row, 'shareRule', '21'),
+        ruleAmout: this.$val(this.row, 'ruleAmout'),
       },
       useTarget: '1',
       columns: [
