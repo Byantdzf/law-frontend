@@ -31,6 +31,7 @@ Page({
     orderApi.orderDetails(id).then(res => {
       const item = res.data || {};
       item.questionTypeName = '';
+      item.emergencyName = orderEmergency[item.emergency];
       this.setData({ item });
       selectApi.data({ dictCode: 'QuestionType' }).then(res => {
         const items = res.data || [];
