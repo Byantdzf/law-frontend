@@ -153,10 +153,15 @@ Page({
   handleCancel(e) {
     const { index } = e.currentTarget.dataset;
     const id = this.data.list[index].id;
+    if (this.isAjaxLoading) {
+      return false;
+    }
     app.confirm({
       content: '系统正在积极为您指派律师，您确定要取消订单？'
     }).then(() => {
+      this.isAjaxLoading = true;
       orderApi.orderCancel(id).then(() => {
+        this.isAjaxLoading = false;
         wx.showToast({
           title: '订单已取消',
           icon: 'success'
@@ -164,19 +169,30 @@ Page({
         this.setData({
           [`list[${index}].orderStatus`]: 70
         });
+      }).catch(e => {
+        this.isAjaxLoading = false;
       });
-    }).catch(e => {});
+    }).catch(e => {
+      this.isAjaxLoading = false;
+    });
   },
   handlePay(e) {
     const { index } = e.currentTarget.dataset;
     const orderNo = this.data.list[index].orderNo;
+    if (this.isAjaxLoading) {
+      return false;
+    }
+    this.isAjaxLoading = true;
     orderApi.pay({orderNo: orderNo}).then(res => {
+      this.isAjaxLoading = false;
       app.wechatPay(res.data, function (res) {
           app.gotoPage('/pages/issue/success/index?type=1')
       }, function (res) {
           app.alert('支付失败，请到我的订单再次发起支付')
       })
-    })
+    }).catch(e => {
+      this.isAjaxLoading = false;
+    });
     
   },
   handleComment(e) {

@@ -90,9 +90,13 @@ Page({
   // 处理取消订单操作
   handleCancel() {
     const id = this.orderId;
+    if (this.isAjaxLoading) {
+      return false;
+    }
     app.confirm({
       content: '系统正在积极为您指派律师，您确定要取消订单？'
     }).then(() => {
+      this.isAjaxLoading = true;
       orderApi.orderCancel(id).then(() => {
         wx.showToast({
           title: '订单已取消',
@@ -101,8 +105,13 @@ Page({
         this.setData({
           [`item.orderStatus`]: 70
         });
+        this.isAjaxLoading = false;
+      }).catch(e => {
+        this.isAjaxLoading = false;
       });
-    }).catch(e => {});
+    }).catch(e => {
+      this.isAjaxLoading = false;
+    });
   },
   // 点击评价按钮
   handleComment() {
@@ -112,17 +121,26 @@ Page({
   // 处理确认完成订单操作
   handleConfirm() {
     const { id, lawyer, lawyerPic } = this.data.item;
+    if (this.isAjaxLoading) {
+      return false;
+    }
     app.confirm({
       content: '您确定要完成此订单吗？'
     }).then(() => {
+      this.isAjaxLoading = true;
       orderApi.orderConfirm(id).then(() => {
+        this.isAjaxLoading = false;
         wx.showToast({
           title: '操作成功',
           icon: 'success'
         });
         app.gotoPage(`/pages/order/evaluate/index?id=${id}&lawyer=${lawyer}&lawyerPic=${lawyerPic || ''}`);
+      }).catch(e => {
+        this.isAjaxLoading = false;
       });
-    }).catch(e => {});
+    }).catch(e => {
+      this.isAjaxLoading = false;
+    });
   },
   // 点击追问按钮
   handleAsk() {
@@ -144,15 +162,22 @@ Page({
       });
       return false;
     }
+    if (this.isAjaxLoading) {
+      return false;
+    }
+    this.isAjaxLoading = true;
     orderApi.orderAskSecond({
       id: this.orderId,
       content: this.askContent
     }).then(() => {
+      this.isAjaxLoading = false;
       wx.showToast({
         title: '您的追问已提交'
       });
       this.loadData(this.orderId);
       this.setData({ showAskWrapper: false });
+    }).catch(e => {
+      this.isAjaxLoading = false;
     })
   },
   // 点击申诉

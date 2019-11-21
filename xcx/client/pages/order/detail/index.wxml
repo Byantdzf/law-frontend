@@ -10,10 +10,10 @@
         return '5,10,20'.indexOf(item.orderStatus) !== -1;
       },
       showPay: function(item) {
-        return item.orderStatus == 10;
+        return item.orderStatus == 10 && item.orderCategory != 32;
       },
       showComment: function(item) {
-        return item.orderStatus == 50;
+        return item.orderStatus == 50 && item.orderCategory != 32;
       },
       showReply: function(item) {
         return '40,50,60'.indexOf(item.orderStatus) !== -1;

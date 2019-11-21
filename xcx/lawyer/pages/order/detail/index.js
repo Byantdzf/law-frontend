@@ -191,7 +191,7 @@ Page({
 
   // 处理确认完成订单操作
   handleConfirm() {
-    const { id, orderType, orderStatus } = this.data.item;
+    const { id, orderType, orderStatus, orderCategory } = this.data.item;
     app.confirm({
       content: '您确定要完成此订单吗？'
     }).then(() => {
@@ -202,31 +202,44 @@ Page({
       };
       if (orderType == 1) {
         // 咨询类订单
-        if (this.data.replyIscontent) {
-          // 回复文字内容
-          if (!this.data.content) {
-            wx.showToast({
-              title: '请输入回复的内容',
-              icon: 'none',
-              duration: 3000
-            });
-            return false;
+        if (orderCategory == 11) {
+          if (this.data.replyIscontent) {
+            // 回复文字内容
+            if (!this.data.content) {
+              wx.showToast({
+                title: '请输入回复的内容',
+                icon: 'none',
+                duration: 3000
+              });
+              return false;
+            }
+            if (this.data.content.length < 20 || this.data.content.length > 500) {
+              wx.showToast({
+                title: '回复的内容不能小于20字符且不大于500字符',
+                icon: 'none',
+                duration: 3000
+              });
+              return false;
+            }
+            params.msgType = 1;
+            params.content = this.data.content;
+          } else {
+            if (this.data.recordTime < 30 || this.data.recordTime > 180) {
+              wx.showToast({
+                title: '语音时长不能小于30s，且不大于180s',
+                icon: 'none',
+                duration: 3500
+              });
+              return false;
+            }
+            // 回复语音
+            params.msgType = 2;
+            params.filePath = this.data.filePath;
+            params.recordTime = this.data.recordTime;
           }
-          params.msgType = 1;
-          params.content = this.data.content;
         } else {
-          if (this.data.recordTime < 30 || this.data.recordTime > 180) {
-            wx.showToast({
-              title: '语音时长不能小于30s，且不大于180s',
-              icon: 'none',
-              duration: 3500
-            });
-            return false;
-          }
-          // 回复语音
-          params.msgType = 2;
-          params.filePath = this.data.filePath;
-          params.recordTime = this.data.recordTime;
+          // 指定律师
+          params.msgType = 7;
         }
 
         orderApi.orderConfirm(params).then(() => {

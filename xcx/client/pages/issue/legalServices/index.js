@@ -89,7 +89,8 @@ Page({
                 this.setData({
                     selectAmount: res.data.price,
                     list: [{id: res.data.id, name: res.data.title}],
-                    showInputNumber: t ? true : false
+                    // showInputNumber: t ? true : false
+                    showInputNumber: false
                 })
             })
         } else {

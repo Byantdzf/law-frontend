@@ -158,7 +158,8 @@
         </view>
       </view>
       <view class="btn-box mt-45">
-        <button type="primary" bindtap="handleConfirm">回复并发送订单确认</button>
+        <button type="primary" bindtap="handleConfirm" wx:if="{{ item.orderCategory != 12 }}">回复并发送订单确认</button>
+        <button type="primary" bindtap="handleConfirm" wx:else>发送订单确认</button>
       </view>
     </view>
     <view wx:if="{{ item.orderStatus == 20 }}">
