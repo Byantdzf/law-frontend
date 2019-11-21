@@ -24,7 +24,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url=""
+        url="/mng/message/querySystemMsglist"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
