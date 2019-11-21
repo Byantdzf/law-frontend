@@ -78,7 +78,7 @@
       <view class="label cl-999">订单金额：</view>
       <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>
     </view>
-    <view class="flex">
+    <view class="flex" wx:if="{{ item.emergency || item.emergency === 0 }}">
       <view class="label cl-999">是否紧急：</view>
       <view class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</view>
     </view>
