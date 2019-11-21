@@ -14,6 +14,7 @@
 			{
 				title: "操作",
 				width: "80",
+				fixed:"right",
 				actions: [
 					{ "id": "view", "name": global.btn.viewBtn },
 				]

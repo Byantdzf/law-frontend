@@ -127,7 +127,7 @@
 				} else if (_t.ids) {
 					params.chooseService = _t.ids.join(',')
 				}
-				params.orderCategory = _t.data.serviceType
+				params.orderCategory = 22
 				params.token = utils.cookie(global.token)
 				utils.put(URL.issue.postLegals, params, function (res) {
 					var orderId = res.data.orderId;

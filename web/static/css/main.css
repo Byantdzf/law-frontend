@@ -1238,10 +1238,10 @@ i, em { font-style: normal;}
 
 .noMinHeight { min-height: auto;}
 
-.bindLeft { position: relative; margin-left:50px; margin-right:90px;}
+/* .bindLeft { position: relative; margin-left:50px; margin-right:90px;}
 .bindLeft:after { content: ""; position: absolute; right:-70px; top:0; width:100%; height:100%; background: url('/static/images/rightArrow.png') right center no-repeat; background-size: 50px;}
-.bindRight { float:left;}
-.bindRight { float: left; width:500px;}
+.bindRight { float:left;} */
+.bindRight { width:500px; margin:0 auto;}
 .bindRight .layui-input-inline { width:160px;}
 
 .authPage img { display: block; margin: 0 auto;}
@@ -1442,15 +1442,15 @@ i, em { font-style: normal;}
 .layui-form-upload a { display: block; width: 339px; height:207px; overflow: hidden;}
 .layui-form-upload img { display: block; width: 100%; height:100%;}
 
-.replyIcon { position: relative; padding-left:40px!important; color: #999; line-height: 1.5;}
-.replyIcon .iconfont { position: absolute; left:0; top:10px; font-size: 30px;}
+.replyIcon { position: relative; color: #999; line-height: 1.5;}
+.replyIcon .iconfont { position: absolute; left:0; top:0; color:#999; font-size: 30px;}
 .replyList .icon-wenjian { font-size:18px; margin-right:10px;}
 .fileList { height: 50px;}
-.fileList a { float:left; position: relative; margin-right:10px; padding: 10px; border: 1px solid #e8e8e8;}
-.fileList a img { width:50px;}
-.fileList a .icon-wenjian { font-size: 30px;}
-.fileList a .del { position: absolute; right: 0; top:0; padding: 3px; font-size: 12px;}
-.uploadFiles { display: block; margin-top:10px;}
+.fileList span { float:left; position: relative; margin-right:10px; border: 1px solid #e8e8e8;}
+.fileList span a { display: block; padding: 7px;}
+.fileList span img { width:50px;}
+.fileList span .icon-wenjian { font-size: 30px;}
+.fileList span .del { position: absolute; right: -7px; top:-7px; width:20px; height:20px; line-height: 20px; border-radius: 50%; background: #f00; color:#fff; text-align: center; font-size: 12px; cursor: pointer;}
 
 .myList { padding: 20px 30px;}
 
@@ -1468,3 +1468,12 @@ i, em { font-style: normal;}
 .askTitle { height: 36px; line-height: 36px; padding-bottom: 50px; padding-left:50px;}
 .askTitle img { float: left; width:36px; height:36px; margin-right:20px;}
 .askTitle h3 { font-size: 32px;}
+
+.uploadMp3Files { position: relative; width: 50px;}
+.uploadFonts { display: block; padding-left:40px;}
+.uploadMp3Files .icon-close { cursor: pointer; position: absolute; right:-7px; top:-7px; width:25px; height:25px; line-height: 25px; text-align: center; color:#fff; background: #f00; border-radius: 50%; font-size: 12px;}
+.uploadMp3Files img {
+    width:100%;
+}
+.orderDetailUserPicBox { position: relative;}
+.orderDetailUserPicBox .orderDetailUserPic { width:30px; height: 30px; border-radius: 50%; margin-left: 20px;}
