@@ -72,7 +72,7 @@ Page({
             params.chooseService = id
             params.fileType = this.data.list[index].businessTypeName
             params.form = 1
-            params.orderCategory = 0
+            params.orderCategory = 41
             params.amount = this.data.list[index].price
             userApi.postTemplate(params).then(res => {
                 app.wechatPay(res.data, function (res) {
