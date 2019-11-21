@@ -205,7 +205,7 @@
             this.$msgSuccess('操作成功！')
             this.refreshTable()
           } catch (error) {
-            
+            // error
           }
         } else {
           this.$msgError('请选择需要删除的数据')

@@ -1,4 +1,4 @@
-import { get, put } from '@/utils/xhr.js'
+import { get, put, del } from '@/utils/xhr.js'
 
 const member = {
   namespaced: true,
@@ -16,6 +16,9 @@ const member = {
     lawyerAuditView: (context, id) => get(`/member/lawyer/audit/${id}`),
     // 审核律师
     lawyerAudit: (context, { id, ...rest }) => put(`/member/lawyer/audit/result/${id}`, { ...rest }),
+
+    // 律师 -- 删除
+    lawyerDel: (context, ids) => del(`/member/lawyer/${ids}`),
   }
 }
   
