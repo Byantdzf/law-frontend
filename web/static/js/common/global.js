@@ -19,6 +19,7 @@ var global = {
     defaultRows: 10,
     defaultPage: 1,
     token: appToken + '_TOKEN',             // 与后端交互的token名称字段
+    lawyerToken: appToken + '_LAWYER_TOKEN',// 与后端交互的token名称字段
     account: appToken + '_ACCOUNT',         // 登录后本地保存用户名字段
     backToken:  'LOGIN_ACCESS_TOKEN',       // 后端授权需要携带的cookie名称
     userInfoToken: appToken + '_USERINFO',  // 登录的用户信息

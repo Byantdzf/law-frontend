@@ -12,7 +12,7 @@
 			var _t = this;
 			utils.get(URL.lawyerObj.order.getById, { orderId: _t.id }, function (res) {
 				var data = res.data;
-				
+
 				var type = data.orderType;
 				var category = data.orderCategory;
 				var temp = '';
@@ -31,7 +31,7 @@
 						temp = '/lawyer/order/orderDetailTemplate.html';
 					}
 				}
-				
+
 				$.each(global.rs.orderStatus, function (i, t) {
 					if (t.id == data.orderStatus) {
 						data.statusName = t.name;
@@ -58,15 +58,28 @@
 						data.questionTypeName = t.name;
 					}
 				})
+
+				console.log(type)
+				data.news = {};
+				if (type == 3 || type == 2) {
+					utils.getSync(URL.legal.getById + data.chooseService, function (res) {
+						data.news = res.data || {};
+					});
+				}
+
 				var html = utils.getTemp(temp, data);
 				$('.orderDetails').html(html);
-				
+
 				if (data.orderStatus != 10 && data.orderStatus != 20) {
 					_t.queryReply(data.id)
 				}
 
 				if ($('.uploadFiles').length) {
 					_t.initUpload('.uploadFiles');
+				}
+
+				if ($('.uploadMp3Btn').length) {
+					_t.initUploadMp3('.uploadMp3Btn');
 				}
 
 				// 获取评论
@@ -86,54 +99,70 @@
 					}
 				})
 
-				// 取消订单
-				$('.cancelOrder').off().on('click', function () {
-					utils.confirm('系统正在积极为您指派律师，您确定要取消订单？', function (i) {
-						layer.close(i);
-						layer.close(index);
-						utils.get(URL.lawyerObj.order.cancel, { orderId: data.id }, function (res) {
-							utils.msg('取消成功');
-							_t.queryList(_t.currPage);
-						})
-					})
-				})
-
-				// 回复提交
-				$('.askAgainBtn').off().on('click', function () {
-					var val = $.trim($('.askAgainContent').val())
-					if (!val) {
-						utils.msg('请输入回复内容');
-						return
-					}
-					if (val.length < 30 || val.length > 300) {
-						utils.msg('回复内容长度为30字～300字');
-						return
+				// 回复语音咨询提交
+				$('.replyVoiceSubmit').off().on('click', function () {
+					var mp3 = $('.uploadedUrl').length ? $('.uploadedUrl').attr('href') : ''
+					var val = $.trim($('.content').val())
+					if (!mp3) {
+						if (!val) {
+							utils.msg('请输入回复内容');
+							return
+						}
+						if (val.length < 30 || val.length > 300) {
+							utils.msg('回复内容长度为30字～300字');
+							return
+						}
 					}
 					var params = {
 						orderId: data.id,
 						curOrderStatus: data.orderStatus,
 						operateType: 2,
 						msgType: 1,
-						content: val
+						content: val,
+						sentTime: utils.nowTime()
 					}
-					utils.postJson(URL.lawyerObj.order.reply, params, function (res) {
-						utils.msg('回复成功')
-						_t.loadOrderDetails(item)
+					if (mp3) {
+						params.filePath = mp3;
+						params.msgType = 2;
+					}
+					utils.msg('确认回复并发送订单确认？', function () {
+						utils.postJson(URL.lawyerObj.order.reply, params, function (res) {
+							utils.msg('回复成功')
+							_t.getData();
+						})
 					})
 				})
 
-				// 上传文件提交
+				// 回复一对一咨询提交
+				$('.replyOneByOneSubmit').off().on('click', function () {
+					var params = {
+						orderId: data.id,
+						curOrderStatus: data.orderStatus,
+						operateType: 2,
+						msgType: 7,
+						sentTime: utils.nowTime()
+					}
+					utils.msg('确认发送订单确认？', function () {
+						utils.postJson(URL.lawyerObj.order.reply, params, function (res) {
+							utils.msg('回复成功')
+							_t.getData();
+						})
+					})
+				})
+
+				// 非诉讼法律服务/诉讼法律服务咨询提交
 				$('.legalSevicesSubmit').off().on('click', function () {
-					var list = $('.fileList a').length;
-					if (list.length < 1) {
+					var list = $('.fileList').find('span').length;
+					if (list < 1) {
 						utils.msg('请上传文件');
 						return
 					}
 					var attachmentList = [];
-					$('.fileList a').each(function () {
+					$('.fileList').find('span').each(function () {
 						var item = {};
 						item.fileType = 4;
-						item.filePath = $(this).data('url');
+						item.filePath = $(this).find('a').attr('href');
+						attachmentList.push(item);
 					});
 					var params = {
 						orderId: data.id,
@@ -143,7 +172,33 @@
 					}
 					utils.postJson(URL.lawyerObj.order.replyFiles, params, function (res) {
 						utils.msg('回复成功')
-						_t.loadOrderDetails(item)
+						_t.getData();
+					})
+				})
+
+				// 非诉讼法律服务/诉讼法律服务咨询提交
+				$('.lawyerSubmit').off().on('click', function () {
+					var list = $('.fileList').find('span').length;
+					if (list < 1) {
+						utils.msg('请上传文件');
+						return
+					}
+					var attachmentList = [];
+					$('.fileList').find('span').each(function () {
+						var item = {};
+						item.fileType = 4;
+						item.filePath = $(this).find('a').attr('href');
+						attachmentList.push(item);
+					});
+					var params = {
+						orderId: data.id,
+						curOrderStatus: data.orderStatus,
+						operateType: 2,
+						attachmentList: attachmentList
+					}
+					utils.postJson(URL.lawyerObj.order.replyFiles, params, function (res) {
+						utils.msg('回复成功')
+						_t.getData();
 					})
 				})
 
@@ -201,22 +256,45 @@
 				_t.orderPetition(orderId);
 			})
 		},
-    
+
 		// 初始化图片上传功能
 		initUpload: function (btn) {
 			// 上传图片
 			var p = {};
 			p.btn = btn;
-			p.accept = {
-				extensions: 'doc,docx,pdf',
-				mimeTypes: '.doc,.docx,.pdf'
-			};
-			utils.uploadFiles(p, function(res) {
+			utils.uploadFiles(p, function (res) {
 				var url = res.data;
-				$('.fileList').append('<a href="javascript:;" data-url="'+url+'"><i class="iconfont icon-wenjian"></i><i class="iconfont icon-close del"></i></a>');
-				$('.fileList').find('.del').off().on('click', function () {
-					$(this).closest('a').remove();
+				$('.fileList').removeClass('hidden')
+				$('.fileList>div').append('<span><a href="' + url + '" target="_blank"><i class="iconfont icon-wenjian"></i></a><i class="iconfont icon-close del"></i></span>');
+
+				$('.fileList .del').off().on('click', function () {
+					$(this).closest('span').remove();
+					if (!$('.fileList>div').find('span').length) {
+						$('.fileList').addClass('hidden')
+					}
 				});
+			});
+		},
+
+		// 初始化图片上传功能
+		initUploadMp3: function (btn) {
+			// 上传图片
+			var p = {};
+			p.btn = btn;
+			p.accept = {
+				extensions: 'mp3',
+				mimeTypes: '.mp3'
+			};
+			utils.uploadFiles(p, function (res) {
+				var url = res.data;
+				$('.uploadMp3Files').html('<a class="uploadedUrl" href="' + url + '" target="_blank"><img src="/static/images/mp3.jpg" /></a><i class="iconfont icon-close"></i>');
+				$('.uploadMp3Btn').addClass('hidden');
+
+				$('.icon-close').off().on('click', function (e) {
+					$(this).closest('.uploadMp3Files').html('');
+					$('.uploadMp3Btn').removeClass('hidden');
+					e.stopPropagation()
+				})
 			});
 		},
 	}

@@ -50,15 +50,27 @@
 
 		getHeader: function () {
 			var obj = {};
-			obj = global.userInfo || {};
-			obj.isLogin = utils.cookie(global.token) ? 1 : 0;
 
 			var keyworkds = $.trim(utils.getQueryString('keyword'));
 			if (keyworkds) {
 				obj.keyWord = keyworkds;
 			}
 			if (window.location.href.indexOf('/lawyer/') > -1) {
+				var isLogin = utils.cookie(global.lawyerToken) ? 1 : 0;
+				if (!global.userInfo || JSON.stringify(global.userInfo) == '{}') {
+					if (isLogin) {
+						utils.getSync(URL.lawyerObj.info, function (res) {
+							obj = res.data || {}
+						});
+					}
+				} else {
+					obj = global.userInfo;
+				}
+				obj.isLogin = isLogin;
 				obj.isLawyer = 1;
+			} else {
+				obj = global.userInfo || {};
+				obj.isLogin = utils.cookie(global.token) ? 1 : 0;
 			}
 			var html = utils.getTemp('/page/common/header.html', obj);
 			$('.appTop').html(html);
@@ -84,6 +96,8 @@
 			utils.setCookie(global.userInfoToken, '');
 			utils.setCookie(global.token, '');
 			utils.setCookie(global.backToken, '');
+			utils.setCookie(global.lawyerToken, '');
+			utils.setCookie('wechatTempToken', '');
 			setTimeout(function () {
 				window.location = '/index.html';
 			}, 10);

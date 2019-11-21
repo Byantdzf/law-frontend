@@ -8,7 +8,7 @@
 				var params = res.field;
 				params.from = 2;
 				utils.get(URL.lawyerObj.login, params, function (res) {
-					utils.setCookie(global.token, res.data.sessionId);
+					utils.setCookie(global.lawyerToken, res.data.sessionId);
 					utils.get(URL.lawyerObj.info, params, function (res) {
 						utils.setCookie(global.userInfoToken, JSON.stringify(res.data));
 						window.location = '/lawyer/index.html'
@@ -27,19 +27,26 @@
 				var params = {
 					accessCode: 'http://' + window.location.host + window.location.pathname
 				};
-				utils.get(URL.user.wxLogin, params, function (res) {
+				utils.get(URL.user.wxLawyerLogin, params, function (res) {
 					var test = window.open(res.data.url)
 					var timer = null;
 					timer = window.setInterval(function () {
-						utils.get(URL.user.wxLoginStatus, {state: res.data.state}, function (res) {
+						utils.get(URL.user.wxLawyerLoginStatus, {state: res.data.state}, function (res) {
 							if (res.code == '000000') {
-								utils.setCookie(global.token, res.data);
-								window.clearInterval(timer);
-								test.close()
-								utils.get(URL.user.info, function (response) {
-									utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
-									// cb && cb(response.data)
-								})
+								if (res.data.loginResult == 1) {
+									utils.setCookie(global.lawyerToken, res.data.token);
+									window.clearInterval(timer);
+									test.close()
+									utils.get(URL.user.info, function (response) {
+										utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
+										window.location = '/lawyer/index.html';
+									})
+								} else {
+									utils.setCookie('wechatTempToken', res.data.token);
+									window.clearInterval(timer);
+									test.close()
+									window.location = '/lawyer/bind.html';
+								}
 							}
 						});
 					}, 1000)

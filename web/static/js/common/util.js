@@ -87,11 +87,23 @@ layui.define(function (exports) {
 
 			// 判断接口是否需要授权，处理授权相关信息
 			var headers = {}
-			// var isAuth = !data.noAuth;
-			// delete (data.noAuth);
-			if (gather.cookie(global.token)) {
+			var isAuth = !data.noAuth;
+			delete (data.noAuth);
+
+			var token = ''
+			if (window.location.href.indexOf('/lawyer/') > -1) {
+				token = gather.cookie(global.lawyerToken)
+			} else {
+				token = gather.cookie(global.token)
+			}
+
+			if (url && url.indexOf('/pc/user/lawyer/info/complete') > -1) {
+				token = gather.cookie('wechatTempToken')
+			}
+
+			if (token && isAuth) {
 				var headers = {
-					Authorization: 'Bearer ' + gather.cookie(global.token)
+					Authorization: 'Bearer ' + token
 				};
 				// data.account = gahter.cookie('account');
 			}
@@ -325,7 +337,7 @@ layui.define(function (exports) {
 		// 读取用户登录cookie
 		localusers: function () {
 			global.userInfo = this.cookie(global.userInfoToken) ? JSON.parse(this.cookie(global.userInfoToken)) : {};
-			if (gather.cookie(global.token) && !global.userInfo) {
+			if (gather.cookie(global.token) && (JSON.stringify(global.userInfo) == '{}' || !global.userInfo)) {
 				utils.getSync(URL.user.info, function (response) {
 					utils.setCookie(global.userInfoToken, JSON.stringify(response.data));
 				})
@@ -1071,6 +1083,20 @@ layui.define(function (exports) {
 			var m = dd.getMonth() + 1;
 			var d = dd.getDate();
 			return y + '-' + lay.digit(m) + '-' + lay.digit(d);
+		},
+
+		// 获取当前时分秒
+		nowTime: function () {
+			var dd = new Date();
+			var y = dd.getFullYear();
+			var m = dd.getMonth() + 1;
+			var d = dd.getDate();
+			
+			var h = dd.getHours();
+			var mins = dd.getMinutes();
+            var s = dd.getSeconds();
+
+			return y + '-' + lay.digit(m) + '-' + lay.digit(d) + ' ' + lay.digit(h) + ':' + lay.digit(mins) + ':' + lay.digit(s);
 		},
 
 		// 获取某天的前几天，后几天

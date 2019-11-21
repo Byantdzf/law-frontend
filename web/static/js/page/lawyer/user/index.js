@@ -21,20 +21,23 @@
 
 		loadPage: function () {
 			var _t = this;
-			var data = global.userInfo || {};
-			utils.get(URL.lawyerObj.myData, function (res) {
-				data = $.extend(true, {}, data, res.data);
-				var html = utils.getTemp('/page/lawyer/user/index.html', data);
-				$('.userPageCon').html(html);
 			
-				// 余额明细
-				$('.getList').off().on('click', function () {
-					_t.getListBox();
-				});
-			
-				// 提现
-				$('.withdraw').off().on('click', function () {
-					_t.withdrawBox(data);
+			utils.get(URL.lawyerObj.info, function (res) {
+				var data = res.data || {};
+				utils.get(URL.lawyerObj.myData, function (res) {
+					data = $.extend(true, {}, data, res.data);
+					var html = utils.getTemp('/page/lawyer/user/index.html', data);
+					$('.userPageCon').html(html);
+				
+					// 余额明细
+					$('.getList').off().on('click', function () {
+						_t.getListBox();
+					});
+				
+					// 提现
+					$('.withdraw').off().on('click', function () {
+						_t.withdrawBox(data);
+					});
 				});
 			});
 		},
@@ -81,7 +84,29 @@
 					utils.getRadio(global.rs.payment, '.withDrawType');
 					form.on('submit(withDrawSubmit)', function (res) {
 						var params = res.field;
-						console.log(params);
+						params.operateType = 1;
+						var limit = $('.cashOutAmount').data('max');
+
+						if (params.cashOutAmount > limit) {
+							utils.alert('您的余额不足，请确认');
+							return false;
+						}
+
+						if (!params.cashOutAmount || params.cashOutAmount == 0) {
+							utils.alert('请输入提现金额');
+							return false;
+						}
+
+						if (Number(params.cashOutAmount).toString() == 'NaN' || params.cashOutAmount < 0) {
+							utils.alert('请输入正确的金额');
+							return false;
+						}
+
+						utils.post(URL.lawyerObj.withDraw, params, function (res) {
+							utils.msg('提现成功');
+							layer.close(index);
+							_t.loadPage();
+						});
 					})
 				}
 			};
@@ -95,7 +120,7 @@
 				box: _t.box,
 				// url: URL.lawyerObj.user.myList,
 				
-				url: URL.lawyerObj.notice.list,
+				url: URL.lawyerObj.waterList,
 				cols: tableParams
 			}
 			utils.queryList(qlps, function (curr,tr, item) {

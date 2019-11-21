@@ -76,8 +76,9 @@ var URL = {
 		feedback: pcHost + '/pc/user/feedback',
 		info: pcHost + '/pc/user/base/info',
 		wxLogin: pcHost + '/pc/user/login/url',
-		wxLawyerLogin: pcHost + '/pc/user/login/lawyer/url',
 		wxLoginStatus: pcHost + '/pc/user/wechat/login/result',
+		wxLawyerLogin: pcHost + '/pc/user/login/lawyer/url',
+		wxLawyerLoginStatus: pcHost + '/pc/user/wechat/lawyer/result',
 		order: {
 			query: pcHost + '/pc/user/order/orderList',
 			getById: pcHost + '/pc/user/order/orderDetail',
@@ -91,6 +92,7 @@ var URL = {
 		}
 	},
 	lawyerObj: {
+		bindMobile: pcHost + '/pc/user/lawyer/info/complete',
 		login: pcHost + '/pc/lawyer/login',
 		reg: pcHost + '/pc/lawyer/register',
 		info: pcHost + '/pc/lawyer/my/myInfo',
@@ -98,6 +100,8 @@ var URL = {
 		update: pcHost + '/pc/lawyer/updateLawyerInfo',
 		attention: pcHost + '/pc/lawyer/my/myFollow',
 		feedback: pcHost + '/pc/lawyer/feedback',
+		waterList: pcHost + '/pc/lawyer/my/balanceAmountDetail',
+		withDraw: pcHost + '/pc/lawyer/pay/cashOut',
 		news: {
 			query: pcHost + '/pc/lawyer/article/list',
 			getById: pcHost + '/pc/lawyer/article/details/'
