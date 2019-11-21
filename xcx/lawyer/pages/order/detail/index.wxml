@@ -70,7 +70,7 @@
         <text>{{ item.userId }}</text>
       </view>
     </view>
-    <view class="flex">
+    <view class="flex" wx:if="{{ item.orderCategory != 11 }}">
       <text class="label cl-999">电话：</text>
       <view class="flex flex-bd cl-666">
         <text>{{ item.contactMobile }}</text>
@@ -116,7 +116,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{ item.orderStatus == 30 || item.orderStatus == 40 }}">
+    <view wx:if="{{ (item.orderStatus == 30 || item.orderStatus == 40) && item.orderCategory != 12 }}">
       <view class="reply-wrapper" wx:if="{{ item.orderType == 1 }}">
         <view class="title fw-b">我的回复</view>
         <radio-group class="flex-column" bindchange="replyRadioChange">

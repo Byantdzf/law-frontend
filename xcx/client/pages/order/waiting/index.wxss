@@ -13,7 +13,7 @@
   padding: 20rpx;
   background: #fff;
   border-radius: 10rpx;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 .order-item + .order-item {
   margin-top: 20rpx;
@@ -94,4 +94,22 @@
 
 .icon-wenjian {
   font-size: 40rpx;
+}
+
+.circle {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #ccc;
+}
+.circle.checked {
+  background: #CF443D;
+  border: 2rpx solid #CF443D;
+}
+.page-footer {
+  background: #ffffff;
+}
+
+.price {
+  font-size: 36rpx;
 }

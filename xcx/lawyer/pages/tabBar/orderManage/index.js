@@ -111,7 +111,7 @@ Page({
       } else {
         delete params.keyWord
       }
-
+      params.onlyLawyerOwner = 'Y'
       return params;
     });
   },

@@ -10,6 +10,7 @@ Page({
     listUrl: '/applets/user/order/orderList',
     list: [],
     curOrderStatus: -1,
+    selectedIds: []
   },
   onLoad({ lawyerId }) {
     app.pages.add(this);
@@ -41,12 +42,35 @@ Page({
     });
     this.setData({ list })
   },
-  handleConfirm(e) {
-    const { index } = e.currentTarget.dataset;
-    const { id } = this.data.list[index];
+  handleChooseItem(e) {
+    const { id } = e.currentTarget.dataset;
+    let { selectedIds, list } = this.data;
+    if (selectedIds.includes(id)) {
+      selectedIds = selectedIds.filter(v => v !== id);
+    } else {
+      selectedIds.push(id);
+    }
+    list.forEach(v => {
+      if (selectedIds.includes(v.id)) {
+        v.checked = true;
+      } else {
+        v.checked = false;
+      }
+    });
+    this.setData({ selectedIds, list });
+  },
+  handleConfirm() {
+    let { selectedIds } = this.data;
+    if (!selectedIds.length) {
+      wx.showToast({
+        title: '请选择订单',
+        icon: 'none'
+      })
+      return false;
+    }
     const page = app.pages.get('pages/lawyer/detail/index')
     if (page) {
-      page.triggerInvite({ orderId: id, lawyerId: this.lawyerId })
+      page.triggerInvite({ orderId: selectedIds.join(','), lawyerId: this.lawyerId })
       wx.navigateBack()
     }
   }

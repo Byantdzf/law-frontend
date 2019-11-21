@@ -97,7 +97,7 @@ Page({
   
   // 处理追问文本域值改变
   handleContentChange(e) {
-    this.content = e.detail.value;
+    this.setData({ content: e.detail.value });
   },
   // 播放音频
   handleOpenAudio(e) {

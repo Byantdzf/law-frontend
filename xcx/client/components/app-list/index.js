@@ -26,7 +26,7 @@ Component({
     isSearch: false,
     defaultParams: {
       [PAGE_KEY]: 1,
-      [SIZE_KEY]: 10,
+      [SIZE_KEY]: 20,
     },
     params: {}
   },

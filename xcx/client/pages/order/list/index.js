@@ -79,6 +79,7 @@ Page({
       } else {
         delete params.orderCategory;
       }
+      params.onlyUserOwner = 'Y';
       return params;
     });
   },
@@ -168,7 +169,6 @@ Page({
   },
   handlePay(e) {
     const { index } = e.currentTarget.dataset;
-    console.log(this.data.list[index])
     const orderNo = this.data.list[index].orderNo;
     orderApi.pay({orderNo: orderNo}).then(res => {
       app.wechatPay(res.data, function (res) {

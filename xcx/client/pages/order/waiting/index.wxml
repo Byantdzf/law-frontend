@@ -5,41 +5,35 @@
     <view class="flex-bd">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20" wx:if="{{ list.length }}">
-          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="gotoDetail">
+          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="handleChooseItem">
             <view class="flex order-item-hd">
               <view class="flex-bd">订单编号：{{ item.orderNo }}</view>
               <view class="flex flex-ft">
                 <text class="pl-10 cl-primary fw-b">{{ orderStatus[item.orderStatus] }}</text>
               </view>
             </view>
-            <view class="order-item-bd pt-20">
-              <view class="flex">
-                <view class="flex flex-bd">
+            <view class="flex flex-bd">
+              <view class="circle {{ item.checked ? 'checked' : '' }}"></view>
+              <view class="order-item-bd flex-bd pl-20 pt-20">
+                <view class="flex">
                   <view class="label cl-999">下单时间：</view>
                   <view class="flex-bd cl-666">{{ item.orderTime }}</view>
                 </view>
                 <view class="flex">
-                  <view class="label cl-999">订单金额：</view>
-                  <view class="flex-bd cl-red">{{ item.amount }}元</view>
+                  <view class="label cl-999">订单类型：</view>
+                  <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>
+                </view>
+                <view class="flex">
+                  <view class="flex flex-bd" wx:if="{{ item.orderType != 4 }}">
+                    <view class="label cl-999">订单种类：</view>
+                    <view class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</view>
+                  </view>
+                  <view class="flex">
+                    <view class="label cl-red flex-bd price">{{ item.amount }}</view>
+                    <view class="cl-666">元</view>
+                  </view>
                 </view>
               </view>
-              <view class="flex">
-                <view class="label cl-999">订单类型：</view>
-                <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>
-              </view>
-              <view class="flex" wx:if="{{ item.orderType != 4 }}">
-                <view class="label cl-999">订单种类：</view>
-                <view class="flex-bd cl-666">{{ orderCategory[item.orderCategory] }}</view>
-              </view>
-            </view>
-            <view class="btn-box">
-              <button
-                plain
-                data-index="{{ index }}"
-                catchtap="handleConfirm"
-              >
-                选择订单
-              </button>
             </view>
           </view>
         </view>
@@ -47,6 +41,17 @@
           <app-empty iconClass="icon-sousuowuneirong" />
         </view>
       </app-list>
+    </view>
+    <view class="flex page-footer pa-20">
+      <view class="flex-bd">已选：{{selectedIds.length}}个订单</view>
+      <view class="flex-ft">
+        <button
+          type="primary"
+          catchtap="handleConfirm"
+        >
+          发送邀请
+        </button>
+      </view>
     </view>
   </view>
 </app-page>

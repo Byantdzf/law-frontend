@@ -71,7 +71,8 @@
 }
 .list-item .desc {
   margin: 10rpx 0;
-  max-height: 110rpx;
+  line-height: 40rpx;
+  max-height: 120rpx;
   overflow: hidden;
 }
 .list-item .btn-box {
@@ -82,7 +83,7 @@
   margin: 0;
   padding: 0 10rpx;
   border-color: #e0e0e0;
-  font-size: 26rpx;
+  font-size: 24rpx;
   color: #666;
 }
 .list-item .btn-box button::after {
