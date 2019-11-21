@@ -235,8 +235,10 @@ Page({
         }
         if (this.data.id) {
             params.chooseService = this.data.id
+            params.orderCategory = 21
         } else {
             params.chooseService = this.data.ids
+            params.orderCategory = 22
         }
         params.deliveryDeadDate = this.data.selectDate
         params.amount = this.data.selectAmount
@@ -251,7 +253,7 @@ Page({
         if (this.data.selectCoupon) {
             params.couponId = this.data.selectCoupon.id
         }
-        params.orderCategory = this.data.details.serviceType
+        
         userApi.postLegals(params).then(res => {
             app.wechatPay(res.data, function (res) {
                 app.gotoPage('/pages/issue/success/index?type=3')
