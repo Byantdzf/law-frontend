@@ -21,6 +21,7 @@
 			var html = utils.getTemp('/page/order/temp3.html', _t.data);
 			$('.questions .layui-form').html(html);
 			form.render();
+			_t.resetTotal(_t.data.price);
 			
 			// 选择优惠券
 			if (utils.cookie(global.token)) {
@@ -29,7 +30,16 @@
 				params[global.page] = 1;
 				utils.get(URL.user.coupon, params, function (res) {
 					var list = res.data.list || []
+					_t.couponList = list;
+					$.each(list, function (i, t) {
+						t.name = t.couponName
+					})
 					utils.getSelect(list, '.coupon', '请选择优惠券')
+
+					// 选择优惠券
+					form.on('select(changeCoupon)', function (res) {
+						_t.resetTotal(res.value)
+					})
 				});
 			}
 
@@ -105,19 +115,24 @@
 					var token = res.data.token;
 					utils.setCookie(global.token, token);
 					window.location = 'order.html?id=' + orderId + '&type=3';
-					// window.location = 'order.html?id=1&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})
 		},
 
-		resetTotal: function (coupon, str) {
+		resetTotal: function (coupon) {
 			var _t = this;
 			var total = _t.data.price || 0;
+			var obj = {};
+			$.each(_t.couponList, function (i, t) {
+				if (coupon == t.id) {
+					obj = t;
+				}
+			})
 			$('.couponInfoBox').addClass('hidden');
 			$('.couponInfo').html('');
-			if (coupon) {
-				total -= coupon;
-				$('.couponInfo').html(str);
+			if (obj.amount) {
+				total -= obj.amount;
+				$('.couponInfo').html(obj.amount);
 				$('.couponInfoBox').removeClass('hidden');
 			}
 			$('.amount').html(total);

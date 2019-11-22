@@ -41,12 +41,6 @@
 				}
 			})
 
-			// 选择优惠券
-			// _t.getCoupon();
-			// form.on('select(changeCoupon)', function (res) {
-			// 	_t.resetTotal(res.value, res.othis.find('input').val())
-			// })
-
 			form.on('submit(type3Submit)', function (res) {
 				var params = res.field;
 				if (!params.name) {
