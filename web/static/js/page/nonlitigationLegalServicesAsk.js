@@ -75,7 +75,7 @@
 					utils.msg('请填写我的要求')
 					return
 				}
-				if(!params.selectDate){
+				if(!params.deliveryDeadDate){
 					utils.msg('请选择交付期限');
 					return;
 				}
