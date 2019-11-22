@@ -51,6 +51,20 @@
   box-sizing: border-box;
 }
 
+.icon-yuyin {
+  font-size: 60rpx;
+  padding-right: 10rpx;
+}
+
 .icon-wenjian {
-  font-size: 70rpx;
+  font-size: 100rpx;
+  line-height: 1;
+}
+
+.file-item {
+  justify-content: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+  width: 140rpx;
 }
