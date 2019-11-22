@@ -1,9 +1,10 @@
 const orderApi = require('../../../service/order');
 const selectApi = require('../../../service/select');
-const { orderType, orderCategory, orderStatus, orderEmergency, PAGE_KEY, SIZE_KEY } = require('../../../config/global');
+const { orderType, orderCategory, orderStatus, orderEmergency, PAGE_KEY, SIZE_KEY, appName } = require('../../../config/global');
 const app = getApp();
 Page({
   data: {
+    appName,
     orderType,
     orderCategory,
     orderStatus,
@@ -24,8 +25,11 @@ Page({
     recordTime: 0,
     // 是否正在上传文件
     isUpload: false,
+    recordTiming: 0,
     // 选择的文件
-    files: []
+    files: [],
+    // 用户授权了录音
+    isRecordAuth: true,
   },
   onLoad(e) {
     app.pages.add(this);
@@ -45,6 +49,7 @@ Page({
     orderApi.orderDetails(id).then(res => {
       const item = res.data || {};
       item.questionTypeName = '';
+      item.emergencyName = orderEmergency[item.emergency];
       this.setData({ item });
       selectApi.data({ dictCode: 'QuestionType' }).then(res => {
         const items = res.data || [];
@@ -117,48 +122,82 @@ Page({
       replyIscontent: value === 'content'
     })
   },
-  // 开始录音，结束录音
-  toggleRecording() {
-    const isRecording = this.data.isRecording;
-    if (isRecording) {
-      if (this.RecorderManager) {
-        this.RecorderManager.stop();
-        this.RecorderManager.onStop((res) => {
-          const { tempFilePath, duration } = res || {};
-          this.setData({
-            isRecording: false,
-            filePath: tempFilePath,
-            recordTime: Math.round(duration/1000),
-            isUpload: true
-          });
-          selectApi.uploadFile({ filePath: tempFilePath }).then(res => {
-            this.setData({
-              filePath: res.data || '',
-              isUpload: false
-            });
-          }).catch(() => {
-            this.setData({
-              filePath: '',
-              recordTime: 0,
-              isUpload: false
-            });
-          })
-        });
-      } else {
-        this.setData({
-          isRecording: false
-        })
-      }
-    } else {
+  // 开始录音
+  startRecording() {
+    if (this.data.replyIscontent) {
+      return false;
+    }
+    try {
       this.RecorderManager = wx.getRecorderManager();
       this.RecorderManager.start({
         duration: 180000
       });
       this.RecorderManager.onStart(() => {
+        this.setData({ isRecording: true });
+        this.recordTimer = setInterval(() => {
+          let { recordTiming } = this.data;
+          recordTiming += 1;
+          this.setData({ recordTiming });
+        }, 1000);
+      });
+      this.RecorderManager.onError(err => {
+        if (err && err.errMsg === 'operateRecorder:fail auth deny') {
+          this.setData({ isRecordAuth: false })
+        }
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  // 结束录音
+  endRecording() {
+    console.log('end');
+    if (this.RecorderManager) {
+      this.RecorderManager.stop();
+      this.RecorderManager.onStop((res) => {
+        const { tempFilePath, duration } = res || {};
         this.setData({
-          isRecording: true
+          isRecording: false,
+          filePath: tempFilePath,
+          recordTime: Math.round(duration/1000),
+          isUpload: true
+        });
+        this.clearRecordTimer();
+        wx.showLoading({ title: '上传中' });
+        selectApi.uploadFile({ filePath: tempFilePath }).then(res => {
+          this.setData({
+            filePath: res.data || '',
+            isUpload: false
+          });
+          wx.hideLoading();
+        }).catch(() => {
+          this.setData({
+            filePath: '',
+            recordTime: 0,
+            isUpload: false
+          });
+          wx.hideLoading();
         })
       });
+    } else {
+      this.clearRecordTimer();
+    }
+  },
+  // 录音被打断
+  cancelRecording() {
+    this.clearRecordTimer();
+  },
+  clearRecordTimer() {
+    if (this.recordTimer) {
+      clearInterval(this.recordTimer);
+      this.recordTimer = null;
+    }
+    this.setData({ recordTiming: 0, isRecording: false });
+  },
+  handleOpenSetting(e) {
+    const { authSetting } = e.detail;
+    if (authSetting['scope.record']) {
+      this.setData({ isRecordAuth: true })
     }
   },
   // 选择文件上传

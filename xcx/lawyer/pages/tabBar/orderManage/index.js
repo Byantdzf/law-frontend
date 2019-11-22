@@ -39,7 +39,7 @@ Page({
   },
   onLoad() {
     const currArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
-
+  
     this.currArea = currArea || []
     
     app.pages.add(this)
@@ -48,36 +48,36 @@ Page({
     selectApi.data({ dictCode: 'OrderCategory' }).then(res => {
       const items = res.data || []
       let orderTypeMap = {}
-
+  
       items.forEach(v => {
         v.id = v.code
         orderTypeMap[v.code] = v.name
       })
-
+  
       this.setData({
         orderTypeMap,
         orderTypes: this.data.orderTypes.concat(items.filter(v => v.code != 4))
       })
       
     });
-
+  
     selectApi.data({ dictCode: 'QuestionType' }).then(res => {
       const items = res.data || []
       let questionTypeMap = {}
-
+  
       items.forEach(v => {
         v.id = v.code
         questionTypeMap[v.code] = v.name
       })
-
+  
       this.setData({
         questionTypeMap
       })
       
     });
-
+  },
+  onShow() {
     this.loadList()
-
   },
   loadList() {
 

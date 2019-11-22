@@ -121,14 +121,15 @@
         <view class="title fw-b">我的回复</view>
         <radio-group class="flex-column" bindchange="replyRadioChange">
           <view class="flex flex-start">
-            <view class="flex flex-bd pt-20 pb-20" bindtap="toggleRecording">
+            <view class="flex flex-bd pt-20 pb-20 recording-box">
+              <button class="recording-btn" catch:longpress="startRecording" catch:touchend="endRecording" catch:touchcancel="cancelRecording">录音按钮</button>
               <view class="iconfont icon-stop cl-primary" wx:if="{{ isRecording }}"></view>
               <view class="iconfont icon-yuyin cl-primary" wx:else></view>
-              <view class="cl-999" wx:if="{{ isRecording }}">正在录音...</view>
+              <view class="cl-999" wx:if="{{ isRecording }}">正在录音...{{ recordTiming }}秒</view>
               <view class="cl-999" wx:else>
                 <text wx:if="{{ recordTime > 0 && isUpload }}">正在上传...</text>
                 <text wx:elif="{{ recordTime > 0 }}">时长{{ recordTime }}s</text>
-                <text wx:else>点击开始录音</text>
+                <text wx:else>按住开始录音</text>
               </view>
             </view>
             <view class="radio-box">
@@ -173,3 +174,27 @@
     </view>
   </view>
 </app-page>
+
+<app-pop direction="bottom" visible="{{ !isRecordAuth }}" styles="bottom:0rpx;left:0;width:100%;margin:0;">
+  <view class='pop-auth'>
+    <view class="pop-auth__hd">
+      <view class="img-box">
+        <image src="/static/images/logo.png" />
+      </view>
+      <text class="txt">欢迎来到{{ appName }}</text>
+    </view>
+    <view class="pop-auth__bd">
+      <view>为提供优质服务，{{ appName }}需要获取录音功能</view>
+    </view>
+    <view class="pop-auth__ft flex mt-20">
+      <view class="flex-bd">
+        <button bind:tap="hideAuth">取消</button>
+      </view>
+      <view class="flex-bd">
+        <button type="primary" open-type="openSetting" lang="zh_CN" bindopensetting="handleOpenSetting">
+          确认微信授权
+        </button>
+      </view>
+    </view>
+  </view>
+</app-pop>

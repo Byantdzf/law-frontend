@@ -59,10 +59,9 @@ Page({
     app.getUserLocation(data => {
         const adInfo = data.adInfo || {}
         this.setData({
-            currArea: [adInfo.province.replace('省', ''), adInfo.city.replace('市', '')]
+          currArea: [adInfo.province.replace('省', ''), adInfo.city.replace('市', '')]
         })
         this.initHome()
-
         // // 获取地址完成以后再判断授权
         // page = this.selectComponent('#app-page')
         // page.checkAuth().then((data) => {
@@ -92,9 +91,6 @@ Page({
     })
   },
 
-  onShow() {
-
-  },
   initHome() {
     let cityPicker = this.selectComponent('#app-cityPicker')
     cityPicker.init(this.data.currArea)

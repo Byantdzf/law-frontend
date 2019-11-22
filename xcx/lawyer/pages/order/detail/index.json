@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "订单详情",
   "usingComponents": {
-    "app-score": "/components/app-score/index"
+    "app-score": "/components/app-score/index",
+    "app-pop": "/components/app-pop/index"
   }
 }
