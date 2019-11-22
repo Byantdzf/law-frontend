@@ -119,6 +119,7 @@ Page({
     let params = {}
     params[PAGE_KEY] = 1
     params[SIZE_KEY] = 5
+    params.orderStatus = 20
     params.orderSource = orderSource
     params.city = this.data.currArea[1] || ''
     // params.city = 'shenzhen'
