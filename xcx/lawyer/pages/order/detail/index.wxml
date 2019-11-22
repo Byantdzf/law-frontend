@@ -90,7 +90,7 @@
       </view>
     </view>
     <view class="detail-box" wx:if="{{ msgList.length }}">
-      <view class="detail-row mt-20" wx:for-item="msg" wx:key="{{ index }}">
+      <view class="detail-row mt-20" wx:for="{{ msgList }}" wx:for-item="msg" wx:key="{{ index }}">
         <view class="flex flex-start" wx:if="{{msg.isUser !== 'Y'}}">
           <text class="label cl-999">回复详情：</text>
           <view class="flex-column flex-bd cl-666">
