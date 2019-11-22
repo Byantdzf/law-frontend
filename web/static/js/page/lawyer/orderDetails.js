@@ -125,7 +125,7 @@
 						params.filePath = mp3;
 						params.msgType = 2;
 					}
-					utils.msg('确认回复并发送订单确认？', function () {
+					utils.confirm('确认回复并发送订单确认？', function () {
 						utils.postJson(URL.lawyerObj.order.reply, params, function (res) {
 							utils.msg('回复成功')
 							_t.getData();
@@ -142,7 +142,7 @@
 						msgType: 7,
 						sentTime: utils.nowTime()
 					}
-					utils.msg('确认发送订单确认？', function () {
+					utils.confirm('确认发送订单确认？', function () {
 						utils.postJson(URL.lawyerObj.order.reply, params, function (res) {
 							utils.msg('回复成功')
 							_t.getData();

@@ -380,16 +380,8 @@
 		},
 
 		downloadFiles: function (data) {
-			var id = data.chooseService
-			if (id) {
-				utils.get(URL.template.details + id, function (res) {
-					utils.get(URL.template.downloadUrl, { targetName: res.data.filePath }, function (response) {
-						window.open(response.data)
-					})
-				})
-			} else {
-				utils.alert('文件不存在')
-			}
+			var files = data.chooseService
+			window.open(URL.user.downloadFiles + '?filePath=https://hujia.obs.cn-south-1.myhuaweicloud.com:443/law/1574432582369sonar.docx');
 		},
 
 		actions: function () {

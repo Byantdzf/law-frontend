@@ -57,14 +57,6 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-col-sm4">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">费用：</label>
-                    <div class="layui-input-block">
-                        <div class="layui-form-mid">{{ d.amount || '' }}元</div>
-                    </div>
-                </div>
-            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">我的要求：</label>
                 <div class="layui-input-block">
@@ -72,7 +64,7 @@
                 </div>
             </div>
 
-            {{# if (d.orderStatus == 10) { }}
+            {{# if (d.orderStatus > 5) { }}
             <div class="layui-form-item">
                 <label class="layui-form-label">订单金额：</label>
                 <div class="layui-input-block">
@@ -80,15 +72,6 @@
                 </div>
             </div>
             {{# } }}
-            <div class="layui-form-item">
-                <label class="layui-form-label">结案法律文书：</label>
-                <div class="layui-input-block">
-                    <div class="replyList">
-                        <div class="app-list"></div>
-                        <div class="app-page-box"></div>
-                    </div>
-                </div>
-            </div>
 
             <!-- 取消订单 -->
             {{# if (d.orderStatus == 5 || d.orderStatus == 10 || d.orderStatus == 20) { }}
