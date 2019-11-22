@@ -1,7 +1,7 @@
 
 const app = getApp();
 const { orderType, orderCategory, orderStatus } = require('../../../config/global');
-const orderApi = require('../../../service/order');
+
 Page({
   data: {
     orderType,
@@ -43,13 +43,19 @@ Page({
     this.setData({ list })
   },
   handleChooseItem(e) {
-    const { id } = e.currentTarget.dataset;
+    const { id, choosed } = e.currentTarget.dataset;
     let { selectedIds, list } = this.data;
+    
+    if (choosed == 1) {
+      return false
+    }
+
     if (selectedIds.includes(id)) {
       selectedIds = selectedIds.filter(v => v !== id);
     } else {
       selectedIds.push(id);
     }
+
     list.forEach(v => {
       if (selectedIds.includes(v.id)) {
         v.checked = true;

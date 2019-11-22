@@ -20,6 +20,8 @@ Page({
   onLoad: function (options) {
     app.pages.add(this)
     app.setNavColor()
+  },
+  onShow() {
     this.loadList()
   },
   loadList() {

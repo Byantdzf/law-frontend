@@ -72,14 +72,13 @@ Page({
         questionTypeMap,
         questionTypes: [{id: -1, name: '全部'}].concat(items)
       })
-      this.loadList()
     });
-
   },
   onShow() {
     const searchFocus = wx.getStorageSync('searchFocus')
     this.setData({ searchFocus })
     wx.removeStorageSync('searchFocus')
+    this.loadList()
   },
   loadList() {
     if (!this.appList) {

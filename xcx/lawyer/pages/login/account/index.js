@@ -22,7 +22,8 @@ Page({
 
         if (token) {
             userApi.getUser().then(res => {
-                if (res.data.auditStatus == 2) {
+                const data = res.data || {}
+                if (data.auditStatus == 2) {
                     app.gotoPage('/pages/tabBar/home/index', 'tab')
                 } else {
                     app.gotoPage('/pages/waitAuth/index')
@@ -84,7 +85,8 @@ Page({
         }
         params.from = 2
         api.accountLogin(params).then(res => {
-            wx.setStorageSync(tokenName, res.data.sessionId)
+            const data = res.data || {};
+            wx.setStorageSync(tokenName, data.sessionId)
             // if (res.data.isOpenIdEmpty) {
             //     app.confirm({ content: '您的帐号还未绑定微信，是否绑定？' }), then(res => {
 
@@ -103,8 +105,9 @@ Page({
             //         // })
             //     })
             // } else {
-                userApi.getUser().then(res => {
-                    if (res.data.auditStatus == 2) {
+                userApi.getUser().then(res1 => {
+                    const data1 = res1.data || {}
+                    if (data1.auditStatus == 2) {
                         app.gotoPage('/pages/tabBar/home/index', 'tab')
                     } else {
                         app.gotoPage('/pages/waitAuth/index')

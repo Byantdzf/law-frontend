@@ -32,13 +32,6 @@
       ]
     },
     {
-      "root": "pages/product",
-      "pages": [
-        "details/index",
-        "list/index"
-      ]
-    },
-    {
       "root": "pages/order",
       "pages": [
         "detail/index"

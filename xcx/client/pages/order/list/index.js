@@ -53,7 +53,8 @@ Page({
       currOrderType: orderTypeList[0],
       currOrderCategory: orderCategoryList[0]
     })
-
+  },
+  onShow() {
     this.loadData()
   },
   loadData() {

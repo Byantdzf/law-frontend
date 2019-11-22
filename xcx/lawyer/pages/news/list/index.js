@@ -10,7 +10,8 @@ Page({
   onLoad() {
     app.pages.add(this)
     app.setNavColor()
-    
+  },
+  onShow() {
     this.loadData()
   },
   loadData() {

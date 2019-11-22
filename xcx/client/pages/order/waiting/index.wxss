@@ -15,6 +15,9 @@
   border-radius: 10rpx;
   /* align-items: flex-start; */
 }
+.order-item.disabled {
+  opacity: 0.75;
+}
 .order-item + .order-item {
   margin-top: 20rpx;
 }

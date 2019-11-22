@@ -8,7 +8,8 @@ Page({
     onLoad() {
         app.pages.add(this)
         app.setNavColor()
-
+    },
+    onShow() {
         const appList = this.selectComponent('#app-list')
         appList.setParams()
     },
