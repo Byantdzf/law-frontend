@@ -24,8 +24,8 @@ Page({
                 code: 'score',
                 value: '',
                 rs: [
-                    {id: 1, name: '从高到低'},
-                    {id: 2, name: '从低到高'}
+                    { id: 1, name: '从高到低' },
+                    { id: 2, name: '从低到高' }
                 ]
             },
             {
@@ -34,8 +34,8 @@ Page({
                 code: 'helps',
                 value: '',
                 rs: [
-                    {id: 1, name: '从多至少'},
-                    {id: 2, name: '从少至多'}
+                    { id: 1, name: '从多至少' },
+                    { id: 2, name: '从少至多' }
                 ]
             },
             {
@@ -44,8 +44,8 @@ Page({
                 code: 'concerns',
                 value: '',
                 rs: [
-                    {id: 1, name: '从多至少'},
-                    {id: 2, name: '从少至多'}
+                    { id: 1, name: '从多至少' },
+                    { id: 2, name: '从少至多' }
                 ]
             }
         ],
@@ -57,7 +57,7 @@ Page({
         app.pages.add(this)
         app.setNavColor()
         this.setData({ currArea })
-        
+
         let cityPicker = this.selectComponent('#app-cityPicker')
         cityPicker.init(currArea)
 
@@ -72,7 +72,8 @@ Page({
                 types
             })
         })
-
+    },
+    onShow() {
         this.loadList()
     },
     loadList() {
@@ -81,13 +82,13 @@ Page({
             return items.id == this.data.type
         })
 
-        if(index == -1) {
+        if (index == -1) {
             index = 0
         }
 
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
-            this.data.types[index] && (this.data.types[index].name && this.data.types[index].key  && (params.goodAt = this.data.types[index].name))
+            this.data.types[index] && (this.data.types[index].name && this.data.types[index].key && (params.goodAt = this.data.types[index].name))
             let sortArr = []
             this.data.sorts.forEach((item, i) => {
                 if (item.code && item.value) {
@@ -138,23 +139,23 @@ Page({
         isReload && this.loadList()
     },
     changeThis(e) {
-      const { id } = e.currentTarget.dataset
-      let sorts = this.data.sorts
-      sorts.forEach((item, i) => {
-          if (item.curr) {
-            item.value = id == 1 ? 'desc' : 'asc'
-          }
-      })
-      this.setData({
-        sorts
-      })
-      this.dropHide()
-      this.loadList()
+        const { id } = e.currentTarget.dataset
+        let sorts = this.data.sorts
+        sorts.forEach((item, i) => {
+            if (item.curr) {
+                item.value = id == 1 ? 'desc' : 'asc'
+            }
+        })
+        this.setData({
+            sorts
+        })
+        this.dropHide()
+        this.loadList()
     },
     dropHide() {
-      this.setData({
-        dropVisable: false,
-      })
+        this.setData({
+            dropVisable: false,
+        })
     },
     updateList(e) {
         this.setData({ list: e.detail })
@@ -205,7 +206,7 @@ Page({
             return id == item.id
         })
         let items = list[index]
-        selectApi.attentionLawyer({businessId: id}).then(res => {
+        selectApi.attentionLawyer({ businessId: id }).then(res => {
             list[index].focused = 1
             list[index].concerns += 1
             this.setData({ list })
@@ -218,7 +219,7 @@ Page({
             return id == item.id
         })
         let items = list[index]
-        selectApi.cancelAttentionLawyer({businessId: id}).then(res => {
+        selectApi.cancelAttentionLawyer({ businessId: id }).then(res => {
             list[index].focused = 0
             list[index].concerns -= 1
             this.setData({ list })

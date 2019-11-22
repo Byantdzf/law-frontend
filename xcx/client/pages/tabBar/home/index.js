@@ -82,21 +82,21 @@ Page({
         let params = {}
         params[PAGE_KEY] = 1
         params[SIZE_KEY] = 5
-        selectApi.newsList({ ...params, type: 1}).then(res => {
+        selectApi.newsList({ ...params, type: 1 }).then(res => {
             let hotNews1 = res.data.list
             this.setData({ hotNews1 })
         })
-        selectApi.newsList({ ...params, type: 2}).then(res => {
+        selectApi.newsList({ ...params, type: 2 }).then(res => {
             let hotNews2 = res.data.list
             this.setData({ hotNews2 })
         })
-        selectApi.newsList({ ...params, type: 3}).then(res => {
+        selectApi.newsList({ ...params, type: 3 }).then(res => {
             let hotNews3 = res.data.list
             this.setData({ hotNews3 })
         })
     },
     onShow() {
-        
+
     },
     initHome() {
         let cityPicker = this.selectComponent('#app-cityPicker')
@@ -107,7 +107,7 @@ Page({
         // 获取本地律师
         let lawyerParams = {}
         lawyerParams[PAGE_KEY] = 1
-        lawyerParams[SIZE_KEY] = 5
+        lawyerParams[SIZE_KEY] = 10
         lawyerParams.city = this.data.currArea[1] || ''
         // lawyerParams.city = 'shenzhen'
         selectApi.lawyerList(lawyerParams).then(res => {
@@ -121,9 +121,9 @@ Page({
         })
     },
     handleClosePop() {
-      this.setData({
-        showTools: false
-      })
+        this.setData({
+            showTools: false
+        })
     },
     gotoLawyerDetail(e) {
         let { id } = e.currentTarget.dataset
@@ -142,7 +142,7 @@ Page({
             return id == item.id
         })
         let items = list[index]
-        selectApi.attentionLawyer({businessId: id}).then(res => {
+        selectApi.attentionLawyer({ businessId: id }).then(res => {
             this.getLawyerList()
         })
     },
@@ -153,7 +153,7 @@ Page({
             return id == item.id
         })
         let items = list[index]
-        selectApi.cancelAttentionLawyer({businessId: id}).then(res => {
+        selectApi.cancelAttentionLawyer({ businessId: id }).then(res => {
             this.getLawyerList()
         })
     },

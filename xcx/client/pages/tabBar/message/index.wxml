@@ -4,23 +4,23 @@
 		<app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
 			<view class="app-cells" wx:if="{{ list.length }}">
 				<view
-                    class="app-cell"
-                    wx:for="{{ list }}"
-                    wx:key="{{ index }}"
-                    data-id="{{ item.senderId }}"
-                    bind:tap="gotoDetail"
+				 class="app-cell"
+				 wx:for="{{ list }}"
+				 wx:key="{{ index }}"
+				 data-id="{{ item.senderId }}"
+				 bind:tap="gotoDetail"
 				>
 					<view class="flex-hd img-box pl-20">
 						<image
-                            src="{{ item.imagePath || defaultImg }}"
-                            mode="widthFix"
-                            binderror="imageError"
-                            data-img="list[{{index}}].imagePath"
+						 src="{{ item.imagePath || defaultImg }}"
+						 mode="widthFix"
+						 binderror="imageError"
+						 data-img="list[{{index}}].imagePath"
 						/>
 					</view>
 					<view class="flex-bd con-box pl-20 pr-20">
 						<view class="flex">
-							<view class="title flex-bd">{{ item.receiver }}</view>
+							<view class="title flex-bd">{{ item.sender }}</view>
 							<view class="cl-999">{{ item.sentTime || '' }}</view>
 						</view>
 						<view class="ellipsis desc">

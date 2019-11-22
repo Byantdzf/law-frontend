@@ -42,9 +42,14 @@ Page({
   // 加载订单详情数据
   loadData(id) {
     this.setData({
+      isUpload: false,
       isRecording: false,
       filePath: '',
-      recordTime: 0
+      recordTime: 0,
+      recordTiming: 0,
+      content: '',
+      files: [],
+      replyIscontent: false
     });
     orderApi.orderDetails(id).then(res => {
       const item = res.data || {};
