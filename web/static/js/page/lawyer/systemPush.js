@@ -147,6 +147,7 @@
 			}
 			var searchData = {
 				orderSource: 1,
+				orderStatus: 20,
 			};
 			if ($('.provList .curr').data('id')) {
 				searchData.province = $.trim($('.provList .curr').html());

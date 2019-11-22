@@ -6,7 +6,7 @@ Page({
     currArea: [],
     orderType,
     orderCategory,
-    orderStatus,
+    orderStatus:20,
     questionTypes: [],
     questionTypeMap: {},
     currQuestionType: -1,
@@ -89,7 +89,7 @@ Page({
 
     this.appList.setParams(params => {
       params.orderSource = this.data.orderSource
-
+      params.orderStatus = this.data.orderStatus
       if (currArea.length) {
         params.city = currArea[1] || ''
       }

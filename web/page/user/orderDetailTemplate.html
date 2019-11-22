@@ -1,45 +1,33 @@
 <div class="orderDetail">
     <div class="layui-form">
-        <div class="layui-form-item">
-            <label class="layui-form-label">订单号：</label>
-            <div class="layui-input-block">
-                <div class="layui-form-mid">201908081121</div>
+        <div class="layui-col-sm4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">订单号：</label>
+                <div class="layui-input-block">
+                    <div class="layui-form-mid">{{ d.orderNo || '' }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">订单状态：</label>
+                <div class="layui-input-block">
+                    <div class="layui-form-mid">{{ d.statusName || '' }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">订单类型：</label>
+                <div class="layui-input-block">
+                    <div class="layui-form-mid">{{ d.categoryName || '' }}</div>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">订单状态：</label>
+            <label class="layui-form-label">订单金额：</label>
             <div class="layui-input-block">
-                <div class="layui-form-mid">已完成</div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">订单类型：</label>
-            <div class="layui-input-block">
-                <div class="layui-form-mid">语音咨询</div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">金额：</label>
-            <div class="layui-input-block">
-                <div class="layui-form-mid">10元</div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">是否紧急：</label>
-            <div class="layui-input-block">
-                <div class="layui-form-mid">是</div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">咨询内容：</label>
-            <div class="layui-input-block">
-                <div class="layui-form-mid">这是咨询的内容，这是咨询的内容这是咨询的内容这是咨询的内容这是咨询的内容这是咨询的内容，这是咨询的内容......</div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">备注：</label>
-            <div class="layui-input-block">
-                <div class="layui-form-mid">这是备注的信息</div>
+                <div class="layui-form-mid">{{ d.amount || '' }}元</div>
             </div>
         </div>
     </div>
