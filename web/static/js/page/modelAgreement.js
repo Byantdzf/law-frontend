@@ -13,7 +13,16 @@
 			});
 
 			$('body').on('click', '.buyNow', function () {
-				window.location = 'order.html?id=1&type=6';
+				var data = $(this).closest('li')[0].data;
+				var params = {}
+				params.chooseService = data.id
+				params.fileType = data.businessTypeName
+				params.form = 2
+				params.orderCategory = 41
+				params.amount = data.price
+				utils.put(URL.issue.postTemplate, params, function (res) {
+					// window.location = 'order.html?id=' + data.id + '&type=6';
+				})
 			});
 		},
 
@@ -60,7 +69,6 @@
 			utils.get(URL.template.details + id, function (res) {
 				var data = res.data;
 				data.price = data.price || 0;
-				console.log(data);
 				var formitem = [
 					{
 						title: "文件名称",
@@ -113,7 +121,15 @@
 						}
 					},
 					yes: function (index) {
-						window.location = 'order.html?id=1&type=6';
+						var params = {}
+						params.chooseService = id
+						params.fileType = data.businessTypeName
+						params.form = 2
+						params.orderCategory = 41
+						params.amount = data.price
+						utils.put(URL.issue.postTemplate, params, function (res) {
+							// window.location = 'order.html?id=' + id + '&type=6';
+						})
 						layer.close(index);
 					}
 				};
