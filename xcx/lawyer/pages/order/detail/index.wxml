@@ -92,9 +92,11 @@
     <view class="detail-box" wx:if="{{ msgList.length }}">
       <view class="detail-row mt-20" wx:for="{{ msgList }}" wx:for-item="msg" wx:key="{{ index }}">
         <view class="flex flex-start" wx:if="{{msg.isUser !== 'Y'}}">
-          <text class="label cl-999">回复详情：</text>
+          <view class="label">
+            <text class="cl-999">回复详情：</text>
+          </view>
           <view class="flex-column flex-bd cl-666">
-            <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
+            <view class="con-box" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
             <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
               <view class="iconfont icon-yuyin cl-primary"></view>
               <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
@@ -151,7 +153,7 @@
           </view>
           <view class="flex flex-start mt-20">
             <view class="flex-bd">
-              <textarea class="textarea" placeholder="请输入您的回复，20~500个字" maxlength="{{ 500 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange"></textarea>
+              <textarea class="textarea" placeholder="请输入您的回复，20~500个字" maxlength="{{ 500 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange" value="{{ content }}"></textarea>
             </view>
             <view class="radio-box">
               <radio class="radio" color="#CF443D" value="content" checked="{{ replyIscontent }}"></radio>
