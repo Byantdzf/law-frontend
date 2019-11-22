@@ -152,7 +152,7 @@
 					subject: '咨询费',
 					returnUrl: window.location.href + '&success=1'
 				};
-console.log(params)
+
 				utils.confirm(
 					'支付完成前，请不要关闭此支付验证窗口。<br />支付完成后，请根据您支付的情况点击下面按钮。',
 					{ 

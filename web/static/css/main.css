@@ -1477,3 +1477,9 @@ i, em { font-style: normal;}
 }
 .orderDetailUserPicBox { position: relative;}
 .orderDetailUserPicBox .orderDetailUserPic { width:30px; height: 30px; border-radius: 50%; margin-left: 20px;}
+
+.chooseBox { position: absolute; left:0; bottom:0; width:100%; border-top:1px solid #e8e8e8; padding: 20px 50px; box-sizing: border-box;}
+.chooseBox .selectOrderNums { float:left;}
+.chooseBox .btnBox { float:right;}
+.trDisabled:hover,
+.trDisabled { background-color: #f8f8f8!important;}

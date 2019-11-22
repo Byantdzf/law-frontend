@@ -101,13 +101,13 @@
 					scrollbar: false,
 					content: '<div class="orderDetailBox"></div>',
 					success: function (layero, index) {
-						_t.loadOrderDetails(item)
+						_t.loadOrderDetails(item, index)
 					}
 				};
 				utils.dialog(ops);
 		},
 
-		loadOrderDetails: function (item) {
+		loadOrderDetails: function (item, index) {
 			var _t = this;
 			var type = item.orderType;
 			var category = item.orderCategory;
@@ -142,6 +142,12 @@
 				$.each(global.rs.orderCategory, function (i, t) {
 					if (t.id == data.orderCategory) {
 						data.categoryName = t.name;
+					}
+				})
+				var questionType = base.getQuestionType();
+				$.each(questionType, function (i, t) {
+					if (t.code == data.questionType) {
+						data.questionTypeName = t.name;
 					}
 				})
 				var html = utils.getTemp(temp, data);

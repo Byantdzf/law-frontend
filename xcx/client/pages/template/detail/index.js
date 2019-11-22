@@ -31,7 +31,7 @@ Page({
       let params = {}
       params.chooseService = this.data.id
       params.fileType = this.data.details.businessTypeName
-      params.form = 1
+      params.from = 1
       params.orderCategory = 41
       params.amount = this.data.details.price
       userApi.postTemplate(params).then(res => {

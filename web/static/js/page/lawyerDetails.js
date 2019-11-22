@@ -1,9 +1,21 @@
 ﻿layui.define(function (exports) {
 
+	var tableParams = [
+		[
+			{title: "全选", type: "checkbox", field: "id", width: "50"},
+			{title: "订单ID", field: "id",}, 
+			{title: "订单类型", field: "orderType", rs: global.rs.orderType}, 
+			{title: "订单种类", field: "orderCategory", rs: global.rs.orderCategory}, 
+			{title: "发布时间", field: "orderTime"}, 
+			{title: "订单金额", field: "amount"}, 
+		]
+	];
+
 	var gather = {
 		init: function () {
 			var _t = this;
 			_t.id = utils.getQueryString('id');
+			_t.ids = [];
 
 			_t.getData();
 
@@ -59,6 +71,138 @@
 					utils.msg('操作成功');
 					_t.getData();
 				})
+			})
+
+			$('.askHim').off().on('click', function () {
+				if (utils.cookie(global.token)) {
+					var ops = {
+						type: 1,
+						title: '订单列表',
+						area: ['1000px', '650px'],
+						shadeClose: true,
+						content: '<div class="myList"></div><div class="chooseBox"><div class="clearfix"><div class="selectOrderNums">已选:<em>0</em>个订单</div><div class="btnBox"><a href="javascript:;" class="layui-btn layui-btn-sm submitSelect">发送邀请</a></div></div></div>',
+						success: function (layero, index) {
+							
+							_t.box = '.myList';
+					
+							var ips = {
+							};
+							utils.initPage(ips, _t.box);
+		
+							_t.queryOrderList();
+	
+							form.on('checkbox(layTableAllChoose)', function (e) {
+								var elem = e.elem;
+								var checked = elem.checked;
+								$(elem).closest('.layui-table-box').find('.layui-table-body').find('tr').each(function () {
+									var data = this.data;
+									if (data.choosed != 1) {
+										$(this).find('input[type="checkbox"]').each(function () {
+											this.checked = checked
+										})
+									}
+								})
+								form.render('checkbox');
+								_t.setChoose()
+							})
+	
+							$('.submitSelect').off().on('click', function () {
+								if (!_t.ids.length) {
+									utils.msg('请选择要指定的订单');
+									return false;
+								}
+								var params = {};
+								params.orderId = _t.ids.join(',');
+								params.lawyerId = _t.id;
+								utils.get(URL.user.pointLawyer, params, function (res) {
+									utils.msg('指定成功');
+									layer.close(index);
+								});
+							})
+						}
+					};
+					utils.dialog(ops);
+				} else {
+					utils.confirm('登录以后才可以操作，是否登录？', function () {
+						base.wxLogin(function (data) {
+							window.location.reload();
+						})
+					})
+				}
+			})
+		},
+
+		setChoose: function () {
+			var _t = this;
+			$('.myList').find('.layui-table-body').find('input[type="checkbox"]').each(function () {
+				var id = $(this).closest('tr').data('id').toString()
+				var checked = this.checked;
+				if (checked) {
+					if ($.inArray(id, _t.ids) == -1) {
+						_t.ids.push(id)
+					}
+				} else {
+					if ($.inArray(id, _t.ids) != -1) {
+						var newArr = []
+						$.each(_t.ids, function (i, t) {
+							if (id != t) {
+								newArr.push(t)
+							}
+						})
+						_t.ids = newArr;
+					}
+				}
+			});
+			var nums = _t.ids.length;	
+			$('.selectOrderNums em').html(nums);
+		},
+
+		queryOrderList: function () {
+			var _t = this;
+			var searchData = {
+				lawyerId: _t.id
+			};
+			var qlps = {
+				box: _t.box,
+				url: URL.user.pointOrderList,
+				searchData: searchData,
+				cols: tableParams
+			}
+			utils.queryList(qlps, function (curr, tr, item) {
+				var id = tr.data('id').toString()
+				if (item.choosed == 1) {
+					tr.addClass('trDisabled')
+					tr.find('input[type="checkbox"]').remove()
+					tr.find('.laytable-cell-checkbox').html('')
+				} else {
+					if ($.inArray(id, _t.ids) != -1) {
+						tr.find('input[type="checkbox"]')[0].checked = true;
+					}
+					tr.find('input[type="checkbox"]').attr('lay-filter', 'chooseSingle');
+					form.render('checkbox');
+				}
+			});
+
+			form.on('checkbox(chooseSingle)', function (e) {
+				var id = $(e.elem).closest('tr').data('id').toString()
+				var checked = this.checked;
+				if (checked) {
+					if ($.inArray(id, _t.ids) == -1) {
+						_t.ids.push(id)
+					}
+				} else {
+					if ($.inArray(id, _t.ids) != -1) {
+						var newArr = []
+						$.each(_t.ids, function (i, t) {
+							if (id != t) {
+								newArr.push(t)
+							}
+						})
+						_t.ids = newArr;
+					}
+				}
+				var nums = _t.ids.length;
+				$('.selectOrderNums em').html(nums);
 			})
 		},
 

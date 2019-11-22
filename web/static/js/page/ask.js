@@ -15,7 +15,6 @@
 			_t.getQuestionType()
 			base.loadArea(_t);
 
-
 			$('body').on('click', '.getSmsCode', function () {
 				var mobile = $.trim($('.mobile').val())
 				if (base.checkMobile(mobile)) {
@@ -31,7 +30,7 @@
 
 			form.on('submit(questionSubmit)', function (res) {
 				var params = res.field;
-				
+
 				if (!params.content || params.content.length < 10) {
 					utils.msg('问题不能少于10个字')
 					return
@@ -67,6 +66,7 @@
 					var token = res.data.token;
 					utils.setCookie(global.token, token);
 					// utils.alert('下单成功，订单号为：' + orderId)
+					// console.log('order.html?id=' + orderId + '&type=1&hasLawyer=' + _t.hasLawyer)
 					window.location = 'order.html?id=' + orderId + '&type=1&hasLawyer=' + _t.hasLawyer;
 				})
 			})

@@ -79,6 +79,8 @@ var URL = {
 		wxLoginStatus: pcHost + '/pc/user/wechat/login/result',
 		wxLawyerLogin: pcHost + '/pc/user/login/lawyer/url',
 		wxLawyerLoginStatus: pcHost + '/pc/user/wechat/lawyer/result',
+		pointOrderList: pcHost + '/pc/user/order/orderList/choose',
+		pointLawyer: pcHost + '/pc/user/order/modifyDispatchWayByUser',
 		order: {
 			query: pcHost + '/pc/user/order/orderList',
 			getById: pcHost + '/pc/user/order/orderDetail',

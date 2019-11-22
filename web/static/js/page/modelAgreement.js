@@ -17,11 +17,14 @@
 				var params = {}
 				params.chooseService = data.id
 				params.fileType = data.businessTypeName
-				params.form = 2
+				params.from = 2
 				params.orderCategory = 41
 				params.amount = data.price
+				params.token = utils.cookie(global.token)
 				utils.put(URL.issue.postTemplate, params, function (res) {
-					// window.location = 'order.html?id=' + data.id + '&type=6';
+					var token = res.data.token;
+					utils.setCookie(global.token, token);
+					window.location = 'order.html?id=' + res.data.orderId + '&type=6';
 				})
 			});
 		},
@@ -124,11 +127,14 @@
 						var params = {}
 						params.chooseService = id
 						params.fileType = data.businessTypeName
-						params.form = 2
+						params.from = 2
 						params.orderCategory = 41
 						params.amount = data.price
+						params.token = utils.cookie(global.token)
 						utils.put(URL.issue.postTemplate, params, function (res) {
-							// window.location = 'order.html?id=' + id + '&type=6';
+							var token = res.data.token;
+							utils.setCookie(global.token, token);
+							window.location = 'order.html?id=' + res.data.orderId + '&type=6';
 						})
 						layer.close(index);
 					}
