@@ -1,0 +1,12 @@
+{{# 
+    layui.each(d, function(i, t) { 
+        if (t.isUser) {
+}}
+<div class="items">
+    {{ t.content || '' }}
+    
+</div>
+{{# 
+        }
+    }) 
+}}

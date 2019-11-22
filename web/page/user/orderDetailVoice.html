@@ -93,6 +93,17 @@
                         </div>
                     </div>
                 </div>
+                {{# if (d.userReplyTimes < 2) { }}
+                <div class="layui-form-item askAgain">
+                    <label class="layui-form-label">用户追问：</label>
+                    <div class="layui-input-block">
+                        <div class="askAgainList">
+                            <div class="app-list"></div>
+                            <div class="app-page-box"></div>
+                        </div>
+                    </div>
+                </div>
+                {{# } }}
                 <div class="layui-form-item">
                     <div class="layui-form-mid">何律师已发起订单确认，请您尽快确认，超过1小时未确认，系统将默认该订单完成。</div>
                 </div>

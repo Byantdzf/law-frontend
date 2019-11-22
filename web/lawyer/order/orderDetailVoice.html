@@ -115,11 +115,14 @@
                         <textarea name="content" minlength="30" maxlength="300" class="layui-textarea content" placeholder="请输入回复内容"></textarea>
                     </div>
                 </div>
+                {{# if (d.lawyerReplyTimes < 3) { }}
                 <div class="layui-form-item orderBtnBox">
                     <a href="javascript:;" class="layui-btn replyVoiceSubmit">回复并发送订单确认</a>
                 </div>
+                {{# } }}
             </div>
             {{# } }}
+            <hr />
             <!-- 我的评价 -->
             <div class="layui-form-item myComment hidden">
                 <label class="layui-form-label">用户评价：</label>

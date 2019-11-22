@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            {{# if (d.orderStatus == 30 || d.orderStatus == 40) { }}
+            {{# if ((d.orderStatus == 30 || d.orderStatus == 40) && d.lawyerReplyTimes < 3) { }}
             <div class="askAgain">
                 <div class="layui-form-item orderBtnBox">
                     <a href="javascript:;" class="layui-btn replyOneByOneSubmit">发送订单确认</a>

@@ -227,6 +227,7 @@
 				box: '.replyList',
 				temp: '/page/user/orderReplyList.html'
 			}
+			qlps[global.rows] = 100;
 			utils.queryTempList(qlps, function (curr, obj) {
 				if (obj.totalRow > 0) {
 					$(qlps.box).removeClass('hidden');
@@ -248,8 +249,14 @@
 			});
 
 			$('.replyList').off().on('click', '.soundPlay', function () {
-				var url = $(this).data('url');
-				base.playAudio(url);
+				if ($(this).hasClass('playing')) {
+					$(this).removeClass('playing');
+					$('#audio').remove();
+				} else {
+					$(this).addClass('playing');
+					var url = $(this).data('url');
+					base.playAudio(url);
+				}
 			})
 
 			$('.replyList').on('click', '.petition', function () {

@@ -37,7 +37,6 @@
 			$.each(_t.areaList, function (i, t) {
 				t.id = t.name
 			});
-			console.log(_t.areaList)
 			utils.getSelect(_t.areaList, '.province', '请选择省', data.province);
 			if (data.city) {
 				var cityData = []

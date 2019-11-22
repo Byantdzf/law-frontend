@@ -1483,3 +1483,7 @@ i, em { font-style: normal;}
 .chooseBox .btnBox { float:right;}
 .trDisabled:hover,
 .trDisabled { background-color: #f8f8f8!important;}
+
+.myComment .layui-input-block .layui-form-label { width:90px; text-align: left;}
+.myComment .layui-input-block { margin-left:120px;}
+.commentContent { padding: 20px; border-radius: 10px; border:1px solid #cfcfcf;}

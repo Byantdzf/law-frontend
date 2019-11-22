@@ -157,6 +157,10 @@
 					_t.queryReply(data.id)
 				}
 
+				if (data.userReplyTimes < 2) {
+					_t.queryAskAgain(data.id)
+				}
+
 				// 获取评论
 				var params = {}
 				params[global.rows] = 10;
@@ -314,6 +318,7 @@
 			utils.queryTempList(qlps, function (curr, obj) {
 				if (obj.totalRow > 0) {
 					$(qlps.box).removeClass('hidden');
+					$('.petitionBox').removeClass('hidden');
 					setTimeout(function () {
 						if (obj.totalRow > 10) {
 							$(qlps.box).find('.app-page-box').removeClass('hidden')
@@ -332,13 +337,44 @@
 			});
 
 			$('.replyList').off().on('click', '.soundPlay', function () {
-				var url = $(this).data('url');
-				base.playAudio(url);
+				if ($(this).hasClass('playing')) {
+					$(this).removeClass('playing');
+					$('#audio').remove();
+				} else {
+					$(this).addClass('playing');
+					var url = $(this).data('url');
+					base.playAudio(url);
+				}
 			})
 
 			$('.replyList').on('click', '.petition', function () {
 				_t.orderPetition(orderId);
 			})
+		},
+
+		queryAskAgain: function (orderId) {
+			var _t = this;
+			var qlps = {
+				url: URL.user.order.reply,
+				searchData: { orderId: orderId },
+				box: '.replyList',
+				temp: '/page/user/orderAskAgainList.html'
+			}
+			utils.queryTempList(qlps, function (curr, obj) {
+				if (obj.totalRow > 0) {
+					$(qlps.box).removeClass('hidden');
+					$('.petitionBox').removeClass('hidden');
+					setTimeout(function () {
+						if (obj.totalRow > 10) {
+							$(qlps.box).find('.app-page-box').removeClass('hidden')
+						} else {
+							$(qlps.box).find('.app-page-box').addClass('hidden')
+						}
+					}, 0)
+				} else {
+					$(qlps.box).addClass('hidden');
+				}
+			});
 		},
 
 		orderPetition: function (orderId) {
@@ -381,7 +417,11 @@
 
 		downloadFiles: function (data) {
 			var files = data.chooseService
-			window.open(URL.user.downloadFiles + '?filePath=https://hujia.obs.cn-south-1.myhuaweicloud.com:443/law/1574432582369sonar.docx');
+			if (files) {
+				window.open(URL.user.downloadFiles + '?filePath=' + files);
+			} else {
+				utils.alert('文件不存在');
+			}
 		},
 
 		actions: function () {
