@@ -138,7 +138,7 @@
           </view>
           <view class="flex flex-start mt-20">
             <view class="flex-bd">
-              <textarea class="textarea" placeholder="请输入您的回复" maxlength="{{ 400 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange"></textarea>
+              <textarea class="textarea" placeholder="请输入您的回复，20~500个字" maxlength="{{ 500 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange"></textarea>
             </view>
             <view class="radio-box">
               <radio class="radio" color="#CF443D" value="content" checked="{{ replyIscontent }}"></radio>

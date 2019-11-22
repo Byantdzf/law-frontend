@@ -249,6 +249,7 @@ Page({
         if (orderCategory == 11) {
           if (this.data.replyIscontent) {
             // 回复文字内容
+            console.log(this.data.content)
             if (!this.data.content) {
               wx.showToast({
                 title: '请输入回复的内容',
