@@ -249,7 +249,6 @@ Page({
         if (orderCategory == 11) {
           if (this.data.replyIscontent) {
             // 回复文字内容
-            console.log(this.data.content)
             if (!this.data.content) {
               wx.showToast({
                 title: '请输入回复的内容',
@@ -287,7 +286,7 @@ Page({
           params.msgType = 7;
         }
 
-        orderApi.orderConfirm(params).then(() => {
+        orderApi.orderReply(params).then(() => {
           app.toastSuccess('操作成功');
           this.loadData(this.orderId);
         });

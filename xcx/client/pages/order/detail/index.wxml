@@ -125,7 +125,7 @@
       <button type="primary" bindtap="handleComment">立即评价</button>
     </view>
     <view class="flex btn-box mt-20" wx:if="{{ (item.orderStatus == 30 || item.orderStatus == 40) && !showAskWrapper }}">
-      <button plain bindtap="handleAsk" wx:if="{{ item.orderType != 2 }}">追问</button>
+      <button plain bindtap="handleAsk" wx:if="{{ item.orderType != 2 && item.userReplyTimes < 2 }}">追问</button>
       <button type="primary" bindtap="handleConfirm">确认订单完成</button>
     </view>
   </view>
