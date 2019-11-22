@@ -109,7 +109,7 @@
                         <view class="issue-form-input flex">
                             <view class="flex-bd">
                                 <picker class="picker" bindchange="couponChange" value="{{index}}" range="{{couponList}}" range-key="name">
-                                    <view wx:if="{{selectCoupon}}">
+                                    <view wx:if="{{selectCoupon.id}}">
                                         使用优惠券：{{selectCoupon.name}}
                                     </view>
                                     <view wx:else>使用优惠券</view>
@@ -119,11 +119,9 @@
                     </view>
                     <view class="issue-form-item">
                         <view class="issue-form-input flex">
-                            <view class="amount flex-bd">
-                                <view>
-                                    合计费用：
-                                    <text class="cl-red">{{selectAmount}}元</text>
-                                </view>
+                            <view class="amount flex flex-bd">
+                                <view>合计费用：</view>
+                                <view class="cl-red">{{selectAmount}}元 <text wx:if="{{selectCoupon.id}}">（优惠券优惠金额{{selectCoupon.amount}}元）</text></view>
                             </view>
                         </view>
                     </view>

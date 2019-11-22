@@ -38,6 +38,7 @@ Page({
         aggreement: false,
         showInputNumber: false,
         selectNums: 1,
+        countTotal: 0,
         list: []
     },
 
@@ -75,7 +76,11 @@ Page({
             params[PAGE_KEY] = 1
             params[SIZE_KEY] = 100
             userApi.couponList(params).then(res => {
-                let couponList = res.data.list || []
+                let list = res.data.list || []
+                let couponList = [{"id": "", "couponName": "不使用", "amount": "0"}, ...list]
+                couponList.forEach(item => {
+                    item.name = item.couponName
+                })
                 this.setData({ couponList })
             })
         }).catch((e) => {
@@ -103,7 +108,8 @@ Page({
                     total += res.data.price
                     this.setData({
                         list,
-                        selectAmount: total
+                        selectAmount: total,
+                        countTotal: total
                     })
                 })
             })
@@ -186,8 +192,10 @@ Page({
     couponChange(e) {
         if (this.data.couponList.length) {
             this.setData({
-                selectCoupon: this.data.couponList[e.detail.value]
+                selectCoupon: this.data.couponList[e.detail.value],
+                selectAmount: this.data.countTotal - this.data.couponList[e.detail.value].amount
             })
+        } else {
         }
     },
     checkboxChange(e) {
