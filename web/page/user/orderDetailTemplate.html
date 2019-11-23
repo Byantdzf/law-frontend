@@ -30,5 +30,28 @@
                 <div class="layui-form-mid">{{ d.amount || '' }}元</div>
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">购买时间：</label>
+            <div class="layui-input-block">
+                <div class="layui-form-mid">{{ d.orderTime || '' }}</div>
+            </div>
+        </div>
+        <hr />
+        <div class="layui-form-item">
+            <div class="fileItem">
+                <div class="imgBox"><img src="{{ d.fileObj.image || '/static/images/nopic.jpg' }}" /></div>
+                <h3>{{ d.fileObj.fileName || '&nbsp;' }}</h3>
+                <div class="info">
+                    <div class="price fontRed">价格：{{ d.fileObj.price || '' }}元</div>
+                    <div class="sales">销售量：{{ d.fileObj.realSales || '' }}</div>
+                </div>
+                <p>{{ d.fileObj.brief || '' }}</p>
+                <div class="btnList">
+                    <a href="javascript:;" class="layui-btn layui-btn-red layui-btn-sm downloadFile">立即下载</a>
+                    <a href="javascript:;" class="layui-btn layui-btn-red layui-btn-sm priviewFile">点击预览</a>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>

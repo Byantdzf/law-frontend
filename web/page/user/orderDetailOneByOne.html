@@ -112,7 +112,7 @@
                 <div class="layui-form-item orderBtnBox">
                     <a href="javascript:;" class="layui-btn finishOrder">确认订单完成</a>
                 </div>
-                {{# } else if (d.orderStatus > 40 && d.orderStatus != 70) { }}
+                {{# } if (d.orderStatus == 40 || d.orderStatus == 50) { }}
                 <div class="layui-form-item">
                     <div class="layui-form-mid">{{ d.lawyer || '' }}律师已确认了订单完成，快去给他评论吧！（对服务不满意？<a href="javascript:;" class="fontRed petition">点击进行申诉</a>）</div>
                 </div>
@@ -124,6 +124,11 @@
                 </div>
                 {{# } }}
             {{# } }}
+            <!-- 我的评价 -->
+            <div class="layui-form-item myComment hidden">
+                <label class="layui-form-label">我的评价：</label>
+                <div class="layui-input-block"></div>
+            </div>
         </div>
     </div>
 </div>

@@ -155,7 +155,7 @@
 					}
 				]
 				params.uploadFiles = imgArr
-				console.log(params);
+				params.pic = $('.avatar').find('img').attr('src') ? $('.avatar').find('img').attr('src') : ''
 				utils.postJson(URL.lawyerObj.update, params, function (res) {
 					utils.msg('保存成功');
 					_t.isEdit = false;
@@ -175,7 +175,11 @@
 			};
 			utils.uploadFiles(p, function(res) {
 				var url = res.data;
-				$(btn).find('img').attr('src', url);
+				if (btn == '.uploadAvatar') {
+					$('.avatar').find('img').attr('src', url);
+				} else {
+					$(btn).find('img').attr('src', url);
+				}
 			});
 		},
 

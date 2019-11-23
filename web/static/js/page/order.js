@@ -45,7 +45,7 @@
 					break;
 				case "6":
 					index = 5;
-					_t.successInfo = '恭喜您！您已支付成功。<a href="javascript:;" class="fontRed">点击此处下载文件</a><br /><br />下载完成后您可在个人中心-我的法律文件中找到下载的文件。<a href="users/myFiles.html" class="fontRed">立即前往》</a><br /><br />';
+					_t.successInfo = '恭喜您！您已支付成功。<a href="javascript:;" class="fontRed downloadFile">点击此处下载文件</a><br /><br />下载完成后您可在个人中心-我的法律文件中找到下载的文件。<a href="/user.html#c=order&category=4" class="fontRed">立即前往》</a><br /><br />';
 					_t.temp = '/page/order/temp5.html';
 					_t.returnPages = 'getLawyer.html';
 					break;
@@ -158,22 +158,15 @@
 					{ 
 						title: '网上支付提示',
 						success: function () {
-							console.log(URL.common.alipay + '?' + $.param(params));
 							window.open(URL.common.alipay + '?' + $.param(params));
 						}
 					},
 					// yes
-					function () {
-						window.location = '/user.html#c=order'
-					},
-					// no
-					function () {
-						window.location = '/user.html#c=order'
+					function (index) {
+						layer.close(index);
+						_t.gotoPaySuccess();
 					}
 				)
-				// utils.get(URL.common.alipay, params, function (res) {
-				// 	console.log(res);
-				// });
 			} else {
 				var ops = {
 					type: 1,
@@ -188,26 +181,30 @@
 								orderNo: orderNo,
 								fee: fee
 							};
-							
 							utils.get(URL.common.wechatPay, params, function (res) {
 								var url = res.data.codeUrl;
-								$.getScript('/static/js/plugin/jquery.qrcode.min.js', function () {
-									$('.wechatPayQrCode .imgBox').qrcode(url);
+								if (url) {
+									$.getScript('/static/js/plugin/jquery.qrcode.min.js', function () {
+										$('.wechatPayQrCode .imgBox').qrcode(url);
 
-									var timer = null;
-									timer = window.setInterval(function () {
-										utils.get(URL.common.wechatPayResult, {orderNo: orderNo}, function (res) {
-											if (res.code == '000000') {
-												var code = res.data.trade_state
-												if (code == 'SUCCESS') {
-													layer.close(index)
-													window.clearInterval(timer);
-													_t.gotoPaySuccess();
+										var timer = null;
+										timer = window.setInterval(function () {
+											utils.get(URL.common.wechatPayResult, {orderNo: orderNo}, function (res) {
+												if (res.code == '000000') {
+													var code = res.data.trade_state
+													if (code == 'SUCCESS') {
+														layer.close(index)
+														window.clearInterval(timer);
+														_t.gotoPaySuccess();
+													}
 												}
-											}
-										});
-									}, 1000);
-								})
+											});
+										}, 1000);
+									})
+								} else {
+									utils.msg('此订单不能使用微信支付')
+									layer.close(index);
+								}
 							});
 						}
 					}
@@ -222,28 +219,47 @@
 			// }, 1000);
 		},
 
+		downloadFiles: function (data) {
+			utils.get(URL.user.order.getFilesInfo, {orderId: data.id}, function (res) {
+				var files = res.data[0].filePath
+				if (files) {
+					window.open(URL.user.downloadFiles + '?filePath=' + files);
+				} else {
+					utils.alert('文件不存在');
+				}
+			})
+		},
+
 		gotoPaySuccess: function () {
 			var _t = this;
 			$('.setPay, .orderPage').addClass('hidden');
-			if (_t.orderInfo) {
-				var lawyer = _t.orderInfo.lawyer || '';
-				_t.successHtml = _t.successHtml.replace('{{lawyer}}', lawyer)
-			}
-			$('.paySuccess').removeClass('hidden').find('.lawyerHtml').html(_t.successHtml);
-			$('.payTit label').html(_t.payTitle);
-			if (_t.successInfo) {
-				$('.successInfo').html(_t.successInfo);
-			}
-			$('.successInfo').removeClass('hidden');
-
-			form.on('submit(returnFirst)', function (res) {
-				var params = res.field;
-				if (_t.c == 'u') {
-					window.location = '/user.html#c=order'
+			utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
+				if (res.data.orderStatus == 10) {
+					window.location.reload()
 				} else {
-					window.location = _t.returnPages;
+					var lawyer = res.data.lawyer || '';
+					_t.successHtml = _t.successHtml && _t.successHtml.replace('{{lawyer}}', lawyer)
+					$('.paySuccess').removeClass('hidden').find('.lawyerHtml').html(_t.successHtml);
+					$('.payTit label').html(_t.payTitle);
+					if (_t.successInfo) {
+						$('.successInfo').html(_t.successInfo);
+					}
+					$('.successInfo').removeClass('hidden');
+
+					$('.downloadFile').off().on('click', function () {
+						_t.downloadFiles(res.data);
+					});
+
+					form.on('submit(returnFirst)', function (res) {
+						var params = res.field;
+						if (_t.c == 'u') {
+							window.location = '/user.html#c=order'
+						} else {
+							window.location = _t.returnPages;
+						}
+					})
 				}
-			})
+			});
 		}
 	}
 

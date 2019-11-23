@@ -1126,7 +1126,7 @@ i, em { font-style: normal;}
 .updateLawyerInfo .layui-input-inline,
 .regPage .layui-input-inline { width:350px;}
 .loginForm { width:350px; margin:0 auto;}
-.forgetStep .steps .layui-form { width:400px; margin:0 auto;}
+.forgetStep .steps .layui-form { width:450px; margin:0 auto;}
 .forgetStep .layui-input-inline { width:160px;}
 .forgetStep .step2 .layui-input-inline { width:260px;}
 
@@ -1445,10 +1445,18 @@ i, em { font-style: normal;}
 .replyIcon { position: relative; color: #999; line-height: 1.5;}
 .replyIcon .iconfont { position: absolute; left:0; top:0; color:#999; font-size: 30px;}
 .replyList .icon-wenjian { font-size:18px; margin-right:10px;}
-.fileList { height: 50px;}
-.fileList span { float:left; position: relative; margin-right:10px; border: 1px solid #e8e8e8;}
+.replyFileList,
+.fileList { height: 80px;}
+.replyFileList span,
+.fileList span { float:left; position: relative; margin-right:10px; border: 1px solid #e8e8e8; text-align: center;}
+.replyFileList span { border:none;}
+.replyFileList span a,
 .fileList span a { display: block; padding: 7px;}
+.replyFileList span p,
+.fileList span p { margin-top:10px;}
+.replyFileList span img,
 .fileList span img { width:50px;}
+.replyFileList span .icon-wenjian,
 .fileList span .icon-wenjian { font-size: 30px;}
 .fileList span .del { position: absolute; right: -7px; top:-7px; width:20px; height:20px; line-height: 20px; border-radius: 50%; background: #f00; color:#fff; text-align: center; font-size: 12px; cursor: pointer;}
 
@@ -1487,3 +1495,20 @@ i, em { font-style: normal;}
 .myComment .layui-input-block .layui-form-label { width:90px; text-align: left;}
 .myComment .layui-input-block { margin-left:120px;}
 .commentContent { padding: 20px; border-radius: 10px; border:1px solid #cfcfcf;}
+
+.fileItem { width: 206px; margin:50px auto 0; border:1px solid #ccc;}
+.fileItem .imgBox { width: 100%; height: 140px;}
+.fileItem .imgBox img { display: block; width: 100%; height: 100%;}
+.fileItem h3 { font-size: 18px; text-align: center; margin-top:10px;}
+.fileItem .info { height: 40px; line-height: 40px; padding:0 10px;}
+.fileItem .info .price { float: left;}
+.fileItem .info .sales { float: right;}
+.fileItem p { padding: 0 10px; line-height: 1.8; color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.fileItem .btnList { padding: 10px 0; text-align: center;}

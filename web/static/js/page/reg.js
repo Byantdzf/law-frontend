@@ -70,7 +70,7 @@
 				params.uploadFiles = imgArr
 				utils.postJson(URL.lawyerObj.reg, params, function (res) {
 					utils.alert('注册成功，点击登录', {}, function () {
-						window.location = '/login.html';
+						window.location = '/lawyer/login.html';
 					})
 				})
 			});

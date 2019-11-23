@@ -119,6 +119,24 @@
                 </div>
             </div>
             {{# } }}
+            {{# if (d.orderStatus >= 40) { }}
+            <div class="layui-form-item">
+                <label class="layui-form-label">上传的文件：</label>
+                <div class="layui-input-block">
+                    <div class="replyFileList">
+                        <div class="clearfix">
+                            {{#
+                                layui.each(d.replyList, function (i, t) {
+                            }}
+                            <span><a href="{{ t.filePath }}" target="_blank"><i class="iconfont icon-wenjian"></i><p>{{ t.fileName || '123123' }}</p></a></span>
+                            {{# 
+                                });
+                            }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{# } }}
 
             {{# if ((d.orderStatus == 30 || d.orderStatus == 40) && d.lawyerReplyTimes < 3) { }}
             <div class="askAgain">

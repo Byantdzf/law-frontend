@@ -94,7 +94,7 @@
 			});
 
 			$('body').on('click', '.eqReg', function () {
-				window.location = '/reg.html';
+				window.location = '/lawyer/reg.html';
 			});
 
 			$('body').on('click', '.eqService', function () {

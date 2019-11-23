@@ -13,6 +13,16 @@
 			utils.get(URL.lawyerObj.order.getById, { orderId: _t.id }, function (res) {
 				var data = res.data;
 
+				if (data.orderStatus >= 40) {
+					var replyParams = {}
+					replyParams[global.rows] = 100;
+					replyParams[global.page] = 1;
+					replyParams.orderId = _t.id;
+					utils.getSync(URL.lawyerObj.order.replyList, replyParams, function (res) {
+						data.replyList = res.data.list || []
+					});
+				}
+
 				var type = data.orderType;
 				var category = data.orderCategory;
 				var temp = '';
@@ -59,7 +69,6 @@
 					}
 				})
 
-				console.log(type)
 				data.news = {};
 				if (type == 3 || type == 2) {
 					utils.getSync(URL.legal.getById + data.chooseService, function (res) {
@@ -267,12 +276,16 @@
 		// 初始化图片上传功能
 		initUpload: function (btn) {
 			// 上传图片
+			var fileName = '';
 			var p = {};
 			p.btn = btn;
+			p.beforeUpload = function (file) {
+				fileName = file.name;
+			};
 			utils.uploadFiles(p, function (res) {
 				var url = res.data;
 				$('.fileList').removeClass('hidden')
-				$('.fileList>div').append('<span><a href="' + url + '" target="_blank"><i class="iconfont icon-wenjian"></i></a><i class="iconfont icon-close del"></i></span>');
+				$('.fileList>div').append('<span><a href="' + url + '" target="_blank"><i class="iconfont icon-wenjian"></i><p>' + fileName + '</p></a><i class="iconfont icon-close del"></i></span>');
 
 				$('.fileList .del').off().on('click', function () {
 					$(this).closest('span').remove();

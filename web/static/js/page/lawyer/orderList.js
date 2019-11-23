@@ -64,6 +64,21 @@
 				$(this).addClass('curr').siblings().removeClass('curr');
 				_t.queryList();
 			});
+
+			//接受订单
+			$('body').on('click', '.handleReceive', function () {
+				var a = $(this);
+				utils.confirm('确定接单？', function () {
+					var id = a.closest('li').data('id')
+					var params = {
+						orderId: id
+					}
+					utils.get(URL.lawyerObj.order.accept, params, function () {
+						utils.msg('操作成功');
+						_t.queryList();
+					})
+				})
+			});
 			
 			// $('.countTimes').each(function () {
 			// 	utils.countTimes($(this));

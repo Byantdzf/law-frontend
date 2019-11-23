@@ -153,10 +153,10 @@ layui.define(function (exports) {
 					// 	gather.setCookie(global.backToken, '');
 					// 	window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else if (res.code == 'E00006') {
-						gather.setCookie(global.userInfoToken, '');	// 清除cookie
-						gather.setCookie(global.token, '');
-						gather.setCookie(global.backToken, '');
-						window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
+						// gather.setCookie(global.userInfoToken, '');	// 清除cookie
+						// gather.setCookie(global.token, '');
+						// gather.setCookie(global.backToken, '');
+						// window.parent.location.pathname != '/user.html' && (window.location = '/user.html');
 					} else {
 						if (url.indexOf('/pc/user/wechat/login/result') == -1) {
 							gather.msg(res.data || res.msg || res.code);
@@ -1198,6 +1198,7 @@ layui.define(function (exports) {
 			// 当有文件被添加进队列的时候
 			fileUploader.on('fileQueued', function (file) {
 				uploading = layer.load(2, { shade: [0.5, "#fff"] });
+				params.beforeUpload && params.beforeUpload(file);
 			});
 
 			//上传成功

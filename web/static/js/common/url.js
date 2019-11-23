@@ -91,6 +91,7 @@ var URL = {
 			askAgain: pcHost + '/pc/user/order/askSecond/',
 			confirm: pcHost	 + '/pc/user/order/confirm/',
 			comment: pcHost + '/pc/user/order/evaluate/',
+			getFilesInfo: pcHost + '/pc/user/order/lawDocument',
 			getComments: pcHost + '/pc/lawyer/orderScore/queryOrderScoreByOrderId'
 		}
 	},
@@ -104,6 +105,7 @@ var URL = {
 		attention: pcHost + '/pc/lawyer/my/myFollow',
 		feedback: pcHost + '/pc/lawyer/feedback',
 		waterList: pcHost + '/pc/lawyer/my/balanceAmountDetail',
+		findPass: pcHost + '/pc/lawyer/resetPassword',
 		withDraw: pcHost + '/pc/lawyer/pay/cashOut',
 		news: {
 			query: pcHost + '/pc/lawyer/article/list',

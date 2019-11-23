@@ -42,6 +42,7 @@
 	var gather = {
 		init: function () {
 			var _t = this;
+			_t.category = hash.get('category');
 			_t.tableParams = $.extend(true, [], normalTableParams);
 			_t.rootCategory = [
 				{ "id": 1, "name": "咨询订单", "child": [{ "id": 11, "name": "在线律师咨询" }, { "id": 12, "name": "指定律师咨询" }] },
@@ -58,7 +59,7 @@
 			var html = utils.getTemp('/page/user/order.html', data);
 			$('.userPageCon').html(html);
 
-			utils.getSelect(_t.rootCategory, '.rootCategory', global.text.all);
+			utils.getSelect(_t.rootCategory, '.rootCategory', global.text.all, _t.category);
 
 			var orderStatus = $.extend(true, [], global.rs.orderStatus);
 
@@ -129,6 +130,24 @@
 			}
 			utils.get(URL.user.order.getById, { orderId: item.id }, function (res) {
 				var data = res.data;
+
+				if (type == 4) {
+					data.fileObj = {};
+					utils.getSync(URL.user.order.getFilesInfo, {orderId: item.id}, function (res) {
+						data.fileObj = res.data[0] || {};
+					})
+				}
+
+				if (data.orderStatus >= 40) {
+					var replyParams = {}
+					replyParams[global.rows] = 100;
+					replyParams[global.page] = 1;
+					replyParams.orderId = item.id;
+					utils.getSync(URL.user.order.reply, replyParams, function (res) {
+						data.replyList = res.data.list || []
+					});
+				}
+
 				$.each(global.rs.orderStatus, function (i, t) {
 					if (t.id == data.orderStatus) {
 						data.statusName = t.name;
@@ -154,7 +173,7 @@
 				$('.orderDetailBox').html(html);
 				
 				if (data.orderStatus != 10 && data.orderStatus != 20) {
-					_t.queryReply(data.id)
+					_t.queryReply(data)
 				}
 
 				if (data.userReplyTimes < 2) {
@@ -250,7 +269,82 @@
 				$('.commentOrder').off().on('click', function () {
 					_t.showCommentBox(data);
 				})
+
+				// 点击下载
+				$('.downloadFile').off().on('click', function () {
+					_t.downloadFiles(data.fileObj);
+				})
+
+				// 点击预览
+				$('.priviewFile').off().on('click', function () {
+					var id = data.fileObj.id;
+					_t.priviewBox(data.fileObj);
+				})
 			});
+		},
+
+		priviewBox: function (fileObj) {
+			var _t = this;
+			utils.get(URL.template.details + fileObj.id, function (res) {
+				var data = res.data;
+				data.price = data.price || 0;
+				var formitem = [
+					{
+						title: "文件名称",
+						label: data.fileName || '',
+						cols: 12
+					}, {
+						title: "所属分类",
+						label: data.businessTypeName || '',
+						cols: 12
+					}, {
+						title: "更新时间",
+						label: data.updateTime || '',
+						cols: 12
+					}, {
+						title: "销量",
+						label: data.sales || '',
+						cols: 12
+					}, {
+						title: "价格",
+						label: data.price + "元",
+						cols: 12
+					}, {
+						title: "文件简介",
+						label: data.brief || '',
+						cols: 12
+					}, {
+						title: "适用范围",
+						label: data.serviceRange || '',
+						cols: 12
+					}
+				]
+				var ops = {
+					title: data.fileName || '',
+					btn: ["立即下载"],
+					class: "servicesRemark",
+					success: function (layero) {
+						$('.layui-layer-btn1').addClass('hidden');
+						var obj = {};
+						if (data) {
+							if (utils.isType(data) == 'object') {
+								utils.loadUpdateForm(layero, formitem, data);
+							} else {
+								utils.get(URL.select.getById, { id: data }, function (res) {
+									obj = res.data || {};
+									utils.loadUpdateForm(layero, formitem, obj);
+								});
+							}
+						} else {
+							utils.loadUpdateForm(layero, formitem);
+						}
+					},
+					yes: function (index) {
+						_t.downloadFiles(fileObj);
+					}
+				};
+				utils.openForm(ops);
+			})
 		},
 
 		showCommentBox: function (data) {
@@ -286,7 +380,6 @@
 							layer.msg('请给律师服务态度评分')
 							return
 						}
-						console.log(professionalAttitudeScore)
 						if (!content) {
 							layer.msg('请填写评论内容')
 							return
@@ -307,18 +400,20 @@
 			utils.dialog(ops);
 		},
 
-		queryReply: function (orderId) {
+		queryReply: function (orderObj) {
 			var _t = this;
 			var qlps = {
 				url: URL.user.order.reply,
-				searchData: { orderId: orderId },
+				searchData: { orderId: orderObj.id },
 				box: '.replyList',
 				temp: '/page/user/orderReplyList.html'
 			}
 			utils.queryTempList(qlps, function (curr, obj) {
 				if (obj.totalRow > 0) {
 					$(qlps.box).removeClass('hidden');
-					$('.petitionBox').removeClass('hidden');
+					if (orderObj.orderStatus == 40 || orderObj.orderStatus == 50) {
+						$('.petitionBox').removeClass('hidden');
+					}
 					setTimeout(function () {
 						if (obj.totalRow > 10) {
 							$(qlps.box).find('.app-page-box').removeClass('hidden')
@@ -416,7 +511,7 @@
 		},
 
 		downloadFiles: function (data) {
-			var files = data.chooseService
+			var files = data.filePath
 			if (files) {
 				window.open(URL.user.downloadFiles + '?filePath=' + files);
 			} else {

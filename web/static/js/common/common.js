@@ -109,6 +109,9 @@
 			if (!data.length) {
 				utils.getSync(URL.common.questionType, {noAuth: 1}, function (res) {
 					data = res.data
+					$.each(data, function (i, t) {
+						t.id = t.code;
+					})
 				});
 				this.questionType = data;
 			}
@@ -158,7 +161,7 @@
 			});
 
 			$('body').on('click', '.eqReg', function () {
-				window.location = '/reg.html';
+				window.location = '/lawyer/reg.html';
 			});
 
 			$('body').on('click', '.eqService', function () {

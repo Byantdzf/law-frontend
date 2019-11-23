@@ -4,14 +4,28 @@
 		init: function () {
 			var _t = this;
 
-			form.on('submit(forgetNext)', function () {
-				$('.step1').addClass('hidden');
-				$('.step2').removeClass('hidden');
+			$('body').on('click', '.getSmsCode', function () {
+				var mobile = $.trim($('.mobile').val())
+				if (base.checkMobile(mobile)) {
+					utils.msg('请输入正确的手机号码');
+					return
+				}
+				if (!$(this).attr('disabled')) {
+					base.timeCount('.getSmsCode', global.smsTime)
+					utils.get(URL.common.getSmsCode, {phone: mobile}, function (res) {
+					})
+				}
 			})
 
-			form.on('submit(forgetSubmit)', function () {
-				$('.step2').addClass('hidden');
-				$('.step3').removeClass('hidden');
+			form.on('submit(forgetSubmit)', function (res) {
+				var params = res.field;
+				console.log(params);
+
+				utils.get(URL.lawyerObj.findPass, params, function(res) {
+					utils.alert('重置密码成功，点确定登录', '', function () {
+						window.location = '/lawyer/login.html';
+					});
+				})
 			})
 		}
 	}

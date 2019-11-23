@@ -44,7 +44,7 @@
 			});
 
 			$('body').on('click', '.lawyer', function () {
-				window.location = '/login.html';
+				window.location = '/lawyer/login.html';
 			});
 		},
 
