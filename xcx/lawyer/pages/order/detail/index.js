@@ -50,7 +50,6 @@ Page({
       recordTime: 0,
       recordTiming: 0,
       content: '',
-      files: [],
       replyIscontent: false
     });
     orderApi.orderDetails(id).then(res => {
