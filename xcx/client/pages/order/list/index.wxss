@@ -95,5 +95,14 @@
 .filter-icon .iconfont { font-size: 24rpx;}
 
 .icon-wenjian {
-  font-size: 40rpx;
+  font-size: 100rpx;
+  line-height: 1;
+}
+
+.file-item {
+  justify-content: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+  width: 140rpx;
 }

@@ -1,9 +1,9 @@
 <view class="order-item" bindtap="gotoDetail">
   <view class="flex order-item-hd">
-    <view class="flex-bd cl-primary fw-b">{{ orderCategoryMap[item.orderCategory] }}</view>
+    <view class="flex-bd cl-primary fw-b">{{ orderCategory[item.orderCategory] }}</view>
     <view class="iconfont icon-guanzhu" wx:if="{{ type == 1 && item.userIsFocusedLawyer == 1 }}"></view>
     <view class="cl-primary fw-b" wx:if="{{ type == 2 }}">
-      {{ orderStatusMap[item.orderStatus] }}
+      {{ orderStatus[item.orderStatus] }}
     </view>
   </view>
 
@@ -34,7 +34,7 @@
     <view class="flex">
       <view class="flex-bd flex">
         <view class="label cl-999">订单类型：</view>
-        <view class="flex-bd cl-666">{{ orderTypeMap[item.orderType] }}</view>
+        <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>
       </view>
       <view class="flex-bd flex" wx:if="{{ item.orderType == 1 }}">
         <view class="label cl-999">所属问题：</view>
@@ -72,7 +72,7 @@
     </view>
     <view class="flex">
       <view class="label cl-999">订单类型：</view>
-      <view class="flex-bd cl-666">{{ orderTypeMap[item.orderType] }}</view>
+      <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>
     </view>
     <view class="flex">
       <view class="label cl-999">订单金额：</view>

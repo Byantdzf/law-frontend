@@ -1,3 +1,23 @@
+<template name="orderBaseInfo">
+  <view class="orderInfo">
+    <view class="flex detail-row">
+      <text class="label cl-999">订单编号：</text>
+      <text class="flex-bd cl-666">{{ orderNo }}</text>
+    </view>
+    <view class="flex detail-row">
+      <text class="label cl-999">订单状态：</text>
+      <text class="flex-bd cl-primary fw-b">{{ orderStatusMap[orderStatus] }}</text>
+    </view>
+    <view class="flex detail-row">
+      <text class="label cl-999">订单类型：</text>
+      <text class="flex-bd cl-666">{{ orderCategoryMap[orderCategory] }}</text>
+    </view>
+    <view class="flex detail-row">
+      <text class="label cl-999">订单来源：</text>
+      <text class="flex-bd cl-666">{{ orderSourceMap[orderSource] }}</text>
+    </view>
+  </view>
+</template>
 
 <template name="orderInfo_01">
   <view class="orderInfo">
@@ -72,7 +92,7 @@
       <text class="label cl-999">{{ amount }}元</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">我的要求：</text>
+      <text class="label cl-999">客户要求：</text>
       <text class="label cl-999">{{ customerRequirement }}</text>
     </view>
   </view>

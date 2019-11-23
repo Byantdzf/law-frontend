@@ -1,6 +1,6 @@
 const orderApi = require('../../../service/order');
 const selectApi = require('../../../service/select');
-const { orderType, orderCategory, orderStatus, orderEmergency, PAGE_KEY, SIZE_KEY } = require('../../../config/global');
+const { orderType, orderCategory, orderStatus, orderEmergency, PAGE_KEY, SIZE_KEY, tokenName } = require('../../../config/global');
 const app = getApp();
 Page({
   data: {
@@ -233,7 +233,22 @@ Page({
   },
   // 打开文件
   handleOpenDoc(e) {
-    const { filepath: filePath } = e.currentTarget.dataset;
-    wx.openDocument({ filePath });
-  }
+    const { filepath: fileUrl } = e.currentTarget.dataset;
+    const token = wx.getStorageSync(tokenName)
+    wx.downloadFile({
+      url: fileUrl,
+      header: {
+        "Authorization": "Bearer " + token
+      },
+      success: (res) => {
+        const filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          }
+        })
+      }
+    });
+  },
 })

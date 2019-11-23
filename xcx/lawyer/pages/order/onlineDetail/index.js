@@ -1,16 +1,18 @@
 const orderApi = require('../../../service/order');
 const selectApi = require('../../../service/select');
-const { orderType, orderCategory, orderStatus, orderEmergency, PAGE_KEY, SIZE_KEY, appName, tokenName } = require('../../../config/global');
+const { orderType, orderCategory, orderStatus, orderSource, orderEmergency, PAGE_KEY, SIZE_KEY, appName } = require('../../../config/global');
 const app = getApp();
 Page({
   data: {
     appName,
-    orderType,
-    orderCategory,
-    orderStatus,
-    orderEmergency,
     // 存放订单信息
-    item: {},
+    item: {
+      orderTypeMap: orderType,
+      orderCategoryMap: orderCategory,
+      orderStatusMap: orderStatus,
+      orderSourceMap: orderSource,
+      emergencyMap: orderEmergency,
+    },
     // 回复列表
     msgList: [],
     // 评价列表
@@ -23,11 +25,7 @@ Page({
     isRecording: false,
     filePath: '',
     recordTime: 0,
-    // 是否正在上传文件
-    isUpload: false,
     recordTiming: 0,
-    // 选择的文件
-    files: [],
     // 用户授权了录音
     isRecordAuth: true,
     // 是否在播放录音
@@ -44,7 +42,6 @@ Page({
   // 加载订单详情数据
   loadData(id) {
     this.setData({
-      isUpload: false,
       isRecording: false,
       filePath: '',
       recordTime: 0,
@@ -52,11 +49,15 @@ Page({
       content: '',
       replyIscontent: false
     });
+
     orderApi.orderDetails(id).then(res => {
-      const item = res.data || {};
+      let { item } = this.data;
+      const resData = res.data || {};
+      item = { ...item, ...resData };
       item.questionTypeName = '';
       item.emergencyName = orderEmergency[item.emergency];
       this.setData({ item });
+
       selectApi.data({ dictCode: 'QuestionType' }).then(res => {
         const items = res.data || [];
         items.forEach(v => {
@@ -156,26 +157,6 @@ Page({
     }
     // TODO：暂停功能
   },
-  // 打开文件
-  handleOpenDoc(e) {
-    const { filepath: fileUrl } = e.currentTarget.dataset;
-    const token = wx.getStorageSync(tokenName)
-    wx.downloadFile({
-      url: fileUrl,
-      header: {
-        "Authorization": "Bearer " + token
-      },
-      success: (res) => {
-        const filePath = res.tempFilePath
-        wx.openDocument({
-          filePath: filePath,
-          success: function (res) {
-            console.log('打开文档成功')
-          }
-        })
-      }
-    });
-  },
   // 回复方式改变，语音回复还是内容回复
   replyRadioChange(e) {
     const { value } = e.detail;
@@ -228,22 +209,19 @@ Page({
         this.setData({
           isRecording: false,
           filePath: tempFilePath,
-          recordTime: Math.round(duration/1000),
-          isUpload: true
+          recordTime: Math.round(duration/1000)
         });
         this.clearRecordTimer();
         wx.showLoading({ title: '上传中' });
         selectApi.uploadFile({ filePath: tempFilePath }).then(res => {
           this.setData({
             filePath: res.data || '',
-            isUpload: false
           });
           wx.hideLoading();
         }).catch(() => {
           this.setData({
             filePath: '',
             recordTime: 0,
-            isUpload: false
           });
           wx.hideLoading();
         })
@@ -269,111 +247,56 @@ Page({
       this.setData({ isRecordAuth: true })
     }
   },
-  // 选择文件上传
-  handleUpload() {
-    wx.chooseMessageFile({
-      count: 10,
-      type: 'file',
-      success: (res) => {
-        const items = res.tempFiles || [];
-        const paths = items.map(v => v.path);
-        const names = items.map(v => v.name);
-        // console.log(paths)
-        for(let i = 0; i < paths.length; i ++) {
-          selectApi.uploadFile({ filePath: paths[i] }).then(res1 => {
-            const data = res1.data || '';
-            let files = this.data.files;
-            this.setData({
-              files: files.concat([{
-                filePath: data,
-                fileName: names[i],
-                // 类型 1：文字；2：音频；3：红包；4：文件；5：位置；6：图片
-                fileType: 4
-              }])
-            })
-          })
-        }
-      }
-    })
-  },
 
   // 处理确认完成订单操作
   handleConfirm() {
-    const { id, orderType, orderStatus, orderCategory } = this.data.item;
     app.confirm({
       content: '您确定要完成此订单吗？'
     }).then(() => {
       let params = {
         orderId: this.orderId,
         // 操作类型 1-回复 2回复并确认
-        operateType: 2
+        operateType: 2,
       };
-      if (orderType == 1) {
-        // 咨询类订单
-        if (orderCategory == 11) {
-          if (this.data.replyIscontent) {
-            // 回复文字内容
-            if (!this.data.content) {
-              wx.showToast({
-                title: '请输入回复的内容',
-                icon: 'none',
-                duration: 3000
-              });
-              return false;
-            }
-            if (this.data.content.length < 20 || this.data.content.length > 500) {
-              wx.showToast({
-                title: '回复的内容不能小于20字符且不大于500字符',
-                icon: 'none',
-                duration: 3000
-              });
-              return false;
-            }
-            params.msgType = 1;
-            params.content = this.data.content;
-          } else {
-            if (this.data.recordTime < 30 || this.data.recordTime > 180) {
-              wx.showToast({
-                title: '语音时长不能小于30s，且不大于180s',
-                icon: 'none',
-                duration: 3500
-              });
-              return false;
-            }
-            // 回复语音
-            params.msgType = 2;
-            params.filePath = this.data.filePath;
-            params.recordTime = this.data.recordTime;
-          }
-        } else {
-          // 指定律师
-          params.msgType = 7;
-        }
-
-        orderApi.orderReply(params).then(() => {
-          app.toastSuccess('操作成功');
-          this.loadData(this.orderId);
-        });
-      } else {
-        // 分块法律服务订单, 代理律师订单, 法律文件订单
-        if (!this.data.files.length) {
+      if (this.data.replyIscontent) {
+        // 回复文字内容
+        if (!this.data.content) {
           wx.showToast({
-            title: '请上传文件',
+            title: '请输入回复的内容',
             icon: 'none',
             duration: 3000
           });
           return false;
         }
-
-        params.curOrderStatus = orderStatus;
-        params.attachmentList = this.data.files;
-
-        orderApi.orderReplyForManyAttachment(params).then(() => {
-          app.toastSuccess('操作成功');
-          this.setData({ files: [] });
-          this.loadData(this.orderId);
-        });
+        if (this.data.content.length < 20 || this.data.content.length > 500) {
+          wx.showToast({
+            title: '回复的内容不能小于20字符且不大于500字符',
+            icon: 'none',
+            duration: 3000
+          });
+          return false;
+        }
+        params.msgType = 1;
+        params.content = this.data.content;
+      } else {
+        if (this.data.recordTime < 30 || this.data.recordTime > 180) {
+          wx.showToast({
+            title: '语音时长不能小于30s，且不大于180s',
+            icon: 'none',
+            duration: 3500
+          });
+          return false;
+        }
+        // 回复语音
+        params.msgType = 2;
+        params.filePath = this.data.filePath;
+        params.recordTime = this.data.recordTime;
       }
+      
+      orderApi.orderReply(params).then(() => {
+        app.toastSuccess('操作成功');
+        this.loadData(this.orderId);
+      });
       
     }).catch(e => {});
   },
@@ -428,7 +351,7 @@ Page({
     }
     return {
       title: '虎甲问答',
-      path: `pages/order/detail/index?id=${ this.orderId }`,  // 路径，传递参数到指定页面。
+      path: `pages/order/onlineDetail/index?id=${ this.orderId }`,  // 路径，传递参数到指定页面。
       imageUrl: '../../../static/images/logo.png',
       success: function (res) {
         // 转发成功
@@ -441,6 +364,5 @@ Page({
         app.toastError('转发失败')
       }
     }
- 
   }
 })

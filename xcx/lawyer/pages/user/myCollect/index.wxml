@@ -9,8 +9,6 @@
             <app-order-item
               item="{{ item }}"
               index="{{ index }}"
-              orderTypeMap="{{ orderType }}"
-              orderCategoryMap="{{ orderCategory }}"
               questionTypeMap="{{ questionTypeMap }}"
               bind:refresh="handleRefreshOrderList"
             />

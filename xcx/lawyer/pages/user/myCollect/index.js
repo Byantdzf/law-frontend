@@ -1,12 +1,8 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
-const { PAGE_KEY, orderType, orderCategory, orderStatus } = require('../../../config/global')
 Page({
   data: {
     currArea: [],
-    orderType,
-    orderCategory,
-    orderStatus,
     questionTypes: [],
     questionTypeMap: {},
     currQuestionType: -1,
@@ -141,16 +137,6 @@ Page({
     const { index, type } = e.detail
     let { list } = this.data
     switch(type) {
-      // case 'Focused':
-      //   this.setData({
-      //     [`list[${ index }].focused`]: 1
-      //   })
-      //   break;
-      // case 'CancelFocused':
-      //   this.setData({
-      //     [`list[${ index }].focused`]: 0
-      //   })
-      //   break;
       case 'CancelFocused':
       case 'Refuse':
       case 'Receive':
@@ -158,10 +144,6 @@ Page({
         this.setData({ list })
         break;
     }
-    // this.appList.setParams(params => {
-    //   params[PAGE_KEY] = 1
-    //   return params
-    // })
   },
   handleKeyWordChange(e) {
     this.keyWord = e.detail.value

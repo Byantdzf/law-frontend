@@ -34,7 +34,10 @@
     {
       "root": "pages/order",
       "pages": [
-        "detail/index"
+        "onlineDetail/index",
+        "oneByOneDetail/index",
+        "legalDetail/index",
+        "mandatoryDetail/index"
       ]
     }
   ],

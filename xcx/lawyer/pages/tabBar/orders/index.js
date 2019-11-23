@@ -1,12 +1,8 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
-const { PAGE_KEY, orderType, orderCategory, orderStatus } = require('../../../config/global')
 Page({
   data: {
     currArea: [],
-    orderType,
-    orderCategory,
-    orderStatus:20,
     questionTypes: [],
     questionTypeMap: {},
     currQuestionType: -1,
@@ -88,8 +84,9 @@ Page({
     let currArea = this.data.currArea || []
 
     this.appList.setParams(params => {
+      params.orderStatus = 20
       params.orderSource = this.data.orderSource
-      params.orderStatus = this.data.orderStatus
+
       if (currArea.length) {
         params.city = currArea[1] || ''
       }

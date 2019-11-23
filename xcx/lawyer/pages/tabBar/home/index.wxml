@@ -37,8 +37,6 @@
               key="isSystem"
               item="{{ item }}"
               index="{{ index }}"
-              orderTypeMap="{{ orderType }}"
-              orderCategoryMap="{{ orderCategory }}"
               questionTypeMap="{{ questionTypeMap }}"
               bind:refresh="handleRefreshOrderList"
             />
@@ -61,8 +59,6 @@
               key="isOrders"
               item="{{ item }}"
               index="{{ index }}"
-              orderTypeMap="{{ orderType }}"
-              orderCategoryMap="{{ orderCategory }}"
               questionTypeMap="{{ questionTypeMap }}"
               bind:refresh="handleRefreshOrderList"
             />
@@ -85,8 +81,6 @@
               key="isFindMe"
               item="{{ item }}"
               index="{{ index }}"
-              orderTypeMap="{{ orderType }}"
-              orderCategoryMap="{{ orderCategory }}"
               questionTypeMap="{{ questionTypeMap }}"
               bind:refresh="handleRefreshOrderList"
             />
@@ -175,9 +169,6 @@
     </view>
   </view>
 
-  <!-- <view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
-		<text class="iconfont icon-plus"/>
-  </view> -->
   <app-pop visible="{{ showTools }}" hideTabBar>
 		<view class="flex">
 			<view

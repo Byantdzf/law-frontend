@@ -1,6 +1,6 @@
 
 const orderApi = require('../../service/order.js')
-const { orderStatus, orderEmergency } = require('../../config/global')
+const { orderType, orderCategory, orderStatus, orderSource, orderEmergency } = require('../../config/global');
 const app = getApp()
 Component({
   options: {
@@ -9,18 +9,6 @@ Component({
   },
   properties: {
     item: {
-      type: Object,
-      value: {}
-    },
-    orderTypeMap: {
-      type: Object,
-      value: {}
-    },
-    orderStatusMap: {
-      type: Object,
-      value: {}
-    },
-    orderCategoryMap: {
       type: Object,
       value: {}
     },
@@ -41,13 +29,34 @@ Component({
     }
   },
   data: {
+    orderType,
+    orderCategory,
+    orderSource,
     orderStatus,
     orderEmergency
   },
 
   methods: {
     gotoDetail() {
-      app.gotoPage('/pages/order/detail/index?id=' + this.data.item.id)
+      let path = '/pages/order/mandatoryDetail/index';
+      let item = this.data.item;
+
+      // 在线咨询
+      if (item.orderCategory == 11) {
+        path = '/pages/order/onlineDetail/index';
+      }
+
+      // 指定律师
+      if (item.orderCategory == 12) {
+        path = '/pages/order/oneByOneDetail/index';
+      }
+      
+      // 分块法律服务订单
+      if (item.orderType == 2) {
+        path = '/pages/order/legalDetail/index';
+      }
+      
+      app.gotoPage(`${path}?id=${item.id}`)
     },
     handleForward() {
       app.confirm({ content: '确认转发此订单吗？' }).then(() => {

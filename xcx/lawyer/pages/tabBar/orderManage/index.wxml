@@ -24,9 +24,6 @@
               type="2"
               item="{{ item }}"
               index="{{ index }}"
-              orderTypeMap="{{ orderType }}"
-              orderStatusMap="{{ orderStatus }}"
-              orderCategoryMap="{{ orderCategory }}"
               questionTypeMap="{{ questionTypeMap }}"
             />
           </view>

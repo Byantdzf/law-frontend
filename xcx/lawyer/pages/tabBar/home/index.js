@@ -1,13 +1,10 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
 const orderApi = require('../../../service/order')
-const { appName, PAGE_KEY, SIZE_KEY, orderType, orderCategory, orderStatus } = require('../../../config/global')
+const { appName, PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 let page = null
 Page({
   data: {
-    orderType,
-    orderCategory,
-    orderStatus,
     currArea: [],
     //图片地址
     banners: [

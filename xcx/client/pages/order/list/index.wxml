@@ -95,9 +95,9 @@
                       <view class="iconfont icon-yuyin cl-primary"></view>
                       <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
                     </view>
-                    <view class="flex {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
-                      <view class="iconfont icon-wenjian cl-primary"></view>
-                      <view>{{ msg.fileName || '' }}</view>
+                    <view class="flex file-item {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
+                      <view class="iconfont icon-wenjian"></view>
+                      <view class="ellipsis">{{ msg.fileName || '' }}</view>
                     </view>
                   </view>
                 </view>

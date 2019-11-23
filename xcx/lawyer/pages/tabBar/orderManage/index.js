@@ -1,11 +1,9 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
-const { orderType, orderCategory, orderStatus } = require('../../../config/global')
+const { orderType } = require('../../../config/global')
 Page({
   data: {
     orderType,
-    orderCategory,
-    orderStatus,
     orderTypeMap: {},
     questionTypeMap: {},
     curOrderType: -1,
