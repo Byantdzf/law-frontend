@@ -28,26 +28,26 @@
 					index = 2;
 					_t.successHtml = '系统会在第一时间给您分配律师进行服务';
 					_t.temp = '/page/order/temp3.html';
-					_t.returnPages = 'nonlitigationLegalServices.html';
+					_t.returnPages = 'index.html';
 					break;
 				case "4":
 					index = 3;
 					_t.successHtml = '系统会在第一时间给您分配律师进行服务';
 					_t.temp = '/page/order/temp4.html';
-					_t.returnPages = 'litigationLegalServices.html';
+					_t.returnPages = 'index.html';
 					break;
 				case "5":
 					index = 4;
 					_t.payTitle = '提交成功';
 					_t.successHtml = '客服人员会在第一时间给您跟您联系';
 					_t.temp = '/page/order/temp5.html';
-					_t.returnPages = 'getLawyer.html';
+					_t.returnPages = 'index.html';
 					break;
 				case "6":
 					index = 5;
 					_t.successInfo = '恭喜您！您已支付成功。<a href="javascript:;" class="fontRed downloadFile">点击此处下载文件</a><br /><br />下载完成后您可在个人中心-我的法律文件中找到下载的文件。<a href="/user.html#c=order&category=4" class="fontRed">立即前往》</a><br /><br />';
 					_t.temp = '/page/order/temp5.html';
-					_t.returnPages = 'getLawyer.html';
+					_t.returnPages = 'index.html';
 					break;
 			}
 			if (!index) {
@@ -234,7 +234,7 @@
 			var _t = this;
 			$('.setPay, .orderPage').addClass('hidden');
 			utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
-				if (res.data.orderStatus == 10) {
+				if (res.data.orderStatus == 10 && _t.type != 5) {
 					window.location.reload()
 				} else {
 					var lawyer = res.data.lawyer || '';
