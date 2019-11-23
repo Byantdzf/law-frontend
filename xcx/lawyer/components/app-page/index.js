@@ -23,29 +23,30 @@ Component({
     isLoading: false
   },
   methods: {
-    userLogin() {
-      wx.login({
-        success:({ code }) => {
-          if(!code) return
-          // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
-          let params = {}
-          params.code = code
-          if (app.globalData.adInfo) {
-            params.locationX = app.globalData.adInfo.location.lng
-            params.locationY = app.globalData.adInfo.location.lat
+    userLogin(payload = {}) {
+      return new Promise((resolve, reject) => {
+        wx.login({
+          success:({ code }) => {
+            if(!code) return
+            // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
+            let params = {}
+            params.code = code
+            if (app.globalData.adInfo) {
+              params.locationX = app.globalData.adInfo.location.lng
+              params.locationY = app.globalData.adInfo.location.lat
+            }
+            api.login({ ...params, ...payload}).then(res => {
+              // 保存token
+              const data = res.data || {}
+              const token = data.sessionId
+              wx.setStorageSync(tokenName, token)
+              resolve(res)
+            }).catch((err) => {
+              reject(err)
+            });
           }
-          api.login(params).then(res => {
-            // 保存token
-            wx.setStorageSync(tokenName, res.data.sessionId)
-
-            // 如果没有返回用户信息，从微信获取
-            this.getAuthSetting()
-          }).catch(() =>{
-            // 后端接口异常情况下，本地继续走流程，从微信获取
-            this.getAuthSetting()
-          })
-        }
-      })
+        })
+      });
     },
     // 打开用户授权modal
     showAuth() {
@@ -59,16 +60,53 @@ Component({
     },
     // 检查用户是否有授权
     checkAuth() {
-      let userInfo = wx.getStorageSync('userInfo')
-
       return new Promise((resolve, reject) => {
-        this.setData({ authResolve:resolve, authReject: reject })
-        if(userInfo) {
-          resolve(userInfo)
-        }else {
-          this.userLogin()
+        this.setData({ authResolve: resolve, authReject: reject })
+        this.getAuthSetting()
+      })
+    },
+    // 获取用户的授权设置
+    getAuthSetting() {
+      wx.getSetting({
+        success: ({ authSetting }) => {
+          if(authSetting['scope.userInfo']) {
+            this.getUserInfo()
+          } else {
+            // 唤起授权对话框
+            this.showAuth()
+          }
+        },
+        fail() {
+          // 唤起授权对话框
+          this.showAuth()
         }
       })
+    },
+    // 获取用户信息
+    getUserInfo() {
+      wx.getUserInfo({
+        lang: "zh_CN",
+        success: (detail) => {
+          if (detail.errMsg == "getUserInfo:ok") {
+            this.data.authResolve(detail)
+            app.globalData.userInfo = detail.userInfo
+            wx.setStorageSync('userInfo', detail.userInfo)
+          } else {
+            this.data.authReject()
+          }
+        }
+      })
+    },
+    // 用户授权回调结果
+    bindGetUserInfo({detail}) {
+      // 保存用户信息到服务器，相当于注册用户，需要提交 iv, encryptedData, rawData, signature, userInfo
+      // ……
+      if (detail.errMsg == "getUserInfo:ok") {
+        this.getUserInfo()
+      } else {
+        this.data.authReject()
+      }
+      this.hideAuth()
     },
     // 检查网络环境
     checNetwork(cb) {
@@ -80,58 +118,6 @@ Component({
       wx.onNetworkStatusChange(res => {
         cb && cb(res.networkType)
       })
-    },
-    getAuthSetting() {
-      wx.getSetting({
-        success: ({ authSetting }) => {
-          if(authSetting['scope.userInfo']) {
-            this.getUserInfo()
-          } else {
-            // 唤起授权对话框
-            this.showAuth()
-          }
-        },
-        fail(err) {
-          // 唤起授权对话框
-          this.showAuth()
-        }
-      })
-    },
-    // 获取用户信息
-    getUserInfo() {
-      wx.getUserInfo({
-        lang: "zh_CN",
-        success: (detail) => {
-          console.log(detail)
-          if (detail.errMsg == "getUserInfo:ok") {
-            this.data.authResolve(detail.userInfo)
-            wx.setStorageSync('userInfo', detail.userInfo)
-          } else {
-            this.data.authReject()
-          }
-
-          // 看情况是否需要提交到后端
-        }
-      })
-    },
-    bindGetUserInfo({detail}) {
-      // 保存用户信息到服务器，相当于注册用户，需要提交 iv, encryptedData, rawData, signature, userInfo
-      // ……
-      if (detail.errMsg == "getUserInfo:ok") {
-        let params = detail.userInfo
-        if (app.globalData.adInfo) {
-          params.locationX = app.globalData.adInfo.location.lng
-          params.locationY = app.globalData.adInfo.location.lat
-        }
-        api.getUserInfo(params).then(res => {
-          this.data.authResolve(detail.userInfo)
-          app.globalData.userInfo = params
-          wx.setStorageSync('userInfo', params)
-        })
-      } else {
-        this.data.authReject()
-      }
-      this.hideAuth()
     },
   },
   ready() {

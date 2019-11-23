@@ -4,11 +4,9 @@ const { post, postJson, get } = require('../utils/ajax.js')
 module.exports = {
   /**
    * 登录
-   * @param[String]  username   账号
-   * @param[String]  password   密码
    * @param[String]  code       小程序登录code
   */
-  login: params => get('/applets/lawyer/wechatGetSession', params, { auth: false, loading: false }),
+  login: params => get('/applets/lawyer/wechatGetSession', params, { auth: false }),
 
   /**
    * 微信登录
@@ -19,8 +17,6 @@ module.exports = {
    * 保存用户信息
    */
   getUserInfo: params => postJson('/applets/lawyer/updateLoginInfo/1', params),
-
-  save: params => post('/api/saveUserInfo', params),
 
   /**
    * 查询用户注册状态

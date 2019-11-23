@@ -91,15 +91,16 @@
     </view>
     <view class="detail-box" wx:if="{{ msgList.length }}">
       <view class="detail-row mt-20" wx:for="{{ msgList }}" wx:for-item="msg" wx:key="{{ index }}">
-        <view class="flex flex-start" wx:if="{{msg.isUser !== 'Y'}}">
+        <view class="flex flex-start" wx:if="{{msg.isUser == 'false'}}">
           <view class="label">
             <text class="cl-999">回复详情：</text>
           </view>
           <view class="flex-column flex-bd cl-666">
             <view class="con-box" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
-            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
-              <view class="iconfont icon-yuyin cl-primary"></view>
-              <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
+            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-index="{{ index }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
+              <view class="iconfont cl-primary {{ playRecordAuthIndex === index ? 'icon-stop' : 'icon-yuyin' }}"></view>
+              <view wx:if="{{ playRecordAuthIndex === index }}">正在播放录音...</view>
+              <view wx:else>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
             </view>
             <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
               <view class="iconfont icon-wenjian cl-primary"></view>

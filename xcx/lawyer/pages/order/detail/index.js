@@ -30,6 +30,8 @@ Page({
     files: [],
     // 用户授权了录音
     isRecordAuth: true,
+    // 是否在播放录音
+    playRecordAuthIndex: '',
   },
   onLoad(e) {
     app.pages.add(this);
@@ -111,8 +113,48 @@ Page({
   },
   // 播放音频
   handleOpenAudio(e) {
-    const { filepath: filePath } = e.currentTarget.dataset;
-    wx.playVoice({filePath});
+    const { filepath, index } = e.currentTarget.dataset;
+
+    if (this.data.playRecordAuthIndex || this.tapFlag) {
+      return false;
+    }
+
+    this.tapFlag = true;
+    this.innerAudioContext = wx.createInnerAudioContext();
+
+    if (this.innerAudioContext) {
+      console.log('播放音频')
+      this.innerAudioContext.src = filepath ? filepath.split('?')[0] : ''
+      this.innerAudioContext.play()
+      this.innerAudioContext.onPlay(() => {
+        console.log('onPlay')
+        this.setData({ playRecordAuthIndex: index })
+        this.tapFlag = false;
+      });
+      this.innerAudioContext.onStop(() => {
+        this.setData({ playRecordAuthIndex: '' });
+        this.innerAudioContext = null;
+        this.tapFlag = false;
+      });
+      this.innerAudioContext.onEnded(() => {
+        this.setData({ playRecordAuthIndex: '' });
+        this.innerAudioContext = null;
+        this.tapFlag = false;
+      });
+      this.innerAudioContext.onError((err) => {
+        const errMsg = {
+          '10001': '系统错误',
+          '10002': '网络错误',
+          '10003': '文件错误',
+          '10004': '格式错误',
+          '-1': '未知错误',
+        }[err.errCode];
+        wx.showToast({ title: errMsg, icon: 'none' });
+        this.setData({ playRecordAuthIndex: '' });
+        this.innerAudioContext = null;
+        this.tapFlag = false;
+      });
+    }
     // TODO：暂停功能
   },
   // 打开文件
@@ -129,6 +171,12 @@ Page({
   },
   // 开始录音
   startRecording() {
+    if (this.innerAudioContext) {
+      this.innerAudioContext.stop();
+      this.setData({ playRecordAuthIndex: '' });
+      this.innerAudioContext = null;
+      this.tapFlag = false;
+    }
     if (this.data.replyIscontent) {
       return false;
     }
@@ -146,6 +194,8 @@ Page({
         }, 1000);
       });
       this.RecorderManager.onError(err => {
+        this.RecorderManager.stop();
+        this.clearRecordTimer();
         if (err && err.errMsg === 'operateRecorder:fail auth deny') {
           this.setData({ isRecordAuth: false })
         }
@@ -156,7 +206,7 @@ Page({
   },
   // 结束录音
   endRecording() {
-    console.log('end');
+    console.log('Recording end');
     if (this.RecorderManager) {
       this.RecorderManager.stop();
       this.RecorderManager.onStop((res) => {
