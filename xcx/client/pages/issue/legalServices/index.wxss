@@ -3,7 +3,7 @@
 
 .numsBox { width:200rpx;}
 
-.titleBox .items { float:left; border: 1rpx solid #333; padding: 6rpx 10rpx; border-radius: 10rpx; margin: 0 10rpx 20rpx 0;}
+.titleBox .items { float:left; border: 1rpx solid #333; padding: 14rpx 20rpx; border-radius: 10rpx; margin: 10rpx 10rpx 10rpx 0;}
 .titleBox .items text { color: #f00; font-size: 24rpx; margin-left:10rpx;}
 
 .issue-form-title {

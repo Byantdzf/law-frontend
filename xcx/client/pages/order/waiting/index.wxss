@@ -16,7 +16,7 @@
   /* align-items: flex-start; */
 }
 .order-item.disabled {
-  opacity: 0.75;
+  opacity: 0.55;
 }
 .order-item + .order-item {
   margin-top: 20rpx;
