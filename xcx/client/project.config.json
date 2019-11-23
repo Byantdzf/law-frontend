@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "0.0.01",
+	"libVersion": "2.9.2",
 	"appid": "wx00f73a4cb0bf22ac",
 	"projectname": "hujia-client",
 	"scripts": {},

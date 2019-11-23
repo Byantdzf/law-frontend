@@ -7,7 +7,7 @@
         <view class="pa-20" wx:if="{{ list.length }}">
           <view class="order-item {{ item.choosed == 1 ? 'disabled' : '' }}" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-choosed="{{ item.choosed }}" bindtap="handleChooseItem">
             <view class="flex order-item-hd">
-              <view class="flex-bd">订单编号：{{ item.orderNo }}</view>
+              <view class="flex-bd">订单编号：{{ item.id }}</view>
               <view class="flex flex-ft">
                 <text class="pl-10 cl-primary fw-b">{{ orderStatus[item.orderStatus] }}</text>
               </view>

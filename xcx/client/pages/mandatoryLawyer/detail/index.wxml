@@ -24,7 +24,7 @@
             </view>
         </view>
         <view class="btn-box">
-            <button size="mini" plain catch:tap="buyNow">立即下单</button>
+            <button type="primary" catch:tap="buyNow">立即下单</button>
         </view>
     </view>
 </app-page>

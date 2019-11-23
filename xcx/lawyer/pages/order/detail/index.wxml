@@ -9,6 +9,19 @@
       showCancel: function(item) {
         return '10,20'.indexOf(item.orderStatus) !== -1;
       },
+      showReplyConfirmBtn: function(item) {
+        var show = true;
+        if (item.orderCategory == 12) {
+          show = false;
+        }
+        if (item.orderType == 2 && item.orderStatus == 40) {
+          show = false;
+        }
+        if (item.lawyerReplyTimes >= 3) {
+          show = false;
+        }
+        return show;
+      },
       showPay: function(item) {
         return item.orderStatus == 10;
       },
@@ -77,14 +90,17 @@
       </view>
     </view>
     <view class="detail-box" wx:if="{{ msgList.length }}">
-      <view class="detail-row mt-20" wx:for-item="msg" wx:key="{{ index }}">
-        <view class="flex flex-start" wx:if="{{msg.isUser !== 'Y'}}">
-          <text class="label cl-999">回复详情：</text>
+      <view class="detail-row mt-20" wx:for="{{ msgList }}" wx:for-item="msg" wx:key="{{ index }}">
+        <view class="flex flex-start" wx:if="{{msg.isUser == 'false'}}">
+          <view class="label">
+            <text class="cl-999">回复详情：</text>
+          </view>
           <view class="flex-column flex-bd cl-666">
-            <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
-            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
-              <view class="iconfont icon-yuyin cl-primary"></view>
-              <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
+            <view class="con-box" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
+            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-index="{{ index }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
+              <view class="iconfont cl-primary {{ playRecordAuthIndex === index ? 'icon-stop' : 'icon-yuyin' }}"></view>
+              <view wx:if="{{ playRecordAuthIndex === index }}">正在播放录音...</view>
+              <view wx:else>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
             </view>
             <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
               <view class="iconfont icon-wenjian cl-primary"></view>
@@ -138,7 +154,7 @@
           </view>
           <view class="flex flex-start mt-20">
             <view class="flex-bd">
-              <textarea class="textarea" placeholder="请输入您的回复" maxlength="{{ 400 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange"></textarea>
+              <textarea class="textarea" placeholder="请输入您的回复，20~500个字" maxlength="{{ 500 }}" disabled="{{ !replyIscontent }}" bindinput="handleContentChange" value="{{ content }}"></textarea>
             </view>
             <view class="radio-box">
               <radio class="radio" color="#CF443D" value="content" checked="{{ replyIscontent }}"></radio>
@@ -159,8 +175,8 @@
         </view>
       </view>
       <view class="btn-box mt-45">
-        <button type="primary" bindtap="handleConfirm" wx:if="{{ item.orderCategory != 12 }}">回复并发送订单确认</button>
-        <button type="primary" bindtap="handleConfirm" wx:else>发送订单确认</button>
+        <button type="primary" bindtap="handleConfirm" wx:if="{{ item.orderCategory == 12 }}">发送订单确认</button>
+        <button type="primary" bindtap="handleConfirm" wx:if="{{ fn.showReplyConfirmBtn(item) }}">回复并发送订单确认</button>
       </view>
     </view>
     <view wx:if="{{ item.orderStatus == 20 }}">

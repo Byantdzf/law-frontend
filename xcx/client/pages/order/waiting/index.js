@@ -7,7 +7,7 @@ Page({
     orderType,
     orderCategory,
     orderStatus,
-    listUrl: '/applets/user/order/orderList',
+    listUrl: '/applets/user/order/orderList/choose',
     list: [],
     curOrderStatus: -1,
     selectedIds: []
@@ -23,8 +23,7 @@ Page({
       this.appList = this.selectComponent('#app-list');
     }
     this.appList.setParams(params => {
-      params.onlyUserOwner = 'Y'
-      params.orderStatus = '20'
+      params.lawyerId = this.lawyerId
       return params;
     });
   },

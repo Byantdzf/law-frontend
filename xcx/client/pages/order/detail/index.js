@@ -16,7 +16,8 @@ Page({
     orderScoreList: [],
     // 追问内容
     askSecondContent: '',
-    showAskWrapper: false
+    showAskWrapper: false,
+    playRecordAuthIndex: ''
   },
   onLoad(e) {
     app.pages.add(this);
@@ -66,12 +67,12 @@ Page({
       const data = res.data || {};
       const msglist = data.list || [];
       msglist.forEach(v => {
-        if (v.isUser === 'Y') {
+        if (v.isUser === 'true') {
           // 找出用户追问的内容
           this.setData({ askSecondContent: v.content || '' });
         }
       });
-      this.setData({ msglist: msglist.filter(v => v.isUser !== 'N') });
+      this.setData({ msglist: msglist.filter(v => v.isUser === 'false') });
     });
   },
   // 查询用户评价
@@ -186,8 +187,48 @@ Page({
   },
   // 播放音频
   handleOpenAudio(e) {
-    const { filepath: filePath } = e.currentTarget.dataset;
-    wx.playVoice({filePath});
+    const { filepath, index } = e.currentTarget.dataset;
+
+    if (this.data.playRecordAuthIndex || this.tapFlag) {
+      return false;
+    }
+
+    this.tapFlag = true;
+    this.innerAudioContext = wx.createInnerAudioContext();
+
+    if (this.innerAudioContext) {
+      console.log('播放音频')
+      this.innerAudioContext.src = filepath ? filepath.split('?')[0] : ''
+      this.innerAudioContext.play()
+      this.innerAudioContext.onPlay(() => {
+        console.log('onPlay')
+        this.setData({ playRecordAuthIndex: index })
+        this.tapFlag = false;
+      });
+      this.innerAudioContext.onStop(() => {
+        this.setData({ playRecordAuthIndex: '' });
+        this.innerAudioContext = null;
+        this.tapFlag = false;
+      });
+      this.innerAudioContext.onEnded(() => {
+        this.setData({ playRecordAuthIndex: '' });
+        this.innerAudioContext = null;
+        this.tapFlag = false;
+      });
+      this.innerAudioContext.onError((err) => {
+        const errMsg = {
+          '10001': '系统错误',
+          '10002': '网络错误',
+          '10003': '文件错误',
+          '10004': '格式错误',
+          '-1': '未知错误',
+        }[err.errCode];
+        wx.showToast({ title: errMsg, icon: 'none' });
+        this.setData({ playRecordAuthIndex: '' });
+        this.innerAudioContext = null;
+        this.tapFlag = false;
+      });
+    }
     // TODO：暂停功能
   },
   // 打开文件

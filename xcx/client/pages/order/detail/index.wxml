@@ -6,6 +6,19 @@
       showLawyer: function(item) {
         return '10,20,70'.indexOf(item.orderStatus) === -1;
       },
+      showAskBtn: function(item) {
+        var flag = true;
+        if (item.orderType == 2 || item.orderType == 4) {
+          flag = false;
+        }
+        if (item.orderCategory == 12) {
+          flag = false;
+        }
+        if (item.userReplyTimes >= 2) {
+          flag = false;
+        }
+        return flag;
+      },
       showCancel: function(item) {
         return '5,10,20'.indexOf(item.orderStatus) !== -1;
       },
@@ -68,9 +81,10 @@
         <view class="flex-column flex-bd cl-666">
           <view wx:for="{{ msglist }}" wx:for-item="msg" wx:key="{{ index }}">
             <view class="{{ index ? 'mt-20' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
-            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
-              <view class="iconfont icon-yuyin cl-primary"></view>
-              <view>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
+            <view class="flex {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-index="{{ index }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
+              <view class="iconfont cl-primary {{ playRecordAuthIndex === index ? 'icon-stop' : 'icon-yuyin' }}"></view>
+              <view wx:if="{{ playRecordAuthIndex === index }}">正在播放录音...</view>
+              <view wx:else>{{ msg.recordTime ? msg.recordTime + '秒，' : '' }}点击收听</view>
             </view>
             <view class="flex-column file-item {{ index ? 'mt-20' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
               <view class="iconfont icon-wenjian cl-primary"></view>
@@ -125,7 +139,7 @@
       <button type="primary" bindtap="handleComment">立即评价</button>
     </view>
     <view class="flex btn-box mt-20" wx:if="{{ (item.orderStatus == 30 || item.orderStatus == 40) && !showAskWrapper }}">
-      <button plain bindtap="handleAsk" wx:if="{{ item.orderType != 2 }}">追问</button>
+      <button plain bindtap="handleAsk" wx:if="{{ fn.showAskBtn(item) }}">追问</button>
       <button type="primary" bindtap="handleConfirm">确认订单完成</button>
     </view>
   </view>
