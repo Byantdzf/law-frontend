@@ -63,22 +63,34 @@ Page({
             this.setData({
                 currArea: [adInfo.province.replace('省', ''), adInfo.city.replace('市', '')]
             })
-            this.initHome()
-
             // 获取地址完成以后再判断授权
             page = this.selectComponent('#app-page')
             page.checkAuth().then((data) => {
                 // 授权成功
                 console.log('index auth')
                 console.log(data)
+                let { encryptedData, iv } = data;
+                page.userLogin({ encryptedData, iv }).then(res => {
+                    this.getNewsData()
+                    this.initHome()
+                })
             }).catch((e) => {
                 // 授权失败
                 console.log('index auth reject')
                 console.log(e)
             });
         })
-
-        // 获取热门新闻
+    },
+    onShow() {
+        console.log(app)
+    },
+    initHome() {
+        let cityPicker = this.selectComponent('#app-cityPicker')
+        cityPicker.init(this.data.currArea)
+        this.getLawyerList()
+    },
+    // 获取热门新闻
+    getNewsData() {
         let params = {}
         params[PAGE_KEY] = 1
         params[SIZE_KEY] = 5
@@ -95,14 +107,7 @@ Page({
             this.setData({ hotNews3 })
         })
     },
-    onShow() {
-
-    },
-    initHome() {
-        let cityPicker = this.selectComponent('#app-cityPicker')
-        cityPicker.init(this.data.currArea)
-        this.getLawyerList()
-    },
+    // 获取推荐律师
     getLawyerList() {
         // 获取本地律师
         let lawyerParams = {}
