@@ -33,7 +33,15 @@ Component({
               // 保存token
               const data = res.data || {}
               const token = data.sessionId
+              const unionId = wx.getStorageSync('unionId')
+              const phone = wx.getStorageSync('loginPhone')
               wx.setStorageSync(tokenName, token)
+              if (unionId) {
+                payload.unionId = unionId
+              }
+              if (phone) {
+                payload.phone = phone
+              }
               api.updateLoginInfoLawyer(payload).then(res => {
                 wx.setStorageSync(tokenName, res.data)
                 resolve(res)

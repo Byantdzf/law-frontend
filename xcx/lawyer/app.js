@@ -33,8 +33,13 @@ App({
       success:({ code }) => {
         if(!code) return
         api.login({ code }).then(res => {
+          const data = res.data || {}
           // 保存token
-          wx.setStorageSync('wechatLoginCode', res.data.sessionId)
+          wx.setStorageSync('wechatLoginCode', data.sessionId)
+          if (data.unionId) {
+            // 保存unionId
+            wx.setStorageSync('unionId', data.unionId)
+          }
         })
       }
     })
