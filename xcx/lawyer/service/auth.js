@@ -11,7 +11,7 @@ module.exports = {
    * updateLoginInfoLawyer
    * @param[String]  code       小程序登录code
   */
-  updateLoginInfoLawyer: params => get('/applets/lawyer/updateLoginInfoLawyer', params, { auth: false }),
+  updateLoginInfoLawyer: params => get('/applets/lawyer/updateLoginInfoLawyer', params),
 
   /**
    * 微信登录
