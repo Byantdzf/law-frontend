@@ -13,8 +13,10 @@
 				<dd><label>发布时间：</label><span>{{ t.createTime || '&nbsp;' }}</span></dd>
 				<dd><label>订单种类：</label><span>{{ t.categoryName || '&nbsp;' }}</span></dd>
 				<dd><label>订单金额：</label><span>{{ t.amount || 0 }}元</span></dd>
+				{{# if (t.orderCategory != 21 || t.orderCategory != 22) { }}
 				<dd><label>所属问题：</label><span>{{ t.questionTypeName || '&nbsp;' }}</span></dd>
 				<dd><label>是否紧急：</label><span class="fontRed">{{ t.emergency == 1 ? '是' : '否' }}</span></dd>
+				{{# } }}
 			</dl>
 			</a>
 			<div class="rightTop">
