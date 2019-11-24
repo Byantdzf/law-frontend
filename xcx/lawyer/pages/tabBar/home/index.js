@@ -67,8 +67,8 @@ Page({
 			page.checkAuth().then((data) => {
 				// 授权成功
 				console.log(data)
-				let { encryptedData, iv } = data;
-				page.userLogin({ encryptedData, iv }).then(res => {
+				let { encryptedData, iv, userInfo } = data;
+				page.userLogin({ encryptedData, iv, userInfo }).then(res => {
 					this.getNewsData()
 					this.initHome()
 				})
