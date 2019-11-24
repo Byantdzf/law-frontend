@@ -34,5 +34,9 @@
         </view>
       </view>
     </view>
+
+    <view class="btn-box mt-20" wx:if="{{ item.orderStatus == 10 }}">
+      <button type="primary" bindtap="handlePay">立即支付</button>
+    </view>
   </view>
 </app-page>

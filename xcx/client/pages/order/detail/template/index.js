@@ -104,5 +104,23 @@ Page({
         })
       }
     });
-  }
+  },
+  handlePay(e) {
+    const orderNo = this.data.item.orderNo;
+    if (this.isAjaxLoading) {
+      return false;
+    }
+    this.isAjaxLoading = true;
+    orderApi.pay({orderNo: orderNo}).then(res => {
+      this.isAjaxLoading = false;
+      app.wechatPay(res.data, function (res) {
+          app.gotoPage('/pages/issue/success/index?type=1')
+      }, function (res) {
+          app.alert('支付失败，请到我的订单再次发起支付')
+      })
+    }).catch(e => {
+      this.isAjaxLoading = false;
+    });
+    
+  },
 })
