@@ -35,6 +35,7 @@ Component({
               const token = data.sessionId
               wx.setStorageSync(tokenName, token)
               api.updateLoginInfoLawyer(payload).then(res => {
+                wx.setStorageSync(tokenName, res.data)
                 resolve(res)
               }).catch((err) => {
                 reject(err)
