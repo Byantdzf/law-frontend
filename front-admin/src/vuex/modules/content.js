@@ -34,9 +34,9 @@ const content = {
     feedbackDel: (context, ids) => del(`/feedback/${ids}`),
 
     // 分块法律服务 -- 添加
-    blockAdd: (context, params) => post(`/blockLaw`, params),
+    blockAdd: (context, params) => postJson(`/blockLaw`, params),
     // 分块法律服务 -- 修改
-    blockUpdate: (context, params) => put(`/blockLaw`, params),
+    blockUpdate: (context, params) => putJson(`/blockLaw`, params),
     // 分块法律服务 -- 删除
     blockDel: (context, ids) => del(`/blockLaw/${ids}`),
 
