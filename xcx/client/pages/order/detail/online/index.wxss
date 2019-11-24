@@ -1,0 +1,85 @@
+.page-order-detail {
+  padding: 0 30rpx 30rpx;
+  line-height: 44rpx;
+}
+
+.page-order-detail .title {
+  padding: 20rpx 0;
+  font-size: 32rpx;
+}
+
+.img-lawyer {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+  background: #f3f3f3;
+}
+
+.detail-box {
+  position: relative;
+  padding: 30rpx 0;
+}
+
+.detail-box + .detail-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-top: 2rpx solid #f3f3f3;
+}
+
+.btn-box button {
+  min-width: 300rpx;
+}
+.btn-box button[plain] {
+  border-color: #e0e0e0;
+  color: #666;
+}
+.btn-box button[plain]::after {
+  border-color: #e0e0e0;
+}
+.btns.btn-box button {
+  min-width: 200rpx;
+}
+
+.textarea {
+  width: 100%;
+  height: 160rpx;
+  padding: 20rpx;
+  border: 2rpx solid #f3f3f3;
+  border-radius: 4rpx;
+  box-sizing: border-box;
+}
+
+.reply-wrapper .radio-box {
+  padding-left: 40rpx;
+}
+
+.icon-stop,
+.icon-yuyin {
+  font-size: 60rpx;
+  padding-right: 10rpx;
+}
+
+.pop-auth {
+  padding: 30rpx;
+}
+
+.recording-box {
+  position: relative;
+  width: 200rpx;
+  height: 80rpx;
+}
+.recording-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  color: transparent;
+  z-index: 100;
+}

@@ -1,0 +1,50 @@
+.page-order-detail {
+  /* background: #f3f3f3; */
+  padding: 0 30rpx 30rpx;
+  line-height: 44rpx;
+}
+
+.page-order-detail .title {
+  padding: 20rpx 0;
+  font-size: 32rpx;
+}
+
+.detail-box {
+  position: relative;
+  padding: 30rpx 0;
+}
+
+.detail-box + .detail-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-top: 2rpx solid #f3f3f3;
+}
+
+
+.btn-box button[plain] {
+  border-color: #e0e0e0;
+  color: #666;
+}
+.btn-box button[plain]::after {
+  border-color: #e0e0e0;
+}
+
+.file-box {
+  width: 500rpx;
+  margin: 40rpx auto 0;
+  border: 2rpx solid #333333;
+}
+
+.file-con {
+  height: 120rpx;
+  line-height: 40rpx;
+  overflow: hidden;
+}
+
+.img-box {
+  width: 500rpx;
+  height: 200rpx;
+}

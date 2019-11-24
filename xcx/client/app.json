@@ -82,7 +82,12 @@
         "waiting/index",
         "detail/index",
         "evaluate/index",
-        "appeal/index"
+        "appeal/index",
+        "detail/online/index",
+        "detail/oneByOne/index",
+        "detail/legal/index",
+        "detail/template/index",
+        "detail/mandatory/index"
       ]
     }
   ],

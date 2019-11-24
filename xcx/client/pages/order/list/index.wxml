@@ -45,7 +45,7 @@
     <view class="flex-bd">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20" wx:if="{{ list.length }}">
-          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="gotoDetail">
+          <view class="order-item" wx:for="{{ list }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-index="{{ index }}" bindtap="gotoDetail">
             <view class="flex order-item-hd">
               <view class="flex-bd">订单编号：{{ item.orderNo }}</view>
               <view class="flex flex-ft">

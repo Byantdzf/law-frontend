@@ -148,8 +148,30 @@ Page({
     })
   },
   gotoDetail(e) {
-    const { id } = e.currentTarget.dataset
-    app.gotoPage('/pages/order/detail/index?id=' + id)
+    const { id, index } = e.currentTarget.dataset;
+    let item = this.data.list[index];
+    let path = '/pages/order/detail/template/index';
+
+    // 在线咨询
+    if (item.orderCategory == 11) {
+      path = '/pages/order/detail/online/index';
+    }
+
+    // 指定律师
+    if (item.orderCategory == 12) {
+      path = '/pages/order/detail/oneByOne/index';
+    }
+    
+    // 分块法律服务订单
+    if (item.orderType == 2) {
+      path = '/pages/order/detail/legal/index';
+    }
+
+    if (item.orderType == 3) {
+      path = '/pages/order/detail/mandatory/index';
+    }
+    
+    app.gotoPage(`${path}?id=${id}`)
   },
   handleCancel(e) {
     const { index } = e.currentTarget.dataset;
