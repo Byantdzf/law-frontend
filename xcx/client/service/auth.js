@@ -11,7 +11,7 @@ module.exports = {
    * updateLoginInfoUser
    * @param[String]  code  小程序登录code
   */
-  updateLoginInfoUser: params => get('/applets/lawyer/updateLoginInfoUser', params, { auth: false }),
+  updateLoginInfoUser: params => get('/applets/lawyer/updateLoginInfoUser', params),
 
   /**
    * 保存用户信息

@@ -29,21 +29,17 @@ Component({
           success:({ code }) => {
             if(!code) return
             // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
-            let params = {}
-            params.code = code
-            if (app.globalData.adInfo) {
-              params.locationX = app.globalData.adInfo.location.lng
-              params.locationY = app.globalData.adInfo.location.lat
-            }
-            api.updateLoginInfoUser({ ...params, ...payload}).then(res => {
-              // 保存token
-              const data = res.data || {}
-              const token = data.sessionId
-              wx.setStorageSync(tokenName, token)
-              resolve(res)
-            }).catch((err) => {
-              reject(err)
-            });
+            api.login({ code }).then(res => {
+              api.updateLoginInfoUser(payload).then(res => {
+                // 保存token
+                const data = res.data || {}
+                const token = data.sessionId
+                wx.setStorageSync(tokenName, token)
+                resolve(res)
+              }).catch((err) => {
+                reject(err)
+              });
+            })
           }
         })
       });
