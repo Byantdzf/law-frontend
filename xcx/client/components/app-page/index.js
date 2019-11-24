@@ -25,7 +25,7 @@ Component({
   methods: {
     userLogin(payload = {}) {
       return new Promise((resolve, reject) => {
-        wx.login({
+        wx.updateLoginInfoUser({
           success:({ code }) => {
             if(!code) return
             // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理

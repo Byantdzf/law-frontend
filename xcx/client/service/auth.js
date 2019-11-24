@@ -7,6 +7,11 @@ module.exports = {
    * @param[String]  code  小程序登录code
   */
   login: params => get('/applets/lawyer/login/user', params, { auth: false }),
+  /**
+   * updateLoginInfoUser
+   * @param[String]  code  小程序登录code
+  */
+  updateLoginInfoUser: params => get('/applets/lawyer/updateLoginInfoUser', params, { auth: false }),
 
   /**
    * 保存用户信息
