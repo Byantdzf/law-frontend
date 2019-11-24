@@ -74,7 +74,7 @@ Page({
 				})
 			}).catch((e) => {
 				// 授权失败
-				page.userLogin({ encryptedData, iv }).then(res => {
+				page.userLogin({ encryptedData, iv, userInfo }).then(res => {
 					this.getNewsData()
 					this.initHome()
 				})

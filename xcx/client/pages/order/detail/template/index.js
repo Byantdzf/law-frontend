@@ -1,13 +1,12 @@
 const orderApi = require('../../../../service/order');
 const selectApi = require('../../../../service/select');
-const { orderType, orderCategory, orderStatus, orderEmergency, PAGE_KEY, SIZE_KEY, tokenName } = require('../../../../config/global');
+const { orderType, orderCategory, orderStatus, orderEmergency, tokenName } = require('../../../../config/global');
 const app = getApp();
 Page({
   data: {
     // 存放订单信息
     item: {},
-    // 回复列表
-    msglist: [],
+    fileInfo: {}
   },
   onLoad(e) {
     app.pages.add(this);
@@ -45,28 +44,17 @@ Page({
         });
       });
       // 如果订单不是待支付，待接单，已取消状态，则查询回复列表
-      if (!(item.orderStatus == 10 || item.orderStatus == 20 || item.orderStatus == 70)) {
-        this.loadReplyList(id);
+      if (item.orderStatus == 60) {
+        this.loadLawDocument(id);
       }
     });
   },
-  // 加载订单回复列表
-  loadReplyList(orderId) {
-    const params = {
-      orderId,
-      [PAGE_KEY]: 1,
-      [SIZE_KEY]: 10
-    };
-    orderApi.orderMsglist(params).then(res => {
+  // 法律文件购买展示文件信息
+  loadLawDocument(orderId) {
+    orderApi.orderMsglist(orderId).then(res => {
       const data = res.data || {};
-      const msglist = data.list || [];
-      msglist.forEach(v => {
-        if (v.isUser === 'true') {
-          // 找出用户追问的内容
-          this.setData({ askSecondContent: v.content || '' });
-        }
-      });
-      this.setData({ msglist: msglist.filter(v => v.isUser === 'false') });
+      console.log(data)
+      // this.setData({ msglist: msglist.filter(v => v.isUser === 'false') });
     });
   },
   // 打开文件

@@ -46,4 +46,8 @@ module.exports = {
    * 订单支付
   */
   pay: params => get('/applets/lawyer/pay/getPrepayInfoByOrderNo', params),
+  /**
+   * 法律文件购买展示文件信息
+  */
+  lawDocument: orderId => get('/applets/user/order/lawDocument', { orderId }),
 }

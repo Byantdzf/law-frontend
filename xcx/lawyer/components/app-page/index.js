@@ -84,9 +84,9 @@ Component({
         lang: "zh_CN",
         success: (detail) => {
           if (detail.errMsg == "getUserInfo:ok") {
-            this.data.authResolve(detail)
             app.globalData.userInfo = detail.userInfo
             wx.setStorageSync('userInfo', detail.userInfo)
+            this.data.authResolve(detail)
           } else {
             this.data.authReject()
           }
