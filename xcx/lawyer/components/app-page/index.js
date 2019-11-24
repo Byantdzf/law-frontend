@@ -35,7 +35,7 @@ Component({
               params.locationX = app.globalData.adInfo.location.lng
               params.locationY = app.globalData.adInfo.location.lat
             }
-            api.login({ ...params, ...payload}).then(res => {
+            api.updateLoginInfoLawyer({ ...params, ...payload}).then(res => {
               // 保存token
               const data = res.data || {}
               const token = data.sessionId

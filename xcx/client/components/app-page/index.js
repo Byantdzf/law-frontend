@@ -25,7 +25,7 @@ Component({
   methods: {
     userLogin(payload = {}) {
       return new Promise((resolve, reject) => {
-        wx.updateLoginInfoUser({
+        wx.login({
           success:({ code }) => {
             if(!code) return
             // 请求后端，用code 换取openid，然后根据后端逻辑，看是返回token还是什么进行处理
@@ -35,7 +35,7 @@ Component({
               params.locationX = app.globalData.adInfo.location.lng
               params.locationY = app.globalData.adInfo.location.lat
             }
-            api.login({ ...params, ...payload}).then(res => {
+            api.updateLoginInfoUser({ ...params, ...payload}).then(res => {
               // 保存token
               const data = res.data || {}
               const token = data.sessionId

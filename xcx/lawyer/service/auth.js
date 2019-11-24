@@ -6,7 +6,12 @@ module.exports = {
    * 登录
    * @param[String]  code       小程序登录code
   */
-  login: params => get('/applets/lawyer/wechatGetSession', params, { auth: false }),
+  login: params => get('/applets/lawyer/wechatGetSession', params, { auth: false, loading: false }),
+  /**
+   * updateLoginInfoLawyer
+   * @param[String]  code       小程序登录code
+  */
+  updateLoginInfoLawyer: params => get('/applets/lawyer/updateLoginInfoLawyer', params, { auth: false }),
 
   /**
    * 微信登录

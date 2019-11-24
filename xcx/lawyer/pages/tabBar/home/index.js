@@ -59,26 +59,26 @@ Page({
         currArea: [adInfo.province.replace('省', ''), adInfo.city.replace('市', '')]
       })
 
-      this.getNewsData()
-      this.initHome()
+      // this.getNewsData()
+      // this.initHome()
       
-      // // 获取地址完成以后再判断授权
-			// page = this.selectComponent('#app-page')
-			// page.checkAuth().then((data) => {
-			// 	// 授权成功
-			// 	console.log(data)
-			// 	let { encryptedData, iv } = data;
-			// 	page.userLogin({ encryptedData, iv }).then(res => {
-			// 		this.getNewsData()
-			// 		this.initHome()
-			// 	})
-			// }).catch((e) => {
-			// 	// 授权失败
-			// 	page.userLogin({ encryptedData, iv }).then(res => {
-			// 		this.getNewsData()
-			// 		this.initHome()
-			// 	})
-			// })
+      // 获取地址完成以后再判断授权
+			page = this.selectComponent('#app-page')
+			page.checkAuth().then((data) => {
+				// 授权成功
+				console.log(data)
+				let { encryptedData, iv } = data;
+				page.userLogin({ encryptedData, iv }).then(res => {
+					this.getNewsData()
+					this.initHome()
+				})
+			}).catch((e) => {
+				// 授权失败
+				page.userLogin({ encryptedData, iv }).then(res => {
+					this.getNewsData()
+					this.initHome()
+				})
+			})
     })
   },
 
