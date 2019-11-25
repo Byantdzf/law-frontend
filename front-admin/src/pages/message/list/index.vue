@@ -18,7 +18,7 @@
         </el-row>
         <el-row class="fr">
           <el-button type="primary"  @click="handleBtnAction({}, 'add')">新增</el-button>
-          <el-button type="primary">修改</el-button>
+          <el-button type="primary" @click="handleBtnAction({}, 'edit')" >修改</el-button>
           <el-button type="primary">删除</el-button>
         </el-row>
       </el-row>
@@ -157,18 +157,26 @@
             this.dialogIsFull = true
             this.dialogTitle = '消息详情'
             // res = await this.tenantView({ id: row.id })
-            // this.curRow = res.data
-            // this.dialogForm = res.data || {}
+            row.allMembers = row.receiver
+            this.dialogForm = {...row}
             this.dialogComponent = 'Detail'
             this.dialogVisible = true
             break;
+          case 'edit':
+            this.dialogIsFull = true
+            this.dialogTitle = '消息修改'
+            // res = await this.tenantView({ id: row.id })
+            row.allMembers = row.receiver
+            this.dialogForm = {...row}
+            this.dialogComponent = 'Edit'
+            this.dialogVisible = true
           case 'add':
             this.dialogIsFull = true
             this.dialogTitle = '新增信息'
             this.dialogForm = null
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
-            break
+            break;
         }
       },
       ...mapActions('message', [

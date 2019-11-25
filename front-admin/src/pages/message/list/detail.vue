@@ -6,6 +6,17 @@
           <el-radio v-for="item in statusItems" :key="item.id" :label="item.id">{{ item.name }}</el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item>
+          <app-table 
+            ref="appTable"
+            url="/mng/message/queryMemberlist"
+            columnType="selection"
+            :params="tableParams"
+            :columns="columns"
+            :columns-props="columnsProps"
+            @selection-change="tableSelect"
+        />
+      </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
@@ -65,58 +76,24 @@ export default {
             field: 'index',
             width: 70
           },{
-            label: '微信头像',
+            label: '角色',
             field: 'avatarUrl',
             width: 100,
             component: AppTableImgs
           },{
-            label: '微信昵称',
+            label: '昵称',
             field: 'name',
           },{
-            label: '手机号',
+            label: 'ID',
             field: 'phone',
-          },{
-            label: '近一周登陆次数',
-            field: 'loginCount',
-            align: 'center',
-          },{
-            label: '最近登陆时间',
-            field: 'createTime',
-            align: 'center',
-          },{
-            label: '下单次数',
-            field: 'orderCount',
-            width: 100,
-            align: 'center'
-          },{
-            label: '状态',
-            field: 'status',
-            width: 100,
-            align: 'center',
-            component: AppRsText,
-            propsHandler ({ col, row }) {
-              return {
-                col,
-                row,
-                type: row[col.prop] == 1 ? 'success' : 'danger'
-              } 
-            }
-          },{
-            label: '操作',
-            field: 'operate',
-            align: 'center',
-            width: 120,
-            type: 'button',
-            items: ['查看'],
-            on: {
-              click: ({ row }) => {
-                this.handleBtnAction(row, 'detail')
-              }
-            }
           }
         ],
         showHeaderTab: false,
-        curDialogTab: ''
+        curDialogTab: '',
+        tableParams: {
+            ...this.tableParams,
+            name: this.$val(this.row, 'allMembers', 1)
+        }
     }
   },
   watch: {
