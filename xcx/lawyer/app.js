@@ -36,9 +36,9 @@ App({
           const data = res.data || {}
           // 保存token
           wx.setStorageSync('wechatLoginCode', data.sessionId)
-          if (data.unionId) {
+          if (data.unionid) {
             // 保存unionId
-            wx.setStorageSync('unionId', data.unionId)
+            wx.setStorageSync('unionid', data.unionid)
           }
         })
       }
