@@ -32,6 +32,7 @@ const Ajax = function(options = {}) {
       auth = true,
       contentType = 'application/x-www-form-urlencoded; charset=utf-8'
     } = options
+    // debugger;
 
     if (path.indexOf('.json') !== -1) {
       url = '/'

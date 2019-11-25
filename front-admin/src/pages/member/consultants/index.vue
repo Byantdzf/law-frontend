@@ -17,9 +17,9 @@
           <span class="title">咨询者会员管理</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">启用</el-button>
-          <el-button type="primary">禁用</el-button>
-          <el-button type="primary">删除</el-button>
+          <el-button type="primary" @click="changeStatusBatch('0')">启用</el-button>
+          <el-button type="primary" @click="changeStatusBatch('1')">禁用</el-button>
+          <el-button type="primary" @click="removeLawyer">删除</el-button>
           <el-button type="primary">导出</el-button>
         </el-row>
       </el-row>
@@ -134,7 +134,8 @@
           }
         ],
         showHeaderTab: false,
-        curDialogTab: ''
+        curDialogTab: '',
+        selectedLawyers: []
       }
     },
     methods: {
@@ -203,15 +204,40 @@
             break;
           case 'status':
             tips = `确认${ row.status == 1 ? '禁用' : '启用' }会员${ row.name }吗？`
-            await this.$confirm(tips, '温馨提示', { type: 'warning' })
-            await this.memberUpdateStatus(row.id)
-            this.$msgSuccess('操作成功！')
+            let params = {status: row.status == 0 ? 1 : 0}
+            this.changeStatus(tips, row.id, params)
             break;
         }
+      },
+      async changeStatus(tips, ids, params){
+        await this.$confirm(tips, '温馨提示', { type: 'warning' })
+        if(ids instanceof Array) { 
+          ids = ids.join(",")
+        }
+        let payload = {ids, params }
+        await this.memberUpdateStatus(payload)
+        this.$msgSuccess('操作成功！')
+        this.refreshTable()
+      },
+      changeStatusBatch(status){
+        let names = this.selectedLawyers.map(item=>item.name).join("、");
+        let ids = this.selectedLawyers.map(item=>item.id).join(",");
+        let tips = `确认${ status == 1 ? '禁用' : '启用' }会员${ names }吗`;
+        let params = {status}
+        changeStatus( tips, ids, params)
+      },
+      async removeLawyer(){
+        let idList = this.selectedLawyers.map(item => item.id).join(",");
+        this.memberDel(idList);
+        this.refreshTable();
+      },
+      tableSelect(val){
+        this.selectedLawyers = val;
       },
       ...mapActions('member', [
         'memberView',
         'memberUpdateStatus',
+        'memberDel'
       ])
     },
     created() {

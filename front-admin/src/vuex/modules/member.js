@@ -6,7 +6,10 @@ const member = {
     // 咨询者会员 -- 详情
     memberView: (context, id) => get(`/member/user/${id}`),
     // 咨询者会员 -- 修改状态
-    memberUpdateStatus: (context, id) => put(`/member/user/${id}`),
+    memberUpdateStatus: (context, payload) => {
+      return put(`/member/user/${payload.ids}`,payload.params)
+    },
+    memberDel: (context, ids ) => del(`/member/user/${ids}`),
 
     // 律师 -- 详情
     lawyerView: (context, id) => get(`/member/lawyer/pending/${id}`),
