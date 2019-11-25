@@ -72,7 +72,7 @@ Page({
 		api.accountLogin(params).then(res => {
 			const data = res.data || {};
 			wx.setStorageSync(tokenName, data.sessionId)
-			wx.getStorageSync('loginPhone', params.account)
+			wx.setStorageSync('loginPhone', params.account)
 			this.getUserInfo()
 			// if (res.data.isOpenIdEmpty) {
 			//     app.confirm({ content: '您的帐号还未绑定微信，是否绑定？' }), then(res => {

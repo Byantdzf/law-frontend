@@ -33,7 +33,7 @@ Component({
               // 保存token
               const data = res.data || {}
               const token = data.sessionId
-              const unionId = wx.getStorageSync('unionId')
+              const unionId = wx.getStorageSync('unionid')
               const phone = wx.getStorageSync('loginPhone')
               wx.setStorageSync(tokenName, token)
               if (unionId) {
