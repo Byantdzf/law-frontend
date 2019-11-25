@@ -8,6 +8,7 @@ import finance from './finance.js'
 import system from './system.js'
 import admin from './admin.js'
 import content from './content.js'
+import message from './message'
 
 const modules = {
   auth,
@@ -19,7 +20,8 @@ const modules = {
   finance,
   system,
   admin,
-  content
+  content,
+  message
 }
 
 export default modules
