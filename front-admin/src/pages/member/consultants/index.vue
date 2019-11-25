@@ -224,7 +224,7 @@
         let ids = this.selectedLawyers.map(item=>item.id).join(",");
         let tips = `确认${ status == 1 ? '禁用' : '启用' }会员${ names }吗`;
         let params = {status}
-        changeStatus( tips, ids, params)
+        this.changeStatus( tips, ids, params)
       },
       async removeLawyer(){
         let idList = this.selectedLawyers.map(item => item.id).join(",");
