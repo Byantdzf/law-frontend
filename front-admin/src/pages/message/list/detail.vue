@@ -16,30 +16,6 @@
         <el-button size="default" class="btn-submit" type="primary" @click="formSubmit">发布</el-button>
       </el-form-item>
     </el-form>
-    <app-dialog
-      :width="dialogWidth"
-      :height="dialogHeight"
-      :title="dialogTitle"
-      :visible="dialogVisible"
-      :full="dialogIsFull"
-      @close="closeDialog"
-    >
-      <template slot="title" v-if="showHeaderTab">
-        <el-radio-group v-model="curDialogTab" size="small">
-          <el-radio-button label="detail">个人资料</el-radio-button>
-          <el-radio-button label="orderInfo">订单信息</el-radio-button>
-        </el-radio-group>
-      </template>
-      <component
-        v-if="dialogVisible"
-        :is="dialogComponent"
-        :row="dialogForm"
-        :tab="curDialogTab"
-        @submit="formSubmit"
-        @cancel="closeDialog"
-        ref="dialogComponent"
-      />
-    </app-dialog>
   </el-row>
 </template>
 

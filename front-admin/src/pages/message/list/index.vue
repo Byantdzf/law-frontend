@@ -61,7 +61,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      // Detail: () => import("./detail"),
+      Detail: () => import("./detail.vue"),
       Edit: () => import("./edit.vue"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
@@ -74,16 +74,17 @@
             width: 100
           },{
             label: '类型',
-            field: 'operator',
+            field: 'msgType',
+            formater: ({ msgType }) => this.$t('rs.msgType')[msgType]
           },{
             label: '标题',
-            field: 'operatorId',
+            field: 'title',
           },{
             label: '内容',
-            field: 'operateDetails',
+            field: 'content',
           },{
             label: '发送用户',
-            field: 'operateType',
+            field: 'receiver',
           },{
             label: '发送时间',
             field: 'createTime',
@@ -135,18 +136,8 @@
         try {
           const searchForm = this.$refs.searchForm
           const tenantId = this.$val(form, 'tenant.id')
-          let params = {
-            tenantId: this.curRow.id,
-            hqTenantId: form
-          }
-          switch (this.dialogComponent) {
-            case 'HqDivide':
-              await this.tenantDivideHq(params)
-              this.$msgSuccess('操作成功')
-              this.closeDialog()
-              this.refreshTable()
-              break;
-          }
+          let params = form
+          this.addMessage(params)
         } catch (e) {
           // error
         }
@@ -162,13 +153,13 @@
             this.dialogComponent = 'Detail'
             this.dialogVisible = true
             break;
-          case 'hqDivide':
+          case 'view':
             this.dialogIsFull = true
-            this.dialogTitle = '选择总部'
-            res = await this.tenantView({ id: row.id })
-            this.curRow = res.data
-            this.dialogForm = res.data || {}
-            this.dialogComponent = 'HqDivide'
+            this.dialogTitle = '消息详情'
+            // res = await this.tenantView({ id: row.id })
+            // this.curRow = res.data
+            // this.dialogForm = res.data || {}
+            this.dialogComponent = 'Detail'
             this.dialogVisible = true
             break;
           case 'add':
@@ -180,10 +171,8 @@
             break
         }
       },
-      ...mapActions('tenant', [
-        'tenantView',
-        'tenantDivideHq',
-        'tenantGetKV'
+      ...mapActions('message', [
+        'addMessage'
       ])
     },
     created() {
