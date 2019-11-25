@@ -98,8 +98,8 @@
   export default {
     components: {
       Detail: () => import("../detail"),
-      OrderConfirmAmount: () => import('../detail/OrderConfirmAmount'),
-      OrderRuleEdit: () => import('../rule/edit')
+      ConfirmAmount: () => import('../common/ConfirmAmount'),
+      OrderRule: () => import('../common/OrderRule')
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -112,10 +112,12 @@
         })
       }
       for(let k in this.$t('rs.orderSource')) {
-        sourceItems.push({
-          id: +k,
-          name: this.$t('rs.orderSource')[k]
-        })
+        if (k != 4) {
+          sourceItems.push({
+            id: +k,
+            name: this.$t('rs.orderSource')[k]
+          })
+        }
       }
       return {
         defaultColumns: [
@@ -298,13 +300,13 @@
         try {
           let { id: orderId, rule: dispatchWay, amount: fee } = form
           switch(this.dialogComponent) {
-            case 'OrderRuleEdit':
+            case 'OrderRule':
               await this.orderModifyDispatchWay({ orderId, dispatchWay })
               this.$msgSuccess('操作成功！')
               this.closeDialog()
               this.refreshTable()
               break;
-            case 'OrderConfirmAmount':
+            case 'ConfirmAmount':
               await this.orderComfirmOrderAmount({ orderId, fee })
               this.$msgSuccess('操作成功！')
               this.closeDialog()
@@ -330,7 +332,7 @@
               this.dialogWidth = '400px'
               this.dialogTitle = '确认订单金额'
               this.dialogForm = row
-              this.dialogComponent = 'OrderConfirmAmount'
+              this.dialogComponent = 'ConfirmAmount'
               this.dialogVisible = true
               break;
             case 'modifyDispatchWay':
@@ -339,7 +341,7 @@
               this.dialogWidth = '400px'
               this.dialogTitle = '修改派单规则'
               this.dialogForm = row
-              this.dialogComponent = 'OrderRuleEdit'
+              this.dialogComponent = 'OrderRule'
               this.dialogVisible = true
               break;
             case 'detail':

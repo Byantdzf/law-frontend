@@ -23,33 +23,21 @@
         <span class="label cl-999">订单种类：</span>
         <span class="con">{{ $t('rs.orderCategory')[$val(row, 'orderCategory')] }}</span>
       </el-row>
-      <el-row>
-        <span class="label cl-999">所属分类：</span>
-        <span class="con">{{ $t('rs.orderBusinessType')[$val(row, 'fileType')] }}</span>
-      </el-row>
     </el-col>
     <el-col :span="8">
       <el-row>
-        <span class="label cl-999">是否紧急：</span>
-        <span class="con">{{ $t('rs.orderEmergency')[$val(row, 'emergency')] }}</span>
+        <span class="label cl-999">发布时间：</span>
+        <span class="con">{{ $val(row, 'orderTime') }}</span>
       </el-row>
       <el-row>
-        <span class="label cl-999">派单方式：</span>
-        <span class="con">{{ $t('rs.orderRule')[$val(row, 'dispatchWay')] }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">接单路径：</span>
-        <span class="con">{{ $t('rs.orderSource')[$val(row, 'orderSource')] }}</span>
+        <span class="label cl-999">交付期限：</span>
+        <span class="con">{{ $val(row, 'deliveryDeadDate') }}</span>
       </el-row>
     </el-col>
     <el-col :span="24">
       <el-row>
-        <span class="label cl-999">咨询内容：</span>
-        <span class="con">{{ $val(row, 'content') }}</span>
-      </el-row>
-      <el-row>
-        <span class="label cl-999">备注：</span>
-        <span class="con">{{ $val(row, 'remark') }}</span>
+        <span class="label cl-999">用户要求：</span>
+        <span class="con">{{ $val(row, 'customerRequirement') }}</span>
       </el-row>
     </el-col>
   </el-row>

@@ -3,13 +3,16 @@ import { get } from '@/utils/xhr.js'
 const data = {
   namespaced: true,
   actions: {
-    // 商户成交数据（统计） -- 导出
-    salesExportCount: (context, payload) => get('/salesCount/exportCount', payload),
-    // 商户成交数据（详情） -- 导出
-    salesExportDetail: (context, payload) => get('/salesCount/exportDetail', payload),
-
-    // 同步数据
-    syncOrdeData: (context, payload) => get('/salesCount/synchOrderDistStatusToPt', payload),
+    // 首页交易数据统计
+    summaryBusiness: (context, payload) => get('/mng/homePage/summaryBusiness', payload),
+    // 订单信息显示 - 汇总
+    summaryOrder: (context, payload) => get('/mng/homePage/summaryOrder', payload),
+    // 订单信息显示 - 订单类型维度列表
+    summaryOrderByOrderTypeAndOrderCategory: (context, payload) => get('/mng/homePage/summaryOrderByOrderTypeAndOrderCategory', payload),
+    // 会员注册信息统计
+    summaryMember: (context, payload) => get('/mng/homePage/summaryMember', payload),
+    // 待办数据统计
+    summaryNeedToDeal: (context, payload) => get('/mng/homePage/summaryNeedToDeal', payload),
   }
 }
   

@@ -39,7 +39,7 @@
   import AppRsText from '@/components/app-table/lib/rsText'
   export default {
     components: {
-      Edit: () => import("./edit"),
+      OrderRule: () => import("../common/OrderRule"),
     },
     mixins: [AppTable, AppDialog],
     data() {
@@ -105,7 +105,7 @@
             this.dialogWidth = '400px'
             this.dialogTitle = '修改派单规则'
             this.dialogForm = row
-            this.dialogComponent = 'Edit'
+            this.dialogComponent = 'OrderRule'
             this.dialogVisible = true
             break;
           case 'del':

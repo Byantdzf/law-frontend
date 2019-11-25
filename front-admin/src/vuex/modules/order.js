@@ -43,6 +43,10 @@ const order = {
     /* 订单 -- 取消订单
      * orderId
     */
+    orderPayed: (context, params) => get(`/mng/order/payed`, params),
+    /* 订单 -- 取消订单
+     * orderId
+    */
     orderCancel: (context, params) => get(`/mng/order/cancel`, params),
 
     /* 删除评论

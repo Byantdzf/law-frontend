@@ -1,76 +1,32 @@
 <template>
   <div class="order-detail">
-    <el-card>
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">发布人信息</span>
-        </el-row>
-      </el-row>
-      <PublishInfo :row="orderInfo" />
-    </el-card>
-    <el-card class="mt-10">
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">订单信息</span>
-        </el-row>
-      </el-row>
-      <BaseInfo1 :row="orderInfo" v-if="$val(row, 'orderType') == 1"/>
-      <BaseInfo3 :row="orderInfo" v-else-if="$val(row, 'orderType') == 4"/>
-      <BaseInfo2 :row="orderInfo" v-else/>
-    </el-card>
-    <el-card class="mt-10" v-if="$val(row, 'orderStatus') != '10'">
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">支付流水信息</span>
-        </el-row>
-      </el-row>
-      <PaymentFlowInfo :row="orderInfo" />
-    </el-card>
-    <el-card class="mt-10" v-if="$val(row, 'orderStatus') != '10' && $val(row, 'orderStatus') != '20'">
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">接单律师信息</span>
-        </el-row>
-      </el-row>
-      <LawyerInfo :row="orderInfo" />
-    </el-card>
-    <el-card class="mt-10" v-if="$val(row, 'orderStatus') == '60'">
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">对律师评价</span>
-        </el-row>
-      </el-row>
-      <CommentInfo :row="orderInfo" />
-    </el-card>
-    <el-card class="mt-10" v-if="$val(row, 'userOperateRecord.id')">
-      <el-row slot="header">
-        <el-row class="fl">
-          <span class="title">用户申诉信息</span>
-        </el-row>
-      </el-row>
-      <AppealInfo :row="orderInfo" />
-    </el-card>
+    <component
+      :is="detailComponent"
+      :row="orderInfo"
+    />
 
-    <el-row class="btn-box ta-c" v-if="$val(row, 'orderStatus') == '10'">
-      <el-button type="primary" @click="handleCancelOrder">取消订单</el-button>
-      <el-button type="primary" @click="handleConfirmOrderPay" v-if="$val(row, 'orderType') == 2 || $val(row, 'orderType') == 3">已支付</el-button>
-    </el-row>
+    <template v-if="$val(orderInfo, 'orderStatus') != '70'">
+      <el-row class="btn-box ta-c" v-if="$val(orderInfo, 'orderStatus') == '10'">
+        <el-button type="primary" @click="handleCancelOrder">取消订单</el-button>
+        <el-button type="primary" @click="handleConfirmOrderPay" v-if="$val(orderInfo, 'orderType') == 2 || $val(orderInfo, 'orderType') == 3">已支付</el-button>
+      </el-row>
 
-    <el-row class="btn-box ta-c" v-if="$val(row, 'orderStatus') == '20'">
-      <el-button type="primary" @click="handleCancelOrder">取消订单</el-button>
-      <el-button type="primary" @click="handleHealthyStatus">
-        {{ $val(row, 'orderHealthyStatus') == 2 ? '暂停订单' : '继续订单' }}
-      </el-button>
-      <el-button type="primary" @click="handleModifyOrderDispatchWay" v-if="$val(row, 'orderType') != 4">修改派单方式</el-button>
-    </el-row>
+      <el-row class="btn-box ta-c" v-if="$val(orderInfo, 'orderStatus') == '20'">
+        <el-button type="primary" @click="handleCancelOrder">取消订单</el-button>
+        <el-button type="primary" @click="handleHealthyStatus">
+          {{ $val(orderInfo, 'orderHealthyStatus') == 2 ? '暂停订单' : '继续订单' }}
+        </el-button>
+        <el-button type="primary" @click="handleModifyOrderDispatchWay" v-if="$val(orderInfo, 'orderType') != 4">修改派单方式</el-button>
+      </el-row>
 
-    <el-row class="btn-box ta-c" v-if="$val(row, 'orderStatus') == '40' || $val(row, 'orderStatus') == '50'">
-      <el-button type="primary" @click="handleCancelOrder">取消订单</el-button>
-      <el-button type="primary" @click="handleConfirmOrderDone">完成确认</el-button>
-      <template v-if="$val(row, 'userOperateRecord.id')">
-        <el-button type="primary">重新进行派单</el-button>
-      </template>
-    </el-row>
+      <el-row class="btn-box ta-c" v-if="$val(orderInfo, 'orderStatus') == '40' || $val(orderInfo, 'orderStatus') == '50'">
+        <el-button type="primary" @click="handleCancelOrder">取消订单</el-button>
+        <el-button type="primary" @click="handleConfirmOrderDone">完成确认</el-button>
+        <template v-if="$val(orderInfo, 'userOperateRecord.id')">
+          <el-button type="primary">重新进行派单</el-button>
+        </template>
+      </el-row>
+    </template>
 
     <app-dialog
       class="page-dialog"
@@ -95,28 +51,18 @@
 
 <script>
 import { mapActions } from 'vuex'
-import PublishInfo from './PublishInfo'
-import BaseInfo1 from './BaseInfo1'
-import BaseInfo2 from './BaseInfo2'
-import BaseInfo3 from './BaseInfo3'
-import PaymentFlowInfo from './PaymentFlowInfo'
-import LawyerInfo from './LawyerInfo'
-import CommentInfo from './CommentInfo'
-import AppealInfo from './AppealInfo'
 import AppDialog from '@/mixins/dialog'
 
 export default {
   components: {
-    PublishInfo,
-    BaseInfo1,
-    BaseInfo2,
-    BaseInfo3,
-    PaymentFlowInfo,
-    LawyerInfo,
-    CommentInfo,
-    AppealInfo,
-    OrderConfirmAmount: () => import('./OrderConfirmAmount'),
-    OrderRuleEdit: () => import('../rule/edit')
+    Online: () => import('./Online.vue'),
+    OneByOne: () => import('./OneByOne.vue'),
+    Block: () => import('./Block.vue'),
+    ChargingAgent: () => import('./ChargingAgent.vue'),
+    RiskAgent: () => import('./RiskAgent.vue'),
+    TemplateFile: () => import('./TemplateFile.vue'),
+    ConfirmAmount: () => import('@/pages/order/common/ConfirmAmount'),
+    OrderRule: () => import('@/pages/order/common/OrderRule')
   },
   mixins: [AppDialog],
   props: {
@@ -125,6 +71,28 @@ export default {
   data() {
     return {
       orderInfo: {}
+    }
+  },
+  computed: {
+    detailComponent() {
+      let name = 'TemplateFile'
+      let { orderType, orderCategory } = this.orderInfo
+      if (orderType == '2') {
+        name = 'Block'
+      }
+      if (orderCategory == '11') {
+        name = 'Online'
+      }
+      if (orderCategory == '12') {
+        name = 'OneByOne'
+      }
+      if (orderCategory == '31') {
+        name = 'ChargingAgent'
+      }
+      if (orderCategory == '32') {
+        name = 'RiskAgent'
+      }
+      return name
     }
   },
   watch: {
@@ -186,29 +154,36 @@ export default {
       this.dialogWidth = '400px'
       this.dialogTitle = '修改派单规则'
       this.dialogForm = this.orderInfo
-      this.dialogComponent = 'OrderRuleEdit'
+      this.dialogComponent = 'OrderRule'
       this.dialogVisible = true
     },
     async handleConfirmOrderPay() {
       this.dialogWidth = '400px'
       this.dialogTitle = '确认订单金额'
       this.dialogForm = this.orderInfo
-      this.dialogComponent = 'OrderConfirmAmount'
+      this.dialogComponent = 'ConfirmAmount'
       this.dialogVisible = true
     },
     async formSubmit(form) {
       let { id: orderId, rule: dispatchWay, amount: fee } = form
-      switch(this.dialogComponent) {
-        case 'OrderRuleEdit':
-          await this.orderModifyDispatchWay({ orderId, dispatchWay })
-          this.$msgSuccess('操作成功！')
-          this.getDetails()
-          break;
-        case 'OrderConfirmAmount':
-          await this.orderComfirmOrderAmount({ orderId, fee })
-          this.$msgSuccess('操作成功！')
-          this.getDetails()
-          break;
+      try {
+        switch(this.dialogComponent) {
+          case 'OrderRule':
+            await this.orderModifyDispatchWay({ orderId, dispatchWay })
+            this.$msgSuccess('操作成功！')
+            this.getDetails()
+            this.closeDialog()
+            break;
+          case 'ConfirmAmount':
+            await this.orderComfirmOrderAmount({ orderId, fee })
+            this.$msgSuccess('操作成功！')
+            this.getDetails()
+            this.closeDialog()
+            break;
+        }
+      } catch (error) {
+        // error
+        console.log(error)
       }
     },
     ...mapActions('order', [
@@ -219,6 +194,7 @@ export default {
       'orderComfirmOrderAmount',
       'orderReDispatchOrder',
       'orderModifyHealthyStatus',
+      'orderPayed',
     ])
   },
   mounted() {
@@ -260,6 +236,9 @@ export default {
       i {
         font-style: normal;
       }
+    }
+    .btn-box {
+      margin-top: 20px;
     }
   }
 </style>

@@ -2,7 +2,7 @@
   <el-row class="dialog-detail">
     <el-form label-width="100px">
       <el-form-item label="订单金额">
-        <el-input v-model.number="amount"></el-input>
+        <el-input v-model="amount"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="formSubmit">确认</el-button>
@@ -17,8 +17,9 @@ export default {
     row: Object
   },
   data() {
+    let { amount } = this.row || {}
     return {
-      amount: '',
+      amount,
     }
   },
   methods: {
