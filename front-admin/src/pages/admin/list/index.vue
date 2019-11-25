@@ -12,7 +12,7 @@
       </el-row>
       <app-table 
         ref="appTable"
-        url="/manage"
+        url="/manager"
         columnType="selection"
         :params="tableParams"
         :columns="columns"

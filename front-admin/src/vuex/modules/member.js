@@ -14,7 +14,7 @@ const member = {
     // 律师 -- 详情
     lawyerView: (context, id) => get(`/member/lawyer/pending/${id}`),
     // 律师 -- 修改状态
-    lawyerUpdateStatus: (context, id) => put(`/member/lawyer/pending/${id}`),
+    lawyerUpdateStatus: (context, payload) => put(`/member/lawyer/${payload.ids}`,payload.params),
     // 审核律师 -- 详情
     lawyerAuditView: (context, id) => get(`/member/lawyer/audit/${id}`),
     // 审核律师

@@ -17,9 +17,9 @@
           <span class="title">咨询者会员管理</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary" @click="changeStatusBatch('0')">启用</el-button>
-          <el-button type="primary" @click="changeStatusBatch('1')">禁用</el-button>
-          <el-button type="primary" @click="removeLawyer">删除</el-button>
+          <el-button type="primary" @click="changeStatusBatch(1)">启用</el-button>
+          <el-button type="primary" @click="changeStatusBatch(0)">禁用</el-button>
+          <el-button type="primary" @click="removeMember">删除</el-button>
           <el-button type="primary">导出</el-button>
         </el-row>
       </el-row>
@@ -222,11 +222,14 @@
       changeStatusBatch(status){
         let names = this.selectedLawyers.map(item=>item.name).join("、");
         let ids = this.selectedLawyers.map(item=>item.id).join(",");
-        let tips = `确认${ status == 1 ? '禁用' : '启用' }会员${ names }吗`;
+        let tips = `确认${ status == 0 ? '禁用' : '启用' }会员${ names }吗`;
         let params = {status}
         this.changeStatus( tips, ids, params)
       },
-      async removeLawyer(){
+      async removeMember(){
+        let names = this.selectedLawyers.map(item=>item.name).join("、");
+        let tips = `确认删除会员${names}吗`
+        await this.$confirm(tips, '温馨提示', { type: 'warning' })
         let idList = this.selectedLawyers.map(item => item.id).join(",");
         this.memberDel(idList);
         this.refreshTable();

@@ -17,9 +17,9 @@
           <span class="title">律师管理</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">启用</el-button>
-          <el-button type="primary">禁用</el-button>
-          <el-button type="danger" @click="handleMultiDel">删除</el-button>
+          <el-button type="primary" @click="changeStatusBatch(1)">启用</el-button>
+          <el-button type="primary" @click="changeStatusBatch(0)">禁用</el-button>
+          <el-button type="danger" @click="removeLawyer">删除</el-button>
           <el-button type="primary">导出</el-button>
         </el-row>
       </el-row>
@@ -213,26 +213,39 @@
             break;
           case 'status':
             tips = `确认${ row.status == 1 ? '禁用' : '启用' }律师${ row.name }吗？`
-            await this.$confirm(tips, '温馨提示', { type: 'warning' })
-            await this.lawyerUpdateStatus(row.id)
-            this.$msgSuccess('操作成功！')
+            let params = {status: row.status == 0 ? 1 : 0}
+            this.changeStatus(tips, row.id, params)
             break;
         }
       },
-      async handleMultiDel() {
-        if (this.tableSelected.length) {
-          try {
-            let ids = this.tableSelected.map(v => v.id).join(',')
-            await this.$confirm('确认删除选中的律师吗?', '温馨提示', { type: 'warning' })
-            await this.lawyerDel(ids)
-            this.$msgSuccess('操作成功！')
-            this.refreshTable()
-          } catch (error) {
-            // error
-          }
-        } else {
-          this.$msgError('请选择需要删除的数据')
+      async changeStatus(tips, ids, params){
+        await this.$confirm(tips, '温馨提示', { type: 'warning' })
+        if(ids instanceof Array) { 
+          ids = ids.join(",")
         }
+
+        let payload = {ids, params }
+        await this.lawyerUpdateStatus(payload)
+        this.$msgSuccess('操作成功！')
+        this.refreshTable()
+      },
+      changeStatusBatch(status){
+        let names = this.selectedLawyers.map(item=>item.name).join("、");
+        let ids = this.selectedLawyers.map(item=>item.id).join(",");
+        let tips = `确认${ status == 0 ? '禁用' : '启用' }会员${ names }吗`;
+        let params = {status}
+        this.changeStatus( tips, ids, params)
+      },
+      async removeLawyer(){
+        let names = this.selectedLawyers.map(item=>item.name).join("、");
+        let tips = `确认删除会员${names}吗`
+        await this.$confirm(tips, '温馨提示', { type: 'warning' })
+        let idList = this.selectedLawyers.map(item => item.id).join(",");
+        this.lawyerDel(idList);
+        this.refreshTable();
+      },
+      tableSelect(val){
+        this.selectedLawyers = val;
       },
       ...mapActions('member', [
         'lawyerView',
