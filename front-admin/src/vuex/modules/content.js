@@ -38,7 +38,7 @@ const content = {
     // 分块法律服务 -- 修改
     blockUpdate: (context, params) => putJson(`/blockLaw`, params),
     // 分块法律服务 -- 删除
-    blockDel: (context, ids) => del(`/blockLaw/${ids}`),
+    blockDel: (context, ids) => del(`/blockLaw/delete/${ids}`),
 
     // 分类 -- 添加
     categoryAdd: (context, params) => post(`/category`, params),

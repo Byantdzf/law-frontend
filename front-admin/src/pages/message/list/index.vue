@@ -17,14 +17,14 @@
           <span class="title">信息推送</span>
         </el-row>
         <el-row class="fr">
-          <el-button type="primary">新增</el-button>
+          <el-button type="primary"  @click="handleBtnAction({}, 'add')">新增</el-button>
           <el-button type="primary">修改</el-button>
           <el-button type="primary">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
         ref="appTable"
-        url="/mng/message/querySystemMsglist"
+        url="/platform/msg/show/msg"
         columnType="selection"
         :params="tableParams"
         :columns="columns"
@@ -37,6 +37,7 @@
       :height="dialogHeight"
       :title="dialogTitle"
       :visible="dialogVisible"
+      :full="dialogIsFull"
       @close="closeDialog"
     >
       <component
@@ -45,6 +46,7 @@
         :row="dialogForm"
         @submit="formSubmit"
         @cancel="closeDialog"
+        :dialogIsFull="dialogIsFull"
         ref="dialogComponent"
       />
     </app-dialog>
@@ -60,7 +62,7 @@
   export default {
     components: {
       // Detail: () => import("./detail"),
-      // HqDivide: () => import("./hqDivide"),
+      Edit: () => import("./edit.vue"),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -153,7 +155,7 @@
         let res = {}
         switch (type) {
           case 'detail':
-            this.dialogWidth = '800px'
+            // this.dialogWidth = '800px'
             this.dialogTitle = row.tenantName
             res = await this.tenantView({ id: row.id })
             this.dialogForm = res.data || {}
@@ -161,7 +163,7 @@
             this.dialogVisible = true
             break;
           case 'hqDivide':
-            this.dialogWidth = '1000px'
+            this.dialogIsFull = true
             this.dialogTitle = '选择总部'
             res = await this.tenantView({ id: row.id })
             this.curRow = res.data
@@ -169,6 +171,13 @@
             this.dialogComponent = 'HqDivide'
             this.dialogVisible = true
             break;
+          case 'add':
+            this.dialogIsFull = true
+            this.dialogTitle = '新增信息'
+            this.dialogForm = null
+            this.dialogComponent = 'Edit'
+            this.dialogVisible = true
+            break
         }
       },
       ...mapActions('tenant', [
