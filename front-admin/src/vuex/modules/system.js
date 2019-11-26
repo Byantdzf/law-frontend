@@ -1,4 +1,4 @@
-import { get, postJson, del, put, putJson } from '@/utils/xhr.js'
+import { get, postJson, del, put, putJson, post } from '@/utils/xhr.js'
 
 const system = {
   namespaced: true,
@@ -14,8 +14,12 @@ const system = {
 
     servicePhoneQuery: () => get('/platform/phone'),
     servicePhoneSetting: (context, params) => put('/platform/phone', params),
-    platformService: (context, params) => postJson(`/platform/service`, params),
-    getPlatfomService: (context, params) => get('/platform/service', params)
+    platformService: (context, params) => {
+      // debugger
+      post(`/platform/service`, params)
+    },
+    getPlatfomService: (context, params) => get(`/platform/service`, params),
+    getBlockLaw: (context, id) => get(`/blockLaw/${id}`)
   }
 }
   

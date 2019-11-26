@@ -185,8 +185,9 @@ export default {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
       uploading: false,
-      img: require("@/assets/images/img_404.png"),
-      remark: "测试内容"
+      img: "",
+      remark: "",
+      blockDetail: {}
     };
   },
   watch: {
@@ -211,6 +212,9 @@ export default {
       this.currTypeName = this.articleTypeItems[0].name;
       let dictCode = 2;
       let res = await this.getPlatfomService({dictCode})
+      this.blockDetail = res.data;
+      this.img = res.data.image;
+      this.remark = res.data.brief;
     },
     // 表单提交
     async formSubmit(form) {
@@ -280,7 +284,7 @@ export default {
     },
     async handleSaveIntro() {
       this.isEditRemark = !this.isEditRemark;
-      this.updateBasicInfo()
+      this.updateBasicInfo('content')
     },
     //上传之前的事件
     beforeUpload(file) {
@@ -291,19 +295,23 @@ export default {
       let fileUrl = res.data || ''
       this.img = fileUrl
       this.uploading = false
-      this.updateBasicInfo('mark')
+      this.updateBasicInfo('image')
     },
     // 上传失败
     handleUploadError() {
       this.uploading = false
       this.$msgError('上传失败，请稍后再试！')
     },
-    updateBasicInfo(){
+    updateBasicInfo(type){
       let params = {
-        name: {
-          brief: this.remark
-        },
-        code: this.img
+        dictCode: 2,
+        name:  this.blockDetail.brief,
+        code: this.blockDetail.image
+      }
+      if(type === 'image'){
+        params.code = this.img
+      }else{
+        params.name = this.remark
       }
       this.platformService(params)
     },
