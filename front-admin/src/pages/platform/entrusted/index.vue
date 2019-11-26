@@ -120,14 +120,14 @@ export default {
       ],
       currTypeName: "",
       info: {},
-      remark: "测试内容",
+      remark: "",
       isEditRemark: false,
       uploadActionUrl: SYSTEM.baseUrl + '/applets/lawyer/multiUpload',
       headers: {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
       uploading: false,
-      img: require("@/assets/images/img_404.png"),
+      img: "",
     };
   },
   watch: {
