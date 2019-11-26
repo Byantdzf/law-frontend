@@ -79,7 +79,7 @@
       </el-row>
     </el-card>
 
-    <el-card class="search-card mt-10 pb-10 block-detail" v-else>
+    <!-- <el-card class="search-card mt-10 pb-10 block-detail" v-else>
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
           <span class="title">{{ currTypeName }}介绍管理</span>
@@ -94,7 +94,7 @@
         :resave="formResave"
         @confirm="formSubmit"
       />
-    </el-card>
+    </el-card> -->
 
      <el-card class="table-card mt-10">
       <el-row slot="header" class="clearfix">
@@ -216,10 +216,9 @@ export default {
         }
       })
       this.currTypeName = obj.name
-      if (type != 30) {
-        // 此处应该读取对应数据
-        this.initForm()
-      }
+      this.tableParams.serviceType = type
+      // 此处应该读取对应数据
+      this.refreshTable();
     }
   },
   methods: {
@@ -404,6 +403,9 @@ export default {
         code: isImage ? this.img : this.remark
       }
       this.platformService(params)
+    },
+    handleMultiDel(){
+
     },
     ...mapActions("content", ["entrustedAdd", "entrustedUpdate", "entrustedDel"]),
     ...mapActions("system", ["platformService", "getPlatfomService"]),
