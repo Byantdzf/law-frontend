@@ -232,8 +232,9 @@
 
 		gotoPaySuccess: function () {
 			var _t = this;
-			$('.setPay, .orderPage').addClass('hidden');
+			$('.setPay, .orderPage, .paySuccessQr img').addClass('hidden');
 			utils.getSync(URL.user.order.getById, { orderId: _t.id }, function (res) {
+				var orderNo = res.data.orderNo;
 				if (res.data.orderStatus == 10 && _t.type != 5) {
 					window.location.reload()
 				} else {
@@ -248,6 +249,15 @@
 
 					$('.downloadFile').off().on('click', function () {
 						_t.downloadFiles(res.data);
+					});
+					
+					utils.get(URL.common.orderQr, {orderNo: orderNo}, function (res) {
+						var url = res.data;
+						if (url) {
+							$('.paySuccessQr img').removeClass('hidden').attr('src', url);
+						} else {
+							utils.msg('二维码生成失败')
+						}
 					});
 
 					form.on('submit(returnFirst)', function (res) {
