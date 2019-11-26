@@ -2,13 +2,16 @@
   <div>
     <tree
     :data="data"
+    ref="tree"
     default-expand-all
+    node-key="id"
+    :default-checked-keys="defaultCheckedKeys"
     show-checkbox
     >
     </tree>
     <div class="btn-box">
-        <el-button type="primary">确定</el-button>
-        <el-button>关闭</el-button>
+        <el-button type="primary" @click="formSubmit">确定</el-button>
+        <el-button @click="$emit('cancel')">关闭</el-button>
     </div>
   </div>
 </template>
@@ -20,46 +23,51 @@ import AppForm from '@/mixins/form'
 export default {
   mixins: [AppForm],
   components: {Tree},
+  props: {row: Object},
   data(){
       return {
           data: [{
               id: 0,
               label: "功能菜单",
-              children: [
-                {
-                    id: 4,
-                    label: '二级 1-1',
-                },{
-                    id: 10,
-                    label: '三级 1-1-2'
-                }
-              ]
-          }]
+              children: []
+          }],
+          defaultCheckedKeys: []
       }
   },
   methods: {
     async initForm(form) {
-        console.log(this.data)
-      let res = await this.permsList()
-      let children = res.data.map(item=>{
-          return {
-              id: item.id,
-              label: item.permName
-          }
-      })
-      this.data[0].children = children
+        this.getList()
+        this.getSlectPerm()
+    },
+    async getSlectPerm(){
+        let res = await this.getslectedPerm(this.row.id)
+        this.defaultCheckedKeys = res.data.map(item=>item.id)
+        console.log(this.defaultCheckedKeys)
+    },
+    async getList(){
+        let res = await this.permsList()
+        let children = res.data.map(item=>{
+            return {
+                id: item.id,
+                label: item.permName
+            }
+        })
+        this.data[0].children = children
     },
     // 表单提交
-    formSubmit(form) {
+    async formSubmit(form) {
       // console.log(form)
-      let params = { ...form }
-      if(this.row && this.row.hasOwnProperty('id')) {
-        params.id = this.row.id
+      let payload = {
+          id: this.row.id,
+          params: this.$refs.tree.getCheckedKeys()
       }
-      this.$emit('submit', params)
+      await this.updateSelectedPerm(payload)
+      this.$emit('cancel')
     },
     ...mapActions('admin', [
-        'permsList'
+        'permsList',
+        'getslectedPerm',
+        'updateSelectedPerm'
     ])
   },
   mounted() {
