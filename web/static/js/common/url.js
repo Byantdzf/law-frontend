@@ -27,7 +27,8 @@ var URL = {
 		orderStatus: pcHost + '/getDictData?dictCode=OrderStatus',
 		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC',
 		wechatPay: pcHost + '/pc/lawyer/pay/getPrepayInfoQr',
-		wechatPayResult: pcHost + '/pc/lawyer/getWeixinOrderByOrderNo'
+		wechatPayResult: pcHost + '/pc/lawyer/getWeixinOrderByOrderNo',
+		orderQr: pcHost + '/pc/lawyer/wechat/qrcode/getQrcodeUrlByOrderNo'
 	},
 	auth: {
 		login: '/static/data/login.json',
