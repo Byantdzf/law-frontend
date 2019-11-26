@@ -1,12 +1,14 @@
 .page-home {
-  background: #f3f3f3;
+  background: #ffffff;
 }
 .page-search {
   padding: 20rpx 30rpx;
   background: #fff;
+  box-shadow: 1rpx 1rpx 12rpx #f0f0f0;
+  z-index: 999;
 }
 .page-search .location {
-  min-width: 160rpx;
+  min-width: 132rpx;
 }
 .page-search .city {
   max-width: 160rpx;
@@ -14,7 +16,7 @@
 .page-search .search-box {
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
-  border-radius: 20rpx;
+  border-radius: 32rpx;
 }
 
 .service-types {
@@ -40,28 +42,43 @@
   color: #fff;
 }
 .page-title {
-  margin-top: 20rpx;
+  padding: 22rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  border-top: 10rpx solid #f6f6f6;
 }
 .page-title .title{
   font-size: 30rpx;
-  font-weight: bold;
+  position: relative;
+  padding-left: 16rpx;
+  color: #CF443D;
+}
+.page-title .title:before{
+  content: '';
+  width: 6rpx;
+  height: 26rpx;
+  background: #CF443D;
+  position: absolute;
+  left: 0 ;
+  top: 8rpx;
 }
 .page-title .icon-arrow-right {
-  font-size: 24rpx;
+  font-size: 26rpx;
+  margin-left: 4rpx;
 }
 
 .list-item {
   padding: 20rpx;
-  background: #fff;
-  border-radius: 20rpx;
+  /*background: #fff;*/
+  /*border-radius: 20rpx;*/
   align-items: flex-start;
+  border-bottom: 1rpx solid #f0f0f0;
 }
 .list-item + .list-item {
-  margin-top: 20rpx;
+  /*margin-top: 20rpx;*/
 }
 .list-item .img-box {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 .list-item .img-box image {
   border-radius: 50%;
@@ -70,10 +87,16 @@
   font-size: 32rpx;
 }
 .list-item .desc {
-  margin: 10rpx 0;
+  margin-top: 8rpx;
   line-height: 40rpx;
   max-height: 120rpx;
   overflow: hidden;
+}
+.helpNum{
+  margin-right: 16rpx;
+}
+.list-item .desc_sub{
+  margin-top: -4rpx;
 }
 .list-item .btn-box {
   margin-top: 16rpx;
@@ -124,15 +147,15 @@
 
 .float-tools-btn {
   position: fixed;
-  bottom: 20rpx;
-  right: 20rpx;
+  bottom: 12vw;
+  right: 8vw;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
-  box-shadow: 0 6rpx 10rpx rgba(0,0,0,0.2);
+  box-shadow: 1rpx 1rpx 14rpx #cacaca;
   z-index: 1000;
 }
 
@@ -185,4 +208,8 @@
 }
 .app-empty .iconfont {
   font-size: 100rpx;
+}
+.iconStyle{
+  width: 42rpx;
+  height: auto;
 }

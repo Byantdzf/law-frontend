@@ -14,8 +14,8 @@ scroll-view {
   box-sizing: border-box;
 }
 
-image { 
-  display: block; 
+image {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -68,7 +68,7 @@ button[type=primary].button-hover {
 button[type=warm].button-hover {
   color: #fff;
   background-color: #e5a700;
-} 
+}
 
 button[plain][type=primary],
 button[plain][type=primary].button-hover {
@@ -123,3 +123,55 @@ checkbox[checked] + .icon-check::after {
 }
 
 /* reset -- end */
+
+.font24 {
+  font-size: 24rpx;
+}
+.font26 {
+  font-size: 26rpx;
+}
+.font28 {
+  font-size: 28rpx;
+}
+.bcF{
+  background: white;
+}
+.bcTheme{
+  background: #CF443D;
+}
+.bcTheme_sub{
+  background-image: linear-gradient(to right, #fdbc3e , #fed065);
+}
+.bold{
+  font-weight: bold;
+}
+.ellipsis_1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.color_theme{
+  color: #CF443D;
+}
+.color_theme_sub{
+  color: #fdbc3e;
+}
+.color_333{
+  color: #333333;
+}
+.color_666{
+  color: #666666;
+}
+.color_999{
+  color: #999999;
+}
+.btn {
+  border: none;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  background: none;
+  border-radius: inherit;
+}
+

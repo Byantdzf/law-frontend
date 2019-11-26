@@ -2,8 +2,9 @@
 <app-page id="app-page">
 	<view class="flex-column container page-home">
 		<view class="flex page-search">
-			<view class="flex location pr-20">
-				<view class="iconfont icon-location" />
+			<view class="flex location ">
+				<!--<view class="iconfont icon-location" />-->
+				<image src="https://images.ufutx.com/201911/26/5ba8fbcb4927f504532e7ab5dfb0bd46.png" mode="widthFix" class="iconStyle"></image>
 				<view class="pl-10 ellipsis city">
 					<app-cityPicker
             id="app-cityPicker"
@@ -14,7 +15,7 @@
 				</view>
 			</view>
 			<view class="flex-bd flex search-box" bind:tap="gotoSearch">
-				<view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
+				<view class="flex-bd pl-20 cl-666 font24">关键字搜索相关信息</view>
 				<view class="iconfont icon-search pl-20 pr-20 cl-primary" />
 			</view>
 		</view>
@@ -22,15 +23,15 @@
 			<scroll-view scroll-y>
 				<app-swiper items="{{ banners }}" />
 				<view class="flex page-title">
-					<view class="flex-bd pl-20 title">站内律师排名</view>
+					<view class="flex-bd title">站内律师排名</view>
 					<view class="flex-ft">
 						<navigator url="../lawyer/index" open-type="switchTab">
 							<text class="cl-999">更多</text>
-							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
+							<text class="iconfont icon-arrow-right cl-999"/>
             </navigator>
 					</view>
 				</view>
-				<view class="pa-20 home-list" wx:if="{{ list.length }}">
+				<view class=" home-list" wx:if="{{ list.length }}">
 					<view
             class="flex list-item"
             wx:for="{{ list }}"
@@ -43,35 +44,22 @@
 						</view>
 						<view class="flex-bd pl-20">
 							<view class="flex">
-								<view class="flex-bd name">{{ item.name }}</view>
+								<view class="flex-bd font26 color_333 name bold">{{ item.name }}</view>
 								<view class="flex-ft score cl-red">{{ item.score || 0 }}分</view>
 							</view>
-							<view class="desc cl-666">{{ item.brief || '' }}</view>
-							<view class="flex">
-								<view class="flex-bd">
-									<text class="cl-999">帮助人数：</text>
-									<text class="cl-666">{{ item.helps || 0 }}人</text>
-								</view>
-								<view class="flex-ft">
-									<text class="cl-999">关注人数：</text>
-									<text class="cl-666">{{ item.concerns || 0 }}人</text>
+							<view class="desc color_666 font24">{{ item.brief || '' }}</view>
+							<view class="flex desc_sub">
+								<view class="flex-bd font24">
+									<text class="color_666">帮助人数：</text>
+									<text class="color_theme helpNum" >{{ item.helps || 0 }}人</text>
+									<text class="color_666">关注人数：</text>
+									<text class="color_theme_sub">{{ item.concerns || 0 }}人</text>
 								</view>
 							</view>
 							<view class="flex btn-box">
-								<button
-                  size="mini"
-                  plain
-                  data-id="{{item.id}}"
-                  catch:tap="voiceTap"
-                >在线律师咨询
+								<button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询
 								</button>
-								<button
-                  size="mini"
-                  plain
-                  data-id="{{item.id}}"
-                  catch:tap="onByOneTap"
-								>指定律师咨询
-								</button>
+								<button size="mini" data-id="{{item.id}}" class="btn bcTheme_sub" catch:tap="onByOneTap">指定律师咨询</button>
                                 <button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">
                                     取消关注
                                 </button>
@@ -85,13 +73,13 @@
 				<view class="app-empty-wrapper" wx:else>
 					<app-empty iconClass="icon-sousuowuneirong" />
         </view>
-                
+
 				<view class="flex page-title">
-					<view class="flex-bd pl-20 title">法律文章精选</view>
+					<view class="flex-bd title">法律文章精选</view>
 					<view class="flex-ft">
 						<navigator url="../../news/list/index">
 							<text class="cl-999">更多</text>
-							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
+							<text class="iconfont icon-arrow-right cl-999"/>
             </navigator>
 					</view>
 				</view>
@@ -110,13 +98,13 @@
 						</view>
 					</scroll-view>
         </view>
-                
+
 				<view class="flex page-title">
-					<view class="flex-bd pl-20 title">最新法律速递</view>
+					<view class="flex-bd title">最新法律速递</view>
 					<view class="flex-ft">
 						<navigator url="../../news/list/index">
 							<text class="cl-999">更多</text>
-							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
+							<text class="iconfont icon-arrow-right cl-999"/>
             </navigator>
 					</view>
 				</view>
@@ -135,13 +123,13 @@
 						</view>
 					</scroll-view>
         </view>
-                
+
 				<view class="flex page-title">
-					<view class="flex-bd pl-20 title">最新公司动态</view>
+					<view class="flex-bd title">最新公司动态</view>
 					<view class="flex-ft">
 						<navigator url="../../news/list/index">
 							<text class="cl-999">更多</text>
-							<text class="iconfont icon-arrow-right cl-999 pr-20"/>
+							<text class="iconfont icon-arrow-right cl-999"/>
             </navigator>
 					</view>
 				</view>
@@ -164,8 +152,9 @@
 			</scroll-view>
 		</view>
 	</view>
-	<view class="float-tools-btn bg-primary" bindtap="handleToolBtnTap">
-		<text class="iconfont icon-plus"/>
+	<view class="float-tools-btn bcF" bindtap="handleToolBtnTap">
+		<!--<text class="iconfont icon-plus"/>-->
+		<image src="https://images.ufutx.com/201911/26/8cb8a78cc12ec6a1cf5e01c69d4cfc1a.png" mode="aspectFit" width="100%"></image>
   </view>
 	<app-pop visible="{{ showTools }}">
 		<view class="flex">
