@@ -96,28 +96,104 @@
       />
     </el-card>
 
+     <el-card class="table-card mt-10">
+      <el-row slot="header" class="clearfix">
+        <el-row class="fl">
+          <span class="title">{{ currTypeName }}类型管理</span>
+        </el-row>
+        <el-row class="fr">
+          <el-button type="primary" @click="handleBtnAction({}, 'add')">新增</el-button>
+          <el-button type="danger" @click="handleMultiDel">删除</el-button>
+        </el-row>
+      </el-row>
+      <app-table
+        ref="appTable"
+        url="/blockLaw"
+        columnType="selection"
+        :params="tableParams"
+        :columns="columns"
+        @selection-change="tableSelect"
+      />
+    </el-card>
+    <app-dialog
+      :width="dialogWidth"
+      :height="dialogHeight"
+      :title="dialogTitle"
+      :visible="dialogVisible"
+      @close="closeDialog"
+    >
+      <component
+        v-if="dialogVisible"
+        :is="dialogComponent"
+        :row="dialogForm"
+        @submit="formSubmitDialog"
+        @cancel="closeDialog"
+        ref="dialogComponent"
+      />
+    </app-dialog>
   </el-row>
 </template>
 
 <script>
 import { mapActions } from "vuex";
 import { Upload } from 'element-ui';
-import SYSTEM from '@/utils/system'
+import SYSTEM from '@/utils/system';
+import AppDialog from "@/mixins/dialog";
 import AppTable from "@/mixins/table";
 import AppForm from '@/mixins/form'
 export default {
   components: {
-    [Upload.name]: Upload
+    [Upload.name]: Upload,
+    Edit: () => import("./edit"),
   },
-  mixins: [AppTable, AppForm],
+  mixins: [AppTable, AppForm, AppDialog],
   data() {
     return {
+      columns: [
+        {
+          label: "序号",
+          field: "index",
+          width: 70
+        },
+        {
+          label: "服务类型名称",
+          field: "title"
+        },
+        {
+          label: "价格",
+          field: "price"
+        },
+        {
+          label: "展示销量",
+          field: "showCount"
+        },
+        {
+          label: "真实销量",
+          field: "salesCount"
+        },
+        {
+          label: "操作",
+          field: "operate",
+          align: "center",
+          width: 120,
+          type: "button",
+          items: ["修改", "删除"],
+          on: {
+            click: ({ row, index }) => {
+              this.handleBtnAction(row, index == 0 ? "edit" : "del");
+            }
+          }
+        }
+      ],
       articleType: 30,
       articleTypeItems: [
         { id: 30, name: "委托律师服务介绍" },
         { id: 31, name: "收费代理详情展示" },
         { id: 32, name: "风险代理详情展示" }
       ],
+      tableParams: {
+        serviceType: 30
+      },
       currTypeName: "",
       info: {},
       remark: "",
@@ -126,6 +202,7 @@ export default {
       headers: {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
+      dialogVisible: false,
       uploading: false,
       img: "",
     };
@@ -155,7 +232,9 @@ export default {
       this.remark = res.data.brief;
     },
     // 表单提交
-    async formSubmit(form) {
+    async formSubmitDialog(form) {
+      form.category = 2;
+      form.serviceType = this.articleType
       try {
         if ("id" in form) {
           await this.blockUpdate(form);
@@ -171,6 +250,35 @@ export default {
       } catch (e) {
         // error
       }
+    },
+    async handleBtnAction(row, type) {
+  
+        switch (type) {
+          case "add":
+            debugger
+            this.dialogWidth = "600px";
+            this.dialogTitle = "新增服务类型";
+            this.dialogForm = null;
+            this.dialogComponent = "Edit";
+            this.dialogVisible = true;
+            break;
+          case "edit":
+            this.dialogWidth = "600px";
+            this.dialogTitle = "编辑服务类型";
+            this.dialogForm = row;
+            this.dialogComponent = "Edit";
+            this.dialogVisible = true;
+            break;
+          case "del":
+            await this.$confirm("确认删除选定的服务类型吗?", "温馨提示", {
+              type: "warning"
+            });
+            await this.blockDel(row.id);
+            this.$msgSuccess("操作成功！");
+            this.refreshTable();
+            break;
+        }
+      // } catch (error) {}
     },
     async handleIntroEdit() {
       this.isEditRemark = !this.isEditRemark;
@@ -262,6 +370,9 @@ export default {
 
       this.formResaveDone()
     },
+    closeDialog(){
+      this.dialogVisible = false
+    },
     // 表单提交
     async formSubmit(form) {
       // console.log(form)
@@ -295,7 +406,8 @@ export default {
       this.platformService(params)
     },
     ...mapActions("content", ["entrustedAdd", "entrustedUpdate", "entrustedDel"]),
-    ...mapActions("system", ["platformService", "getPlatfomService"])
+    ...mapActions("system", ["platformService", "getPlatfomService"]),
+    ...mapActions("content", ["blockAdd", "blockUpdate", "blockDel"]),
   },
   created() {
     this.initPage();

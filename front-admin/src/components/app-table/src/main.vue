@@ -216,7 +216,7 @@
             delete schema[key]
           }
         }
-
+        
         const renderColumns = getTreeData(columns.map(col => {
           const mix = schema && schema[col[map.prop]] || {}
           const it = Object.assign({}, {
