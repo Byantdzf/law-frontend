@@ -147,8 +147,12 @@ export default {
   },
   methods: {
     // 初始化页面
-    initPage() {
+    async initPage() {
       this.currTypeName = this.articleTypeItems[0].name;
+      let dictCode = 3;
+      let res = await this.getPlatfomService({dictCode})
+      this.img = res.data.image;
+      this.remark = res.data.brief;
     },
     // 表单提交
     async formSubmit(form) {
@@ -173,6 +177,7 @@ export default {
     },
     async handleSaveIntro() {
       this.isEditRemark = !this.isEditRemark;
+      this.updateBasicInfo('content')
     },
     //上传之前的事件
     beforeUpload(file) {
@@ -183,6 +188,7 @@ export default {
       let fileUrl = res.data || ''
       this.img = fileUrl
       this.uploading = false
+      this.updateBasicInfo('image')
     },
     // 上传失败
     handleUploadError() {
@@ -279,7 +285,17 @@ export default {
         // error
       }
     },
-    ...mapActions("content", ["entrustedAdd", "entrustedUpdate", "entrustedDel"])
+    updateBasicInfo(type){
+      let isImage = type === 'image';
+      let params = {
+        dictCode: 3,
+        name: isImage  ? 'image' : 'brief',
+        code: isImage ? this.img : this.remark
+      }
+      this.platformService(params)
+    },
+    ...mapActions("content", ["entrustedAdd", "entrustedUpdate", "entrustedDel"]),
+    ...mapActions("system", ["platformService", "getPlatfomService"])
   },
   created() {
     this.initPage();
