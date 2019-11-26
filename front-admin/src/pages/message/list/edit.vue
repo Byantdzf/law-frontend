@@ -83,13 +83,13 @@ export default {
     let statusItems = getItems('publishObject')
     let sceneItems = getItems('couponScene')
     let typeItems = getItems('couponType')
-    let selectedRows = this.$val(this.row, 'userIdList').split(",")
+    // let selectedRows = this.$val(this.row, 'userIdList').split(",")
 
     return {
       statusItems,
       sceneItems,
       typeItems,
-      selectedRows: [],
+      // selectedRows: [],
       form: {
         allMembers: +this.$val(this.row, 'allMembers', 1),
         title: this.$val(this.row, 'title'),
