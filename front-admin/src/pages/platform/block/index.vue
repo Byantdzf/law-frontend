@@ -212,7 +212,6 @@ export default {
       this.currTypeName = this.articleTypeItems[0].name;
       let dictCode = 2;
       let res = await this.getPlatfomService({dictCode})
-      this.blockDetail = res.data;
       this.img = res.data.image;
       this.remark = res.data.brief;
     },
@@ -303,15 +302,11 @@ export default {
       this.$msgError('上传失败，请稍后再试！')
     },
     updateBasicInfo(type){
+      let isImage = type === 'image';
       let params = {
         dictCode: 2,
-        name:  this.blockDetail.brief,
-        code: this.blockDetail.image
-      }
-      if(type === 'image'){
-        params.code = this.img
-      }else{
-        params.name = this.remark
+        name: isImage  ? 'image' : 'brief',
+        code: isImage ? this.img : this.remark
       }
       this.platformService(params)
     },
