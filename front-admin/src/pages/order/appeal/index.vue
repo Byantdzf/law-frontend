@@ -30,7 +30,7 @@
           </el-radio-button>
         </el-radio-group>
       </el-row>
-      <el-row slot="header" class="clearfix mt-10" v-if="orderTypeValue != 4">
+      <!-- <el-row slot="header" class="clearfix mt-10" v-if="orderTypeValue != 4">
         <el-row class="fl">
           <span class="head-label">订单状态</span>
         </el-row>
@@ -43,7 +43,7 @@
             {{ item.name }}
           </el-radio-button>
         </el-radio-group>
-      </el-row>
+      </el-row> -->
       
       <el-row slot="header" class="clearfix mt-10" v-if="orderTypeValue != 4">
         <el-row class="fl">

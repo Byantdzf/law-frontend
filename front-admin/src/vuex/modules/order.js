@@ -40,7 +40,7 @@ const order = {
      * orderStatus  10 待支付 20 待接单 30 已接单 40 完成确认 50 待评价 60 完成
     */
     orderUpdateOrderStatus: (context, params) => get(`/mng/order/updateOrderStatus`, params),
-    /* 订单 -- 取消订单
+    /* 订单 -- 已支付
      * orderId
     */
     orderPayed: (context, params) => get(`/mng/order/payed`, params),
@@ -48,6 +48,14 @@ const order = {
      * orderId
     */
     orderCancel: (context, params) => get(`/mng/order/cancel`, params),
+    /* 订单 -- 确认完成
+     * orderId
+    */
+    orderConfirm: (context, params) => get(`/mng/order/confirm`, params),
+    /* 订单 -- 立即解决
+     * id
+    */
+    orderImmediateSolution: (context, params) => get(`/mng/order/immediateSolution`, params),
 
     /* 删除评论
      * orderScoreId

@@ -99,7 +99,8 @@
     components: {
       Detail: () => import("../detail"),
       ConfirmAmount: () => import('../common/ConfirmAmount'),
-      OrderRule: () => import('../common/OrderRule')
+      OrderRule: () => import('../common/OrderRule'),
+      OrderLawyers: () => import('@/pages/order/common/OrderLawyers'),
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -298,10 +299,24 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          let { id: orderId, rule: dispatchWay, amount: fee } = form
+          let { id: orderId, rule: dispatchWay, amount: fee, lawyerId } = form
           switch(this.dialogComponent) {
             case 'OrderRule':
-              await this.orderModifyDispatchWay({ orderId, dispatchWay })
+              if (dispatchWay == 1) {
+                await this.orderModifyDispatchWay({ orderId, dispatchWay })
+                this.$msgSuccess('操作成功！')
+                this.closeDialog()
+                this.refreshTable()
+              } else {
+                this.dialogWidth = '800px'
+                this.dialogTitle = '选择律师发送'
+                this.dialogForm = { id: orderId }
+                this.dialogComponent = 'OrderLawyers'
+                this.dialogVisible = true
+              }
+              break;
+            case 'OrderLawyers':
+              await this.orderModifyDispatchWay({ orderId, dispatchWay: 2, lawyerId })
               this.$msgSuccess('操作成功！')
               this.closeDialog()
               this.refreshTable()

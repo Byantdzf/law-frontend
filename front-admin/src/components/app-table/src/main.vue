@@ -46,8 +46,7 @@
     <el-pagination
       v-if="total"
       class="ta-r"
-      background
-      layout="total, prev, pager, next, sizes, jumper"
+      v-bind="defaultPagination"
       :current-page.sync="currentPage"
       :page-sizes="pageSizes"
       :page-size="tableParams.rows"
@@ -152,10 +151,19 @@
       totalKey: {
         type: String,
         default: 'totalRow'
+      },
+      pagination: {
+        type: Object,
+        default: () => ({})
       }
     },
     data () {
+      const _dp = {
+        background: true,
+        layout: "total, prev, pager, next, sizes, jumper"
+      }
       return {
+        defaultPagination: { ..._dp, ...this.pagination },
         currentPage: 1,
         total: 0,
         list: [],

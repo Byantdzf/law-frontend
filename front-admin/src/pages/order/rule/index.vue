@@ -24,6 +24,7 @@
         v-if="dialogVisible"
         :is="dialogComponent"
         :row="dialogForm"
+        :showTips="true"
         @submit="formSubmit"
         @cancel="closeDialog"
         ref="dialogComponent"
