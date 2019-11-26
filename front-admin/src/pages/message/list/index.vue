@@ -19,7 +19,7 @@
         <el-row class="fr">
           <el-button type="primary"  @click="handleBtnAction({}, 'add')">新增</el-button>
           <el-button type="primary" @click="handleBtnAction({}, 'edit')" >修改</el-button>
-          <el-button type="primary">删除</el-button>
+          <el-button type="primary" @click="delMessage">删除</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -44,7 +44,7 @@
         v-if="dialogVisible"
         :is="dialogComponent"
         :row="dialogForm"
-        @submit="formSubmit"
+        @submit="submit"
         @cancel="closeDialog"
         :dialogIsFull="dialogIsFull"
         ref="dialogComponent"
@@ -94,17 +94,18 @@
             align: 'center',
             width: 120,
             type: 'button',
-            default: '查看',
+            items: ['查看','修改'],
             on: {
-              click: ({ row }) => {
-                this.handleBtnAction(row, 'view')
+              click: ({ row, index }) => {
+                this.handleBtnAction(row,index == 0 ? 'view' : 'edit')
               }
             }
           }
         ],
         columnsProps: {
           minWidth: 100,
-        }
+        },
+        selectedRows: []
       }
     },
     methods: {
@@ -142,6 +143,17 @@
           // error
         }
       },
+      async formChangeSubmit(form) {
+        try {
+          const searchForm = this.$refs.searchForm
+          const tenantId = this.$val(form, 'tenant.id')
+          form.id = this.dialogForm.id;
+          let params = form
+          this.updateMessage(params)
+        } catch (e) {
+          // error
+        }
+      },
       async handleBtnAction(row, type) {
         let res = {}
         switch (type) {
@@ -170,17 +182,33 @@
             this.dialogForm = {...row}
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
+            this.submit = this.formChangeSubmit
+            break;
           case 'add':
             this.dialogIsFull = true
             this.dialogTitle = '新增信息'
             this.dialogForm = null
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
+            this.submit = this.formSubmit
             break;
         }
       },
+      tableSelect(val){
+        this.selectedRows = val
+      },
+      async delMessage(){
+        let names = this.selectedRows.map(item=>item.title).join("、");
+        let tips = `确认删除消息${names}吗`
+        await this.$confirm(tips, '温馨提示', { type: 'warning' })
+        let idList = this.selectedRows.map(item=>item.id).join(",")
+        await this.removeMessage(idList);
+        this.refreshTable()
+      },
       ...mapActions('message', [
-        'addMessage'
+        'addMessage',
+        'removeMessage',
+        'updateMessage'
       ])
     },
     created() {
