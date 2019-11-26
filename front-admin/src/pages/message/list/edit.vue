@@ -83,7 +83,7 @@ export default {
     let statusItems = getItems('publishObject')
     let sceneItems = getItems('couponScene')
     let typeItems = getItems('couponType')
-    let selectedRows = this.$val(this.row, 'userIdList')
+    let selectedRows = this.$val(this.row, 'userIdList').split(",")
 
     return {
       statusItems,

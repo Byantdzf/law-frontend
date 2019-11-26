@@ -14,6 +14,8 @@ const system = {
 
     servicePhoneQuery: () => get('/platform/phone'),
     servicePhoneSetting: (context, params) => put('/platform/phone', params),
+    platformService: (context, params) => postJson(`/platform/service`, params),
+    getPlatfomService: (context, params) => get('/platform/service', params)
   }
 }
   

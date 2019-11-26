@@ -179,7 +179,6 @@ export default {
       },
       currTypeName: "",
       info: {},
-      remark: "测试内容",
       isEditRemark: false,
       uploadActionUrl: SYSTEM.baseUrl + '/applets/lawyer/multiUpload',
       headers: {
@@ -187,6 +186,7 @@ export default {
       },
       uploading: false,
       img: require("@/assets/images/img_404.png"),
+      remark: "测试内容"
     };
   },
   watch: {
@@ -207,8 +207,10 @@ export default {
   },
   methods: {
     // 初始化页面
-    initPage() {
+    async initPage() {
       this.currTypeName = this.articleTypeItems[0].name;
+      let dictCode = 2;
+      let res = await this.getPlatfomService({dictCode})
     },
     // 表单提交
     async formSubmit(form) {
@@ -278,23 +280,35 @@ export default {
     },
     async handleSaveIntro() {
       this.isEditRemark = !this.isEditRemark;
+      this.updateBasicInfo()
     },
-      //上传之前的事件
-      beforeUpload(file) {
-          this.uploading = true
-      },
-      // 上传成功的事件
-      handleUploadSuccess(res, file) {
-        let fileUrl = res.data || ''
-        this.img = fileUrl
-        this.uploading = false
-      },
-      // 上传失败
-      handleUploadError() {
-        this.uploading = false
-        this.$msgError('上传失败，请稍后再试！')
-      },
-    ...mapActions("content", ["blockAdd", "blockUpdate", "blockDel"])
+    //上传之前的事件
+    beforeUpload(file) {
+        this.uploading = true
+    },
+    // 上传成功的事件
+    handleUploadSuccess(res, file) {
+      let fileUrl = res.data || ''
+      this.img = fileUrl
+      this.uploading = false
+      this.updateBasicInfo('mark')
+    },
+    // 上传失败
+    handleUploadError() {
+      this.uploading = false
+      this.$msgError('上传失败，请稍后再试！')
+    },
+    updateBasicInfo(){
+      let params = {
+        name: {
+          brief: this.remark
+        },
+        code: this.img
+      }
+      this.platformService(params)
+    },
+    ...mapActions("content", ["blockAdd", "blockUpdate", "blockDel"]),
+    ...mapActions("system", ["platformService", "getPlatfomService"])
   },
   created() {
     this.initPage();
