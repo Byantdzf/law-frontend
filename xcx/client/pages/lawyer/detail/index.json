@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "律师详情",
+  "navigationBarBackgroundColor":"#0b0b0b",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "app-text": "/components/app-text/index"
   }

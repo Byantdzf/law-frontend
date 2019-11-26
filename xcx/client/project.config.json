@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.2",
+	"libVersion": "2.9.3",
 	"appid": "wx00f73a4cb0bf22ac",
 	"projectname": "hujia-client",
 	"scripts": {},
@@ -223,6 +223,13 @@
 					"name": "orderWaiting",
 					"pathName": "pages/order/waiting/index",
 					"query": "onlyUserOwner=Y&orderStatus=20",
+					"scene": null
+				},
+				{
+					"id": 25,
+					"name": "律师详情",
+					"pathName": "pages/lawyer/detail/index",
+					"query": "id=129520900910350336",
 					"scene": null
 				}
 			]

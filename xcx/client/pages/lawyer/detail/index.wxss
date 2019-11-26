@@ -1,5 +1,4 @@
 
-.img-box { width:200rpx; height:200rpx; margin: 0 auto; border-radius: 20rpx; overflow: hidden;}
 .lawyerName { text-align: center; }
 .lawyerName .name { font-size: 40rpx;}
 .lawyerName .name text { font-size: 28rpx; color:#999; margin-left:40rpx;}
@@ -42,3 +41,144 @@
 .scoreList .items .flex-bd .flex { line-height: 1.5em;}
 .scoreList .items .flex-bd .flex .flex-ft { width: 140rpx; font-size: 24rpx;}
 .scoreList .items .desc {margin-top:20rpx; font-size: 24rpx; color:#999; line-height: 1.5em; text-align: left;}
+
+/*````````*/
+.img-box {
+  width: 100vw;
+  height: 100vw;
+  background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574792664031&di=baf0f42bc0e6302dd609c862ce0ae259&imgtype=0&src=http%3A%2F%2Fwww.juimg.com%2Ftuku%2Fyulantu%2F140210%2F330760-14021000500895.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.img-box image{
+  width: 22vw;
+  height: 22vw;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  left: 38.6vw;
+  bottom: 28vw;
+  box-shadow: 1rpx 1rpx 18rpx #fff;
+  animation: rotate360 2s linear 1;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: scale(.5) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
+}
+.main_laber_left{
+  position: absolute;
+  right: 68vw;
+  bottom: 44vw;
+}
+.dot{
+  height: 30rpx;
+  width: 30rpx;
+  border-radius: 50%;
+  border: 10rpx solid rgba(105, 19, 28, 0.6);
+  background: #fff;
+  position: absolute;
+  z-index: 1;
+  display: inline-block;
+  margin-top: 2rpx;
+}
+.item_laber{
+  max-width: 180rpx;
+  height: 36rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 50rpx;
+  border: 2rpx solid #fff;
+  display: inline-block;
+  margin-right: 16rpx;
+  line-height: 26rpx;
+  color: white;
+  font-size: 20rpx;
+  background: rgba(0,0,0,.3);
+}
+.left:after{
+  content: '';
+  width: 26rpx;
+  height: 2rpx;
+  background: white;
+  position: absolute;
+  top: 4rpx;
+  left: -26rpx;
+  z-index: -1;
+}
+.right:after{
+  content: '';
+  width: 26rpx;
+  height: 2rpx;
+  background: white;
+  position: absolute;
+  top: 4rpx;
+  right: -26rpx;
+  z-index: -1;
+}
+.main_laber_right{
+  position: absolute;
+  left: 64vw;
+  bottom: 40vw;
+}
+.item_laber_right{
+  max-width: 200rpx;
+  height: 36rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 50rpx;
+  border: 2rpx solid #fff;
+  display: inline-block;
+  margin-left: 46rpx;
+  line-height: 26rpx;
+  color: white;
+  font-size: 20rpx;
+  background: rgba(0,0,0,.3);
+}
+.main-info{
+  width: 90vw;
+  padding: 4vw;
+  background: white;
+  box-shadow: 1rpx 1rpx 16rpx #e0e0e0;
+  margin: -4vw auto;
+  border-radius: 12rpx;
+  position: relative;
+}
+.item-info{
+  padding: 8rpx ;
+}
+.main-grade{
+  transform: scale(.9);
+  display: inline-block;
+}
+.info-label{
+  font-size: 24rpx;
+  border: 1rpx solid #d0d0d0;
+  color: #929292;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+}
+.info-brief{
+  margin-top: 12rpx;
+}
+.info-collect{
+  position: absolute;
+  right: 4vw;
+  top: 4vw;
+  text-align: center;
+}
+.info-collect image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.item-collect{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  box-shadow: 1rpx 1rpx 12rpx #d0d0d0;
+  background: white;
+}
