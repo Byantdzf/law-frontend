@@ -6,6 +6,17 @@
           <el-radio v-for="item in statusItems" :key="item.id" :label="item.id">{{ item.name }}</el-radio>
         </el-radio-group>
       </el-form-item>
+       <el-form-item v-if="form.allMembers==0">
+          <app-table 
+            ref="appTable"
+            url="/mng/message/member/list"
+            columnType="selection"
+            :params="tableParams"
+            :columns="columns"
+            @selection-change="tableSelect"
+            
+        />
+      </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
@@ -77,6 +88,7 @@ export default {
       statusItems,
       sceneItems,
       typeItems,
+      selectedRows: [],
       form: {
         allMembers: +this.$val(this.row, 'allMembers', 1),
         title: this.$val(this.row, 'title'),
@@ -204,11 +216,19 @@ export default {
     // 表单提交
     formSubmit() {
       let params = { ...this.form }
-      if(this.row && this.row.hasOwnProperty('id')) {
+      let idList = []
+      if(params.allMembers == 0){
+        idList = this.selectedRows.map(item=>item.id).join(",")
+        params.idList = idList
+      }
+      else{
         params.id = this.row.id
       }
   
       this.$emit('submit', params)
+    },
+    tableSelect(val){
+      this.selectedRows = val;
     },
     ...mapActions('member', [
       'memberView',

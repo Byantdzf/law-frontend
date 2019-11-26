@@ -159,8 +159,7 @@
         switch (type) {
           case 'detail':
             // this.dialogWidth = '800px'
-            this.dialogTitle = row.tenantName
-            res = await this.tenantView({ id: row.id })
+            res = await this.getMessageDetail(row.id)
             this.dialogForm = res.data || {}
             this.dialogComponent = 'Detail'
             this.dialogVisible = true
@@ -168,18 +167,16 @@
           case 'view':
             this.dialogIsFull = true
             this.dialogTitle = '消息详情'
-            // res = await this.tenantView({ id: row.id })
-            row.allMembers = row.receiver
-            this.dialogForm = {...row}
+            res = await this.getMessageDetail(row.id)
+            this.dialogForm = res.data
             this.dialogComponent = 'Detail'
             this.dialogVisible = true
             break;
           case 'edit':
             this.dialogIsFull = true
             this.dialogTitle = '消息修改'
-            // res = await this.tenantView({ id: row.id })
-            row.allMembers = row.receiver
-            this.dialogForm = {...row}
+            res = await this.getMessageDetail(row.id)
+            this.dialogForm = res.data
             this.dialogComponent = 'Edit'
             this.dialogVisible = true
             this.submit = this.formChangeSubmit
@@ -208,7 +205,8 @@
       ...mapActions('message', [
         'addMessage',
         'removeMessage',
-        'updateMessage'
+        'updateMessage',
+        'getMessageDetail'
       ])
     },
     created() {

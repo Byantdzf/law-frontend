@@ -6,15 +6,13 @@
           <el-radio v-for="item in statusItems" :key="item.id" :label="item.id">{{ item.name }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="form.allMembers==0">
           <app-table 
             ref="appTable"
-            url="/mng/message/queryMemberlist"
-            columnType="selection"
+            url="/mng/message/member/list"
             :params="tableParams"
             :columns="columns"
             :columns-props="columnsProps"
-            @selection-change="tableSelect"
         />
       </el-form-item>
       <el-form-item label="标题">
@@ -90,10 +88,10 @@ export default {
         ],
         showHeaderTab: false,
         curDialogTab: '',
-        tableParams: {
-            ...this.tableParams,
-            name: this.$val(this.row, 'allMembers', 1)
-        }
+        // tableParams: {
+        //     ...this.tableParams,
+        //     name: this.$val(this.row, 'receiver', 1)
+        // }
     }
   },
   watch: {
