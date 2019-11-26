@@ -89,7 +89,7 @@ export default {
       statusItems,
       sceneItems,
       typeItems,
-      // selectedRows: [],
+      selectedRows: [],
       form: {
         allMembers: +this.$val(this.row, 'allMembers', 1),
         title: this.$val(this.row, 'title'),
