@@ -202,6 +202,7 @@ export default {
       headers: {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
+      selectedRow: [],
       dialogVisible: false,
       uploading: false,
       img: "",
@@ -254,7 +255,6 @@ export default {
   
         switch (type) {
           case "add":
-            debugger
             this.dialogWidth = "600px";
             this.dialogTitle = "新增服务类型";
             this.dialogForm = null;
@@ -404,8 +404,14 @@ export default {
       }
       this.platformService(params)
     },
-    handleMultiDel(){
-
+    async handleMultiDel(){
+      let ids = this.selectedRow.map(item=>item.id).join(",")
+      await this.blockDel(ids)
+      this.$msgSuccess("操作成功！");
+      this.refreshTable()
+    },
+    tableSelect(val){
+      this.selectedRow = val;
     },
     ...mapActions("content", ["entrustedAdd", "entrustedUpdate", "entrustedDel"]),
     ...mapActions("system", ["platformService", "getPlatfomService"]),
