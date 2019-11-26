@@ -10,7 +10,7 @@
       </el-radio-group>
     </el-card>
 
-    <el-card class="search-card mt-10 pb-10 block-detail" v-if="articleType==30">
+    <el-card class="search-card mt-10 pb-10 block-detail">
       <el-row slot="header" class="clearfix">
         <el-row class="fl">
           <span class="title">{{ currTypeName }}介绍管理</span>
@@ -185,14 +185,14 @@ export default {
           }
         }
       ],
-      articleType: 30,
+      articleType: 31,
       articleTypeItems: [
-        { id: 30, name: "委托律师服务介绍" },
+        // { id: 30, name: "委托律师服务介绍" },
         { id: 31, name: "收费代理详情展示" },
         { id: 32, name: "风险代理详情展示" }
       ],
       tableParams: {
-        serviceType: 30
+        serviceType: 31
       },
       currTypeName: "",
       info: {},

@@ -48,6 +48,7 @@
   export default {
     components: {
       Edit: () => import("./edit"),
+      Manage: () => import("./manange")
     },
     mixins: [AppTable, AppDialog, AppSearch],
     data() {
@@ -87,10 +88,10 @@
             align: 'center',
             width: 120,
             type: 'button',
-            items: ['编辑', '删除'],
+            items: ['编辑', '删除',  "权限管理"],
             on: {
               click: ({ row, index }) => {
-                this.handleBtnAction(row, ['edit', 'del'][index])
+                this.handleBtnAction(row, ['edit', 'del', 'manage'][index])
               }
             }
           }
@@ -134,6 +135,13 @@
             this.dialogTitle = '编辑角色'
             this.dialogForm = row
             this.dialogComponent = 'Edit'
+            this.dialogVisible = true
+            break;
+          case 'manage':
+            this.dialogWidth = '400px'
+            this.dialogTitle = '权限管理'
+            this.dialogForm = row
+            this.dialogComponent = 'Manage'
             this.dialogVisible = true
             break;
           case 'del':

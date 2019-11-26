@@ -18,6 +18,7 @@ const admin = {
     managerUpdate: (context, params) => put(`/manager`, params),
     // 管理员 -- 修改状态
     managerDel: (context, ids) => del(`/manager/${ids}`),
+    permsList: (context, params) => get(`/perms/list`, params)
   }
 }
   

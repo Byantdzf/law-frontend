@@ -183,7 +183,11 @@ export default {
     async formSubmit(form) {
       try {
         if ("id" in form) {
-          await this.templateUpdate(form);
+          let payload = {
+            params: form,
+            id: form.id
+          }
+          await this.templateUpdate(payload);
           this.closeDialog();
           this.refreshTable();
           this.$msgSuccess("修改成功");
