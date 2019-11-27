@@ -2,12 +2,15 @@
 const app = getApp()
 const selectApi = require('../../../service/select')
 const userApi = require('../../../service/user')
+const { orderType, orderCategory } = require('../../../config/global');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    orderType,
+    orderCategory,
     showType: 1,
     persent: 0,
     gender: ['', '男', '女'],
@@ -40,7 +43,8 @@ Page({
 
       this.setData({
         persent,
-        details
+        details,
+        comments: details.scoreList || []
       })
     })
   },
