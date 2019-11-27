@@ -6,11 +6,13 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
-		"postcss": true,
-		"minified": true,
+		"postcss": false,
+		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": false,
+		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -21,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.2",
+	"libVersion": "2.9.3",
 	"appid": "wx00f73a4cb0bf22ac",
 	"projectname": "hujia-client",
 	"scripts": {},
@@ -221,6 +223,34 @@
 					"name": "orderWaiting",
 					"pathName": "pages/order/waiting/index",
 					"query": "onlyUserOwner=Y&orderStatus=20",
+					"scene": null
+				},
+				{
+					"id": 25,
+					"name": "律师详情",
+					"pathName": "pages/lawyer/detail/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "详情",
+					"pathName": "pages/lawyer/detail/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "在线律师",
+					"pathName": "pages/lawyer/voice/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "指定律师咨询",
+					"pathName": "pages/lawyer/oneByOne/index",
+					"query": "id=129520900910350336",
 					"scene": null
 				}
 			]

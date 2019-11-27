@@ -1,28 +1,31 @@
 .page-lawyer {
-  background: #f3f3f3;
+  background: #ffffff;
 }
 .page-search {
-  padding: 20rpx 30rpx 0;
-  background: #fff;
+  padding: 20rpx 30rpx;
+  background: #CF443D;
   position: relative;
   z-index: 10;
+  border-bottom: 4rpx solid #f0f0f0;
 }
 .page-search .location {
-  min-width: 160rpx;
+  min-width: 132rpx;
 }
 .page-search .search-box {
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
-  border-radius: 20rpx;
+  background: white;
+  border-radius: 32rpx;
 }
 .tabBox { position: relative; z-index: 10;}
 .page-lawyer .app-tab {
   background: #fff;
 }
 .app-sort-con {
-  background: #dcdcdc;
+  background: #fff;
   position: relative;
   z-index: 10;
+  border-bottom: 12rpx solid #f5f6f9;
 }
 .app-sort .flex-bd {
   padding: 20rpx 0;
@@ -33,14 +36,21 @@
   font-size: 22rpx;
 }
 .app-sort .curr {
-  background: #fff;
+  /*background: #fff;*/
+  padding: 6rpx 0;
+  border-radius: 32rpx;
+  color: white;
+  background-image: linear-gradient(to right, #fdbc3e , #fed065)!important;
+  background: linear-gradient(to right, #CF443D , #fe664f)!important;
+
 }
 
 .list-item {
-  padding: 20rpx;
-  background: #fff;
-  border-radius: 20rpx;
+  padding: 24rpx 22rpx;
+  /*background: #fff;*/
+  /*border-radius: 20rpx;*/
   align-items: flex-start;
+  border-bottom: 1rpx solid #f0f0f0;
 }
 .list-item + .list-item {
   margin-top: 20rpx;
@@ -91,5 +101,19 @@
 
 .order-filter-bg { position: fixed; z-index: 9; left:0; top:0; right:0; bottom:0; background: rgba(0,0,0,.5);}
 .order-child { position: absolute; z-index: 10; top:76rpx; background: #fff; width: 100%; padding: 20rpx 30rpx;}
-.order-child .filter-item { line-height: 3; border-bottom: 1rpx solid #f8f8f8;}
+.order-child .filter-item { line-height: 3; border-bottom: 1rpx solid #f0f0f0;margin-left: 10rpx;}
 .order-child .filter-item.curr { color: #CF443D;}
+/*------·*/
+
+.iconStyle{
+  width: 42rpx;
+  height: auto;
+}
+.item-btn{
+  padding: 4rpx 20rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #eeeeee;
+}
+.helpNum{
+  margin-right: 16rpx;
+}

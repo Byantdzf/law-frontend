@@ -26,3 +26,44 @@ page { background: #f3f3f3; }
 
 .logout-btn { margin: 30rpx;}
 .logout-btn button { width:100%; background: #fff; border:none; height:100rpx; line-height: 100rpx; color: #E1251B; font-size: 32rpx; border-radius: 20rpx;}
+.water{
+    width: 140%;
+    height: 140%;
+    position: relative;
+    position: absolute;
+    top: -16%;
+    left: -20%;
+}
+.activeStyle{
+    position: absolute;
+    border-radius: 50%;
+    animation: border 3s linear infinite;
+}
+.water .point{
+
+}
+.water .point2{
+    -webkit-animation-delay: 0.5s;
+}
+.water .point3{
+    -webkit-animation-delay: 1s;
+}
+.water .point4{
+    -webkit-animation-delay: 1.5s;
+}
+@keyframes border{
+    from {
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        background-color: rgb(227, 235, 228, 0.4);
+    }
+    to {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(235,51,36,0);
+    }
+}

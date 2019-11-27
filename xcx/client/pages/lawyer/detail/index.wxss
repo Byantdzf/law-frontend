@@ -1,5 +1,4 @@
 
-.img-box { width:200rpx; height:200rpx; margin: 0 auto; border-radius: 20rpx; overflow: hidden;}
 .lawyerName { text-align: center; }
 .lawyerName .name { font-size: 40rpx;}
 .lawyerName .name text { font-size: 28rpx; color:#999; margin-left:40rpx;}
@@ -37,8 +36,220 @@
 
 .scoreBox .score { color: #f00; font-size: 36rpx;}
 .scoreList .items { border:1px solid #e6e6e6; border-radius: 30rpx; padding:20rpx; align-items: initial; margin-top: 30rpx;}
-.scoreList .items .img-box { width:200rpx; height:200rpx; margin-right:50rpx; margin-top:10rpx; border-radius: 20rpx; overflow: hidden;}
+.scoreList .items .img-box { width:200rpx; height:200rpx; margin-right:50rpx; margin-top:10rpx; border-radius: 20rpx; overflow: hidden; }
 .scoreList .items .flex-bd .name { font-size: 36rpx; text-align: left;}
 .scoreList .items .flex-bd .flex { line-height: 1.5em;}
 .scoreList .items .flex-bd .flex .flex-ft { width: 140rpx; font-size: 24rpx;}
 .scoreList .items .desc {margin-top:20rpx; font-size: 24rpx; color:#999; line-height: 1.5em; text-align: left;}
+
+/*````````*/
+.img-box {
+  width: 100vw;
+  height: 100vw;
+  background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574792664031&di=baf0f42bc0e6302dd609c862ce0ae259&imgtype=0&src=http%3A%2F%2Fwww.juimg.com%2Ftuku%2Fyulantu%2F140210%2F330760-14021000500895.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.img-box image{
+  width: 22vw;
+  height: 22vw;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  left: 38.6vw;
+  bottom: 28vw;
+  box-shadow: 1rpx 1rpx 18rpx #fff;
+  animation: rotate360 2s linear 1;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: scale(.5) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
+}
+.main_laber_left{
+  position: absolute;
+  right: 68vw;
+  bottom: 44vw;
+}
+.dot{
+  height: 30rpx;
+  width: 30rpx;
+  border-radius: 50%;
+  border: 10rpx solid rgba(105, 19, 28, 0.6);
+  background: #fff;
+  position: absolute;
+  z-index: 1;
+  display: inline-block;
+  margin-top: 2rpx;
+}
+.item_laber{
+  max-width: 180rpx;
+  height: 36rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 50rpx;
+  border: 2rpx solid #fff;
+  display: inline-block;
+  margin-right: 16rpx;
+  line-height: 26rpx;
+  color: white;
+  font-size: 20rpx;
+  background: rgba(0,0,0,.3);
+}
+.left:after{
+  content: '';
+  width: 26rpx;
+  height: 2rpx;
+  background: white;
+  position: absolute;
+  top: 4rpx;
+  left: -26rpx;
+  z-index: -1;
+}
+.right:after{
+  content: '';
+  width: 26rpx;
+  height: 2rpx;
+  background: white;
+  position: absolute;
+  top: 4rpx;
+  right: -26rpx;
+  z-index: -1;
+}
+.main_laber_right{
+  position: absolute;
+  left: 64vw;
+  bottom: 40vw;
+}
+.item_laber_right{
+  max-width: 200rpx;
+  height: 36rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 50rpx;
+  border: 2rpx solid #fff;
+  display: inline-block;
+  margin-left: 46rpx;
+  line-height: 26rpx;
+  color: white;
+  font-size: 20rpx;
+  background: rgba(0,0,0,.3);
+}
+.main-info{
+  width: 92vw;
+  padding: 4vw;
+  background: white;
+  box-shadow: 1rpx 1rpx 16rpx #e0e0e0;
+  margin: -4vw auto;
+  border-radius: 12rpx;
+  position: relative;
+}
+.item-info{
+  padding: 8rpx ;
+}
+.main-grade{
+  transform: scale(.9);
+  display: inline-block;
+}
+.info-label{
+  font-size: 24rpx;
+  border: 1rpx solid #d0d0d0;
+  color: #929292;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+}
+.info-brief{
+  margin-top: 8rpx;
+}
+.info-collect{
+  position: absolute;
+  right: 4vw;
+  top: 4vw;
+  text-align: center;
+}
+.info-collect image{
+  width: 100rpx;
+  height: 100rpx;
+  margin: auto;
+}
+.item-collect{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  box-shadow: 1rpx 1rpx 12rpx #d0d0d0;
+  background: white;
+}
+.item-info-w{
+  width: 82%;
+}
+.starBox {
+  margin-top: -6rpx;
+}
+.score{
+  margin-top: -2rpx;
+}
+.main-btn{
+  width: 100vw;
+  padding: 6vw 8vw;
+  z-index: 9999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: white;
+  box-shadow: 0rpx -2rpx 12rpx #dfdfdf;
+}
+.item_btn{
+  display: inline-block;
+  padding: 10rpx 32rpx;
+  /*border: 1rpx solid #d3d3d3;*/
+  border-radius: 42rpx;
+  box-shadow: 1rpx 1rpx 12rpx #d0d0d0;
+}
+.water{
+  width: 140%;
+  height: 140%;
+  position: relative;
+  position: absolute;
+  top: -9%;
+  left: -20%;
+}
+.activeStyle{
+  position: absolute;
+  border-radius: 50%;
+  animation: border 3s linear infinite;
+}
+.water .point{
+  position: absolute;
+  border-radius: 50%;
+  animation: border 3s linear 1;
+}
+.water .point2{
+  -webkit-animation-delay: 0.5s;
+}
+.water .point3{
+  -webkit-animation-delay: 1s;
+}
+.water .point4{
+  -webkit-animation-delay: 1.5s;
+}
+@keyframes border{
+  from {
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    background-color: rgb(227, 235, 228, 0.4);
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(235,51,36,0);
+  }
+}
+

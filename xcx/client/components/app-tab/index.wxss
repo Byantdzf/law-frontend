@@ -71,7 +71,7 @@
   text-align: center;
 }
 .scroll-view-item text {
-  display: block; 
+  display: block;
   margin: 0 20rpx;
   height:84rpx;
 }
@@ -80,6 +80,7 @@
 }
 .scroll-view-item.active {
   color: #CF443D;
+  font-weight: bold;
 }
 .scroll-view-item.active text {
   border-bottom: 6rpx solid #CF443D;
