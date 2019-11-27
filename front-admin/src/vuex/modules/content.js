@@ -48,9 +48,9 @@ const content = {
     categoryDel: (context, ids) => del(`/category/${ids}`),
 
     // 模板 -- 添加
-    templateAdd: (context, params) => post(`/template`, params),
+    templateAdd: (context, params) => postJson(`/template`, params),
     // 模板 -- 修改
-    templateUpdate: (context, params) => put(`/template`, params),
+    templateUpdate: (context, payload) => postJson(`/template/update/${payload.id}`, payload.params),
     // 模板 -- 删除
     templateDel: (context, ids) => del(`/template/${ids}`),
   }

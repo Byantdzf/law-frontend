@@ -179,14 +179,15 @@ export default {
       },
       currTypeName: "",
       info: {},
-      remark: "测试内容",
       isEditRemark: false,
       uploadActionUrl: SYSTEM.baseUrl + '/applets/lawyer/multiUpload',
       headers: {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
       uploading: false,
-      img: require("@/assets/images/img_404.png"),
+      img: "",
+      remark: "",
+      blockDetail: {}
     };
   },
   watch: {
@@ -207,8 +208,12 @@ export default {
   },
   methods: {
     // 初始化页面
-    initPage() {
+    async initPage() {
       this.currTypeName = this.articleTypeItems[0].name;
+      let dictCode = 2;
+      let res = await this.getPlatfomService({dictCode})
+      this.img = res.data.image;
+      this.remark = res.data.brief;
     },
     // 表单提交
     async formSubmit(form) {
@@ -278,23 +283,35 @@ export default {
     },
     async handleSaveIntro() {
       this.isEditRemark = !this.isEditRemark;
+      this.updateBasicInfo('content')
     },
-      //上传之前的事件
-      beforeUpload(file) {
-          this.uploading = true
-      },
-      // 上传成功的事件
-      handleUploadSuccess(res, file) {
-        let fileUrl = res.data || ''
-        this.img = fileUrl
-        this.uploading = false
-      },
-      // 上传失败
-      handleUploadError() {
-        this.uploading = false
-        this.$msgError('上传失败，请稍后再试！')
-      },
-    ...mapActions("content", ["blockAdd", "blockUpdate", "blockDel"])
+    //上传之前的事件
+    beforeUpload(file) {
+        this.uploading = true
+    },
+    // 上传成功的事件
+    handleUploadSuccess(res, file) {
+      let fileUrl = res.data || ''
+      this.img = fileUrl
+      this.uploading = false
+      this.updateBasicInfo('image')
+    },
+    // 上传失败
+    handleUploadError() {
+      this.uploading = false
+      this.$msgError('上传失败，请稍后再试！')
+    },
+    updateBasicInfo(type){
+      let isImage = type === 'image';
+      let params = {
+        dictCode: 2,
+        name: isImage  ? 'image' : 'brief',
+        code: isImage ? this.img : this.remark
+      }
+      this.platformService(params)
+    },
+    ...mapActions("content", ["blockAdd", "blockUpdate", "blockDel"]),
+    ...mapActions("system", ["platformService", "getPlatfomService"])
   },
   created() {
     this.initPage();

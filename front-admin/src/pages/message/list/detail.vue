@@ -21,9 +21,6 @@
       <el-form-item label="消息内容">
         <el-input v-model="form.content" type="textarea"></el-input>
       </el-form-item>
-      <el-form-item class="ta-c">
-        <el-button size="default" class="btn-submit" type="primary" @click="formSubmit">发布</el-button>
-      </el-form-item>
     </el-form>
   </el-row>
 </template>

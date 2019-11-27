@@ -46,8 +46,7 @@
     <el-pagination
       v-if="total"
       class="ta-r"
-      background
-      layout="total, prev, pager, next, sizes, jumper"
+      v-bind="defaultPagination"
       :current-page.sync="currentPage"
       :page-sizes="pageSizes"
       :page-size="tableParams.rows"
@@ -152,10 +151,19 @@
       totalKey: {
         type: String,
         default: 'totalRow'
+      },
+      pagination: {
+        type: Object,
+        default: () => ({})
       }
     },
     data () {
+      const _dp = {
+        background: true,
+        layout: "total, prev, pager, next, sizes, jumper"
+      }
       return {
+        defaultPagination: { ..._dp, ...this.pagination },
         currentPage: 1,
         total: 0,
         list: [],
@@ -216,7 +224,7 @@
             delete schema[key]
           }
         }
-
+        
         const renderColumns = getTreeData(columns.map(col => {
           const mix = schema && schema[col[map.prop]] || {}
           const it = Object.assign({}, {
@@ -332,12 +340,11 @@
       // 获取表体数据
       async getList() {
         try {
-          let params = { ...this.tableParams }
-  
+          let params = { ...this.tableParams, ...this.params }
+          // console.log(this.params)
           for(let key in params) {
             ((!isNumber(params[key]) && !params[key]) || !~params[key]) && (delete params[key])
           }
-
           const res = await get(this.url, params)
           const data = res.data || {}
 

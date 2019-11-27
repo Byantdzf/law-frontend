@@ -30,7 +30,7 @@
           <span class="title">接单律师信息</span>
         </el-row>
       </el-row>
-      <LawyerInfo :row="row" />
+      <LawyerInfo :row="row" type="2"/>
     </el-card>
     <el-card class="mt-10" v-if="showMoreInfo && $val(row, 'msgList', []).length">
       <el-row slot="header">

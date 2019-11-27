@@ -33,7 +33,11 @@
 <script>
 export default {
   props: {
-    row: Object
+    row: Object,
+    type: {
+      type: String,
+      default: '1'
+    }
   },
 }
 </script>

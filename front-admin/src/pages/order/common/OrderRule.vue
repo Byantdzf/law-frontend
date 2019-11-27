@@ -12,7 +12,7 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="说明">
+      <el-form-item label="说明" v-if="showTips">
         <span v-if="rule == 2">您选择了手动派单模式，需要您到订单列表中进行手动派单。</span>
         <span v-else>您选择了自动派单模式，系统会按照规则自动派单。</span>
       </el-form-item>
@@ -26,7 +26,8 @@
 <script>
 export default {
   props: {
-    row: Object
+    row: Object,
+    showTips: Boolean
   },
   data() {
     let rules = []

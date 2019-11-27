@@ -10,9 +10,9 @@
 					<label>{{ d.name || '&nbsp;' }}</label>
 					<div class="score">
 						<div class="scoreBox">
-							<span style="width:0"></span>
+							<span style="width:{{d.persent}}%"></span>
 						</div>
-						<div class="scoreCount">0分</div>
+						<div class="scoreCount">{{d.score}}分</div>
 					</div>
 				</div>
 			</div>
@@ -46,9 +46,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						{{# layui.each(d.orderList, function (i, t) { }}
+						{{# 
+							layui.each(d.orderList, function (i, t) { 
+								layui.each(global.rs.orderCategory, function (i2, t2) {
+									if (t2.id == t.orderCategory) {
+										t.orderCategoryName = t2.name;
+									}
+								})
+						}}
 						<tr>
-							<td>{{ t.orderTypeName || '' }}</td>
+							<td>{{ t.orderCategoryName || '' }}</td>
 							<td>{{ t.count || 0 }}</td>
 							<td>{{ t.score || 0 }}</td>
 						</tr>

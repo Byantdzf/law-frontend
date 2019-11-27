@@ -138,7 +138,8 @@
           const searchForm = this.$refs.searchForm
           const tenantId = this.$val(form, 'tenant.id')
           let params = form
-          this.addMessage(params)
+          await this.addMessage(params)
+          this.refreshTable()
         } catch (e) {
           // error
         }
@@ -149,7 +150,8 @@
           const tenantId = this.$val(form, 'tenant.id')
           form.id = this.dialogForm.id;
           let params = form
-          this.updateMessage(params)
+          await this.updateMessage(params)
+          this.refreshTable()
         } catch (e) {
           // error
         }

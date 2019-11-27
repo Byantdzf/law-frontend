@@ -38,7 +38,7 @@
 
     <app-table 
       ref="appTable"
-      :url="`/member/user/order/${row.id}`"
+      :url="`/member/user/orderList/${row.id}`"
       :params="tableParams"
       :columns="columns"
     />
@@ -143,14 +143,19 @@
         } else {
           this.orderCategory = []
         }
-
+        this.tableParams.orderType = e;
         this.orderCategoryValue = ''
+        this.refreshTable()
 			},
 			orderCategoryValue(e) {
-				console.log(e)
+        console.log(e)
+        this.tableParams.orderCategory = e;
+        this.refreshTable()
 			},
 			orderStatusValue(e) {
-				console.log(e)
+        console.log(e)
+        this.tableParams.orderStatus = e;
+        this.refreshTable()
 			}
 		},
     methods: {

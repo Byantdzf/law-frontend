@@ -83,6 +83,7 @@ export default {
     let statusItems = getItems('publishObject')
     let sceneItems = getItems('couponScene')
     let typeItems = getItems('couponType')
+    // let selectedRows = this.$val(this.row, 'userIdList').split(",")
 
     return {
       statusItems,
@@ -221,11 +222,12 @@ export default {
         idList = this.selectedRows.map(item=>item.id).join(",")
         params.idList = idList
       }
-      else{
+      else if(this.row && this.row.hasOwnProperty('id')) {
         params.id = this.row.id
       }
   
       this.$emit('submit', params)
+      this.$emit('cancel')
     },
     tableSelect(val){
       this.selectedRows = val;
