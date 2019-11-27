@@ -1408,7 +1408,7 @@ i, em { font-style: normal;}
 .lawyerComments .items { padding: 20px 0; border-bottom:1px solid #e8e8e8;}
 .lawyerComments .items .imgBox { float: left; width:120px; margin-right:20px; padding-left:20px;} 
 .lawyerComments .items .imgBox img { display: block; width:80px; height: 80px; border-radius: 50%; margin:0 auto 10px;} 
-.lawyerComments .items .imgBox h4 { text-align: center; font-size: 16px;} 
+.lawyerComments .items .imgBox h4 { text-align: center; font-size: 16px; text-overflow: ellipsis;white-space:nowrap;overflow: hidden;} 
 .lawyerComments .items .userInfo { float: left; width: 700px;}
 .lawyerComments .items .userInfo .item>div>div { position: relative; float: left; width: 200px; padding-left: 70px; line-height: 30px;}
 .lawyerComments .items .userInfo label { position: absolute; width:70px; left:0; color:#999;} 
