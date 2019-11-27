@@ -36,13 +36,12 @@ export default {
   },
   methods: {
     async initForm(form) {
-        this.getList()
-        this.getSlectPerm()
+        await this.getList()
+        await this.getSlectPerm()
     },
     async getSlectPerm(){
         let res = await this.getslectedPerm(this.row.id)
         this.defaultCheckedKeys = res.data.map(item=>item.id)
-        console.log(this.defaultCheckedKeys)
     },
     async getList(){
         let res = await this.permsList()
@@ -59,7 +58,9 @@ export default {
       // console.log(form)
       let payload = {
           id: this.row.id,
-          params: this.$refs.tree.getCheckedKeys()
+          params: {
+           permsIdList: this.$refs.tree.getCheckedKeys().filter(item=>item!=0).join(",")
+          }
       }
       await this.updateSelectedPerm(payload)
       this.$emit('cancel')
@@ -70,7 +71,7 @@ export default {
         'updateSelectedPerm'
     ])
   },
-  mounted() {
+  created() {
     this.initForm(this.row)
   }
 }
