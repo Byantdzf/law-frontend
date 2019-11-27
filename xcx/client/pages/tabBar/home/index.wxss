@@ -68,7 +68,7 @@
 }
 
 .list-item {
-  padding: 20rpx;
+  padding: 24rpx 22rpx;
   /*background: #fff;*/
   /*border-radius: 20rpx;*/
   align-items: flex-start;

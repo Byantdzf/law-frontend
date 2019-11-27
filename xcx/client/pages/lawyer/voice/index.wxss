@@ -242,7 +242,7 @@
     }
 }
 .issue-title{
-    margin-top: 12rpx;
+    margin-top: 34rpx;
     position: relative;
     margin-left: 12rpx;
 }
