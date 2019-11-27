@@ -48,7 +48,7 @@
     },
     data () {
       return {
-        defaultValue: this.value.toString()
+        defaultValue: this.value && this.value.toString()
       }
     },
     computed: {

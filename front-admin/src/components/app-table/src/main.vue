@@ -340,12 +340,11 @@
       // 获取表体数据
       async getList() {
         try {
-          let params = { ...this.tableParams }
-  
+          let params = { ...this.tableParams, ...this.params }
+          // console.log(this.params)
           for(let key in params) {
             ((!isNumber(params[key]) && !params[key]) || !~params[key]) && (delete params[key])
           }
-
           const res = await get(this.url, params)
           const data = res.data || {}
 
