@@ -22,6 +22,8 @@ const member = {
 
     // 律师 -- 删除
     lawyerDel: (context, ids) => del(`/member/lawyer/${ids}`),
+
+    getCouponDetail: (context, id) => get(`/pc/coupon/pool/${id}`)
   }
 }
   

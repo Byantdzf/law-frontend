@@ -57,6 +57,12 @@
       <el-form-item label="优惠券发放数量">
         <el-input v-model.number="form.sendCount"></el-input>
       </el-form-item>
+      <el-form-item label="优惠券被领取数量">
+        <el-input v-model.number="form.sendCount"></el-input>
+      </el-form-item>
+      <el-form-item label="优惠券剩余数量">
+        <el-input v-model.number="form.sendCount"></el-input>
+      </el-form-item>
       <el-form-item label="优惠券规则">
         <el-col :span="11">
           <el-input v-model.number="form.overAmount">
@@ -245,7 +251,8 @@ export default {
   },
   methods: {
     // 初始化页面
-    initPage() {
+    async initPage() {
+      await this.getCouponDetail(this.row.id)
       this.$set(this.searchFormInit, 'align', 'left')
 
       this.searchItems = [
@@ -313,6 +320,7 @@ export default {
     },
     ...mapActions('member', [
       'memberView',
+      'getCouponDetail'
     ])
   },
   mounted() {
