@@ -13,24 +13,27 @@
       <template is="orderInfo_04" data="{{...item}}"/>
     </view>
 
-    <view class="file-box" wx:if="{{ item.orderStatus == 60 }}">
-      <view class="img-box">
-        <image src="/static/images/tplImg.png" />
-      </view>
-      <view class="pa-20">
-        <view class="file-name ta-c">
-          {{ item.fileName || '' }}
+
+    <view class="file-group" wx:if="{{ item.orderStatus == 60 }}">
+      <view class="file-box" wx:for="{{files}}" wx:key="{{ index }}">
+        <view class="img-box">
+          <image src="/static/images/tplImg.png" />
         </view>
-        <view class="flex pt-20 pb-20">
-          <view class="flex-bd cl-primary">价格：{{ item.amount || '' }}元</view>
-          <view class="cl-999">销量：{{ item.orgAmount || '' }}</view>
-        </view>
-        <view class="file-con">
-          {{ item.agreeProtocal || '' }}
-        </view>
-        <view class="flex btn-box mt-20">
-          <button size="mini" type="primary" bindtap="handleDownload">立即下载</button>
-          <button size="mini" type="primary" bindtap="handleOpenDoc">点击预览</button>
+        <view class="pa-20">
+          <view class="file-name ta-c">
+            {{ item.fileName || '' }}
+          </view>
+          <view class="flex pt-20 pb-20">
+            <view class="flex-bd cl-primary">价格：{{ item.price || '' }}元</view>
+            <view class="cl-999">销量：{{ item.realSales || '' }}</view>
+          </view>
+          <view class="file-con">
+            {{ item.brief || '' }}
+          </view>
+          <view class="flex btn-box mt-20">
+            <button size="mini" type="primary" data-filepath="{{ item.filePath }}" bindtap="handleDownload">立即下载</button>
+            <button size="mini" type="primary" data-filepath="{{ item.filePath }}" bindtap="handleOpenDoc">点击预览</button>
+          </view>
         </view>
       </view>
     </view>

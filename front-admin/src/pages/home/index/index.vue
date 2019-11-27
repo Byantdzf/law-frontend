@@ -30,6 +30,32 @@
           <StatisticsBox title="上月交易订单数" subtitle="较上月" :value="smo.monthOrderCount" :subvalue="smo.comparePreMonthOrderCount"/>
           <StatisticsBox title="历史交易订单数" :value="smo.historyOrderCount"/>
         </el-row>
+        <el-table
+          :data="tableData"
+          border
+          style="width: 100%">
+          <el-table-column
+            prop="orderType"
+            label="订单类别"
+            align="center"
+            width="120">
+
+          </el-table-column>
+          <el-table-column
+            prop="orderCategory"
+            label="订单种类"
+            align="center"
+            width="120">
+          </el-table-column>
+          <el-table-column align="center" prop="yesterdaySummaryCount" label="昨日订单数量"></el-table-column>
+          <el-table-column align="center" prop="yesterdaySummaryAmount" label="昨日订单收入"></el-table-column>
+          <el-table-column align="center" prop="weekSummaryCount" label="上周订单数量"></el-table-column>
+          <el-table-column align="center" prop="weekSummaryAmount" label="上周订单收入"></el-table-column>
+          <el-table-column align="center" prop="monthSummaryCount" label="上月订单数量"></el-table-column>
+          <el-table-column align="center" prop="monthSummaryAmount" label="上月订单收入"></el-table-column>
+          <el-table-column align="center" prop="historyCount" label="历史订单数量"></el-table-column>
+          <el-table-column align="center" prop="historyAmount" label="历史订单收入"></el-table-column>
+        </el-table>
       </el-row>
 
       <h3 class="subtitle">会员注册信息统计</h3>
@@ -77,11 +103,12 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import { TableColumn } from 'element-ui'
+  import { Table, TableColumn } from 'element-ui'
   import AppTable from '@/mixins/table'
   import StatisticsBox from './StatisticsBox'
   export default {
     components: {
+      [Table.name]: Table,
       [TableColumn.name]: TableColumn,
       StatisticsBox
     },
@@ -93,6 +120,7 @@
         smm: {},
         smn: {},
         smoc: {},
+        tableData: []
       }
     },
     methods: {
@@ -127,7 +155,12 @@
       // 订单信息显示 - 订单类型维度列表
       async getSummaryOrderCategory() {
         const res = await this.summaryOrderByOrderTypeAndOrderCategory()
-        this.smoc = res.data || {}
+        const items = res.data || []
+        items.forEach(v => {
+          v.orderType = this.$t('rs.orderType')[v.orderType] || v.orderType
+          v.orderCategory = this.$t('rs.orderCategory')[v.orderCategory] || v.orderCategory
+        });
+        this.tableData = items
       },
       ...mapActions('count', [
         'summaryBusiness',
