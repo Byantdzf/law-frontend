@@ -18,6 +18,11 @@ export default {
   props: {
     row: Object
   },
+  data(){
+    return {
+      data: {}
+    }
+  },
   methods: {
     async initForm(form) {
       let row = { ...form }
@@ -25,13 +30,17 @@ export default {
       this.formResave = true
 
       this.$set(this.formInit, 'labelWidth', '100px')
-      
+     
+      if(row.id){
+        let res = await this.managerDetail({id: row.id})
+        this.data = res.data
+      }
       this.formItems = [
         {
           label: '账号',
           field: 'userName',
           type: 1,
-          value: row.userName,
+          value: this.data.userName,
           placeholder: '字母、下划线，不可修改',
           required: true
         },
@@ -39,64 +48,59 @@ export default {
           label: '登录密码',
           field: 'password',
           type: 6,
-          value: row.password,
+          value: this.data.password,
           required: true
         },
         {
           label: '确认密码',
           field: 'passwordConfirm',
           type: 6,
-          value: row.passwordConfirm,
+          value: this.data.passwordConfirm,
           required: true
         },
         {
           label: '角色选择',
           field: 'roleId',
           type: 2,
-          value: row.roleId ? +row.roleId : '',
+          value: this.data.roleId ? + this.data.roleId : '',
           options: []
         },
         {
           label: '姓名',
           field: 'realName',
           type: 1,
-          value: row.realName,
+          value: this.data.realName,
         },
         {
           label: '手机',
           field: 'phone',
           type: 1,
-          value: row.phone,
+          value: this.data.phone,
           number: true
         },
         {
           label: '邮箱',
           field: 'email',
           type: 1,
-          value: row.email
+          value: this.data.email
         },
         {
           label: '备注',
           field: 'remark',
           type: 5,
-          value: row.remark
+          value: this.data.remark
         },
         {
           label: '启用状态',
           field: 'isDisable',
           type: 3,
-          value: row.isDisable || 0,
+          value: this.data.isDisable || 0,
           options: this.$t('rs.isDisable')
         }
       ]
-
-      this.formResaveDone()
-
       this.roleKV().then(res => {
         this.updateFormItem('roleId', 'options', res.data || [])
       })
-      let res = await this.managerDetail({id: row.id})
-      this.row = res.data
     },
     // 表单提交
     formSubmit(form) {
