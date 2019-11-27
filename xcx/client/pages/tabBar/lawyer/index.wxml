@@ -3,12 +3,15 @@
     <view class="flex-column container page-lawyer">
         <view class="flex page-search">
             <view class="flex location pr-20">
-                <view class="iconfont icon-location"></view>
-                <view class="pl-10"><app-cityPicker id="app-cityPicker" selectArea="{{currArea}}" isHome="true" bind:change="getCityResult"></app-cityPicker></view>
+                <image src="https://images.ufutx.com/201911/27/3a25cf8023a9cc46807f70ab54b729db.png" mode="widthFix" class="iconStyle"></image>
+                <view class="pl-10 color_white"><app-cityPicker id="app-cityPicker" selectArea="{{currArea}}" isHome="true" bind:change="getCityResult"></app-cityPicker></view>
+
+
             </view>
             <view class="flex-bd flex search-box">
                 <input class="flex-bd pl-20" type="text" name="keyWord" placeholder="关键字搜索相关信息" placeholder-class="placeholder" bindinput="searchChange" confirm-type="search" bindconfirm="handleSearch"/>
-                <view class="iconfont icon-search pl-20 pr-20" bind:tap="handleSearch"></view>
+                <!--<view class="iconfont icon-search pl-20 pr-20"></view>-->
+                <view class="iconfont icon-search pl-20 pr-20 cl-primary"  bind:tap="handleSearch"/>
             </view>
         </view>
         <view class="tabBox"><app-tab items="{{ types }}" bind:change="changeType" wx:if="{{ types.length > 1}}" /></view>
@@ -26,42 +29,62 @@
         </view>
         <view class="flex-bd app-scroller">
             <app-list url="/applets/user/lawyer/list" id="app-list" bind:change="updateList">
-                <view class="pa-20" wx:if="{{ list.length }}">
+                <view class="" wx:if="{{ list.length }}">
                     <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="gotoLawyerDetail">
                         <view class="img-box">
                             <image src="{{ item.pic || '/static/images/demo/img_lawyer.png' }}" binderror="imageError" data-img="list[{{index}}].pic"></image>
                         </view>
                         <view class="flex-bd pl-20">
                             <view class="flex">
-                                <view class="flex-bd name">{{ item.name || '' }}</view>
-                                <view class="flex-ft score cl-red" wx:if="{{ item.score || item.score === 0 }}">{{ item.score }}分</view>
+                                <view class="flex-bd font26 color_333 name bold">{{ item.name }}</view>
+                                <view class="flex-ft score color_theme bold">{{ item.score || 0 }}分</view>
                             </view>
-                            <view class="desc cl-666">{{ item.brief || '' }}</view>
-                            <view class="flex">
-                                <view class="flex-bd">
-                                    <text class="cl-999">帮助人数：</text>
-                                    <text class="cl-666">{{ item.helps || 0 }}人</text>
-                                </view>
-                                <view class="flex-ft">
-                                    <text class="cl-999">关注人数：</text>
-                                    <text class="cl-666">{{ item.concerns || 0 }}人</text>
+                            <view class="desc color_666 font24 ellipsis_1">{{ item.brief || '' }}</view>
+                            <view class="flex desc_sub">
+                                <view class="flex-bd font24">
+                                    <text class="color_666">已帮助：</text>									<text class="color_theme helpNum" >{{ item.helps || 0 }}人</text>
+                                    <text class="color_666">关注数：</text>
+                                    <text class="color_theme_sub">{{ item.concerns || 0 }}人</text>
                                 </view>
                             </view>
                             <view class="flex btn-box">
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">
-                                    在线律师咨询
-                                </button>
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">
-                                    指定律师咨询
-                                </button>
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">
-                                    取消关注
-                                </button>
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect" wx:else>
-                                    立即关注
-                                </button>
+                                <view class="flo_l bcTheme color_white item-btn" data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询</view>
+                                <view class="bcTheme_sub item-btn" data-id="{{item.id}}" catch:tap="onByOneTap">指定律师咨询</view>
+                                <view class=" item-btn" data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">已关注</view>
+                                <view class=" item-btn" data-id="{{item.id}}" catch:tap="collect" wx:else>+关注</view>
                             </view>
                         </view>
+                        <!--<view class="flex-bd pl-20">-->
+                            <!--<view class="flex">-->
+                                <!--<view class="flex-bd name">{{ item.name || '' }}</view>-->
+                                <!--<view class="flex-ft score cl-red" wx:if="{{ item.score || item.score === 0 }}">{{ item.score }}分</view>-->
+                            <!--</view>-->
+                            <!--<view class="desc cl-666">{{ item.brief || '' }}</view>-->
+                            <!--<view class="flex">-->
+                                <!--<view class="flex-bd">-->
+                                    <!--<text class="cl-999">帮助人数：</text>-->
+                                    <!--<text class="cl-666">{{ item.helps || 0 }}人</text>-->
+                                <!--</view>-->
+                                <!--<view class="flex-ft">-->
+                                    <!--<text class="cl-999">关注人数：</text>-->
+                                    <!--<text class="cl-666">{{ item.concerns || 0 }}人</text>-->
+                                <!--</view>-->
+                            <!--</view>-->
+                            <!--<view class="flex btn-box">-->
+                                <!--<button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">-->
+                                    <!--在线律师咨询-->
+                                <!--</button>-->
+                                <!--<button size="mini" plain data-id="{{item.id}}" catch:tap="onByOneTap">-->
+                                    <!--指定律师咨询-->
+                                <!--</button>-->
+                                <!--<button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">-->
+                                    <!--取消关注-->
+                                <!--</button>-->
+                                <!--<button size="mini" plain data-id="{{item.id}}" catch:tap="collect" wx:else>-->
+                                    <!--立即关注-->
+                                <!--</button>-->
+                            <!--</view>-->
+                        <!--</view>-->
                     </view>
                 </view>
                 <view class="app-empty-wrapper" wx:else>

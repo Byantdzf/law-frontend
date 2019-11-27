@@ -16,7 +16,8 @@ Page({
           { id: 1, name: "是", checked: true },
           { id: 0, name: "否" }
       ],
-      regRadio: [
+        active: false,
+        regRadio: [
           { id: 1, name: "是", checked: true },
           { id: 0, name: "否" }
       ],
@@ -53,13 +54,13 @@ Page({
         // 获得律师详情
         let { id } = options
         this.setData({
-          id 
+          id
         })
         selectApi.lawyerDetail({id: id}).then(res => {
           let details = res.data
           details.joinDate = details.joinDate && details.joinDate.split(' ')[0]
           details.goodAt = details.goodAt && details.goodAt.split('，')
-      
+
           let score = details.score > 5 ? 5 : details.score < 0 ? 0 : details.score
           let persent = Math.floor(score / app.globalData.maxScore * 100)
 
@@ -133,9 +134,14 @@ Page({
             emergency: value
         })
     },
+    activeFn() {
+        this.setData({
+            active: !this.data.active
+        })
+    },
     regMobileChange(e) {
         let { value } = e.detail
-        
+
         let regRadio = this.data.regRadio
         regRadio.forEach(item => {
             item.checked = item.id == value ? true : false
@@ -183,7 +189,7 @@ Page({
     formSubmit(e) {
         // 测试流程
         // app.gotoPage('/pages/issue/success/index?type=1')
-        // return 
+        // return
         let params = e.detail.value
         if (!params.content || params.content.length < 10) {
             app.toastError('问题不能少于10个字')

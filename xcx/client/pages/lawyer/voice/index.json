@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "在线律师咨询",
+  "navigationBarBackgroundColor":"#0b0b0b",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "app-cityPicker": "/components/app-cityPicker/index"
   }

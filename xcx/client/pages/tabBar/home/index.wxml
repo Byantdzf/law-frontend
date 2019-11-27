@@ -4,8 +4,8 @@
 		<view class="flex page-search">
 			<view class="flex location ">
 				<!--<view class="iconfont icon-location" />-->
-				<image src="https://images.ufutx.com/201911/26/5ba8fbcb4927f504532e7ab5dfb0bd46.png" mode="widthFix" class="iconStyle"></image>
-				<view class="pl-10 ellipsis city">
+				<image src="https://images.ufutx.com/201911/27/3a25cf8023a9cc46807f70ab54b729db.png" mode="widthFix" class="iconStyle"></image>
+				<view class="pl-10 ellipsis city color_white">
 					<app-cityPicker
             id="app-cityPicker"
             selectArea="{{currArea}}"
@@ -45,27 +45,30 @@
 						<view class="flex-bd pl-20">
 							<view class="flex">
 								<view class="flex-bd font26 color_333 name bold">{{ item.name }}</view>
-								<view class="flex-ft score cl-red">{{ item.score || 0 }}分</view>
+								<view class="flex-ft score color_theme bold">{{ item.score || 0 }}分</view>
 							</view>
-							<view class="desc color_666 font24">{{ item.brief || '' }}</view>
+							<view class="desc color_666 font24 ellipsis_1">{{ item.brief || '' }}</view>
 							<view class="flex desc_sub">
 								<view class="flex-bd font24">
-									<text class="color_666">帮助人数：</text>
-									<text class="color_theme helpNum" >{{ item.helps || 0 }}人</text>
-									<text class="color_666">关注人数：</text>
+									<text class="color_666">已帮助：</text>									<text class="color_theme helpNum" >{{ item.helps || 0 }}人</text>
+									<text class="color_666">关注数：</text>
 									<text class="color_theme_sub">{{ item.concerns || 0 }}人</text>
 								</view>
 							</view>
 							<view class="flex btn-box">
-								<button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询
-								</button>
-								<button size="mini" data-id="{{item.id}}" class="btn bcTheme_sub" catch:tap="onByOneTap">指定律师咨询</button>
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">
-                                    取消关注
-                                </button>
-                                <button size="mini" plain data-id="{{item.id}}" catch:tap="collect" wx:else>
-                                    立即关注
-                                </button>
+								<view class="flo_l bcTheme color_white item-btn" data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询</view>
+								<view class="bcTheme_sub item-btn" data-id="{{item.id}}" catch:tap="onByOneTap">指定律师咨询</view>
+								<view class=" item-btn" data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">已关注</view>
+								<view class=" item-btn" data-id="{{item.id}}" catch:tap="collect" wx:else>+关注</view>
+								<!--<button size="mini" plain data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询-->
+								<!--</button>-->
+								<!--<button size="mini" data-id="{{item.id}}" class="btn bcTheme_sub" catch:tap="onByOneTap">指定律师咨询</button>-->
+                                <!--<button size="mini" plain data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">-->
+                                    <!--取消关注-->
+                                <!--</button>-->
+                                <!--<button size="mini" plain data-id="{{item.id}}" catch:tap="collect" wx:else>-->
+                                    <!--立即关注-->
+                                <!--</button>-->
 							</view>
 						</view>
 					</view>
@@ -89,10 +92,10 @@
 							<view class="hot-news-item" wx:for="{{ hotNews1 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" mode="aspectFill"/>
 									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+									<view class="ellipsis color_333 font26" style="margin-top: 10rpx">{{ item.title }}</view>
+									<view class="ellipsis color_666 font24 brief">{{ item.brief || '' }}</view>
 								</navigator>
 							</view>
 						</view>
@@ -114,10 +117,10 @@
 							<view class="hot-news-item" wx:for="{{ hotNews2 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" mode="aspectFill"/>
 									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+									<view class="ellipsis color_333 font26" style="margin-top: 10rpx">{{ item.title }}</view>
+									<view class="ellipsis color_666 font24 brief">{{ item.brief || '' }}</view>
 								</navigator>
 							</view>
 						</view>
@@ -139,10 +142,10 @@
 							<view class="hot-news-item" wx:for="{{ hotNews3 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" mode="aspectFill"/>
 									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+									<view class="ellipsis color_333 font26" style="margin-top: 10rpx">{{ item.title }}</view>
+									<view class="ellipsis color_666 font24 brief">{{ item.brief || '' }}</view>
 								</navigator>
 							</view>
 						</view>

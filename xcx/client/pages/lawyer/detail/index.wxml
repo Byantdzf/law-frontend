@@ -1,8 +1,14 @@
 <view class="home-list">
   <view class="img-box">
-    <image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
+    <view class="water">
+      <view class=" point1 {{active?'activeStyle':'point'}}"></view>
+      <view class=" point2 {{active?'activeStyle':'point'}}"></view>
+      <view class=" point3 {{active?'activeStyle':'point'}}"></view>
+      <view class=" point4 {{active?'activeStyle':'point'}}"></view>
+    </view>
+    <image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
     <view class="main_laber_left">
-      <view class="item_laber">{{ details.name }}</view>
+      <view class="item_laber font28"style="padding: 4rpx 22rpx;">{{ details.name }}</view>
       <view class="dot left"></view>
     </view>
     <view class="main_laber_left" style="bottom: 34vw">
@@ -15,18 +21,22 @@
     </view>
     <view class="main_laber_right"  style="bottom: 30vw">
       <view class="dot right"></view>
-      <view class="item_laber_right">被关注：{{ details.concerns || 0 }}9090人</view>
+      <view class="item_laber_right">被关注：{{ details.concerns || 0 }}</view>
     </view>
   </view>
   <view class="main-info">
     <view class="info-collect">
       <block wx:if="{{details.focused > 0}}">
-        <image src="https://images.ufutx.com/201911/27/afd417c60dc7b84776371a03b8278393.png" mode="aspectFix"></image>
-        <span>取消关注</span>
+        <view catchtap="cancelCollect">
+          <image src="https://images.ufutx.com/201911/27/96b50150e9d66881285406c61466f4c3.png" mode="aspectFix" ></image>
+          <span class="font22 color_666">已关注</span>
+        </view>
       </block>
       <block wx:else>
-        <image src="https://images.ufutx.com/201911/27/afd417c60dc7b84776371a03b8278393.png" mode="aspectFix"></image>
-        <span class="color_theme font24">关注</span>
+        <view catchtap="collect">
+          <image src="https://images.ufutx.com/201911/27/166a4b498b15348ae70138fe3be7a5e9.png" mode="aspectFix" ></image>
+          <span class="color_theme font22">关注</span>
+        </view>
       </block>
 <!--      <view class="item-collect"></view>-->
 <!--      <button size="mini" plain catch:tap="cancelCollect" wx:if="{{details.focused > 0}}">-->
@@ -36,9 +46,9 @@
 <!--        立即关注-->
 <!--      </button>-->
     </view>
-    <view class="item-info font28 bold">基本信息：</view>
-    <view class="item-info font26 color_333">所在区域：<span class="font24 color_666">{{ details.province }} - {{ details.city }}</span></view>
-    <view class="item-info font26 color_333">所属事务所：<span class="font24 color_666">{{ details.belongs }}</span></view>
+    <view class="item-info item-info-w font28 bold">基本信息：</view>
+    <view class="item-info item-info-w font26 color_333">所在区域：<span class="font24 color_666">{{ details.province }} - {{ details.city }}</span></view>
+    <view class="item-info item-info-w font26 color_333">所属事务所：<span class="font24 color_666">{{ details.belongs }}</span></view>
     <view class="item-info font26 color_333">执业证号：<span class="font24 color_666">{{ details.lawyerLicenseNo }}</span></view>
     <view class="item-info font26 color_333">擅长领域：
       <span  wx:for="{{ details.goodAt }}" class="info-label" wx:key="*this">
@@ -81,17 +91,17 @@
 <!--      </view>-->
 <!--    </view>-->
 <!--  </view>-->
-  <view class="flex btn-box">
-    <button size="mini" plain bind:tap="voiceTap">在线律师咨询</button>
-    <button size="mini" plain bind:tap="onByOneTap">指定律师咨询</button>
-    <button size="mini" plain catch:tap="cancelCollect" wx:if="{{details.focused > 0}}">
-        取消关注
-    </button>
-    <button size="mini" plain catch:tap="collect" wx:else>
-        立即关注
-    </button>
-    <button size="mini" plain bind:tap="inviteTap">邀请接单</button>
-  </view>
+  <!--<view class="flex btn-box">-->
+    <!--<button size="mini" plain bind:tap="voiceTap">在线律师咨询</button>-->
+    <!--<button size="mini" plain bind:tap="onByOneTap">指定律师咨询</button>-->
+    <!--<button size="mini" plain catch:tap="cancelCollect" wx:if="{{details.focused > 0}}">-->
+        <!--取消关注-->
+    <!--</button>-->
+    <!--<button size="mini" plain catch:tap="collect" wx:else>-->
+        <!--立即关注-->
+    <!--</button>-->
+    <!--<button size="mini" plain bind:tap="inviteTap">邀请接单</button>-->
+  <!--</view>-->
   <view class="flex tab-box">
     <view class="flex-bd {{ showType == 1 && 'curr' }}" data-type="1" bind:tap="changeTab">基本信息</view>
     <view class="flex-bd {{ showType == 2 && 'curr' }}" data-type="2" bind:tap="changeTab">用户评论</view>
@@ -99,56 +109,56 @@
   <view class="tab-content">
     <!-- 基本信息 -->
     <view class="baseInfo" wx:if="{{showType == 1}}">
-      <view class="items flex">
-        <view class="flex-ft">
-          <text class="cl-999">性别：</text>
-        </view>
-        <view class="flex-bd">
-          <text class="cl-666">{{gender[details.gender]}}</text>
-        </view>
-      </view>
-      <view class="items flex">
-        <view class="flex-ft">
-          <text class="cl-999">所在地区：</text>
-        </view>
-        <view class="flex-bd">
-          <text class="cl-666">{{ details.province }}-{{ details.city }}</text>
-        </view>
-      </view>
-      <view class="items flex">
-        <view class="flex-ft">
-          <text class="cl-999">所属事务所：</text>
-        </view>
-        <view class="flex-bd">
-          <text class="cl-666">{{ details.belongs }}</text>
-        </view>
-      </view>
-      <view class="items flex">
-        <view class="flex-ft">
-          <text class="cl-999">执业证号：</text>
-        </view>
-        <view class="flex-bd">
-          <text class="cl-666">{{ details.lawyerLicenseNo }}</text>
-        </view>
-      </view>
-      <view class="items flex">
-        <view class="flex-ft">
-          <text class="cl-999">入驻时间：</text>
-        </view>
-        <view class="flex-bd">
-          <text class="cl-666">{{ details.joinDate || '' }}</text>
-        </view>
-      </view>
-      <view class="items flex rangeList">
-        <view class="flex-ft">
-          <text class="cl-999">擅长领域：</text>
-        </view>
-        <view class="flex-bd">
-          <button size="mini" plain wx:for="{{ details.goodAt }}" wx:key="{{index}}">
-            {{item}}
-          </button>
-        </view>
-      </view>
+      <!--<view class="items flex">-->
+        <!--<view class="flex-ft">-->
+          <!--<text class="cl-999">性别：</text>-->
+        <!--</view>-->
+        <!--<view class="flex-bd">-->
+          <!--<text class="cl-666">{{gender[details.gender]}}</text>-->
+        <!--</view>-->
+      <!--</view>-->
+      <!--<view class="items flex">-->
+        <!--<view class="flex-ft">-->
+          <!--<text class="cl-999">所在地区：</text>-->
+        <!--</view>-->
+        <!--<view class="flex-bd">-->
+          <!--<text class="cl-666">{{ details.province }}-{{ details.city }}</text>-->
+        <!--</view>-->
+      <!--</view>-->
+      <!--<view class="items flex">-->
+        <!--<view class="flex-ft">-->
+          <!--<text class="cl-999">所属事务所：</text>-->
+        <!--</view>-->
+        <!--<view class="flex-bd">-->
+          <!--<text class="cl-666">{{ details.belongs }}</text>-->
+        <!--</view>-->
+      <!--</view>-->
+      <!--<view class="items flex">-->
+        <!--<view class="flex-ft">-->
+          <!--<text class="cl-999">执业证号：</text>-->
+        <!--</view>-->
+        <!--<view class="flex-bd">-->
+          <!--<text class="cl-666">{{ details.lawyerLicenseNo }}</text>-->
+        <!--</view>-->
+      <!--</view>-->
+      <!--<view class="items flex">-->
+        <!--<view class="flex-ft">-->
+          <!--<text class="cl-999">入驻时间：</text>-->
+        <!--</view>-->
+        <!--<view class="flex-bd">-->
+          <!--<text class="cl-666">{{ details.joinDate || '' }}</text>-->
+        <!--</view>-->
+      <!--</view>-->
+      <!--<view class="items flex rangeList">-->
+        <!--<view class="flex-ft">-->
+          <!--<text class="cl-999">擅长领域：</text>-->
+        <!--</view>-->
+        <!--<view class="flex-bd">-->
+          <!--<button size="mini" plain wx:for="{{ details.goodAt }}" wx:key="{{index}}">-->
+            <!--{{item}}-->
+          <!--</button>-->
+        <!--</view>-->
+      <!--</view>-->
       <view class="orderList">
         <view class="tit">接单数据</view>
         <view class="table">
@@ -170,10 +180,10 @@
           </view>
         </view>
       </view>
-      <view class="orderList">
-        <view class="tit">个人简介</view>
-        <app-text datatext="{{ details.brief }}"></app-text>
-      </view>
+      <!--<view class="orderList">-->
+        <!--<view class="tit">个人简介</view>-->
+        <!--<app-text datatext="{{ details.brief }}"></app-text>-->
+      <!--</view>-->
     </view>
     <!-- 用户评论 -->
     <view class="scoreBox" wx:if="{{showType == 2}}">
@@ -192,6 +202,12 @@
             <view class="desc">{{ item.remark }}</view>
         </view>
       </view>
+    </view>
+    <view style="height: 22vw;"></view>
+    <view class="main-btn text-center">
+      <view class="item_btn flo_l bcTheme color_white" bind:tap="voiceTap">在线咨询</view>
+      <view class="item_btn bcTheme_sub" bind:tap="onByOneTap">指定咨询</view>
+      <view class="item_btn flo_r" bind:tap="inviteTap">邀请接单</view>
     </view>
   </view>
 </view>

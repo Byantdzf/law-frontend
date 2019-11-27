@@ -1,39 +1,72 @@
 <app-page id="app-page">
-    <view class="pa-20 home-list">
+    <view class="home-list">
         <view class="img-box">
-            <image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
+            <view class="water">
+                <view class=" point1 {{active?'activeStyle':'point'}}"></view>
+                <view class=" point2 {{active?'activeStyle':'point'}}"></view>
+                <view class=" point3 {{active?'activeStyle':'point'}}"></view>
+                <view class=" point4 {{active?'activeStyle':'point'}}"></view>
+            </view>
+            <image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
+            <view class="main_laber_left">
+                <view class="item_laber font28"style="padding: 4rpx 22rpx;">{{ details.name }}</view>
+                <view class="dot left"></view>
+            </view>
+            <view class="main_laber_left" style="bottom: 34vw">
+                <view class="item_laber">{{ details.province }} - {{ details.city }}</view>
+                <view class="dot left"></view>
+            </view>
+            <view class="main_laber_right">
+                <view class="dot right"></view>
+                <view class="item_laber_right">已帮助：{{ details.helps || 0 }}人</view>
+            </view>
+            <view class="main_laber_right"  style="bottom: 30vw">
+                <view class="dot right"></view>
+                <view class="item_laber_right">被关注：{{ details.concerns || 0 }}</view>
+            </view>
         </view>
-        <view class="lawyerName">
-            <view class="scoreBox" wx:if="{{ details.score || details.score === 0 }}">
-                <view class="starBox"><text style="width:{{persent}}%"></text></view>
-                <view class="score">{{details.score}}分</view>
-            </view>
-            <view class="name">
-                {{ details.name }}
-                <text>{{ details.province }} - {{ details.city }}</text>
-            </view>
+        <view class="scoreBox main-grade" wx:if="{{ details.score || details.score === 0 }}">
+            <view class="starBox "><text style="width:{{persent}}%"></text></view>
+            <view class="score font28 color_666">{{details.score || 0}}分</view>
         </view>
-        <view class="helper">
-            <view class="flex">
-            <view class="flex-bd">
-                <text class="cl-999">帮助人数：</text>
-                <text class="cl-666">{{ details.helps || 0 }}人</text>
-            </view>
-            <view class="flex-ft">
-                <text class="cl-999">关注人数：</text>
-                <text class="cl-666">{{ details.concerns || 0 }}人</text>
-            </view>
-            </view>
-        </view>
+        <!--<view class="scoreBox" >-->
+            <!--<view class="starBox"><text style="width:{{persent}}%"></text></view>-->
+            <!--<view class="score">{{details.score}}分</view>-->
+        <!--</view>-->
+        <!--<view class="img-box">-->
+            <!--<image src="{{ details.pic || defaultPic }}" mode="widthFix" binderror="imageError" data-img="details.pic"></image>-->
+        <!--</view>-->
+        <!--<view class="lawyerName">-->
+            <!--<view class="scoreBox" wx:if="{{ details.score || details.score === 0 }}">-->
+                <!--<view class="starBox"><text style="width:{{persent}}%"></text></view>-->
+                <!--<view class="score">{{details.score}}分</view>-->
+            <!--</view>-->
+            <!--<view class="name">-->
+                <!--{{ details.name }}-->
+                <!--<text>{{ details.province }} - {{ details.city }}</text>-->
+            <!--</view>-->
+        <!--</view>-->
+        <!--<view class="helper">-->
+            <!--<view class="flex">-->
+            <!--<view class="flex-bd">-->
+                <!--<text class="cl-999">帮助人数：</text>-->
+                <!--<text class="cl-666">{{ details.helps || 0 }}人</text>-->
+            <!--</view>-->
+            <!--<view class="flex-ft">-->
+                <!--<text class="cl-999">关注人数：</text>-->
+                <!--<text class="cl-666">{{ details.concerns || 0 }}人</text>-->
+            <!--</view>-->
+            <!--</view>-->
+        <!--</view>-->
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-            <view class="issue-title">
-            <image src="/static/images/plain.svg" />
+            <view class="issue-title color_theme">
+            <!--<image src="/static/images/plain.svg" />-->
             在线律师咨询发布
             </view>
             <view class="issue-form">
                 <view class="issue-form-item">
-                    <textarea name="content" auto-height placeholder="请在此输入您想咨询的问题（不少于10个字）" />
+                    <textarea name="content" class="color_666" auto-height placeholder="请在此输入您想咨询的问题（不少于10个字）" />
                 </view>
                 <view class="issue-form-item">
                     <view class="issue-form-input flex">
@@ -112,7 +145,7 @@
                         <input class="app-input" type="number" name="registerPhone" bindblur="setRegisterMobile" placeholder="请输入注册手机号码"></input>
                     </view>
                     <view>
-                        <text class="sendSMS cl-primary" bindtap="getRegisterValidateCode" wx:if="{{!waitRegisterCode}}">获取验证码</text>
+                        <text class="sendSMS color_theme" bindtap="getRegisterValidateCode" wx:if="{{!waitRegisterCode}}">获取验证码</text>
                         <text class="cl-999" wx:else>重新发送({{countReg}})</text>
                     </view>
                 </view>
@@ -122,10 +155,10 @@
                     </view>
                 </view>
                 <view class="issue-form-item">
-                    <textarea name="remark" auto-height placeholder="请填写备注说明" />
+                    <textarea name="remark" auto-height placeholder="请填写备注说明"  style="padding: 10rpx 0;"/>
                 </view>
-                <view class="form-btn-box mt-20">
-                    <button type="primary" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
+                <view class="form-btn-box">
+                    <button type="primary" disabled="{{btnDisable}}" form-type="submit" class="font30 bcTheme">确定提交</button>
                 </view>
             </view>
             </form>

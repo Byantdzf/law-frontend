@@ -4,7 +4,13 @@
 		<view class="user-head">
 			<image class="user-bg" src="/static/images/userBg.jpg" mode="widthFix" />
 			<view class="flex">
-				<view class="user-avatar">
+				<view class="user-avatar" bind:tap="activeFn">
+					<view class="water">
+						<view class="point point1 {{active?'activeStyle':''}}"></view>
+						<view class="point point2 {{active?'activeStyle':''}}"></view>
+						<view class="point point3 {{active?'activeStyle':''}}"></view>
+						<view class="point point4 {{active?'activeStyle':''}}"></view>
+					</view>
 					<image src="{{userInfos.portrait}}" mode="widthFix" wx:if="{{ userInfos.avatar }}" />
 					<open-data type="userAvatarUrl" wx:else />
 				</view>

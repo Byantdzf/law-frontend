@@ -8,6 +8,7 @@ Page({
             name: '',
             avatar: ''
         },
+        active: false,
         tools: [
             {
                 code: 'collect',
@@ -40,6 +41,11 @@ Page({
                 app.gotoPage('/pages/user/setting/home/index')
                 break;
         }
+    },
+    activeFn() {
+        this.setData({
+            active: !this.data.active
+        })
     },
     gotoOrder(e) {
       let { state } = e.currentTarget.dataset;

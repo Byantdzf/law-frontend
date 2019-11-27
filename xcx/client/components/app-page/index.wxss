@@ -7,7 +7,7 @@
   padding: 30rpx;
 }
 
-.pop-auth { padding: 60rpx 40rpx;}
+.pop-auth { padding: 40rpx;}
 .pop-auth .pop-auth__hd .img-box { float:left; width:60rpx; height:60rpx; background:#fff; border-radius: 50%; overflow: hidden;}
 .pop-auth .pop-auth__hd .img-box image { display:block; width:60rpx; height:60rpx;}
 .pop-auth .pop-auth__hd .txt { font-size:40rpx; margin-left:30rpx;}
@@ -30,4 +30,11 @@
   padding: 300rpx;
   text-align: center;
   font-size: 40rpx;
+}
+.save-btn{
+  width: 34vw;
+  padding: 12rpx 22rpx;
+  box-shadow: 1rpx 1rpx 12rpx #e1e1e1;
+  border-radius: 12rpx;
+  margin: auto;
 }

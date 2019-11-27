@@ -231,6 +231,27 @@
 					"pathName": "pages/lawyer/detail/index",
 					"query": "id=129520900910350336",
 					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "详情",
+					"pathName": "pages/lawyer/detail/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "在线律师",
+					"pathName": "pages/lawyer/voice/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "指定律师咨询",
+					"pathName": "pages/lawyer/oneByOne/index",
+					"query": "id=129520900910350336",
+					"scene": null
 				}
 			]
 		}

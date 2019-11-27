@@ -19,12 +19,12 @@
       <view class="subtxt">您的公开信息（昵称、头像等）</view>
     </view>
     <view class="pop-auth__ft flex">
-      <view class="flex-bd">
-        <button bind:tap="hideAuth">取消</button>
+      <view class="flex-bd flo_l text-center">
+        <button bind:tap="hideAuth" class="btn save-btn text-center color_666 font30">取消</button>
       </view>
-      <view class="flex-bd">
-        <button type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-          确认微信授权
+      <view class="flex-bd flo_r text-center">
+        <button open-type="getUserInfo" class="btn bcTheme save-btn text-center color_white font30" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+          确认授权
         </button>
       </view>
     </view>

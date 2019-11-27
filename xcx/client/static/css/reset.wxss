@@ -123,24 +123,32 @@ checkbox[checked] + .icon-check::after {
 }
 
 /* reset -- end */
-
+.font22 {
+  font-size: 22rpx !important;
+}
 .font24 {
   font-size: 24rpx !important;
 }
 .font26 {
   font-size: 26rpx !important;
 }
+
 .font28 {
   font-size: 28rpx !important;
 }
+
+.font30 {
+  font-size: 30rpx !important;
+}
+
 .bcF{
   background: white;
 }
 .bcTheme{
-  background: #CF443D;
+  background: linear-gradient(to right, #CF443D , #fe664f)!important;
 }
 .bcTheme_sub{
-  background-image: linear-gradient(to right, #fdbc3e , #fed065);
+  background-image: linear-gradient(to right, #fdbc3e , #fed065)!important;
 }
 .bold{
   font-weight: bold;
@@ -150,6 +158,7 @@ checkbox[checked] + .icon-check::after {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.color_white{color: white}
 .color_theme{
   color: #CF443D !important;
 }
@@ -174,5 +183,9 @@ checkbox[checked] + .icon-check::after {
   background: none;
   border-radius: inherit;
 }
+.flo_l {float: left}
+.flo_r {float: right}
+.clearfloat {clear:both}
+.text-center{text-align: center}
 
 

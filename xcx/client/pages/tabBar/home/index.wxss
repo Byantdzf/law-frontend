@@ -3,7 +3,7 @@
 }
 .page-search {
   padding: 20rpx 30rpx;
-  background: #fff;
+  background: #CF443D;
   box-shadow: 1rpx 1rpx 12rpx #f0f0f0;
   z-index: 999;
 }
@@ -17,6 +17,7 @@
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
   border-radius: 32rpx;
+  background: white;
 }
 
 .service-types {
@@ -43,8 +44,8 @@
 }
 .page-title {
   padding: 22rpx;
-  border-bottom: 2rpx solid #f0f0f0;
-  border-top: 10rpx solid #f6f6f6;
+  border-bottom: 2rpx solid #f5f6f9;
+  border-top: 10rpx solid #f5f6f9;
 }
 .page-title .title{
   font-size: 30rpx;
@@ -83,11 +84,15 @@
 .list-item .img-box image {
   border-radius: 50%;
 }
+.hot-news-item .img-box image {
+  box-shadow: 1rpx 1rpx 12rpx #d3d3d3;
+}
 .list-item .name {
   font-size: 32rpx;
 }
 .list-item .desc {
-  margin-top: 8rpx;
+  max-width: 70vw;
+  margin-top: 2rpx;
   line-height: 40rpx;
   max-height: 120rpx;
   overflow: hidden;
@@ -186,11 +191,11 @@
   height: 100rpx;
   margin-bottom: 16rpx;
   border-radius: 50%;
-  box-shadow: 0 0 20rpx rgba(0,0,0,0.2);
+  box-shadow: 0 0 20rpx #d9d9d9;
 }
 .icon-box image {
-  width: 70rpx;
-  height: 70rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 .txt-box {
   font-size: 24rpx;
@@ -212,4 +217,9 @@
 .iconStyle{
   width: 42rpx;
   height: auto;
+}
+.item-btn{
+  padding: 4rpx 20rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #eeeeee;
 }

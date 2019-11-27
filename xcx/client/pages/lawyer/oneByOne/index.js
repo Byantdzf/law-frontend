@@ -34,6 +34,7 @@ Page({
         countVal: app.globalData.smsCount,
         countReg: app.globalData.smsCount,
         persent: 0,
+        active: false,
         defaultPic: '/static/images/demo/img_lawyer.png',
         details: {}
     },
@@ -50,13 +51,13 @@ Page({
         // 获得律师详情
         let { id } = options
         this.setData({
-          id 
+          id
         })
         selectApi.lawyerDetail({id: id}).then(res => {
           let details = res.data
           details.joinDate = details.joinDate && details.joinDate.split(' ')[0]
           details.goodAt = details.goodAt && details.goodAt.split('，')
-      
+
           let score = details.score > 5 ? 5 : details.score < 0 ? 0 : details.score
           let persent = Math.floor(score / app.globalData.maxScore * 100)
 
@@ -86,6 +87,12 @@ Page({
         let selectArea = app.globalData.adInfo ? [app.globalData.adInfo.province.replace('省', ''), app.globalData.adInfo.city.replace('市', '')] : []
         this.setData({selectArea})
     },
+
+    activeFn() {
+        this.setData({
+            active: !this.data.active
+        })
+    },
     imageError(e) {
         var _errImg = e.target.dataset.img
         var _errObj = {}
@@ -105,7 +112,7 @@ Page({
     },
     regMobileChange(e) {
         let { value } = e.detail
-        
+
         let regRadio = this.data.regRadio
         regRadio.forEach(item => {
             item.checked = item.id == value ? true : false
@@ -153,7 +160,7 @@ Page({
     formSubmit(e) {
         // 测试流程
         // app.gotoPage('/pages/issue/success/index?type=2')
-        // return 
+        // return
         let params = e.detail.value
         if (!params.name) {
             app.toastError('请输入您的姓名')

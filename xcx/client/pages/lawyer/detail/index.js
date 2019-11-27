@@ -13,7 +13,8 @@ Page({
     gender: ['', '男', '女'],
     defaultPic: '/static/images/demo/img_lawyer.png',
     details: {},
-    comments: []
+    comments: [],
+    active: false
   },
 
   /**
@@ -68,6 +69,11 @@ Page({
   },
   onByOneTap() {
     app.gotoPage('/pages/lawyer/oneByOne/index?id=' + this.data.id)
+  },
+  activeFn() {
+    this.setData({
+      active: !this.data.active
+    })
   },
   inviteTap() {
     app.gotoPage('/pages/order/waiting/index?lawyerId=' + this.data.id)
