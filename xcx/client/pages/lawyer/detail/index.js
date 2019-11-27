@@ -96,8 +96,8 @@ Page({
     })
   },
   cancelCollect() {
-    let details = this.data.details
-    selectApi.attentionLawyer({ businessId: this.data.id }).then(res => {
+    // let details = this.data.details
+    selectApi.cancelAttentionLawyer({ businessId: this.data.id }).then(res => {
       this.loadData()
     })
   },
