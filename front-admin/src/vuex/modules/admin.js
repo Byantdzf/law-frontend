@@ -20,7 +20,8 @@ const admin = {
     managerDel: (context, ids) => del(`/manager/${ids}`),
     permsList: (context, params) => get(`/perms/list`, params),
     getslectedPerm: (context, id) => get(`/role/perm/${id}`),
-    updateSelectedPerm: (context, payload) => put(`/role/perms/update/${payload.id}`, payload.params)
+    updateSelectedPerm: (context, payload) => put(`/role/perms/update/${payload.id}`, payload.params),
+    managerDetail: (context, params) => get(`/manager/details`, params)
   }
 }
   

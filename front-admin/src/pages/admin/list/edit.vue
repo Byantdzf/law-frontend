@@ -18,16 +18,8 @@ export default {
   props: {
     row: Object
   },
-  watch: {
-    row: {
-      handler: function(newval) {
-        this.initForm(newval)
-      },
-      deep: true
-    }
-  },
   methods: {
-    initForm(form) {
+    async initForm(form) {
       let row = { ...form }
 
       this.formResave = true
@@ -103,6 +95,8 @@ export default {
       this.roleKV().then(res => {
         this.updateFormItem('roleId', 'options', res.data || [])
       })
+      let res = await this.managerDetail({id: row.id})
+      this.row = res.data
     },
     // 表单提交
     formSubmit(form) {
@@ -112,7 +106,8 @@ export default {
       }
       this.$emit('submit', params)
     },
-    ...mapActions('data', ['roleKV'])
+    ...mapActions('data', ['roleKV']),
+    ...mapActions('admin', ['managerDetail'])
   },
   mounted() {
     this.initForm(this.row)
