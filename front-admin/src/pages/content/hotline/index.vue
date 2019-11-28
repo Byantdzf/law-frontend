@@ -64,7 +64,7 @@
           }
           await this.servicePhoneSetting(params)
           this.$msgSuccess('更新成功！')
-          this.handleCancel()
+          this.handleCancel(key)
         } catch (e) {
           // error
         }
