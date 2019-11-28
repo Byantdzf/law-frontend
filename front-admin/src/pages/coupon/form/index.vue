@@ -55,13 +55,13 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label="优惠券发放数量">
-        <el-input v-model.number="form.sendCount"></el-input>
+        <el-input v-model.number="form.total"></el-input>
       </el-form-item>
       <el-form-item label="优惠券被领取数量">
-        <el-input v-model.number="form.fetched"></el-input>
+        <el-input v-model.number="form.receiveCount"></el-input>
       </el-form-item>
       <el-form-item label="优惠券剩余数量">
-        <el-input v-model.number="form.unused"></el-input>
+        <el-input v-model.number="form.unused" disabled></el-input>
       </el-form-item>
       <el-form-item label="优惠券规则">
         <el-col :span="11">
@@ -79,12 +79,12 @@
         </el-col>
       </el-form-item>
       <el-form-item label="使用对象">
-        <el-radio-group v-model="useTarget">
+        <el-radio-group v-model="allUser">
           <el-radio label="1">全部用户</el-radio>
-          <el-radio label="2">指定用户</el-radio>
+          <el-radio label="0">指定用户</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-row class="table-box mb-20" v-if="useTarget == '2'">
+      <el-row class="table-box mb-20" v-if="allUser == '0'">
         <app-form
           class="app-search"
           :init="searchFormInit"
@@ -155,7 +155,7 @@ export default {
       let arr = []
       for(let k in this.$t(`rs.${key}`)) {
         arr.push({
-          id: +k,
+          id: k && k.toString(),
           name: this.$t(`rs.${key}`)[k]
         })
       }
@@ -170,20 +170,20 @@ export default {
       sceneItems,
       typeItems,
       form: {
-        dataStatus: +this.$val(this.row, 'dataStatus', 1),
-        couponName: this.$val(this.row, 'couponName'),
-        type: +this.$val(this.row, 'type', 1),
-        scene: +this.$val(this.row, 'scene', 1),
-        remark: this.$val(this.row, 'remark'),
-        rangeStartTime: this.$val(this.row, 'rangeStartTime'),
-        rangeEndTime: this.$val(this.row, 'rangeEndTime'),
-        sendCount: this.$val(this.row, 'sendCount'),
-        overAmount: this.$val(this.row, 'overAmount'),
-        amount: this.$val(this.row, 'amount'),
-        shareRule: this.$val(this.row, 'shareRule', '21'),
-        ruleAmout: this.$val(this.row, 'ruleAmout'),
+        // dataStatus: +this.$val(this.row, 'dataStatus', 1),
+        // couponName: this.$val(this.row, 'couponName'),
+        // type: +this.$val(this.row, 'type', 1),
+        // scene: +this.$val(this.row, 'scene', 1),
+        // remark: this.$val(this.row, 'remark'),
+        // rangeStartTime: this.$val(this.row, 'rangeStartTime'),
+        // rangeEndTime: this.$val(this.row, 'rangeEndTime'),
+        // sendCount: this.$val(this.row, 'sendCount'),
+        // overAmount: this.$val(this.row, 'overAmount'),
+        // amount: this.$val(this.row, 'amount'),
+        // shareRule: this.$val(this.row, 'shareRule', '21'),
+        // ruleAmout: this.$val(this.row, 'ruleAmout'),
       },
-      useTarget: '1',
+      allUser: '1',
       columns: [
           {
             label: '序号',
@@ -245,14 +245,16 @@ export default {
     }
   },
   watch: {
-    useTarget() {
+    allUser() {
       this.tableSelected = []
     }
   },
   methods: {
     // 初始化页面
     async initPage() {
-      await this.getCouponDetail(this.row.id)
+      let res = await this.getCouponDetail(this.row.id)
+      this.form = res.data
+      this.form.unused = this.form.total - this.form.receiveCount
       this.$set(this.searchFormInit, 'align', 'left')
 
       this.searchItems = [
@@ -309,11 +311,11 @@ export default {
       if(this.row && this.row.hasOwnProperty('id')) {
         params.id = this.row.id
       }
-      if (this.useTarget == 2 && !this.tableSelected.length) {
+      if (this.form.allUser == 0 && !this.tableSelected.length) {
         this.$msgError('请选择指定的用户')
         return false
       }
-      if (this.useTarget == 2) {
+      if (this.form.allUser == 0) {
         params.userIdList = this.tableSelected.map(v => v.id)
       }
       this.$emit('submit', params)

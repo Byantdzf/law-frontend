@@ -82,7 +82,8 @@
             formater: (row) => {
               return {
                 1: '查看',
-                2: '操作'
+                2: '操作',
+                3: '登录'
               }[row.operateType]
             }
           },{
