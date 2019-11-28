@@ -1,1 +1,29 @@
 @import "/static/css/issue.wxss";
+.issue-title{
+    margin-top: 34rpx;
+    position: relative;
+    margin-left: 12rpx;
+}
+
+.issue-title:before{
+    content: '';
+    width: 6rpx;
+    height: 26rpx;
+    background: #CF443D;
+    position: absolute;
+    left: -12rpx;
+    top: 8rpx;
+}
+.issue-form-item{
+    padding: 4rpx;
+}
+.app-input{
+    padding: 0;
+}
+.form-btn-box{
+    padding: 32rpx;
+}
+.radio-group{
+    transform: scale(.8);
+    font-size: 34rpx;
+}

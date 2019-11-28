@@ -9,7 +9,7 @@
   align-items: stretch;
   position: relative;
   background: #fff;
-  border-radius: 20rpx;
+  border-radius: 12rpx;
   border-bottom: 1rpx solid #f3f3f3;
 }
 .list-item + .list-item {

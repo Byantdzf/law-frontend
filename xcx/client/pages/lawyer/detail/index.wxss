@@ -88,7 +88,7 @@
   margin-top: 2rpx;
 }
 .item_laber{
-  max-width: 180rpx;
+  max-width: 210rpx;
   height: 36rpx;
   padding: 4rpx 16rpx;
   border-radius: 50rpx;
@@ -161,6 +161,8 @@
   padding: 2rpx 8rpx;
   border-radius: 4rpx;
   margin-right: 12rpx;
+  display: inline-block;
+  margin-top: 8rpx;
 }
 .info-brief{
   margin-top: 8rpx;

@@ -27,20 +27,20 @@
             </view>
             <view class="flex-bd pa-20">
               <view class="flex" wx:if="{{ item.useStatus == 1 }}">
-                <text class="cl-999">使用时间：</text>
-                <text>{{ item.updateTime }}</text>
+                <text class="color_666 bold">使用时间：</text>
+                <text class="color_666">{{ item.updateTime }}</text>
               </view>
               <view class="flex">
-                <text class="cl-999">领取时间：</text>
-                <text>{{ item.fetchDate }}</text>
+                <text class="color_666 bold">领取时间：</text>
+                <text class="color_666">{{ item.fetchDate }}</text>
               </view>
               <view class="flex" wx:if="{{ item.useStatus != 1 }}">
-                <text class="cl-999">有效期至：</text>
-                <text>{{ item.validityPeriod }}</text>
+                <text class="color_666">有效期至：</text>
+                <text class="color_666">{{ item.validityPeriod }}</text>
               </view>
               <view class="flex flex-start cl-666">
-                <text class="cl-999">使用说明：</text>
-                <text>{{ item.note || '' }}</text>
+                <text class="color_666">使用说明：</text>
+                <text class="color_666">{{ item.note || '' }}</text>
               </view>
             </view>
           </view>

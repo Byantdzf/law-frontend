@@ -236,7 +236,7 @@
 					"id": 26,
 					"name": "详情",
 					"pathName": "pages/lawyer/detail/index",
-					"query": "id=129520900910350336",
+					"query": "id=129807878662914048",
 					"scene": null
 				},
 				{
@@ -251,6 +251,48 @@
 					"name": "指定律师咨询",
 					"pathName": "pages/lawyer/oneByOne/index",
 					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/order/list/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的关注",
+					"pathName": "pages/user/collect/index",
+					"query": "id=129520900910350336",
+					"scene": null
+				},
+				{
+					"id": 31,
+					"name": "pages/user/coupon/index",
+					"pathName": "pages/user/coupon/index",
+					"query": "id=129807878662914048",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/issue/voice/index",
+					"pathName": "pages/issue/voice/index",
+					"query": "id=129807878662914048",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/issue/oneByOne/index",
+					"pathName": "pages/issue/oneByOne/index",
+					"query": "id=129807878662914048",
+					"scene": null
+				},
+				{
+					"id": 34,
+					"name": "pages/legalServices/list/index",
+					"pathName": "pages/legalServices/list/index",
+					"query": "type=21",
 					"scene": null
 				}
 			]

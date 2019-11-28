@@ -50,3 +50,11 @@
   .app-empty .iconfont {
     font-size: 100rpx;
   }
+.item-btn{
+  padding: 4rpx 12rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #ececec;
+}
+.helpNum{
+  margin-right: 16rpx;
+}

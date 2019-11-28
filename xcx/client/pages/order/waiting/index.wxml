@@ -48,6 +48,8 @@
         <button
           type="primary"
           catchtap="handleConfirm"
+          class="btn bcTheme font28"
+          style="padding: 12rpx 22rpx; border-radius: 12rpx;"
         >
           发送邀请
         </button>

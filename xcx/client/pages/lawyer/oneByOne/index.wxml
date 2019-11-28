@@ -10,7 +10,7 @@
             </view>
             <image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="widthFix" binderror="imageError" data-img="details.pic"></image>
             <view class="main_laber_left">
-                <view class="item_laber font28"style="padding: 4rpx 22rpx;">{{ details.name }}</view>
+                <view class="item_laber font28 ellipsis_1"style="padding: 4rpx 22rpx;">{{ details.name }}</view>
                 <view class="dot left"></view>
             </view>
             <view class="main_laber_left" style="bottom: 34vw">

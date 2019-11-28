@@ -3,8 +3,8 @@
     <view class="pa-20 home-list">
         <view class="issueBox">
             <form bindsubmit="formSubmit">
-            <view class="issue-title">
-            <image src="/static/images/plain.svg" />
+                <view class="issue-title color_theme">
+                    <!--<image src="/static/images/plain.svg" />-->
             指定律师咨询发布
             </view>
             <view class="issue-form">
@@ -79,10 +79,10 @@
                     </view>
                 </view>
                 <view class="issue-form-item">
-                    <textarea name="remark" auto-height placeholder="请填写备注说明" />
+                    <textarea name="remark" auto-height placeholder="请填写备注说明"  style="padding: 10rpx 0;"/>
                 </view>
                 <view class="form-btn-box mt-20">
-                    <button type="primary" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
+                    <button type="primary" disabled="{{btnDisable}}" form-type="submit" class="font30 bcTheme">确定提交</button>
                 </view>
             </view>
             </form>

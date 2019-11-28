@@ -50,7 +50,8 @@
 							<view class="desc color_666 font24 ellipsis_1">{{ item.brief || '' }}</view>
 							<view class="flex desc_sub">
 								<view class="flex-bd font24">
-									<text class="color_666">已帮助：</text>									<text class="color_theme helpNum" >{{ item.helps || 0 }}人</text>
+									<text class="color_666">已帮助：</text>
+									<text class="color_theme helpNum" >{{ item.helps || 0 }}人</text>
 									<text class="color_666">关注数：</text>
 									<text class="color_theme_sub">{{ item.concerns || 0 }}人</text>
 								</view>
