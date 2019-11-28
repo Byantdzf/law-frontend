@@ -1,6 +1,7 @@
 // pages/legalServices/list/index.js
 const app = getApp();
 const legalServices = require('../../../service/legalServices')
+const selectApi = require('../../../service/select')
 const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 Page({
     data: {
@@ -32,13 +33,17 @@ Page({
         this.loadData()
     },
     loadData() {
-        let params = {}
-        params[PAGE_KEY] = 1
-        params[SIZE_KEY] = 1
-        params.url = this.data.baseUrl
-        params.serviceType = this.data.type
-        legalServices.query(params).then(res => {
-            let intro = res.data.list[0] || {}
+        // let params = {}
+        // params[PAGE_KEY] = 1
+        // params[SIZE_KEY] = 1
+        // params.url = this.data.baseUrl
+        // params.serviceType = this.data.type
+        // legalServices.query(params).then(res => {
+        //     let intro = res.data.list[0] || {}
+        //     this.setData({ intro })
+        // })
+        selectApi.platformService({ dictCode: 2 }).then(res => {
+            let intro = res.data || {}
             this.setData({ intro })
         })
         this.loadList()

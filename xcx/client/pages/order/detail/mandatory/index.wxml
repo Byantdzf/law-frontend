@@ -58,7 +58,7 @@
     <view class="detail-box" wx:if="{{ orderScoreList.length }}">
       <view class="flex detail-row flex-start">
         <text class="label cl-999">我的评价：</text>
-        <view class="flex flex-bd cl-666">
+        <view class="flex-bd cl-666">
           <view class="flex">
             <text class="label cl-999 pr-20">专业态度</text>
             <app-score value="{{ orderScoreList[0].professionalAttitudeScore }}" readonly/>
