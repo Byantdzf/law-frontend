@@ -68,4 +68,11 @@ module.exports = {
     params.operateType = 40            // 1-阅读 2-转发 3-点赞 4-关注 10-取消阅读 20-取消转发 30-取消点赞 40-取消关注
     return get('/applets/lawyer/order/operateOrder', params)
   },
+
+  /**
+   * 广告列表
+   * terminal 所属广告位:1.用户端PCWEB广告位 2.用户端小程序广告位\r\n3.律师端PCWEB广告位 4.律师端小程序广告位
+   * location 1-首页Banner图3～5张; 2-律师详情页下方1张
+  */
+ advertisementList: params => get('/applets/user/homePage/advertisementList', params),
 }

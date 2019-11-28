@@ -1,4 +1,8 @@
 /* components/app-swiper.wxss */
+.swiper {
+    max-height: 420rpx;
+    overflow: hidden;
+}
 .swiper-text { 
     position: absolute; 
     right:20rpx; 

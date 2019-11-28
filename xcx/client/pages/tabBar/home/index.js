@@ -6,11 +6,7 @@ Page({
 	data: {
 		currArea: [],
 		//图片地址
-		banners: [
-			'/static/images/demo/banner1.png',
-			'/static/images/demo/banner2.png',
-			'/static/images/demo/banner3.png'
-		],
+		banners: [],
 		list: [],
 		hotNews1: [],
 		hotNews2: [],
@@ -89,7 +85,15 @@ Page({
 		let cityPicker = this.selectComponent('#app-cityPicker')
 		cityPicker.init(this.data.currArea)
 		this.getLawyerList()
+		this.getBanners()
 	},
+	// 获取banners
+  getBanners() {
+    selectApi.advertisementList({ terminal: 2, location: 1 }).then(res => {
+      let banners = (res.data || []).map(v => v.coverPhoto)
+      this.setData({ banners })
+    })
+  },
 	// 获取热门新闻
 	getNewsData() {
 		let params = {}
