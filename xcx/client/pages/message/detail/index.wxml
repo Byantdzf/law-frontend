@@ -4,11 +4,15 @@
         <app-list url="{{listUrl}}" id="app-list" bind:change="updateList" wx:if="{{listUrl}}">
             <view class="app-cells">
                 <view class="app-cell" wx:for="{{ list }}" wx:key="{{ index }}">
-                    <view class="flex-hd img-box pl-20">
-                        <image src="{{ item.imagePath || defaultImg }}" mode="widthFix" binderror="imageError" data-img="list[{{index}}].imagePath"></image>
-                    </view>
-                    <view class="flex-bd con-box">
-                        <rich-text class="cl-666" nodes="{{ item.content }}"></rich-text>
+                    <view class="text-center" style="width: 100vw"><view class="main-time color_666">{{item.sentTime}}</view></view>
+                    <view>
+                        <view class="flex-hd img-box pl-20 flo_l">
+                            <image src="{{ item.imagePath || defaultImg }}" mode="widthFix" binderror="imageError" data-img="list[{{index}}].imagePath"></image>
+                        </view>
+                        <view class="flex-bd con-box flo_l">
+                            <rich-text class="cl-666" nodes="{{ item.content }}"></rich-text>
+                        </view>
+                        <view class="clearfloat"></view>
                     </view>
                 </view>
             </view>

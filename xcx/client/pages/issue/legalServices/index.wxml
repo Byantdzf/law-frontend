@@ -4,15 +4,16 @@
         <view class="issueBox">
             <form bindsubmit="formSubmit">
                 <view class="issue-form-title">
-                    <view class="flex">
-                        <view>已选服务：</view>
-                        <view class="titleBox flex-bd">
-                            <view class="items" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bind:tap="removeItem">{{item.name}}<text class="iconfont icon-close" wx:if="{{list.length > 1}}"></text></view>  
+                    <view class="">
+                        <view class="color_333 bold flo_l color_theme">已选服务：</view>
+                        <view class="titleBox  flo_l">
+                            <view class="items" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bind:tap="removeItem">{{item.name}}<text class="iconfont icon-close" wx:if="{{list.length > 1}}"></text></view>
                         </view>
+                        <view class="clearfloat"></view>
                     </view>
                 </view>
                 <!-- <view class="issue-title">{{details.title}}</view> -->
-                
+
                 <view class="issue-form-item" wx:if="{{showInputNumber}}">
                     <view class="issue-form-input flex">
                         <view class="amount flex-bd">
@@ -24,7 +25,7 @@
                     </view>
                 </view>
                 <view class="issue-form">
-                    <view class="issue-form-item">
+                    <view class="issue-form-item font28 color_666">
                         <textarea name="customerRequirement" auto-height placeholder="在此编辑服务内容及大致要求（不得少于10个字）" />
                     </view>
                     <view class="issue-form-item">
@@ -38,7 +39,7 @@
                                 </picker>
                             </view>
                             <view>
-                                <text class="cl-999 iconfont icon-arrow-right"></text>
+                                <text class="cl-999 iconfont icon-arrow-right font26"></text>
                             </view>
                         </view>
                     </view>
@@ -48,7 +49,7 @@
                                 <app-cityPicker selectArea="{{selectArea}}" bind:change="getCityResult"></app-cityPicker>
                             </view>
                             <view>
-                                <text class="cl-999 iconfont icon-arrow-right"></text>
+                                <text class="cl-999 iconfont icon-arrow-right font26"></text>
                             </view>
                         </view>
                     </view>
@@ -56,12 +57,12 @@
                         <view class="issue-form-input flex-bd">
                             <input class="app-input" type="number" name="contactMobile" bindblur="setValidateMobie" placeholder="请输入您的手机号码"></input>
                         </view>
-                        <view>
-                            <text class="sendSMS cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">
+<!--                        <view>-->
+                            <view class="main-code cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">
                                 获取验证码
-                            </text>
-                            <text class="cl-999" wx:else>重新发送({{countVal}})</text>
-                        </view>
+                            </view>
+                            <view class="main-code cl-999" wx:else>重新发送({{countVal}})</view>
+<!--                        </view>-->
                     </view>
                     <view class="issue-form-item flex">
                         <view class="issue-form-input">
@@ -121,17 +122,17 @@
                         <view class="issue-form-input flex">
                             <view class="amount flex flex-bd">
                                 <view>合计费用：</view>
-                                <view class="cl-red">{{selectAmount}}元 <text wx:if="{{selectCoupon.id}}">（优惠券优惠金额{{selectCoupon.amount}}元）</text></view>
+                                <view class="color_theme">{{selectAmount}}元 <text wx:if="{{selectCoupon.id}}">（优惠券优惠金额{{selectCoupon.amount}}元）</text></view>
                             </view>
                         </view>
                     </view>
                     <view class="issue-form-item">
                         <view class="issue-form-input flex">
                             <view class="amount flex-bd">
-                                <checkbox-group bindchange="checkboxChange">
+                                <checkbox-group bindchange="checkboxChange" color="#CF443D">
                                     <label class="checkbox cl-primary">
                                         <checkbox value="1" />
-                                        <icon class="iconfont icon-check"></icon>
+                                        <icon class="iconfont icon-check" style="color: #CF443D"></icon>
                                         确认同意<text catchtap="showAgreement">《虎甲平台委托服务协议》</text>
                                     </label>
                                 </checkbox-group>
@@ -139,7 +140,7 @@
                         </view>
                     </view>
                     <view class="form-btn-box mt-20">
-                        <button type="primary" disabled="{{btnDisable}}" form-type="submit">
+                        <button type="primary"  disabled="{{btnDisable}}" form-type="submit">
                             立即支付
                         </button>
                     </view>

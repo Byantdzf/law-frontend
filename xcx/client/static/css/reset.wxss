@@ -119,7 +119,7 @@ checkbox {
 
 checkbox[checked] + .icon-check::after {
   content: "\e695";
-  color: #F64335;
+  color: #CF443D;
 }
 
 /* reset -- end */

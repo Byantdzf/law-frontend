@@ -9,41 +9,44 @@
                 <app-list url="{{baseUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
                     <view class="intro" wx:if="{{list[0]}}">
                         <view class="img-box">
-                            <image src="{{ list[0].instructionPic }}" binderror="imageError" data-img="list[0].instructionPic"></image>
+                            <image src="{{ list[0].instructionPic }}" binderror="imageError" mode="aspectFit" data-img="list[0].instructionPic"></image>
                         </view>
-                        <view class="title">{{ list[0].title }}</view>
-                        <view class="desc">{{ list[0].instruction }}</view>
+                        <view class="title color_333 font30 bold">{{ list[0].title }}</view>
+                        <view class="desc color_666 font26">{{ list[0].instruction }}</view>
                     </view>
                     <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails" wx:if="{{ list.length }}">
                         <view class="flex items">
                     <!-- <view class="list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
                         <view class="flex"> -->
                             <view class="img-box">
-                                <image src="{{ item.instructionPic }}" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
+                                <image src="{{ item.instructionPic }}" binderror="imageError" mode="aspectFit" data-img="list[{{index}}].instructionPic"></image>
                             </view>
                             <view class="flex-bd pl-20">
-                                <view class="title">{{ item.title }}</view>
-                                <view class="desc cl-666">{{ item.instruction }}</view>
+                                <view class="title  color_333 font30 bold">{{ item.title }}</view>
+                                <view class="desc color_666 font26">{{ item.instruction }}</view>
                                 <view class="price-box flex">
                                     <view class="flex-bd">
-                                        <text class="cl-999">价格：</text>
-                                        <text class="cl-red">{{ item.price }}元/次</text>
+                                        <text class="cl-999 font24">价格：</text>
+                                        <text class="color_theme font24">{{ item.price }}元/ 次</text>
                                     </view>
                                     <view class="flex-ft">
-                                        <text class="cl-999">销售量：</text>
-                                        <text class="cl-999">{{ item.salesCount }}</text>
+                                        <text class="cl-999 font24">销售量：</text>
+                                        <text class="color_theme_sub font24">{{ item.salesCount }}</text>
                                     </view>
                                 </view>
                                 <view class="btn-box">
-                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="addCart" wx:if="{{ !item.addCart }}">
-                                        选择加入
-                                    </button>
-                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="removeCart" wx:else>
-                                        移除
-                                    </button>
-                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
-                                        单独购买
-                                    </button>
+                                    <view class="item_btn flo_l bcTheme_sub color_666" data-id="{{item.id}}" catch:tap="addCart" wx:if="{{ !item.addCart }}">选择加入</view>
+                                    <view class="item_btn flo_l bcTheme_sub color_666"  data-id="{{item.id}}" catch:tap="removeCart" wx:else>移除</view>
+                                    <view class="item_btn color_666"  data-id="{{item.id}}" catch:tap="buyNow">单独购买</view>
+<!--                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="addCart" wx:if="{{ !item.addCart }}">-->
+<!--                                        选择加入-->
+<!--                                    </button>-->
+<!--                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="removeCart" wx:else>-->
+<!--                                        移除-->
+<!--                                    </button>-->
+<!--                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">-->
+<!--                                        单独购买-->
+<!--                                    </button>-->
                                 </view>
                             </view>
                         </view>
@@ -54,15 +57,18 @@
 
         <view class="bottomCart">
             <view class="flex">
-                <view class="iconfont icon-susong"></view>
+                <image  class="bottomICON" src="https://images.ufutx.com/201911/28/29e33e970822263285fcf39d9ef10075.png" mode="aspectFit"></image>
+<!--                <view class="iconfont icon-susong"></view>-->
                 <view class="flex-bd">
-                    <view class="total"><text>￥</text>{{total}}</view>
-                    <view class="fonts ellipsis">您选择的服务：{{ cartNameStr || '' }}</view>
+                    <view class="total color_theme"><text>￥</text>{{total}}</view>
+                    <view class="fonts ellipsis color_333">您选择的服务：{{ cartNameStr || '' }}</view>
                 </view>
                 <view class="bottomBtn">
-                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyMutliNow">
-                        我要下单
-                    </button>
+                    <view class="item_btn flo_l bcTheme color_white" data-id="{{item.id}}" catch:tap="buyMutliNow">我要下单</view>
+
+<!--                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyMutliNow">-->
+<!--                        我要下单-->
+<!--                    </button>-->
                 </view>
             </view>
         </view>

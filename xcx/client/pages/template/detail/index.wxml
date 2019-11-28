@@ -4,47 +4,49 @@
         <view class="baseInfo">
             <view class="items flex">
                 <view class="flex-ft">
-                    <text class="cl-999">所属分类：</text>
+                    <text class="color_333">所属分类：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.businessTypeName}}</text>
+                    <text class="color_666">{{details.businessTypeName}}</text>
                 </view>
             </view>
             <view class="items flex">
                 <view class="flex-ft">
-                    <text class="cl-999">更新时间：</text>
+                    <text class="color_333">更新时间：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.updateTime || details.createTime}}</text>
+                    <text class="color_666">{{details.updateTime || details.createTime}}</text>
                 </view>
             </view>
             <view class="items flex">
                 <view class="flex-ft">
-                    <text class="cl-999">价格：</text>
+                    <text class="color_333">价格：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.price}}元/次</text>
+                    <text class="color_666">{{details.price}}元/次</text>
                 </view>
             </view>
             <view class="items flex">
                 <view class="flex-ft">
-                    <text class="cl-999">销售量：</text>
+                    <text class="color_333">销售量：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.sales}}</text>
+                    <text class="color_666">{{details.sales}}</text>
                 </view>
             </view>
             <view class="orderList">
-                <view class="tit">服务说明</view>
-                <app-text datatext="{{ details.brief }}"></app-text>
+                <view class="tit color_333">服务说明</view>
+                <app-text datatext="{{ details.brief }}" class="color_666"></app-text>
             </view>
             <view class="orderList">
-                <view class="tit">适用范围</view>
-                <app-text datatext="{{ details.serviceRange }}"></app-text>
+                <view class="tit color_333">适用范围</view>
+                <app-text datatext="{{ details.serviceRange }}" class="color_666"></app-text>
             </view>
         </view>
         <view class="btn-box">
-            <button size="mini" plain catch:tap="buyNow">立即购买</button>
+            <view class="bcTheme color_white" data-id="{{item.id}}" catch:tap="buyNow">立即购买</view>
+
+<!--            <button size="mini" plain catch:tap="buyNow">立即购买</button>-->
         </view>
     </view>
 </app-page>

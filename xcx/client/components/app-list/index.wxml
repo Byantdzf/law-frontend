@@ -6,7 +6,7 @@
   lower-threshold="{{ threshold }}"
 >
 	<slot></slot>
-  <view class="loading-box pb-20">
+  <view class="loading-box">
     <app-loading
       show="{{ isLoadMoreLoading }}"
       type="circle"

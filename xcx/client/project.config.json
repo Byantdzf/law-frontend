@@ -294,6 +294,76 @@
 					"pathName": "pages/legalServices/list/index",
 					"query": "type=21",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/legalServices/listMutli/index",
+					"pathName": "pages/legalServices/listMutli/index",
+					"query": "type=22",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/legalServices/detail/index",
+					"pathName": "pages/legalServices/detail/index",
+					"query": "id=129471561534013440",
+					"scene": null
+				},
+				{
+					"id": 37,
+					"name": "pages/issue/legalServices/index",
+					"pathName": "pages/issue/legalServices/index",
+					"query": "ids=129472490421354496,2C129471561534013440,2C4",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mandatoryLawyer/list/index",
+					"pathName": "pages/mandatoryLawyer/list/index",
+					"query": "type=32",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mandatoryLawyer/detail/index",
+					"pathName": "pages/mandatoryLawyer/detail/index",
+					"query": "id=9",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/issue/mandatoryLawyer/index",
+					"pathName": "pages/issue/mandatoryLawyer/index",
+					"query": "id=9",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/template/list/index",
+					"pathName": "pages/template/list/index",
+					"query": "id=9",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/template/detail/index",
+					"pathName": "pages/template/detail/index",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/message/detail/index",
+					"pathName": "pages/message/detail/index",
+					"query": "id=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabBar/message/index",
+					"pathName": "pages/tabBar/message/index",
+					"query": "id=2",
+					"scene": null
 				}
 			]
 		}

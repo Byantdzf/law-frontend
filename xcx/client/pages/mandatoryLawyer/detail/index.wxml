@@ -1,30 +1,30 @@
 <app-page id="app-page">
     <view class="container">
-        <view class="title">{{ details.title }}</view>
+        <view class="title color_333 bold font30">{{ details.title }}</view>
         <view class="baseInfo">
             <view class="items flex">
                 <view class="flex-ft">
-                    <text class="cl-999">价格：</text>
+                    <text class="color_333 bold">价格：</text>
                 </view>
                 <view class="flex-bd">
-                    <text>{{details.priceRange}}元/次</text>
+                    <text class="color_666">{{details.priceRange}}元/次</text>
                 </view>
             </view>
             <view class="orderList">
-                <view class="tit">服务说明</view>
+                <view class="tit color_333">服务说明</view>
                 <app-text datatext="{{ details.instruction }}"></app-text>
             </view>
             <view class="orderList">
-                <view class="tit">适用范围</view>
+                <view class="tit color_333">适用范围</view>
                 <app-text datatext="{{ details.serviceRange }}"></app-text>
             </view>
             <view class="orderList">
-                <view class="tit">服务流程</view>
+                <view class="tit color_333">服务流程</view>
                 <app-text datatext="{{ details.serviceSteps }}"></app-text>
             </view>
         </view>
         <view class="btn-box">
-            <button type="primary" catch:tap="buyNow">立即下单</button>
+            <button type="primary" class="bcTheme" catch:tap="buyNow">立即下单</button>
         </view>
     </view>
 </app-page>

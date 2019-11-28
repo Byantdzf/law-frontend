@@ -5,21 +5,22 @@
             <app-list url="{{baseUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
                 <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
                     <view class="img-box">
-                        <image src="{{ item.instructionPic }}" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
+                        <image src="{{ item.instructionPic }}" binderror="imageError" mode="aspectFill" data-img="list[{{index}}].instructionPic"></image>
                     </view>
                     <view class="flex-bd pl-20">
-                        <view class="title">{{ item.title }}</view>
-                        <view class="desc cl-666">{{ item.instruction }}</view>
+                        <view class="title font30 color_333 bold">{{ item.title }}</view>
+                        <view class="desc color_666 font28">{{ item.instruction }}</view>
                         <view class="price-box flex">
                             <view class="flex-bd">
-                                <text class="cl-999">价格：</text>
-                                <text class="cl-red">{{ item.priceRange }}元/次</text>
+                                <text class="color_333">价格：</text>
+                                <text class="color_theme font24">{{ item.priceRange }}元/次</text>
                             </view>
                         </view>
                         <view class="btn-box">
-                            <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
-                                立即下单
-                            </button>
+                            <view class="bcTheme color_white flo_r" data-id="{{item.id}}" catch:tap="buyNow">立即下单</view>
+<!--                            <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">-->
+<!--                                立即下单-->
+<!--                            </button>-->
                         </view>
                     </view>
                 </view>

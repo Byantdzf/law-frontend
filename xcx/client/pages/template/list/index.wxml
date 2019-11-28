@@ -8,25 +8,27 @@
             <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
                 <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
                     <view class="img-box">
-                        <image src="{{ item.instructionPic || defaultImg }}" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
+                        <image src="{{ item.instructionPic || defaultImg }}" mode="aspectFill" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
                     </view>
                     <view class="flex-bd pl-20">
-                        <view class="title">{{ item.fileName }}</view>
-                        <view class="desc cl-666">{{ item.brief }}</view>
+                        <view class="title  font30 color_333 bold">{{ item.fileName }}</view>
+                        <view class="desc color_666 font28">{{ item.brief }}</view>
                         <view class="price-box flex">
-                            <view class="flex-bd">
-                                <text class="cl-999">价格：</text>
-                                <text class="cl-red">{{ item.price }}元/次</text>
+                            <view class="flex-bd font26">
+                                <text class="color_666 font24">价格：</text>
+                                <text class="color_theme font24">{{ item.price }}元/次</text>
                             </view>
                             <view class="flex-ft">
-                                <text class="cl-999">销售量：</text>
-                                <text class="cl-999">{{ item.sales }}</text>
+                                <text class="color_666 font24">销售量：</text>
+                                <text class="color_theme font24">{{ item.sales }}</text>
                             </view>
                         </view>
                         <view class="btn-box">
-                            <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
-                                立即购买
-                            </button>
+                            <view class="bcTheme color_white flo_r" data-id="{{item.id}}" catch:tap="buyNow">立即购买</view>
+
+<!--                            <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">-->
+<!--                                立即购买-->
+<!--                            </button>-->
                         </view>
                     </view>
                 </view>

@@ -6,5 +6,8 @@
 .baseInfo .items { padding: 20rpx 0;}
 .baseInfo .flex-ft { width: 150rpx;}
 
-.btn-box { height: 100rpx; line-height: 100rpx; background: #fff; position: fixed; z-index: 9; left:0; right:0; bottom:0; padding: 0 30rpx; box-sizing: border-box; border-top: 1rpx solid #f3f3f3; text-align: center;}
+
+.btn-box {  background: #fff; position: fixed; z-index: 9; left:0; right:0; bottom:0; padding:30rpx; box-sizing: border-box; border-top: 1rpx solid #f3f3f3; text-align: center;
+}
 .btn-box button { width: 100%; margin-top:20rpx;}
+.btn-box view {padding: 22rpx;}

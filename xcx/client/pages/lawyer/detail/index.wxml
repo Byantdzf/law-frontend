@@ -52,7 +52,7 @@
     <view class="item-info font26 color_333">执业证号：<span class="font24 color_666">{{ details.lawyerLicenseNo }}</span></view>
     <view class="item-info font26 color_333">
       <span class="flo_l">擅长领域：</span>
-      <view style="width: 64vw;" class="flo_l">
+      <view style="width: 64vw;" class="flo_l"  style="margin-top: -8rpx">
         <view  wx:for="{{ details.goodAt }}" class="info-label" wx:key="*this">
           {{item}}
         </view>

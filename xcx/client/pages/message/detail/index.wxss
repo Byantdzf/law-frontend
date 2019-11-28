@@ -1,12 +1,40 @@
-page { background: #f3f3f3;}
+page { background: #f0f0f0;}
 .page-message {
   width: 100%;
   overflow-x: hidden;
 }
-.app-cell { align-items: flex-start; }
+.app-cell { align-items: flex-start; display: inline-block}
 .page-message .img-box image{
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
+  background: white;
 }
-.page-message .con-box { background: #fff; padding: 30rpx; margin: 0 100rpx 0 30rpx; border-radius: 20rpx;}
+
+.page-message .con-box {
+  background: #fff;
+  padding: 30rpx;
+  margin: 0 100rpx 0 30rpx;
+  border-radius: 20rpx;
+  position: relative
+}
+
+.page-message .con-box:before {
+  content: "";
+  border-top: 12rpx solid transparent;
+  border-bottom: 12rpx solid transparent;
+  border-right: 22rpx solid #fff;
+  position: absolute;
+  top: 24rpx;
+  left: -18rpx;
+  /*box-shadow: 1rpx 1rpx 12rpx #d6d6d6;*/
+}
+
+.main-time {
+  display: inline-block;
+  padding: 6rpx 12rpx;
+  margin: 12rpx;
+  background: rgba(123, 123, 123, 0.3);
+  margin-bottom: 32rpx;
+  border-radius: 8rpx;
+}
