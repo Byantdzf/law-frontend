@@ -31,14 +31,11 @@
 
 		loadRecommend: function () {
 			var params = {}
-			params[global.rows] = 1;
-			params[global.page] = 1;
-			params.noAuth = 1;
-			utils.getSync(URL.template.query, params, function (res) {
-				var data = res.data.list || []
-				data = data[0] || {}
+			params.dictCode = 4;
+			utils.getSync(URL.common.common, params, function (res) {
+				var data = res.data || {}
 				var src = data.image || '/static/images/nopic.jpg'
-				$('.services_header img').attr('src', src)
+				$('.services_header img').removeClass('hidden').attr('src', src)
 				$('.services_header p').html(data.brief || '')
 				
 			})

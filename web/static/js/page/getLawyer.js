@@ -19,18 +19,13 @@
 		},
 
 		loadRecommend: function () {
-			var _t = this;
 			var params = {}
-			params[global.rows] = 1;
-			params[global.page] = 1;
-			params.noAuth = 1;
-			params.serviceType = _t.type;
-			utils.getSync(URL.legal.queryLawyer, params, function (res) {
-				var data = res.data.list || []
-				data = data[0] || {}
-				var src = data.instructionPic || '/static/images/nopic.jpg'
-				$('.services_header img').attr('src', src)
-				$('.services_header p').html(data.instruction || '')
+			params.dictCode = 3;
+			utils.getSync(URL.common.common, params, function (res) {
+				var data = res.data || {}
+				var src = data.image || '/static/images/nopic.jpg'
+				$('.services_header img').removeClass('hidden').attr('src', src)
+				$('.services_header p').html(data.brief || '')
 				
 			})
 		},

@@ -28,7 +28,8 @@ var URL = {
 		alipay: pcHost + '/pc/lawyer/pay/customerPayForPC',
 		wechatPay: pcHost + '/pc/lawyer/pay/getPrepayInfoQr',
 		wechatPayResult: pcHost + '/pc/lawyer/getWeixinOrderByOrderNo',
-		orderQr: pcHost + '/pc/lawyer/wechat/qrcode/getQrcodeUrlByOrderNo'
+		orderQr: pcHost + '/pc/lawyer/wechat/qrcode/getQrcodeUrlByOrderNo',
+		common: pcHost + '/platform/common/service'
 	},
 	auth: {
 		login: '/static/data/login.json',
