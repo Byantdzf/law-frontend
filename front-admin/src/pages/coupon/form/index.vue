@@ -58,10 +58,10 @@
         <el-input v-model.number="form.sendCount"></el-input>
       </el-form-item>
       <el-form-item label="优惠券被领取数量">
-        <el-input v-model.number="form.sendCount"></el-input>
+        <el-input v-model.number="form.fetched"></el-input>
       </el-form-item>
       <el-form-item label="优惠券剩余数量">
-        <el-input v-model.number="form.sendCount"></el-input>
+        <el-input v-model.number="form.unused"></el-input>
       </el-form-item>
       <el-form-item label="优惠券规则">
         <el-col :span="11">
