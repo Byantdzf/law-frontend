@@ -254,6 +254,7 @@ export default {
     async initPage() {
       let res = await this.getCouponDetail(this.row.id)
       this.form = res.data
+      this.form.dataStatus = this.form.dataStatus && this.form.dataStatus.toString()
       this.form.unused = this.form.total - this.form.receiveCount
       this.$set(this.searchFormInit, 'align', 'left')
 
