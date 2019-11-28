@@ -140,13 +140,14 @@ import { Upload } from 'element-ui';
 import SYSTEM from '@/utils/system';
 import AppDialog from "@/mixins/dialog";
 import AppTable from "@/mixins/table";
+import AppTableImgs from '@/components/app-table/lib/imgs'
 import AppForm from '@/mixins/form'
 export default {
   components: {
     [Upload.name]: Upload,
     Edit: () => import("./edit"),
   },
-  mixins: [AppTable, AppForm, AppDialog],
+  mixins: [AppTable, AppForm, AppDialog, AppTableImgs],
   data() {
     return {
       columns: [
@@ -158,6 +159,12 @@ export default {
         {
           label: "服务类型名称",
           field: "title"
+        },
+        {
+          label: "封面",
+          field: "instructionPic",
+          width: 100,
+          component: AppTableImgs
         },
         {
           label: "价格",
