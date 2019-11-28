@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "消息",
+  "usingComponents": {
+    "app-empty":"/components/app-empty/index",
+    "app-list": "/components/app-list/index"
+  }
+}

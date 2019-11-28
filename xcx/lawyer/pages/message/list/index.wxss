@@ -1,0 +1,33 @@
+.page-message {
+  width: 100%;
+  overflow-x: hidden;
+}
+.page-message .img-box image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.page-message .desc {
+  max-width: 580rpx;
+  margin-top: 12rpx;
+}
+.page-message .title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.page-message .app-cell::before,
+.page-message .app-cells::after {
+  left: 140rpx;
+}
+
+.app-empty-wrapper {
+  padding: 20rpx;
+}
+.app-empty {
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.app-empty .iconfont {
+  font-size: 100rpx;
+}

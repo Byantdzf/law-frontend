@@ -1,0 +1,12 @@
+page { background: #f3f3f3;}
+.page-message {
+  width: 100%;
+  overflow-x: hidden;
+}
+.app-cell { align-items: flex-start; }
+.page-message .img-box image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.page-message .con-box { background: #fff; padding: 30rpx; margin: 0 100rpx 0 30rpx; border-radius: 20rpx;}

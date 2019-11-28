@@ -184,5 +184,8 @@ Page({
   gotoSearch() {
     wx.setStorageSync('searchFocus', 'true')
     app.gotoPage('/pages/tabBar/orders/index', 'tab')
+  },
+  gotoMsg() {
+    app.gotoPage('/pages/message/list/index')
   }
 })

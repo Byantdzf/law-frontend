@@ -9,6 +9,8 @@
     "pages/findPassword/index",
     "pages/news/list/index",
     "pages/news/detail/index",
+    "pages/message/list/index",
+    "pages/message/detail/index",
     "pages/reg/index",
     "pages/waitAuth/index"
   ],
