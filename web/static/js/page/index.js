@@ -5,8 +5,6 @@
 			var _t = this;
 			_t.c = utils.getQueryString('c');
 
-			
-
 			// base.openRedPacket();
 			let params = {
 				location: 1,
@@ -29,6 +27,8 @@
 
 			!_t.c && !areas && _t.getLocation()
 
+			// _t.getBanner()
+
 			_t.getLawyer()
 
 			_t.getQuestionType()
@@ -46,6 +46,30 @@
 				// 公司新闻
 				_t.getCompanyNews()
 			})
+		},
+
+		getBanner: function () {
+			var params = {
+				terminal: 1,
+				location: 1,
+			};
+			utils.get(URL.common.ad, params, function (res) {
+				var html = '<div class="layui-carousel" id="indexBanner" lay-filter="always">';
+				html += '<div carousel-item="">';
+				$.each(res.data, function (i, t) {
+					var url = t.url || 'javascript:;';
+					html += '<div><a href="' + url + '"><img src="' + t.coverPhoto + '" alt=""></a></div>';
+				});
+				html += '</div>';
+				html += '</div>';
+				$('.banner').html(html);
+				
+				carousel.render({
+					elem: '#indexBanner'
+					, width: '1200px'
+					, height: '376px'
+				});
+			});
 		},
 
 		getLocation: function () {

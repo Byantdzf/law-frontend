@@ -19,7 +19,24 @@
 
 			_t.getData();
 
+			_t.getBanner();
+
 			_t.getLawyerList();
+		},
+
+		getBanner: function () {
+			var params = {
+				terminal: 1,
+				location: 2,
+			};
+			utils.get(URL.common.ad, params, function (res) {
+				if (res.data && res.data.length) {
+					var list = res.data[0] || {};
+					var url = list.url || 'javascript:;';
+					var html = '<a href="' + url + '"><img src="' + list.coverPhoto + '" alt=""></a>';
+					$('.lawyerAd').html(html);
+				}
+			});
 		},
 
 		getData: function () {
