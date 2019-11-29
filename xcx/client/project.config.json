@@ -236,7 +236,7 @@
 					"id": 26,
 					"name": "详情",
 					"pathName": "pages/lawyer/detail/index",
-					"query": "id=129807878662914048",
+					"query": "id=129520900910350336",
 					"scene": null
 				},
 				{
@@ -363,6 +363,13 @@
 					"name": "pages/tabBar/message/index",
 					"pathName": "pages/tabBar/message/index",
 					"query": "id=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabBar/message/index",
+					"pathName": "pages/tabBar/message/index",
+					"query": "type=21",
 					"scene": null
 				}
 			]

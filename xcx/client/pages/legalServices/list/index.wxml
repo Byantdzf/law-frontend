@@ -9,7 +9,7 @@
                 <app-list url="{{baseUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
                     <view class="intro" wx:if="{{list[0]}}">
                         <view class="img-box">
-                            <image src="{{ list[0].instructionPic }}" binderror="imageError" data-img="list[0].instructionPic"></image>
+                            <image src="{{ list[0].instructionPic }}" mode="aspectFill" binderror="imageError" data-img="list[0].instructionPic"></image>
                         </view>
                         <view class="title color_333 font30 bold">{{ list[0].title }}</view>
                         <view class="desc color_666 font28">{{ list[0].instruction }}</view>
@@ -19,25 +19,25 @@
                     <!-- <view class="list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
                         <view class="flex"> -->
                             <view class="img-box">
-                                <image src="{{ item.instructionPic }}" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
+                                <image src="{{ item.instructionPic }}" mode="aspectFill" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
                             </view>
                             <view class="flex-bd pl-20">
-                                <view class="title">{{ item.title }}</view>
-                                <view class="desc cl-666">{{ item.instruction }}</view>
+                                <view class="title color_333  bold">{{ item.title }}</view>
+                                <view class="desc color_666">{{ item.instruction }}</view>
                                 <view class="price-box flex">
                                     <view class="flex-bd">
-                                        <text class="cl-999">价格：</text>
-                                        <text class="cl-red">{{ item.price }}元/次</text>
+                                        <text class="color_666 font24">价格：</text>
+                                        <text class="color_theme font24">{{ item.price }}元/次</text>
                                     </view>
                                     <view class="flex-ft">
-                                        <text class="cl-999">销售量：</text>
-                                        <text class="cl-999">{{ item.salesCount }}</text>
+                                        <text class="color_666 font24">销售量：</text>
+                                        <text class="color_666 font24">{{ item.salesCount }}</text>
                                     </view>
                                 </view>
                                 <view class="btn-box">
-                                    <button size="mini" plain data-id="{{item.id}}" catch:tap="buyNow">
+                                    <view class="main-btn flo_r text-center bcTheme color_white"  data-id="{{item.id}}" catch:tap="buyNow">
                                         立即购买
-                                    </button>
+                                    </view>
                                 </view>
                             </view>
                         </view>
