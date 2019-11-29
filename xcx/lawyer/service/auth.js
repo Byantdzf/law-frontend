@@ -42,4 +42,8 @@ module.exports = {
    * 修改用户资料
    */
   updateInfo: params => postJson('/applets/lawyer/updateLawyerInfo', params),
+  /**
+   * 忘记密码-重置密码
+   */
+  resetPassword: params => get('/applets/lawyer/resetPassword', params),
 }

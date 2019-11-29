@@ -8,7 +8,7 @@
             <form bindsubmit="formSubmit">
                 <view class="issue-form-item">
                     <view class="issue-form-input">
-                        <input class="app-input" type="text" name="account" placeholder="请输入手机号"></input>
+                        <input class="app-input" type="text" name="account" bindinput="phoneChange" placeholder="请输入手机号"></input>
                     </view>
                 </view>
                 <view class="issue-form-item">
@@ -21,7 +21,7 @@
                         还没帐号？
                         <span class="cl-red" bind:tap="gotoReg">立即注册</span>
                     </view>
-                    <!-- <view class="cl-999" bind:tap="findPassword">忘记密码</view> -->
+                    <view class="cl-red" bind:tap="findPassword">忘记密码？</view>
                 </view>
                 <view class="issue-form-item flex no-border">
                     <checkbox-group bindchange="checkboxChange">

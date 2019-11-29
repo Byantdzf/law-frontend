@@ -40,7 +40,7 @@ Page({
         //     let intro = res.data.list[0] || {}
         //     this.setData({ intro })
         // })
-        selectApi.platformService({ dictCode: 22 }).then(res => {
+        selectApi.platformService({ dictCode: this.data.type }).then(res => {
             let intro = res.data || {}
             this.setData({ intro })
         })
