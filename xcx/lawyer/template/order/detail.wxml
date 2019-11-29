@@ -21,11 +21,11 @@
 
 <template name="orderInfo_01">
   <view class="orderInfo">
-    <view class="flex">
+    <view class="flex" wx:if="{{ orderCategory == 11 }}">
       <text class="label cl-999">咨询内容：</text>
       <text class="label cl-999">{{ content }}</text>
     </view>
-    <view class="flex">
+    <view class="flex" wx:if="{{ orderCategory == 11 }}">
       <text class="label cl-999">所属分类：</text>
       <text class="label cl-999">{{ questionTypeName }}</text>
     </view>
@@ -40,6 +40,10 @@
     <view class="flex">
       <text class="label cl-999">订单备注：</text>
       <text class="label cl-999">{{ remark }}</text>
+    </view>
+    <view class="flex" wx:if="{{ orderCategory == 12 }}">
+      <text class="label cl-999">所在地区：</text>
+      <text class="label cl-999">{{ province + '-' + city }}</text>
     </view>
   </view>
 </template>

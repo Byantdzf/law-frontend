@@ -4,7 +4,7 @@
 <wxs module="fn">
   module.exports = {
     showLawyer: function(item) {
-      return '10,20,70'.indexOf(item.orderStatus) === -1;
+      return '5,10,20,70'.indexOf(item.orderStatus) === -1;
     },
     showCancel: function(item) {
       return '5,10,20'.indexOf(item.orderStatus) !== -1;

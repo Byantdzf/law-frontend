@@ -192,5 +192,11 @@ Page({
   },
   gotoMsg() {
     app.gotoPage('/pages/message/list/index')
+  },
+  gotoMoreOrders(e) {
+    const { type } = e.currentTarget.dataset
+    console.log(type)
+    wx.setStorageSync('orderSource', +type)
+    app.gotoPage('/pages/tabBar/orders/index', 'tab')
   }
 })

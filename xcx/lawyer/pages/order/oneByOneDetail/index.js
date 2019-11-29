@@ -83,4 +83,7 @@ Page({
       });
     }).catch(e => {});
   },
+  makePhone() {
+    app.makePhoneCall(this.data.item.contactMobile)
+  }
 })

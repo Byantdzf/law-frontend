@@ -26,8 +26,9 @@
     </view>
     <view class="flex">
       <text class="label cl-999">电话：</text>
-      <view class="flex flex-bd cl-666">
-        <text>{{ item.contactMobile }}</text>
+      <view class="flex flex-bd cl-666" bindtap="makePhone">
+        <text class="iconfont icon-tel cl-primary"></text>
+        <text class="pl-10">{{ item.contactMobile }}</text>
       </view>
     </view>
     <view class="detail-box" wx:if="{{ orderScoreList.length }}">
