@@ -27,7 +27,7 @@ const content = {
     // 反馈信息 -- 添加
     feedbackAdd: (context, params) => postJson(`/feedback`, params),
     // 反馈信息 -- 修改
-    feedbackUpdate: (context, params) => put(`/feedback`, params),
+    feedbackUpdate: (context, params) => post(`/feedback/response`, params),
     // 反馈信息 -- 标记
     feedbackMark: (context, ids) => put(`/feedback/mark/${ids}`),
     // 反馈信息 -- 删除
