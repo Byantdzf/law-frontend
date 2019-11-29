@@ -108,6 +108,8 @@ export default {
       if(this.row && this.row.hasOwnProperty('id')) {
         params.id = this.row.id
       }
+      params.category = 3;
+      debugger
       this.$emit('submit', params)
     }
   },

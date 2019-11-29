@@ -240,7 +240,7 @@ export default {
     },
     // 表单提交
     async formSubmitDialog(form) {
-      form.category = 2;
+      form.category = 3;
       form.serviceType = this.articleType
       try {
         if ("id" in form) {
