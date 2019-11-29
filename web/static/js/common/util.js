@@ -161,7 +161,7 @@ layui.define(function (exports) {
 						})
 					} else {
 						if (url.indexOf('/pc/user/wechat/login/result') == -1) {
-							gather.msg(res.data || res.msg || res.code);
+							gather.msg(res.msg || res.code);
 						}
 					}
 				},
