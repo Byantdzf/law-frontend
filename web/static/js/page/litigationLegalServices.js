@@ -47,7 +47,7 @@
 
 		loadRecommend: function () {
 			var params = {}
-			params.dictCode = 2;
+			params.dictCode = 22;
 			utils.getSync(URL.common.common, params, function (res) {
 				var data = res.data || {}
 				var src = data.image || '/static/images/nopic.jpg'
