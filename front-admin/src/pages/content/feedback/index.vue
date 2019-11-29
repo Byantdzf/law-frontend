@@ -145,7 +145,7 @@
           },
           {
             label: '关键词：',
-            field: 'keyword',
+            field: 'keyWord',
             type: 1
           }
         ]
