@@ -33,7 +33,7 @@
 			var qlps = {
 				url: URL.legal.queryNonlitigationLegalServices,
 				searchData: {
-					serviceType: 21
+					serviceType: 22
 				},
 				box: '.services_list',
 				temp: '/page/legal/list.html'
