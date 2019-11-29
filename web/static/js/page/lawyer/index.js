@@ -4,13 +4,9 @@
 		init: function () {
 			var _t = this;
 
-			carousel.render({
-				elem: '#indexBanner'
-				, width: '1200px'
-				, height: '376px'
-			});
-
 			this.getQuestionType();
+
+			_t.getBanner()
 
 			$.get('/static/js/plugin/jquery.SuperSlide.2.1.3.js', function () {
 				// 法律文章精选
@@ -32,6 +28,30 @@
 			});
 
 			_t.actions();
+		},
+
+		getBanner: function () {
+			var params = {
+				terminal: 3,
+				location: 1,
+			};
+			utils.get(URL.common.ad, params, function (res) {
+				var html = '<div class="layui-carousel" id="indexBanner" lay-filter="always">';
+				html += '<div carousel-item="">';
+				$.each(res.data, function (i, t) {
+					var url = t.url || 'javascript:;';
+					html += '<div><a href="' + url + '"><img src="' + t.coverPhoto + '" alt=""></a></div>';
+				});
+				html += '</div>';
+				html += '</div>';
+				$('.banner').html(html);
+				
+				carousel.render({
+					elem: '#indexBanner'
+					, width: '1200px'
+					, height: '376px'
+				});
+			});
 		},
 
 		getQuestionType: function () {

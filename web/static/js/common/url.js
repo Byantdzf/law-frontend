@@ -29,7 +29,8 @@ var URL = {
 		wechatPay: pcHost + '/pc/lawyer/pay/getPrepayInfoQr',
 		wechatPayResult: pcHost + '/pc/lawyer/getWeixinOrderByOrderNo',
 		orderQr: pcHost + '/pc/lawyer/wechat/qrcode/getQrcodeUrlByOrderNo',
-		common: pcHost + '/platform/common/service'
+		common: pcHost + '/platform/common/service',
+		ad: pcHost + '/pc/user/homePage/advertisementList'
 	},
 	auth: {
 		login: '/static/data/login.json',
