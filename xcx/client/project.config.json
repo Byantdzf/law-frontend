@@ -371,6 +371,13 @@
 					"pathName": "pages/tabBar/message/index",
 					"query": "type=21",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/legalServices/listMutli/index",
+					"pathName": "pages/legalServices/listMutli/index",
+					"query": "id=129520900910350336",
+					"scene": null
 				}
 			]
 		}

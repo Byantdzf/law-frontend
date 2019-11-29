@@ -90,12 +90,13 @@ export default {
           const { userName, password } = this.loginForm
           const res = await this.login({ userName, password })
           const accountId = this.$val(res, 'data.id')
-
           this.setState({
             userName,
             accountId,
+            // perms: res.data.user.perms,
             saveStorage: true
           })
+          localStorage.setItem("perms",res.data.user.perms.join(",") )
 
           // this.$router.push({ query: { uid: accountId } })
 

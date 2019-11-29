@@ -176,7 +176,7 @@
           <view class="tbody">
             <block wx:for="{{details.orderList}}" wx:key="{{index}}">
               <view class="tr">
-                <view class="td">{{item.orderTypeName || ''}}</view>
+                <view class="td">{{orderCategory[item.orderCategory]}}</view>
                 <view class="td">{{item.count}}</view>
                 <view class="td">{{item.score}}</view>
               </view>
@@ -197,13 +197,15 @@
             <image src="{{item.imgUrl}}" mode="widthFix"></image>
           </view>
           <view class="flex-bd">
-            <view class="name">{{item.name}}</view>
-            <view class="flex"><view class="flex-ft cl-999">服务类型：</view><view class="flex_bd">{{ item.type }}</view></view>
-            <view class="flex"><view class="flex-ft cl-999">服务时间：</view><view class="flex_bd">{{ item.servicesTime }}</view></view>
-            <view class="flex"><view class="flex-ft cl-999">服务态度：</view><view class="flex_bd">{{ item.servicesScore }}</view></view>
-            <view class="flex"><view class="flex-ft cl-999">专业程度：</view><view class="flex_bd">{{ item.Professional }}</view></view>
+            <view class="info">
+              <view class="name">{{item.userName}}</view>
+              <view class="flex"><view class="flex-ft cl-999">服务类型：</view><view class="flex_bd">{{ orderType[item.serviceType] }}</view></view>
+              <view class="flex"><view class="flex-ft cl-999">服务时间：</view><view class="flex_bd">{{ item.orderUpdateTime }}</view></view>
+              <view class="flex"><view class="flex-ft cl-999">服务态度：</view><view class="flex_bd">{{ item.serviceAttitudeScore }}</view></view>
+              <view class="flex"><view class="flex-ft cl-999">专业程度：</view><view class="flex_bd">{{ item.professionalAttitudeScore }}</view></view>
+            </view>
+            <view class="content">{{ item.content }}</view>
           </view>
-            <view class="desc">{{ item.remark }}</view>
         </view>
       </view>
     </view>

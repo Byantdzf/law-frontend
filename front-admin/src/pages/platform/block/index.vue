@@ -122,6 +122,7 @@ import { mapActions } from "vuex";
 import { Upload } from 'element-ui';
 import AppTable from "@/mixins/table";
 import AppDialog from "@/mixins/dialog";
+import AppTableImgs from '@/components/app-table/lib/imgs'
 import AppSearch from "@/mixins/search";
 import AppRsText from "@/components/app-table/lib/rsText";
 import SYSTEM from '@/utils/system'
@@ -130,7 +131,7 @@ export default {
     Edit: () => import("./edit"),
     [Upload.name]: Upload
   },
-  mixins: [AppTable, AppDialog, AppSearch],
+  mixins: [AppTable, AppDialog, AppSearch, AppTableImgs],
   data() {
     return {
       columns: [
@@ -142,6 +143,12 @@ export default {
         {
           label: "服务类型名称",
           field: "title"
+        },
+        {
+          label: "封面",
+          field: "instructionPic",
+          width: 100,
+          component: AppTableImgs
         },
         {
           label: "价格",
@@ -175,7 +182,8 @@ export default {
         { id: 22, name: "分块法律服务" }
       ],
       tableParams: {
-        serviceType: 21
+        serviceType: 21,
+        category: 2
       },
       currTypeName: "",
       info: {},
@@ -194,7 +202,8 @@ export default {
     articleType(type) {
       this.tableParams = {
         ...this.tableParams,
-        serviceType: type
+        serviceType: type,
+        category: 2
       };
       
       let obj = {}

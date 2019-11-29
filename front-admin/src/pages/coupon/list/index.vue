@@ -91,17 +91,17 @@
             align: 'center'
           },{
             label: '领取总数',
-            field: 'getCount',
+            field: 'fetched',
             width: 80,
             align: 'center'
           },{
             label: '使用总数',
-            field: 'useCount',
+            field: 'used',
             width: 80,
             align: 'center'
           },{
             label: '未使用总数',
-            field: 'remainCount',
+            field: 'unused',
             width: 90,
             align: 'center'
           },{

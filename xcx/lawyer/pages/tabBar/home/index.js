@@ -7,11 +7,7 @@ Page({
   data: {
     currArea: [],
     //图片地址
-    banners: [
-      '/static/images/demo/banner1.png',
-      '/static/images/demo/banner2.png',
-      '/static/images/demo/banner3.png'
-    ],
+    banners: [],
     list1: [],
     list2: [],
     list4: [],
@@ -100,6 +96,15 @@ Page({
       this.getOrderList(2)
       this.getOrderList(4)
     });
+
+    this.getBanners();
+  },
+  // 获取banners
+  getBanners() {
+    selectApi.advertisementList({ terminal: 4, location: 1 }).then(res => {
+      let banners = (res.data || []).map(v => v.coverPhoto)
+      this.setData({ banners })
+    })
   },
   // 获取热门新闻
   getNewsData() {
@@ -184,5 +189,8 @@ Page({
   gotoSearch() {
     wx.setStorageSync('searchFocus', 'true')
     app.gotoPage('/pages/tabBar/orders/index', 'tab')
+  },
+  gotoMsg() {
+    app.gotoPage('/pages/message/list/index')
   }
 })

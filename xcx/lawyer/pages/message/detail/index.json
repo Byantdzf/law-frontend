@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "消息详情",
+  "backgroundColor": "#f3f3f3",
+  "usingComponents": {
+    "app-list": "../../../components/app-list/index"
+  }
+}

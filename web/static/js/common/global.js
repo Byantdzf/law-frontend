@@ -12,7 +12,7 @@ var appToken = 'HJLAWYER';
 var audioCanPlay = true;
 
 var global = {
-    tel: '0755-123456',
+    tel: '',
     // userInfo: {id: 1, username: "wakaka", pic: "/static/images/avatar.jpg"},
     page: 'pageNo',                      // 分页页码字段
     rows: 'pageSize',                       // 分页每页条数字段

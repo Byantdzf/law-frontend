@@ -32,7 +32,6 @@ const auth = {
           })
 
           rootState.navs = getTreeData({ list: data, pid: 'parentId', cid: 'id' })
-          
           resolve(rootState.navs)
         }).catch(error => {
           reject(error)

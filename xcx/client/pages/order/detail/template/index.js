@@ -6,7 +6,7 @@ Page({
   data: {
     // 存放订单信息
     item: {},
-    fileInfo: {}
+    files: []
   },
   onLoad(e) {
     app.pages.add(this);
@@ -51,18 +51,17 @@ Page({
   },
   // 法律文件购买展示文件信息
   loadLawDocument(orderId) {
-    orderApi.orderMsglist(orderId).then(res => {
-      const data = res.data || {};
-      console.log(data)
-      // this.setData({ msglist: msglist.filter(v => v.isUser === 'false') });
+    orderApi.lawDocument(orderId).then(res => {
+      const files = res.data || [];
+      this.setData({ files });
     });
   },
   // 打开文件
   handleOpenDoc(e) {
-    const { item } = this.data;
-    const token = wx.getStorageSync(tokenName);
+    const { filepath: fileUrl } = e.currentTarget.dataset;
+    const token = wx.getStorageSync(tokenName)
     wx.downloadFile({
-      url: item.filePath,
+      url: fileUrl,
       header: {
         "Authorization": "Bearer " + token
       },
@@ -77,11 +76,11 @@ Page({
       }
     });
   },
-  handleDownload() {
-    const { item } = this.data;
+  handleDownload(e) {
+    const { filepath: fileUrl } = e.currentTarget.dataset;
     const token = wx.getStorageSync(tokenName)
     wx.downloadFile({
-      url: item.filePath,
+      url: fileUrl,
       header: {
         "Authorization": "Bearer " + token
       },

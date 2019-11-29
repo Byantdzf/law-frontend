@@ -1,7 +1,8 @@
 // pages/mandatoryLawyer/list/index.js
 const app = getApp();
-const legalServices = require('../../../service/legalServices')
-const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
+// const legalServices = require('../../../service/legalServices')
+// const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
+const selectApi = require('../../../service/select')
 Page({
     data: {
         type: 31,
@@ -16,7 +17,14 @@ Page({
         this.setData({
             type
         })
+        this.loadData()
         this.loadList()
+    },
+    loadData() {
+        selectApi.platformService({ dictCode: 3 }).then(res => {
+            let intro = res.data || {}
+            this.setData({ intro })
+        })
     },
     loadList() {
         const appList = this.selectComponent('#app-list')

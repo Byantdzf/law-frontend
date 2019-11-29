@@ -145,6 +145,18 @@
 			gather.getHeader();
 			gather.getFoot();
 
+			utils.getSync(URL.common.common, {dictCode: 1}, function (res) {
+				global.tel = res.data.phone || '';
+				global.complainTel = res.data.complaint_phone || '';
+
+				if ($('.tel').length) {
+					$('.tel').html(global.tel)
+				}
+				if ($('.complainTel').length) {
+					$('.complainTel').html(global.complainTel)
+				}
+			});
+
 			$('body').on('click', '.searchBtn', function () {
 				gather.topSearch();
 			});

@@ -38,7 +38,7 @@
 
     <app-table 
       ref="appTable"
-      :url="`/member/lawyer/order/${row.id}`"
+      :url="`/member/user/orderList/${row.id}`"
       :params="tableParams"
       :columns="columns"
     />

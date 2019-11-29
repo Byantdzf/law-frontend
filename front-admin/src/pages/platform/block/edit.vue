@@ -12,8 +12,9 @@
 
 <script>
 import AppForm from '@/mixins/form'
+import AppUpload from '@/components/app-upload'
 export default {
-  mixins: [AppForm],
+  mixins: [AppForm, AppUpload],
   props: {
     row: Object
   },
@@ -40,6 +41,20 @@ export default {
           type: 1,
           value: row.title,
           required: true
+        },
+        {
+          label: '封面图片',
+          field: 'instructionPic',
+          value: row.instructionPic || '',
+          component: AppUpload,
+          config: {
+            max: 1,
+            preview: true,
+            dataType: 'string',
+            fileType: 'jpg,jpeg,png',
+            btnIcon: 'el-icon-plus',
+            tips: '建议300*300'
+          }
         },
         {
           label: '价格',
@@ -93,6 +108,7 @@ export default {
       if(this.row && this.row.hasOwnProperty('id')) {
         params.id = this.row.id
       }
+      params.category = 2;
       this.$emit('submit', params)
     }
   },

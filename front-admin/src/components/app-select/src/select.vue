@@ -48,7 +48,7 @@
     },
     data () {
       return {
-        defaultValue: this.value && this.value.toString()
+        defaultValue:  this.value && this.value.toString()
       }
     },
     computed: {
@@ -68,7 +68,7 @@
         if (isPlainObject(this.options)) {
           for (let k in this.options) {
             arr.push({
-              id: isNumber(+k) ? +k : k,
+              id: k.toString(),
               name: this.options[k]
             })
           }
@@ -76,10 +76,11 @@
           arr = this.options.reduce((res, cur) => {
             if (isString(cur) || isNumber(cur)){
               res.push({
-                id: cur,
+                id: cur && cur.toString(),
                 name: cur
               })
             } else if(isPlainObject(cur)) {
+              cur.id = cur.id && cur.id.toString()
               res.push(cur)
             }
             return res

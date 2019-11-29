@@ -16,8 +16,8 @@
                     </view>
                     <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails" wx:if="{{ list.length }}">
                         <view class="flex items">
-                    <!-- <view class="list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
-                        <view class="flex"> -->
+                            <!-- <view class="list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
+                                <view class="flex"> -->
                             <view class="img-box">
                                 <image src="{{ item.instructionPic }}" mode="aspectFill" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
                             </view>

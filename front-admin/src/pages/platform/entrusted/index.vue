@@ -140,13 +140,14 @@ import { Upload } from 'element-ui';
 import SYSTEM from '@/utils/system';
 import AppDialog from "@/mixins/dialog";
 import AppTable from "@/mixins/table";
+import AppTableImgs from '@/components/app-table/lib/imgs'
 import AppForm from '@/mixins/form'
 export default {
   components: {
     [Upload.name]: Upload,
     Edit: () => import("./edit"),
   },
-  mixins: [AppTable, AppForm, AppDialog],
+  mixins: [AppTable, AppForm, AppDialog, AppTableImgs],
   data() {
     return {
       columns: [
@@ -158,6 +159,12 @@ export default {
         {
           label: "服务类型名称",
           field: "title"
+        },
+        {
+          label: "封面",
+          field: "instructionPic",
+          width: 100,
+          component: AppTableImgs
         },
         {
           label: "价格",
@@ -192,7 +199,8 @@ export default {
         { id: 32, name: "风险代理详情展示" }
       ],
       tableParams: {
-        serviceType: 31
+        serviceType: 31,
+        category: 3
       },
       currTypeName: "",
       info: {},
@@ -233,7 +241,7 @@ export default {
     },
     // 表单提交
     async formSubmitDialog(form) {
-      form.category = 2;
+      form.category = 3;
       form.serviceType = this.articleType
       try {
         if ("id" in form) {

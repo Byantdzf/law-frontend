@@ -1,5 +1,6 @@
 // pages/user/suggestion/index.js
 const app = getApp();
+const userApi = require('../../../../service/user')
 
 Page({
 
@@ -30,9 +31,9 @@ Page({
             return;
         }
 
-        app.toastSuccess(`保存成功`);
-        setTimeout(() => {
-            wx.navigateBack()
-        }, 800)
+        userApi.userFeedback({ remark: data.content }).then(() => {
+            wx.navigateBack();
+            app.toastSuccess(`提交成功`);
+        });
     },
 })

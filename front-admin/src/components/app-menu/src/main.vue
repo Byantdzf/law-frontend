@@ -7,6 +7,7 @@
 	>
 		<app-menu-item
 			v-for="menu in navs"
+			v-show="perms.indexOf(menu.value) != -1 || menu.value =='/home'"
 			:key="menu.id"
 			:menu="menu"
 			:root="menu"
@@ -49,6 +50,7 @@
 		},
 		methods: {
 			itemClick(){
+				
 				this.$emit("clickTime")
 			},
 
@@ -56,7 +58,18 @@
 				let _t = this
 				let	menu = null
 				let	path = this.$route.path;
-
+				// if( this.navs instanceof Array){
+				// 	this.navs = this.navs.filter(item => {
+				// 		for(let sonItem of perms){
+				// 			if(item.value && item.value.indexOf( sonItem ) != -1 ){
+				// 				return true
+				// 			}
+				// 		}
+				// 		return false
+				// 	})
+				// }
+				// console.log(this.navs)
+				// this.navs = []
 				(function fn(arr) {
 					let i = 0
 
@@ -80,7 +93,9 @@
 				})(this.navs)
 			}
 		},
-		created() {
+		created() {				
+			this.perms = localStorage.getItem("perms");
+
 			this.setCurMenuId()
 		}
 	}

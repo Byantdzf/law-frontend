@@ -39,5 +39,9 @@ module.exports = {
     /**
      * 提现
     */
-    withDraw: params => post('/applets/lawyer/pay/cashOut', params)
+    withDraw: params => post('/applets/lawyer/pay/cashOut', params),
+    /**
+     * 用户反馈
+    */
+    userFeedback: params => post('/applets/user/feedback', params),
 }

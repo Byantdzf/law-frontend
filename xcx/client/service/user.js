@@ -30,4 +30,8 @@ module.exports = {
      * 用户邀请律师-指定律师
     */
     orderModifyDispatchWayByUser: params =>get('/applets/user/order/modifyDispatchWayByUser', params),
+    /**
+     * 用户反馈
+    */
+    userFeedback: params => post('/applets/user/feedback', params),
 }

@@ -71,15 +71,15 @@
           },{
             label: '订单类型',
             field: 'orderType',
-            formater: ({ type }) => this.$t('rs.orderType')[type]
+            formater: ({ orderType }) => this.$t('rs.orderType')[orderType],
           },{
             label: '订单种类',
             field: 'orderCategory',
-            formater: ({ type }) => this.$t('rs.orderCategory')[type]
+            formater: ({ orderCategory }) => this.$t('rs.orderCategory')[orderCategory]
           },{
             label: '订单状态',
             field: 'orderStatus',
-            formater: ({ type }) => this.$t('rs.orderStatus')[type]
+            formater: ({ orderStatus }) => this.$t('rs.orderStatus')[orderStatus]
           },{
             label: '订单金额',
             field: 'amount',

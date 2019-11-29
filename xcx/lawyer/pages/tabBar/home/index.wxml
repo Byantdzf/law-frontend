@@ -17,7 +17,7 @@
         <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
         <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
       </view>
-      <view class="msg-box pl-40">
+      <view class="msg-box pl-40" bindtap="gotoMsg">
         <view class="iconfont icon-send-msg"></view>
       </view>
     </view>
