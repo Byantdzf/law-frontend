@@ -167,6 +167,9 @@ export default {
       headers: {
         'Authorization':  'Bearer ' + SYSTEM.userToken()
       },
+      tableParams: {
+        category: 1
+      },
       uploading: false,
       img: "",
     };

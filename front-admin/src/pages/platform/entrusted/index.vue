@@ -199,7 +199,8 @@ export default {
         { id: 32, name: "风险代理详情展示" }
       ],
       tableParams: {
-        serviceType: 31
+        serviceType: 31,
+        category: 3
       },
       currTypeName: "",
       info: {},

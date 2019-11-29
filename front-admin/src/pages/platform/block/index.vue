@@ -182,7 +182,8 @@ export default {
         { id: 22, name: "分块法律服务" }
       ],
       tableParams: {
-        serviceType: 21
+        serviceType: 21,
+        category: 2
       },
       currTypeName: "",
       info: {},
@@ -201,7 +202,8 @@ export default {
     articleType(type) {
       this.tableParams = {
         ...this.tableParams,
-        serviceType: type
+        serviceType: type,
+        category: 2
       };
       
       let obj = {}
