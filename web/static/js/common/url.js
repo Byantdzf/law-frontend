@@ -48,7 +48,8 @@ var URL = {
 	lawyer: {
 		query: pcHost + '/pc/user/lawyer/list',
 		getById: pcHost + '/pc/user/lawyer/details/',
-		comments: pcHost + '/pc/user/lawyer/details/evaluation/list'
+		comments: pcHost + '/pc/user/lawyer/details/evaluation/list',
+		getBanner: pcHost + '/pc/user/homePage/advertisementList'
 	},
 	news: {
 		query: pcHost + '/pc/user/article/list',

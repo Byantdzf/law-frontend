@@ -117,6 +117,7 @@ a:hover { opacity: .8;}
 .lawyer_nav .layui-nav .layui-nav-item:nth-child(5){ background: none;}
 
 .banner { position:relative; z-index:1;}
+.banner-image {background-size: cover; background-position: center; cursor: pointer}
 /*  首页  banner 提交框  */
 .submitbox{width:288px;height:278px;border: 1px solid #d8d8d8;}
 .submitbox h2{font-size:20px;font-weight:bold;padding-left:46px;background: url("../images/icon_edit.png") no-repeat 16px center;border-bottom: 1px solid #d8d8d8;height:52px;line-height:52px;}
