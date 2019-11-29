@@ -21,7 +21,7 @@ Page({
         this.loadList()
     },
     loadData() {
-        selectApi.platformService({ dictCode: 3 }).then(res => {
+        selectApi.platformService({ dictCode: this.data.type }).then(res => {
             let intro = res.data || {}
             this.setData({ intro })
         })
