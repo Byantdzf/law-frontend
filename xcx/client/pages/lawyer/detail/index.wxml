@@ -1,29 +1,29 @@
 <view class="home-list">
-  <view class="img-box">
-    <view class="water">
-      <view class=" point1 {{active?'activeStyle':'point'}}"></view>
-      <view class=" point2 {{active?'activeStyle':'point'}}"></view>
-      <view class=" point3 {{active?'activeStyle':'point'}}"></view>
-      <view class=" point4 {{active?'activeStyle':'point'}}"></view>
-    </view>
-    <image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="aspectFill" binderror="imageError" data-img="details.pic"></image>
-    <view class="main_laber_left">
-      <view class="item_laber font28 ellipsis_1"style="padding: 4rpx 22rpx;">{{ details.name }}</view>
-      <view class="dot left"></view>
-    </view>
-    <view class="main_laber_left" style="bottom: 34vw">
-      <view class="item_laber">性别：{{gender[details.gender]}}</view>
-      <view class="dot left"></view>
-    </view>
-    <view class="main_laber_right">
-      <view class="dot right"></view>
-      <view class="item_laber_right">已帮助：{{ details.helps || 0 }}人</view>
-    </view>
-    <view class="main_laber_right"  style="bottom: 30vw">
-      <view class="dot right"></view>
-      <view class="item_laber_right">被关注：{{ details.concerns || 0 }}</view>
-    </view>
-  </view>
+  <!--<view class="img-box">-->
+    <!--<view class="water">-->
+      <!--<view class=" point1 {{active?'activeStyle':'point'}}"></view>-->
+      <!--<view class=" point2 {{active?'activeStyle':'point'}}"></view>-->
+      <!--<view class=" point3 {{active?'activeStyle':'point'}}"></view>-->
+      <!--<view class=" point4 {{active?'activeStyle':'point'}}"></view>-->
+    <!--</view>-->
+    <!--<image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="aspectFill" binderror="imageError" data-img="details.pic"></image>-->
+    <!--<view class="main_laber_left">-->
+      <!--<view class="item_laber font28 ellipsis_1"style="padding: 4rpx 22rpx;">{{ details.name }}</view>-->
+      <!--<view class="dot left"></view>-->
+    <!--</view>-->
+    <!--<view class="main_laber_left" style="bottom: 34vw">-->
+      <!--<view class="item_laber">性别：{{gender[details.gender]}}</view>-->
+      <!--<view class="dot left"></view>-->
+    <!--</view>-->
+    <!--<view class="main_laber_right">-->
+      <!--<view class="dot right"></view>-->
+      <!--<view class="item_laber_right">已帮助：{{ details.helps || 0 }}人</view>-->
+    <!--</view>-->
+    <!--<view class="main_laber_right"  style="bottom: 30vw">-->
+      <!--<view class="dot right"></view>-->
+      <!--<view class="item_laber_right">被关注：{{ details.concerns || 0 }}</view>-->
+    <!--</view>-->
+  <!--</view>-->
   <view class="main-info">
     <view class="info-collect">
       <block wx:if="{{details.focused > 0}}">
@@ -106,9 +106,9 @@
     <!--</button>-->
     <!--<button size="mini" plain bind:tap="inviteTap">邀请接单</button>-->
   <!--</view>-->
-  <view class="flex tab-box">
-    <view class="flex-bd {{ showType == 1 && 'curr' }}" data-type="1" bind:tap="changeTab">基本信息</view>
-    <view class="flex-bd {{ showType == 2 && 'curr' }}" data-type="2" bind:tap="changeTab">用户评论</view>
+  <view class="main-tab ">
+    <view class="{{ showType == 1 && 'curr' }} item-tab" data-type="1" bind:tap="changeTab">接单数据</view>
+    <view class="{{ showType == 2 && 'curr' }} item-tab" data-type="2" bind:tap="changeTab">用户评论</view>
   </view>
   <view class="tab-content">
     <!-- 基本信息 -->
@@ -190,7 +190,7 @@
       <!--</view>-->
     </view>
     <!-- 用户评论 -->
-    <view class="scoreBox" wx:if="{{showType == 2}}">
+    <view class="scoreBox" wx:if="{{showType == 1}}">
       <view class="scoreList">
         <view class="flex items" wx:for="{{comments}}" wx:key="{{index}}">
           <view class="flex-ft img-box">
