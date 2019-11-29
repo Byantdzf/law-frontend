@@ -164,7 +164,7 @@
       // 表单提交
       async formSubmit(form) {
         try {
-          if ('id' in form) {
+          if ('userId' in form) {
             await this.feedbackUpdate(form)
             this.closeDialog()
             this.refreshTable()

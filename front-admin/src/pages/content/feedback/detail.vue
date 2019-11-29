@@ -50,11 +50,11 @@ export default {
     // 表单提交
     formSubmit() {
       let params = {
-        respInfo: this.$val(this.row, 'respInfo'),
-        dealStatus: 1
+        content: this.respInfo,
+        question: this.$val(this.row, 'content')
       }
       if(this.row && this.row.hasOwnProperty('id')) {
-        params.id = this.row.id
+        params.userId = this.row.id
       }
       this.$emit('submit', params)
     }
