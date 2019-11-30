@@ -228,13 +228,17 @@ export default {
       this.tableParams.serviceType = type
       // 此处应该读取对应数据
       this.refreshTable();
+      this.initService()
     }
   },
   methods: {
     // 初始化页面
     async initPage() {
       this.currTypeName = this.articleTypeItems[0].name;
-      let dictCode = 3;
+      this.initService()
+    },
+    async initService(){
+      let dictCode = this.articleType;
       let res = await this.getPlatfomService({dictCode})
       this.img = res.data.image;
       this.remark = res.data.brief;
@@ -406,7 +410,7 @@ export default {
     updateBasicInfo(type){
       let isImage = type === 'image';
       let params = {
-        dictCode: 3,
+        dictCode: this.articleType,
         name: isImage  ? 'image' : 'brief',
         code: isImage ? this.img : this.remark
       }
