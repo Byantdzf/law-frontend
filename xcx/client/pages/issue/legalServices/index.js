@@ -72,11 +72,12 @@ Page({
                 })
             })
 
-            let params = {}
-            params[PAGE_KEY] = 1
-            params[SIZE_KEY] = 100
-            userApi.couponList(params).then(res => {
-                let list = res.data.list || []
+            // let params = {}
+            // params[PAGE_KEY] = 1
+            // params[SIZE_KEY] = 100
+            userApi.couponList().then(res => {
+                // let list = res.data.list || []
+                let list = res.data || []
                 let couponList = [{"id": "", "couponName": "不使用", "amount": "0"}, ...list]
                 couponList.forEach(item => {
                     item.name = item.couponName
@@ -92,6 +93,7 @@ Page({
         if (this.data.id) {
             legalServices.getById({id: this.data.id}).then(res => {
                 this.setData({
+                    countTotal: res.data.price,
                     selectAmount: res.data.price,
                     list: [{id: res.data.id, name: res.data.title}],
                     // showInputNumber: t ? true : false

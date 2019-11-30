@@ -24,7 +24,8 @@ module.exports = {
     /**
      * 我的优惠券列表
     */
-    couponList: params =>get('/applets/user/coupon/list/', params),
+    // couponList: params =>get('/applets/user/coupon/list/', params),
+    couponList: params =>get('/applets/user/order/coupon/list', params),
 
     /**
      * 用户邀请律师-指定律师
