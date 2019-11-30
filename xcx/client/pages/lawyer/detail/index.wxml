@@ -229,7 +229,6 @@
       </view>
     </view>
     <view class="main-btn text-center">
-      <!--<view data-url="https://hujia.obs.cn-south-1.myhuaweicloud.com/law/1575077279000tmp_ada2669522a55befbe1e09ef457ca98a.xls" data-type="excel" class="item_btn flo_l bcTheme color_white" catchtap='downloadFile'>测试下载XLS</view>-->
       <view class="item_btn flo_l bcTheme color_white" bind:tap="voiceTap">在线咨询</view>
       <view class="item_btn bcTheme_sub" bind:tap="onByOneTap">指定咨询</view>
       <view class="item_btn flo_r" bind:tap="inviteTap">邀请接单</view>

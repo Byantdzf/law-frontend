@@ -222,5 +222,10 @@ Page({
     const { index } = e.currentTarget.dataset;
     const { id, lawyer, lawyerPic } = this.data.list[index];
     app.gotoPage(`/pages/order/evaluate/index?id=${id}&lawyer=${lawyer}&lawyerPic=${lawyerPic || ''}`);
-  }
+  },
+  // 打开文件
+  handleOpenDoc(e) {
+    const { filepath } = e.currentTarget.dataset;
+    app.handleOpenDoc(filepath);
+  },
 })

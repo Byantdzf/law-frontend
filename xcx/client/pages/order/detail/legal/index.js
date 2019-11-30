@@ -153,22 +153,7 @@ Page({
   },
   // 打开文件
   handleOpenDoc(e) {
-    const { filepath: fileUrl } = e.currentTarget.dataset;
-    const token = wx.getStorageSync(tokenName)
-    wx.downloadFile({
-      url: fileUrl,
-      header: {
-        "Authorization": "Bearer " + token
-      },
-      success: (res) => {
-        const filePath = res.tempFilePath
-        wx.openDocument({
-          filePath: filePath,
-          success: function (res) {
-            console.log('打开文档成功')
-          }
-        })
-      }
-    });
+    const { filepath } = e.currentTarget.dataset;
+    app.handleOpenDoc(filepath);
   },
 })

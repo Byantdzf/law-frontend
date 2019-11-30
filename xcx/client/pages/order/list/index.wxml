@@ -52,12 +52,6 @@
                 <span class="color_666 font28">{{ item.orderNo }}</span>
               </view>
               <view class="flex flex-ft">
-                <!-- <app-countdown
-                  wx:if="{{ item.time }}"
-                  value="{{ item.time }}"
-                  data-index="{{ index }}"
-                  bind:timeup="handleItemTimeup"
-                /> -->
                 <text class="pl-10 color_666 fw-b">{{ orderStatus[item.orderStatus] }}</text>
               </view>
             </view>
