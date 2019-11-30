@@ -131,7 +131,7 @@
   </view>
 </app-page>
 
-<app-pop direction="bottom" visible="{{ !isRecordAuth }}" styles="bottom:0rpx;left:0;width:100%;margin:0;">
+<app-pop direction="bottom" visible="{{ recordAuthVisible }}" styles="bottom:0rpx;left:0;width:100%;margin:0;">
   <view class='pop-auth'>
     <view class="pop-auth__hd">
       <view class="img-box">

@@ -287,4 +287,25 @@ App({
       })
     });
   },
+  // 检查/唤起用户授权使用录音功能
+  checkAndTriggerRecordAuth(successCallback, errorCallback) {
+    // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
+    wx.getSetting({
+      success: (res) => {
+        if (!res.authSetting['scope.record']) {
+          wx.authorize({
+            scope: 'scope.record',
+            success: () => {
+              typeof successCallback === 'function' && successCallback({ fromAuthorize: true });
+            },
+            fail: () => {
+              typeof errorCallback === 'function' && errorCallback();
+            }
+          })
+        } else {
+          typeof successCallback === 'function' && successCallback({ fromAuthorize: false });
+        }
+      }
+    });
+  }
 })

@@ -185,6 +185,7 @@ Page({
         format: 'mp3',
         duration: 180000
       });
+      this.clearRecordTimer();
       this.RecorderManager.onStart(() => {
         this.setData({ isRecording: true });
         this.recordTimer = setInterval(() => {

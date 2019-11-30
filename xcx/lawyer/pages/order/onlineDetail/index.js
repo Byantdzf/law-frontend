@@ -26,8 +26,8 @@ Page({
     filePath: '',
     recordTime: 0,
     recordTiming: 0,
-    // 用户授权了录音
-    isRecordAuth: true,
+    // 打开用户授权录音
+    recordAuthVisible: false,
     // 是否在播放录音
     playRecordAuthIndex: '',
   },
@@ -176,25 +176,34 @@ Page({
       return false;
     }
     try {
-      this.RecorderManager = wx.getRecorderManager();
-      this.RecorderManager.start({
-        format: 'mp3',
-        duration: 180000
-      });
-      this.RecorderManager.onStart(() => {
-        this.setData({ isRecording: true });
-        this.recordTimer = setInterval(() => {
-          let { recordTiming } = this.data;
-          recordTiming += 1;
-          this.setData({ recordTiming });
-        }, 1000);
-      });
-      this.RecorderManager.onError(err => {
-        this.RecorderManager.stop();
-        this.clearRecordTimer();
-        if (err && err.errMsg === 'operateRecorder:fail auth deny') {
-          this.setData({ isRecordAuth: false })
+      app.checkAndTriggerRecordAuth(({ fromAuthorize }) => {
+        if (fromAuthorize) {
+          // 通过弹出的授权框获取的授权先不执行，否则定时器有问题
+          return false;
         }
+        // 用户已经同意小程序使用录音功能
+        this.RecorderManager = wx.getRecorderManager();
+        this.RecorderManager.start({
+          format: 'mp3',
+          duration: 180000
+        });
+        this.RecorderManager.onStart(() => {
+          this.setData({ isRecording: true });
+          this.recordTimer = setInterval(() => {
+            let { recordTiming } = this.data;
+            recordTiming += 1;
+            this.setData({ recordTiming });
+          }, 1000);
+        });
+        this.RecorderManager.onError(err => {
+          this.RecorderManager.stop();
+          this.clearRecordTimer();
+          if (err && err.errMsg === 'operateRecorder:fail auth deny') {
+            this.setData({ recordAuthVisible: true })
+          }
+        });
+      }, () => {
+        this.setData({ recordAuthVisible: true })
       });
     } catch (error) {
       console.log(error)
@@ -245,10 +254,12 @@ Page({
   handleOpenSetting(e) {
     const { authSetting } = e.detail;
     if (authSetting['scope.record']) {
-      this.setData({ isRecordAuth: true })
+      this.setData({ recordAuthVisible: false })
     }
   },
-
+  hideAuth() {
+    this.setData({ recordAuthVisible: false })
+  },
   // 处理确认完成订单操作
   handleConfirm() {
     app.confirm({
