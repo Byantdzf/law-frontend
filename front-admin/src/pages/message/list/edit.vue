@@ -11,7 +11,9 @@
             ref="appTable"
             url="/mng/message/member/list"
             columnType="selection"
-            :selectedRowKeys="selectedRows"
+            reserve-selection="true"
+            :row-key="setRowKey"
+            :selectedRowKeys="selectedRowKeys"
             :params="tableParams"
             :columns="columns"
             @selection-change="tableSelect"
@@ -84,13 +86,14 @@ export default {
     let statusItems = getItems('publishObject')
     let sceneItems = getItems('couponScene')
     let typeItems = getItems('couponType')
-    let selectedRows = this.$val(this.row, 'receiverId').split(",")
-
+    let selectedRows = this.row.receiverId.split(",")
+    // debugger
     return {
       statusItems,
       sceneItems,
       typeItems,
       selectedRows: selectedRows || [],
+      selectedRowKeys: selectedRows,
       form: {
         allMembers: +this.$val(this.row, 'allMembers', 1),
         title: this.$val(this.row, 'title'),
@@ -232,6 +235,9 @@ export default {
     },
     tableSelect(val){
       this.selectedRows = val;
+    },
+    setRowKey(row){
+      return row.id
     },
     ...mapActions('member', [
       'memberView',

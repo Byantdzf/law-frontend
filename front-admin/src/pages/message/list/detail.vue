@@ -10,9 +10,11 @@
           <app-table 
             ref="appTable"
             url="/mng/message/member/list"
-            :params="tableParams"
+            :filter="true"
+            :selectedRowKeys="selectedRowKeys"
             :columns="columns"
-            :columns-props="columnsProps"
+            @selection-change="tableSelect"
+            
         />
       </el-form-item>
       <el-form-item label="标题">
@@ -54,11 +56,13 @@ export default {
     let statusItems = getItems('publishObject')
     let sceneItems = getItems('couponScene')
     let typeItems = getItems('couponType')
+    let selectedRows = this.row.receiverId.split(",")
 
     return {
       statusItems,
       sceneItems,
       typeItems,
+      selectedRowKeys: selectedRows,
       form: {
         allMembers: +this.$val(this.row, 'allMembers', 1),
         title: this.$val(this.row, 'title'),
@@ -149,15 +153,6 @@ export default {
             break;
         }
       },
-    // 表单提交
-    formSubmit() {
-      let params = { ...this.form }
-      if(this.row && this.row.hasOwnProperty('id')) {
-        params.id = this.row.id
-      }
-  
-      this.$emit('submit', params)
-    },
     ...mapActions('member', [
       'memberView',
     ])

@@ -131,6 +131,7 @@
       },
       columnsSchema: Object,
       columnsHandler: Function,
+      filter: Boolean,
       theaderSchema: Object,
       isReady: {
         type: Boolean,
@@ -366,17 +367,25 @@
             const idx = (params[PAGE_KEY] - 1) * params[SIZE_KEY] + i + 1
             v.index = v.index || idx
           });
-
+          
           if(this.selectedRowKeys){
-            let arr = []
-             this.selectedRowKeys.forEach(item => {
-               for(let listItem of this.list){
-                 if(listItem.id == item){
-                  this.toggleRowSelection(listItem, true)
-                  break
-                 }
-               }
-            })
+            if(this.filter){
+              this.list = this.list.filter(item => {
+                return this.selectedRowKeys.find((findItem)=>{
+                  return item.id == findItem}
+                )
+              })
+            }else{
+              this.selectedRowKeys.forEach(item => {
+                for(let listItem of this.list){
+                  if(listItem.id == item){
+                    this.toggleRowSelection(listItem, true)
+                    break
+                  }
+                }
+              })
+            }
+            
           }
 
 

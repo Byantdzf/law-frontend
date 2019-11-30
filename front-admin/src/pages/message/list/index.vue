@@ -173,6 +173,7 @@
             this.dialogForm = res.data
             this.dialogComponent = 'Detail'
             this.dialogVisible = true
+            this.submit = ()=>{}
             break;
           case 'edit':
             this.dialogIsFull = true
