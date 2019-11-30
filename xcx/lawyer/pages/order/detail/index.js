@@ -182,6 +182,7 @@ Page({
     try {
       this.RecorderManager = wx.getRecorderManager();
       this.RecorderManager.start({
+        format: 'mp3',
         duration: 180000
       });
       this.RecorderManager.onStart(() => {
