@@ -98,6 +98,9 @@
           ref="appTable"
           url="/member/user/list"
           columnType="selection"
+          reserve-selection="true"
+          :row-key="setRowKey"
+          :selectedRowKeys="userList"
           :params="tableParams"
           :columns="columns"
           @selection-change="tableSelect"
@@ -184,6 +187,7 @@ export default {
         // ruleAmout: this.$val(this.row, 'ruleAmout'),
       },
       allUser: '1',
+      userList: [],
       columns: [
           {
             label: '序号',
@@ -253,9 +257,11 @@ export default {
     // 初始化页面
     async initPage() {
       let res = await this.getCouponDetail(this.row.id)
-      this.form = res.data
+      this.form = res.data.info
       this.form.dataStatus = this.form.dataStatus && this.form.dataStatus.toString()
       this.form.unused = this.form.total - this.form.receiveCount
+      this.userList = this.form.userIdList && this.form.userIdList.split(",");
+      this.allUser =  this.userList instanceof Array ? "0" : "1";
       this.$set(this.searchFormInit, 'align', 'left')
 
       this.searchItems = [
@@ -312,14 +318,17 @@ export default {
       if(this.row && this.row.hasOwnProperty('id')) {
         params.id = this.row.id
       }
-      if (this.form.allUser == 0 && !this.tableSelected.length) {
+      if (this.allUser == 0 && !this.tableSelected.length) {
         this.$msgError('请选择指定的用户')
         return false
       }
-      if (this.form.allUser == 0) {
+      if (this.allUser == 0) {
         params.userIdList = this.tableSelected.map(v => v.id)
       }
       this.$emit('submit', params)
+    },
+    setRowKey(row){
+      return row.id
     },
     ...mapActions('member', [
       'memberView',

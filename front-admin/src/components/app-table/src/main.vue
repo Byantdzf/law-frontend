@@ -10,6 +10,7 @@
       :data="list"
       v-bind="tableBind"
       v-on="$listeners"
+      row-key="id"
       highlight-current-row
       @selection-change="selectChange"
       @sort-change="sortChange"
@@ -32,6 +33,7 @@
               :label="`${ tp.type == 'index' ? $t('text.index') : '' }`"
               :key="tp.type"
               :type="tp.type"
+              :reserve-selection="true"
               v-bind="tp.props"
             >
             </el-table-column>
@@ -143,6 +145,7 @@
       },
       url: String,
       radio: Boolean,
+      selectedRowKeys: Array,
       dataFormater: Function,
       listKey: {
         type: String,
@@ -299,6 +302,11 @@
           this.isReady && this.getList()
         },
         deep: true
+      },
+      selectedRowKeys: {
+        handler: function(val){
+          this.newSelectedRowKeys = val
+        }
       }
     },
     methods: {
@@ -358,6 +366,19 @@
             const idx = (params[PAGE_KEY] - 1) * params[SIZE_KEY] + i + 1
             v.index = v.index || idx
           });
+
+          if(this.selectedRowKeys){
+            let arr = []
+             this.selectedRowKeys.forEach(item => {
+               for(let listItem of this.list){
+                 if(listItem.id == item){
+                  this.toggleRowSelection(listItem, true)
+                  break
+                 }
+               }
+            })
+          }
+
 
           if(isFunction(this.dataFormater)) {
             const arr = this.dataFormater([...this.list])
