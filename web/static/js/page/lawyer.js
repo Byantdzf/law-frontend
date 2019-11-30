@@ -100,14 +100,12 @@
 
 		queryList: function () {
 			var searchData = {};
-			var keyWork = utils.getQueryString('keyword');
 			var province = $('.provList .curr').data('id') ? $('.provList .curr').html() : '';
 			var city = $('.cityList .curr').data('id') ? $('.cityList .curr').html() : '';
 			var goodAt = $('.specialityList .curr').data('id') ? $('.specialityList .curr').html() : '';
 			province && (searchData.province = province);
 			city && (searchData.city = city);
 			goodAt && (searchData.goodAt = goodAt);
-			keyWork && (searchData.keyWork = keyWork);
 			var qlps = {
 				url: URL.lawyer.query,
 				searchData: searchData,
@@ -127,6 +125,7 @@
 			var params = {}
 			params[global.rows] = 5;
 			params[global.page] = 1;
+			params.keyWork = utils.getQueryString('keyword');
 			params.city = areas.name;
 			params.noAuth = 1;
 			utils.get(URL.lawyer.query, params, function (res) {
