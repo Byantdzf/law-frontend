@@ -227,5 +227,64 @@ App({
           failCB && failCB(res)
         }
     })
-  }
+  },
+  // 通用下载接口
+  downloadFile(url, successCB) {
+    if (!url) {
+      this.toastError('文件地址为空');
+      return false;
+    }
+    wx.showLoading({ mask: true });
+    wx.downloadFile({
+      url,
+      header: {},
+      success: ({ statusCode, tempFilePath}) => {
+        wx.hideLoading();
+        if (statusCode == 200) {
+          typeof successCB === 'function' && successCB(tempFilePath);
+        } else {
+          this.toastError(`下载失败！(code: ${ statusCode })`);
+        }
+      },
+      fail: err => {
+        wx.hideLoading();
+        this.toastError('文件下载失败！');
+      }
+    });
+  },
+  // 下载文件并打开文件
+  handleOpenDoc(url) {
+    this.downloadFile(url, (tempFilePath) => {
+      wx.showLoading({ mask: true });
+      wx.openDocument({
+        filePath: tempFilePath,
+        success: () => {
+          wx.hideLoading();
+          console.log('打开文档成功')
+        },
+        fail: err => {
+          wx.hideLoading();
+          console.log('打开文档失败：', err)
+        }
+      })
+    });
+  },
+  // 下载文件并保存
+  handleSaveFile(url) {
+    this.downloadFile(url, (tempFilePath) => {
+      wx.showLoading({ mask: true, title: '正在保存文件' });
+      wx.saveFile({
+        tempFilePath,
+        success: () => {
+          wx.hideLoading();
+          this.toastSuccess(`保存成功！`);
+        },
+        fail: err => {
+          console.log(err)
+          wx.hideLoading();
+          this.toastError(`保存失败！`);
+        }
+      })
+    });
+  },
 })
