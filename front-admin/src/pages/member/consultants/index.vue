@@ -20,7 +20,7 @@
           <el-button type="primary" @click="changeStatusBatch(1)">启用</el-button>
           <el-button type="primary" @click="changeStatusBatch(0)">禁用</el-button>
           <el-button type="primary" @click="removeMember">删除</el-button>
-          <el-button type="primary">导出</el-button>
+          <el-button type="primary" @click="exportFile">导出</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -66,6 +66,7 @@
   import AppSearch from '@/mixins/search'
   import AppRsText from '@/components/app-table/lib/rsText'
   import AppTableImgs from '@/components/app-table/lib/imgs'
+  import SYSTEM from '@/utils/system'
   export default {
     components: {
       Edit: () => import("./edit"),
@@ -226,6 +227,10 @@
         let params = {status}
         this.changeStatus( tips, ids, params)
       },
+      async exportFile(){
+        // await this.userListexport(this.tableParams)
+        SYSTEM.download(`/member/user/list/export`, this.tableParams)
+      },
       async removeMember(){
         let names = this.selectedLawyers.map(item=>item.name).join("、");
         let tips = `确认删除会员${names}吗`
@@ -240,7 +245,8 @@
       ...mapActions('member', [
         'memberView',
         'memberUpdateStatus',
-        'memberDel'
+        'memberDel',
+        'userListexport'
       ])
     },
     created() {

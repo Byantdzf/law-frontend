@@ -44,6 +44,17 @@ const SYSTEM = {
   },
   userName() {
     return localStorage.getItem('userName')
+  },
+  download(path, params) {
+    let paramStr = this.getParamStr(params);
+    window.open(`${this.baseUrl}${path}?${paramStr}`)
+  },
+  getParamStr(params){
+    let ret = []
+    for (let it in params) {
+      ret.push(encodeURIComponent(it) + '=' + encodeURIComponent(params[it]))
+    }
+    return ret.join('&')
   }
 }
 

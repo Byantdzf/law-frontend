@@ -22,6 +22,7 @@ const member = {
 
     // 律师 -- 删除
     lawyerDel: (context, ids) => del(`/member/lawyer/${ids}`),
+    userListexport: (context, params) => get(`/member/user/list/export`, params),
 
     getCouponDetail: (context, id) => get(`/pc/coupon/pool/${id}`)
   }
