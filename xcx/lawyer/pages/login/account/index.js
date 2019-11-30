@@ -37,7 +37,7 @@ Page({
 		app.gotoPage('/pages/reg/index')
 	},
 	findPassword() {
-		app.gotoPage('/pages/findPassword/index')
+		app.gotoPage('/pages/findPassword/index?phone=' + this.phone)
 	},
 	checkboxChange() {
 		this.setData({
@@ -96,4 +96,7 @@ Page({
 			// }
 		})
 	},
+	phoneChange(e) {
+		this.phone = e.detail.value
+	}
 })

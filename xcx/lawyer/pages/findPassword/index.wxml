@@ -1,2 +1,52 @@
-<!--pages/findPassword/index.wxml-->
-<text>pages/findPassword/index.wxml</text>
+<app-page className="page-password bg-f5">
+  <form bindsubmit="formSubmit">
+    <view class="app-spacing"></view>
+    <view class="app-form bg-inverse">
+      <view class="app-cell">
+        <view class="flex-bd">
+          <input
+            value="{{ validateMobile }}"
+            name="phone"
+            bindblur="setValidateMobie"
+            placeholder="手机号"
+            placeholder-class="placeholder"
+          />
+        </view>
+      </view>
+      <view class="app-cell">
+        <view class="flex-bd">
+          <input
+            type="number"
+            name="phoneVerificationCode"
+            placeholder="手机验证码"
+            placeholder-class="placeholder"
+          />
+        </view>
+        <view>
+          <text class="sendSMS cl-primary" bindtap="getValidateCode" wx:if="{{!waitValidateCode}}">获取验证码</text>
+          <text class="cl-999" wx:else>重新发送({{countVal}})</text>
+        </view>
+      </view>
+      <view class="app-cell last-cell">
+        <view class="flex-bd">
+          <input 
+            type="password"
+            name="pwd"
+            placeholder="设置新密码" 
+            placeholder-class="placeholder"
+          />
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button
+        loading="{{ xhrLoading }}"
+        disabled="{{ xhrLoading }}"
+        type="primary"
+        form-type="submit"
+      >
+        确 认
+      </button>
+    </view>
+  </form>
+</app-page>

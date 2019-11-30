@@ -125,6 +125,7 @@
 			var params = {}
 			params[global.rows] = 5;
 			params[global.page] = 1;
+			params.keyWord = utils.getQueryString('keyword');
 			params.city = areas.name;
 			params.noAuth = 1;
 			utils.get(URL.lawyer.query, params, function (res) {

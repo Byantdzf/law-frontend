@@ -26,7 +26,7 @@
         <app-swiper items="{{ banners }}" />
         <view class="flex page-title">
           <view class="flex-bd pl-20 title">订单推荐</view>
-          <view class="flex-ft">
+          <view class="flex-ft" data-type="1" bindtap="gotoMoreOrders">
             <text class="cl-999">更多</text>
             <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
           </view>
@@ -48,7 +48,7 @@
 
         <view class="flex page-title">
           <view class="flex-bd pl-20 title">订单池订单推荐</view>
-          <view class="flex-ft">
+          <view class="flex-ft" data-type="2" bindtap="gotoMoreOrders">
             <text class="cl-999">更多</text>
             <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
           </view>
@@ -70,7 +70,7 @@
 
         <view class="flex page-title">
           <view class="flex-bd pl-20 title">找到我的订单推荐</view>
-          <view class="flex-ft">
+          <view class="flex-ft" data-type="4" bindtap="gotoMoreOrders">
             <text class="cl-999">更多</text>
             <text class="iconfont icon-arrow-right cl-999 pr-20"></text>
           </view>

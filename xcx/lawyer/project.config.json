@@ -115,6 +115,13 @@
 					"id": -1,
 					"name": "reg",
 					"pathName": "pages/reg/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "findPassword",
+					"pathName": "pages/findPassword/index",
 					"scene": null
 				}
 			]

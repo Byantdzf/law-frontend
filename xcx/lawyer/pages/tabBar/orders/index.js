@@ -54,7 +54,7 @@ Page({
     app.pages.add(this)
     app.setNavColor()
     this.setData({ currArea, orderSource })
-
+    
     selectApi.data({ dictCode: 'QuestionType' }).then(res => {
       const items = res.data || []
       let questionTypeMap = {}
@@ -72,9 +72,17 @@ Page({
   },
   onShow() {
     const searchFocus = wx.getStorageSync('searchFocus')
+    const orderSource = wx.getStorageSync('orderSource')
     this.setData({ searchFocus })
-    wx.removeStorageSync('searchFocus')
+    if (+orderSource) {
+      this.setData({ orderSource })
+    }
     this.loadList()
+  },
+  onHide() {
+    wx.removeStorageSync('searchFocus')
+    wx.removeStorageSync('orderSource')
+    this.setData({ orderSource: 2 })
   },
   loadList() {
     if (!this.appList) {

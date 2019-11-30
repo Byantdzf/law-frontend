@@ -6,8 +6,18 @@
 
 			this.getQuestionType();
 
-			_t.getBanner()
-
+			// utils.get(URL.lawyer.getBanner, params, function(res){
+			// 	var arrStr = res.data.map(function(item){
+			// 		return `<div class="banner-image" style="background-image:url(${item.coverPhoto});"></div>`
+			// 	}).join('');
+			// 	var html = `<div carousel-item="">${arrStr}</div>`;
+			// 	$("#indexBanner").html(html)
+			// 	carousel.render({
+			// 		elem: '#indexBanner'
+			// 		, width: '1200px'
+			// 		, height: '376px'
+			// 	});
+			// })
 			$.get('/static/js/plugin/jquery.SuperSlide.2.1.3.js', function () {
 				// 法律文章精选
 				_t.getLegalNews()

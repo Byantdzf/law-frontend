@@ -213,13 +213,17 @@ export default {
         }
       })
       this.currTypeName = obj.name
+      this.initService()
     }
   },
   methods: {
     // 初始化页面
     async initPage() {
       this.currTypeName = this.articleTypeItems[0].name;
-      let dictCode = 2;
+      this.initService()
+    },
+    async initService(){
+      let dictCode = this.articleType;
       let res = await this.getPlatfomService({dictCode})
       this.img = res.data.image;
       this.remark = res.data.brief;
@@ -313,7 +317,7 @@ export default {
     updateBasicInfo(type){
       let isImage = type === 'image';
       let params = {
-        dictCode: 2,
+        dictCode: this.articleType,
         name: isImage  ? 'image' : 'brief',
         code: isImage ? this.img : this.remark
       }

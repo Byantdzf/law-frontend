@@ -5,7 +5,7 @@ const selectApi = require('../../../service/select')
 const { PAGE_KEY, SIZE_KEY } = require('../../../config/global')
 Page({
     data: {
-        type: 21,
+        type: 22,
         baseUrl: '/applets/user/service/info/2',
         types: [
             {
@@ -42,7 +42,7 @@ Page({
         //     let intro = res.data.list[0] || {}
         //     this.setData({ intro })
         // })
-        selectApi.platformService({ dictCode: 2 }).then(res => {
+        selectApi.platformService({ dictCode: this.data.type }).then(res => {
             let intro = res.data || {}
             this.setData({ intro })
         })

@@ -1,1 +1,18 @@
 /* pages/findPassword/index.wxss */
+
+.app-form {
+  padding: 40rpx;
+}
+
+.btn-area {
+  padding: 0 40rpx;
+}
+
+.last-cell::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #f3f3f3;
+}

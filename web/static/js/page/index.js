@@ -6,12 +6,28 @@
 			_t.c = utils.getQueryString('c');
 
 			// base.openRedPacket();
+			let params = {
+				location: 1,
+				terminal: 1
+			}
+			utils.get(URL.lawyer.getBanner, params, function(res){
+				var arrStr = res.data.map(function(item){
+					return `<div class="banner-image" style="background-image:url(${item.coverPhoto});"></div>`
+				}).join('');
+				var html = `<div carousel-item="">${arrStr}</div>`;
+				$("#indexBanner").html(html)
+				carousel.render({
+					elem: '#indexBanner'
+					, width: '1200px'
+					, height: '376px'
+				});
+			})
 
 			var areas = utils.cookie(global.areaCookie);
 
 			!_t.c && !areas && _t.getLocation()
 
-			_t.getBanner()
+			// _t.getBanner()
 
 			_t.getLawyer()
 
