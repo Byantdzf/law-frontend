@@ -4,8 +4,10 @@
 }
 
 .page-order-detail .title {
-  padding: 20rpx 0;
-  font-size: 32rpx;
+  /*padding: 10rpx 0;*/
+  /*font-size: 32rpx;*/
+  margin-bottom: 12rpx;
+  border-bottom: 2rpx solid #eaebee;
 }
 
 .img-lawyer {
@@ -19,6 +21,7 @@
 .detail-box {
   position: relative;
   padding: 30rpx 0;
+  border: 1rpx solid;
 }
 
 .detail-box + .detail-box::before {
@@ -29,7 +32,9 @@
   width: 100%;
   border-top: 2rpx solid #f3f3f3;
 }
-
+.btn-box{
+  margin-top: 12vw;
+}
 .btn-box button {
   min-width: 300rpx;
 }
@@ -82,4 +87,101 @@
   border: 0;
   color: transparent;
   z-index: 100;
+}
+.playBox{
+  width: 42vw;
+  height: 52rpx;
+  background: red;
+  margin-left: 0vw;
+  border-radius: 50rpx;
+  position: relative;
+  text-align: left;
+  /*margin-top: 12rpx;*/
+  line-height: 52rpx;
+  background: -webkit-linear-gradient(left,#fe4557,#fea0b8);
+}
+/*.playBox:before {*/
+  /*content: "";*/
+  /*border-bottom: solid 10px #fe4557;*/
+  /*border-left: solid 8px #00800000;*/
+  /*border-right: solid 8px #00800000;*/
+  /*border-top: solid 0px #00800000;*/
+  /*position: absolute;*/
+  /*left: 8%;*/
+  /*top: -22%;*/
+/*}*/
+.mainBoxPlay {
+  width: 40rpx;
+  height: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+  margin-top: 8rpx;
+  transform: scale(.9);
+}
+.mainBoxPlay image{
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 42rpx;
+}
+.wifi-symbol {
+  width: 50rpx;
+  height: 50rpx;
+  /*box-sizing: border-box;*/
+  overflow: hidden;
+  transform: rotate(135deg);
+}
+.wifi-circle {
+  border: 5rpx solid #ffffff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.first {
+  width: 5rpx;
+  height: 5rpx;
+  background: white;
+  top: 45rpx;
+  left: 45rpx;
+}
+
+.second {
+  width: 25rpx;
+  height: 25rpx;
+  top: 35rpx;
+  left: 35rpx;
+}
+.third {
+  width: 40rpx;
+  height: 40rpx;
+  top: 25rpx;
+  left: 25rpx;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /*初始状态 透明度为0*/
+  }
+  100% {
+    opacity: 1; /*结尾状态 透明度为1*/
+  }
+}
+
+.playActiveSecond {
+  animation: fadeInOut 1s infinite 0.2s;
+}
+.playActiveThird {
+  animation: fadeInOut 1s infinite 0.4s;
+}
+.detail-box {
+  position: relative;
+  /*padding: 12rpx;*/
+  border: 1rpx solid #efefef;
+  margin: 22rpx auto;
+}
+.main-info{
+  padding: 0 22rpx;
+}
+.main-dot{
+  border-bottom: 12rpx solid #f5f6f9;
+  margin: 22rpx 0;
 }

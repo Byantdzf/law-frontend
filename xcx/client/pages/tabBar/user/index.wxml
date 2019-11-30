@@ -25,27 +25,27 @@
 		</view>
 		<view class="user-order">
 			<view class="user-order-title flex" data-state="-1" bindtap="gotoOrder">
-				<view class="flex-bd">我的订单</view>
+				<view class="flex-bd font28 color_333">我的订单</view>
 				<view>
-					<text class="iconfont icon-arrow-right"/>
+					<text class="iconfont icon-arrow-right color_333" style="font-size: 28rpx;"/>
         </view>
 			</view>
 			<view class="user-order-type flex">
 				<view class="flex-bd" data-state="10" bindtap="gotoOrder">
 					<image src="/static/images/icon1.png" mode="widthFix" />
-					待支付
+					<span class="font26 color_666">待支付</span>
 				</view>
 				<view class="flex-bd" data-state="20" bindtap="gotoOrder">
 					<image src="/static/images/icon2.png" mode="widthFix" />
-					待接单
+					<span class="font26 color_666">待接单</span>
 				</view>
 				<view class="flex-bd" data-state="50" bindtap="gotoOrder">
 					<image src="/static/images/icon3.png" mode="widthFix" />
-					待评价
+					<span class="font26 color_666">待评价</span>
 				</view>
 				<view class="flex-bd" data-state="60" bindtap="gotoOrder">
 					<image src="/static/images/icon4.png" mode="widthFix" />
-					已完成
+					<span class="font26 color_666">已完成</span>
 				</view>
 			</view>
 		</view>
@@ -60,9 +60,9 @@
 				<view class="item-icon">
 					<text class="iconfont {{ item.icon }}"/>
         </view>
-				<view class="flex-bd">{{ item.title }}</view>
+				<view class="flex-bd color_333 font26">{{ item.title }}</view>
 				<view class="item-right">
-					<text class="iconfont icon-arrow-right"/>
+					<text class="iconfont icon-arrow-right" style="font-size: 28rpx;"/>
         </view>
 			</view>
 		</view>

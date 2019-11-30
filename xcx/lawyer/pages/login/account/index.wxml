@@ -16,31 +16,31 @@
                         <input class="app-input" type="password" name="pwd" placeholder="请输入密码"></input>
                     </view>
                 </view>
-                <view class="issue-form-item flex no-border forget">
-                    <view class="flex-bd reg cl-999">
-                        还没帐号？
-                        <span class="cl-red" bind:tap="gotoReg">立即注册</span>
-                    </view>
-                    <view class="cl-red" bind:tap="findPassword">忘记密码？</view>
-                </view>
                 <view class="issue-form-item flex no-border">
                     <checkbox-group bindchange="checkboxChange">
                         <label class="checkbox cl-999">
                             <checkbox value="1" />
                             <icon class="iconfont icon-check"></icon>
                             我同意
-                            <text class="cl-primary" catchtap="showAgreement">《用户协议》</text>、
-                            <text class="cl-primary" catchtap="showPrivacy">《隐私协议》</text>
+                            <text class="cl-primary" catchtap="showAgreement">《用户注册协议》</text>
+                            <!--<text class="cl-primary" catchtap="showPrivacy">《隐私协议》</text>-->
                         </label>
                     </checkbox-group>
                 </view>
                 <view class="issue-form-item form-btn-box no-border">
-                    <button class="app-input-btn" type="primary" form-type="submit">
+                    <button class="app-input-btn bcTheme" type="primary" form-type="submit">
                         登录
                     </button>
                 </view>
-                <view class="issue-form-item wechatLogin no-border cl-primary" bind:tap="gotoWechatLogin">
-                    使用微信登录
+                <view class="" style="margin-top: 16rpx;">
+                    <view class="color_theme flo_l" bind:tap="findPassword">忘记密码？</view>
+                    <view class="color_theme flo_r" bind:tap="gotoWechatLogin">使用微信登录</view>
+                </view>
+                <view class="main-fix text-center">
+                    <view class="flex-bd reg cl-999">
+                        还没帐号？
+                        <span class="cl-red" bind:tap="gotoReg">立即注册</span>
+                    </view>
                 </view>
             </form>
         </view>

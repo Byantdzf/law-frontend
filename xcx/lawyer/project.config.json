@@ -122,6 +122,13 @@
 					"id": -1,
 					"name": "findPassword",
 					"pathName": "pages/findPassword/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "用户协议",
+					"pathName": "pages/user/setting/agreement/index",
 					"scene": null
 				}
 			]

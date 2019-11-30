@@ -5,7 +5,7 @@
 }
 
 .page-order-detail .title {
-  padding: 20rpx 0;
+  padding: 10rpx 0;
   font-size: 32rpx;
 }
 
@@ -33,18 +33,38 @@
 }
 
 .file-box {
-  width: 500rpx;
-  margin: 40rpx auto 0;
-  border: 2rpx solid #333333;
+  width: 82vw;
+  margin: 62rpx auto;
+  border-radius: 12rpx;
+  box-shadow: 0rpx 0rpx 12rpx #d0d0d0;
 }
 
 .file-con {
-  height: 120rpx;
+  /*height: 120rpx;*/
   line-height: 40rpx;
   overflow: hidden;
 }
 
 .img-box {
-  width: 500rpx;
-  height: 200rpx;
+  width: 100%;
+  height: 300rpx;
+  /*border-radius: 12rpx;*/
+}
+.img-box image {
+  border-top-right-radius: 12rpx;
+  border-top-left-radius: 12rpx;
+}
+/*-------------*/
+.detail-box {
+  position: relative;
+  /*padding: 12rpx;*/
+  border: 1rpx solid #efefef;
+  margin: 22rpx auto;
+}
+.main-info{
+  padding: 0 22rpx;
+}
+.main-dot{
+  border-bottom: 12rpx solid #f5f6f9;
+  margin: 22rpx 0;
 }

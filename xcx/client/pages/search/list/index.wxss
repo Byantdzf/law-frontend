@@ -1,13 +1,26 @@
 /* pages/mandatoryLawyer/list/index.wxss */
+page{background: #ffffff;}
+.mp-top-box { padding:22rpx 30rpx;border-bottom: 12rpx solid #f5f6f9;}
 
-.mp-top-box { padding:30rpx;}
-.mp-top-box input { background: #ECECEC; box-sizing: border-box; border-radius: 64rpx; height:80rpx; line-height: 80rpx; text-align: center; padding:0 20rpx 0 60rpx; text-align: left;}
-.mp-top-box .icon-search { position: absolute; left:50rpx; top:30rpx; font-size: 30rpx; line-height: 80rpx;}
+.mp-top-box input {
+  background: #ECECEC;
+  box-sizing: border-box;
+  border-radius: 64rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  padding:0 20rpx 0 60rpx;
+  text-align: left;
+}
 
-.search-items { padding:0 20rpx;}
+.mp-top-box .icon-search { position: absolute; left:50rpx; top:30rpx; font-size: 30rpx; line-height: 68rpx;}
+
+.search-items {
+  /*padding:0 20rpx;*/
+}
 
 .list-item {
-padding: 20rpx;
+padding: 20rpx 32rpx;
 background: #fff;
 border-radius: 20rpx;
 align-items: flex-start;
@@ -17,8 +30,8 @@ margin-top: 20rpx;
 }
 .news-items .img-box,
 .list-item .img-box {
-width: 120rpx;
-height: 120rpx;
+width: 100rpx;
+height: 100rpx;
 margin-right:30rpx;
 }
 .news-items .img-box image,
@@ -69,4 +82,16 @@ word-wrap: break-word;
 white-space: normal !important;
 -webkit-line-clamp: 2;
 -webkit-box-orient: vertical;
+}
+
+.item-btn{
+  padding: 4rpx 20rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #eeeeee;
+}
+.list-item{
+  border-bottom: 4rpx solid #f5f6f9;
+}
+.btn-box{
+  margin: 26rpx 0 2rpx 0 !important;
 }

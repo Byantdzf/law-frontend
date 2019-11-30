@@ -4,35 +4,55 @@
 <app-page id="app-page">
   <view class="page-order-detail">
     <view class="detail-box">
-      <view class="title flex">
-        <text class="flex-bd fw-b">基本信息</text>
+      <view class="main-info">
+        <view class="title flex">
+          <text class="flex-bd fw-b color_theme font28">基本信息</text>
+        </view>
+        <!--<view class="flex detail-row" wx:if="{{ fn.showLawyer(item) }}">-->
+          <!--<text class="label color_333 font26">接单律师：</text>-->
+          <!--<text class="flex-bd color_666 font28 bold">{{item. lawyer }}</text>-->
+          <!--<image class="img-lawyer" src="{{ item.lawyerPic }}"></image>-->
+        <!--</view>-->
+        <template is="orderBaseInfo" data="{{...item}}"/>
       </view>
-      <template is="orderBaseInfo" data="{{...item}}"/>
-      
-      <view class="title fw-b">订单信息</view>
-      <template is="orderInfo_04" data="{{...item}}"/>
+      <view class="main-dot"></view>
+      <view class="main-info">
+        <view class="title fw-b color_theme font28">订单信息</view>
+        <template is="orderInfo_04" data="{{...item}}"/>
+      </view>
+
+
+
+
+      <!--<view class="title flex">-->
+        <!--<text class="flex-bd fw-b">基本信息</text>-->
+      <!--</view>-->
+      <!--<template is="orderBaseInfo" data="{{...item}}"/>-->
+
+      <!--<view class="title fw-b">订单信息</view>-->
+      <!--<template is="orderInfo_04" data="{{...item}}"/>-->
     </view>
 
 
     <view class="file-group" wx:if="{{ item.orderStatus == 60 }}">
       <view class="file-box" wx:for="{{files}}" wx:key="{{ index }}">
         <view class="img-box">
-          <image src="/static/images/tplImg.png" />
+          <image src="/static/images/tplImg.png" mode="aspectFill"/>
         </view>
         <view class="pa-20">
-          <view class="file-name ta-c">
+          <view class="file-name  text-left font28 bold">
             {{ item.fileName || '' }}
           </view>
-          <view class="flex pt-20 pb-20">
-            <view class="flex-bd cl-primary">价格：{{ item.price || '' }}元</view>
-            <view class="cl-999">销量：{{ item.realSales || '' }}</view>
+          <view class="flex" style="margin: 12rpx 0;">
+            <view class="flex-bd color_theme font26">价格：{{ item.price || '' }}元</view>
+            <view class="color_666 font26">销量：{{ item.realSales || '' }}</view>
           </view>
-          <view class="file-con">
+          <view class="file-con font26 color_333" style="text-indent: 2em;">
             {{ item.brief || '' }}
           </view>
           <view class="flex btn-box mt-20">
-            <button size="mini" type="primary" data-filepath="{{ item.filePath }}" bindtap="handleDownload">立即下载</button>
-            <button size="mini" type="primary" data-filepath="{{ item.filePath }}" bindtap="handleOpenDoc">点击预览</button>
+            <button size="mini" type="primary" data-filepath="{{ item.filePath }}" class="bcTheme_sub" bindtap="handleDownload">立即下载</button>
+            <button size="mini" type="primary" data-filepath="{{ item.filePath }}" class="bcTheme" bindtap="handleOpenDoc">点击预览</button>
           </view>
         </view>
       </view>

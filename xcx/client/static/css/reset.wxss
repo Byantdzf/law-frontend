@@ -187,7 +187,7 @@ checkbox[checked] + .icon-check::after {
 .flo_r {float: right}
 .clearfloat {clear:both}
 .text-center{text-align: center}
-
+.text-left{text-align: left}
 .ellipsis_3 {
   overflow: hidden;
   text-overflow: ellipsis;

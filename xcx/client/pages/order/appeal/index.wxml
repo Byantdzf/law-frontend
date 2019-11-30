@@ -2,24 +2,24 @@
 <app-page id="app-page">
   <view class="container page-evaluate">
     <view class="page-form">
-      <view class="title">申诉类型</view>
-      <view class="flex mt-20">
+      <view class="title color_333">申诉类型</view>
+      <view class="flex mt-20" style="transform: scale(.92)">
         <radio-group class="radio-group" bindchange="radioChange">
           <radio class="radio pr-30" color="#CF443D" wx:for-items="{{items}}" wx:key="value" value="{{item.value}}" checked="{{item.checked}}">
             <text>{{item.name}}</text>
           </radio>
         </radio-group>
       </view>
-      <view class="mt-20">
+      <view class="mt-20 font26">
         <textarea class="textarea" placeholder="请输入您申诉的想法，后台工作人员会在第一时间进行处理" bindinput="handleContentChange"></textarea>
       </view>
       <view class="mt-20">
-        <text class="cl-999">您也可以拨打客服热线进行申诉：</text>
+        <text class="color_666 font26">您也可以拨打客服热线进行申诉：</text>
         <text>{{ tel }}</text>
       </view>
     </view>
     <view class="btn-box">
-      <button type="primary" bindtap="submit">提交申诉</button>
+      <button type="primary" bindtap="submit"  class="bcTheme font28" style="width: 62vw;height: 72rpx;">提交申诉</button>
     </view>
   </view>
 </app-page>

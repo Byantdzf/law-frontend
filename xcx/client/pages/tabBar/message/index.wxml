@@ -16,16 +16,16 @@
 						 mode="widthFix"
 						 binderror="imageError"
 						 data-img="list[{{index}}].imagePath"
-						 style="background: white"
+						 style="background: white; border-radius: 50%;"
 						/>
 					</view>
 					<view class="flex-bd con-box pl-20 pr-20">
 						<view class="flex">
-							<view class="title flex-bd color_333 bold font30">{{ item.sender }}</view>
-							<view class="color_666 font28">{{ item.sentTime || '' }}</view>
+							<view class="title flex-bd color_333 bold font28">{{ item.sender }}</view>
+							<view class="color_666 font26">{{ item.sentTime || '' }}</view>
 						</view>
 						<view class="ellipsis desc">
-							<text class="color_666">{{ item.content || '' }}</text>
+							<text class="color_666 font26">{{ item.content || '' }}</text>
 						</view>
 					</view>
 				</view>

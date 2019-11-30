@@ -9,3 +9,17 @@
 .forget { margin-top: 30rpx; font-size: 24rpx;}
 .icon-check { top:-10rpx; margin-right: 0;}
 .iconfont:after { font-size: 36rpx;}
+.app-input-btn{
+    height: 80rpx;
+    line-height: 80rpx;
+}
+.issue-form-item{
+    padding: 4rpx 0;
+    margin-top: 18rpx;
+}
+.main-fix{
+    position: fixed;
+    bottom: 12rpx;
+    left: 0;
+    width: 100vw;
+}

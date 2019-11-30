@@ -14,8 +14,8 @@ scroll-view {
   box-sizing: border-box;
 }
 
-image { 
-  display: block; 
+image {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -68,7 +68,7 @@ button[type=primary].button-hover {
 button[type=warm].button-hover {
   color: #fff;
   background-color: #e5a700;
-} 
+}
 
 button[plain][type=primary],
 button[plain][type=primary].button-hover {
@@ -119,7 +119,81 @@ checkbox {
 
 checkbox[checked] + .icon-check::after {
   content: "\e695";
-  color: #F64335;
+  color: #CF443D;
 }
 
+
 /* reset -- end */
+.font22 {
+  font-size: 22rpx !important;
+}
+.font24 {
+  font-size: 24rpx !important;
+}
+.font26 {
+  font-size: 26rpx !important;
+}
+
+.font28 {
+  font-size: 28rpx !important;
+}
+
+.font30 {
+  font-size: 30rpx !important;
+}
+
+.bcF{
+  background: white;
+}
+.bcTheme{
+  background: linear-gradient(to right, #CF443D , #fe664f)!important;
+}
+.bcTheme_sub{
+  background-image: linear-gradient(to right, #fdbc3e , #fed065)!important;
+}
+.bold{
+  font-weight: bold;
+}
+.ellipsis_1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.color_white{color: white}
+.color_theme{
+  color: #CF443D !important;
+}
+.color_theme_sub{
+  color: #fdbc3e;
+}
+.color_333{
+  color: #333333;
+}
+.color_666{
+  color: #666666;
+}
+.color_999{
+  color: #999999;
+}
+.btn {
+  border: none;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  background: none;
+  border-radius: inherit;
+}
+.flo_l {float: left}
+.flo_r {float: right}
+.clearfloat {clear:both}
+.text-center{text-align: center !important;}
+.text-left{text-align: left !important;}
+.text-right{text-align: right !important;}
+.ellipsis_3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

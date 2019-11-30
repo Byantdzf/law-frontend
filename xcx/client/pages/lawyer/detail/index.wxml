@@ -1,29 +1,29 @@
 <view class="home-list">
-  <!--<view class="img-box">-->
-    <!--<view class="water">-->
-      <!--<view class=" point1 {{active?'activeStyle':'point'}}"></view>-->
-      <!--<view class=" point2 {{active?'activeStyle':'point'}}"></view>-->
-      <!--<view class=" point3 {{active?'activeStyle':'point'}}"></view>-->
-      <!--<view class=" point4 {{active?'activeStyle':'point'}}"></view>-->
-    <!--</view>-->
-    <!--<image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="aspectFill" binderror="imageError" data-img="details.pic"></image>-->
-    <!--<view class="main_laber_left">-->
-      <!--<view class="item_laber font28 ellipsis_1"style="padding: 4rpx 22rpx;">{{ details.name }}</view>-->
-      <!--<view class="dot left"></view>-->
-    <!--</view>-->
-    <!--<view class="main_laber_left" style="bottom: 34vw">-->
-      <!--<view class="item_laber">性别：{{gender[details.gender]}}</view>-->
-      <!--<view class="dot left"></view>-->
-    <!--</view>-->
-    <!--<view class="main_laber_right">-->
-      <!--<view class="dot right"></view>-->
-      <!--<view class="item_laber_right">已帮助：{{ details.helps || 0 }}人</view>-->
-    <!--</view>-->
-    <!--<view class="main_laber_right"  style="bottom: 30vw">-->
-      <!--<view class="dot right"></view>-->
-      <!--<view class="item_laber_right">被关注：{{ details.concerns || 0 }}</view>-->
-    <!--</view>-->
-  <!--</view>-->
+  <view class="img-box">
+    <view class="water">
+      <view class=" point1 {{active?'activeStyle':'point'}}"></view>
+      <view class=" point2 {{active?'activeStyle':'point'}}"></view>
+      <view class=" point3 {{active?'activeStyle':'point'}}"></view>
+      <view class=" point4 {{active?'activeStyle':'point'}}"></view>
+    </view>
+    <image src="{{ details.pic || defaultPic }}" bind:tap="activeFn" mode="aspectFill" binderror="imageError" data-img="details.pic"></image>
+    <view class="main_laber_left">
+      <view class="item_laber font28 ellipsis_1"style="padding: 4rpx 22rpx;">{{ details.name }}</view>
+      <view class="dot left"></view>
+    </view>
+    <view class="main_laber_left" style="bottom: 34vw">
+      <view class="item_laber">性别：{{gender[details.gender]}}</view>
+      <view class="dot left"></view>
+    </view>
+    <view class="main_laber_right">
+      <view class="dot right"></view>
+      <view class="item_laber_right">已帮助：{{ details.helps || 0 }}人</view>
+    </view>
+    <view class="main_laber_right"  style="bottom: 30vw">
+      <view class="dot right"></view>
+      <view class="item_laber_right">被关注：{{ details.concerns || 0 }}</view>
+    </view>
+  </view>
   <view class="main-info">
     <view class="info-collect">
       <block wx:if="{{details.focused > 0}}">
@@ -68,7 +68,8 @@
     </view>
     <view class="item-info font26 color_333">个人简介:
       <view class="info-brief">
-        <app-text datatext="{{ details.brief }}"></app-text>
+        <span class="font26 color_666">{{ details.brief }}</span>
+        <!--<app-text datatext="{{ details.brief }}"></app-text>-->
       </view>
     </view>
 
@@ -164,7 +165,7 @@
         <!--</view>-->
       <!--</view>-->
       <view class="orderList">
-        <view class="tit">接单数据</view>
+        <!--<view class="tit">接单数据</view>-->
         <view class="table">
           <view class="thead">
             <view class="tr bg-w">
@@ -183,6 +184,7 @@
             </block>
           </view>
         </view>
+        <view style="height: 26vw;"></view>
       </view>
       <!--<view class="orderList">-->
         <!--<view class="tit">个人简介</view>-->
@@ -190,7 +192,7 @@
       <!--</view>-->
     </view>
     <!-- 用户评论 -->
-    <view class="scoreBox" wx:if="{{showType == 1}}">
+    <view class="scoreBox" wx:if="{{showType == 2}}">
       <view class="scoreList">
         <view class="flex items" wx:for="{{comments}}" wx:key="{{index}}">
           <view class="flex-ft img-box">
@@ -198,19 +200,36 @@
           </view>
           <view class="flex-bd">
             <view class="info">
-              <view class="name">{{item.userName}}</view>
-              <view class="flex"><view class="flex-ft cl-999">服务类型：</view><view class="flex_bd">{{ orderType[item.serviceType] }}</view></view>
-              <view class="flex"><view class="flex-ft cl-999">服务时间：</view><view class="flex_bd">{{ item.orderUpdateTime }}</view></view>
-              <view class="flex"><view class="flex-ft cl-999">服务态度：</view><view class="flex_bd">{{ item.serviceAttitudeScore }}</view></view>
-              <view class="flex"><view class="flex-ft cl-999">专业程度：</view><view class="flex_bd">{{ item.professionalAttitudeScore }}</view></view>
+              <view class="name color_333 font30 bold flo_l">{{item.userName}}</view>
+              <view class="flo_r flex_bd color_666 font26">{{ item.orderUpdateTime }}</view>
+              <view class="clearfloat"></view>
+              <view class="flex">
+                <view class="flex-ft color_333 font26">服务类型：</view>
+                <view class="flex_bd color_666 font26">{{ orderType[item.serviceType] }}</view>
+              </view>
+              <!--<view class="flex">-->
+                <!--<view class="flex-ft color_333 font26">服务时间：</view>-->
+                <!--<view class="flex_bd color_666 font26">{{ item.orderUpdateTime }}</view>-->
+              <!--</view>-->
+              <view class="flex flo_l">
+                <view class="flex-ft color_333 font26">服务态度：</view>
+                <view class="flex_bd color_theme_sub font30 bold">{{ item.serviceAttitudeScore }}</view>
+              </view>
+              <view class="flex flo_l" style="margin-left: 12rpx;">
+                <view class="flex-ft color_333 font26">专业程度：</view>
+                <view class="flex_bd color_theme font30 bold">{{ item.professionalAttitudeScore }}</view>
+              </view>
+              <view class="clearfloat"></view>
             </view>
-            <view class="content">{{ item.content }}</view>
+            <view class="font26 color_666 text-left">{{ item.content }}</view>
           </view>
         </view>
+        <view class="clearfloat"></view>
+        <view style="height: 22vw;"></view>
       </view>
     </view>
-    <view style="height: 22vw;"></view>
     <view class="main-btn text-center">
+      <!--<view data-url="https://hujia.obs.cn-south-1.myhuaweicloud.com/law/1575077279000tmp_ada2669522a55befbe1e09ef457ca98a.xls" data-type="excel" class="item_btn flo_l bcTheme color_white" catchtap='downloadFile'>测试下载XLS</view>-->
       <view class="item_btn flo_l bcTheme color_white" bind:tap="voiceTap">在线咨询</view>
       <view class="item_btn bcTheme_sub" bind:tap="onByOneTap">指定咨询</view>
       <view class="item_btn flo_r" bind:tap="inviteTap">邀请接单</view>

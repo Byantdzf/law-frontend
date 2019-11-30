@@ -1,16 +1,20 @@
 <template name="orderBaseInfo">
   <view class="orderInfo">
     <view class="flex detail-row">
-      <text class="label cl-999">订单编号：</text>
-      <text class="flex-bd cl-666">{{ orderNo }}</text>
+      <text class="label color_333 font26">订单编号：</text>
+      <text class="flex-bd color_666 font26">{{ orderNo }}</text>
     </view>
     <view class="flex detail-row">
-      <text class="label cl-999">订单状态：</text>
-      <text class="flex-bd cl-primary fw-b">{{ orderStatusMap[orderStatus] }}</text>
+      <text class="label color_333 font26">下单时间：</text>
+      <text class="flex-bd color_666 font26">{{ orderTime }}</text>
     </view>
     <view class="flex detail-row">
-      <text class="label cl-999">订单类型：</text>
-      <text class="flex-bd cl-666">{{ orderCategoryMap[orderCategory] }}</text>
+      <text class="label color_333 font26">订单状态：</text>
+      <text class="flex-bd cl-primary fw-b color_666 font26">{{ orderStatusMap[orderStatus] }}</text>
+    </view>
+    <view class="flex detail-row">
+      <text class="label color_333 font26">订单类型：</text>
+      <text class="flex-bd color_666 font26">{{ orderCategoryMap[orderCategory] }}</text>
     </view>
   </view>
 </template>
@@ -18,24 +22,24 @@
 <template name="orderInfo_01">
   <view class="orderInfo">
     <view class="flex">
-      <text class="label cl-999">咨询内容：</text>
-      <text class="label cl-999">{{ content }}</text>
+      <text class="label color_333 font26">咨询内容：</text>
+      <text class="label color_666 font26">{{ content }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">所属分类：</text>
-      <text class="label cl-999">{{ questionTypeName }}</text>
+      <text class="label color_333 font26">所属分类：</text>
+      <text class="label color_666 font26">{{ questionTypeName }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">订单金额：</text>
-      <text class="label cl-999">{{ amount }}元</text>
+      <text class="label color_333 font26">订单金额：</text>
+      <text class="label color_666 font26">{{ amount }}元</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">是否紧急：</text>
-      <text class="label cl-999">{{ emergencyName }}</text>
+      <text class="label color_333 font26">是否紧急：</text>
+      <text class="label color_666 font26">{{ emergencyName }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">订单备注：</text>
-      <text class="label cl-999">{{ remark }}</text>
+      <text class="label color_333 font26">订单备注：</text>
+      <text class="label color_666 font26">{{ remark }}</text>
     </view>
   </view>
 </template>
@@ -43,24 +47,24 @@
 <template name="orderInfo_02">
   <view class="orderInfo">
     <view class="flex">
-      <text class="label cl-999">手机号码：</text>
-      <text class="label cl-999">{{ contactMobile }}</text>
+      <text class="label color_333 font26">手机号码：</text>
+      <text class="label color_666 font26">{{ contactMobile }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">称呼：</text>
-      <text class="label cl-999">{{ name }}</text>
+      <text class="label color_333 font26">称呼：</text>
+      <text class="label color_666 font26">{{ name }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">地区：</text>
-      <text class="label cl-999">{{ province + '-' + city }}</text>
+      <text class="label color_333 font26">地区：</text>
+      <text class="label color_666 font26">{{ province + '-' + city }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">是否紧急：</text>
-      <text class="label cl-999">{{ emergencyName }}</text>
+      <text class="label color_333 font26">是否紧急：</text>
+      <text class="label color_666 font26">{{ emergencyName }}</text>
     </view>
     <view class="flex">
       <text class="label cl-999">订单备注：</text>
-      <text class="label cl-999">{{ remark }}</text>
+      <text class="label color_666 font26">{{ remark }}</text>
     </view>
   </view>
 </template>
@@ -68,28 +72,28 @@
 <template name="orderInfo_03">
   <view class="orderInfo">
     <view class="flex">
-      <text class="label cl-999">已选服务：</text>
-      <text class="label cl-999">{{ chooseService }}</text>
+      <text class="label color_333 font26">已选服务：</text>
+      <text class="label color_666 font26">{{ chooseService }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">交付期限：</text>
-      <text class="label cl-999">{{ deliveryDeadDate }}</text>
+      <text class="label color_333 font26">交付期限：</text>
+      <text class="label color_666 font26">{{ deliveryDeadDate }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">地区：</text>
-      <text class="label cl-999">{{ province + '-' + city }}</text>
+      <text class="label color_333 font26">地区：</text>
+      <text class="label color_666 font26">{{ province + '-' + city }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">手机号码：</text>
-      <text class="label cl-999">{{ contactMobile }}</text>
+      <text class="label color_333 font26">手机号码：</text>
+      <text class="label color_666 font26">{{ contactMobile }}</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">订单金额：</text>
-      <text class="label cl-999">{{ amount }}元</text>
+      <text class="label color_333 font26">订单金额：</text>
+      <text class="label color_666 font26">{{ amount }}元</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">我的要求：</text>
-      <text class="label cl-999">{{ customerRequirement }}</text>
+      <text class="label color_333 font26">我的要求：</text>
+      <text class="label color_666 font26">{{ customerRequirement }}</text>
     </view>
   </view>
 </template>
@@ -97,12 +101,12 @@
 <template name="orderInfo_04">
   <view class="orderInfo">
     <view class="flex">
-      <text class="label cl-999">订单金额：</text>
-      <text class="label cl-999">{{ amount }}元</text>
+      <text class="label color_333 font26">订单金额：</text>
+      <text class="label color_666 font26">{{ amount }}元</text>
     </view>
     <view class="flex">
-      <text class="label cl-999">购买时间：</text>
-      <text class="label cl-999">{{ orderTime }}</text>
+      <text class="label color_333 font26">购买时间：</text>
+      <text class="label color_666 font26">{{ orderTime }}</text>
     </view>
   </view>
 </template>

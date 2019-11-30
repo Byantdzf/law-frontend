@@ -48,6 +48,10 @@
                                 </view>
                             </view>
                             <view class="flex btn-box">
+                                <!--<view class="flo_l bcTheme color_white item-btn font26" data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询</view>-->
+                                <!--<view class="bcTheme_sub item-btn color_333 font26" data-id="{{item.id}}" catch:tap="onByOneTap">指定律师咨询</view>-->
+                                <!--<view class=" item-btn font26" data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">已关注</view>-->
+                                <!--<view class=" item-btn font26" data-id="{{item.id}}" catch:tap="collect" wx:else>+关注</view>-->
                                 <view class="flo_l bcTheme color_white item-btn" data-id="{{item.id}}" catch:tap="voiceTap">在线律师咨询</view>
                                 <view class="bcTheme_sub item-btn" data-id="{{item.id}}" catch:tap="onByOneTap">指定律师咨询</view>
                                 <view class=" item-btn" data-id="{{item.id}}" catch:tap="cancelCollect" wx:if="{{item.focused > 0}}">已关注</view>

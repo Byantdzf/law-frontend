@@ -4,19 +4,23 @@ page { background: #f0f0f0;}
   overflow-x: hidden;
 }
 .app-cell { align-items: flex-start; display: inline-block}
+.page-message .img-box{
+  margin-left: 40rpx;
+}
 .page-message .img-box image{
-  width: 80rpx;
-  height: 80rpx;
+  width: 86rpx;
+  height: 86rpx;
   border-radius: 50%;
   background: white;
 }
 
 .page-message .con-box {
   background: #fff;
-  padding: 30rpx;
+  padding: 16rpx;
   margin: 0 100rpx 0 30rpx;
-  border-radius: 20rpx;
-  position: relative
+  border-radius: 12rpx;
+  position: relative;
+  max-width: 62vw;
 }
 
 .page-message .con-box:before {
@@ -25,7 +29,7 @@ page { background: #f0f0f0;}
   border-bottom: 12rpx solid transparent;
   border-right: 22rpx solid #fff;
   position: absolute;
-  top: 24rpx;
+  top: 18rpx;
   left: -18rpx;
   /*box-shadow: 1rpx 1rpx 12rpx #d6d6d6;*/
 }
@@ -34,7 +38,7 @@ page { background: #f0f0f0;}
   display: inline-block;
   padding: 6rpx 12rpx;
   margin: 12rpx;
-  background: rgba(163, 163, 163, 0.3);
+  background: rgba(193, 193, 193, 0.3);
   margin-bottom: 32rpx;
   border-radius: 8rpx;
 }
