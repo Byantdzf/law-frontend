@@ -5,7 +5,7 @@
 			var _t = this;
 			_t.type = utils.getQueryString('id');
 
-			_t.loadRecommend();
+			_t.loadRecommend(_t.type);
 			_t.queryList();
 
 			$('body').on('click', '.showDetail', function() {
@@ -18,9 +18,9 @@
 			});
 		},
 
-		loadRecommend: function () {
+		loadRecommend: function (t) {
 			var params = {}
-			params.dictCode = 3;
+			params.dictCode = t;
 			utils.getSync(URL.common.common, params, function (res) {
 				var data = res.data || {}
 				var src = data.image || '/static/images/nopic.jpg'
