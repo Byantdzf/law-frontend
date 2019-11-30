@@ -20,7 +20,7 @@
 
 		loadRecommend: function () {
 			var params = {}
-			params.dictCode = 3;
+			params.dictCode = _t.type;
 			utils.getSync(URL.common.common, params, function (res) {
 				var data = res.data || {}
 				var src = data.image || '/static/images/nopic.jpg'
