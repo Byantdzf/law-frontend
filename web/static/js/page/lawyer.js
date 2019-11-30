@@ -106,6 +106,7 @@
 			province && (searchData.province = province);
 			city && (searchData.city = city);
 			goodAt && (searchData.goodAt = goodAt);
+			searchData.keyWord = utils.getQueryString('keyword');
 			var qlps = {
 				url: URL.lawyer.query,
 				searchData: searchData,
@@ -125,7 +126,6 @@
 			var params = {}
 			params[global.rows] = 5;
 			params[global.page] = 1;
-			params.keyWord = utils.getQueryString('keyword');
 			params.city = areas.name;
 			params.noAuth = 1;
 			utils.get(URL.lawyer.query, params, function (res) {
