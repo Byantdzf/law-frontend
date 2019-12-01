@@ -195,6 +195,9 @@ button[type=primary][plain].btn-code{
 .ta-c {
   text-align: center;
 }
+.text-right {
+  text-align: right;
+}
 /* pulbic -- end */
 
 /* footer -- start */

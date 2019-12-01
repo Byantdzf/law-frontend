@@ -201,7 +201,7 @@ Page({
         })
     },
     showAgreement() {
-        app.gotoPage('/pages/user/setting/agreement/index')
+        app.gotoPage('/pages/user/setting/agreementAgency/index')
     },
     countTimes(field, statusField) {
         let _t = this
