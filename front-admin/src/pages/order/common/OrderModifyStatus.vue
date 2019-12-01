@@ -11,7 +11,7 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="订单金额：" v-if="orderStatus == 60">
+      <el-form-item label="订单金额：" v-if="showAmountInput">
         <el-input v-model="amount"></el-input>
         <p class="cl-999">请输入该订单金额，方便系统统计</p>
       </el-form-item>
@@ -44,6 +44,12 @@ export default {
       amount: this.$val(this.row, 'amount')
     }
   },
+  computed: {
+    showAmountInput() {
+      const status = this.$val(this.row, 'orderStatus')
+      return status == 30 || status == 40 || status == 50 || status == 60
+    }
+  },
   methods: {
     // 表单提交
     formSubmit() {
@@ -52,9 +58,12 @@ export default {
         amount: this.amount,
         orderId: this.$val(this.row, 'id'),
       }
-      if (this.orderStatus == 60 && !(this.amount || this.amount === 0)) {
+      if (this.showAmountInput && !(this.amount || this.amount === 0)) {
         this.$msgError('请输入订单金额')
         return false
+      }
+      if (!this.showAmountInput) {
+        params.amount = ''
       }
       this.$emit('submit', params)
     }

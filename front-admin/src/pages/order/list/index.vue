@@ -245,8 +245,18 @@
             type: 'button',
             formater: (row) => {
               let items = [{ label: '查看详情', code: 'detail' }]
-              if (row.orderStatus == '10') {
-                items.push({ label: '修改订单金额', code: 'modifyAmount' })
+              // 只有代理订单有修改金额按钮
+              if (row.orderType == 3) {
+                // 收费代理，只有待接入状态有修改金额按钮
+                if (row.orderCategory == 31 && row.orderStatus == 5) {
+                  items.push({ label: '修改订单金额', code: 'modifyAmount' })
+                }
+                if (
+                  row.orderCategory == 32 &&
+                  (row.orderStatus == 30 || row.orderStatus == 40 || row.orderStatus == 50 || row.orderStatus == 60)
+                ) {
+                  items.push({ label: '修改订单金额', code: 'modifyAmount' })
+                }
               }
               if (row.orderStatus == '20') {
                 items.push({ label: '修改派单方式', code: 'modifyDispatchWay' })

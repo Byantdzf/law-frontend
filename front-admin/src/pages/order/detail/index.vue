@@ -266,7 +266,10 @@ export default {
             this.closeDialog()
             break;
           case 'OrderModifyStatus':
-            await this.orderUpdateOrderStatus({ orderId, fee, orderStatus })
+            await this.orderUpdateOrderStatus({ orderId, orderStatus })
+            if(fee || fee === 0) {
+              await this.orderComfirmOrderAmount({ orderId, fee })
+            }
             this.$msgSuccess('操作成功！')
             this.getDetails()
             this.closeDialog()
