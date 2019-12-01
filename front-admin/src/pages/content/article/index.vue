@@ -104,7 +104,7 @@
             }
           },{
             label: '更新时间',
-            field: 'publishTime'
+            field: 'updateTime'
           },{
             label: '操作',
             field: 'operate',
