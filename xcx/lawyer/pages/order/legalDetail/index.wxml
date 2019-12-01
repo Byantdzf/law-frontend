@@ -76,7 +76,11 @@
       <view class="reply-wrapper">
         <view class="title fw-b">法律文件</view>
         <view class="flex flex-start files">
-          <view class="flex-column file-item" wx:for="{{ files }}" wx:for-item="file" wx:key="{{ index }}" data-index="{{ index }}">
+          <view class="flex-column file-item" wx:for="{{ files }}" wx:for-item="file" wx:key="{{ index }}" data-index="{{ index }}" data-filepath="{{ file.filePath }}" bindtap="handleOpenDoc" wx:if="{{ file.fileType == 4 }}">       
+            <text class="iconfont icon-wenjian"></text>
+            <text class="ellipsis">{{ file.fileName }}</text>
+          </view>
+          <view class="flex-column file-item" wx:for="{{ files }}" wx:for-item="file" wx:key="{{ index }}" data-index="{{ index }}" wx:if="{{ file.fileType != 4 }}" >
             <text class="iconfont icon-wenjian"></text>
             <text class="ellipsis">{{ file.fileName }}</text>
           </view>
