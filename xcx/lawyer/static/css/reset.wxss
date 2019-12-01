@@ -197,3 +197,8 @@ checkbox[checked] + .icon-check::after {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.app-input-btn{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}

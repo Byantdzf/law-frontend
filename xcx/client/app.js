@@ -28,7 +28,7 @@ App({
     this.pages = pages
     this.globalData.scene = e.scene
     this.qqmapsdk = qqmapsdk
-    
+    this.overShare()
     // wx.login({
     //   success:({ code }) => {
     //     if(!code) return
@@ -40,7 +40,41 @@ App({
     // })
   },
   onShow(o) {
-    // console.log(o)
+
+  },
+  getCurrentPageUrlWithArgs(){
+    let pages = getCurrentPages()    // 获取加载的页面
+    let currentPage = pages[pages.length - 1]    // 获取当前页面的对象
+    let url = currentPage.route    // 当前页面url
+    let options = currentPage.options    // 如果要获取url中所带的参数可以查看options
+    // 拼接url的参数
+    let urlWithArgs = url + '?from_openid=' + this.from_openid
+    for (let key in options) {
+      var value = options[key]
+      if (key !== 'from_openid') {
+        urlWithArgs = url + '?' + key + '=' + value + '&from_openid=' + this.from_openid
+      }
+    }
+    // urlWithArgs = urlWithArgs.substring(0, urlWithArgs.length - 1)
+    return urlWithArgs
+  },
+  //重写分享方法
+  overShare() {
+    //监听路由切换
+    wx.onAppRoute(res=>{
+      let view = getCurrentPages();
+      wx.showShareMenu({
+        withShareTicket: true
+      });
+      let URL = this.getCurrentPageUrlWithArgs();
+      console.log(URL)
+      view.onShareAppMessage = function(){
+        return {
+          title:'分享',
+          path: URL
+        }
+      }
+    })
   },
   // 设置导航栏标题
   setNavTitle(title) {
@@ -191,7 +225,7 @@ App({
                   adInfo.location = res.result.location
                   this.globalData.adInfo = adInfo
                 } else {
-                  
+
                 }
               }
             })

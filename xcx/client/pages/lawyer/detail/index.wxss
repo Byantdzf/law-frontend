@@ -288,3 +288,9 @@
   border-radius: 32rpx;
   box-shadow: 1rpx 1rpx 12rpx #eeeeee;
 }
+.noData{
+  padding: 12rpx 22rpx;
+  background: #f5f6f9;
+  width: 88vw;
+  border-radius: 8rpx;
+}
