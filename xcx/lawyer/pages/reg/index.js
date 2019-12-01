@@ -280,7 +280,7 @@ Page({
             return;
         }
 
-        params.provice = this.data.region[0] ? this.data.region[0].replace('省', '') : ''
+      params.province = this.data.region[0] ? this.data.region[0].replace('省', '') : ''
         params.city = this.data.region[1] ? this.data.region[1].replace('市', '') : ''
         params.zone = this.data.region[2] ? this.data.region[2].replace('区', '') : ''
 
