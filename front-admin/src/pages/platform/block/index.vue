@@ -237,6 +237,7 @@ export default {
           this.refreshTable();
           this.$msgSuccess("修改成功");
         } else {
+          form.serviceType = this.articleType;
           await this.blockAdd(form);
           this.closeDialog();
           this.refreshTable();
