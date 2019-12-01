@@ -81,7 +81,7 @@ export default {
           label: '服务流程说明',
           field: 'serviceSteps',
           type: 5,
-          value: row.serviceRange,
+          value: row.serviceSteps,
           required: true
         },
         {
