@@ -83,12 +83,13 @@
 			})
 			
 			// 选择优惠券
+			console.log(URL.user)
 			if (utils.cookie(global.token)) {
 				var params = {}
 				params[global.rows] = 1000;
 				params[global.page] = 1;
 				utils.get(URL.user.couponOrder, params, function (res) {
-					var list = res.data.list || []
+					var list = res.data || []
 					_t.couponList = list;
 					$.each(list, function (i, t) {
 						t.name = t.couponName

@@ -11,6 +11,7 @@ import AppLoading from '@/components/app-loading'
 
 // 引入element ui
 import '@/element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 // 公共样式
 import '@/assets/less/main.less'
 // 去除生产环境的提示

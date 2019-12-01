@@ -24,6 +24,7 @@
 
 		queryList: function (page) {
 			var _t = this;
+			// console.log(page)
 			var qlps = {
 				url: URL.user.coupon,
 				page: page,
