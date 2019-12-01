@@ -42,7 +42,13 @@
 		},
 
 		queryList: function () {
+			var businessType = $('.modelAgreement_cate .on').data('id');
+			var searchData = {};
+			if (businessType) {
+				searchData.businessTypes = businessType;
+			}
 			var qlps = {
+				searchData: searchData,
 				url: URL.template.query,
 				box: '.modelAgreementListBox',
 				temp: '/page/template/list.html'
@@ -51,6 +57,7 @@
 		},
 
 		getQuestionType: function () {
+			var _t = this;
 			var list = base.getQuestionType()
 			var html = '<a href="javascript:;" class="on">全部</a>';
 			$.each(list, function (i, t) {
@@ -59,9 +66,9 @@
 				html += '<a href="javascript:;" data-id="' + t.id + '"' + on + '>' + t.name + '</a>';
 			})
 			$('.modelAgreement_cate').html(html);
-
 			$('.modelAgreement_cate').find('a').off().on('click', function () {
 				$(this).addClass('on').siblings().removeClass('on')
+				_t.queryList();
 			})
 		},
 

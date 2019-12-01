@@ -4,8 +4,18 @@
 		init: function () {
 			var _t = this;
 
+			$('body').on('click', '.agreementBox a', function () {
+				_t.showAgreement();
+			})
+
 			form.on('submit(loginSubmit)', function (res) {
 				var params = res.field;
+				
+				if(!params.agreeProtocal){
+					utils.msg('请确定同意虎甲平台用户协议，隐私协议');
+					return;
+				}
+
 				params.from = 2;
 				utils.get(URL.lawyerObj.login, params, function (res) {
 					utils.setCookie(global.lawyerToken, res.data.sessionId);
@@ -56,6 +66,20 @@
 				// 	window.location = '/lawyer/bind.html';
 				// });
 			});
+		},
+
+		showAgreement: function () {
+			var _t = this;
+			var contents = utils.getTemp('/page/user/agreement.html');
+			var html = '<div class="agreementPage">' + contents + '</div>';
+
+			var ops = {
+				type: 1,
+				area: ['1000px', '80%'],
+				title: "虎甲平台委托服务协议",
+				content: html
+			};
+			utils.dialog(ops);
 		}
 	}
 
