@@ -78,6 +78,13 @@ export default {
           required: true
         },
         {
+          label: '服务流程说明',
+          field: 'serviceSteps',
+          type: 5,
+          value: row.serviceRange,
+          required: true
+        },
+        {
           label: '真实销量数据',
           field: 'salesCount',
           type: 1,
