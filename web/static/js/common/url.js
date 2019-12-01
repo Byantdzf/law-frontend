@@ -76,7 +76,8 @@ var URL = {
 	user: {
 		attention: pcHost + '/pc/user/focused',
 		cancelattention: pcHost + '/pc/user/order/operateOrder',
-		coupon: pcHost + '/pc/user/coupon/list',
+        couponOrder: pcHost + '/pc/user/order/coupon/list',
+        coupon: pcHost + '/pc/user/coupon/list',
 		feedback: pcHost + '/pc/user/feedback',
 		info: pcHost + '/pc/user/base/info',
 		wxLogin: pcHost + '/pc/user/login/url',
