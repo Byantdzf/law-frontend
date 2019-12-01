@@ -87,7 +87,7 @@
 				var params = {}
 				params[global.rows] = 1000;
 				params[global.page] = 1;
-				utils.get(URL.user.coupon, params, function (res) {
+				utils.get(URL.user.couponOrder, params, function (res) {
 					var list = res.data.list || []
 					_t.couponList = list;
 					$.each(list, function (i, t) {
