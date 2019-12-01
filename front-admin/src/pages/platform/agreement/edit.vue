@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import AppForm from '@/mixins/form'
 import AppUpload from '@/components/app-upload'
 export default {
@@ -27,10 +28,15 @@ export default {
     }
   },
   methods: {
-    initForm(form) {
+    async initForm(form) {
       let row = { ...form }
 
       this.formResave = true
+      let res = await this.getDictData({dictCode: "QuestionType"})
+      let orderBusinessType = {}
+      res.data.map(item => {
+        orderBusinessType[item.code] = item.name
+      })
 
       this.$set(this.formInit, 'labelWidth', '100px')
       
@@ -48,7 +54,7 @@ export default {
           required: true,
           type: 2,
           value: row.businessType ? +row.businessType : '',
-          options: this.$t('rs.orderBusinessType')
+          options: orderBusinessType
         },
         {
           label: '更新时间',
@@ -140,7 +146,8 @@ export default {
       }
       params.category = 1;
       this.$emit('submit', params)
-    }
+    },
+    ...mapActions("content", ["getDictData"]),
   },
   mounted() {
     this.initForm(this.row)
