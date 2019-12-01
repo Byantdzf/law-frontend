@@ -16,6 +16,7 @@ const content = {
     articleUpdate: (context, params) => postJson(`/pc/mgr/article/update`, params),
     // 文章 -- 删除
     articleDel: (context, ids) => del(`/pc/mgr/article/${ids}`),
+    articleDetail: (context, ids) => get(`/pc/mgr/article/${ids}`),
 
     // 敏感词 -- 添加
     sensitiveAdd: (context, params) => postJson(`/sensitive`, params),

@@ -235,7 +235,8 @@
       ...mapActions('content', [
         'articleAdd',
         'articleUpdate',
-        'articleDel'
+        'articleDel',
+        'articleDetail'
       ])
     },
     created() {

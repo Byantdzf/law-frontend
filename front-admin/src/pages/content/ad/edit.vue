@@ -13,6 +13,7 @@
 <script>
 import AppForm from '@/mixins/form'
 import AppUpload from '@/components/app-upload'
+import {VueEditor} from "vue2-editor" 
 export default {
   mixins: [AppForm],
   props: {
@@ -118,7 +119,8 @@ export default {
           label: '内容详情',
           field: 'content',
           type: 5,
-          value: row.content
+          value: row.content,
+          component: VueEditor
         }
       ]
 

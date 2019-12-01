@@ -34,6 +34,13 @@ export default {
       this.$set(this.formInit, 'labelWidth', '100px')
       this.formItems = [
         {
+          label: '编码',
+          field: 'code',
+          type: 1,
+          value: row.code,
+          required: true,
+        },
+        {
           label: '分类',
           field: 'categoryName',
           type: 1,
