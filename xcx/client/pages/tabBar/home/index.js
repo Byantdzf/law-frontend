@@ -22,11 +22,11 @@ Page({
 				icon: '/static/images/icon-menu02.png'
 			}, {
 				name: '日常法律服务',
-				url: '/pages/legalServices/list/index?type=22',
+				url: '/pages/legalServices/list/index?type=21',
 				icon: '/static/images/icon-menu03.png'
 			}, {
 				name: '分块法律服务',
-				url: '/pages/legalServices/listMutli/index?type=21',
+				url: '/pages/legalServices/listMutli/index?type=22',
 				icon: '/static/images/icon-menu04.png'
 			}, {
 				name: '收费代理',
