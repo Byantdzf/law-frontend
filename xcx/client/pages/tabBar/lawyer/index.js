@@ -7,8 +7,8 @@ Page({
         currArea: [],
         dropList: [],
         types: [{
-            key: '',
-            value: '全部'
+            code: '',
+            name: '全部'
         }],
         sorts: [
             {
@@ -62,16 +62,15 @@ Page({
         cityPicker.init(currArea)
 
         // 获取问题类型
-        selectApi.getQuestionType().then(res => {
+        selectApi.data({ dictCode: 'QuestionType' }).then(res => {
             let types = [...this.data.types, ...res.data]
             types.forEach(item => {
-                item.id = item.key
-                item.name = item.value
+                item.id = item.code
             })
             this.setData({
                 types
             })
-        })
+        });
     },
     onShow() {
         this.loadList()
@@ -81,14 +80,17 @@ Page({
         let index = this.data.types.findIndex(items => {
             return items.id == this.data.type
         })
-
         if (index == -1) {
             index = 0
         }
-
         appList.setParams(params => {
             params.city = this.data.currArea[1] || ''
-            this.data.types[index] && (this.data.types[index].name && this.data.types[index].key && (params.goodAt = this.data.types[index].name))
+            
+            if (this.data.types[index] && this.data.types[index].name && this.data.types[index].code) {
+                params.goodAt = this.data.types[index].name
+            } else {
+                delete params.goodAt
+            }
             let sortArr = []
             this.data.sorts.forEach((item, i) => {
                 if (item.code && item.value) {

@@ -60,11 +60,11 @@ Page({
             })
         })
         // 获取问题类型
-        selectApi.getQuestionType().then(res => {
+        selectApi.data({ dictCode: 'QuestionType' }).then(res => {
             this.setData({
-                questionType: res.data
+                questionType: res.data || []
             })
-        })
+        });
       }).catch((e) => {
         // 授权失败
         this.setData({btnDisable: true})
@@ -192,7 +192,7 @@ Page({
                 return;
             }
         }
-        params.questionType = this.data.selectQuestionType.key
+        params.questionType = this.data.selectQuestionType.code
         params.amount = this.data.selectAmount.value
         params.emergency = this.data.emergency
         params.useCurrentPhone = this.data.useCurrentPhone

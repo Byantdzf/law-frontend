@@ -8,7 +8,7 @@
             <app-list url="{{listUrl}}" id="app-list" params="{{ queryParams }}" bind:change="updateList">
                 <view class="flex list-item" wx:for="{{ list }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bind:tap="showDetails">
                     <view class="img-box">
-                        <image src="{{ item.instructionPic || defaultImg }}" mode="aspectFill" binderror="imageError" data-img="list[{{index}}].instructionPic"></image>
+                        <image src="{{ item.image || defaultImg }}" mode="aspectFill" binderror="imageError" data-img="list[{{index}}].image"></image>
                     </view>
                     <view class="flex-bd pl-20">
                         <view class="title  font30 color_333 bold">{{ item.fileName }}</view>

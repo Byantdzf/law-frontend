@@ -8,27 +8,25 @@ Page({
         listUrl: '/applets/user/template/list',
         list: [],
         types: [{
-            key: '',
-            value: '全部'
+            code: '',
+            name: '全部'
         }],
         queryParams: {},
         defaultImg: '/static/images/errorImage.jpg'
     },
     onLoad(e) {
-        let { type } = e
         app.pages.add(this)
 
         // 获取问题类型
-        selectApi.getQuestionType().then(res => {
+        selectApi.data({ dictCode: 'QuestionType' }).then(res => {
             let types = [...this.data.types, ...res.data]
             types.forEach(item => {
-                item.id = item.key
-                item.name = item.value
+                item.id = item.code
             })
             this.setData({
                 types
             })
-        })
+        });
         this.loadList()
     },
     loadList() {

@@ -13,9 +13,9 @@
                 <view class="issue-form-item">
                     <view class="issue-form-input flex">
                         <view class="question flex-bd">
-                            <picker class="picker" bindchange="questionChange" value="{{index}}" range="{{questionType}}" range-key="value">
+                            <picker class="picker" bindchange="questionChange" value="{{index}}" range="{{questionType}}" range-key="name">
                                 <view wx:if="{{selectQuestionType}}">
-                                    所属问题：{{selectQuestionType.value}}
+                                    所属问题：{{selectQuestionType.name}}
                                 </view>
                                 <view wx:else>请选择所属问题</view>
                             </picker>
