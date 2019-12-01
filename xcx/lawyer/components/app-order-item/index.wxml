@@ -68,7 +68,7 @@
     </view>
     <view class="flex">
       <view class="label cl-999">订单来源：</view>
-      <view class="flex-bd cl-666">{{ item.orderSource || '' }}</view>
+      <view class="flex-bd cl-666">{{ orderSource[item.orderSource] }}</view>
     </view>
     <view class="flex">
       <view class="label cl-999">订单类型：</view>
