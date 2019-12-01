@@ -20,7 +20,7 @@
           <el-button type="primary" @click="changeStatusBatch(1)">启用</el-button>
           <el-button type="primary" @click="changeStatusBatch(0)">禁用</el-button>
           <el-button type="danger" @click="removeLawyer">删除</el-button>
-          <el-button type="primary">导出</el-button>
+          <el-button type="primary" @click="exportFile">导出</el-button>
         </el-row>
       </el-row>
       <app-table 
@@ -66,6 +66,7 @@
   import AppSearch from '@/mixins/search'
   import AppTableImgs from '@/components/app-table/lib/imgs'
   import AppRsText from '@/components/app-table/lib/rsText'
+  import SYSTEM from '@/utils/system'
   export default {
     components: {
       Edit: () => import("./edit"),
@@ -186,6 +187,10 @@
             type: 'default'
           }
         ]
+      },
+      async exportFile(){
+        // await this.userListexport(this.tableParams)
+        SYSTEM.download(`/member/lawyer/pending/export`, this.tableParams)
       },
       // 表单提交
       async formSubmit(form) {

@@ -68,6 +68,12 @@
 		editBox: function (id) {
 			utils.get(URL.template.details + id, function (res) {
 				var data = res.data;
+				var list = base.getQuestionType()
+				$.each(list, function (i, t) {
+					if (t.id == data.businessType) {
+						data.businessTypeName = t.name;
+					}
+				});
 				data.price = data.price || 0;
 				var formitem = [
 					{
@@ -92,7 +98,8 @@
 						cols: 12
 					}, {
 						title: "文件简介",
-						label: data.brief || '',
+						type: 'html',
+						html: data.brief || '',
 						cols: 12
 					}, {
 						title: "适用范围",
@@ -123,7 +130,7 @@
 					yes: function (index) {
 						var params = {}
 						params.chooseService = id
-						params.fileType = data.businessTypeName
+						params.fileType = data.businessType
 						params.from = 2
 						params.orderCategory = 41
 						params.amount = data.price

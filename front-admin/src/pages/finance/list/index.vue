@@ -116,7 +116,7 @@
         />
       </el-row>
       <el-row class="fr">
-        <el-button type="primary">导出</el-button>
+        <el-button type="primary" @click="exportFile">导出</el-button>
       </el-row>
     </el-card>
     <el-card class="table-card">
@@ -224,6 +224,7 @@
   import AppDialog from '@/mixins/dialog'
   import AppSearch from '@/mixins/search'
   import AppChartBar from '@/components/app-chart-bar'
+  import SYSTEM from '@/utils/system'
   export default {
     components: {
       AppSelect: () => import('@/components/app-select'),
@@ -421,6 +422,10 @@
           },
           ...times
         ]
+      },
+      async exportFile(){
+        // await this.userListexport(this.tableParams)
+        SYSTEM.download(`/mng/financialManage/queryCashOrderInfoList/export`, this.tableParams)
       },
       setSearchParams() {
         this.searchItems = [

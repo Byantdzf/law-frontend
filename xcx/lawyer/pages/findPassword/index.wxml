@@ -29,10 +29,10 @@
       </view>
       <view class="app-cell last-cell">
         <view class="flex-bd">
-          <input 
+          <input
             type="password"
             name="pwd"
-            placeholder="设置新密码" 
+            placeholder="设置新密码"
             placeholder-class="placeholder"
           />
         </view>
@@ -44,6 +44,7 @@
         disabled="{{ xhrLoading }}"
         type="primary"
         form-type="submit"
+        class="app-input-btn bcTheme"
       >
         确 认
       </button>

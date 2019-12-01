@@ -194,40 +194,45 @@
     <!-- 用户评论 -->
     <view class="scoreBox" wx:if="{{showType == 2}}">
       <view class="scoreList">
-        <view class="flex items" wx:for="{{comments}}" wx:key="{{index}}">
-          <view class="flex-ft img-box">
-            <image src="{{item.imgUrl}}" mode="widthFix"></image>
-          </view>
-          <view class="flex-bd">
-            <view class="info">
-              <view class="name color_333 font30 bold flo_l">{{item.userName}}</view>
-              <view class="flo_r flex_bd color_666 font26">{{ item.orderUpdateTime }}</view>
-              <view class="clearfloat"></view>
-              <view class="flex">
-                <view class="flex-ft color_333 font26">服务类型：</view>
-                <view class="flex_bd color_666 font26">{{ orderType[item.serviceType] }}</view>
-              </view>
-              <!--<view class="flex">-->
+        <block wx:if="{{comments.length > 0}}">
+          <view class="flex items" wx:for="{{comments}}" wx:key="{{index}}">
+            <view class="flex-ft img-box">
+              <image src="{{item.imgUrl}}" mode="widthFix"></image>
+            </view>
+            <view class="flex-bd">
+              <view class="info">
+                <view class="name color_333 font30 bold flo_l">{{item.userName}}</view>
+                <view class="flo_r flex_bd color_666 font26">{{ item.orderUpdateTime }}</view>
+                <view class="clearfloat"></view>
+                <view class="flex">
+                  <view class="flex-ft color_333 font26">服务类型：</view>
+                  <view class="flex_bd color_666 font26">{{ orderType[item.serviceType] }}</view>
+                </view>
+                <!--<view class="flex">-->
                 <!--<view class="flex-ft color_333 font26">服务时间：</view>-->
                 <!--<view class="flex_bd color_666 font26">{{ item.orderUpdateTime }}</view>-->
-              <!--</view>-->
-              <view class="flex flo_l">
-                <view class="flex-ft color_333 font26">服务态度：</view>
-                <view class="flex_bd color_theme_sub font30 bold">{{ item.serviceAttitudeScore }}</view>
+                <!--</view>-->
+                <view class="flex flo_l">
+                  <view class="flex-ft color_333 font26">服务态度：</view>
+                  <view class="flex_bd color_theme_sub font30 bold">{{ item.serviceAttitudeScore }}</view>
+                </view>
+                <view class="flex flo_l" style="margin-left: 12rpx;">
+                  <view class="flex-ft color_333 font26">专业程度：</view>
+                  <view class="flex_bd color_theme font30 bold">{{ item.professionalAttitudeScore }}</view>
+                </view>
+                <view class="clearfloat"></view>
               </view>
-              <view class="flex flo_l" style="margin-left: 12rpx;">
-                <view class="flex-ft color_333 font26">专业程度：</view>
-                <view class="flex_bd color_theme font30 bold">{{ item.professionalAttitudeScore }}</view>
-              </view>
-              <view class="clearfloat"></view>
+              <view class="font26 color_666 text-left">{{ item.content }}</view>
             </view>
-            <view class="font26 color_666 text-left">{{ item.content }}</view>
           </view>
-        </view>
-        <view class="clearfloat"></view>
+        </block>
+        <block wx:else>
+          <view  class="font28 color_666 noData">暂无评论...</view>
+        </block>
         <view style="height: 22vw;"></view>
       </view>
     </view>
+    <view style="height: 22vw;"></view>
     <view class="main-btn text-center">
       <view class="item_btn flo_l bcTheme color_white" bind:tap="voiceTap">在线咨询</view>
       <view class="item_btn bcTheme_sub" bind:tap="onByOneTap">指定咨询</view>

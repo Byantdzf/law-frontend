@@ -129,6 +129,13 @@
 					"id": -1,
 					"name": "用户协议",
 					"pathName": "pages/user/setting/agreement/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/reg/index",
+					"pathName": "pages/reg/index",
 					"scene": null
 				}
 			]

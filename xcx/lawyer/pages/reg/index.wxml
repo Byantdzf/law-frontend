@@ -19,49 +19,49 @@
                     <view class="issue-form-input flex-bd">
                         <input class="app-input" type="text" name="phoneVerificationCode" placeholder="请输入验证码"></input>
                     </view>
-                </view> 
+                </view>
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
                         <input class="app-input" type="password" name="pwd" placeholder="请输入密码"></input>
                     </view>
-                </view> 
+                </view>
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
                         <input class="app-input" type="password" name="rePwd" placeholder="请重复输入密码"></input>
                     </view>
-                </view> 
+                </view>
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
                         <input class="app-input" type="idcard" name="identityCard" placeholder="请输入身份证号码"></input>
                     </view>
-                </view> 
+                </view>
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
                         <input class="app-input" type="text" name="lawyerLicenseNo" placeholder="请输入执业证号码"></input>
                     </view>
-                </view> 
+                </view>
                 <view class="issue-form-item flex">
                     <view class="issue-form-input flex-bd">
                         <input class="app-input" type="text" name="belongs" placeholder="请输入执业律所"></input>
                     </view>
-                </view> 
+                </view>
                 <view class="issue-form-item">
                     <view class="issue-form-input flex">
                         <view class="question flex-bd">
                             <picker mode="region" bindchange="bindRegionChange">
-                                <view wx:if="{{region}}">
+                                <view wx:if="{{region}}" class="color_333">
                                     所在地区：{{region[0]}}，{{region[1]}}，{{region[2]}}
                                 </view>
-                                <view wx:else>请选择所在地区</view>
+                                <view class="color_333" wx:else>请选择所在地区</view>
                             </picker>
                         </view>
                         <view>
-                            <text class="cl-999 iconfont icon-arrow-right"></text>
+                            <text class="cl-999 iconfont icon-arrow-right font28"></text>
                         </view>
                     </view>
                 </view>
                 <view class="issue-form-item goodAtBox">
-                    <view class="goodAtTit">请选择擅长领域<text>（可多选）</text></view>
+                    <view class="goodAtTit color_333">请选择擅长领域<text>（可多选）</text></view>
                     <view class="flex">
                         <text class="at-item {{item.selected && 'curr'}}" wx:for="{{questionType}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="selectAt">{{item.value}}</text>
                     </view>
@@ -103,7 +103,7 @@
                     <image src="{{idCard3}}" data-img="idCard3" mode="aspectFit" bind:tap="uploadImage" />
                 </view>
                 <view class="form-btn-box">
-                    <button type="primary" class="app-input-btn" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
+                    <button type="primary" class="app-input-btn bcTheme" disabled="{{btnDisable}}" form-type="submit">确定提交</button>
                 </view>
                 <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;position:fixed;top:200%; left: 500%;" ></canvas>
                 <!-- <canvas canvas-id="canvas" style="width:{{imageWidth}}px;height:{{imageHeight}}px;" ></canvas> -->

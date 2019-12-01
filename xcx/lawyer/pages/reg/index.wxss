@@ -11,3 +11,4 @@
 .goodAtBox .at-item.curr { background: #CF443D; color:#fff; border-color: #CF443D;}
 
 .form-btn-box { padding: 30rpx 0; }
+.issue-form-item{padding: 4rpx 12rpx;}
