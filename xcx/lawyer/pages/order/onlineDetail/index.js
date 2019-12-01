@@ -227,12 +227,14 @@ Page({
           this.setData({
             filePath: res.data || '',
           });
+          app.toastSuccess('上传成功');
           wx.hideLoading();
         }).catch(() => {
           this.setData({
             filePath: '',
             recordTime: 0,
           });
+          app.toastError('上传失败');
           wx.hideLoading();
         })
       });

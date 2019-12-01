@@ -88,7 +88,7 @@
                 <view class="flex-bd cl-666">
                   <view wx:for="{{ item.msgList }}" wx:for-item="msg" wx:for-index="msgIdx" wx:key="{{ msgIdx }}">
                     <view class="{{ index ? 'mt-10' : '' }}" wx:if="{{ msg.msgType == 1 }}">{{ msg.content || '' }}</view>
-                    <view class="flex {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenAudio">
+                    <view class="flex {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 2 }}" data-filepath="{{ msg.filePath }}" catchtap="handleOpenAudio">
                       <!--<view class="iconfont icon-yuyin cl-primary"></view>-->
                       <view class="playBox white">
                         <view class="mainBoxPlay flo_l">
@@ -98,7 +98,7 @@
                         <span class="color_white font26" style="margin-left: 36rpx;">{{ msg.recordTime ? msg.recordTime + " '" : '' }}</span>
                       </view>
                     </view>
-                    <view class="flex file-item {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" bindtap="handleOpenDoc">
+                    <view class="flex file-item {{ index ? 'mt-10' : '' }}" wx:elif="{{ msg.msgType == 4 }}" data-filepath="{{ msg.filePath }}" catchtap="handleOpenDoc">
                       <view class="iconfont icon-wenjian"></view>
                       <view class="ellipsis">{{ msg.fileName || '' }}</view>
                     </view>
