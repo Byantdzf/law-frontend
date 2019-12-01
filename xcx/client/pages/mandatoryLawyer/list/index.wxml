@@ -17,7 +17,7 @@
                         <view class="title font30 color_333 bold">{{ item.title }}</view>
                         <view class="desc color_666 font28">{{ item.instruction }}</view>
                         <view class="price-box flex">
-                            <view class="flex-bd">
+                            <view class="flex-bd" wx:if="{{ priceRange || priceRange === 0 }}">
                                 <text class="color_333">价格：</text>
                                 <text class="color_theme font24">{{ item.priceRange }}元/次</text>
                             </view>
