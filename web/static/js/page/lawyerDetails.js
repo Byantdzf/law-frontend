@@ -251,7 +251,7 @@
 			params.noAuth = 1;
 			utils.get(URL.lawyer.query, params, function (res) {
 				var data = res.data.list || []
-				var html = utils.getTemp('/page/common/reclawyerList.html', data)
+				var html = utils.getTemp('/page/common/reclawyerTemp.html', data)
 				$('.newsRight ul').html(html);
 			})
 		}

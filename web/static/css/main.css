@@ -1520,3 +1520,8 @@ i, em { font-style: normal;}
     -webkit-box-orient: vertical;
 }
 .fileItem .btnList { padding: 10px 0; text-align: center;}
+
+.agreementContent h3 { font-size: 18px; text-align: center; font-weight: bold;}
+.agreementContent h4 { font-weight: bold; margin-top:20px;}
+.agreementContent p { text-indent: 2em;}
+.agreementContent .third { padding-left:2em;}
