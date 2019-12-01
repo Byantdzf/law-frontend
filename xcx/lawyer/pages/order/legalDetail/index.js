@@ -104,9 +104,25 @@ Page({
       count: 10,
       type: 'file',
       success: (res) => {
-        const items = res.tempFiles || [];
-        const paths = items.map(v => v.path);
-        const names = items.map(v => v.name);
+        let items = res.tempFiles || [];
+        let resItems = [];
+        let txtItems = [];
+        
+        items.forEach(v => {
+          if (/.txt$/.test(v.path)) {
+            txtItems.push(v)
+          } else {
+            resItems.push(v)
+          }
+        });
+
+        let paths = resItems.map(v => v.path);
+        let names = resItems.map(v => v.name);
+
+        if (txtItems.length) {
+          app.toastError('不支持txt文件')
+        }
+        
         // console.log(paths)
         for(let i = 0; i < paths.length; i ++) {
           selectApi.uploadFile({ filePath: paths[i] }).then(res1 => {
