@@ -28,9 +28,9 @@ Page({
      */
     onLoad: function (options) {
         // 获取问题类型
-        selectApi.getQuestionType().then(res => {
+        selectApi.data({ dictCode: 'QuestionType' }).then(res => {
             this.setData({
-                questionType: res.data
+                questionType: res.data || []
             })
         })
     },
@@ -286,7 +286,7 @@ Page({
 
         let arr = []
         this.data.questionType.forEach(item => {
-            item.selected == true && arr.push(item.value)
+            item.selected == true && arr.push(item.code)
         })
         params.goodAt = arr.join(',')
         if (!params.goodAt) {

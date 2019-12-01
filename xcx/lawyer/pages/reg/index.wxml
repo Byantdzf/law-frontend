@@ -63,7 +63,7 @@
                 <view class="issue-form-item goodAtBox">
                     <view class="goodAtTit color_333">请选择擅长领域<text>（可多选）</text></view>
                     <view class="flex">
-                        <text class="at-item {{item.selected && 'curr'}}" wx:for="{{questionType}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="selectAt">{{item.value}}</text>
+                        <text class="at-item {{item.selected && 'curr'}}" wx:for="{{questionType}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="selectAt">{{item.name}}</text>
                     </view>
                 </view>
                 <!-- <view class="issue-form-item">
