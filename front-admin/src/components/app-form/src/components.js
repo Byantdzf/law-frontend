@@ -7,7 +7,7 @@ export default {
     AppRadio: () => import('@/components/app-radio'),
     AppCheckbox: () => import('@/components/app-checkbox'),
     AppDate: () => import('@/components/app-date-picker'),
-    AppTime: () => import('@/components/app-time')
+    AppTime: () => import('@/components/app-time'),
   },
   data() {
     return {
@@ -19,7 +19,7 @@ export default {
         AppRadio: ['radio'],
         AppCheckbox: ['checkbox'],
         AppDate: ['date', 'datetime', 'daterange', 'datetimerange'],
-        AppTime: ['time']
+        AppTime: ['time'],
       },
       // form表单类型映射
       formTypeMaps: {
@@ -34,6 +34,7 @@ export default {
         9: 'datetime',  // 日期时间
         10: 'daterange', // 日期范围
         11: 'datetimerange', // 日期范围
+        12: 'editor'
       },
     }
   },
@@ -41,7 +42,6 @@ export default {
     // 表单item组件名
     getFormItemComponent({ type, component }) {
       let name = 'AppText'
-
       for (const key in this.formComponentMaps) {
         this.formComponentMaps[key].includes(type) && (name = key)
       }
