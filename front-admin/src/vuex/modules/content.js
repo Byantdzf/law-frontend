@@ -1,4 +1,4 @@
-import { post, postJson, del, put, putJson } from '@/utils/xhr.js'
+import { post, postJson, del, put, putJson, get } from '@/utils/xhr.js'
 
 const content = {
   namespaced: true,
@@ -54,6 +54,7 @@ const content = {
     templateUpdate: (context, payload) => postJson(`/template/update/${payload.id}`, payload.params),
     // 模板 -- 删除
     templateDel: (context, ids) => del(`/template/${ids}`),
+    getDictData: (context, params) => get(`/getDictData`, params)
   }
 }
   
