@@ -2,7 +2,12 @@
 <app-page id="app-page">
   <view class="page-news">
     <view class="desc">
-    <app-text datatext="{{ item.content }}"></app-text>
+      <view class="font30 bold color_333 text-center main-text">{{ item.agreement_title }}</view>
+      <view class="font26 bold color_666 text-right main-text">{{ item.agreement_title_sub }}</view>
+      <view wx:for="{{item.agreement_texts}}" wx:for-item="itemText" wx:key="{{ index }}">
+        <view class="font28 bold color_333 main-text">{{itemText.text}}</view>
+        <view class="font26 color_666 text_sub" wx:for="{{itemText.text_sub}}" wx:for-item="itemText_sub" wx:for-index="idx" wx:key="{{ idx }}">{{itemText_sub}}</view>
+      </view>
     </view>
   </view>
 </app-page>

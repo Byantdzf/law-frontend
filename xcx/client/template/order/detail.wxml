@@ -75,7 +75,7 @@
       <text class="label color_333 font26">已选服务：</text>
       <text class="label color_666 font26">{{ chooseService }}</text>
     </view>
-    <view class="flex">
+    <view class="flex" wx:if="{{ deliveryDeadDate }}">
       <text class="label color_333 font26">交付期限：</text>
       <text class="label color_666 font26">{{ deliveryDeadDate }}</text>
     </view>

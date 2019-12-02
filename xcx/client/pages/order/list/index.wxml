@@ -61,7 +61,7 @@
                   <view class="label color_333 font26">下单时间：</view>
                   <view class="flex-bd color_666 font28">{{ item.orderTime }}</view>
                 </view>
-                <view class="flex">
+                <view class="flex" wx:if="{{ item.amount || item.amount === 0 }}">
                   <!--<view class="label color_333 font28">订单金额：</view>-->
                   <view class="flex-bd color_theme bold font30">{{ item.amount }}元</view>
                 </view>

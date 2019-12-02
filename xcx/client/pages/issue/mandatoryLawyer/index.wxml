@@ -65,7 +65,7 @@
                             <input class="app-input" type="text" name="registerValidateCode" placeholder="请输入验证码"></input>
                         </view>
                     </view>
-                    <view class="issue-form-item">
+                    <view class="issue-form-item" wx:if="{{selectAmount || selectAmount === 0}}">
                         <view class="issue-form-input flex">
                             <view class="amount flex-bd">
                                 <view>

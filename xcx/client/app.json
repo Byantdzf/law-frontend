@@ -18,6 +18,8 @@
         "setting/about/index",
         "setting/help/index",
         "setting/agreement/index",
+        "setting/agreementAgency/index",
+        "setting/agreementService/index",
         "setting/feedback/index"
       ]
     },

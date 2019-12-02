@@ -42,7 +42,13 @@
 		},
 
 		queryList: function () {
+			var businessType = $('.modelAgreement_cate .on').data('id');
+			var searchData = {};
+			if (businessType) {
+				searchData.businessTypes = businessType;
+			}
 			var qlps = {
+				searchData: searchData,
 				url: URL.template.query,
 				box: '.modelAgreementListBox',
 				temp: '/page/template/list.html'
@@ -51,6 +57,7 @@
 		},
 
 		getQuestionType: function () {
+			var _t = this;
 			var list = base.getQuestionType()
 			var html = '<a href="javascript:;" class="on">全部</a>';
 			$.each(list, function (i, t) {
@@ -59,15 +66,21 @@
 				html += '<a href="javascript:;" data-id="' + t.id + '"' + on + '>' + t.name + '</a>';
 			})
 			$('.modelAgreement_cate').html(html);
-
 			$('.modelAgreement_cate').find('a').off().on('click', function () {
 				$(this).addClass('on').siblings().removeClass('on')
+				_t.queryList();
 			})
 		},
 
 		editBox: function (id) {
 			utils.get(URL.template.details + id, function (res) {
 				var data = res.data;
+				var list = base.getQuestionType()
+				$.each(list, function (i, t) {
+					if (t.id == data.businessType) {
+						data.businessTypeName = t.name;
+					}
+				});
 				data.price = data.price || 0;
 				var formitem = [
 					{
@@ -92,7 +105,8 @@
 						cols: 12
 					}, {
 						title: "文件简介",
-						label: data.brief || '',
+						type: 'html',
+						html: data.brief || '',
 						cols: 12
 					}, {
 						title: "适用范围",
@@ -123,7 +137,7 @@
 					yes: function (index) {
 						var params = {}
 						params.chooseService = id
-						params.fileType = data.businessTypeName
+						params.fileType = data.businessType
 						params.from = 2
 						params.orderCategory = 41
 						params.amount = data.price
