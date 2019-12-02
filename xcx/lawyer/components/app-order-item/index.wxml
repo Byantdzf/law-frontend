@@ -1,93 +1,167 @@
 <view class="order-item" bindtap="gotoDetail">
   <view class="flex order-item-hd">
     <view class="flex-bd cl-primary fw-b">{{ orderCategory[item.orderCategory] }}</view>
-    <view class="iconfont icon-guanzhu" wx:if="{{ type == 1 && item.userIsFocusedLawyer == 1 }}"></view>
+<!--    <view class="iconfont icon-guanzhu" wx:if="{{ type == 1 && item.userIsFocusedLawyer == 1 }}"></view>-->
     <view class="cl-primary fw-b" wx:if="{{ type == 2 }}">
       {{ orderStatus[item.orderStatus] }}
     </view>
   </view>
 
   <view class="order-item-bd" wx:if="{{ type == 1 }}">
-    <view class="cl-999 subtitle">发布人信息</view>
-    <view class="flex">
-      <view class="flex-bd flex">
-        <view class="label cl-999">姓名：</view>
-        <view class="flex-bd cl-666">{{ item.name }}</view>
+<!--    <view class="subtitle color_333 font28">发布人信息</view>-->
+    <view class="color_theme font28 inline-block order_title" >发布人信息</view>
+
+    <view style="position: relative">
+      <image src="{{item.userAvatarUrl}}" class="order-pic " mode="aspectFit"></image>
+      <view wx:if="{{type == 1}}" class="main_focus text-center">
+        <view class="item-btn font26 bcTheme_sub color_white" catchtap="handleFocused" wx:if="{{ item.focused == 0 }}">+ 关注</view>
+        <view class="item-btn font26 color_theme cancel_btn" catchtap="handleCancelFocused" wx:else>取消关注</view>
       </view>
-      <view class="flex-bd flex">
-        <view class="label cl-999">所在城市：</view>
-        <view class="flex-bd cl-666">{{ item.province || '' }} - {{ item.city || '' }}</view>
-      </view>
     </view>
-    <view class="flex">
-      <view class="label cl-999">联系方式：</view>
-      <view class="flex-bd cl-666">{{ item.contactMobile }}</view>
+    <view class="item-info font26">
+      <span class="color_333">姓名：</span>
+      <span class="bold">{{ item.name || '' }}</span>
     </view>
-    <view class="flex">
-      <view class="label cl-999">ID号：</view>
-      <view class="flex-bd cl-666">{{ item.id }}</view>
+    <view class="item-info font26">
+      <span class="color_333">所在城市：</span>
+      <span class="color_666">{{ item.province || '' }} - {{ item.city || '' }}</span>
     </view>
+    <view class="item-info font26">
+      <span class="color_333">联系方式：</span>
+      <span class="color_666">{{ item.contactMobile }}</span>
+    </view>
+    <view class="item-info font26">
+      <span class="color_333">ID号：</span>
+      <span class="color_666">{{ item.id || '' }}</span>
+    </view>
+<!--    <view class="flex-bd flex">-->
+<!--      <view class="label color_333 font26">姓名：</view>-->
+<!--      <view class="flex-bd color_666 font26">{{ item.name || '' }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex-bd flex">-->
+<!--      <view class="label color_333 font26">所在城市：</view>-->
+<!--      <view class="flex-bd color_666 font26">{{ item.province || '' }} - {{ item.city || '' }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label color_333 font26">联系方式：</view>-->
+<!--      <view class="flex-bd color_666 font26">{{ item.contactMobile }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label color_333 font26">ID号：</view>-->
+<!--      <view class="flex-bd color_666 font26">{{ item.id }}</view>-->
+<!--    </view>-->
   </view>
 
   <view class="order-item-bd" wx:if="{{ type == 1 }}">
-    <view class="cl-999 subtitle">订单信息</view>
-    <view class="flex">
-      <view class="flex-bd flex">
-        <view class="label cl-999">订单类型：</view>
-        <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>
-      </view>
-      <view class="flex-bd flex" wx:if="{{ item.orderType == 1 }}">
-        <view class="label cl-999">所属问题：</view>
-        <view class="flex-bd cl-666">{{ questionTypeMap[item.questionType] }}</view>
-      </view>
+    <view class="color_theme font28 inline-block order_title">订单信息</view>
+    <view class="item-info font26">
+      <span class="color_333">订单类型：</span>
+      <span class="color_666">{{ orderType[item.orderType] }}</span>
     </view>
-    <view class="flex">
-      <view class="flex-bd flex">
-        <view class="label cl-999">订单金额：</view>
-        <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>
-      </view>
-      <view class="flex-bd flex" wx:if="{{ item.orderType == 1 }}">
-        <view class="label cl-999">是否紧急：</view>
-        <view class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</view>
-      </view>
+    <view class="item-info font26"  wx:if="{{ item.orderType == 1 }}">
+      <span class="color_333">所属问题：</span>
+      <span class="color_666">{{ questionTypeMap[item.questionType] }}</span>
     </view>
-    <view class="flex">
-      <view class="label cl-999">发布时间：</view>
-      <view class="flex-bd cl-666">{{ item.createTime || '' }}</view>
+    <view class="item-info font26"  wx:if="{{ item.orderType == 1 }}">
+      <span class="color_333">是否紧急：</span>
+      <span class="color_666">{{ orderEmergency[item.emergency] }}</span>
     </view>
+    <view class="item-info font26">
+      <span class="color_333">订单金额：</span>
+      <span class="color_theme">{{ item.amount || 0 }}元</span>
+    </view>
+    <view class="item-info font26 inline-block">
+      <span class="color_333">发布时间：</span>
+      <span class="color_666">{{ item.createTime || '' }}</span>
+    </view>
+<!--    <view class="flex">-->
+<!--      <view class="flex-bd flex">-->
+<!--        <view class="label cl-999">订单类型：</view>-->
+<!--        <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>-->
+<!--      </view>-->
+<!--      <view class="flex-bd flex" wx:if="{{ item.orderType == 1 }}">-->
+<!--        <view class="label cl-999">所属问题：</view>-->
+<!--        <view class="flex-bd cl-666">{{ questionTypeMap[item.questionType] }}</view>-->
+<!--      </view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="flex-bd flex">-->
+<!--        <view class="label cl-999">订单金额：</view>-->
+<!--        <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>-->
+<!--      </view>-->
+<!--      <view class="flex-bd flex" wx:if="{{ item.orderType == 1 }}">-->
+<!--        <view class="label cl-999">是否紧急：</view>-->
+<!--        <view class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</view>-->
+<!--      </view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label cl-999">发布时间：</view>-->
+<!--      <view class="flex-bd cl-666">{{ item.createTime || '' }}</view>-->
+<!--    </view>-->
   </view>
 
   <view class="order-item-bd pt-10" wx:elif="{{ type == 2 }}">
-    <view class="flex">
-      <view class="label cl-999">订单编号：</view>
-      <view class="flex-bd cl-666">{{ item.orderNo }}</view>
+    <view class="item-info font26">
+      <span class="color_333">订单编号：</span>
+      <span class="color_666">{{ item.orderNo }}</span>
     </view>
-    <view class="flex">
-      <view class="label cl-999">订单时间：</view>
-      <view class="flex-bd cl-666">{{ item.createTime || '' }}</view>
+    <view class="item-info font26"  wx:if="{{ item.orderType == 1 }}">
+      <span class="color_333">订单时间：</span>
+      <span class="color_666">{{ item.createTime || '' }}</span>
     </view>
-    <view class="flex">
-      <view class="label cl-999">订单来源：</view>
-      <view class="flex-bd cl-666">{{ orderSource[item.orderSource] }}</view>
+    <view class="item-info font26"  wx:if="{{ item.orderType == 1 }}">
+      <span class="color_333">订单类型：</span>
+      <span class="color_666">{{ orderSource[item.orderSource] }}</span>
     </view>
-    <view class="flex">
-      <view class="label cl-999">订单类型：</view>
-      <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>
+    <view class="item-info font26"  wx:if="{{ item.orderType == 1 }}">
+      <span class="color_333">是否紧急：</span>
+      <span class="color_666">{{ orderEmergency[item.emergency] }}</span>
     </view>
-    <view class="flex">
-      <view class="label cl-999">订单金额：</view>
-      <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>
+    <view class="item-info font26">
+      <span class="color_333">订单来源：</span>
+      <span class="color_666">{{ orderSource[item.orderSource] }}</span>
     </view>
-    <view class="flex" wx:if="{{ item.orderType == 1 }}">
-      <view class="label cl-999">是否紧急：</view>
-      <view class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</view>
+    <view class="item-info font26">
+      <span class="color_333">订单金额：</span>
+      <span class="color_666">{{ item.amount || 0 }}元</span>
     </view>
+
+
+
+<!--    <view class="flex">-->
+<!--      <view class="label cl-999">订单编号：</view>-->
+<!--      <view class="flex-bd cl-666">{{ item.orderNo }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label cl-999">订单时间：</view>-->
+<!--      <view class="flex-bd cl-666">{{ item.createTime || '' }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label cl-999">订单来源：</view>-->
+<!--      <view class="flex-bd cl-666">{{ orderSource[item.orderSource] }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label cl-999">订单类型：</view>-->
+<!--      <view class="flex-bd cl-666">{{ orderType[item.orderType] }}</view>-->
+<!--    </view>-->
+<!--    <view class="flex">-->
+<!--      <view class="label cl-999">订单金额：</view>-->
+<!--      <view class="flex-bd cl-666">{{ item.amount || 0 }}元</view>-->
+<!--    </view>-->
+<!--    <view class="flex" wx:if="{{ item.orderType == 1 }}">-->
+<!--      <view class="label cl-999">是否紧急：</view>-->
+<!--      <view class="flex-bd cl-666">{{ orderEmergency[item.emergency] }}</view>-->
+<!--    </view>-->
   </view>
 
-  <view class="flex btn-box {{ item.orderSource == 2 && 'orderListBtn'}}" wx:if="{{ type == 1 }}">
-    <button size="mini" plain catchtap="handleFocused" wx:if="{{ item.focused == 0 }}">关注</button>
-    <button size="mini" plain catchtap="handleCancelFocused" wx:else>取消关注</button>
-    <button size="mini" plain catchtap="handleRefuse" wx:if="{{ item.orderSource != 2}}">拒绝接单</button>
-    <button size="mini" plain catchtap="handleReceive">立即接单</button>
+  <view class=" btn-box  {{ item.orderSource == 2 && 'orderListBtn'}}" wx:if="{{ type == 1 }}">
+    <view class="bcTheme item-btn color_white font26 flo_r" catchtap="handleReceive" >立即接单</view>
+    <view class="flo_l bcTheme_sub color_white item-btn font26 flo_r" catchtap="handleRefuse" style="margin-right: 22rpx;" wx:if="{{ item.orderSource != 2}}">拒绝接单</view>
+    <view class="clearfloat"></view>
+<!--    <button size="mini" plain catchtap="handleFocused" wx:if="{{ item.focused == 0 }}">关注</button>-->
+<!--    <button size="mini" plain catchtap="handleCancelFocused" wx:else>取消关注</button>-->
+<!--    <button size="mini" plain catchtap="handleRefuse" wx:if="{{ item.orderSource != 2}}">拒绝接单</button>-->
+<!--    <button size="mini" plain catchtap="handleReceive">立即接单</button>-->
   </view>
+  <view class="clearfloat"></view>
 </view>

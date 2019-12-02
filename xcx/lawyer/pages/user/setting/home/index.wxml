@@ -14,7 +14,7 @@
 
         <view class="logout-btn">
 			<button
-				class="app-input-btn"
+				class="app-input-btn bcTheme color_white"
 				size="mini"
 				plain
 				bindtap="logout"

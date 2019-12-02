@@ -14,4 +14,13 @@ page { background: #f3f3f3; }
 .list .items button { background: none; text-align: left; font-size: 30rpx; padding-left:0; margin-left:0; color:#333;}
 
 .logout-btn { margin: 30rpx;}
-.logout-btn button { width:100%; background: #fff; border:none; height:100rpx; line-height: 100rpx; color: #E1251B; font-size: 32rpx; border-radius: 20rpx;}
+
+.logout-btn button {
+    width: 100%;
+    border: none;
+    height: 72rpx;
+    line-height: 72rpx;
+    font-size: 30rpx;
+    border-radius: 12rpx;
+    color: white !important;
+}

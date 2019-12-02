@@ -3,7 +3,8 @@
   <view class="flex-column container page-home">
     <view class="flex page-search">
       <view class="flex location pr-20">
-        <view class="iconfont icon-location"></view>
+<!--        <view class="iconfont icon-location"></view>-->
+		  <image src="https://images.ufutx.com/201911/27/3a25cf8023a9cc46807f70ab54b729db.png" mode="widthFix" class="iconStyle"></image>
         <view class="pl-10 ellipsis city">
           <app-cityPicker
             id="app-cityPicker"
@@ -13,12 +14,12 @@
 					/>
         </view>
       </view>
-      <view class="flex-bd flex search-box" bindtap="gotoSearch">
+      <view class="flex-bd flex search-box"  bindtap="gotoSearch">
         <view class="flex-bd pl-20 cl-666">关键字搜索相关信息</view>
         <view class="iconfont icon-search pl-20 pr-20 cl-primary"></view>
       </view>
       <view class="msg-box pl-40" bindtap="gotoMsg">
-        <view class="iconfont icon-send-msg"></view>
+        <view class="iconfont icon-send-msg" style="color: white;" ></view>
       </view>
     </view>
     <view class="flex-bd app-scroller">
@@ -105,16 +106,17 @@
 							<view class="hot-news-item" wx:for="{{ hotNews1 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}"
+											   binderror="imageError" data-img="hotNews[{{index}}].pic" mode="aspectFill"/>
 									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+									<view class="ellipsis color_333 font26 title">{{ item.title }}</view>
+									<view class="ellipsis cl-999 brief font24 color_666">{{ item.brief || '' }}</view>
 								</navigator>
 							</view>
 						</view>
 					</scroll-view>
         </view>
-                
+
 				<view class="flex page-title">
 					<view class="flex-bd pl-20 title">最新法律速递</view>
 					<view class="flex-ft">
@@ -130,16 +132,17 @@
 							<view class="hot-news-item" wx:for="{{ hotNews2 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" mode="aspectFill"
+											   binderror="imageError" data-img="hotNews[{{index}}].pic"/>
 									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+									<view class="ellipsis font26 color_333 title">{{ item.title }}</view>
+									<view class="ellipsis font24 brief color_666">{{ item.brief || '点击阅读' }}</view>
 								</navigator>
 							</view>
 						</view>
 					</scroll-view>
         </view>
-                
+
 				<view class="flex page-title">
 					<view class="flex-bd pl-20 title">最新公司动态</view>
 					<view class="flex-ft">
@@ -155,10 +158,10 @@
 							<view class="hot-news-item" wx:for="{{ hotNews3 }}" wx:key="{{ index }}">
 								<navigator url="../../news/detail/index?id={{ item.id }}">
 									<view class="img-box">
-										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}" binderror="imageError" data-img="hotNews[{{index}}].pic" />
+										<image src="{{ item.pic || '/static/images/errorImage.jpg' }}"  mode="aspectFill" binderror="imageError" data-img="hotNews[{{index}}].pic" />
 									</view>
-									<view class="ellipsis">{{ item.title }}</view>
-									<view class="ellipsis cl-999 brief">{{ item.brief || '' }}</view>
+									<view class="ellipsis font26 color_333 title">{{ item.title }}</view>
+									<view class="ellipsis font24 brief color_666">{{ item.brief || '' }}</view>
 								</navigator>
 							</view>
 						</view>

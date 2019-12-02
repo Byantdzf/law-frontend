@@ -1,12 +1,14 @@
 .page-home {
-  background: #f3f3f3;
+  background: #ffffff;
 }
 .page-search {
   padding: 20rpx 30rpx;
-  background: #fff;
+  background: #CF443D;
+  box-shadow: 1rpx 1rpx 12rpx #f0f0f0;
+  z-index: 999;
 }
 .page-search .location {
-  min-width: 160rpx;
+  min-width: 132rpx;
 }
 .page-search .city {
   max-width: 160rpx;
@@ -14,7 +16,8 @@
 .page-search .search-box {
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
-  border-radius: 20rpx;
+  border-radius: 32rpx;
+  background: white;
 }
 
 .service-types {
@@ -40,11 +43,24 @@
   color: #fff;
 }
 .page-title {
-  margin-top: 20rpx;
+  padding: 22rpx;
+  border-bottom: 2rpx solid #f5f6f9;
+  border-top: 10rpx solid #f5f6f9;
 }
 .page-title .title{
   font-size: 30rpx;
-  font-weight: bold;
+  position: relative;
+  padding-left: 16rpx;
+  color: #CF443D;
+}
+.page-title .title:before{
+  content: '';
+  width: 6rpx;
+  height: 26rpx;
+  background: #CF443D;
+  position: absolute;
+  left: 0 ;
+  top: 8rpx;
 }
 .page-title .icon-arrow-right {
   font-size: 24rpx;
@@ -65,9 +81,10 @@
 }
 
 .hot-news-item image {
-  width: 100%;
-  height: 130rpx;
+  width: 200rpx;
+  height: 120rpx;
   border-radius: 6rpx;
+  box-shadow: 0 0 16rpx #e0e0e0;
 }
 .hot-news-item + .hot-news-item {
   margin-left: 22rpx;
@@ -145,4 +162,17 @@
 }
 .app-empty .iconfont {
   font-size: 70rpx;
+}
+
+.iconStyle{
+  width: 42rpx;
+  height: auto;
+}
+.item-btn{
+  padding: 4rpx 20rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #eeeeee;
+}
+.hot-news-item title{
+  margin-top: 6rpx;
 }

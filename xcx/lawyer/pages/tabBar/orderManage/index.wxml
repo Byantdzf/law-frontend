@@ -15,7 +15,7 @@
       </view>
     </view>
     <app-tab items="{{ orderTypes }}" wx:if="{{orderTypes.length > 1}}" bindchange="handleOrderTypeChange"/>
-    <app-tab items="{{ orderSources }}" current="{{ orderSource }}" bindchange="handleOrderSourceChange"/>
+    <app-tab_sub items="{{ orderSources }}" current="{{ orderSource }}" bindchange="handleOrderSourceChange"/>
     <view class="flex-bd app-scroller">
       <app-list url="{{listUrl}}" id="app-list" bind:change="updateList">
         <view class="pa-20" wx:if="{{ list.length }}">

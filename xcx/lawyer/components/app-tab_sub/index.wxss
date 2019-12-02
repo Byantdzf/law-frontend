@@ -80,12 +80,7 @@
 }
 .scroll-view-item.active {
   color: #CF443D;
-  height: 54rpx;
-  line-height: 56rpx;
-  border-radius: 32rpx;
-  color: white;
-  margin-top: 16rpx;
-  background: linear-gradient(to right, #CF443D , #fe664f)!important;
+  font-weight: bold;
 }
 .scroll-view-item.active text {
   border-bottom: 6rpx solid #CF443D;

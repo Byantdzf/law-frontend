@@ -1,11 +1,14 @@
 .order-item {
-  padding: 20rpx;
+  padding: 26rpx;
   background: #fff;
   border-radius: 10rpx;
   align-items: flex-start;
+  box-shadow: 1rpx 1rpx 12rpx #dfdfdf;
+  width: 92vw;
+  margin: auto;
 }
 .order-item + .order-item {
-  margin-top: 20rpx;
+  margin-top: 32rpx;
 }
 .order-item .subtitle {
   margin: 10rpx 0;
@@ -18,6 +21,10 @@
 .order-item .btn-box {
   margin-top: 30rpx;
   justify-content: space-between;
+  max-width: 50vw;
+  float: right;
+  text-align: right;
+  margin-right: -1.4vw ;
 }
 .order-item .btn-box button {
   width: 210rpx;
@@ -31,4 +38,44 @@
 }
 .order-item .btn-box button::after {
   border-color: #e0e0e0;
+}
+.order-pic{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 2rpx solid #c2c3c5;
+  margin-top: 22rpx;
+  position: absolute;
+  right: 3vw;
+  top: -8vw;
+}
+.main_focus{
+  width: 20vw;
+  /*background: pink;*/
+  margin-top: 22rpx;
+  position: absolute;
+  right: -1.4vw ;
+  top: 6vw;
+}
+.main_focus view{
+  padding: 6rpx 22rpx;
+}
+.order-item-bd .flex-bd{
+  margin-top: 4rpx;
+}
+.item-info{
+  margin-top: 12rpx;
+}
+.order_title{
+  border-bottom: 1rpx solid #CF443D;
+  margin: 10rpx 0 4rpx 0;
+}
+
+.item-btn{
+  padding: 6rpx 32rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #eeeeee;
+}
+.cancel_btn{
+  border: 1rpx solid #f0f0f0;
 }

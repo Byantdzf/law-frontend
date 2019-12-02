@@ -1,25 +1,35 @@
 .page-order {
   background: #f3f3f3;
 }
+.page-home {
+  background: #ffffff;
+}
 .page-search {
-  padding: 20rpx 30rpx 0;
-  background: #fff;
+  padding: 20rpx 30rpx;
+  background: #CF443D;
+  box-shadow: 1rpx 1rpx 12rpx #f0f0f0;
+  z-index: 999;
 }
 .page-search .location {
-  min-width: 160rpx;
+  min-width: 132rpx;
+}
+.page-search .city {
+  max-width: 160rpx;
 }
 .page-search .search-box {
   padding: 8rpx 0;
   border: 1px solid #e0e0e0;
-  border-radius: 20rpx;
+  border-radius: 32rpx;
+  background: white;
 }
+
 .page-order .app-tab {
   background: #fff;
   border-bottom: 2rpx solid #f3f3f3;
 }
 .app-sort {
   padding: 20rpx 0;
-  background: #dcdcdc;
+  background: #ffffff;
 }
 .app-sort .flex-bd {
   justify-content: center;
@@ -49,4 +59,17 @@
 .icons {
   padding-left: 4rpx;
   line-height: 0.7;
+}
+
+.iconStyle{
+  width: 42rpx;
+  height: auto;
+}
+.item-btn{
+  padding: 4rpx 20rpx;
+  border-radius: 32rpx;
+  box-shadow: 1rpx 1rpx 12rpx #eeeeee;
+}
+.hot-news-item title{
+  margin-top: 6rpx;
 }

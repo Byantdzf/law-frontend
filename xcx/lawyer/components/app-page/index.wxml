@@ -12,18 +12,18 @@
       <view class="img-box">
         <image src="/static/images/logo.png" />
       </view>
-      <text class="txt">欢迎来到{{ appName }}</text>
+      <text class="txt color_333 bold ">欢迎来到{{ appName }}</text>
     </view>
     <view class="pop-auth__bd">
-      <view>为提供优质服务，{{ appName }}需要获取以下信息</view>
-      <view class="subtxt">您的公开信息（昵称、头像等）</view>
+      <view class="font28 color_666">为提供优质服务，{{ appName }}需要获取以下信息</view>
+      <view class="subtxt font26">您的公开信息（昵称、头像等）</view>
     </view>
     <view class="pop-auth__ft flex">
       <view class="flex-bd">
-        <button bind:tap="hideAuth">取消</button>
+        <button bind:tap="hideAuth" class="btn save-btn text-center color_666 font30">取消</button>
       </view>
       <view class="flex-bd">
-        <button type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+        <button type="primary" open-type="getUserInfo" class="btn bcTheme save-btn text-center color_white font30" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
           确认微信授权
         </button>
       </view>

@@ -136,6 +136,35 @@
 					"id": -1,
 					"name": "pages/reg/index",
 					"pathName": "pages/reg/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabBar/home/index",
+					"pathName": "pages/tabBar/home/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabBar/orders/index",
+					"pathName": "pages/tabBar/orders/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabBar/orderManage/index",
+					"pathName": "pages/tabBar/orderManage/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/onlineDetail/index",
+					"pathName": "pages/order/onlineDetail/index",
+					"query": "id=129162032405544960",
 					"scene": null
 				}
 			]

@@ -12,11 +12,11 @@
       <view class="img-box">
         <image src="/static/images/logo.png" />
       </view>
-      <text class="txt">欢迎来到{{ appName }}</text>
+      <text class="txt color_333 bold ">欢迎来到{{ appName }}</text>
     </view>
     <view class="pop-auth__bd">
-      <view>为提供优质服务，{{ appName }}需要获取以下信息</view>
-      <view class="subtxt">您的公开信息（昵称、头像等）</view>
+      <view class="font28 color_666">为提供优质服务，{{ appName }}需要获取以下信息</view>
+      <view class="subtxt font26">您的公开信息（昵称、头像等）</view>
     </view>
     <view class="pop-auth__ft flex">
       <view class="flex-bd flo_l text-center">

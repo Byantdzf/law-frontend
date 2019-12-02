@@ -1,2 +1,10 @@
 /* components/app-cityPicker/index.wxss */
 .picker { min-width: 80rpx; min-height: 40rpx;}
+.pickerHome {
+    width: 86rpx; min-height: 40rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 8rpx;
+    color: white;
+}

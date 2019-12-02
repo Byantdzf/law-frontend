@@ -3,7 +3,8 @@
   <view class="flex-column container page-order">
     <view class="flex page-search">
       <view class="flex location pr-20">
-        <view class="iconfont icon-location"></view>
+<!--        <view class="iconfont icon-location"></view>-->
+        <image src="https://images.ufutx.com/201911/27/3a25cf8023a9cc46807f70ab54b729db.png" mode="widthFix" class="iconStyle"></image>
         <view class="pl-10">
           <app-cityPicker id="app-cityPicker" selectArea="{{currArea}}" isHome="true" bind:change="getCityResult"></app-cityPicker>
         </view>
@@ -24,13 +25,13 @@
       </view>
     </view>
     <app-tab items="{{ orderSources }}" current="{{ orderSource }}" bindchange="handleOrderSourceChange" wx:if="{{ orderSources.length > 1}}"/>
-    <app-tab items="{{ questionTypes }}" bindchange="handleQuestionTypeChange" wx:if="{{ questionTypes.length > 1}}"/>
+    <app-tab_sub items="{{ questionTypes }}" bindchange="handleQuestionTypeChange" wx:if="{{ questionTypes.length > 1}}"/>
     <view class="flex app-sort">
       <view class="flex-bd flex" wx:for="{{ sorts }}" wx:key="{{ index }}" data-index="{{ index }}" bindtap="handleSortChange">
-        <text>{{ item.name }}</text>
-        <view class="icons flex-column">
-          <text class="iconfont icon-arrow-up-fill {{ curSortIndex == index && curSortBy == 1 ? 'cl-primary' : '' }}"></text>
-          <text class="iconfont icon-arrow-down-fill {{ curSortIndex == index && curSortBy == 2 ? 'cl-primary' : '' }}"></text>
+        <text class="color_666 {{ curSortIndex == index && curSortBy !== ''? 'color_theme bold' : '' }}">{{ item.name }}</text>
+        <view class="icons flex-column" wx:if="{{index !== 0}}">
+          <text class="iconfont icon-arrow-up-fill {{ curSortIndex == index && curSortBy == 1 ? 'color_theme' : '' }}"></text>
+          <text class="iconfont icon-arrow-down-fill {{ curSortIndex == index && curSortBy == 2 ? 'color_theme' : '' }}"></text>
         </view>
       </view>
     </view>

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "订单池",
   "usingComponents": {
     "app-tab":"../../../../components/app-tab/index",
+    "app-tab_sub":"../../../../components/app-tab_sub/index",
     "app-empty":"../../../../components/app-empty/index",
     "app-cityPicker": "/components/app-cityPicker/index",
     "app-list": "/components/app-list/index",

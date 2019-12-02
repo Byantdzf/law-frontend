@@ -190,6 +190,7 @@ checkbox[checked] + .icon-check::after {
 .text-center{text-align: center !important;}
 .text-left{text-align: left !important;}
 .text-right{text-align: right !important;}
+.inline-block{display: inline-block;}
 .ellipsis_3 {
   overflow: hidden;
   text-overflow: ellipsis;

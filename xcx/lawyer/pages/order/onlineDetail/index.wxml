@@ -5,11 +5,13 @@
   <view class="page-order-detail">
     <view class="detail-box">
       <view class="title flex">
-        <text class="flex-bd fw-b">基本信息</text>
+        <text class=" main-title">基本信息</text>
       </view>
       <template is="orderBaseInfo" data="{{...item}}"/>
-      
-      <view class="title fw-b">订单信息</view>
+      <view class="main-dot"></view>
+      <view class="title flex">
+        <text class=" main-title">订单信息</text>
+      </view>
       <template is="orderInfo_01" data="{{...item}}"/>
     </view>
     <view class="flex">
